@@ -11,4 +11,5 @@
     {{ post.body|truncatewords:30|linebreaks }}
 </div>
 {% endfor %} 
+{% include "pagination.html" with page=posts %}
 {% endblock %}
