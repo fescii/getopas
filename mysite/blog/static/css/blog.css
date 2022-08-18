@@ -15,10 +15,23 @@ header{
     gap: 30px;
     justify-content: space-between;
 }
+header>.site-name{
+    margin: 0%;
+    padding: 0%;
+}
+header>.site-name h2{
+    margin: 0%;
+    padding: 0%;
+}
 .header-links{
+    margin: 0%;
     list-style: none;
     display: flex;
     gap: 20px;
+}
+.header-links>li{
+    margin: 0%;
+    padding: 0%;
 }
 .header-links>li a{
     text-decoration: none;
