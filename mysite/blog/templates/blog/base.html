@@ -6,6 +6,21 @@
     <link href="{% static "css/blog.css" %}" rel="stylesheet">
   </head>
   <body>
+    <header>
+        <div class="site-name">
+          <div class="logo-image">
+            <img src="" alt="">
+          </div>
+          <h2>Opus</h2>
+        </div>
+        <ul class="header-links">
+            <li> <a href="" >Home</a></li>
+            <li> <a href="" >Recent</a></li>
+            <li> <a href="" >New</a></li>
+            <li> <a href="" >Subscribe</a></li>
+            <li> <a href="" >Donate</a></li>
+        </ul>
+    </header>
     <div id="content">{% block content %} {% endblock %}</div>
     <div id="sidebar">
       <h2>My blog</h2>

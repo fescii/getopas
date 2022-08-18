@@ -3,15 +3,36 @@ body{
     margin: 0px 5%;
     display: grid;
     grid-template-columns: 1fr 20%;
+    gap: 30px;
 }
-.content{
+header{
+    position: fixed;
+    top: 0px;
+    margin: 0px 5%;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    justify-content: space-between;
+}
+.header-links{
+    list-style: none;
+    display: flex;
+    gap: 20px;
+}
+.header-links>li a{
+    text-decoration: none;
+    color: rgb(6, 108, 177);
+}
+body>#content{
+    margin-top: 60px;
     grid-column: 1/2;
-    border-right: 1px solid rgba(0, 255, 157, 0.692);
-    background-color: black;
+    border-right: 1px solid rgba(52, 53, 52, 0.692);
+    padding: 5p 5px 5px 10px;
 }
-.sidebar{
+#sidebar{
     grid-column: 2/3;
-    border-left: 1px solid rgba(0, 255, 157, 0.699);
+    margin-top: 60px;
 }
 .post-summery>.date{
     font-style: italic;
