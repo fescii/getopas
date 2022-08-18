@@ -1,8 +1,24 @@
-.sidebar{
-    float: right;
-    margin-right: 20px;
-}
+
 body{
-    background-color: aquamarine;
     margin: 0px 5%;
+    display: grid;
+    grid-template-columns: 1fr 20%;
+}
+.content{
+    grid-column: 1/2;
+    border-right: 1px solid rgba(0, 255, 157, 0.692);
+    background-color: black;
+}
+.sidebar{
+    grid-column: 2/3;
+    border-left: 1px solid rgba(0, 255, 157, 0.699);
+}
+.post-summery>.date{
+    font-style: italic;
+    opacity: .9;
+    font-weight: 600;
+}
+.post-summery>h2 a{
+    color: rgb(6, 117, 190);
+    text-decoration: none;
 }
