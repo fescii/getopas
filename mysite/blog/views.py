@@ -16,14 +16,14 @@ class PostListView(ListView):
 
 def post_detail(request, year, month, day, post):
     post = get_object_or_404(Post, slug=post, status='published',
-                             publish__year=year, 
-                             publish__month=month, 
+                             publish__year=year,
+                             publish__month=month,
                              publish__day=day)
     #List of ctive comments for this post
     comments = post.comments.filter(active=True)
 
     new_comment = None
-    
+
     if request.method == 'POST':
         #A Comment was posted
         comment_form = CommentForm(data=request.POST)
@@ -36,9 +36,9 @@ def post_detail(request, year, month, day, post):
             new_comment.save()
         else:
             comment_form = CommentForm()
-            
-    return render(request, 
-                  'blog/post/detail.html', 
+
+    return render(request,
+                  'blog/post/detail.html',
                   {'post': post,
                    'comments':comments,
                    'new_comment': new_comment,
