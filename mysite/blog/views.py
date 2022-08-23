@@ -19,10 +19,11 @@ def post_detail(request, year, month, day, post):
                              publish__year=year,
                              publish__month=month,
                              publish__day=day)
-    #List of ctive comments for this post
+    #List of active comments for this post
     comments = post.comments.filter(active=True)
 
     new_comment = None
+    comment_form = CommentForm()
 
     if request.method == 'POST':
         #A Comment was posted
@@ -42,7 +43,7 @@ def post_detail(request, year, month, day, post):
                   {'post': post,
                    'comments':comments,
                    'new_comment': new_comment,
-                   'comment_form':comment_form})
+                   'comment_form': comment_form})
 
 def post_share(request, post_id):
     #Retrieve post by id
