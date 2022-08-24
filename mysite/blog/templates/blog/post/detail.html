@@ -9,6 +9,18 @@
             Share Post
         </a>
     </p>
+
+    <!--Similar Posts-->
+    <h2>Similar Posts</h2>
+    {% for post in similar_posts  %}
+        <p>
+            <a href="{{ post.get_absolute_url }}">{{ post.title }}</a>
+        </p>
+    {% empty %}
+        No similar Posts yet.
+    {% endfor %}
+
+
     {% with comments.count as total_comments %}
         <h2>
             {{ total_comments }} comment {{ total_comments | pluralize }}
