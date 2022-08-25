@@ -1,6 +1,4 @@
-from typing_extensions import Self
 from django.contrib.sitemaps import Sitemap
-
 from .models import Post
 
 class PostSiteMap(Sitemap):
