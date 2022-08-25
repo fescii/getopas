@@ -5,7 +5,6 @@ from .forms import EmailIssueForm,FeedbackForm
 from django.core.mail import send_mail
 
 # Create your views here.
-
 #List All Issues
 def issue_list(request):
     issues = Issue.published.all()[:3]
