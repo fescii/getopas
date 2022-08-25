@@ -4,4 +4,9 @@
 <h1>{{ issue.title }}</h1>
 <p class="date">Published {{ issue.publish }} by {{ issue.author }}</p>
 {{ issue.description|linebreaks }}
+<p>
+    <a href="{% url "magazine:issue_share" issue.id %}">
+    Share this post
+    </a>
+</p>
 {% endblock %}
