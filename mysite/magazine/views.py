@@ -4,14 +4,14 @@ from .models import Issue
 # Create your views here.
 
 #List All Issues
-def post_list(request):
+def issue_list(request):
     issues = Issue.published.all()
     return render(request,
                   'magazine/issue/issues.html',
                   {'posts': issues})
 
 
-def post_detail(request, year, no, issue):
+def issue_detail(request, year, no, issue):
     issue = get_object_or_404(Issue,
                              slug=issue,
                              status='published',
