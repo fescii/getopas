@@ -96,7 +96,7 @@ def post_share(request, post_id):
                         f"{post.title}"
             message = f"Read {post.title} at {post_url}\n\n" \
                         f"{cd['name']}\'s comments: {cd['comments']}"
-            send_mail = (subject, message, 'admin@myblog.com')
+            send_mail(subject, message, 'admin@myblog.com', [cd['to']])
             sent = True
     else:
         form = EmailPostForm()

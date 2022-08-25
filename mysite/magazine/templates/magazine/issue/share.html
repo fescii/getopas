@@ -1,7 +1,7 @@
 {% extends 'magazine/base.html' %}
 {% block title %} Share Magazine Issue {% endblock  %}
 {% block content %}
-    {% if sent %}
+    {% if sent  %}
         <h1>Email succsessfully sent</h1>
         <p>
             "{{issue.title}}" was succsessfully sent to {{form.cleaned_data.to}}
