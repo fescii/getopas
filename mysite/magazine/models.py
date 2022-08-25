@@ -33,8 +33,9 @@ class Issue(models.Model):
         return self.title
 
     def get_absolute_url(self):
-        return reverse('magazine:magazine_detail',
-        args=[self.publish.year, self.no, self.slug])
+        return reverse('magazine:issue_detail',
+                       args=[self.publish.year,
+                             self.no, self.slug])
 
     objects = models.Manager() # The default manager.
     issues_published = PublishedManager() # Our custom manager.
