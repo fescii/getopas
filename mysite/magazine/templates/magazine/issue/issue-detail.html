@@ -3,5 +3,5 @@
 {% block content %}
 <h1>{{ issue.title }}</h1>
 <p class="date">Published {{ issue.publish }} by {{ issue.author }}</p>
-{{ issue.body|linebreaks }}
+{{ issue.description|linebreaks }}
 {% endblock %}

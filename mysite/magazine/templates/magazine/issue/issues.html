@@ -8,6 +8,6 @@
   <a href="{{ issue.get_absolute_url }}"> {{ issue.title }} </a>
 </h2>
 <p class="date">Published {{ issue.publish }} by {{ issue.author }}</p>
-{{ post.body|truncatewords:30|linebreaks }} {% endfor %}
+{{ post.description|truncatewords:30|linebreaks }} {% endfor %}
 
 {% endblock %}
