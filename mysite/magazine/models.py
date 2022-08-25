@@ -38,4 +38,4 @@ class Issue(models.Model):
                              self.no, self.slug])
 
     objects = models.Manager() # The default manager.
-    issues_published = PublishedManager() # Our custom manager.
+    published = PublishedManager() # Our custom manager.

@@ -8,7 +8,7 @@ def issue_list(request):
     issues = Issue.published.all()
     return render(request,
                   'magazine/issue/issues.html',
-                  {'posts': issues})
+                  {'issues': issues})
 
 
 def issue_detail(request, year, no, issue):

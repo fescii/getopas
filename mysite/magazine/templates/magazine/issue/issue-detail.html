@@ -1,0 +1,7 @@
+{% extends "magazine/base.html" %}
+{% block title %} {{ post.title }} {% endblock %}
+{% block content %}
+<h1>{{ issue.title }}</h1>
+<p class="date">Published {{ issue.publish }} by {{ issue.author }}</p>
+{{ issue.body|linebreaks }}
+{% endblock %}
