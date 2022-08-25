@@ -10,7 +10,6 @@
 </h2>
 <p class="date">Published {{ issue.publish }} by {{ issue.author }}</p>
 {{ issue.description|truncatewords:30|linebreaks }} {% endfor %}
-{% endblock %}
 
-<h3>Latest posts</h3>
 {% show_latest_issues 4 %}
+{% endblock %}

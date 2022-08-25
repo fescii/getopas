@@ -1,4 +1,5 @@
 <div class='latest-issues'>
+    <h3>Latest posts</h3>
     {% for issue in latest_issues %}
     <h2>
         <a href="{{ issue.get_absolute_url }}"> {{ issue.title }} </a>
