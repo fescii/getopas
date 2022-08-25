@@ -9,4 +9,30 @@
     Share this post
     </a>
 </p>
+{% with feedback.count as total_feedbacks %}
+    <h2>
+        {{ total_feedbacks }} Feedback{{ total_feedbacks|pluralize }}
+    </h2>
+{% endwith %}
+{% for feedback in feedbacks %}
+    <div class="feedback">
+        <p class="info">
+        Feedback {{ forloop.counter }} by {{ feedback.name }}
+        {{ feedback.created }}
+        </p>
+        {{ feedback.body|linebreaks }}
+    </div>
+    {% empty %}
+    <p>There are no comments yet.</p>
+{% endfor %}
+{% if new_feedback %}
+    <h2>Your Feedback has been added.</h2>
+    {% else %}
+    <h2>Add a Feedback</h2>
+    <form method="post">
+        {{ feedback_form.as_p }}
+        {% csrf_token %}
+        <p><input type="submit" value="Add Feedback"></p>
+    </form>
+{% endif %}
 {% endblock %}
