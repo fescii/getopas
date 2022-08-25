@@ -5,6 +5,13 @@ from taggit.managers  import TaggableManager
 from django.urls import reverse
 
 # Create your models here.
+#Creating Our own Manager
+class PublishedManager(models.Manager):
+    def get_queryset(self):
+        return super(PublishedManager, self).get_queryset()\
+            .filter(status='published')
+
+#Creating Issues Manager
 class Issue(models.Model):
     STATUS_CHOICES = (
         ('draft', 'Draft'),
@@ -28,3 +35,6 @@ class Issue(models.Model):
     def get_absolute_url(self):
         return reverse('magazine:magazine_detail',
         args=[self.publish.year, self.no, self.slug])
+
+    objects = models.Manager() # The default manager.
+    issues_published = PublishedManager() # Our custom manager.
