@@ -1,6 +1,7 @@
+import re
 from django.shortcuts import render, get_object_or_404
-from .models import Issue
-from .forms import EmailIssueForm
+from .models import Issue,Feedback
+from .forms import EmailIssueForm,FeedbackForm
 from django.core.mail import send_mail
 
 # Create your views here.
@@ -19,10 +20,31 @@ def issue_detail(request, year, no, issue):
                              status='published',
                              publish__year=year,
                              no = no)
+
+    #List of active Feedbacks for current issue
+    feedbacks = issue.feedbacks.filter(active=True)
+
+    new_feedback  = None
+
+    if request.method == 'POST':
+        #A feedback was Posted
+        feedback_form = FeedbackForm(data=request.POST)
+        if feedback_form.is_valid():
+            #Create feedback object but we're not saving it to DB yet
+            new_feedback = feedback_form.save(commit=False)
+            #Assigning the current issue to the feedback
+            new_feedback.issue = issue
+            #Saving the feedback object to the Database
+            new_feedback.save()
+    else:
+        feedback_form = FeedbackForm()
+
     return render(request,
                   'magazine/issue/issue-detail.html',
-                  {'issue': issue})
-
+                  {'issue': issue,
+                   'feedbacks':feedbacks,
+                  'new_feedback': new_feedback,
+                  'feedback_form':feedback_form})
 
 #Share Issue By E-mail
 def issue_share(request, issue_id):
