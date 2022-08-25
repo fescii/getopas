@@ -46,7 +46,7 @@ def issue_share(request, issue_id):
                        f"{issue.title}"
             message = f"Read {issue.title} at {issue_url}\n\n" \
                       f"{form_data['name']}\s comments: {form_data['comments']}"
-            send_mail(subject, message, 'admin@opus.com', [form_data['to']])
+            send_mail(subject, message, 'admin@magazine.com', [form_data['to']])
             sent = True
     else:
         form = EmailIssueForm()

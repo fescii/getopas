@@ -1,18 +1,17 @@
 {% extends 'magazine/base.html' %}
-{% block title %} Share Magazine Issue {% endblock %}
+{% block title %} Share Magazine Issue {% endblock  %}
 {% block content %}
     {% if sent %}
-    <h2>E-mail successfully sent</h2>
-    <p>
-        "{{ issue.title }}" was successfully sent to {{ form.cleaned_data.to }}
-    </p>
+        <h1>Email succsessfully sent</h1>
+        <p>
+            "{{issue.title}}" was succsessfully sent to {{form.cleaned_data.to}}
+        </p>
     {% else %}
-        <h2>Share "{{ issue.title }}" by e-mail</h2>
-        <form method='post'>
-            {{ forms.as_ul }}
+        <h1>Share "{{issue.title}}" by e-mail</h1>
+        <form method="post">
+            {{form.as_p}}
             {% csrf_token %}
             <input type="submit" value="Send e-mail">
         </form>
     {% endif %}
-
-{% endblock %}
+{% endblock content %}
