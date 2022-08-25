@@ -9,10 +9,10 @@ class Issue(models.Model):
     STATUS_CHOICES = (
         ('draft', 'Draft'),
         ('published', 'Published'),)
-    no = models.IntegerField(max_length=11)
+    no = models.IntegerField()
     title = models.CharField(max_length=250)
     slug = models.SlugField(max_length=250, unique_for_date='publish')
-    author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='blog_posts')
+    author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='magazine_posts')
     description = models.TextField()
     publish = models.DateTimeField(default=timezone.now)
     created = models.DateTimeField(auto_now_add=True)
@@ -26,5 +26,5 @@ class Issue(models.Model):
         return self.title
 
     def get_absolute_url(self):
-        return reverse('blog:post_detail',
+        return reverse('magazine:magazine_detail',
         args=[self.publish.year, self.no, self.slug])
