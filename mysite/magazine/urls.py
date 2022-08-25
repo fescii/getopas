@@ -8,4 +8,5 @@ urlpatterns = [
 # post views
     path('', views.issue_list, name='issue_list'),
     path('<int:year>/<int:no>/<slug:issue>/',views.issue_detail, name='issue_detail'),
+    path('<int:issue_id>/share/', views.issue_share, name='issue_share')
 ]
