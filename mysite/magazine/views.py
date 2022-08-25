@@ -8,7 +8,7 @@ from django.core.mail import send_mail
 
 #List All Issues
 def issue_list(request):
-    issues = Issue.published.all()
+    issues = Issue.published.all()[:3]
     return render(request,
                   'magazine/issue/issues.html',
                   {'issues': issues})
