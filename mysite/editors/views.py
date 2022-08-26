@@ -12,7 +12,7 @@ def dashboard(request):
                   'editors/dashboard.html',
                   {'section': dashboard})
 
-
+"""
 def user_login(request):
     if request.method == 'POST':
         form = LoginForm(request.POST)
@@ -31,3 +31,4 @@ def user_login(request):
         else:
             form = LoginForm()
     return render(request, 'editors/login.html', {'form': form})
+    """
