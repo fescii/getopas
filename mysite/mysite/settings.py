@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'blog.apps.BlogConfig',
     'magazine.apps.MagazineConfig',
+    'editors.apps.EditorsConfig',
     'taggit',
     'django.contrib.sites',
     'django.contrib.sitemaps',
