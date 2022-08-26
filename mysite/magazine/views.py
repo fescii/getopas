@@ -1,8 +1,10 @@
+from multiprocessing import context
 import re
 from django.shortcuts import render, get_object_or_404
 from .models import Issue,Feedback
 from .forms import EmailIssueForm,FeedbackForm
 from django.core.mail import send_mail
+
 
 # Create your views here.
 #List All Issues
@@ -19,6 +21,9 @@ def issue_detail(request, year, no, issue):
                              status='published',
                              publish__year=year,
                              no = no)
+    obj =  Issue.objects.get(id=issue.id)
+    obj.issue_views  += 1
+    obj.save()
 
     #List of active Feedbacks for current issue
     feedbacks = issue.feedbacks.filter(active=True)

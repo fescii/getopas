@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from django.utils import timezone
 from taggit.managers  import TaggableManager
 from django.urls import reverse
+from django.contrib.contenttypes.fields import GenericRelation
 
 # Create your models here.
 #Creating Our own Manager
@@ -25,7 +26,7 @@ class Issue(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
     status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='draft')
-
+    issue_views = models.IntegerField(default=0)
     tags = TaggableManager()
     class Meta:
         ordering = ('-publish',)
