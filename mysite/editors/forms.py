@@ -1,6 +1,8 @@
 from dataclasses import fields
+from pyexpat import model
 from django import forms
 from django.contrib.auth.models import User
+from .models import Profile
 
 #User Registration Form
 class UserRegistrationForm(forms.ModelForm):
@@ -16,3 +18,14 @@ class UserRegistrationForm(forms.ModelForm):
         if cd['password'] != cd['password2']:
             raise forms.ValidationError('Password don\'t match!')
         return cd['password2']
+
+#User Details Edit Form
+class UserEditForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ('first_name','last_name','email')
+
+class ProfileEditForm(forms.ModelForm):
+    class Meta:
+        model = Profile
+        fields = ('date_of_birth','about','photo')
