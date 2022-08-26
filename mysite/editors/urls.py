@@ -35,5 +35,5 @@ urlpatterns = [
     #Dashboard path
     path('', views.dashboard, name='dashboard'),
     #Edit user info path
-    path('edit/', views.edit, name='edit'),
+    path('edit-info/', views.edit, name='edit'),
 ]
