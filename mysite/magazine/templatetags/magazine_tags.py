@@ -16,7 +16,7 @@ def show_latest_issues(count=4):
 
 #Fetching 4 most viewed Issues
 @register.inclusion_tag('magazine/issue/most-viewed-issues.html')
-def show_latest_issues(count=4):
+def show_most_viewed_issues(count=4):
     latest_posts = Issue.published.order_by('-issue_views')[:count]
     return {'latest_issues': latest_posts}
 
@@ -27,5 +27,12 @@ def get_issues_with_most_feedback(count=5):
     return  Issue.published.annotate(
         total_feedbacks=Count('feedbacks'))\
             .order_by('-total_feedbacks')[:count]
+
+
+
+#Fetching issues with the most feedbacks
+@register.simple_tag
+def get_health_care_issues(count=5):
+    return  Issue.published.filter(tags__contains='health-care')[:5]
 
 
