@@ -32,6 +32,8 @@ urlpatterns = [
          name='password_reset_complete'),
     #Register urls
     path('register/', views.register, name='register'),
-
+    #Dashboard path
     path('', views.dashboard, name='dashboard'),
+    #Edit user info path
+    path('edit/', views.edit, name='edit'),
 ]
