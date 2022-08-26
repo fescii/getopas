@@ -26,7 +26,7 @@
 </div>
 <div class='health-care-issues'>
   <h3>Health Care</h3>
-    {% get_health_care_issues as h_issues %}
+    {% get_issues_of_health_care as h_issues %}
     {% for issue in h_issues %}
       <h2>
         <a href="{{ issue.get_absolute_url }}"> {{ issue.title }} </a>
@@ -35,4 +35,15 @@
       {{ issue.description|truncatewords:30|linebreaks }}
     {% endfor %}
   </div>
+  <div class='health-care-issues'>
+    <h3>Business & Tech</h3>
+      {% get_issues_of_business as b_issues %}
+      {% for issue in h_issues %}
+        <h2>
+          <a href="{{ issue.get_absolute_url }}"> {{ issue.title }} </a>
+        </h2>
+        <p class="date">Published {{ issue.publish }} by {{ issue.author }}</p>
+        {{ issue.description|truncatewords:30|linebreaks }}
+      {% endfor %}
+    </div>
 {% endblock %}

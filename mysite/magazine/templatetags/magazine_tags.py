@@ -30,9 +30,13 @@ def get_issues_with_most_feedback(count=5):
 
 
 
-#Fetching issues with the most feedbacks
+#Fetching issues For Health
 @register.simple_tag
-def get_health_care_issues(count=5):
-    return  Issue.published.filter(tags__contains='health-care')[:5]
+def get_issues_of_health_care(count=4):
+    return  Issue.published.filter(tags__name__in=['health-care'])[:4]
 
+#Fetching issues Business and Tech
+@register.simple_tag
+def get_issues_of_business(count=4):
+    return  Issue.published.filter(tags__name__in=['business, technology'])[:4]
 
