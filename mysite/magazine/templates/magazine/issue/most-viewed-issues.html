@@ -1,0 +1,10 @@
+<div class='most-viewed-issues'>
+    <h3>Most Viewed posts</h3>
+    {% for issue in latest_issues %}
+    <h2>
+        <a href="{{ issue.get_absolute_url }}"> {{ issue.title }} </a>
+      </h2>
+      <p class="date">Published {{ issue.publish }} by {{ issue.author }}</p>
+      {{ issue.description|truncatewords:30|linebreaks }}
+    {% endfor %}
+</div>
