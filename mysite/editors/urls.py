@@ -30,5 +30,8 @@ urlpatterns = [
     path('reset/done/',
          auth_views.PasswordResetCompleteView.as_view(template_name='editors/templates/registration/password_reset_complete.html'),
          name='password_reset_complete'),
+    #Register urls
+    path('register/', views.register, name='register'),
+
     path('', views.dashboard, name='dashboard'),
 ]
