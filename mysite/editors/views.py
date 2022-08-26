@@ -21,7 +21,7 @@ def register(request):
             new_user = user_form.save(commit=False)
             #Setting the password
             new_user.set_password(
-                user_form.changed_data['password'])
+                user_form.cleaned_data['password'])
             #Saving The User Object
             new_user.save()
             return render(request,
@@ -29,6 +29,11 @@ def register(request):
                           {'new_user': new_user})
         else:
             user_form = UserRegistrationForm()
+        return render(request,
+                      'editors/register.html',
+                      {'user_form': user_form})
+    else:
+        user_form = UserRegistrationForm()
         return render(request,
                       'editors/register.html',
                       {'user_form': user_form})
