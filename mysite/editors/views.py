@@ -2,7 +2,8 @@ from django.http import HttpResponse
 from django.shortcuts import render
 from django.contrib.auth import authenticate, login
 from .forms import UserRegistrationForm,\
-    UserEditForm, ProfileEditForm, CreateBlogPostForm
+    UserEditForm, ProfileEditForm, CreateBlogPostForm,\
+        BlogEditForm
 from django.contrib.auth.decorators import login_required
 from .models import Profile
 from django.contrib import messages
@@ -94,3 +95,8 @@ def create_post(request):
         return render(request,
                       'editors/articles/create.html',
                       {'post_form': post_form})
+
+@login_required
+def edit_blog_post(request):
+        user_form = BlogEditForm(instance=request.user,
+                                 data=request.POST)

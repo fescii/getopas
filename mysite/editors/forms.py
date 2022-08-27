@@ -35,3 +35,7 @@ class CreateBlogPostForm(forms.ModelForm):
     class Meta:
         model = Post
         fields = ('title','body','status')
+class BlogEditForm(forms.ModelForm):
+    class Meta:
+        model = Post
+        fields = ('title', 'body', 'status')
