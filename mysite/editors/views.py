@@ -1,5 +1,5 @@
 from django.http import HttpResponse
-from django.shortcuts import render
+from django.shortcuts import render,get_object_or_404
 from django.contrib.auth import authenticate, login
 from .forms import UserRegistrationForm,\
     UserEditForm, ProfileEditForm, CreateBlogPostForm,\
@@ -121,9 +121,10 @@ def user_post_list(request):
                    'posts': posts,})
 
 @login_required
-def edit_blog_post(request):
+def edit_blog_post(request, post_id):
+    post = get_object_or_404(Post,id=post_id)
     if request.method == 'POST':
-        edit_form = BlogEditForm(instance=request.user,
+        edit_form = BlogEditForm(instance=request.user and post_id.id,
                                  data=request.POST)
         if edit_form.is_valid():
             edit_form.save()
