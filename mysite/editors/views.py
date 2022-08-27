@@ -74,9 +74,10 @@ def edit(request):
 
 @login_required
 def create_post(request):
+    post_form = CreateBlogPostForm(data=request.POST)
     if request.method == 'POST':
         #Form is sent
-        post_form = CreateBlogPostForm(data=request.Post)
+        post_form = CreateBlogPostForm(data=request.POST)
         if post_form.is_valid():
             new_post = post_form.save(commit=False)
             #Assign The Current User To the Post
@@ -86,5 +87,9 @@ def create_post(request):
         else:
             post_form = CreateBlogPostForm(data=request.GET)
         return render(request,
-                      'editors/add-article/create.html',
+                      'editors/articles/create.html',
+                      {'post_form': post_form})
+    else:
+        return render(request,
+                      'editors/articles/create.html',
                       {'post_form': post_form})
