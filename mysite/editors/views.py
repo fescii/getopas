@@ -121,10 +121,14 @@ def user_post_list(request):
                    'posts': posts,})
 
 @login_required
-def edit_blog_post(request, post_id):
-    post = get_object_or_404(Post,id=post_id)
+def edit_blog_post(request, year, month, day, post):
+    post = get_object_or_404(Post,
+                             slug=post,
+                             publish__year=year,
+                             publish__month=month,
+                             publish__day=day)
     if request.method == 'POST':
-        edit_form = BlogEditForm(instance=request.user and post_id.id,
+        edit_form = BlogEditForm(instance=post,
                                  data=request.POST)
         if edit_form.is_valid():
             edit_form.save()
@@ -132,12 +136,12 @@ def edit_blog_post(request, post_id):
 
         else:
             messages.error(request, 'Error updating your profile')
-            edit_form = UserEditForm(instance=request.user)
+            edit_form = BlogEditForm(instance=post)
         return render(request,
                       'editors/articles/edit.html',
                       {'edit_form': edit_form})
     else:
-        edit_form = UserEditForm(instance=request.user)
+        edit_form = BlogEditForm(instance=post)
         return render(request,
                       'editors/articles/edit.html',
                       {'edit_form': edit_form})
