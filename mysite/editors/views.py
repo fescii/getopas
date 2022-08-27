@@ -11,6 +11,7 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django.urls import reverse
 from .models import Profile
 from blog.models import Post
+from django.contrib.auth.models import User
 from django.contrib import messages
 from datetime import datetime
 
@@ -124,28 +125,28 @@ def user_post_list(request):
                    'posts': posts,})
 
 @login_required
-def edit_blog_post(request,pk):
+def edit_blog_post(request, pk):
     post = get_object_or_404(Post, id=pk)
+    #post = Post.objects.get(id=pk)
     if request.method == 'POST':
-        edit_form = BlogEditForm(instance=post,
-                                 data=request.POST)
+        edit_form = BlogEditForm(request.POST or None, instance=post)
         if edit_form.is_valid():
-            post.updated_date = datetime.now()
-            post.save()
-            edit_form.save()
+            edited = edit_form.save()
             messages.success(request, 'Post updated successfully')
+            return HttpResponseRedirect(reverse('user_post_list'))
 
         else:
             messages.error(request, 'Error updating the Post')
-            edit_form = BlogEditForm(instance=post)
+            edit_form = BlogEditForm(request.POST or None, instance=post)
+
         return render(request,
-                      'editors/articles/edit.html',
-                      {'edit_form': edit_form})
+                        'editors/articles/edit.html',
+                        {'edit_form': edit_form})
     else:
-        edit_form = BlogEditForm(instance=post)
+        edit_form = BlogEditForm(request.POST or None, instance=post)
         return render(request,
-                      'editors/articles/edit.html',
-                      {'edit_form': edit_form})
+                        'editors/articles/edit.html',
+                        {'edit_form': edit_form})
 
 
 # process delete post
