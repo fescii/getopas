@@ -7,9 +7,12 @@ from .forms import UserRegistrationForm,\
 from django.core.paginator import Paginator, EmptyPage,\
     PageNotAnInteger
 from django.contrib.auth.decorators import login_required
+from django.http import HttpResponseRedirect, HttpResponse
+from django.urls import reverse
 from .models import Profile
 from blog.models import Post
 from django.contrib import messages
+from datetime import datetime
 
 
 # Create your views here.
@@ -121,21 +124,19 @@ def user_post_list(request):
                    'posts': posts,})
 
 @login_required
-def edit_blog_post(request, year, month, day, post):
-    post = get_object_or_404(Post,
-                             slug=post,
-                             publish__year=year,
-                             publish__month=month,
-                             publish__day=day)
+def edit_blog_post(request,pk):
+    post = get_object_or_404(Post, id=pk)
     if request.method == 'POST':
         edit_form = BlogEditForm(instance=post,
                                  data=request.POST)
         if edit_form.is_valid():
+            post.updated_date = datetime.now()
+            post.save()
             edit_form.save()
-            messages.success(request, 'Profile updated successfully')
+            messages.success(request, 'Post updated successfully')
 
         else:
-            messages.error(request, 'Error updating your profile')
+            messages.error(request, 'Error updating the Post')
             edit_form = BlogEditForm(instance=post)
         return render(request,
                       'editors/articles/edit.html',
@@ -145,3 +146,15 @@ def edit_blog_post(request, year, month, day, post):
         return render(request,
                       'editors/articles/edit.html',
                       {'edit_form': edit_form})
+
+
+# process delete post
+@login_required
+def delete_post(request, pk):
+    post = get_object_or_404(Post, id=pk)
+    post.delete()
+
+    if(request.user.is_staff):
+        return HttpResponseRedirect(reverse('backend:posts'))
+    else:
+        return HttpResponseRedirect(reverse('backend:posts_by_author'))

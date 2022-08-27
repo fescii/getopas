@@ -38,5 +38,5 @@ urlpatterns = [
     path('edit-info/', views.edit, name='edit'),
     path('add-article/', views.create_post, name='create_post'),
     path('my-articles/', views.user_post_list, name='user_post_list'),
-    path('edit-article/', views.edit_blog_post, name='edit_blog_post'),
+    path('edit-article/<int:pk>/', views.edit_blog_post, name='edit_blog_post'),
 ]

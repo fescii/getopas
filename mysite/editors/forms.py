@@ -34,8 +34,8 @@ class ProfileEditForm(forms.ModelForm):
 class CreateBlogPostForm(forms.ModelForm):
     class Meta:
         model = Post
-        fields = ('title','body','status')
+        fields = ('title','body','tags','status')
 class BlogEditForm(forms.ModelForm):
     class Meta:
         model = Post
-        fields = ('title', 'body', 'status')
+        fields = ('title', 'body','tags','status')
