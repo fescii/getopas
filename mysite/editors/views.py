@@ -2,7 +2,7 @@ from django.http import HttpResponse
 from django.shortcuts import render
 from django.contrib.auth import authenticate, login
 from .forms import UserRegistrationForm,\
-    UserEditForm, ProfileEditForm
+    UserEditForm, ProfileEditForm, CreateBlogPostForm
 from django.contrib.auth.decorators import login_required
 from .models import Profile
 from django.contrib import messages
@@ -74,4 +74,17 @@ def edit(request):
 
 @login_required
 def create_post(request):
-    pass
+    if request.method == 'POST':
+        #Form is sent
+        post_form = CreateBlogPostForm(data=request.Post)
+        if post_form.is_valid():
+            new_post = post_form.save(commit=False)
+            #Assign The Current User To the Post
+            new_post.author = request.user
+            new_post.save()
+            messages.success(request, 'Your Post Was added')
+        else:
+            post_form = CreateBlogPostForm(data=request.GET)
+        return render(request,
+                      'editors/add-article/create.html',
+                      {'post_form': post_form})
