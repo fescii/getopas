@@ -134,10 +134,10 @@ def edit_blog_post(request, post_id):
             messages.error(request, 'Error updating your profile')
             edit_form = UserEditForm(instance=request.user)
         return render(request,
-                      'editors/articles/edit-article.html',
+                      'editors/articles/edit.html',
                       {'edit_form': edit_form})
     else:
         edit_form = UserEditForm(instance=request.user)
         return render(request,
-                      'editors/articles/edit-article.html',
+                      'editors/articles/edit.html',
                       {'edit_form': edit_form})
