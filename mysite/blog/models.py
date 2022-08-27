@@ -4,6 +4,8 @@ from django.utils import timezone
 from django.contrib.auth.models import User
 from django.urls import reverse
 from taggit.managers  import TaggableManager
+from django.conf import settings
+from django.utils.text import slugify
 
 # Create your models here.
 class PublishedManager(models.Manager):
@@ -15,15 +17,21 @@ class Post(models.Model):
         ('draft', 'Draft'),
         ('published', 'Published'),)
     title = models.CharField(max_length=250)
-    slug = models.SlugField(max_length=250, unique_for_date='publish')
-    author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='blog_posts')
+    slug = models.SlugField(max_length=250, blank=True)
+    #author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='blog_posts')
+    author = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='blog_posts', on_delete=models.CASCADE)
     body = models.TextField()
     publish = models.DateTimeField(default=timezone.now)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
     status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='draft')
-
     tags = TaggableManager()
+
+    #Overriding The Save Method
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.title)
+            super().save(*args, **kwargs)
     class Meta:
         ordering = ('-publish',)
     def __str__(self):

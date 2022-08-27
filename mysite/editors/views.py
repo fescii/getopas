@@ -71,3 +71,7 @@ def edit(request):
                       'editors/edit.html',
                       {'user_form': user_form,
                        'profile_form': profile_form})
+
+@login_required
+def create_post(request):
+    pass
