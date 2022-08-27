@@ -105,7 +105,7 @@ def create_post(request):
 def user_post_list(request):
     object_list = Post.published.all().filter(author=request.user)
 
-    paginator = Paginator(object_list, 5) # 3 posts in each page
+    paginator = Paginator(object_list, 5) # 5 posts in each page
     page = request.GET.get('page')
     try:
         posts = paginator.page(page)

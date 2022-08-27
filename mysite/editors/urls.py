@@ -36,5 +36,6 @@ urlpatterns = [
     path('', views.dashboard, name='dashboard'),
     #Edit user info path
     path('edit-info/', views.edit, name='edit'),
-    path('add-article/', views.create_post, name='create_post')
+    path('add-article/', views.create_post, name='create_post'),
+    path('my-articles/', views.user_post_list, name='user_post_list'),
 ]
