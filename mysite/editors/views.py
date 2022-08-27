@@ -4,8 +4,11 @@ from django.contrib.auth import authenticate, login
 from .forms import UserRegistrationForm,\
     UserEditForm, ProfileEditForm, CreateBlogPostForm,\
         BlogEditForm
+from django.core.paginator import Paginator, EmptyPage,\
+    PageNotAnInteger
 from django.contrib.auth.decorators import login_required
 from .models import Profile
+from blog.models import Post
 from django.contrib import messages
 
 
@@ -95,6 +98,27 @@ def create_post(request):
         return render(request,
                       'editors/articles/create.html',
                       {'post_form': post_form})
+
+
+#Blog Posts Created By The Current User.
+@login_required
+def user_post_list(request):
+    object_list = Post.published.all().filter(author=request.user)
+
+    paginator = Paginator(object_list, 5) # 3 posts in each page
+    page = request.GET.get('page')
+    try:
+        posts = paginator.page(page)
+    except PageNotAnInteger:
+    # If page is not an integer deliver the first page
+        posts = paginator.page(1)
+    except EmptyPage:
+    # If page is out of range deliver last page of results
+        posts = paginator.page(paginator.num_pages)
+
+    return render(request, 'editors/articles/user_articles_list.html',
+                  {'page': page,
+                   'posts': posts,})
 
 @login_required
 def edit_blog_post(request):
