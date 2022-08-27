@@ -74,7 +74,7 @@ def edit(request):
 
 @login_required
 def create_post(request):
-    post_form = CreateBlogPostForm()
+    post_form = None
     if request.method == 'POST':
         #Form is sent
         post_form = CreateBlogPostForm(data=request.POST)

@@ -3,7 +3,7 @@
 {% block content %}
 <h1>Add A new Article</h1>
 <form method="post">
-{{ form.as_p }}
+{{ post_form.as_p }}
 {% csrf_token %}
 <input type="submit" value="Create">
 </form>
