@@ -3,7 +3,7 @@ from pyexpat import model
 from django import forms
 from django.contrib.auth.models import User
 from .models import Profile
-
+from blog.models import Post
 #User Registration Form
 class UserRegistrationForm(forms.ModelForm):
     password = forms.CharField(label='Password',
@@ -28,4 +28,10 @@ class UserEditForm(forms.ModelForm):
 class ProfileEditForm(forms.ModelForm):
     class Meta:
         model = Profile
+        fields = ('date_of_birth','about','photo')
+
+#User/Editor Creating a Blog Post
+class CreateBlogPostForm(forms.ModelForm):
+    class Meta:
+        model = Post
         fields = ('date_of_birth','about','photo')
