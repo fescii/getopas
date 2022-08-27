@@ -63,6 +63,7 @@ def edit(request):
             user_form.save()
             profile_form.save()
             messages.success(request, 'Profile updated successfully')
+            return HttpResponseRedirect(reverse('dashboard'))
 
         else:
             messages.error(request, 'Error updating your profile')
@@ -126,12 +127,12 @@ def user_post_list(request):
 
 @login_required
 def edit_blog_post(request, pk):
-    post = get_object_or_404(Post, id=pk)
-    #post = Post.objects.get(id=pk)
+    #post = get_object_or_404(Post, id=pk)
+    post = Post.objects.get(id=pk)
     if request.method == 'POST':
         edit_form = BlogEditForm(request.POST or None, instance=post)
         if edit_form.is_valid():
-            edited = edit_form.save()
+            edit_form.save()
             messages.success(request, 'Post updated successfully')
             return HttpResponseRedirect(reverse('user_post_list'))
 
@@ -154,8 +155,5 @@ def edit_blog_post(request, pk):
 def delete_post(request, pk):
     post = get_object_or_404(Post, id=pk)
     post.delete()
-
-    if(request.user.is_staff):
-        return HttpResponseRedirect(reverse('backend:posts'))
-    else:
-        return HttpResponseRedirect(reverse('backend:posts_by_author'))
+    messages.success(request, 'Post deleted successfully')
+    return HttpResponseRedirect(reverse('user_post_list'))

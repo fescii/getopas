@@ -38,5 +38,5 @@ class CreateBlogPostForm(forms.ModelForm):
 class BlogEditForm(forms.ModelForm):
     class Meta:
         model = Post
-        #fields = ('title', 'body','tags','status')
-        fields = '__all__'
+        fields = ('title', 'body','tags','status')
+        #fields = '__all__'
