@@ -122,5 +122,21 @@ def user_post_list(request):
 
 @login_required
 def edit_blog_post(request):
-        user_form = BlogEditForm(instance=request.user,
+    if request.method == 'POST':
+        edit_form = BlogEditForm(instance=request.user,
                                  data=request.POST)
+        if edit_form.is_valid():
+            edit_form.save()
+            messages.success(request, 'Profile updated successfully')
+
+        else:
+            messages.error(request, 'Error updating your profile')
+            edit_form = UserEditForm(instance=request.user)
+        return render(request,
+                      'editors/articles/edit-article.html',
+                      {'edit_form': edit_form})
+    else:
+        edit_form = UserEditForm(instance=request.user)
+        return render(request,
+                      'editors/articles/edit-article.html',
+                      {'edit_form': edit_form})

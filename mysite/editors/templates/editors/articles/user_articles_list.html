@@ -12,6 +12,7 @@
     </h2>
     <p class="date">Published on {{ post.publish }} by {{ post.author }}</p>
     {{ post.body|truncatewords:30|linebreaks }}
+    <a href="{% url "edit-article" %}
 </div>
 {% endfor %}
 {% include "pagination.html" with page=posts %}
