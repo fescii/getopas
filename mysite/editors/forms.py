@@ -34,4 +34,4 @@ class ProfileEditForm(forms.ModelForm):
 class CreateBlogPostForm(forms.ModelForm):
     class Meta:
         model = Post
-        fields = ('date_of_birth','about','photo')
+        fields = ('title','body','status')
