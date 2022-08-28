@@ -11,12 +11,15 @@
     <p class="date">Section Title: {{ section.name }}</p>
     {% if section.added %}
     <p>Added<a href="/editors/my-newsletters/{{section.issue}}/remove/{{section.page}}">Remove</a></p>
-    {% else %}
-    <p>Not Added<a href="/editors/my-newsletters/{{section.issue}}/add/{{section.page}}">Add</a></p>
-    {% endif %}
     {{ section.body|truncatewords:30|linebreaks }}
     <a href="/editors/edit-section/{{section.page}}">edit</a>
     <a href="/editors/delete-section/{{section.page}}">delete</a>
+    {% else %}
+    <p>Not Added<a href="/editors/my-newsletters/{{section.issue}}/add/{{section.page}}">Add</a></p>
+    {{ section.body|truncatewords:30|linebreaks }}
+    <a href="/editors/edit-section/{{section.page}}">edit</a>
+    <a href="/editors/delete-section/{{section.page}}">delete</a>
+    {% endif %}
 </div>
 {% if empty %}
 <p> You've not Published any Sections For This Newsletter Yet!</p>
