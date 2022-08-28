@@ -10,12 +10,12 @@
 <div class="issue-section">
     <p class="date">Section Title: {{ section.name }}</p>
     {% if section.added %}
-    <p>Added<a href="/editors/my-newsletters/sections/remove-section/{{section.page}}">Remove</a></p>
+    <p>Added<a href="/editors/my-newsletters/{{issue.id}}/sections/remove-section/{{section.page}}">Remove</a></p>
     {{ section.body|truncatewords:30|linebreaks }}
     <a href="/editors/edit-section/{{section.page}}">edit</a>
     <a href="/editors/delete-section/{{section.page}}">delete</a>
     {% else %}
-    <p>Not Added<a href="/editors/my-newsletters/sections/add-section/{{section.page}}">Add</a></p>
+    <p>Not Added<a href="/editors/my-newsletters/{{issue.id}}/sections/add-section/{{section.page}}">Add</a></p>
     {{ section.body|truncatewords:30|linebreaks }}
     <a href="/editors/edit-section/{{section.page}}">edit</a>
     <a href="/editors/delete-section/{{section.page}}">delete</a>
