@@ -306,20 +306,18 @@ def create_section(request, pk):
 
 # Add Section To Issue
 @login_required
-def remove_section(request, page):
-    section = get_object_or_404(Section,page=page)
-    pk = section.issue
-    section.added = False
+def add_section(request,issue_id, pk):
+    section = get_object_or_404(Section, id=pk)
+    section.added = True
     section.save()
-    messages.success(request, 'Post deleted successfully')
+    messages.success(request, 'Section was added successfully')
     return HttpResponseRedirect(reverse('user_issue_section_list'))
 
 # Remove Section From An Issue
 @login_required
-def add_section(request, page):
-    section = get_object_or_404(Section, page=page)
-    pk = section.issue
-    section.added = True
+def remove_section(request,issue_id, pk):
+    section = get_object_or_404(Section, id=pk)
+    section.added = False
     section.save()
-    messages.success(request, 'Post deleted successfully')
+    messages.success(request, 'Post was deleted successfully')
     return HttpResponseRedirect(reverse('user_issue_section_list'))
