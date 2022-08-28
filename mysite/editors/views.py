@@ -273,11 +273,12 @@ def user_issue_section_list(request, pk):
         sections = paginator.page(paginator.num_pages)
     """
     return render(request, 'editors/articles/user_issues_sections.html',
-                  {'sections': sections,})
+                  {'sections': sections,
+                   'obj': obj})
 
 #Edit Newsletter Section
 @login_required
-def create_section(request):
+def create_section(request,pk):
     section_form = None
     if request.method == 'POST':
         #Form is sent
