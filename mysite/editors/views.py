@@ -189,7 +189,7 @@ def create_magazine(request):
             #new_magazine.save()
             new.save()
             messages.success(request, f'Magazine Was {magazine_form.cleaned_data}Created Successfully')
-            #return HttpResponseRedirect(reverse('user_post_list'))
+            return HttpResponseRedirect(reverse('user_issue_list'))
         else:
             magazine_form = CreateMagazineForm(data=request.GET)
         return render(request,
@@ -230,7 +230,7 @@ def edit_newsletter(request, pk):
         if edit_form.is_valid():
             edit_form.save()
             messages.success(request, 'Issue updated successfully')
-            #return HttpResponseRedirect(reverse('user_post_list'))
+            return HttpResponseRedirect(reverse('user_issue_list'))
 
         else:
             messages.error(request, 'Error updating the Issue')
@@ -244,3 +244,11 @@ def edit_newsletter(request, pk):
         return render(request,
                         'editors/articles/issue-edit.html',
                         {'edit_form': edit_form})
+
+#Deleting an Issue
+@login_required
+def delete_issue(request, pk):
+    post = get_object_or_404(Issue, id=pk)
+    post.delete()
+    messages.success(request, 'Post deleted successfully')
+    return HttpResponseRedirect(reverse('user_issue_list'))
