@@ -4,6 +4,7 @@ from django.utils import timezone
 from taggit.managers  import TaggableManager
 from django.urls import reverse
 from django.contrib.contenttypes.fields import GenericRelation
+from django.utils.text import slugify
 
 # Create your models here.
 #Creating Our own Manager
@@ -33,14 +34,17 @@ class Issue(models.Model):
     def __str__(self):
         return self.title
 
+    objects = models.Manager() # The default manager.
+    published = PublishedManager() # Our custom manager.
     def get_absolute_url(self):
         return reverse('magazine:issue_detail',
                        args=[self.publish.year,
                              self.no, self.slug])
-
-    objects = models.Manager() # The default manager.
-    published = PublishedManager() # Our custom manager.
-
+    #Overriding The Save Method
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.title)
+            super().save(*args, **kwargs)
 #Feedback Model
 class Feedback(models.Model):
     issue = models.ForeignKey(Issue, on_delete=models.CASCADE, related_name='feedbacks')

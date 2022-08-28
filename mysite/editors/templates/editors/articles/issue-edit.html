@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block title %}Updating A Newsletter{% endblock %}
+{% block content %}
+<h1>Edit Issue</h1>
+<form method="POST">
+{{ edit_form.as_p }}
+{% csrf_token %}
+<input type="submit" value="Save">
+</form>
+{% endblock %}

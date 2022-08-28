@@ -40,4 +40,7 @@ urlpatterns = [
     path('my-articles/', views.user_post_list, name='user_post_list'),
     path('edit-article/<int:pk>/', views.edit_blog_post, name='edit_blog_post'),
     path('delete-article/<int:pk>/', views.delete_post, name='delete_post'),
+    path('add-newsletter/', views.create_magazine, name='new_newsletter'),
+    path('my-newsletters/', views.user_issue_list, name='user_issue_list'),
+    path('edit-newsletter/<int:pk>/', views.edit_newsletter, name='edit_newsletter'),
 ]

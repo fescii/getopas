@@ -1,9 +1,11 @@
 from django.http import HttpResponse
 from django.shortcuts import render,get_object_or_404
 from django.contrib.auth import authenticate, login
+
+from magazine.models import Issue
 from .forms import UserRegistrationForm,\
     UserEditForm, ProfileEditForm, CreateBlogPostForm,\
-        BlogEditForm
+        BlogEditForm, CreateMagazineForm, MagazineEditForm
 from django.core.paginator import Paginator, EmptyPage,\
     PageNotAnInteger
 from django.contrib.auth.decorators import login_required
@@ -158,3 +160,87 @@ def delete_post(request, pk):
     post.delete()
     messages.success(request, 'Post deleted successfully')
     return HttpResponseRedirect(reverse('user_post_list'))
+
+#Create Magazine View
+@login_required
+def create_magazine(request):
+    magazine_form = None
+    #magazine_form = None
+    if request.method == 'POST':
+        #Form is sent
+        magazine_form = CreateMagazineForm(data=request.POST)
+        if magazine_form.is_valid():
+            cd = magazine_form.cleaned_data
+            no = cd['no']
+            title = cd['title']
+            author = request.user
+            description = cd['description']
+            status = cd['status']
+            tags = cd['tags']
+            new = Issue(no=no,
+                        title=title,
+                        author=author,
+                        description=description,
+                        status=status,
+                        tags=tags)
+            #Assign The Current User To the Post
+            #new_magazine.author = request.user
+            #new_magazine.tags = cd['tags']
+            #new_magazine.save()
+            new.save()
+            messages.success(request, f'Magazine Was {magazine_form.cleaned_data}Created Successfully')
+            #return HttpResponseRedirect(reverse('user_post_list'))
+        else:
+            magazine_form = CreateMagazineForm(data=request.GET)
+        return render(request,
+                      'editors/articles/create-magazine.html',
+                      {'magazine_form': magazine_form})
+    else:
+        magazine_form = CreateMagazineForm(data=request.GET)
+        return render(request,
+                      'editors/articles/create-magazine.html',
+                      {'magazine_form': magazine_form})
+
+#Newsletter created by The Current User.
+@login_required
+def user_issue_list(request):
+    object_list = Issue.published.all().filter(author=request.user)
+
+    paginator = Paginator(object_list, 5) # 5 issues in each page
+    page = request.GET.get('page')
+    try:
+        issues = paginator.page(page)
+    except PageNotAnInteger:
+    # If page is not an integer deliver the first page
+        issues = paginator.page(1)
+    except EmptyPage:
+    # If page is out of range deliver last page of results
+        issues = paginator.page(paginator.num_pages)
+
+    return render(request, 'editors/articles/user_issues_list.html',
+                  {'page': page,
+                   'issues': issues,})
+#Edit Magazine Newsletter
+@login_required
+def edit_newsletter(request, pk):
+    #post = get_object_or_404(Post, id=pk)
+    post = Issue.objects.get(id=pk)
+    if request.method == 'POST':
+        edit_form = MagazineEditForm(request.POST or None, instance=post)
+        if edit_form.is_valid():
+            edit_form.save()
+            messages.success(request, 'Issue updated successfully')
+            #return HttpResponseRedirect(reverse('user_post_list'))
+
+        else:
+            messages.error(request, 'Error updating the Issue')
+            edit_form = MagazineEditForm(request.POST or None, instance=post)
+
+        return render(request,
+                        'editors/articles/issue-edit.html',
+                        {'edit_form': edit_form})
+    else:
+        edit_form = MagazineEditForm(request.POST or None, instance=post)
+        return render(request,
+                        'editors/articles/issue-edit.html',
+                        {'edit_form': edit_form})
