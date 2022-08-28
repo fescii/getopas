@@ -278,8 +278,8 @@ def user_issue_section_list(request, pk):
 
 #Edit Newsletter Section
 @login_required
-def create_section(request, pk):
-    issue = get_object_or_404(Issue, id=pk)
+def create_section(request, id):
+    issue = get_object_or_404(Issue, id=id)
     section_form = None
     if request.method == 'POST':
         #Form is sent
@@ -287,7 +287,7 @@ def create_section(request, pk):
         if section_form.is_valid():
             new_section = section_form.save(commit=False)
             #Assign The Current Issue To the Section
-            new_section.issue = pk
+            new_section.issue = id
             new_section.save()
             messages.success(request, 'Your Section Was added Successfully')
             #return HttpResponseRedirect(reverse('user_post_list'))

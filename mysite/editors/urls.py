@@ -45,5 +45,5 @@ urlpatterns = [
     path('edit-newsletter/<int:pk>/', views.edit_newsletter, name='edit_newsletter'),
     path('delete-newsletter/<int:pk>/', views.delete_issue, name='delete_issue'),
     path('my-newsletters/<int:pk>/sections', views.user_issue_section_list, name='user_issue_section_list'),
-    path('my-newsletters/<int:pk>/sections/add', views.create_magazine, name='new_newsletter'),
+    path('my-newsletters/<int:id>/sections/add', views.create_magazine, name='new_newsletter'),
 ]
