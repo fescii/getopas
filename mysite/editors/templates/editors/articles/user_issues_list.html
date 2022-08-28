@@ -9,6 +9,7 @@
     <p class="date">Published on {{ issue.publish }} by {{ issue.author }}</p>
     {{ issue.description|truncatewords:30|linebreaks }}
     <a href="/editors/edit-newsletter/{{issue.id}}">edit</a>
+    <a href="/editors/my-newsletters/edit-section/{{issue.page}}">Sections</a>
     <a href="/editors/delete-newsletter/{{issue.id}}">delete</a>
 </div>
 {% if empty %}

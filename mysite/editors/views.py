@@ -2,8 +2,8 @@ from django.http import HttpResponse
 from django.shortcuts import render,get_object_or_404
 from django.contrib.auth import authenticate, login
 
-from magazine.models import Issue,Section
-from .forms import CreateSection, UserRegistrationForm,\
+from magazine.models import Issue, Section
+from .forms import UserRegistrationForm,\
     UserEditForm, ProfileEditForm, CreateBlogPostForm,\
         BlogEditForm, CreateMagazineForm, MagazineEditForm,\
             CreateSectionForm
@@ -253,6 +253,27 @@ def delete_issue(request, pk):
     post.delete()
     messages.success(request, 'Post deleted successfully')
     return HttpResponseRedirect(reverse('user_issue_list'))
+
+
+#List Newsletter By The User.
+@login_required
+def user_issue_section_list(request, issue):
+    sections = Issue.objects.get(issue=request.issue)
+
+    paginator = Paginator(sections, 5) # 5 issues in each page
+    page = request.GET.get('page')
+    try:
+        issues = paginator.page(page)
+    except PageNotAnInteger:
+    # If page is not an integer deliver the first page
+        issues = paginator.page(1)
+    except EmptyPage:
+    # If page is out of range deliver last page of results
+        issues = paginator.page(paginator.num_pages)
+
+    return render(request, 'editors/articles/user_issues_sections.html',
+                  {'page': page,
+                   'issues': issues,})
 
 #Edit Newsletter Section
 @login_required
