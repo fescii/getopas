@@ -289,7 +289,7 @@ def create_section(request, pk):
             new_section.issue = issue
             new_section.save()
             messages.success(request, 'Your Section Was added Successfully')
-            #return HttpResponseRedirect(reverse('user_post_list'))
+            return HttpResponseRedirect(reverse('user_issue_section_list'))
         else:
             section_form = CreateSectionForm(data=request.GET)
         return render(request,
@@ -302,3 +302,24 @@ def create_section(request, pk):
                       'editors/articles/create-section.html',
                       {'post_form': section_form,
                        'issue':issue})
+
+
+# Add Section To Issue
+@login_required
+def remove_section(request, page):
+    section = get_object_or_404(Section,page=page)
+    pk = section.issue
+    section.added = False
+    section.save()
+    messages.success(request, 'Post deleted successfully')
+    return HttpResponseRedirect(reverse('user_issue_section_list'))
+
+# Remove Section From An Issue
+@login_required
+def add_section(request, page):
+    section = get_object_or_404(Section, page=page)
+    pk = section.issue
+    section.added = True
+    section.save()
+    messages.success(request, 'Post deleted successfully')
+    return HttpResponseRedirect(reverse('user_issue_section_list'))
