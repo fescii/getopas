@@ -258,8 +258,8 @@ def delete_issue(request, pk):
 #List Newsletter By The User.
 @login_required
 def user_issue_section_list(request, pk):
-    obj = get_object_or_404(Issue, id=pk)
-    sections = obj.sections.all()
+    issue = get_object_or_404(Issue, id=pk)
+    sections = issue.sections.all()
     """
     paginator = Paginator(sections, 5) # 5 issues in each page
     page = request.GET.get('page')
@@ -274,29 +274,32 @@ def user_issue_section_list(request, pk):
     """
     return render(request, 'editors/articles/user_issues_sections.html',
                   {'sections': sections,
-                   'obj': obj})
+                   'obj': issue})
 
 #Edit Newsletter Section
 @login_required
-def create_section(request,pk):
+def create_section(request, pk):
+    issue = get_object_or_404(Issue, id=pk)
     section_form = None
     if request.method == 'POST':
         #Form is sent
         section_form = CreateSectionForm(data=request.POST)
         if section_form.is_valid():
             new_section = section_form.save(commit=False)
-            #Assign The Current User To the Post
-            new_section.author = request.user
+            #Assign The Current Issue To the Section
+            new_section.issue = pk
             new_section.save()
-            messages.success(request, 'Your Section Was added')
+            messages.success(request, 'Your Section Was added Successfully')
             #return HttpResponseRedirect(reverse('user_post_list'))
         else:
-            section_form = CreateBlogPostForm(data=request.GET)
+            section_form = CreateSectionForm(data=request.GET)
         return render(request,
-                      'editors/articles/create.html',
-                      {'post_form': section_form})
+                      'editors/articles/create-section.html',
+                      {'post_form': section_form,
+                       'issue':issue})
     else:
-        section_form = CreateBlogPostForm(data=request.GET)
+        section_form = CreateSectionForm(data=request.GET)
         return render(request,
-                      'editors/articles/create.html',
-                      {'post_form': section_form})
+                      'editors/articles/create-section.html',
+                      {'post_form': section_form,
+                       'issue':issue})

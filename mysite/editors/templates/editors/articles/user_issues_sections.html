@@ -2,8 +2,8 @@
 {% block content %}
 <h1>My Issues</h1>
 <div class='issue-title'>
-    <p>{{obj.title}}</p>
-    <a href="/editors/my-newsletters/{{obj.id}}/new">New Section</a>
+    <p>{{issue.title}}</p>
+    <a href="/editors/my-newsletters/{{ issue.id }}/sections/add">New Section</a>
 </div>
 
 {% for section in sections %}
