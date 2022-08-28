@@ -2,7 +2,7 @@ from django.http import HttpResponse
 from django.shortcuts import render,get_object_or_404
 from django.contrib.auth import authenticate, login
 
-from magazine.models import Issue
+from magazine.models import Issue,Section
 from .forms import UserRegistrationForm,\
     UserEditForm, ProfileEditForm, CreateBlogPostForm,\
         BlogEditForm, CreateMagazineForm, MagazineEditForm
@@ -252,3 +252,28 @@ def delete_issue(request, pk):
     post.delete()
     messages.success(request, 'Post deleted successfully')
     return HttpResponseRedirect(reverse('user_issue_list'))
+
+#Edit Newsletter Section
+@login_required
+def edit_section(request, page):
+    #post = get_object_or_404(Post, id=pk)
+    post = Section.objects.get(page=page)
+    if request.method == 'POST':
+        edit_form = MagazineEditForm(request.POST or None, instance=post)
+        if edit_form.is_valid():
+            edit_form.save()
+            messages.success(request, 'Issue updated successfully')
+            return HttpResponseRedirect(reverse('user_issue_list'))
+
+        else:
+            messages.error(request, 'Error updating the Issue')
+            edit_form = MagazineEditForm(request.POST or None, instance=post)
+
+        return render(request,
+                        'editors/articles/issue-edit.html',
+                        {'edit_form': edit_form})
+    else:
+        edit_form = MagazineEditForm(request.POST or None, instance=post)
+        return render(request,
+                        'editors/articles/issue-edit.html',
+                        {'edit_form': edit_form})

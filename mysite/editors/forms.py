@@ -4,7 +4,7 @@ from django import forms
 from django.contrib.auth.models import User
 from .models import Profile
 from blog.models import Post
-from magazine.models import Issue
+from magazine.models import Issue, Section
 #User Registration Form
 class UserRegistrationForm(forms.ModelForm):
     password = forms.CharField(label='Password',
@@ -51,3 +51,8 @@ class MagazineEditForm(forms.ModelForm):
     class Meta:
         model = Issue
         fields = ('no','title','description','tags','status')
+
+class CreateSection(forms.ModelForm):
+    class Meta:
+        model = Section
+        fields =('name','page','body','added')
