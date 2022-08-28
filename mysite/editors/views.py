@@ -274,7 +274,7 @@ def user_issue_section_list(request, pk):
     """
     return render(request, 'editors/articles/user_issues_sections.html',
                   {'sections': sections,
-                   'obj': issue})
+                   'issue': issue})
 
 #Edit Newsletter Section
 @login_required
