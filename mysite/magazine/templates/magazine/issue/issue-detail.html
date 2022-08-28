@@ -9,6 +9,15 @@
     Share this post
     </a>
 </p>
+{% for section in sections %}
+    <div class="section">
+        <h2 class="info"> {{ section.name }}</h2>
+        {{ section.body|linebreaks }}
+    </div>
+    {% empty %}
+    <p>There are no sections yet.</p>
+{% endfor %}
+
 {% with feedback.count as total_feedbacks %}
     <h2>
         {{ total_feedbacks }} Feedback{{ total_feedbacks|pluralize }}

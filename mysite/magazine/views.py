@@ -25,6 +25,8 @@ def issue_detail(request, year, no, issue):
     obj.issue_views  += 1
     obj.save()
 
+    #List of All Sections Belonging to the current Issue
+    sections = issue.sections.filter(added=True)
     #List of active Feedbacks for current issue
     feedbacks = issue.feedbacks.filter(active=True)
 
@@ -46,9 +48,13 @@ def issue_detail(request, year, no, issue):
     return render(request,
                   'magazine/issue/issue-detail.html',
                   {'issue': issue,
+                   'sections':sections,
                    'feedbacks':feedbacks,
                   'new_feedback': new_feedback,
                   'feedback_form':feedback_form})
+
+
+
 
 #Share Issue By E-mail
 def issue_share(request, issue_id):

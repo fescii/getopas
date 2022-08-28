@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Issue, Feedback
+from .models import Issue, Feedback, Section
 
 # Register your models here.
 @admin.register(Issue)
@@ -18,3 +18,10 @@ class FeedbackAdmin(admin.ModelAdmin):
     list_display = ('name', 'email', 'issue', 'created','active')
     list_filter = ('active', 'created', 'updated')
     search_fields = ('name', 'email', 'description')
+
+#Registering Section Model
+@admin.register(Section)
+class SectionAdmin(admin.ModelAdmin):
+    list_display = ('page','name','body','added')
+    list_filter = ('added', 'page',)
+    search_fields = ('page','name')
