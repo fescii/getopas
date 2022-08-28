@@ -257,8 +257,9 @@ def delete_issue(request, pk):
 
 #List Newsletter By The User.
 @login_required
-def user_issue_section_list(request, issue):
-    sections = Issue.objects.get(issue=request.issue)
+def user_issue_section_list(request, id):
+    obj = Issue.objects.get(id=id)
+    sections = obj.sections
 
     paginator = Paginator(sections, 5) # 5 issues in each page
     page = request.GET.get('page')
