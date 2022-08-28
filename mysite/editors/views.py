@@ -3,9 +3,10 @@ from django.shortcuts import render,get_object_or_404
 from django.contrib.auth import authenticate, login
 
 from magazine.models import Issue,Section
-from .forms import UserRegistrationForm,\
+from .forms import CreateSection, UserRegistrationForm,\
     UserEditForm, ProfileEditForm, CreateBlogPostForm,\
-        BlogEditForm, CreateMagazineForm, MagazineEditForm
+        BlogEditForm, CreateMagazineForm, MagazineEditForm,\
+            CreateSectionForm
 from django.core.paginator import Paginator, EmptyPage,\
     PageNotAnInteger
 from django.contrib.auth.decorators import login_required
@@ -255,25 +256,25 @@ def delete_issue(request, pk):
 
 #Edit Newsletter Section
 @login_required
-def edit_section(request, page):
-    #post = get_object_or_404(Post, id=pk)
-    post = Section.objects.get(page=page)
+def create_section(request):
+    section_form = None
     if request.method == 'POST':
-        edit_form = MagazineEditForm(request.POST or None, instance=post)
-        if edit_form.is_valid():
-            edit_form.save()
-            messages.success(request, 'Issue updated successfully')
-            return HttpResponseRedirect(reverse('user_issue_list'))
-
+        #Form is sent
+        section_form = CreateSectionForm(data=request.POST)
+        if section_form.is_valid():
+            new_section = section_form.save(commit=False)
+            #Assign The Current User To the Post
+            new_section.author = request.user
+            new_section.save()
+            messages.success(request, 'Your Section Was added')
+            #return HttpResponseRedirect(reverse('user_post_list'))
         else:
-            messages.error(request, 'Error updating the Issue')
-            edit_form = MagazineEditForm(request.POST or None, instance=post)
-
+            section_form = CreateBlogPostForm(data=request.GET)
         return render(request,
-                        'editors/articles/issue-edit.html',
-                        {'edit_form': edit_form})
+                      'editors/articles/create.html',
+                      {'post_form': section_form})
     else:
-        edit_form = MagazineEditForm(request.POST or None, instance=post)
+        section_form = CreateBlogPostForm(data=request.GET)
         return render(request,
-                        'editors/articles/issue-edit.html',
-                        {'edit_form': edit_form})
+                      'editors/articles/create.html',
+                      {'post_form': section_form})

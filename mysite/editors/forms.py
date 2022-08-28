@@ -52,7 +52,7 @@ class MagazineEditForm(forms.ModelForm):
         model = Issue
         fields = ('no','title','description','tags','status')
 
-class CreateSection(forms.ModelForm):
+class CreateSectionForm(forms.ModelForm):
     class Meta:
         model = Section
         fields =('name','page','body','added')
