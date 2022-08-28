@@ -257,24 +257,23 @@ def delete_issue(request, pk):
 
 #List Newsletter By The User.
 @login_required
-def user_issue_section_list(request, id):
-    obj = Issue.objects.get(id=id)
-    sections = obj.sections
-
+def user_issue_section_list(request, pk):
+    obj = get_object_or_404(Issue, id=pk)
+    sections = obj.sections.all()
+    """
     paginator = Paginator(sections, 5) # 5 issues in each page
     page = request.GET.get('page')
     try:
-        issues = paginator.page(page)
+        sections = paginator.page(page)
     except PageNotAnInteger:
     # If page is not an integer deliver the first page
-        issues = paginator.page(1)
+        sections = paginator.page(1)
     except EmptyPage:
     # If page is out of range deliver last page of results
-        issues = paginator.page(paginator.num_pages)
-
+        sections = paginator.page(paginator.num_pages)
+    """
     return render(request, 'editors/articles/user_issues_sections.html',
-                  {'page': page,
-                   'issues': issues,})
+                  {'sections': sections,})
 
 #Edit Newsletter Section
 @login_required
