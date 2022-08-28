@@ -43,4 +43,5 @@ urlpatterns = [
     path('add-newsletter/', views.create_magazine, name='new_newsletter'),
     path('my-newsletters/', views.user_issue_list, name='user_issue_list'),
     path('edit-newsletter/<int:pk>/', views.edit_newsletter, name='edit_newsletter'),
+    path('delete-newsletter/<int:pk>/', views.delete_issue, name='delete_issue'),
 ]

@@ -45,6 +45,16 @@ class Issue(models.Model):
         if not self.slug:
             self.slug = slugify(self.title)
             super().save(*args, **kwargs)
+
+
+#Section Model
+class Section(models.Model):
+    issue = models.ForeignKey(Issue, on_delete=models.CASCADE, related_name='section_issue')
+    name = models.TextField(max_length=250)
+    page = models.IntegerField()
+    body = models.TextField()
+    added = models.BooleanField(default=False)
+
 #Feedback Model
 class Feedback(models.Model):
     issue = models.ForeignKey(Issue, on_delete=models.CASCADE, related_name='feedbacks')
