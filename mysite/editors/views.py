@@ -93,6 +93,7 @@ def create_post(request):
             new_post.author = request.user
             new_post.save()
             messages.success(request, 'Your Post Was added')
+            return HttpResponseRedirect(reverse('user_post_list'))
         else:
             post_form = CreateBlogPostForm(data=request.GET)
         return render(request,

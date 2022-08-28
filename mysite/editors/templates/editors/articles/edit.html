@@ -2,7 +2,7 @@
 {% block title %}Create A post{% endblock %}
 {% block content %}
 <h1>Edit Article</h1>
-<form method="post">
+<form method="POST">
 {{ edit_form.as_p }}
 {% csrf_token %}
 <input type="submit" value="Save">
