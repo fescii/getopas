@@ -311,7 +311,7 @@ def add_section(request,issue_id, section_id):
     section.added = True
     section.save()
     messages.success(request, 'Section was added successfully')
-    return HttpResponseRedirect(reverse('user_issue_section_list'))
+    return HttpResponseRedirect(reverse('user_issue_section_list',kwargs={'pk': issue_id}))
 
 # Remove Section From An Issue
 @login_required
@@ -320,4 +320,4 @@ def remove_section(request,issue_id, section_id):
     section.added = False
     section.save()
     messages.success(request, 'Post was deleted successfully')
-    return HttpResponseRedirect(reverse('user_issue_section_list'))
+    return HttpResponseRedirect(reverse('user_issue_section_list', kwargs={'pk': issue_id}))
