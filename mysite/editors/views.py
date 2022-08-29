@@ -332,7 +332,7 @@ def delete_section(request,issue_id, section_id):
 
 #Edit Edit Section
 @login_required
-def edit_newsletter(request, issue_id, section_id):
+def edit_section(request, issue_id, section_id):
     issue = Issue.objects.get(id=issue_id)
     section = Section.objects.get(id=section_id)
     if request.method == 'POST':
@@ -344,15 +344,15 @@ def edit_newsletter(request, issue_id, section_id):
 
         else:
             messages.error(request, 'Error updating the Issue')
-            section_edit_form = SectionEditForm(request.POST or None, instance=section)
+            section_edit_form = SectionEditForm(request.POST, instance=section)
 
         return render(request,
-                        'editors/articles/issue-edit.html',
-                        {'edit_form': section_edit_form},
+                        'editors/articles/section-edit.html',
+                        {'section_edit_form': section_edit_form},
                         {'issue': issue})
     else:
-        section_edit_form = SectionEditForm(request.POST or None, instance=section)
+        section_edit_form = SectionEditForm(request.POST, instance=section)
         return render(request,
-                        'editors/articles/issue-edit.html',
-                        {'edit_form': section_edit_form},
+                        'editors/articles/section-edit.html',
+                        {'section_edit_form': section_edit_form},
                         {'issue': issue})

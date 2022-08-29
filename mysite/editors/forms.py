@@ -58,5 +58,6 @@ class CreateSectionForm(forms.ModelForm):
         fields =('name','page','body','added')
 
 class SectionEditForm(forms.ModelForm):
-    model = Section
-    fields =('name','page','body','added')
+    class Meta:
+        model = Section
+        fields =('name','page','body','added')
