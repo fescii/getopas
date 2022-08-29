@@ -306,8 +306,8 @@ def create_section(request, pk):
 
 # Add Section To Issue
 @login_required
-def add_section(request,issue_id, pk):
-    section = get_object_or_404(Section, id=pk)
+def add_section(request,issue_id, section_id):
+    section = get_object_or_404(Section, id=section_id)
     section.added = True
     section.save()
     messages.success(request, 'Section was added successfully')
@@ -315,8 +315,8 @@ def add_section(request,issue_id, pk):
 
 # Remove Section From An Issue
 @login_required
-def remove_section(request,issue_id, pk):
-    section = get_object_or_404(Section, id=pk)
+def remove_section(request,issue_id, section_id):
+    section = get_object_or_404(Section, id=section_id)
     section.added = False
     section.save()
     messages.success(request, 'Post was deleted successfully')

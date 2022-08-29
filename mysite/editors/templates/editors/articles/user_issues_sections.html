@@ -9,19 +9,17 @@
 {% for section in sections %}
 <div class="issue-section">
     <p class="date">Section Title: {{ section.name }}</p>
-    {% with issue.id as issue_id %}
     {% if section.added %}
-    <p>Added<a href="/editors/my-newsletters/{{issue_id}}/sections/remove-section-{{section.id}}">Remove</a></p>
+    <p>Added<a href="{% url 'remove_section' issue_id=issue.id  section_id=section.id%}">Remove</a></p>
     {{ section.body|truncatewords:30|linebreaks }}
     <a href="/editors/edit-section/{{section.page}}">edit</a>
     <a href="/editors/delete-section/{{section.page}}">delete</a>
     {% else %}
-    <p>Not Added<a href="/editors/my-newsletters/{{issue_id}}/sections/add-section-{{section.id}}">Add</a></p>
+    <p>Not Added<a href="{% url 'add_section' issue_id=issue.id  section_id=section.id%}">Add</a></p>
     {{ section.body|truncatewords:30|linebreaks }}
     <a href="/editors/edit-section/{{section.page}}">edit</a>
     <a href="/editors/delete-section/{{section.page}}">delete</a>
     {% endif %}
-    {% endwith %}
 </div>
 {% if empty %}
 <p> You've not Published any Sections For This Newsletter Yet!</p>
