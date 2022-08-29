@@ -42,11 +42,13 @@ class PostListView(ListView):
     template_name = 'blog/post/list.html'
 
 
-def post_detail(request, year, month, day, post):
-    post = get_object_or_404(Post, slug=post, status='published',
+def post_detail(request, year, month, day, slug):
+    post = get_object_or_404(Post, slug=slug, status='published',
                              publish__year=year,
                              publish__month=month,
                              publish__day=day)
+    post.blog_views  += 1
+    post.save(commit=True)
     #List of active comments for this post
     comments = post.comments.filter(active=True)
 

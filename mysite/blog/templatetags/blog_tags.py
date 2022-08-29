@@ -21,3 +21,10 @@ def show_latest_posts(count=5):
 def get_most_commented_posts(count=5):
     return Post.published.annotate(
                 total_comments = Count('comments')).order_by('-total_comments')[:count]
+
+
+#Fetching 4 most viewed  Blog
+@register.inclusion_tag('blog/post/most_viewed.html')
+def show_most_viewed_posts(count=4):
+    most_viewed = Post.published.order_by('-blog_views')[:count]
+    return {'most_viewed': most_viewed}
