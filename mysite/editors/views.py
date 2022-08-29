@@ -6,7 +6,7 @@ from magazine.models import Issue, Section
 from .forms import UserRegistrationForm,\
     UserEditForm, ProfileEditForm, CreateBlogPostForm,\
         BlogEditForm, CreateMagazineForm, MagazineEditForm,\
-            CreateSectionForm
+            CreateSectionForm, SectionEditForm
 from django.core.paginator import Paginator, EmptyPage,\
     PageNotAnInteger
 from django.contrib.auth.decorators import login_required
@@ -329,3 +329,30 @@ def delete_section(request,issue_id, section_id):
     section.delete()
     messages.success(request, 'Section was deleted successfully')
     return HttpResponseRedirect(reverse('user_issue_section_list',kwargs={'pk': issue_id}))
+
+#Edit Edit Section
+@login_required
+def edit_newsletter(request, issue_id, section_id):
+    issue = Issue.objects.get(id=issue_id)
+    section = Section.objects.get(id=section_id)
+    if request.method == 'POST':
+        section_edit_form = SectionEditForm(request.POST or None, instance=section)
+        if section_edit_form.is_valid():
+            section_edit_form.save()
+            messages.success(request, 'Issue updated successfully')
+            return HttpResponseRedirect(reverse('user_issue_section_list',kwargs={'pk': issue_id}))
+
+        else:
+            messages.error(request, 'Error updating the Issue')
+            section_edit_form = SectionEditForm(request.POST or None, instance=section)
+
+        return render(request,
+                        'editors/articles/issue-edit.html',
+                        {'edit_form': section_edit_form},
+                        {'issue': issue})
+    else:
+        section_edit_form = SectionEditForm(request.POST or None, instance=section)
+        return render(request,
+                        'editors/articles/issue-edit.html',
+                        {'edit_form': section_edit_form},
+                        {'issue': issue})
