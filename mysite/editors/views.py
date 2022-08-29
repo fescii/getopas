@@ -335,11 +335,12 @@ def delete_section(request,issue_id, section_id):
 def edit_section(request, issue_id, section_id):
     issue = Issue.objects.get(id=issue_id)
     section = Section.objects.get(id=section_id)
+    section_edit_form = SectionEditForm(request.POST or None, instance=section)
     if request.method == 'POST':
         section_edit_form = SectionEditForm(request.POST or None, instance=section)
         if section_edit_form.is_valid():
             section_edit_form.save()
-            messages.success(request, 'Issue updated successfully')
+            messages.success(request, 'Section updated successfully')
             return HttpResponseRedirect(reverse('user_issue_section_list',kwargs={'pk': issue_id}))
 
         else:
@@ -348,11 +349,10 @@ def edit_section(request, issue_id, section_id):
 
         return render(request,
                         'editors/articles/section-edit.html',
-                        {'section_edit_form': section_edit_form},
-                        {'issue': issue})
+                        {'section_edit_form': section_edit_form,
+                        'issue': issue})
     else:
-        section_edit_form = SectionEditForm(request.POST, instance=section)
         return render(request,
                         'editors/articles/section-edit.html',
-                        {'section_edit_form': section_edit_form},
-                        {'issue': issue})
+                        {'section_edit_form': section_edit_form,
+                        'issue': issue})
