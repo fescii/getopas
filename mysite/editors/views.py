@@ -259,7 +259,7 @@ def delete_issue(request, pk):
 @login_required
 def user_issue_section_list(request, pk):
     issue = get_object_or_404(Issue, id=pk)
-    sections = issue.sections.all()
+    sections = issue.sections.all().order_by('-page')
     """
     paginator = Paginator(sections, 5) # 5 issues in each page
     page = request.GET.get('page')
