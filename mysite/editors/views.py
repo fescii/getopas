@@ -321,3 +321,11 @@ def remove_section(request,issue_id, section_id):
     section.save()
     messages.success(request, 'Post was deleted successfully')
     return HttpResponseRedirect(reverse('user_issue_section_list', kwargs={'pk': issue_id}))
+
+# Delete Section
+@login_required
+def delete_section(request,issue_id, section_id):
+    section = get_object_or_404(Section, id=section_id)
+    section.delete()
+    messages.success(request, 'Section was deleted successfully')
+    return HttpResponseRedirect(reverse('user_issue_section_list',kwargs={'pk': issue_id}))
