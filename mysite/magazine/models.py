@@ -18,22 +18,22 @@ class Issue(models.Model):
     STATUS_CHOICES = (
         ('draft', 'Draft'),
         ('published', 'Published'),)
-    no = models.IntegerField()
+    no = models.IntegerField(editable=True)
     title = models.CharField(max_length=250)
     slug = models.SlugField(max_length=250, unique_for_date='publish')
     author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='magazine_posts')
-    description = models.TextField()
+    description = models.TextField(editable=True)
     publish = models.DateTimeField(default=timezone.now)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
-    status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='draft')
+    status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='draft', editable=True)
     issue_views = models.IntegerField(default=0)
     tags = TaggableManager()
     class Meta:
         ordering = ('-publish',)
     def __str__(self):
         return self.title
-    
+
     def Tag(self):
         return ",".join([str(p) for p in self.Tags.all()])
 

@@ -171,24 +171,14 @@ def create_magazine(request):
         #Form is sent
         magazine_form = CreateMagazineForm(data=request.POST)
         if magazine_form.is_valid():
-            cd = magazine_form.cleaned_data
-            no = cd['no']
-            title = cd['title']
-            author = request.user
-            description = cd['description']
-            status = cd['status']
-            tags = cd['tags']
-            new = Issue(no=no,
-                        title=title,
-                        author=author,
-                        description=description,
-                        status=status,
-                        tags=tags)
+            issue = magazine_form.save(commit=False)
+            issue.author = request.user
+            issue.save()
+            magazine_form.save_m2m()
             #Assign The Current User To the Post
             #new_magazine.author = request.user
             #new_magazine.tags = cd['tags']
             #new_magazine.save()
-            new.save()
             messages.success(request, f'Magazine Was {magazine_form.cleaned_data}Created Successfully')
             return HttpResponseRedirect(reverse('user_issue_list'))
         else:
@@ -229,7 +219,8 @@ def edit_newsletter(request, pk):
     if request.method == 'POST':
         edit_form = MagazineEditForm(request.POST or None, instance=issue)
         if edit_form.is_valid():
-            edit_form.save()
+            edit_form.save(commit=False)
+            edit_form.save_m2m()
             messages.success(request, 'Issue updated successfully')
             return HttpResponseRedirect(reverse('user_issue_list'))
 
@@ -289,7 +280,7 @@ def create_section(request, pk):
             new_section.issue = issue
             new_section.save()
             messages.success(request, 'Your Section Was added Successfully')
-            return HttpResponseRedirect(reverse('user_issue_section_list'))
+            return HttpResponseRedirect(reverse('user_issue_section_list',kwargs={'pk': pk}))
         else:
             section_form = CreateSectionForm(data=request.GET)
         return render(request,
