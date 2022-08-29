@@ -225,9 +225,9 @@ def user_issue_list(request):
 @login_required
 def edit_newsletter(request, pk):
     #post = get_object_or_404(Post, id=pk)
-    post = Issue.objects.get(id=pk)
+    issue = Issue.objects.get(id=pk)
     if request.method == 'POST':
-        edit_form = MagazineEditForm(request.POST or None, instance=post)
+        edit_form = MagazineEditForm(request.POST, instance=issue)
         if edit_form.is_valid():
             edit_form.save()
             messages.success(request, 'Issue updated successfully')
@@ -235,13 +235,13 @@ def edit_newsletter(request, pk):
 
         else:
             messages.error(request, 'Error updating the Issue')
-            edit_form = MagazineEditForm(request.POST or None, instance=post)
+            edit_form = MagazineEditForm(request.POST, instance=issue)
 
         return render(request,
                         'editors/articles/issue-edit.html',
                         {'edit_form': edit_form})
     else:
-        edit_form = MagazineEditForm(request.POST or None, instance=post)
+        edit_form = MagazineEditForm(request.POST, instance=issue)
         return render(request,
                         'editors/articles/issue-edit.html',
                         {'edit_form': edit_form})
