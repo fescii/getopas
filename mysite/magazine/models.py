@@ -33,6 +33,9 @@ class Issue(models.Model):
         ordering = ('-publish',)
     def __str__(self):
         return self.title
+    
+    def Tag(self):
+        return ",".join([str(p) for p in self.Tags.all()])
 
     objects = models.Manager() # The default manager.
     published = PublishedManager() # Our custom manager.
