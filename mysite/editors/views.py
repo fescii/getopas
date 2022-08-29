@@ -91,10 +91,11 @@ def create_post(request):
         #Form is sent
         post_form = CreateBlogPostForm(data=request.POST)
         if post_form.is_valid():
-            new_post = post_form.save(commit=False)
             #Assign The Current User To the Post
-            new_post.author = request.user
-            new_post.save()
+            post = post_form.save(commit=False)
+            post.author = request.user
+            post.save()
+            post_form.save_m2m()
             messages.success(request, 'Your Post Was added')
             return HttpResponseRedirect(reverse('user_post_list'))
         else:
