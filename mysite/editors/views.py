@@ -97,9 +97,10 @@ def create_post(request):
             post.author = request.user
             post.save()
             post_form.save_m2m()
-            messages.success(request, 'Your Post Was added')
+            messages.success(request, 'Blog Post Created Successfully')
             return HttpResponseRedirect(reverse('user_post_list'))
         else:
+            messages.error(request, 'Error! Blog post was not created')
             post_form = CreateBlogPostForm(data=request.GET)
         return render(request,
                       'editors/articles/create.html',
@@ -213,9 +214,10 @@ def create_magazine(request):
             #new_magazine.author = request.user
             #new_magazine.tags = cd['tags']
             #new_magazine.save()
-            messages.success(request, f'Magazine Was {magazine_form.cleaned_data}Created Successfully')
+            messages.success(request, 'Magazine issue was created Successfully')
             return HttpResponseRedirect(reverse('user_issue_list'))
         else:
+            messages.error(request, 'Error! Magazine issue was not created')
             magazine_form = CreateMagazineForm(data=request.GET)
         return render(request,
                       'editors/articles/create-magazine.html',
@@ -318,18 +320,6 @@ def delete_issue(request, pk):
 def user_issue_section_list(request, pk):
     issue = get_object_or_404(Issue, id=pk)
     sections = issue.sections.all().order_by('-page')
-    """
-    paginator = Paginator(sections, 5) # 5 issues in each page
-    page = request.GET.get('page')
-    try:
-        sections = paginator.page(page)
-    except PageNotAnInteger:
-    # If page is not an integer deliver the first page
-        sections = paginator.page(1)
-    except EmptyPage:
-    # If page is out of range deliver last page of results
-        sections = paginator.page(paginator.num_pages)
-    """
     return render(request, 'editors/articles/user_issues_sections.html',
                   {'sections': sections,
                    'issue': issue})
@@ -349,6 +339,7 @@ def create_section(request, pk):
             messages.success(request, 'Your Section Was added Successfully')
             return HttpResponseRedirect(reverse('user_issue_section_list',kwargs={'pk': pk}))
         else:
+            messages.error(request, 'Error! Issue Section was not created')
             section_form = CreateSectionForm(data=request.GET)
         return render(request,
                       'editors/articles/create-section.html',
@@ -368,7 +359,7 @@ def add_section(request,issue_id, section_id):
     section = get_object_or_404(Section, id=section_id)
     section.added = True
     section.save()
-    messages.success(request, 'Section was added successfully')
+    messages.success(request, 'Section added')
     return HttpResponseRedirect(reverse('user_issue_section_list',kwargs={'pk': issue_id}))
 
 # Remove Section From An Issue
@@ -377,7 +368,7 @@ def remove_section(request,issue_id, section_id):
     section = get_object_or_404(Section, id=section_id)
     section.added = False
     section.save()
-    messages.success(request, 'Post was deleted successfully')
+    messages.success(request, 'Section was removed')
     return HttpResponseRedirect(reverse('user_issue_section_list', kwargs={'pk': issue_id}))
 
 # Delete Section
@@ -385,7 +376,7 @@ def remove_section(request,issue_id, section_id):
 def delete_section(request,issue_id, section_id):
     section = get_object_or_404(Section, id=section_id)
     section.delete()
-    messages.success(request, 'Section was deleted successfully')
+    messages.success(request, 'Section was deleted')
     return HttpResponseRedirect(reverse('user_issue_section_list',kwargs={'pk': issue_id}))
 
 #Edit Edit Section
@@ -402,7 +393,7 @@ def edit_section(request, issue_id, section_id):
             return HttpResponseRedirect(reverse('user_issue_section_list',kwargs={'pk': issue_id}))
 
         else:
-            messages.error(request, 'Error updating the Issue')
+            messages.error(request, 'Error updating the Section')
             section_edit_form = SectionEditForm(request.POST, instance=section)
 
         return render(request,
