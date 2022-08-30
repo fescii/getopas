@@ -28,6 +28,10 @@ class Post(models.Model):
     blog_views = models.IntegerField(default=0)
     tags = TaggableManager()
 
+    #Update Views
+    def update_views(self, *args, **kwargs):
+        self.blog_views =self.blog_views+1
+        super(Post, self).save(*args, kwargs)
     #Overriding The Save Method
     def save(self, *args, **kwargs):
         if not self.slug:

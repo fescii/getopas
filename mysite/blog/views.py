@@ -47,8 +47,9 @@ def post_detail(request, year, month, day, slug):
                              publish__year=year,
                              publish__month=month,
                              publish__day=day)
-    post.blog_views  += 1
-    post.save(commit=True)
+    #Update Views count on each visit
+    if post:
+        post.update_views()
     #List of active comments for this post
     comments = post.comments.filter(active=True)
 
