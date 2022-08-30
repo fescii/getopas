@@ -179,12 +179,12 @@ def edit_blog_post_tags(request, pk):
             edit_form = BlogEditTagsForm(request.POST or None, instance=post)
 
         return render(request,
-                        'editors/articles/issue-tags-edit.html',
+                        'editors/articles/edit-post-tags.html',
                         {'edit_form': edit_form})
     else:
         edit_form = BlogEditTagsForm(request.POST or None, instance=post)
         return render(request,
-                        'editors/articles/issue-tags-edit.html',
+                        'editors/articles/edit-post-tags-edit.html',
                         {'edit_form': edit_form,
                          'post': post})
 
