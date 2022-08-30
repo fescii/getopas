@@ -28,6 +28,14 @@ class Post(models.Model):
     blog_views = models.IntegerField(default=0)
     tags = TaggableManager()
 
+    #Updating Blog Post
+    def update_post(self, title, body, status, *args, **kwargs):
+        self.title = title
+        self.body = body
+        self.status = status
+        super(Post, self).save(update_fields=['title',
+                                              'body',
+                                              'status'], *args, **kwargs)
     #Update Views
     def update_views(self, *args, **kwargs):
         self.blog_views =self.blog_views+1

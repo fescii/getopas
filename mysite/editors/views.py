@@ -137,7 +137,12 @@ def edit_blog_post(request, pk):
     if request.method == 'POST':
         edit_form = BlogEditForm(request.POST or None, instance=post)
         if edit_form.is_valid():
-            edit_form.save()
+            cd = edit_form.cleaned_data
+            title = cd['title']
+            body = cd['body']
+            status = cd['status']
+            Post.update_post(post,title, body, status)
+            #edit_form.save()
             messages.success(request, 'Post updated successfully')
             return HttpResponseRedirect(reverse('user_post_list'))
 
