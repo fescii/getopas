@@ -267,13 +267,14 @@ def edit_newsletter_tags(request, pk):
             edit_form = MagazineEditTagsForm(request.POST or None, instance=issue)
 
         return render(request,
-                        'editors/articles/tags-edit.html',
+                        'editors/articles/issue-tags-edit.html',
                         {'edit_form': edit_form})
     else:
         edit_form = MagazineEditTagsForm(request.POST or None, instance=issue)
         return render(request,
-                        'editors/articles/tags-edit.html',
-                        {'edit_form': edit_form})
+                        'editors/articles/issue-tags-edit.html',
+                        {'edit_form': edit_form,
+                         'issue': issue})
 
 #Deleting an Issue
 @login_required
