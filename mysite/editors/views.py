@@ -172,7 +172,7 @@ def edit_blog_post_tags(request, pk):
             edit_form.save_m2m()
             tags.save()
             messages.success(request, 'Tags updated successfully')
-            return HttpResponseRedirect(reverse('user_issue_list'))
+            return HttpResponseRedirect(reverse('user_post_list'))
 
         else:
             messages.error(request, 'Error updating the Tags')
