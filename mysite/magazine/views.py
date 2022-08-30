@@ -21,10 +21,9 @@ def issue_detail(request, year, no, issue):
                              status='published',
                              publish__year=year,
                              no = no)
-    #obj =  Issue.objects.get(id=issue.id)
-    i = issue
-    i.issue_views = issue.issue_views + 1
-    i.save()
+    #Update Views count on each visit
+    if issue:
+        issue.update_views()
 
     #List of All Sections Belonging to the current Issue
     sections = issue.sections.filter(added=True)

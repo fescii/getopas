@@ -29,6 +29,11 @@ class Issue(models.Model):
     status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='draft', editable=True)
     issue_views = models.IntegerField(default=0)
     tags = TaggableManager()
+
+    #Update Views
+    def update_views(self, *args, **kwargs):
+        self.issue_views =self.issue_views+1
+        super(Issue, self).save(*args, kwargs)
     class Meta:
         ordering = ('-publish',)
     def __str__(self):
