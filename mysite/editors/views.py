@@ -6,7 +6,8 @@ from magazine.models import Issue, Section
 from .forms import UserRegistrationForm,\
     UserEditForm, ProfileEditForm, CreateBlogPostForm,\
         BlogEditForm, CreateMagazineForm, MagazineEditForm,\
-            CreateSectionForm, SectionEditForm, MagazineEditTagsForm
+            CreateSectionForm, SectionEditForm, MagazineEditTagsForm,\
+                BlogEditTagsForm
 from django.core.paginator import Paginator, EmptyPage,\
     PageNotAnInteger
 from django.contrib.auth.decorators import login_required
@@ -159,6 +160,33 @@ def edit_blog_post(request, pk):
                         'editors/articles/edit.html',
                         {'edit_form': edit_form})
 
+#Edit Magazine Newsletter Tags
+@login_required
+def edit_blog_post_tags(request, pk):
+    #post = get_object_or_404(Post, id=pk)
+    post = Post.objects.get(id=pk)
+    if request.method == 'POST':
+        edit_form = BlogEditTagsForm(request.POST or None, instance=post)
+        if edit_form.is_valid():
+            tags = edit_form.save(commit=False)
+            edit_form.save_m2m()
+            tags.save()
+            messages.success(request, 'Tags updated successfully')
+            return HttpResponseRedirect(reverse('user_issue_list'))
+
+        else:
+            messages.error(request, 'Error updating the Tags')
+            edit_form = BlogEditTagsForm(request.POST or None, instance=post)
+
+        return render(request,
+                        'editors/articles/issue-tags-edit.html',
+                        {'edit_form': edit_form})
+    else:
+        edit_form = BlogEditTagsForm(request.POST or None, instance=post)
+        return render(request,
+                        'editors/articles/issue-tags-edit.html',
+                        {'edit_form': edit_form,
+                         'post': post})
 
 # process delete post
 @login_required

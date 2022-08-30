@@ -42,6 +42,11 @@ class BlogEditForm(forms.ModelForm):
         fields = ('title', 'body','status')
         #fields = '__all__'
 
+class BlogEditTagsForm(forms.ModelForm):
+    class Meta:
+        model = Post
+        fields = ('tags',)
+
 class CreateMagazineForm(forms.ModelForm):
     class Meta:
         model = Issue
