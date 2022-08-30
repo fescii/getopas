@@ -30,6 +30,16 @@ class Issue(models.Model):
     issue_views = models.IntegerField(default=0)
     tags = TaggableManager()
 
+    #Updating an Issue
+    def update_issue(self, no,title, description, status, *args, **kwargs):
+        self.no = no
+        self.title = title
+        self.description = description
+        self.status = status
+        super(Issue, self).save(update_fields=['no',
+                                               'title',
+                                              'description',
+                                              'status'], *args, **kwargs)
     #Update Views
     def update_views(self, *args, **kwargs):
         self.issue_views =self.issue_views+1

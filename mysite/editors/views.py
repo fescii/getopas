@@ -225,8 +225,12 @@ def edit_newsletter(request, pk):
     if request.method == 'POST':
         edit_form = MagazineEditForm(request.POST or None, instance=issue)
         if edit_form.is_valid():
-            edit_form.save(commit=False)
-            edit_form.save_m2m()
+            cd = edit_form.cleaned_data
+            no = cd['no']
+            title = cd['title']
+            description = cd['description']
+            status = cd['status']
+            Issue.update_issue(issue,no,title, description, status)
             messages.success(request, 'Issue updated successfully')
             return HttpResponseRedirect(reverse('user_issue_list'))
 

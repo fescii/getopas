@@ -50,7 +50,7 @@ class CreateMagazineForm(forms.ModelForm):
 class MagazineEditForm(forms.ModelForm):
     class Meta:
         model = Issue
-        fields = ('no','title','description','tags','status')
+        fields = ('no','title','description','status')
 
 class CreateSectionForm(forms.ModelForm):
     class Meta:
