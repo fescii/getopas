@@ -6,7 +6,7 @@ from magazine.models import Issue, Section
 from .forms import UserRegistrationForm,\
     UserEditForm, ProfileEditForm, CreateBlogPostForm,\
         BlogEditForm, CreateMagazineForm, MagazineEditForm,\
-            CreateSectionForm, SectionEditForm
+            CreateSectionForm, SectionEditForm, MagazineEditTagsForm
 from django.core.paginator import Paginator, EmptyPage,\
     PageNotAnInteger
 from django.contrib.auth.decorators import login_required
@@ -217,6 +217,7 @@ def user_issue_list(request):
     return render(request, 'editors/articles/user_issues_list.html',
                   {'page': page,
                    'issues': issues,})
+
 #Edit Magazine Newsletter
 @login_required
 def edit_newsletter(request, pk):
@@ -245,6 +246,33 @@ def edit_newsletter(request, pk):
         edit_form = MagazineEditForm(request.POST or None, instance=issue)
         return render(request,
                         'editors/articles/issue-edit.html',
+                        {'edit_form': edit_form})
+
+#Edit Magazine Newsletter Tags
+@login_required
+def edit_newsletter_tags(request, pk):
+    #post = get_object_or_404(Post, id=pk)
+    issue = Issue.objects.get(id=pk)
+    if request.method == 'POST':
+        edit_form = MagazineEditTagsForm(request.POST or None, instance=issue)
+        if edit_form.is_valid():
+            tags = edit_form.save(commit=False)
+            edit_form.save_m2m()
+            tags.save()
+            messages.success(request, 'Tags updated successfully')
+            return HttpResponseRedirect(reverse('user_issue_list'))
+
+        else:
+            messages.error(request, 'Error updating the Tags')
+            edit_form = MagazineEditTagsForm(request.POST or None, instance=issue)
+
+        return render(request,
+                        'editors/articles/tags-edit.html',
+                        {'edit_form': edit_form})
+    else:
+        edit_form = MagazineEditTagsForm(request.POST or None, instance=issue)
+        return render(request,
+                        'editors/articles/tags-edit.html',
                         {'edit_form': edit_form})
 
 #Deleting an Issue

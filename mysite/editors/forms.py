@@ -51,6 +51,10 @@ class MagazineEditForm(forms.ModelForm):
     class Meta:
         model = Issue
         fields = ('no','title','description','status')
+class MagazineEditTagsForm(forms.ModelForm):
+    class Meta:
+        model = Issue
+        fields = ('tags',)
 
 class CreateSectionForm(forms.ModelForm):
     class Meta:
