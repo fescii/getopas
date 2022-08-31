@@ -1,3 +1,4 @@
+from distutils.log import error
 from django.http import HttpResponse
 from django.shortcuts import render,get_object_or_404
 from django.contrib.auth import authenticate, login
@@ -29,6 +30,7 @@ def dashboard(request):
 
 #Registration View
 def register(request):
+    args = ''
     if request.method == 'POST':
         user_form = UserRegistrationForm(request.POST)
         if user_form.is_valid():
@@ -36,7 +38,7 @@ def register(request):
             new_user = user_form.save(commit=False)
             #Setting the password
             new_user.set_password(
-                user_form.cleaned_data['password'])
+            user_form.cleaned_data['password'])
             #Saving The User Object
             new_user.save()
             Profile.objects.create(user=new_user)
@@ -44,10 +46,12 @@ def register(request):
                           'editors/register_done.html',
                           {'new_user': new_user})
         else:
+            args = user_form.errors
             user_form = UserRegistrationForm()
         return render(request,
                       'editors/register.html',
-                      {'user_form': user_form})
+                      {'user_form': user_form,
+                       'error': args})
     else:
         user_form = UserRegistrationForm()
         return render(request,
