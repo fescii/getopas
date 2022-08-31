@@ -1,5 +1,3 @@
-from dataclasses import fields
-from pyexpat import model
 from django import forms
 from django.contrib.auth.models import User
 from .models import Profile
@@ -42,6 +40,12 @@ class ProfileEditForm(forms.ModelForm):
     class Meta:
         model = Profile
         fields = ('date_of_birth','about','photo')
+
+
+#Moderate User Form
+class ModerateUserForm(forms.Form):
+    user_types = (('admin','editor','normal'),)
+    role = forms.ChoiceField(choices=user_types)
 
 #User/Editor Creating a Blog Post
 class CreateBlogPostForm(forms.ModelForm):

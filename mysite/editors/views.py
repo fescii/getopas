@@ -8,7 +8,7 @@ from .forms import UserRegistrationForm,\
     UserEditForm, ProfileEditForm, CreateBlogPostForm,\
         BlogEditForm, CreateMagazineForm, MagazineEditForm,\
             CreateSectionForm, SectionEditForm, MagazineEditTagsForm,\
-                BlogEditTagsForm
+                BlogEditTagsForm, ModerateUserForm
 from django.core.paginator import Paginator, EmptyPage,\
     PageNotAnInteger
 from django.contrib.auth.decorators import login_required,user_passes_test
@@ -45,28 +45,28 @@ def list_users(request):
 # modify an user based on action
 @user_passes_test(is_admin)
 def moderate_user(request, pk):
+    form = ModerateUserForm()
     if request.method == 'POST':
         user = User.objects.get(id=pk)
-        action = request.POST.get('action')
+        if form.is_valid():
+            cd = form.cleaned_data
+            action = cd['role']
 
-        if action == "admin":
-            user.is_superuser = True
-            user.is_staff = True
-            user.save()
+            if action == "admin":
+                user.is_superuser = True
+                user.is_staff = True
+                user.save()
 
-        elif action == "moderator":
-            user.is_superuser = False
-            user.is_staff = True
-            user.save()
+            elif action == "editor":
+                user.is_superuser = False
+                user.is_staff = True
+                user.save()
 
 
-        elif action == "author":
-            user.is_superuser = False
-            user.is_staff = False
-            user.save()
-
-        elif action == "delete":
-            user.delete()
+            elif action == "author":
+                user.is_superuser = False
+                user.is_staff = False
+                user.save()
 
     return HttpResponseRedirect(reverse('backend:users'))
 
