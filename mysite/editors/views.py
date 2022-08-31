@@ -46,36 +46,37 @@ def list_users(request):
 # modify an user based on action
 @user_passes_test(is_admin)
 def moderate_user(request, user_id):
-    user = User.objects.get(id=user_id)
+    u = User.objects.get(id=user_id)
+
     role = ''
-    if user.is_superuser == True:
+    if u.is_superuser == True:
         role = 'admin'
-    elif user.is_staff == True and user.is_superuser == False:
+    elif u.is_staff == True and u.is_superuser == False:
         role = 'editor'
     else:
         role = 'author'
+
     if request.method == 'POST':
         form = ModerateUserForm()
         if form.is_valid():
             cd = form.cleaned_data
             action = cd['role']
 
-            if action == "admin":
-                user.is_superuser = True
-                user.is_staff = True
-                user.save()
+            if action == "1":
+                u.is_superuser = True
+                u.is_staff = True
+                u.save()
 
-            elif action == "editor":
-                user.is_superuser = False
-                user.is_staff = True
-                user.save()
+            elif action == "2":
+                u.is_superuser = False
+                u.is_staff = True
+                u.save()
 
 
-            elif action == "author":
-                user.is_superuser = False
-                user.is_staff = False
-                user.save()
-
+            elif action == "3":
+                u.is_superuser = False
+                u.is_staff = False
+                u.save()
                 messages.success(request, 'Role updated successfully')
                 return HttpResponseRedirect(reverse('user_list'))
         else:

@@ -47,7 +47,7 @@ class ModerateUserForm(forms.Form):
     CHOICES = (
         ('1', 'admin'),
          ('2','editor'),
-         ('3', 'author')
+         ('3', 'author'),
     )
     role = forms.ChoiceField(choices=CHOICES)
 

@@ -8,7 +8,7 @@
 {% endif %}
 
 <form method="POST">
-{{ form.as_p }}
+{{ form }}
 {% csrf_token %}
 <input type="submit" value="Save">
 </form>
