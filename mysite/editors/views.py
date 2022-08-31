@@ -22,18 +22,55 @@ from datetime import datetime
 
 
 # Create your views here.
-
 #verify if an user is an admin
 def is_admin(user):
     return user.is_superuser and user.is_staff
 
 # verify if an user is a moderator
-def is_editor(user):
+def is_moderator(user):
     return user.is_staff
 
 # verify if an user is an author
 def is_author(user):
     return user.is_active and not user.is_staff
+
+#List Users
+@user_passes_test(is_admin)
+def list_users(request):
+    users = User.objects.all()
+    return render(request,
+                  'editors/admin/users.html',
+                  {'users': users,})
+
+# modify an user based on action
+@user_passes_test(is_admin)
+def moderate_user(request, pk):
+    if request.method == 'POST':
+        user = User.objects.get(id=pk)
+        action = request.POST.get('action')
+
+        if action == "admin":
+            user.is_superuser = True
+            user.is_staff = True
+            user.save()
+
+        elif action == "moderator":
+            user.is_superuser = False
+            user.is_staff = True
+            user.save()
+
+
+        elif action == "author":
+            user.is_superuser = False
+            user.is_staff = False
+            user.save()
+
+        elif action == "delete":
+            user.delete()
+
+    return HttpResponseRedirect(reverse('backend:users'))
+
+
 
 
 @login_required
