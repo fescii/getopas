@@ -6,7 +6,7 @@
 <div class="user-wrapper">
     <p class="name">Name: {{ user.first_name}} {{ user.last_name }}</p>
     <p class="name">Email: {{ user.email}}</p>
-    <a href="/editors/users/edit-user-{{user.id}}">edit role</a>
+    <a href="{% url 'moderate_user' user_id=user.id%}">edit role</a>
     <a href="/editors/users/remove-user-{{user.id}}">remove user</a>
 </div>
 {% endfor %}

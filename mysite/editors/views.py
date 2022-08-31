@@ -1,4 +1,5 @@
 from distutils.log import error
+from email import message
 from django.http import HttpResponse
 from django.shortcuts import render,get_object_or_404
 from django.contrib.auth import authenticate, login
@@ -44,10 +45,17 @@ def list_users(request):
 
 # modify an user based on action
 @user_passes_test(is_admin)
-def moderate_user(request, pk):
-    form = ModerateUserForm()
+def moderate_user(request, user_id):
+    user = User.objects.get(id=user_id)
+    role = ''
+    if user.is_superuser == True:
+        role = 'admin'
+    elif user.is_staff == True and user.is_superuser == False:
+        role = 'editor'
+    else:
+        role = 'author'
     if request.method == 'POST':
-        user = User.objects.get(id=pk)
+        form = ModerateUserForm()
         if form.is_valid():
             cd = form.cleaned_data
             action = cd['role']
@@ -68,7 +76,21 @@ def moderate_user(request, pk):
                 user.is_staff = False
                 user.save()
 
-    return HttpResponseRedirect(reverse('backend:users'))
+                messages.success(request, 'Role updated successfully')
+                return HttpResponseRedirect(reverse('user_list'))
+        else:
+            messages.error(request, 'Role Not Updated, Try Again!')
+            form = ModerateUserForm()
+            return render(request,
+                          'editors/admin/edit-user.html',
+                          {'form': form,
+                           'role': role})
+    else:
+        form = ModerateUserForm()
+        return render(request,
+                          'editors/admin/edit-user.html',
+                          {'form': form,
+                           'role': role})
 
 
 

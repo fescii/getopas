@@ -44,8 +44,12 @@ class ProfileEditForm(forms.ModelForm):
 
 #Moderate User Form
 class ModerateUserForm(forms.Form):
-    user_types = (('admin','editor','normal'),)
-    role = forms.ChoiceField(choices=user_types)
+    CHOICES = (
+        ('1', 'admin'),
+         ('2','editor'),
+         ('3', 'author')
+    )
+    role = forms.ChoiceField(choices=CHOICES)
 
 #User/Editor Creating a Blog Post
 class CreateBlogPostForm(forms.ModelForm):
