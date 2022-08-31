@@ -1,100 +1,15 @@
-<!DOCTYPE html>
-{% extends 'backend/base.html'%}
+{% extends "base.html" %}
+{% block title %}Opus | Magazine{% endblock %} 
 {% block content %}
-<div class="col-md-10" >
-
-
-    <div class="post" style="height:1200px; overflow: scroll">
-
-        <table class="table">
-          <thead>
-            <tr>
-              <th scope="col">#</th>
-              <th scope="col">User Avatar</th>
-              <th scope="col">Name</th>
-              <th scope="col">UserName</th>
-              <th scope="col">Role</th>
-              <th scope="col">Action</th>
-            </tr>
-          </thead>
-          <tbody>
-        {% if users %}
-          {% for profile in users %}
-          <tr>
-            <th scope="row">1</th>
-             <td style="width: auto"><img src="/media/{{profile.profile_pic}}" alt="xHacker404" width="50px" height="50px"> </td>
-            <td> <a href="{% url 'backend:profile'%}">{{profile.user.first_name}} {{profile.user.last_name}}</a> </td>
-            <td>{{profile.user.username}}</td>
-            {% if profile.user.is_superuser %}
-            <td>Admin</td>
-            <td>
-              <form action="{% url 'backend:moderate_user'%}" method="POST">
-                {% csrf_token %}
-                <input type="hidden" name="user_id" value="{{profile.user.id}}">
-                <select name="action" class="custom-select" style="width:200px">
-                  <option value="moderator">
-                    Make Moderator
-                  </option>
-
-                    <option value="author">
-                      Make Author
-                    </option>
-                    <option value="delete">
-                    Remove User
-                    </option>
-                </select>
-              <button type="submit" class="btn btn-dark">Apply</a>
-                  </form>
-            </td>
-            {% elif profile.user.is_staff %}
-            <td>Moderator</td>
-            <td>
-              <form action="{% url 'backend:moderate_user'%}" method="POST">
-                {% csrf_token %}
-                <input type="hidden" name="user_id" value="{{profile.user.id}}">
-                <select name="action" class="custom-select" style="width:200px">
-                  <option value="admin">
-                    Make Admin
-                  </option>
-
-                    <option value="author">
-                      Make Author
-                    </option>
-                    <option value="delete">
-                    Remove User
-                    </option>
-                </select>
-                <button type="submit" class="btn btn-dark">Apply</a>
-              </form>
-            </td>
-            {% else %}
-            <td> Author </td>
-            <td>
-              <form action="{% url 'backend:moderate_user'%}" method="POST">
-                {% csrf_token %}
-                <input type="hidden" name="user_id" value="{{profile.user.id}}">
-                <select name="action" class="custom-select" style="width:200px">
-                  <option value="admin">
-                    Make Admin
-                  </option>
-
-                    <option value="moderator">
-                      Make Moderator
-                    </option>
-                    <option value="delete">
-                    Remove User
-                    </option>
-                </select>
-              <button type="submit" class="btn btn-dark">Apply</a>
-              </form>
-            </td>
-            {% endif %}
-            <td></td>
-          </tr>
-          {% endfor %}
-        {% endif %}
-          </tbody>
-        </table>
-    </div>
+<h1>Users</h1>
+{% for user in users %}
+<div class="user-wrapper">
+    <p class="name">Name: {{ user.first_name}} {{ user.last_name }}</p>
+    <p class="name">Email: {{ user.email}}</p>
+    <a href="/editors/users/edit-user-{{user.id}}">edit role</a>
+    <a href="/editors/users/remove-user-{{user.id}}">remove user</a>
 </div>
+{% endfor %}
+{% include "pagination.html" with page=posts %}
+<!--{% include "pagination.html" with page=page_obj %}-->
 {% endblock %}
