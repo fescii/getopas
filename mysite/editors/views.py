@@ -11,7 +11,7 @@ from .forms import UserRegistrationForm,\
                 BlogEditTagsForm
 from django.core.paginator import Paginator, EmptyPage,\
     PageNotAnInteger
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required,user_passes_test
 from django.http import HttpResponseRedirect, HttpResponse
 from django.urls import reverse
 from .models import Profile
@@ -22,6 +22,20 @@ from datetime import datetime
 
 
 # Create your views here.
+
+#verify if an user is an admin
+def is_admin(user):
+    return user.is_superuser and user.is_staff
+
+# verify if an user is a moderator
+def is_editor(user):
+    return user.is_staff
+
+# verify if an user is an author
+def is_author(user):
+    return user.is_active and not user.is_staff
+
+
 @login_required
 def dashboard(request):
     return render(request,
