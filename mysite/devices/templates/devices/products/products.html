@@ -1,9 +1,9 @@
 {% extends "magazine/base.html" %}
 {% load magazine_tags %}
-{% block title %}Opus - Magazine{% endblock %}
+{% block title %}Opus - Device-Info{% endblock %}
 
 {% block content %}
-<h1>My Blog</h1>
+<h1>Devices</h1>
 {% for issue in issues %}
 <h2>
   <a href="{{ issue.get_absolute_url }}"> {{ issue.title }} </a>
