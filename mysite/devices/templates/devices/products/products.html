@@ -6,7 +6,7 @@
 <h1>Devices</h1>
 {% for product in products %}
 <h2>
-  <a href="#"> {{ product.name }} </a>
+  <a href="{{ issue.get_absolute_url }}"> {{ product.name }} </a>
 </h2>
 <p>Type: {{product.type}}</p>
 <p class="date">Series: {{ product.series }}</p
