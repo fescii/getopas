@@ -28,6 +28,7 @@ class Product(models.Model):
     name = models.CharField(max_length=250)
     slug = models.SlugField(max_length=250, blank=True)
     model = models.CharField(max_length=250)
+    series = models.CharField(max_length=250, blank=True)
     type = models.CharField(max_length=50, choices=TYPE_CHOICES)
     company = models.CharField(max_length=250)
     release_date = models.DateTimeField(blank=True)
