@@ -60,7 +60,7 @@ class Product(models.Model):
     #Overriding The Save Method
     def save(self, *args, **kwargs):
         if not self.slug:
-            self.slug = slugify(self.name, self.model)
+            self.slug = slugify(self.name)
             super().save(*args, **kwargs)
     class Meta:
         ordering = ('-release_date',)
