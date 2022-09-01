@@ -37,18 +37,18 @@ def product_detail(request, year, product):
         if request.method == 'POST':
            #A feedback was Posted
             review_form = ReviewForm(data=request.POST)
-            if feedback_form.is_valid():
+            if review_form.is_valid():
                 #Create feedback object but we're not saving it to DB yet
-                new_review = feedback_form.save(commit=False)
+                new_review = review_form.save(commit=False)
                 #Assigning the current user and issue to the feedback
                 new_review.product = product
                 new_review.author = user
                 #Save the comment to the databases
                 new_review.save()
             else:
-                feedback_form = ReviewForm()
+                review_form = ReviewForm()
         else:
-            feedback_form = ReviewForm()
+            review_form = ReviewForm()
     """#List of All Sections Belonging to the current Issue
     #sections = issue.sections.filter(added=True)"""
 
