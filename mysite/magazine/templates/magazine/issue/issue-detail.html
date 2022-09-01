@@ -26,7 +26,7 @@
 {% for feedback in feedbacks %}
     <div class="feedback">
         <p class="info">
-        Feedback {{ forloop.counter }} by {{ feedback.name }}
+        Feedback {{ forloop.counter }} by {{ feedback.author }}
         {{ feedback.created }}
         </p>
         {{ feedback.body|linebreaks }}
@@ -34,14 +34,21 @@
     {% empty %}
     <p>There are no comments yet.</p>
 {% endfor %}
-{% if new_feedback %}
-    <h2>Your Feedback has been added.</h2>
-    {% else %}
-    <h2>Add a Feedback</h2>
-    <form method="post">
-        {{ feedback_form.as_p }}
-        {% csrf_token %}
-        <p><input type="submit" value="Add Feedback"></p>
-    </form>
+{% if user.is_authenticated %}
+
+    {% if new_feedback %}
+        <h2>Your Feedback has been added.</h2>
+        {% else %}
+        <h2>Add a Feedback</h2>
+        <form method="post">
+            {{ feedback_form.as_p }}
+            {% csrf_token %}
+            <p><input type="submit" value="Add Feedback"></p>
+        </form>
+    {% endif %}
+
+{% else %}
+<a href=" {% url 'login' %}">Login To Add Feedback</a>
 {% endif %}
+
 {% endblock %}

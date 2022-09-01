@@ -35,6 +35,7 @@ def issue_detail(request, year, no, issue):
                              status='published',
                              publish__year=year,
                              no = no)
+    user = request.user
     #Update Views count on each visit
     if issue:
         issue.update_views()
@@ -43,21 +44,24 @@ def issue_detail(request, year, no, issue):
     sections = issue.sections.filter(added=True)
     #List of active Feedbacks for current issue
     feedbacks = issue.feedbacks.filter(active=True)
-
+    feedback_form = None
     new_feedback  = None
-
-    if request.method == 'POST':
-        #A feedback was Posted
-        feedback_form = FeedbackForm(data=request.POST)
-        if feedback_form.is_valid():
-            #Create feedback object but we're not saving it to DB yet
-            new_feedback = feedback_form.save(commit=False)
-            #Assigning the current issue to the feedback
-            new_feedback.issue = issue
-            #Saving the feedback object to the Database
-            new_feedback.save()
-    else:
-        feedback_form = FeedbackForm()
+    if user.is_authenticated:
+        if request.method == 'POST':
+           #A feedback was Posted
+            feedback_form = FeedbackForm(data=request.POST)
+            if feedback_form.is_valid():
+                #Create feedback object but we're not saving it to DB yet
+                new_feedback = feedback_form.save(commit=False)
+                #Assigning the current user and issue to the feedback
+                new_feedback.issue = issue
+                new_feedback.author = user
+                #Save the comment to the databases
+                new_feedback.save()
+            else:
+                feedback_form = FeedbackForm()
+        else:
+            feedback_form = FeedbackForm()
 
     return render(request,
                   'magazine/issue/issue-detail.html',
@@ -66,6 +70,7 @@ def issue_detail(request, year, no, issue):
                    'feedbacks':feedbacks,
                   'new_feedback': new_feedback,
                   'feedback_form':feedback_form})
+
 
 
 

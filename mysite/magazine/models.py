@@ -76,8 +76,7 @@ class Section(models.Model):
 #Feedback Model
 class Feedback(models.Model):
     issue = models.ForeignKey(Issue, on_delete=models.CASCADE, related_name='feedbacks')
-    name = models.CharField(max_length=80)
-    email = models.EmailField()
+    author = models.ForeignKey(User, on_delete=models.CASCADE)
     body = models.TextField()
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)

@@ -14,4 +14,4 @@ class EmailIssueForm(forms.Form):
 class FeedbackForm(forms.ModelForm):
     class Meta:
         model = Feedback
-        fields = ('name','email','body')
+        fields = ('body',)

@@ -15,9 +15,8 @@ class IssueAdmin(admin.ModelAdmin):
 #Registering feedback model
 @admin.register(Feedback)
 class FeedbackAdmin(admin.ModelAdmin):
-    list_display = ('name', 'email', 'issue', 'created','active')
+    list_display = ('issue', 'created','active')
     list_filter = ('active', 'created', 'updated')
-    search_fields = ('name', 'email', 'description')
 
 #Registering Section Model
 @admin.register(Section)
