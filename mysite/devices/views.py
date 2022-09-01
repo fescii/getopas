@@ -32,29 +32,27 @@ def product_detail(request, year, product):
     review_form = None
     new_review  = None
 
-    """#List of All Sections Belonging to the current Issue
-    #sections = issue.sections.filter(added=True)
-    #List of active Feedbacks for current issue
-    #feedbacks = issue.feedbacks.filter(active=True)
-    #feedback_form = None
-    #new_feedback  = None
+    #Allow Only Registered Users To Enter Reviews
     if user.is_authenticated:
         if request.method == 'POST':
            #A feedback was Posted
-            feedback_form = FeedbackForm(data=request.POST)
+            review_form = ReviewForm(data=request.POST)
             if feedback_form.is_valid():
                 #Create feedback object but we're not saving it to DB yet
-                new_feedback = feedback_form.save(commit=False)
+                new_review = feedback_form.save(commit=False)
                 #Assigning the current user and issue to the feedback
-                new_feedback.issue = issue
-                new_feedback.author = user
+                new_review.product = product
+                new_review.author = user
                 #Save the comment to the databases
-                new_feedback.save()
+                new_review.save()
             else:
-                feedback_form = FeedbackForm()
+                feedback_form = ReviewForm()
         else:
-            feedback_form = FeedbackForm()"""
+            feedback_form = ReviewForm()
+    """#List of All Sections Belonging to the current Issue
+    #sections = issue.sections.filter(added=True)"""
 
     return render(request,
                   'devices/products/product-detail.html',
-                  {'product': product,})
+                  {'product': product,
+                   'review_form':review_form})
