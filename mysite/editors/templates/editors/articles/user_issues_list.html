@@ -9,10 +9,10 @@
     </h2>
     <p class="date">Published on {{ issue.publish }} by {{ issue.author }}</p>
     {{ issue.description|truncatewords:30|linebreaks }}
-    <a href="/editors/edit-newsletter/{{issue.id}}">edit</a>
-    <a href="/editors/edit-newsletter/tags/{{issue.id}}">Edit tags</a>
-    <a href="/editors/my-newsletters/{{issue.id}}/sections">Sections</a>
-    <a href="/editors/delete-newsletter/{{issue.id}}">delete</a>
+    <a href="/dashboard/edit-newsletter/{{issue.id}}">edit</a>
+    <a href="/dashboard/edit-newsletter/tags/{{issue.id}}">Edit tags</a>
+    <a href="/dashboard/my-newsletters/{{issue.id}}/sections">Sections</a>
+    <a href="/dashboard/delete-newsletter/{{issue.id}}">delete</a>
 </div>
 {% if empty %}
 <p> You've not Published any Issues Yet!</p>

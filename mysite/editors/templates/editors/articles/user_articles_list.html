@@ -13,9 +13,9 @@
     </h2>
     <p class="date">Published on {{ post.publish }} by {{ post.author }}</p>
     {{ post.body|truncatewords:30|linebreaks }}
-    <a href="/editors/edit-article/{{post.id}}">edit</a>
-    <a href="/editors/edit-article/tags/{{post.id}}">Edit Tags</a>
-    <a href="/editors/delete-article/{{post.id}}">delete</a>
+    <a href="/dashboard/edit-article/{{post.id}}">edit</a>
+    <a href="/dashboard/edit-article/tags/{{post.id}}">Edit Tags</a>
+    <a href="/dashboard/delete-article/{{post.id}}">delete</a>
 </div>
 {% endfor %}
 {% include "pagination.html" with page=posts %}
