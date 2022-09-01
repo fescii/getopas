@@ -33,12 +33,14 @@ class Issue(models.Model):
     tags = TaggableManager()
 
     #Updating an Issue
-    def update_issue(self, no,title, description, status, *args, **kwargs):
+    def update_issue(self, no, cover, title, description, status, *args, **kwargs):
         self.no = no
+        self.cover = cover
         self.title = title
         self.description = description
         self.status = status
         super(Issue, self).save(update_fields=['no',
+                                               'cover',
                                                'title',
                                               'description',
                                               'status'], *args, **kwargs)

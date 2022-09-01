@@ -70,12 +70,12 @@ class BlogEditTagsForm(forms.ModelForm):
 class CreateMagazineForm(forms.ModelForm):
     class Meta:
         model = Issue
-        fields = ('no','title','description','tags','status')
+        fields = ('no','cover','title','description','tags','status')
 
 class MagazineEditForm(forms.ModelForm):
     class Meta:
         model = Issue
-        fields = ('no','title','description','status')
+        fields = ('no','cover','title','description','status')
 class MagazineEditTagsForm(forms.ModelForm):
     class Meta:
         model = Issue

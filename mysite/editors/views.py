@@ -89,7 +89,13 @@ def moderate_user(request, user_id):
                           {'form': form,
                            'role': role})
 
-
+# Removing a user based on action
+@user_passes_test(is_admin)
+def remove_user(request, user_id):
+    user = User.objects.get(id=user_id)
+    user.delete()
+    messages.success(request, 'User account was successfully deleted')
+    return HttpResponseRedirect(reverse('user_list',kwargs={'pk': user_id}))
 
 
 @login_required
@@ -330,26 +336,30 @@ def edit_newsletter(request, pk):
     #post = get_object_or_404(Post, id=pk)
     issue = Issue.objects.get(id=pk)
     if request.method == 'POST':
-        edit_form = MagazineEditForm(request.POST or None, instance=issue)
+        edit_form = MagazineEditForm(request.POST or None, instance=issue,
+                                     files=request.FILES)
         if edit_form.is_valid():
             cd = edit_form.cleaned_data
             no = cd['no']
+            cover = cd['cover']
             title = cd['title']
             description = cd['description']
             status = cd['status']
-            Issue.update_issue(issue,no,title, description, status)
+            Issue.update_issue(issue,no,cover,title, description, status)
             messages.success(request, 'Issue updated successfully')
             return HttpResponseRedirect(reverse('user_issue_list'))
 
         else:
             messages.error(request, 'Error updating the Issue')
-            edit_form = MagazineEditForm(request.POST or None, instance=issue)
+            edit_form = MagazineEditForm(request.POST or None, instance=issue,
+                                         files=request.FILES)
 
         return render(request,
                         'editors/articles/issue-edit.html',
                         {'edit_form': edit_form})
     else:
-        edit_form = MagazineEditForm(request.POST or None, instance=issue)
+        edit_form = MagazineEditForm(request.POST or None,
+                                     instance=issue)
         return render(request,
                         'editors/articles/issue-edit.html',
                         {'edit_form': edit_form})

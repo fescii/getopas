@@ -2,7 +2,7 @@
 {% block title %}Updating A Newsletter{% endblock %}
 {% block content %}
 <h1>Edit Issue</h1>
-<form method="POST">
+<form method="post" enctype="multipart/form-data">
 {{ edit_form.as_p }}
 {% csrf_token %}
 <input type="submit" value="Save">

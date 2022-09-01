@@ -8,6 +8,7 @@
         <a href="{{ issue.get_absolute_url }}"> {{ issue.title }} </a>
     </h2>
     <p class="date">Published on {{ issue.publish }} by {{ issue.author }}</p>
+    <img src="/media/{{issue.cover}}" width="300" height="250" title="{{issue.cover}}" alt='Cover Image'/>
     {{ issue.description|truncatewords:30|linebreaks }}
     <a href="/dashboard/edit-newsletter/{{issue.id}}">edit</a>
     <a href="/dashboard/edit-newsletter/tags/{{issue.id}}">Edit tags</a>
