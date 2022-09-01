@@ -1,12 +1,14 @@
 from re import search
 from unittest import result
 from django.shortcuts import render, get_object_or_404
-from .models import Post, Comment
+from .models import Post
+from django.http import HttpResponseRedirect, HttpResponse
 from django.views.generic import ListView
 from django.core.paginator import Paginator, EmptyPage,\
     PageNotAnInteger
 from django.contrib.postgres.search import SearchVector, SearchQuery, SearchRank
-from .forms import EmailPostForm, CommentForm, SearchForm
+from .forms import EmailPostForm,BlogCommentForm, SearchForm
+from django.contrib.auth.decorators import login_required
 from django.core.mail import send_mail
 from taggit.models import Tag
 from django.db.models import Count
@@ -50,24 +52,27 @@ def post_detail(request, year, month, day, slug):
     #Update Views count on each visit
     if post:
         post.update_views()
+    user = request.user
     #List of active comments for this post
     comments = post.comments.filter(active=True)
 
     new_comment = None
     comment_form = None
-
-    if request.method == 'POST':
-        #A Comment was posted
-        comment_form = CommentForm(data=request.POST)
-        if comment_form.is_valid():
-            #Create Comment object but don't save to database yet
-            new_comment = comment_form.save(commit=False)
-            #Assign the current post to comment
-            new_comment.post = post
-            #Save the comment to the database
-            new_comment.save()
+    if user.is_authenticated:
+        if request.method == 'POST':
+            #A Comment was posted
+            comment_form = BlogCommentForm(data=request.POST)
+            if comment_form.is_valid():
+                #Create Comment object but don't save to database yet
+                new_comment = comment_form.save(commit=False)
+                #Assign the current post to comment
+                new_comment.post = post
+                #Save the comment to the database
+                new_comment.save()
+            else:
+                comment_form = BlogCommentForm()
         else:
-            comment_form = CommentForm()
+            return HttpResponseRedirect('login')
 
     #List of similar posts
     post_tags_ids = post.tags.values_list('id', flat=True)
@@ -83,6 +88,8 @@ def post_detail(request, year, month, day, slug):
                    'new_comment': new_comment,
                    'comment_form': comment_form,
                    'similar_posts': similar_posts})
+
+
 
 def post_share(request, post_id):
     #Retrieve post by id

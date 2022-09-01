@@ -90,7 +90,7 @@ DATABASES = {
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'femar',
+        'NAME': 'opus',
         'USER': 'femar',
         'PASSWORD': 'Fescii##$$3',
 }

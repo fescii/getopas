@@ -57,10 +57,9 @@ class Post(models.Model):
         args=[self.publish.year, self.publish.month, self.publish.day, self.slug])
 
 #Comments Model
-class Comment(models.Model):
+class BlogComment(models.Model):
     post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='comments')
-    name = models.CharField(max_length=80)
-    email = models.EmailField()
+    author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     body = models.TextField()
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
