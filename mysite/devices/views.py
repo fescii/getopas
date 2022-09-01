@@ -55,7 +55,7 @@ def product_detail(request, year, product):
             else:
                 review_form = ReviewForm()
         else:
-            review_form = ReviewForm()
+            review_form = None
     """#List of All Sections Belonging to the current Issue
     #sections = issue.sections.filter(added=True)"""
 
