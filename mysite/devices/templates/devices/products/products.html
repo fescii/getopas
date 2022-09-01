@@ -10,9 +10,7 @@
 </h2>
 <p class="date">Published {{ issue.publish }} by {{ issue.author }}</p>
 {{ issue.description|truncatewords:30|linebreaks }} {% endfor %}
-
-{% show_latest_issues 4 %}
-{% show_most_viewed_issues 4%}
+<!--
 <div class='most-feedback'>
 <h3>Editor's Pick</h3>
   {% get_issues_with_most_feedback as m_issues %}
@@ -46,4 +44,5 @@
         {{ issue.description|truncatewords:30|linebreaks }}
       {% endfor %}
     </div>
+    -->
 {% endblock %}
