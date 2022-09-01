@@ -75,7 +75,7 @@ class Product(models.Model):
 
 #Comments Model
 class PhysicalInfo(models.Model):
-    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='physical_info')
+    product = models.OneToOneField(Product, on_delete=models.CASCADE, related_name='physical_info')
     screen = models.CharField(max_length=250)
     battery = models.CharField(max_length=250)
     camera = models.TextField()
@@ -91,7 +91,7 @@ class PhysicalInfo(models.Model):
         return f'Comment By {self.name} on {self.post}'"""
 
 class SoftwareInfo(models.Model):
-    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='software_info')
+    product = models.OneToOneField(Product, on_delete=models.CASCADE, related_name='software_info')
     os_version = models.CharField(max_length=250)
     os_name = models.CharField(max_length=250)
     os_family = models.TextField()

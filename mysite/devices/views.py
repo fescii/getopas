@@ -28,6 +28,9 @@ def product_detail(request, year, product):
     #List of active Reviews for current product
     reviews = product.reviews.filter(active=True)
 
+    #List of  Reviews for current product
+    physical_info = product.physical.filter(active=True)
+
     #Adding New Review
     review_form = None
     new_review  = None
