@@ -26,6 +26,22 @@
 {% endif %}
 {% endwith %}
 
+{% with software_info as s_info %}
+{% if s_info %}
+<div class="physical_info">
+    <h2 class="info"> Physical Info</h2>
+    <p class="info"> Screen: {{ s_info.screen }}</p>
+    <p class="info"> Battery: {{ s_info.battery }}</p>
+    <p class="info"> Camera: {{ s_info.camera}}</p>
+    <p class="info"> RAM: {{ s_info.ram }}</p>
+    <p class="info"> Storage: {{ s_info.rom }}</p>
+    <p class="info"> Process:{{ s_info.processor }}</p>
+</div>
+{% else %}
+<p>There are no info yet.</p>
+{% endif %}
+{% endwith %}
+
 {% with reviews.count as total_reviews %}
     <h2>
         {{ total_reviews }} Review{{ total_reviews|pluralize }}
