@@ -29,13 +29,12 @@
 {% with software_info as s_info %}
 {% if s_info %}
 <div class="physical_info">
-    <h2 class="info"> Physical Info</h2>
-    <p class="info"> Screen: {{ s_info.screen }}</p>
-    <p class="info"> Battery: {{ s_info.battery }}</p>
-    <p class="info"> Camera: {{ s_info.camera}}</p>
-    <p class="info"> RAM: {{ s_info.ram }}</p>
-    <p class="info"> Storage: {{ s_info.rom }}</p>
-    <p class="info"> Process:{{ s_info.processor }}</p>
+    <h2 class="info"> Software Info</h2>
+    <p class="info"> OS Version: {{ s_info.os_version }}</p>
+    <p class="info"> OS Name: {{ s_info.os_name }}</p>
+    <p class="info"> OS Family: {{ s_info.os_family}}</p>
+    <p class="info"> OS Type: {{ s_info.os_type }}</p>
+    <p class="info"> Other Info: {{ s_info.other_info }}</p>
 </div>
 {% else %}
 <p>There are no info yet.</p>
