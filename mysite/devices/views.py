@@ -3,7 +3,7 @@ from multiprocessing import context
 import re
 from django.shortcuts import render, get_object_or_404
 from .models import Product, PhysicalInfo, SoftwareInfo,Review
-#from .forms import EmailIssueForm,FeedbackForm
+from .forms import ReviewForm
 from django.core.mail import send_mail
 
 # Create your views here.
@@ -27,6 +27,10 @@ def product_detail(request, year, product):
         product.update_views()
     #List of active Reviews for current product
     reviews = product.reviews.filter(active=True)
+
+    #Adding New Review
+    review_form = None
+    new_review  = None
 
     """#List of All Sections Belonging to the current Issue
     #sections = issue.sections.filter(added=True)
