@@ -70,7 +70,7 @@ class Product(models.Model):
     published = PublishedManager() # Our custom manager.
 
     def get_absolute_url(self):
-        return reverse('devices:device_detail',
+        return reverse('devices:product_detail',
         args=[self.release_date.year,self.slug])
 
 #Comments Model
