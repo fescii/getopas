@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'blog.apps.BlogConfig',
     'magazine.apps.MagazineConfig',
     'editors.apps.EditorsConfig',
+    'devices.apps.DevicesConfig',
     'django.contrib.auth',
     'taggit',
     'django.contrib.sites',
