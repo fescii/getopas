@@ -9,7 +9,7 @@ from django.core.mail import send_mail
 # Create your views here.
 #List Products
 def product_list(request):
-    products = Product.published.all()[:3]
+    products = Product.published.all()
     return render(request,
                   'devices/products/products.html',
                   {'products': products})
