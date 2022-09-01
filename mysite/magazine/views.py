@@ -5,20 +5,8 @@ from .models import Issue,Feedback
 from .forms import EmailIssueForm,FeedbackForm
 from django.core.mail import send_mail
 
-
 # Create your views here.
 
-#verify if an user is an admin
-def is_admin(user):
-    return user.is_superuser and user.is_staff
-
-# verify if an user is a moderator
-def is_moderator(user):
-    return user.is_staff
-
-# verify if an user is an author
-def is_author(user):
-    return user.is_active and not user.is_staff
 #List All Issues
 def issue_list(request):
     issues = Issue.published.all()[:3]
