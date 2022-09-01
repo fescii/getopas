@@ -49,10 +49,10 @@ def post_detail(request, year, month, day, slug):
                              publish__year=year,
                              publish__month=month,
                              publish__day=day)
+    user = request.user
     #Update Views count on each visit
     if post:
         post.update_views()
-    user = request.user
     #List of active comments for this post
     comments = post.comments.filter(active=True)
 
@@ -65,14 +65,15 @@ def post_detail(request, year, month, day, slug):
             if comment_form.is_valid():
                 #Create Comment object but don't save to database yet
                 new_comment = comment_form.save(commit=False)
-                #Assign the current post to comment
+                #Assign the current post and user to comment
                 new_comment.post = post
+                new_comment.author = user
                 #Save the comment to the database
                 new_comment.save()
             else:
                 comment_form = BlogCommentForm()
-        else:
-            return HttpResponseRedirect('login')
+        #else:
+            #return HttpResponseRedirect('login')
 
     #List of similar posts
     post_tags_ids = post.tags.values_list('id', flat=True)
