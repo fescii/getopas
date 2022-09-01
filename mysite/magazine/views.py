@@ -43,6 +43,7 @@ def issue_detail(request, year, no, issue):
                 new_feedback.author = user
                 #Save the comment to the databases
                 new_feedback.save()
+                feedback_form = None
             else:
                 feedback_form = FeedbackForm()
         else:

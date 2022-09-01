@@ -45,6 +45,7 @@ def product_detail(request, year, product):
                 new_review.author = user
                 #Save the comment to the databases
                 new_review.save()
+                review_form = None
             else:
                 review_form = ReviewForm()
         else:
