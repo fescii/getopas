@@ -1,0 +1,49 @@
+{% extends "magazine/base.html" %}
+{% load magazine_tags %}
+{% block title %}Opus - Magazine{% endblock %}
+
+{% block content %}
+<h1>My Blog</h1>
+{% for issue in issues %}
+<h2>
+  <a href="{{ issue.get_absolute_url }}"> {{ issue.title }} </a>
+</h2>
+<p class="date">Published {{ issue.publish }} by {{ issue.author }}</p>
+{{ issue.description|truncatewords:30|linebreaks }} {% endfor %}
+
+{% show_latest_issues 4 %}
+{% show_most_viewed_issues 4%}
+<div class='most-feedback'>
+<h3>Editor's Pick</h3>
+  {% get_issues_with_most_feedback as m_issues %}
+  {% for issue in m_issues %}
+    <h2>
+      <a href="{{ issue.get_absolute_url }}"> {{ issue.title }} </a>
+    </h2>
+    <p class="date">Published {{ issue.publish }} by {{ issue.author }}</p>
+    {{ issue.description|truncatewords:30|linebreaks }}
+  {% endfor %}
+</div>
+<div class='health-care-issues'>
+  <h3>Health Care</h3>
+    {% get_issues_of_health_care as h_issues %}
+    {% for issue in h_issues %}
+      <h2>
+        <a href="{{ issue.get_absolute_url }}"> {{ issue.title }} </a>
+      </h2>
+      <p class="date">Published {{ issue.publish }} by {{ issue.author }}</p>
+      {{ issue.description|truncatewords:30|linebreaks }}
+    {% endfor %}
+  </div>
+  <div class='health-care-issues'>
+    <h3>Business & Tech</h3>
+      {% get_issues_of_business as b_issues %}
+      {% for issue in h_issues %}
+        <h2>
+          <a href="{{ issue.get_absolute_url }}"> {{ issue.title }} </a>
+        </h2>
+        <p class="date">Published {{ issue.publish }} by {{ issue.author }}</p>
+        {{ issue.description|truncatewords:30|linebreaks }}
+      {% endfor %}
+    </div>
+{% endblock %}
