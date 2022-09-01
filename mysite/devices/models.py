@@ -25,6 +25,7 @@ class Product(models.Model):
         ('desktop', 'Desktop'),
         ('other', 'Other'),)
     author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='products')
+    title = models.CharField(max_length=250)
     name = models.CharField(max_length=250)
     slug = models.SlugField(max_length=250, blank=True)
     model = models.CharField(max_length=250)
