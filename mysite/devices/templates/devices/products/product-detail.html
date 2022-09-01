@@ -1,14 +1,15 @@
 {% extends "base.html" %}
-{% block title %} {{ post.title }} {% endblock %}
+{% block title %} {{ product.name }} {% endblock %}
 {% block content %}
-<h1>{{ issue.title }}</h1>
-<p class="date">Published {{ issue.publish }} by {{ issue.author }}</p>
-{{ issue.description|linebreaks }}
-<p>
-    <a href="{% url "magazine:issue_share" issue.id %}">
-    Share this post
-    </a>
-</p>
+<h1>{{ product.name }}</h1>
+<p>Type: {{product.type}}</p>
+<p class="date">Series: {{ product.series }}</p
+<p class="date">Name: {{ product.name }}</p>
+<p class="date">Model: {{ product.model }}</p>
+<p class="date">Company: {{ product.company }}</p>
+<p class="date">Release: {{ product.release_date }}</p>
+{{ product.about|truncatewords:30|linebreaks }} {% endfor %}
+<!--
 {% for section in sections %}
     <div class="section">
         <h2 class="info"> {{ section.name }}</h2>
@@ -50,5 +51,5 @@
 {% else %}
 <a href=" {% url 'login' %}">Login To Add Feedback</a>
 {% endif %}
-
+-->
 {% endblock %}
