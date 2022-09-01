@@ -25,6 +25,8 @@ def product_detail(request, year, product):
     #Update Views count on each visit
     if product:
         product.update_views()
+    #List of active Reviews for current product
+    reviews = product.reviews.filter(active=True)
 
     """#List of All Sections Belonging to the current Issue
     #sections = issue.sections.filter(added=True)
