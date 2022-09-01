@@ -19,7 +19,7 @@ class Product(models.Model):
         ('draft', 'Draft'),
         ('published', 'Published'),)
     TYPE_CHOICES = (
-        ('mobile', 'Draft'),
+        ('mobile', 'Mobile'),
         ('tablet', 'Tablet'),
         ('laptop', 'Laptop'),
         ('desktop', 'Desktop'),
@@ -28,7 +28,7 @@ class Product(models.Model):
     name = models.CharField(max_length=250)
     slug = models.SlugField(max_length=250, blank=True)
     model = models.CharField(max_length=250)
-    series = models.CharField(max_length=250, blank=True)
+    series = models.CharField(max_length=250, default='None')
     type = models.CharField(max_length=50, choices=TYPE_CHOICES)
     company = models.CharField(max_length=250)
     release_date = models.DateTimeField(blank=True)
