@@ -4,11 +4,14 @@
 
 {% block content %}
 <h1>Devices</h1>
-{% for issue in issues %}
+{% for product in products %}
 <h2>
-  <a href="{{ issue.get_absolute_url }}"> {{ issue.title }} </a>
+  <a href="{{ product.get_absolute_url }}"> {{ product.name }} </a>
 </h2>
-<p class="date">Published {{ issue.publish }} by {{ issue.author }}</p>
+<p class="date">Name: {{ product.name }}</p>
+<p class="date">Model: {{ product.model }}</p>
+<p class="date">Company: {{ product.company }}</p>
+<p class="date">Release: {{ product.release_date }}</p>
 {{ issue.description|truncatewords:30|linebreaks }} {% endfor %}
 <!--
 <div class='most-feedback'>
