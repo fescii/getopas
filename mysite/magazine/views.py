@@ -14,9 +14,6 @@ def issue_list(request):
                   'magazine/issue/issues.html',
                   {'issues': issues})
 
-
-
-
 def issue_detail(request, year, no, issue):
     issue = get_object_or_404(Issue,
                              slug=issue,
@@ -58,10 +55,6 @@ def issue_detail(request, year, no, issue):
                    'feedbacks':feedbacks,
                   'new_feedback': new_feedback,
                   'feedback_form':feedback_form})
-
-
-
-
 
 #Share Issue By E-mail
 def issue_share(request, issue_id):
