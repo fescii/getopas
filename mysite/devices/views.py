@@ -11,5 +11,5 @@ from django.core.mail import send_mail
 def product_list(request):
     products = Product.published.all()[:3]
     return render(request,
-                  'devices/product/products.html',
+                  'devices/products/products.html',
                   {'products': products})

@@ -61,9 +61,9 @@ class Product(models.Model):
     objects = models.Manager() # The default manager.
     published = PublishedManager() # Our custom manager.
 
-    def get_absolute_url(self):
+    """def get_absolute_url(self):
         return reverse('devices:device_detail',
-        args=[self.slug])
+        args=[self.slug])"""
 
 #Comments Model
 class PhysicalInfo(models.Model):
