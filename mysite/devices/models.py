@@ -18,10 +18,17 @@ class Product(models.Model):
     STATUS_CHOICES = (
         ('draft', 'Draft'),
         ('published', 'Published'),)
+    TYPE_CHOICES = (
+        ('mobile', 'Draft'),
+        ('tablet', 'Tablet'),
+        ('laptop', 'Laptop'),
+        ('desktop', 'Desktop'),
+        ('other', 'Other'),)
     author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='products')
     name = models.CharField(max_length=250)
     slug = models.SlugField(max_length=250, blank=True)
     model = models.CharField(max_length=250)
+    type = models.CharField(max_length=50, choices=TYPE_CHOICES)
     company = models.CharField(max_length=250)
     release_date = models.DateTimeField(blank=True)
     price = models.CharField(max_length=250)
