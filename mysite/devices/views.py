@@ -29,7 +29,7 @@ def product_detail(request, year, product):
     reviews = product.reviews.filter(active=True)
 
     #List of  Reviews for current product
-    physical_info = product.physical.filter(active=True)
+    physical_info = product.physical_info
 
     #Adding New Review
     review_form = None
@@ -60,4 +60,5 @@ def product_detail(request, year, product):
                   'devices/products/product-detail.html',
                   {'product': product,
                    'review_form':review_form,
-                   'reviews': reviews})
+                   'reviews': reviews,
+                   'physical_info': physical_info})

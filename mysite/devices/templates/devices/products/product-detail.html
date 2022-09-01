@@ -9,6 +9,23 @@
 <p class="date">Company: {{ product.company }}</p>
 <p class="date">Release: {{ product.release_date }}</p>
 {{ product.about|linebreaks }}
+
+{% with physical_info as p_info %}
+{% if p_info %}
+<div class="physical_info">
+    <p class="info"> Physical Info</p>
+    <p class="info"> Screen: {{ p_info.screen }}</p>
+    <p class="info"> Battery: {{ p_info.battery }}</p>
+    <p class="info"> Camera: {{ p_info.camera}}</p>
+    <p class="info"> RAM: {{ p_info.ram }}</p>
+    <p class="info"> Storage: {{ p_info.rom }}</p>
+    <p class="info"> Process:{{ p_info.processor }}</p>
+</div>
+{% else %}
+<p>There are no info yet.</p>
+{% endif %}
+{% endwith %}
+
 {% with reviews.count as total_reviews %}
     <h2>
         {{ total_reviews }} Review{{ total_reviews|pluralize }}
@@ -42,6 +59,8 @@
 {% else %}
 <a href=" {% url 'login' %}">Login to add a Review</a>
 {% endif %}
+
+
 <!--
 {% for section in sections %}
     <div class="section">
