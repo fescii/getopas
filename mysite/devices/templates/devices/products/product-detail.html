@@ -9,37 +9,38 @@
 <p class="date">Company: {{ product.company }}</p>
 <p class="date">Release: {{ product.release_date }}</p>
 {{ product.about|linebreaks }}
-{% with feedback.count as total_feedbacks %}
+{% with reviews.count as total_reviews %}
     <h2>
-        {{ total_feedbacks }} Feedback{{ total_feedbacks|pluralize }}
+        {{ total_reviews }} Review{{ total_reviews|pluralize }}
     </h2>
 {% endwith %}
-{% for feedback in feedbacks %}
-    <div class="feedback">
+{% for review in reviews %}
+    <div class="Reviews">
         <p class="info">
-        Feedback {{ forloop.counter }} by {{ feedback.author }}
-        {{ feedback.created }}
+        Review {{ forloop.counter }} by {{ review.author }}
+        {{ review.created }}
         </p>
-        {{ feedback.body|linebreaks }}
+        <p>Rate: {{ review.rate}}</p>
+        {{ review.remarks|linebreaks }}
     </div>
     {% empty %}
-    <p>There are no comments yet.</p>
+    <p>There are no reviews yet.</p>
 {% endfor %}
 {% if user.is_authenticated %}
 
     {% if new_feedback %}
-        <h2>Your Feedback has been added.</h2>
+        <h2>Your Reviews has been added.</h2>
         {% else %}
-        <h2>Add a Feedback</h2>
+        <h2>Add a Review</h2>
         <form method="post">
-            {{ feedback_form.as_p }}
+            {{ review_form.as_p }}
             {% csrf_token %}
-            <p><input type="submit" value="Add Feedback"></p>
+            <p><input type="submit" value="Add Review"></p>
         </form>
     {% endif %}
 
 {% else %}
-<a href=" {% url 'login' %}">Login To Add Feedback</a>
+<a href=" {% url 'login' %}">Login to add a Review</a>
 {% endif %}
 <!--
 {% for section in sections %}
