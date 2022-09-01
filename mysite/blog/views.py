@@ -72,8 +72,8 @@ def post_detail(request, year, month, day, slug):
                 new_comment.save()
             else:
                 comment_form = BlogCommentForm()
-        #else:
-            #return HttpResponseRedirect('login')
+        else:
+            return HttpResponseRedirect('login')
 
     #List of similar posts
     post_tags_ids = post.tags.values_list('id', flat=True)
