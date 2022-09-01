@@ -15,11 +15,10 @@ def product_list(request):
                   {'products': products})
 
 #Product Detail Page
-def product_detail(request, year, pk, product):
+def product_detail(request, year, product):
     product = get_object_or_404(Product,
                              status='published',
-                             release_date__year=year,
-                             id = pk)
+                             release_date__year=year)
     #Get The Current User
     user = request.user
 

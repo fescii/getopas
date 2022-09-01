@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "devices/base.html" %}
 {% block title %} {{ product.name }} {% endblock %}
 {% block content %}
 <h1>{{ product.name }}</h1>
@@ -8,7 +8,7 @@
 <p class="date">Model: {{ product.model }}</p>
 <p class="date">Company: {{ product.company }}</p>
 <p class="date">Release: {{ product.release_date }}</p>
-{{ product.about|truncatewords:30|linebreaks }} {% endfor %}
+{{ product.about|linebreaks }}
 <!--
 {% for section in sections %}
     <div class="section">
