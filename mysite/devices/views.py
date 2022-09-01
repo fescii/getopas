@@ -8,7 +8,7 @@ from django.core.mail import send_mail
 
 # Create your views here.
 #List All Issues
-def device_list(request):
+def product_list(request):
     products = Product.published.all()[:3]
     return render(request,
                   'devices/product/products.html',
