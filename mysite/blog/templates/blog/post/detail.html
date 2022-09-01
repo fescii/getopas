@@ -1,4 +1,4 @@
-{% extends "blog/base.html" %} 
+{% extends "blog/base.html" %}
 {% block title %}{{ post.title }}{% endblock %}
 {% block content %}
     <h1>{{ post.title }}</h1>
@@ -30,7 +30,7 @@
     {% for comment in comments %}
         <div class='comment'>
             <p class='info'>
-                Comment {{ forloop.counter }} by {{ comment.name }}
+                Comment {{ forloop.counter }} by {{ comment.author }}
                 {{ comment.created }}
             </p>
             {{ comment.body | linebreaks}}
@@ -38,6 +38,8 @@
         {% empty %}
             <p>There are no comments yet.</p>
     {% endfor %}
+{% if user.is_authenticated %}
+
 
     {% if new_comment %}
         <h2>Your comment has been added.</h2>
@@ -49,5 +51,8 @@
         <p><input type="submit" value="Add comment"></p>
         </form>
     {% endif %}
+{% else %}
+<a href="{% url 'login' %}">Login To Comment</a>
+{% endif %}
 
 {% endblock content%}
