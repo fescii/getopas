@@ -55,4 +55,5 @@ def product_detail(request, year, product):
     return render(request,
                   'devices/products/product-detail.html',
                   {'product': product,
-                   'review_form':review_form})
+                   'review_form':review_form,
+                   'reviews': reviews})

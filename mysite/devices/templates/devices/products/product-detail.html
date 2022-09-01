@@ -9,16 +9,6 @@
 <p class="date">Company: {{ product.company }}</p>
 <p class="date">Release: {{ product.release_date }}</p>
 {{ product.about|linebreaks }}
-<!--
-{% for section in sections %}
-    <div class="section">
-        <h2 class="info"> {{ section.name }}</h2>
-        {{ section.body|linebreaks }}
-    </div>
-    {% empty %}
-    <p>There are no sections yet.</p>
-{% endfor %}
-
 {% with feedback.count as total_feedbacks %}
     <h2>
         {{ total_feedbacks }} Feedback{{ total_feedbacks|pluralize }}
@@ -51,5 +41,16 @@
 {% else %}
 <a href=" {% url 'login' %}">Login To Add Feedback</a>
 {% endif %}
+<!--
+{% for section in sections %}
+    <div class="section">
+        <h2 class="info"> {{ section.name }}</h2>
+        {{ section.body|linebreaks }}
+    </div>
+    {% empty %}
+    <p>There are no sections yet.</p>
+{% endfor %}
+
+
 -->
 {% endblock %}
