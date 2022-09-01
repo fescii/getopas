@@ -95,7 +95,7 @@ def remove_user(request, user_id):
     user = User.objects.get(id=user_id)
     user.delete()
     messages.success(request, 'User account was successfully deleted')
-    return HttpResponseRedirect(reverse('user_list',kwargs={'pk': user_id}))
+    return HttpResponseRedirect(reverse('list_users'))
 
 
 @login_required
