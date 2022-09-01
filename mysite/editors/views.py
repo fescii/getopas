@@ -28,7 +28,7 @@ def is_admin(user):
     return user.is_superuser and user.is_staff
 
 # verify if an user is a moderator
-def is_moderator(user):
+def is_editor(user):
     return user.is_staff
 
 # verify if an user is an author
@@ -46,6 +46,7 @@ def list_users(request):
 # modify an user based on action
 @user_passes_test(is_admin)
 def moderate_user(request, user_id):
+    form = ModerateUserForm(request.GET)
     u = User.objects.get(id=user_id)
 
     role = ''
@@ -57,37 +58,32 @@ def moderate_user(request, user_id):
         role = 'author'
 
     if request.method == 'POST':
-        form = ModerateUserForm()
-        if form.is_valid():
-            cd = form.cleaned_data
-            action = cd['role']
+        action = request.POST.get('role')
+        #cd = form.cleaned_data
+        #action = cd['role']
 
-            if action == "1":
-                u.is_superuser = True
-                u.is_staff = True
-                u.save()
+        if action == "1":
+            u.is_superuser = True
+            u.is_staff = True
+            u.save()
 
-            elif action == "2":
-                u.is_superuser = False
-                u.is_staff = True
-                u.save()
+        elif action == "2":
+            u.is_superuser = False
+            u.is_staff = True
+            u.save()
 
 
-            elif action == "3":
-                u.is_superuser = False
-                u.is_staff = False
-                u.save()
-                messages.success(request, 'Role updated successfully')
-                return HttpResponseRedirect(reverse('user_list'))
-        else:
+        elif action == "3":
+            u.is_superuser = False
+            u.is_staff = False
+            u.save()
+        messages.success(request, 'Role updated successfully')
+        return HttpResponseRedirect(reverse('list_users'))
+        """
             messages.error(request, 'Role Not Updated, Try Again!')
-            form = ModerateUserForm()
-            return render(request,
-                          'editors/admin/edit-user.html',
-                          {'form': form,
-                           'role': role})
+        """
     else:
-        form = ModerateUserForm()
+        form = ModerateUserForm(request.GET)
         return render(request,
                           'editors/admin/edit-user.html',
                           {'form': form,
@@ -276,7 +272,8 @@ def delete_post(request, pk):
     return HttpResponseRedirect(reverse('user_post_list'))
 
 #Create Magazine View
-@login_required
+#@login_required
+@user_passes_test(is_editor)
 def create_magazine(request):
     magazine_form = None
     #magazine_form = None
@@ -307,7 +304,8 @@ def create_magazine(request):
                       {'magazine_form': magazine_form})
 
 #Newsletter created by The Current User.
-@login_required
+#@login_required
+@user_passes_test(is_editor)
 def user_issue_list(request):
     object_list = Issue.published.all().filter(author=request.user)
 
@@ -357,7 +355,8 @@ def edit_newsletter(request, pk):
                         {'edit_form': edit_form})
 
 #Edit Magazine Newsletter Tags
-@login_required
+#@login_required
+@user_passes_test(is_editor)
 def edit_newsletter_tags(request, pk):
     #post = get_object_or_404(Post, id=pk)
     issue = Issue.objects.get(id=pk)
@@ -385,7 +384,8 @@ def edit_newsletter_tags(request, pk):
                          'issue': issue})
 
 #Deleting an Issue
-@login_required
+#@login_required
+@user_passes_test(is_editor)
 def delete_issue(request, pk):
     post = get_object_or_404(Issue, id=pk)
     post.delete()
@@ -394,7 +394,8 @@ def delete_issue(request, pk):
 
 
 #List Newsletter By The User.
-@login_required
+#@login_required
+@user_passes_test(is_editor)
 def user_issue_section_list(request, pk):
     issue = get_object_or_404(Issue, id=pk)
     sections = issue.sections.all().order_by('-page')
@@ -432,7 +433,8 @@ def create_section(request, pk):
 
 
 # Add Section To Issue
-@login_required
+#@login_required
+@user_passes_test(is_editor)
 def add_section(request,issue_id, section_id):
     section = get_object_or_404(Section, id=section_id)
     section.added = True
@@ -441,7 +443,8 @@ def add_section(request,issue_id, section_id):
     return HttpResponseRedirect(reverse('user_issue_section_list',kwargs={'pk': issue_id}))
 
 # Remove Section From An Issue
-@login_required
+#@login_required
+@user_passes_test(is_editor)
 def remove_section(request,issue_id, section_id):
     section = get_object_or_404(Section, id=section_id)
     section.added = False
@@ -450,7 +453,8 @@ def remove_section(request,issue_id, section_id):
     return HttpResponseRedirect(reverse('user_issue_section_list', kwargs={'pk': issue_id}))
 
 # Delete Section
-@login_required
+#@login_required
+@user_passes_test(is_editor)
 def delete_section(request,issue_id, section_id):
     section = get_object_or_404(Section, id=section_id)
     section.delete()
@@ -458,7 +462,8 @@ def delete_section(request,issue_id, section_id):
     return HttpResponseRedirect(reverse('user_issue_section_list',kwargs={'pk': issue_id}))
 
 #Edit Edit Section
-@login_required
+#@login_required
+@user_passes_test(is_editor)
 def edit_section(request, issue_id, section_id):
     issue = Issue.objects.get(id=issue_id)
     section = Section.objects.get(id=section_id)

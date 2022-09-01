@@ -3,6 +3,13 @@
 {% block content %}
 <h1>Users</h1>
 {% for user in users %}
+{% if user.is_superuser == True %}
+<p>Role: Admin</p>
+{% elif user.is_staff == True and user.is_superuser == False %}
+<p>Role: Editor</p>
+{% else %}
+<p>Role: Author</p>
+{% endif %}
 <div class="user-wrapper">
     <p class="name">Name: {{ user.first_name}} {{ user.last_name }}</p>
     <p class="name">Email: {{ user.email}}</p>
