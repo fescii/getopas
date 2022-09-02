@@ -548,3 +548,25 @@ def create_product(request):
         return render(request,
                       'editors/products/create-product.html',
                           {'product_form': product_form})
+
+#Viewing Physical Information of a  product
+@user_passes_test(is_editor)
+def show_physical_info(request, pk):
+    product = get_object_or_404(Product, id=pk)
+
+    #Get The product Physical Information
+    info = PhysicalInfo.get_physical(PhysicalInfo, product)
+
+    return render(request, 'editors/products/physical-product-info.html',
+                  {'physical_info': info,})
+
+#Viewing Physical Information of a  product
+@user_passes_test(is_editor)
+def show_physical_info(request, pk):
+    product = get_object_or_404(Product, id=pk)
+
+    #Get The product Physical Information
+    info = PhysicalInfo.get_physical(PhysicalInfo, product)
+
+    return render(request, 'editors/products/physical-product-info.html',
+                  {'physical_info': info,})
