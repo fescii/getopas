@@ -66,6 +66,6 @@ urlpatterns = [
     path('product/<str:product_id>/<str:product_name>/tags-edit', views.edit_product_tags, name='edit_product_tags'),
     path('product/<str:pk>/physical-info', views.show_physical_info, name='product_physical_info'),
     path('product/<str:pk>/software-info', views.show_software_info, name='product_software_info'),
-    path('product/<str:pk>/physical-info/edit', views.edit_physical_info, name='edit_physical_info'),
-    path('product/<str:pk>/software-info/edit', views.edit_software_info, name='edit_software_info'),
+    path('product/<str:product_id>/physical-info/edit-<str:info_id>', views.edit_physical_info, name='edit_physical_info'),
+    path('product/<str:product_id>/software-info/edit<str:info_id>', views.edit_software_info, name='edit_software_info'),
 ]
