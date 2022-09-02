@@ -633,7 +633,6 @@ def show_software_info(request, pk):
 
     return render(request, 'editors/products/software-product-info.html',
                   {'software_info': info,
-
                    'product': product})
 
 #Editing Physical Info
