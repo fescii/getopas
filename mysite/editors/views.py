@@ -500,12 +500,32 @@ def edit_section(request, issue_id, section_id):
                         {'section_edit_form': section_edit_form,
                         'issue': issue})
 
+
+#List Users Products
+@user_passes_test(is_editor)
+def user_product_list(request):
+    object_list = Product.published.all().filter(author=request.user)
+
+    paginator = Paginator(object_list, 5) # 5 issues in each page
+    page = request.GET.get('page')
+    try:
+        products = paginator.page(page)
+    except PageNotAnInteger:
+    # If page is not an integer deliver the first page
+        products = paginator.page(1)
+    except EmptyPage:
+    # If page is out of range deliver last page of results
+        products = paginator.page(paginator.num_pages)
+
+    return render(request, 'editors/articles/user_issues_list.html',
+                  {'page': page,
+                   'products': products,})
 #Creating a new product
 @user_passes_test(is_editor)
 def create_product(request):
     product_form = CreateProductForm()
     if request.method == 'POST':
-        product_form = CreateProductForm(request.POST)
+        product_form = CreateProductForm(request.POST, files=request.FILES)
         if product_form.is_valid():
             cd = product_form.cleaned_data
             name = cd['name']
