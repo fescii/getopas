@@ -554,27 +554,26 @@ def create_product(request):
 @user_passes_test(is_editor)
 def edit_product(request, pk):
     product = get_object_or_404(Product, id=pk)
-    product_form = CreateProductForm(instance=product,
+    product_form = EditProductForm(instance=product,
                                      files=request.FILES)
     if request.method == 'POST':
-        product_form = CreateProductForm(request.POST, files=request.FILES)
+        product_form = EditProductForm(request.POST, files=request.FILES)
         if product_form.is_valid():
             cd = product_form.cleaned_data
-            name = cd['name']
-            new_product = product_form.save(commit=False)
-            new_product.author = request.user
-            new_product.save()
-            product_form.save_m2m()
-            messages.success(request, f'The Product {name} was created successfully')
+            Product.update_product(product, cd['title'], cd['name'],
+                                   cd['cover'], cd['model'],cd['series'],
+                                   cd['company'], cd['release'], cd['price'],
+                                   cd['about'])
+            messages.success(request, f"The Product {cd['name']} was created successfully")
             return HttpResponseRedirect(reverse('user_products_list'))
         else:
             messages.error(request, 'An error occurred, Please try again!')
-            product_form = CreateProductForm()
+            product_form = EditProductForm(instance=product)
             return render(request,
                           'editors/products/create-product.html',
                           {'product_form': product_form})
     else:
-        product_form = CreateProductForm()
+        product_form = EditProductForm(instance=product)
         return render(request,
                       'editors/products/create-product.html',
                           {'product_form': product_form})
