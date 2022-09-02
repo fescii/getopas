@@ -163,6 +163,11 @@ class Image(models.Model):
                                   cover=True)
         return img.photo
 
+    def cover_photos(self, products):
+        images = [ self.cover_photo(Image, product) for product in products ]
+        photos = [ i.photo for i in images]
+        return photos
+
 
     #Get List of Photos Excluding The Cover Photo
     def product_images(self, product):
