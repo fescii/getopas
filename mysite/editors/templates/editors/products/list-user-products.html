@@ -12,8 +12,8 @@
     {{ product.about|truncatewords:30|linebreaks }}
     <a href=" {% url 'edit_product' product_id=product.id product_name=product.slug %}">edit</a>
     <a href="{% url 'edit_product_tags' product_id=product.id product_name=product.slug %}">Edit tags</a>
-    <a href="/dashboard/product/{{product.id}}/physical-info">Physical Info</a>
-    <a href="/dashboard/product/{{product.id}}/software-info">Software Info</a>
+    <a href="{% url 'product_physical_info' pk=product.id %}">Physical Info</a>
+    <a href="{% url 'product_software_info' pk=product.id%}">Software Info</a>
     <a href="/dashboard/delete-product/{{prodct.id}}">delete</a>
 </div>
 {% if empty %}
