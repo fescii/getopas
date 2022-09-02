@@ -35,7 +35,7 @@ def product_detail(request, year, product):
     software_info = product.software_info
 
     #List of  Images for current product
-    images = product.images
+    images = Image.product_images(Image, product)
 
     #Cover Image for current product
     cover = Image.cover_photo(Image, product)

@@ -169,6 +169,7 @@ class Image(models.Model):
         photos = Image.objects.filter(product=product,
                                       added=True,
                                       cover=False)
+        photos = [i.photo for i in photos]
         return photos
 
 
