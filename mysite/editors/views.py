@@ -5,11 +5,12 @@ from django.shortcuts import render,get_object_or_404
 from django.contrib.auth import authenticate, login
 
 from magazine.models import Issue, Section
+from devices.models import Product,PhysicalInfo, SoftwareInfo, Review, Image
 from .forms import UserRegistrationForm,\
     UserEditForm, ProfileEditForm, CreateBlogPostForm,\
         BlogEditForm, CreateMagazineForm, MagazineEditForm,\
             CreateSectionForm, SectionEditForm, MagazineEditTagsForm,\
-                BlogEditTagsForm, ModerateUserForm
+                BlogEditTagsForm, ModerateUserForm, CreateProductForm
 from django.core.paginator import Paginator, EmptyPage,\
     PageNotAnInteger
 from django.contrib.auth.decorators import login_required,user_passes_test
@@ -498,3 +499,8 @@ def edit_section(request, issue_id, section_id):
                         'editors/articles/section-edit.html',
                         {'section_edit_form': section_edit_form,
                         'issue': issue})
+
+#Creating a new product
+@user_passes_test(is_editor)
+def create_product(request):
+    product_form = CreateProductForm()

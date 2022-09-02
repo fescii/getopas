@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from .models import Profile
 from blog.models import Post
 from magazine.models import Issue, Section
+from devices.models import Product, PhysicalInfo, SoftwareInfo, Review,Image
 #User Registration Form
 class UserRegistrationForm(forms.ModelForm):
     password = forms.CharField(label='Password',
@@ -90,3 +91,9 @@ class SectionEditForm(forms.ModelForm):
     class Meta:
         model = Section
         fields =('name','page','body','added')
+
+#Create Product Form
+class CreateProductForm(forms.ModelForm):
+    class Meta:
+        fields = ('title', 'name', 'cover','model', 'series',
+                  'type','company','release_date','price','about', 'tags','status')
