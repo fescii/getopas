@@ -648,20 +648,21 @@ def edit_physical_info(request, info_id, product_id):
             cd = physical_form.cleaned_data
 
             #Saving The Form
-            PhysicalInfo.update_physical_info(physical, cd['screen'], cd['battery'],
-                                              cd['camera'],cd['ram'], cd['rom'],
-                                              cd['processor'], cd['added'])
+            #Saving The Form
+            updated = physical_form.save(commit=False)
+            updated.save()
+            physical_form.save_m2m()
             #On Success
             messages.success('Physical Information updated successfully')
             return HttpResponseRedirect(reverse('product_physical_info', kwargs={'pk': product_id}))
         else:
             messages.error('An error occurred, Please Try again')
-            physical_form = EditPhysicalInfo(request.POST, instance=physical)
+            physical_form = EditPhysicalInfo(request.POST or None, instance=physical)
             return render(request, 'editors/products/edit-physical-info.html',
                           {'physical_form': physical_form,
                            'product':product})
     else:
-        physical_form = EditPhysicalInfo(request.POST, instance=physical)
+        physical_form = EditPhysicalInfo(request.POST or None, instance=physical)
         return render(request, 'editors/products/edit-physical-info.html',
                           {'physical_form': physical_form,
                            'product': product})
@@ -675,18 +676,19 @@ def edit_software_info(request, info_id, product_id):
     if request.method == 'POST':
         software_form = EditSoftwareInfo(request.POST, instance=software)
 
-        if physical_form.is_valid():
+        if software_form.is_valid():
             cd = software_form.cleaned_data
 
             #Saving The Form
-            SoftwareInfo.update_software_info(software, cd['os_version'], cd['os_name'],
-                                              cd['os_family'],cd['os_ui'], cd['other_info'],
-                                              cd['added'])
+            updated = software_form.save(commit=False)
+            updated.save()
+            software_form.save_m2m()
+
             #On Success
-            messages.success('Software Information updated successfully')
+            messages.success(request,'Software Information updated successfully')
             return HttpResponseRedirect(reverse('product_software_info', kwargs={'pk': product_id}))
         else:
-            messages.error('An error occurred, Please Try again')
+            messages.error(request,'An error occurred, Please Try again')
             physical_form = EditSoftwareInfo(request.POST or None, instance=software)
             return render(request, 'editors/products/edit-software-info.html',
                           {'software_form': physical_form,

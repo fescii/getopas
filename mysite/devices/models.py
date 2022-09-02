@@ -89,22 +89,6 @@ class PhysicalInfo(models.Model):
     added = models.BooleanField(default=False)
 
 
-    #Updating Physical Info
-    def update_physical_info(self, screen, battery, camera, ram, rom, processor,added,*args, **kwargs):
-        self.screen = screen
-        self.battery = battery
-        self.camera = camera
-        self.ram = ram
-        self.rom = rom
-        self.processor = processor
-        self.added = added
-        super(PhysicalInfo, self).save(update_fields=['screen',
-                                              'battery'
-                                              'camera',
-                                              'ram'
-                                              'rom',
-                                              'processor',
-                                              'added',], *args, **kwargs)
     #Get Physical Information
     def get_physical(self, product):
         info = get_object_or_404(PhysicalInfo, product=product)
@@ -125,21 +109,6 @@ class SoftwareInfo(models.Model):
     other_info = models.TextField()
     added = models.BooleanField(default=False)
 
-    #Updating Software Info
-    def update_software_info(self, os_version, os_name, os_family, os_ui, other_info,added,*args, **kwargs):
-        self.os_version = os_version
-        self.os_name = os_name
-        self.os_family = os_family
-        self.os_ui = os_ui
-        self.other_info = other_info
-        self.added = added
-        super(SoftwareInfo, self).save(update_fields=['screen',
-                                              'battery'
-                                              'camera',
-                                              'ram'
-                                              'rom',
-                                              'processor',
-                                              'added',], *args, **kwargs)
 
     #Get Software Information
     def get_software(self, product):

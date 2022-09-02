@@ -32,10 +32,10 @@ class EditProductTags(forms.ModelForm):
 class EditPhysicalInfo(forms.ModelForm):
     class Meta:
         model = PhysicalInfo
-        fields = ('screen', 'battery', 'camera', 'ram', 'rom','processor')
+        fields = ('screen', 'battery', 'camera', 'ram', 'rom','processor','added')
 
 #Edit Physical Information Form
 class EditSoftwareInfo(forms.ModelForm):
     class Meta:
         model = SoftwareInfo
-        fields = ('os_version', 'os_name', 'os_family','os_ui','other_info')
+        fields = ('os_version', 'os_name', 'os_family','os_ui','other_info','added')
