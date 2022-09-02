@@ -558,7 +558,8 @@ def show_physical_info(request, pk):
     info = PhysicalInfo.get_physical(PhysicalInfo, product)
 
     return render(request, 'editors/products/physical-product-info.html',
-                  {'physical_info': info,})
+                  {'physical_info': info,
+                   'product': product})
 
 #Viewing Physical Information of a  product
 @user_passes_test(is_editor)
@@ -569,4 +570,5 @@ def show_software_info(request, pk):
     info = SoftwareInfo.get_software(SoftwareInfo, product)
 
     return render(request, 'editors/products/software-product-info.html',
-                  {'software_info': info,})
+                  {'software_info': info,
+                   'product': product})

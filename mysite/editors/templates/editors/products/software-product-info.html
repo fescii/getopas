@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block title %} {{ product.name }}| Info{% endblock %}
+{% block content %}
+<h1>{{ prodct.name }} Physical Information</h1>
+<a href="/dashboard/product/{{product.id}}/edit-software-info">edit</a>
+<div class="physical_info">
+    <h2 class="info"> Software Info</h2>
+    <p class="info"> OS Version: {{ s_info.os_version }}</p>
+    <p class="info"> OS Name: {{ s_info.os_name }}</p>
+    <p class="info"> OS Family: {{ s_info.os_family}}</p>
+    <p class="info"> OS UI: {{ s_info.os_ui }}</p>
+    <p class="info"> Other Info: {{ s_info.other_info }}</p>
+</div>
+
+{% endblock %}
