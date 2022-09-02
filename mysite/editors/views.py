@@ -587,7 +587,7 @@ def edit_product_tags(request, product_id, product_name):
     product = Product.objects.get(id=product_id)
     product_name = product.name
     if request.method == 'POST':
-        edit_form = MagazineEditTagsForm(request.POST or None, instance=product)
+        edit_form = EditProductTags(request.POST or None, instance=product)
         if edit_form.is_valid():
             tags = edit_form.save(commit=False)
             edit_form.save_m2m()
@@ -597,13 +597,13 @@ def edit_product_tags(request, product_id, product_name):
 
         else:
             messages.error(request, 'Error updating the Tags')
-            edit_form = MagazineEditTagsForm(request.POST or None, instance=product)
+            edit_form = EditProductTags(request.POST or None, instance=product)
 
         return render(request,
                         'editors/articles/issue-tags-edit.html',
                         {'edit_form': edit_form})
     else:
-        edit_form = MagazineEditTagsForm(request.POST or None, instance=product)
+        edit_form = EditProductTags(request.POST or None, instance=product)
         return render(request,
                         'editors/articles/issue-tags-edit.html',
                         {'edit_form': edit_form,
