@@ -10,7 +10,7 @@
     <p class="date">Release on {{ product.release_date }} by {{ product.author }}</p>
     <img src="/media/{{product.cover}}" alt="Cover Image" width="300" height="250" title="{{issue.cover}}"/>
     {{ product.about|truncatewords:30|linebreaks }}
-    <a href="/dashboard/edit-product/{{product.id}}">edit</a>
+    <a href=" {% url 'edit_product' product_id=product.id product_name=product.slug %}">edit</a>
     <a href="/dashboard/edit-product/tags/{{product.id}}">Edit tags</a>
     <a href="/dashboard/product/{{product.id}}/physical-info">Physical Info</a>
     <a href="/dashboard/product/{{product.id}}/software-info">Software Info</a>

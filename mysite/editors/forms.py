@@ -100,7 +100,7 @@ class CreateProductForm(forms.ModelForm):
         fields = ('title', 'name', 'cover','model', 'series',
                   'type','company','release_date','price','about', 'tags','status')
 
-class EditProductForm(forms.Form):
+class EditProductForm(forms.ModelForm):
     class Meta:
         model = Product
         fields = ('title', 'name', 'cover','model', 'series',

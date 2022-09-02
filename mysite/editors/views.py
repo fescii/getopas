@@ -552,31 +552,34 @@ def create_product(request):
 
 #Editing a product
 @user_passes_test(is_editor)
-def edit_product(request, pk):
-    product = get_object_or_404(Product, id=pk)
-    product_form = EditProductForm(request.POST or None,instance=product,
-                                     files=request.FILES)
+def edit_product(request, product_id, product_name):
+    product = Product.objects.get(id=product_id)
+    product_name = product.name
+    product_form = EditProductForm(request.POST or None, instance=product)
     if request.method == 'POST':
-        product_form = EditProductForm(request.POST, files=request.FILES)
+        product_form = EditProductForm(request.POST or None, instance=product,
+                                     files=request.FILES)
         if product_form.is_valid():
             cd = product_form.cleaned_data
             Product.update_product(product, cd['title'], cd['name'],
                                    cd['cover'], cd['model'],cd['series'],
-                                   cd['company'], cd['release'], cd['price'],
+                                   cd['company'], cd['release_date'], cd['price'],
                                    cd['about'])
-            messages.success(request, f"The Product {cd.name} was created successfully")
-            return HttpResponseRedirect(reverse('user_products_list'))
+            messages.success(request, f"The Product was updated successfully")
+            return HttpResponseRedirect(reverse('user_product_list'))
         else:
             messages.error(request, 'An error occurred, Please try again!')
-            product_form = EditProductForm(request.POST or None, instance=product)
+            product_form = EditProductForm(request.POST or None, instance=product,
+                                     files=request.FILES)
             return render(request,
                           'editors/products/edit-product.html',
-                          {'product_form': product_form})
+                          {'product_form': product_form,
+                          'name': product_name})
     else:
-        product_form = EditProductForm(request.POST or None,instance=product)
         return render(request,
                       'editors/products/edit-product.html',
-                          {'product_form': product_form})
+                          {'product_form': product_form,
+                           'name': product_name})
 
 #Viewing Physical Information of a  product
 @user_passes_test(is_editor)
