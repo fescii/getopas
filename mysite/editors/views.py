@@ -554,7 +554,7 @@ def create_product(request):
 @user_passes_test(is_editor)
 def edit_product(request, pk):
     product = get_object_or_404(Product, id=pk)
-    product_form = EditProductForm(instance=product,
+    product_form = EditProductForm(request.POST or None,instance=product,
                                      files=request.FILES)
     if request.method == 'POST':
         product_form = EditProductForm(request.POST, files=request.FILES)
@@ -564,18 +564,18 @@ def edit_product(request, pk):
                                    cd['cover'], cd['model'],cd['series'],
                                    cd['company'], cd['release'], cd['price'],
                                    cd['about'])
-            messages.success(request, f"The Product {cd['name']} was created successfully")
+            messages.success(request, f"The Product {cd.name} was created successfully")
             return HttpResponseRedirect(reverse('user_products_list'))
         else:
             messages.error(request, 'An error occurred, Please try again!')
-            product_form = EditProductForm(instance=product)
+            product_form = EditProductForm(request.POST or None, instance=product)
             return render(request,
-                          'editors/products/create-product.html',
+                          'editors/products/edit-product.html',
                           {'product_form': product_form})
     else:
-        product_form = EditProductForm(instance=product)
+        product_form = EditProductForm(request.POST or None,instance=product)
         return render(request,
-                      'editors/products/create-product.html',
+                      'editors/products/edit-product.html',
                           {'product_form': product_form})
 
 #Viewing Physical Information of a  product
