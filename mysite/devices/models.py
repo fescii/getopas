@@ -89,6 +89,24 @@ class PhysicalInfo(models.Model):
     processor = models.TextField()
     added = models.BooleanField(default=False)
 
+
+    #Updating Physical Info
+    def update_physical_info(self, screen, battery, camera, ram, rom, processor,added,*args, **kwargs):
+        self.screen = screen
+        self.battery = battery
+        self.camera = camera
+        self.ram = ram
+        self.rom = rom
+        self.processor = processor
+        self.added = added
+        super(PhysicalInfo, self).save(update_fields=['screen',
+                                              'battery'
+                                              'camera',
+                                              'ram'
+                                              'rom',
+                                              'processor',
+                                              'added',], *args, **kwargs)
+
     class Meta:
         ordering = ('added',)
 
@@ -100,9 +118,25 @@ class SoftwareInfo(models.Model):
     os_version = models.CharField(max_length=250)
     os_name = models.CharField(max_length=250)
     os_family = models.TextField()
-    os_type = models.CharField(max_length=250)
+    os_ui = models.CharField(max_length=250)
     other_info = models.TextField()
     added = models.BooleanField(default=False)
+
+    #Updating Software Info
+    def update_software_info(self, os_version, os_name, os_family, os_ui, other_info,added,*args, **kwargs):
+        self.os_version = os_version
+        self.os_name = os_name
+        self.os_family = os_family
+        self.os_ui = os_ui
+        self.other_info = other_info
+        self.added = added
+        super(SoftwareInfo, self).save(update_fields=['screen',
+                                              'battery'
+                                              'camera',
+                                              'ram'
+                                              'rom',
+                                              'processor',
+                                              'added',], *args, **kwargs)
 
     class Meta:
         ordering = ('added',)
