@@ -517,4 +517,10 @@ def create_product(request):
             message.success(f'The Product {name} was created successfully')
         else:
             message.error('An error occurred, Please try again!')
-            product_form = CreateProductForm(request.POST)
+            product_form = CreateProductForm()
+            return render('editors/products/create-product.html',
+                          {'product_form': product_form})
+    else:
+        product_form = CreateProductForm()
+        return render('editors/products/create-product.html',
+                          {'product_form': product_form})
