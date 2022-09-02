@@ -687,11 +687,11 @@ def edit_physical_info(request, info_id, product_id):
         else:
             messages.error('An error occurred, Please Try again')
             physical_form = EditPhysicalInfo(request.POST, instance=physical)
-            return render(request, 'editors/products/edit-physical-info.html',
+            return render(request, 'editors/products/edit-software-info.html',
                           {'physical_form': physical_form,
                            'product':product})
     else:
         physical_form = EditPhysicalInfo(request.POST, instance=physical)
-        return render(request, 'editors/products/edit-physical-info.html',
+        return render(request, 'editors/products/edit-software-info.html',
                           {'physical_form': physical_form,
                            'product': product})
