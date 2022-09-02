@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block title %}Editing Tags For - {{name}}{% endblock %}
+{% block content %}
+<h1>Editing Tags For - {{name}}</h1>
+<form method="post">
+{{ edit_form.as_p }}
+{% csrf_token %}
+<input type="submit" value="Save">
+</form>
+{% endblock %}

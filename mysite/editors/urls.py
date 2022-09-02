@@ -61,8 +61,9 @@ urlpatterns = [
 
     #Products Path
     path('add-product/', views.create_product, name='new_product'),
-    path('product/<str:product_id>/<str:product_name>/edit', views.edit_product, name='edit_product'),
     path('products/', views.user_product_list, name='user_product_list'),
+    path('product/<str:product_id>/<str:product_name>/edit', views.edit_product, name='edit_product'),
+    path('product/<str:product_id>/<str:product_name>/tags-edit', views.edit_product_tags, name='edit_product_tags'),
     path('product/<int:pk>/physical-info', views.show_physical_info, name='product_physical_info'),
     path('product/<int:pk>/software-info', views.show_physical_info, name='product_software_info'),
 ]

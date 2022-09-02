@@ -593,20 +593,20 @@ def edit_product_tags(request, product_id, product_name):
             edit_form.save_m2m()
             tags.save()
             messages.success(request, 'Product Tags updated successfully')
-            return HttpResponseRedirect(reverse('user_issue_list'))
+            return HttpResponseRedirect(reverse('user_product_list'))
 
         else:
             messages.error(request, 'Error updating the Tags')
             edit_form = EditProductTags(request.POST or None, instance=product)
 
         return render(request,
-                        'editors/product/edit-product-tags.html',
+                        'editors/products/edit-product-tags.html',
                         {'edit_form': edit_form,
                          'name': product_name})
     else:
         edit_form = EditProductTags(request.POST or None, instance=product)
         return render(request,
-                        'editors/product/edit-product-tags.html',
+                        'editors/products/edit-product-tags.html',
                         {'edit_form': edit_form,
                          'name': product_name})
 
