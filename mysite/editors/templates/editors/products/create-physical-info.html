@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block title %}Create | Physical Info{% endblock %}
+{% block content %}
+<h1>Add Product Information</h1>
+<form method="post">
+{{ info_form.as_p }}
+{% csrf_token %}
+<input type="submit" value="Create">
+</form>
+{% endblock %}

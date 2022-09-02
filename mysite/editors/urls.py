@@ -64,6 +64,9 @@ urlpatterns = [
     path('products/', views.user_product_list, name='user_product_list'),
     path('product/<str:product_id>/<str:product_name>/edit', views.edit_product, name='edit_product'),
     path('product/<str:product_id>/<str:product_name>/tags-edit', views.edit_product_tags, name='edit_product_tags'),
+    path('product/<str:pk>/add-physical-info', views.add_physical_info, name='add_physical_info'),
+    path('product/<str:pk>/software-info', views.show_software_info, name='product_software_info'),
+
     path('product/<str:pk>/physical-info', views.show_physical_info, name='product_physical_info'),
     path('product/<str:pk>/software-info', views.show_software_info, name='product_software_info'),
     path('product/<str:product_id>/physical-info/edit-<str:info_id>', views.edit_physical_info, name='edit_physical_info'),
