@@ -504,3 +504,17 @@ def edit_section(request, issue_id, section_id):
 @user_passes_test(is_editor)
 def create_product(request):
     product_form = CreateProductForm()
+
+    if request.method == 'POST':
+        product_form = CreateProductForm(request.POST)
+        if product_form.is_valid():
+            cd = product_form.cleaned_data
+            name = cd['name']
+            new_product = product_form.save(commit=False)
+            new_product.author = request.user
+            new_product.save()
+            product_form.save_m2m()
+            message.success(f'The Product {name} was created successfully')
+        else:
+            message.error('An error occurred, Please try again!')
+            product_form = CreateProductForm(request.POST)
