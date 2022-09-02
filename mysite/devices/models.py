@@ -162,6 +162,16 @@ class Image(models.Model):
                                   product=product,
                                   cover=True)
         return img.photo
+
+
+    #Get List of Photos Excluding The Cover Photo
+    def product_images(self, product):
+        photos = Image.objects.filter(product=product,
+                                      added=True,
+                                      cover=False)
+        return photos
+
+
     class Meta:
         ordering = ('added',)
 
