@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block title %}Editing - {{product.name}}{% endblock %}
+{% block content %}
+<h1>Editing - Physical Info of {{ product.name }}</h1>
+<form method="post">
+{{ physical_form.as_p }}
+{% csrf_token %}
+<input type="submit" value="Save">
+</form>
+{% endblock %}
