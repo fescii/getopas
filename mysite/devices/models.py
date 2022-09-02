@@ -75,7 +75,7 @@ class Product(models.Model):
 
     def get_absolute_url(self):
         return reverse('devices:product_detail',
-        args=[self.release_date.year,self.slug])
+        args=[self.id,self.slug])
 
 #Comments Model
 class PhysicalInfo(models.Model):

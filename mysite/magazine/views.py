@@ -12,12 +12,12 @@ def issue_list(request):
                   'magazine/issue/issues.html',
                   {'issues': issues})
 
-def issue_detail(request, year, no, issue):
+def issue_detail(request, pk, year, issue):
     issue = get_object_or_404(Issue,
                              slug=issue,
                              status='published',
                              publish__year=year,
-                             no = no)
+                             id = id)
     user = request.user
     #Update Views count on each visit
     if issue:

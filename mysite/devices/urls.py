@@ -6,6 +6,6 @@ app_name = 'devices'
 urlpatterns = [
 # post views
     path('', views.product_list, name='product_list'),
-    path('<int:year>/<slug:product>/',views.product_detail, name='product_detail'),
+    path('<int:pk>/<slug:product>/',views.product_detail, name='product_detail'),
     #path('<int:issue_id>/share/', views.issue_share, name='issue_share')
 ]

@@ -5,7 +5,7 @@
 <h1>Devices</h1>
 {% for product in products %}
 <h2>
-  <a href="{{ product.get_absolute_url }}"> {{ product.id }} </a>
+  <a href="{{ product.get_absolute_url }}"> {{ product.name }} </a>
 </h2>
 <p class="date">Title: {{ product.title}}</p>
 <img src="/media/{{ product.cover }}" title="Good-{{ product.cover }}" width="200px" height="100px" />
