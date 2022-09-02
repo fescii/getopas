@@ -12,7 +12,7 @@ from .forms import UserRegistrationForm,\
             CreateSectionForm, SectionEditForm, MagazineEditTagsForm,\
                 BlogEditTagsForm, ModerateUserForm
 from devices.forms import CreateProductForm, EditProductForm, EditProductTags,\
-    EditPhysicalInfo, EditSoftwareInfo
+    EditPhysicalInfo, EditSoftwareInfo, CreatePhysicalInfo, CreateSoftwareInfo
 from django.core.paginator import Paginator, EmptyPage,\
     PageNotAnInteger
 from django.contrib.auth.decorators import login_required,user_passes_test
@@ -506,7 +506,7 @@ def edit_section(request, issue_id, section_id):
 #List Users Products
 @user_passes_test(is_editor)
 def user_product_list(request):
-    object_list = Product.published.all().filter(author=request.user)
+    object_list = Product.published.all().filter(author=request.user).order_by('-release_date')
 
     paginator = Paginator(object_list, 5) # 5 issues in each page
     page = request.GET.get('page')
@@ -619,9 +619,41 @@ def show_physical_info(request, pk):
     #Get The product Physical Information
     info = PhysicalInfo.get_physical(PhysicalInfo, product)
 
-    return render(request, 'editors/products/physical-product-info.html',
+    if info:
+        return render(request, 'editors/products/physical-product-info.html',
                   {'physical_info': info,
                    'product': product})
+    else:
+        return HttpResponseRedirect(reverse('add_physical_info'))
+
+# Adding Physical Information of a  product if no present
+@user_passes_test(is_editor)
+def add_physical_info(request, product_id):
+    info_form = CreatePhysicalInfo()
+    product = get_object_or_404(Product, id=product_id)
+    if request.method == 'POST':
+        info_form = CreatePhysicalInfo(request.POST)
+        if product_form.is_valid():
+            cd = product_form.cleaned_data
+            name = cd['name']
+            new_info = info_form.save(commit=False)
+            new_info.product = product
+            new_info.save()
+            info_form.save_m2m()
+            messages.success(request, f'Physical information for {name} was created successfully')
+            return HttpResponseRedirect(reverse('user_products_list'))
+        else:
+            messages.error(request, 'An error occurred, Please try again!')
+            product_form = CreatePhysicalInfo()
+            return render(request,
+                          'editors/products/create-physical-info.html',
+                          {'product_form': info_form})
+    else:
+        product_form = CreatePhysicalInfo()
+        return render(request,
+                      'editors/products/create-physical-info.html',
+                          {'product_form': info_form})
+
 
 #Viewing Physical Information of a  product
 @user_passes_test(is_editor)

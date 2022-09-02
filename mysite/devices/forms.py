@@ -29,6 +29,18 @@ class EditProductTags(forms.ModelForm):
         fields = ('tags',)
 
 #Edit Physical Information Form
+class CreatePhysicalInfo(forms.ModelForm):
+    class Meta:
+        model = PhysicalInfo
+        fields = ('screen', 'battery', 'camera', 'ram', 'rom','processor','added')
+
+#Edit Physical Information Form
+class CreateSoftwareInfo(forms.ModelForm):
+    class Meta:
+        model = SoftwareInfo
+        fields = ('os_version', 'os_name', 'os_family','os_ui','other_info','added')
+
+#Edit Physical Information Form
 class EditPhysicalInfo(forms.ModelForm):
     class Meta:
         model = PhysicalInfo
