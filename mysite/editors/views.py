@@ -637,6 +637,7 @@ def show_software_info(request, pk):
                    'product': product})
 
 #Editing Physical Info
+@user_passes_test(is_editor)
 def edit_physical_info(request, info_id, product_id):
     physical = get_object_or_404(PhysicalInfo, id=info_id)
     product = get_object_or_404(Product, id=product_id)
@@ -667,6 +668,7 @@ def edit_physical_info(request, info_id, product_id):
                            'product': product})
 
 #Editing Software Info
+@user_passes_test(is_editor)
 def edit_physical_info(request, info_id, product_id):
     software = get_object_or_404(SoftwareInfo, id=info_id)
     product = get_object_or_404(Product, id=product_id)
