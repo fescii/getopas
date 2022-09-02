@@ -150,11 +150,11 @@ class Image(models.Model):
     added = models.BooleanField(default=False)
 
     #Updating Software Info
-    def update_image(self, image, cover, added,*args, **kwargs):
-        self.image = image
+    def update_image(self, photo, cover, added,*args, **kwargs):
+        self.photo = photo
         self.cover = cover
         self.added = added
-        super(Image, self).save(update_fields=['image','cover','added',], *args, **kwargs)
+        super(Image, self).save(update_fields=['photo','cover','added',], *args, **kwargs)
 
     #Get The Cover Photo
     def cover_photo(self, product):
@@ -164,9 +164,11 @@ class Image(models.Model):
         return img.photo
 
     def cover_photos(self, products):
-        images = [ self.cover_photo(Image, product) for product in products ]
-        photos = [ i.photo for i in images]
-        return photos
+        images = []
+        for product in  products:
+            cover = self.cover_photo(Image, product)
+            images.append(cover)
+        return images
 
 
     #Get List of Photos Excluding The Cover Photo
