@@ -668,7 +668,7 @@ def edit_physical_info(request, info_id, product_id):
 
 #Editing Software Info
 @user_passes_test(is_editor)
-def edit_physical_info(request, info_id, product_id):
+def edit_software_info(request, info_id, product_id):
     software = get_object_or_404(SoftwareInfo, id=info_id)
     product = get_object_or_404(Product, id=product_id)
 

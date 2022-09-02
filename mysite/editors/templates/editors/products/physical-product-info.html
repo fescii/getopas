@@ -1,8 +1,8 @@
 {% extends "base.html" %}
 {% block title %} {{ product.name }}| Info{% endblock %}
 {% block content %}
-<h1>{{ prodct.name }} Physical Information</h1>
-<a href="/dashboard/product/{{product.id}}/edit-physical-info">Edit Info</a>
+<h1>{{ product.name }} Physical Information</h1>
+<a href="{% url 'edit_physical_info' info_id=physical_info.id product_info=prodct.id %}">Edit Info</a>
 <div class="physical_info">
     <h2 class="info"> Physical Info</h2>
     <p class="info"> Screen: {{ physical_info.screen }}</p>
