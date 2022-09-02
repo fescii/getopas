@@ -15,14 +15,9 @@ def product_list(request):
     #Cover Image for current product
     covers = Image.cover_photos(Image, products)
 
-    for dict in products:
-        for cover in covers:
-            dict['image'] = cover
-
     return render(request,
                   'devices/products/products.html',
-                  {'products': products,
-                   'covers': covers})
+                  {'covers': covers})
 
 #Product Detail Page
 def product_detail(request, year, product):

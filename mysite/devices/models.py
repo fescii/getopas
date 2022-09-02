@@ -164,11 +164,19 @@ class Image(models.Model):
         return img.photo
 
     def cover_photos(self, products):
-        images = []
+        pros = {}
         for product in  products:
             cover = self.cover_photo(Image, product)
-            images.append(cover)
-        return images
+            pros['type'] = product.type
+            pros['title'] = product.title
+            pros['series'] = product.series
+            pros['name'] = product.name
+            pros['model'] = product.model
+            pros['company'] = product.company
+            pros['release_date'] = product.release_date
+            pros['about'] = product.about
+            pros['image'] = product.cover
+        return pros
 
 
     #Get List of Photos Excluding The Cover Photo
