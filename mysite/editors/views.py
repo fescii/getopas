@@ -568,5 +568,5 @@ def show_software_info(request, pk):
     #Get The product Physical Information
     info = SoftwareInfo.get_software(SoftwareInfo, product)
 
-    return render(request, 'editors/products/physical-product-info.html',
+    return render(request, 'editors/products/software-product-info.html',
                   {'software_info': info,})

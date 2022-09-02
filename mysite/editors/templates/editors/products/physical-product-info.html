@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block title %} | Products{% endblock %}
+{% block content %}
+<h1>My Products</h1>
+{% for product in products %}
+<div class="post-summery">
+    <h2>
+        <a href="{{ product.get_absolute_url }}"> {{ product.name }} </a>
+    </h2>
+    <p class="date">Release on {{ product.release_date }} by {{ product.author }}</p>
+    <img src="/media/{{product.cover}}" alt="Cover Image" width="300" height="250" title="{{issue.cover}}"/>
+    {{ product.about|truncatewords:30|linebreaks }}
+    <a href="/dashboard/edit-product/{{product.id}}">edit</a>
+    <a href="/dashboard/edit-product/tags/{{product.id}}">Edit tags</a>
+    <a href="/dashboard/product/{{product.id}}/physical-info">Physical Info</a>
+    <a href="/dashboard/product/{{product.id}}/software-info">Software Info</a>
+    <a href="/dashboard/delete-product/{{prodct.id}}">delete</a>
+</div>
+{% if empty %}
+<p> You've Added Any Products Yet!</p>
+
+{% else %}
+{% endif %}
+{% endfor %}
+{% include "pagination.html" with page=posts %}
+<!--{% include "pagination.html" with page=page_obj %}-->
+{% endblock %}
