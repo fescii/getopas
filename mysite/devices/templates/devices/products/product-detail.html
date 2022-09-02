@@ -3,14 +3,7 @@
 {% block content %}
 <h1>{{ product.name }}</h1>
 <p>Cover Photo: </p>
-<img src="/media/{{ cover }}" title="Cover Image For {{ product.name }}" width="200px" height="100px" />
-
-<div class='images'>
-    <p>Images: </p>
-    {% for image in images %}
-        <img src="/media/{{ image }}" width="200px" height="100px" />
-    {% endfor %}
-</div>
+<img src="/media/{{ product.image }}" title="Cover Image For {{ product.name }}" width="200px" height="100px" />
 <p>Type: {{product.type}}</p>
 <p class="date">Title: {{ product.title }}</p
 <p class="date">Series: {{ product.series }}</p

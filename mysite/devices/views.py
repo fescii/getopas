@@ -1,3 +1,4 @@
+from email.mime import image
 from itertools import product
 from multiprocessing import context
 import re
@@ -13,6 +14,10 @@ def product_list(request):
 
     #Cover Image for current product
     covers = Image.cover_photos(Image, products)
+
+    for dict in products:
+        for cover in covers:
+            dict['image'] = cover
 
     return render(request,
                   'devices/products/products.html',
