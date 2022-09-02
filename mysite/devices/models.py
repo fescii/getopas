@@ -28,7 +28,7 @@ class Product(models.Model):
     author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='products')
     title = models.CharField(max_length=250)
     name = models.CharField(max_length=250)
-    cover = models.ImageField(upload_to='devices/%Y/%m/%d',
+    cover = models.ImageField(upload_to='device-covers/%Y/%m/%d',
                               blank=True)
     slug = models.SlugField(max_length=250, blank=True)
     model = models.CharField(max_length=250)
