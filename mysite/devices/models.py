@@ -28,6 +28,8 @@ class Product(models.Model):
     author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='products')
     title = models.CharField(max_length=250)
     name = models.CharField(max_length=250)
+    cover = models.ImageField(upload_to='devices/%Y/%m/%d',
+                              blank=True)
     slug = models.SlugField(max_length=250, blank=True)
     model = models.CharField(max_length=250)
     series = models.CharField(max_length=250, default='None')
@@ -41,23 +43,19 @@ class Product(models.Model):
     tags = TaggableManager()
 
     #Updating Product
-    def update_product(self, title, name, model, series, company, release,price, about, *args, **kwargs):
+    def update_product(self, title, name, cover, model, series, company, release,price, about, *args, **kwargs):
         self.title = title
         self.name = name
+        self.cover = cover
         self.model = model
         self.series = series
         self.company = company
         self.release_date = release
         self.price = price
         self.about = about
-        super(Product, self).save(update_fields=['title',
-                                              'name'
-                                              'model',
-                                              'series'
-                                              'company',
-                                              'release_date',
-                                              'price',
-                                              'about'], *args, **kwargs)
+        super(Product, self).save(update_fields=['title','name','cover','model',
+                                              'series','company','release_date',
+                                              'price','about'], *args, **kwargs)
     #Update Views
     def update_views(self, *args, **kwargs):
         self.product_views = self.product_views+1
@@ -146,7 +144,6 @@ class Image(models.Model):
     product = models.ForeignKey(Product, related_name='images', on_delete=models.CASCADE)
     photo = models.ImageField(upload_to='devices/%Y/%m/%d',
                               blank=True)
-    cover = models.BooleanField(default=False)
     added = models.BooleanField(default=False)
 
     #Updating Software Info
@@ -156,34 +153,11 @@ class Image(models.Model):
         self.added = added
         super(Image, self).save(update_fields=['photo','cover','added',], *args, **kwargs)
 
-    #Get The Cover Photo
-    def cover_photo(self, product):
-        img = get_object_or_404(Image,
-                                  product=product,
-                                  cover=True)
-        return img.photo
 
-    def cover_photos(self, products):
-        pros = {}
-        for product in  products:
-            cover = self.cover_photo(Image, product)
-            pros['type'] = product.type
-            pros['title'] = product.title
-            pros['series'] = product.series
-            pros['name'] = product.name
-            pros['model'] = product.model
-            pros['company'] = product.company
-            pros['release_date'] = product.release_date
-            pros['about'] = product.about
-            pros['image'] = product.cover
-        return pros
-
-
-    #Get List of Photos Excluding The Cover Photo
+    #Get List of Photos Excluding The Non Published Photos
     def product_images(self, product):
         photos = Image.objects.filter(product=product,
-                                      added=True,
-                                      cover=False)
+                                      added=True)
         photos = [i.photo for i in photos]
         return photos
 

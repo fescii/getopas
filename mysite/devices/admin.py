@@ -6,7 +6,7 @@ from .models import Product, PhysicalInfo, SoftwareInfo,\
 # Register your models here.
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
-    list_display = ('name', 'slug', 'author', 'release_date', 'status')
+    list_display = ('name', 'slug', 'author', 'cover','release_date', 'status')
     list_filter = ('status', 'release_date', 'author')
     search_fields = ('name', 'about')
     raw_id_fields = ('author',)
@@ -34,5 +34,5 @@ class ReviewAdmin(admin.ModelAdmin):
 #Registering Image model
 @admin.register(Image)
 class ImageAdmin(admin.ModelAdmin):
-    list_display = ('product', 'photo','cover', 'added')
-    list_filter = ('added', 'cover')
+    list_display = ('product', 'photo', 'added')
+    list_filter = ('added',)

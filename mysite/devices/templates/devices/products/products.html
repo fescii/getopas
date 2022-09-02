@@ -7,14 +7,8 @@
 <h2>
   <a href="{{ product.get_absolute_url }}"> {{ product.name }} </a>
 </h2>
-<div class='images'>
-  <p>Images: </p>
-  {% for cover in covers %}
-      <img src="/media/{{ cover }}" width="200px" height="100px" />
-  {% endfor %}
-</div>
 <p class="date">Title: {{ product.title}}</p>
-<img src="/media/{{ cover_photo }}" title="Good-{{ cover_photo }}" width="200px" height="100px" />
+<img src="/media/{{ product.image }}" title="Good-{{ product.image }}" width="200px" height="100px" />
 <p>Type: {{product.type}}</p>
 <p class="date">Series: {{ product.series }}</p
 <p class="date">Name: {{ product.name }}</p>
