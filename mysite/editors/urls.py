@@ -30,6 +30,7 @@ urlpatterns = [
     path('reset/done/',
          auth_views.PasswordResetCompleteView.as_view(template_name='editors/templates/registration/password_reset_complete.html'),
          name='password_reset_complete'),
+
     #Register urls
     path('register/', views.register, name='register'),
     #Dashboard path
@@ -44,6 +45,8 @@ urlpatterns = [
     path('edit-article/<int:pk>/', views.edit_blog_post, name='edit_blog_post'),
     path('edit-article/tags/<int:pk>/', views.edit_blog_post_tags, name='edit_blog_post_tags'),
     path('delete-article/<int:pk>/', views.delete_post, name='delete_post'),
+
+    #Newsletters Paths
     path('add-newsletter/', views.create_magazine, name='new_newsletter'),
     path('my-newsletters/', views.user_issue_list, name='user_issue_list'),
     path('edit-newsletter/<int:pk>/', views.edit_newsletter, name='edit_newsletter'),
@@ -55,6 +58,8 @@ urlpatterns = [
     path('my-newsletters/<str:issue_id>/sections/remove-section-<str:section_id>', views.remove_section, name='remove_section'),
     path('my-newsletters/<str:issue_id>/sections/delete-section-<str:section_id>', views.delete_section, name='delete_section'),
     path('my-newsletters/<str:issue_id>/sections/edit-section-<str:section_id>', views.edit_section, name='edit_section'),
+
+    #Products Path
     path('add-product/', views.create_product, name='new_product'),
     path('products/', views.user_product_list, name='user_product_list'),
     path('product/<int:pk>/physical-info', views.show_physical_info, name='product_physical_info'),
