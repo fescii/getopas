@@ -1,6 +1,6 @@
 from dataclasses import fields
 from django import forms
-from .models import PhysicalInfo, Product, Review
+from .models import PhysicalInfo, Product, Review, SoftwareInfo
 
 #Form for entering user review on a particular product
 class ReviewForm(forms.ModelForm):
@@ -33,3 +33,9 @@ class EditPhysicalInfo(forms.ModelForm):
     class Meta:
         model = PhysicalInfo
         fields = ('screen', 'battery', 'camera', 'ram', 'rom','processor')
+
+#Edit Physical Information Form
+class EditSoftwareInfo(forms.ModelForm):
+    class Meta:
+        model = SoftwareInfo
+        fields = ('os_version', 'os_name', 'os_family','os_ui','other_info')
