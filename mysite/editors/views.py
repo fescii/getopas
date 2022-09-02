@@ -653,10 +653,10 @@ def edit_physical_info(request, info_id, product_id):
             updated.save()
             physical_form.save_m2m()
             #On Success
-            messages.success('Physical Information updated successfully')
+            messages.success(request,'Physical Information updated successfully')
             return HttpResponseRedirect(reverse('product_physical_info', kwargs={'pk': product_id}))
         else:
-            messages.error('An error occurred, Please Try again')
+            messages.error(request,'An error occurred, Please Try again')
             physical_form = EditPhysicalInfo(request.POST or None, instance=physical)
             return render(request, 'editors/products/edit-physical-info.html',
                           {'physical_form': physical_form,
