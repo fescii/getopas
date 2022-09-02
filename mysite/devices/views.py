@@ -11,13 +11,9 @@ from django.core.mail import send_mail
 #List Products
 def product_list(request):
     products = Product.published.all()
-
-    #Cover Image for current product
-    covers = Image.cover_photos(Image, products)
-
     return render(request,
                   'devices/products/products.html',
-                  {'covers': covers})
+                  {'products': products})
 
 #Product Detail Page
 def product_detail(request, year, product):
