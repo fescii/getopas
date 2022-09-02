@@ -57,6 +57,6 @@ urlpatterns = [
     path('my-newsletters/<str:issue_id>/sections/edit-section-<str:section_id>', views.edit_section, name='edit_section'),
     path('add-product/', views.create_product, name='new_product'),
     path('products/', views.user_product_list, name='user_product_list'),
-    path('product/<int:id>/physical-info', views.show_physical_info, name='product_physical_info'),
-    path('product/<int:id>/software-info', views.show_physical_info, name='product_software_info'),
+    path('product/<int:pk>/physical-info', views.show_physical_info, name='product_physical_info'),
+    path('product/<int:pk>/software-info', views.show_physical_info, name='product_software_info'),
 ]
