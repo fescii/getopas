@@ -624,7 +624,7 @@ def show_physical_info(request, pk):
                   {'physical_info': info,
                    'product': product})
     else:
-        return HttpResponseRedirect(reverse('add_physical_info'))
+        return HttpResponseRedirect(reverse('add_physical_info', kwargs={'pk': product.id}))
 
 # Adding Physical Information of a  product if no present
 @user_passes_test(is_editor)
@@ -635,12 +635,11 @@ def add_physical_info(request, product_id):
         info_form = CreatePhysicalInfo(request.POST)
         if product_form.is_valid():
             cd = product_form.cleaned_data
-            name = cd['name']
             new_info = info_form.save(commit=False)
             new_info.product = product
             new_info.save()
             info_form.save_m2m()
-            messages.success(request, f'Physical information for {name} was created successfully')
+            messages.success(request, f'Physical information was created successfully')
             return HttpResponseRedirect(reverse('user_products_list'))
         else:
             messages.error(request, 'An error occurred, Please try again!')
@@ -652,6 +651,33 @@ def add_physical_info(request, product_id):
         product_form = CreatePhysicalInfo()
         return render(request,
                       'editors/products/create-physical-info.html',
+                          {'product_form': info_form})
+
+# Adding Physical Information of a  product if no present
+@user_passes_test(is_editor)
+def add_software_info(request, product_id):
+    info_form = CreateSoftwareInfo()
+    product = get_object_or_404(Product, id=product_id)
+    if request.method == 'POST':
+        info_form = CreateSoftwareInfo(request.POST)
+        if product_form.is_valid():
+            cd = product_form.cleaned_data
+            new_info = info_form.save(commit=False)
+            new_info.product = product
+            new_info.save()
+            info_form.save_m2m()
+            messages.success(request, f'Software information for  was created successfully')
+            return HttpResponseRedirect(reverse('user_products_list'))
+        else:
+            messages.error(request, 'An error occurred, Please try again!')
+            product_form = CreateSoftwareInfo()
+            return render(request,
+                          'editors/products/create-software-info.html',
+                          {'product_form': info_form})
+    else:
+        product_form = CreateSoftwareInfo()
+        return render(request,
+                      'editors/products/create-software-info.html',
                           {'product_form': info_form})
 
 
