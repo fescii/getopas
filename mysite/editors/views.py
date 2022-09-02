@@ -517,9 +517,11 @@ def user_product_list(request):
     # If page is out of range deliver last page of results
         products = paginator.page(paginator.num_pages)
 
-    return render(request, 'editors/articles/user_issues_list.html',
+    return render(request, 'editors/products/list-user-products.html',
                   {'page': page,
                    'products': products,})
+
+
 #Creating a new product
 @user_passes_test(is_editor)
 def create_product(request):
