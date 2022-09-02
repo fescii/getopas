@@ -1,6 +1,6 @@
 from django.contrib import admin
 from .models import Product, PhysicalInfo, SoftwareInfo,\
-    Review
+    Review, Image
 
 
 # Register your models here.
@@ -13,13 +13,13 @@ class ProductAdmin(admin.ModelAdmin):
     date_hierarchy = 'release_date'
     ordering = ('status',)
 
-#Physical Info Model
+#Registering Physical Info Model
 @admin.register(PhysicalInfo)
 class PhysicalInfoAdmin(admin.ModelAdmin):
     list_display = ('screen','ram','rom','added')
     list_filter = ('added',)
 
-#SoftwareInfo Model
+#Registering SoftwareInfo Model
 @admin.register(SoftwareInfo)
 class SoftwareInfoAdmin(admin.ModelAdmin):
     list_display = ('os_version','os_name','added')
@@ -30,3 +30,9 @@ class SoftwareInfoAdmin(admin.ModelAdmin):
 class ReviewAdmin(admin.ModelAdmin):
     list_display = ('product', 'created','active')
     list_filter = ('active', 'created', 'updated')
+
+#Registering Image model
+@admin.register(Image)
+class ImageAdmin(admin.ModelAdmin):
+    list_display = ('product', 'image','cover', 'added')
+    list_filter = ('added', 'cover')
