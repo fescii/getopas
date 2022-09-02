@@ -11,7 +11,8 @@ from .forms import UserRegistrationForm,\
         BlogEditForm, CreateMagazineForm, MagazineEditForm,\
             CreateSectionForm, SectionEditForm, MagazineEditTagsForm,\
                 BlogEditTagsForm, ModerateUserForm
-from devices.forms import CreateProductForm, EditProductForm, EditProductTags
+from devices.forms import CreateProductForm, EditProductForm, EditProductTags,\
+    EditPhysicalInfo
 from django.core.paginator import Paginator, EmptyPage,\
     PageNotAnInteger
 from django.contrib.auth.decorators import login_required,user_passes_test
