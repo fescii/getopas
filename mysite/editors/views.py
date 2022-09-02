@@ -12,7 +12,7 @@ from .forms import UserRegistrationForm,\
             CreateSectionForm, SectionEditForm, MagazineEditTagsForm,\
                 BlogEditTagsForm, ModerateUserForm
 from devices.forms import CreateProductForm, EditProductForm, EditProductTags,\
-    EditPhysicalInfo
+    EditPhysicalInfo, EditSoftwareInfo
 from django.core.paginator import Paginator, EmptyPage,\
     PageNotAnInteger
 from django.contrib.auth.decorators import login_required,user_passes_test
@@ -633,4 +633,23 @@ def show_software_info(request, pk):
 
     return render(request, 'editors/products/software-product-info.html',
                   {'software_info': info,
+
                    'product': product})
+
+#Editing Physical Info
+def edit_physical_info(request, info_id):
+    physical = get_object_or_404(PhysicalInfo, id=info_id)
+
+    if request.method == 'POST':
+        physical_form = EditPhysicalInfo(request.POST, instance=physical)
+
+        if physical_form.is_valid():
+            cd = physical_form.cleaned_data
+
+            #Saving The Form
+            PhysicalInfo.update_physical_info(physical, cd['screen'], cd['battery'],
+                                              cd['camera'],cd['ram'], cd['rom'],
+                                              cd['processor'], cd['added'])
+            #On Success
+            messages.success('Physical Information updated successfully')
+            return HttpResponseRedirect(reverse('product_physical_info'))
