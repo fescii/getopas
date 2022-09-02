@@ -105,6 +105,10 @@ class PhysicalInfo(models.Model):
                                               'rom',
                                               'processor',
                                               'added',], *args, **kwargs)
+    #Get Physical Information
+    def get_physical(self, product):
+        info = get_object_or_404(PhysicalInfo, product=product)
+        return info
 
     class Meta:
         ordering = ('added',)
@@ -136,6 +140,11 @@ class SoftwareInfo(models.Model):
                                               'rom',
                                               'processor',
                                               'added',], *args, **kwargs)
+
+    #Get Software Information
+    def get_software(self, product):
+        info = get_object_or_404(SoftwareInfo, product=product)
+        return info
 
     class Meta:
         ordering = ('added',)
