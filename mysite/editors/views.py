@@ -583,8 +583,8 @@ def edit_product(request, product_id, product_name):
 
 #Edit Products Tags
 @user_passes_test(is_editor)
-def edit_newsletter_tags(request, product_id, product_name):
-    product = Issue.objects.get(id=product_id)
+def edit_product_tags(request, product_id, product_name):
+    product = Product.objects.get(id=product_id)
     product_name = product.name
     if request.method == 'POST':
         edit_form = MagazineEditTagsForm(request.POST or None, instance=product)
