@@ -141,6 +141,23 @@ class SoftwareInfo(models.Model):
     class Meta:
         ordering = ('added',)
 
+class Image(models.Model):
+    product = models.ForeignKey(Product, related_name='images', on_delete=models.CASCADE)
+    image = models.ImageField(upload_to='devices/%Y/%m/%d',
+                              blank=True)
+    cover = models.BooleanField(default=False)
+    added = models.BooleanField(default=False)
+
+    #Updating Software Info
+    def update_image(self, image, cover, added,*args, **kwargs):
+        self.image = image
+        self.cover = cover
+        self.added = added
+        super(Image, self).save(update_fields=['image','cover','added',], *args, **kwargs)
+
+    class Meta:
+        ordering = ('added',)
+
 #Review Model
 class Review(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='reviews')
