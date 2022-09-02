@@ -2,7 +2,7 @@
 {% block title %} {{ product.name }}| Info{% endblock %}
 {% block content %}
 <h1>{{ product.name }} Physical Information</h1>
-<a href="{% url 'edit_physical_info' info_id=physical_info.id product_info=prodct.id %}">Edit Info</a>
+<a href="{% url 'edit_physical_info' info_id=physical_info.id product_id=product.id %}">Edit Info</a>
 <div class="physical_info">
     <h2 class="info"> Physical Info</h2>
     <p class="info"> Screen: {{ physical_info.screen }}</p>

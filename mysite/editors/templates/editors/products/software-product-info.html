@@ -2,7 +2,7 @@
 {% block title %} {{ product.name }}| Info{% endblock %}
 {% block content %}
 <h1>{{ product.name }} Software Information</h1>
-<a href="{% url 'edit_software_info' info_id=software_info.id product_info=prodct.id %}">Edit Info</a>
+<a href="{% url 'edit_software_info' info_id=software_info.id product_id=product.id %}">Edit Info</a>
 <div class="software_info">
     <h2 class="info"> Software Info</h2>
     <p class="info"> OS Version: {{ software_info.os_version }}</p>

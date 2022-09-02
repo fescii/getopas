@@ -673,26 +673,26 @@ def edit_software_info(request, info_id, product_id):
     product = get_object_or_404(Product, id=product_id)
 
     if request.method == 'POST':
-        physical_form = EditPhysicalInfo(request.POST, instance=software)
+        software_form = EditSoftwareInfo(request.POST, instance=software)
 
         if physical_form.is_valid():
-            cd = physical_form.cleaned_data
+            cd = software_form.cleaned_data
 
             #Saving The Form
-            PhysicalInfo.update_physical_info(software, cd['screen'], cd['battery'],
-                                              cd['camera'],cd['ram'], cd['rom'],
-                                              cd['processor'], cd['added'])
+            SoftwareInfo.update_software_info(software, cd['os_version'], cd['os_name'],
+                                              cd['os_family'],cd['os_ui'], cd['other_info'],
+                                              cd['added'])
             #On Success
-            messages.success('Physical Information updated successfully')
+            messages.success('Software Information updated successfully')
             return HttpResponseRedirect(reverse('product_software_info', kwargs={'pk': product_id}))
         else:
             messages.error('An error occurred, Please Try again')
-            physical_form = EditPhysicalInfo(request.POST, instance=software)
+            physical_form = EditSoftwareInfo(request.POST or None, instance=software)
             return render(request, 'editors/products/edit-software-info.html',
-                          {'physical_form': physical_form,
+                          {'software_form': physical_form,
                            'product':product})
     else:
-        physical_form = EditPhysicalInfo(request.POST, instance=software)
+        physical_form = EditSoftwareInfo(request.POST or None, instance=software)
         return render(request, 'editors/products/edit-software-info.html',
-                          {'physical_form': physical_form,
+                          {'software_form': physical_form,
                            'product': product})
