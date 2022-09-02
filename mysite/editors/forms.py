@@ -1,3 +1,4 @@
+from pyexpat import model
 from django import forms
 from django.contrib.auth.models import User
 from .models import Profile
@@ -95,5 +96,6 @@ class SectionEditForm(forms.ModelForm):
 #Create Product Form
 class CreateProductForm(forms.ModelForm):
     class Meta:
+        model = Product
         fields = ('title', 'name', 'cover','model', 'series',
                   'type','company','release_date','price','about', 'tags','status')

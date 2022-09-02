@@ -504,7 +504,6 @@ def edit_section(request, issue_id, section_id):
 @user_passes_test(is_editor)
 def create_product(request):
     product_form = CreateProductForm()
-
     if request.method == 'POST':
         product_form = CreateProductForm(request.POST)
         if product_form.is_valid():
@@ -514,13 +513,16 @@ def create_product(request):
             new_product.author = request.user
             new_product.save()
             product_form.save_m2m()
-            message.success(f'The Product {name} was created successfully')
+            messages.success(request, f'The Product {name} was created successfully')
+            return HttpResponseRedirect(reverse('user_products_list'))
         else:
-            message.error('An error occurred, Please try again!')
+            messages.error(request, 'An error occurred, Please try again!')
             product_form = CreateProductForm()
-            return render('editors/products/create-product.html',
+            return render(request,
+                          'editors/products/create-product.html',
                           {'product_form': product_form})
     else:
         product_form = CreateProductForm()
-        return render('editors/products/create-product.html',
+        return render(request,
+                      'editors/products/create-product.html',
                           {'product_form': product_form})
