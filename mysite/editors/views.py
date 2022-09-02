@@ -637,8 +637,9 @@ def show_software_info(request, pk):
                    'product': product})
 
 #Editing Physical Info
-def edit_physical_info(request, info_id):
+def edit_physical_info(request, info_id, product_id):
     physical = get_object_or_404(PhysicalInfo, id=info_id)
+    product = get_object_or_404(Product, id=product_id)
 
     if request.method == 'POST':
         physical_form = EditPhysicalInfo(request.POST, instance=physical)
@@ -652,4 +653,15 @@ def edit_physical_info(request, info_id):
                                               cd['processor'], cd['added'])
             #On Success
             messages.success('Physical Information updated successfully')
-            return HttpResponseRedirect(reverse('product_physical_info'))
+            return HttpResponseRedirect(reverse('product_physical_info', kwargs={'pk': product_id}))
+        else:
+            messages.error('An error occurred, Please Try again')
+            physical_form = EditPhysicalInfo(request.POST, instance=physical)
+            return render(request, 'editors/products/edit-physical-info.html',
+                          {'physical_form': physical_form,
+                           'product':product})
+    else:
+        physical_form = EditPhysicalInfo(request.POST, instance=physical)
+        return render(request, 'editors/products/edit-physical-info.html',
+                          {'physical_form': physical_form,
+                           'product': product})
