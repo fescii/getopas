@@ -3,12 +3,12 @@
 
 {% block content %}
 <h1>Devices</h1>
-{% for product in covers %}
+{% for product in products %}
 <h2>
   <a href="{{ product.get_absolute_url }}"> {{ product.name }} </a>
 </h2>
 <p class="date">Title: {{ product.title}}</p>
-<img src="/media/{{ product.image }}" title="Good-{{ product.image }}" width="200px" height="100px" />
+<img src="/media/{{ product.cover }}" title="Good-{{ product.cover }}" width="200px" height="100px" />
 <p>Type: {{product.type}}</p>
 <p class="date">Series: {{ product.series }}</p
 <p class="date">Name: {{ product.name }}</p>
