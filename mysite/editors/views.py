@@ -668,17 +668,17 @@ def edit_physical_info(request, info_id, product_id):
 
 #Editing Software Info
 def edit_physical_info(request, info_id, product_id):
-    physical = get_object_or_404(SoftwareInfo, id=info_id)
+    software = get_object_or_404(SoftwareInfo, id=info_id)
     product = get_object_or_404(Product, id=product_id)
 
     if request.method == 'POST':
-        physical_form = EditPhysicalInfo(request.POST, instance=physical)
+        physical_form = EditPhysicalInfo(request.POST, instance=software)
 
         if physical_form.is_valid():
             cd = physical_form.cleaned_data
 
             #Saving The Form
-            PhysicalInfo.update_physical_info(physical, cd['screen'], cd['battery'],
+            PhysicalInfo.update_physical_info(software, cd['screen'], cd['battery'],
                                               cd['camera'],cd['ram'], cd['rom'],
                                               cd['processor'], cd['added'])
             #On Success
@@ -686,12 +686,12 @@ def edit_physical_info(request, info_id, product_id):
             return HttpResponseRedirect(reverse('product_software_info', kwargs={'pk': product_id}))
         else:
             messages.error('An error occurred, Please Try again')
-            physical_form = EditPhysicalInfo(request.POST, instance=physical)
+            physical_form = EditPhysicalInfo(request.POST, instance=software)
             return render(request, 'editors/products/edit-software-info.html',
                           {'physical_form': physical_form,
                            'product':product})
     else:
-        physical_form = EditPhysicalInfo(request.POST, instance=physical)
+        physical_form = EditPhysicalInfo(request.POST, instance=software)
         return render(request, 'editors/products/edit-software-info.html',
                           {'physical_form': physical_form,
                            'product': product})
