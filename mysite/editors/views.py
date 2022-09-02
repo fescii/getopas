@@ -754,3 +754,11 @@ def edit_software_info(request, info_id, product_id):
         return render(request, 'editors/products/edit-software-info.html',
                           {'software_form': physical_form,
                            'product': product})
+
+#Delete Product
+@user_passes_test(is_editor)
+def delete_product(request,pk):
+    product = get_object_or_404(Product, id=pk)
+    product.delete()
+    messages.success(request, 'Product was Successfully')
+    return HttpResponseRedirect(reverse('user_product_list'))
