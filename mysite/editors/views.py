@@ -10,8 +10,8 @@ from .forms import UserRegistrationForm,\
     UserEditForm, ProfileEditForm, CreateBlogPostForm,\
         BlogEditForm, CreateMagazineForm, MagazineEditForm,\
             CreateSectionForm, SectionEditForm, MagazineEditTagsForm,\
-                BlogEditTagsForm, ModerateUserForm, CreateProductForm,\
-                    EditProductForm
+                BlogEditTagsForm, ModerateUserForm
+from devices.forms import CreateProductForm, EditProductForm, EditProductTags
 from django.core.paginator import Paginator, EmptyPage,\
     PageNotAnInteger
 from django.contrib.auth.decorators import login_required,user_passes_test
@@ -580,6 +580,34 @@ def edit_product(request, product_id, product_name):
                       'editors/products/edit-product.html',
                           {'product_form': product_form,
                            'name': product_name})
+
+#Edit Products Tags
+@user_passes_test(is_editor)
+def edit_newsletter_tags(request, product_id, product_name):
+    product = Issue.objects.get(id=product_id)
+    product_name = product.name
+    if request.method == 'POST':
+        edit_form = MagazineEditTagsForm(request.POST or None, instance=product)
+        if edit_form.is_valid():
+            tags = edit_form.save(commit=False)
+            edit_form.save_m2m()
+            tags.save()
+            messages.success(request, 'Tags updated successfully')
+            return HttpResponseRedirect(reverse('user_issue_list'))
+
+        else:
+            messages.error(request, 'Error updating the Tags')
+            edit_form = MagazineEditTagsForm(request.POST or None, instance=product)
+
+        return render(request,
+                        'editors/articles/issue-tags-edit.html',
+                        {'edit_form': edit_form})
+    else:
+        edit_form = MagazineEditTagsForm(request.POST or None, instance=product)
+        return render(request,
+                        'editors/articles/issue-tags-edit.html',
+                        {'edit_form': edit_form,
+                         'issue': issue})
 
 #Viewing Physical Information of a  product
 @user_passes_test(is_editor)

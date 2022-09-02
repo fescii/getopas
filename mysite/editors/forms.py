@@ -93,15 +93,3 @@ class SectionEditForm(forms.ModelForm):
         model = Section
         fields =('name','page','body','added')
 
-#Create Product Form
-class CreateProductForm(forms.ModelForm):
-    class Meta:
-        model = Product
-        fields = ('title', 'name', 'cover','model', 'series',
-                  'type','company','release_date','price','about', 'tags','status')
-
-class EditProductForm(forms.ModelForm):
-    class Meta:
-        model = Product
-        fields = ('title', 'name', 'cover','model', 'series',
-                  'type','company','release_date','price','about','status')
