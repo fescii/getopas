@@ -16,10 +16,11 @@ def product_list(request):
                   {'products': products})
 
 #Product Detail Page
-def product_detail(request, year, product):
+def product_detail(request, id, year, product):
     product = get_object_or_404(Product,
                              status='published',
-                             release_date__year=year)
+                             release_date__year=year,
+                             id=id)
     #Get The Current User
     user = request.user
 
@@ -38,8 +39,6 @@ def product_detail(request, year, product):
     #List of  Images for current product
     images = Image.product_images(Image, product)
 
-    #Cover Image for current product
-    cover = Image.cover_photo(Image, product)
 
     #Adding New Review
     review_form = None
@@ -73,5 +72,4 @@ def product_detail(request, year, product):
                    'reviews': reviews,
                    'physical_info': physical_info,
                    'software_info': software_info,
-                   'images': images,
-                   'cover':cover})
+                   'images': images,})
