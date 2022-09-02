@@ -2,7 +2,7 @@ from itertools import product
 from multiprocessing import context
 import re
 from django.shortcuts import render, get_object_or_404
-from .models import Product, PhysicalInfo, SoftwareInfo,Review
+from .models import Image, Product, PhysicalInfo, SoftwareInfo,Review
 from .forms import ReviewForm
 from django.core.mail import send_mail
 
@@ -34,8 +34,11 @@ def product_detail(request, year, product):
     #List of  Software Info for current product
     software_info = product.software_info
 
-     #List of  Images for current product
+    #List of  Images for current product
     images = product.images
+
+    #Cover Image for current product
+    cover = Image.cover_photo(Image, product)
 
     #Adding New Review
     review_form = None
@@ -69,4 +72,5 @@ def product_detail(request, year, product):
                    'reviews': reviews,
                    'physical_info': physical_info,
                    'software_info': software_info,
-                   'images': images})
+                   'images': images,
+                   'cover':cover})

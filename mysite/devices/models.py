@@ -7,6 +7,7 @@ from django.urls import reverse
 from taggit.managers  import TaggableManager
 from django.conf import settings
 from django.utils.text import slugify
+from django.shortcuts import get_object_or_404
 
 
 # Create your models here.
@@ -143,7 +144,7 @@ class SoftwareInfo(models.Model):
 
 class Image(models.Model):
     product = models.ForeignKey(Product, related_name='images', on_delete=models.CASCADE)
-    image = models.ImageField(upload_to='devices/%Y/%m/%d',
+    photo = models.ImageField(upload_to='devices/%Y/%m/%d',
                               blank=True)
     cover = models.BooleanField(default=False)
     added = models.BooleanField(default=False)
@@ -155,6 +156,12 @@ class Image(models.Model):
         self.added = added
         super(Image, self).save(update_fields=['image','cover','added',], *args, **kwargs)
 
+    #Get The Cover Photo
+    def cover_photo(self, product):
+        img = get_object_or_404(Image,
+                                  product=product,
+                                  cover=True)
+        return img.photo
     class Meta:
         ordering = ('added',)
 
@@ -170,4 +177,4 @@ class Review(models.Model):
     class Meta:
         ordering = ('created',)
     def __str__(self):
-        return f'Feedback by {self.name} on {self.post}'
+        return f'Review by {self.author} on {self.product}'

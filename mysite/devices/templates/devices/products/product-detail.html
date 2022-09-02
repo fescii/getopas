@@ -2,6 +2,8 @@
 {% block title %} {{ product.name }} {% endblock %}
 {% block content %}
 <h1>{{ product.name }}</h1>
+<p>Cover Photo: </p>
+<img src="/media/{{ cover }}" title="Cover Image For {{ product.name }}" width="200px" height="100px" />
 <p>Type: {{product.type}}</p>
 <p class="date">Title: {{ product.title }}</p
 <p class="date">Series: {{ product.series }}</p

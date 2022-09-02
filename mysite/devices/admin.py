@@ -34,5 +34,5 @@ class ReviewAdmin(admin.ModelAdmin):
 #Registering Image model
 @admin.register(Image)
 class ImageAdmin(admin.ModelAdmin):
-    list_display = ('product', 'image','cover', 'added')
+    list_display = ('product', 'photo','cover', 'added')
     list_filter = ('added', 'cover')
