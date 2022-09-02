@@ -34,6 +34,9 @@ def product_detail(request, year, product):
     #List of  Software Info for current product
     software_info = product.software_info
 
+     #List of  Images for current product
+    images = product.images
+
     #Adding New Review
     review_form = None
     new_review  = None
@@ -65,4 +68,5 @@ def product_detail(request, year, product):
                    'review_form':review_form,
                    'reviews': reviews,
                    'physical_info': physical_info,
-                   'software_info': software_info})
+                   'software_info': software_info,
+                   'images': images})
