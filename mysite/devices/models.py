@@ -39,7 +39,7 @@ class Product(models.Model):
     product_views = models.IntegerField(default=0)
     tags = TaggableManager()
 
-    #Updating Blog Post
+    #Updating Product
     def update_product(self, title, name, model, series, company, release,price, about, *args, **kwargs):
         self.title = title
         self.name = name
