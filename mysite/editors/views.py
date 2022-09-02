@@ -10,7 +10,8 @@ from .forms import UserRegistrationForm,\
     UserEditForm, ProfileEditForm, CreateBlogPostForm,\
         BlogEditForm, CreateMagazineForm, MagazineEditForm,\
             CreateSectionForm, SectionEditForm, MagazineEditTagsForm,\
-                BlogEditTagsForm, ModerateUserForm, CreateProductForm
+                BlogEditTagsForm, ModerateUserForm, CreateProductForm,\
+                    EditProductForm
 from django.core.paginator import Paginator, EmptyPage,\
     PageNotAnInteger
 from django.contrib.auth.decorators import login_required,user_passes_test
@@ -526,6 +527,35 @@ def user_product_list(request):
 @user_passes_test(is_editor)
 def create_product(request):
     product_form = CreateProductForm()
+    if request.method == 'POST':
+        product_form = CreateProductForm(request.POST, files=request.FILES)
+        if product_form.is_valid():
+            cd = product_form.cleaned_data
+            name = cd['name']
+            new_product = product_form.save(commit=False)
+            new_product.author = request.user
+            new_product.save()
+            product_form.save_m2m()
+            messages.success(request, f'The Product {name} was created successfully')
+            return HttpResponseRedirect(reverse('user_products_list'))
+        else:
+            messages.error(request, 'An error occurred, Please try again!')
+            product_form = CreateProductForm()
+            return render(request,
+                          'editors/products/create-product.html',
+                          {'product_form': product_form})
+    else:
+        product_form = CreateProductForm()
+        return render(request,
+                      'editors/products/create-product.html',
+                          {'product_form': product_form})
+
+#Editing a product
+@user_passes_test(is_editor)
+def edit_product(request, pk):
+    product = get_object_or_404(Product, id=pk)
+    product_form = CreateProductForm(instance=product,
+                                     files=request.FILES)
     if request.method == 'POST':
         product_form = CreateProductForm(request.POST, files=request.FILES)
         if product_form.is_valid():

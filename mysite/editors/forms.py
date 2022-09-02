@@ -104,4 +104,4 @@ class EditProductForm(forms.Form):
     class Meta:
         model = Product
         fields = ('title', 'name', 'cover','model', 'series',
-                  'type','company','release_date','price','about', 'tags','status')
+                  'type','company','release_date','price','about','status')
