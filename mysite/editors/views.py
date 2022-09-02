@@ -592,7 +592,7 @@ def edit_product_tags(request, product_id, product_name):
             tags = edit_form.save(commit=False)
             edit_form.save_m2m()
             tags.save()
-            messages.success(request, 'Tags updated successfully')
+            messages.success(request, 'Product Tags updated successfully')
             return HttpResponseRedirect(reverse('user_issue_list'))
 
         else:
@@ -600,14 +600,15 @@ def edit_product_tags(request, product_id, product_name):
             edit_form = EditProductTags(request.POST or None, instance=product)
 
         return render(request,
-                        'editors/articles/issue-tags-edit.html',
-                        {'edit_form': edit_form})
+                        'editors/product/edit-product-tags.html',
+                        {'edit_form': edit_form,
+                         'name': product_name})
     else:
         edit_form = EditProductTags(request.POST or None, instance=product)
         return render(request,
-                        'editors/articles/issue-tags-edit.html',
+                        'editors/product/edit-product-tags.html',
                         {'edit_form': edit_form,
-                         'issue': issue})
+                         'name': product_name})
 
 #Viewing Physical Information of a  product
 @user_passes_test(is_editor)
