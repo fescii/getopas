@@ -778,10 +778,10 @@ def show_product_images(request, pk):
 # Add product image present
 @user_passes_test(is_editor)
 def add_image(request, product_id):
-    image_form = AddProductPhoto()
+    image_form = AddProductPhoto(files=request.FILES)
     product = get_object_or_404(Product, id=product_id)
     if request.method == 'POST':
-        image_form = AddProductPhoto(request.POST)
+        image_form = AddProductPhoto(request.POST,files=request.FILES)
         if image_form.is_valid():
             new_info = image_form.save(commit=False)
             new_info.product = product
@@ -791,12 +791,22 @@ def add_image(request, product_id):
             return HttpResponseRedirect(reverse('images', kwargs={'pk': product_id}))
         else:
             messages.error(request, 'An error occurred, Please try again!')
-            image_form = AddProductPhoto()
+            image_form = AddProductPhoto(files=request.FILES)
             return render(request,
                           'editors/products/add-product-image.html',
-                          {'info_form': info_form})
+                          {'info_form': info_form,
+                           'product': product})
     else:
-        info_form = AddProductPhoto()
+        info_form = AddProductPhoto(files=request.FILES)
         return render(request,
                       'editors/products/add-product-image.html',
-                          {'image_form': image_form})
+                          {'image_form': image_form,
+                           'product':product})
+
+#Delete Product image
+@user_passes_test(is_editor)
+def delete_product(request,pk):
+    product = get_object_or_404(Product, id=pk)
+    product.delete()
+    messages.success(request, 'Product was Successfully')
+    return HttpResponseRedirect(reverse('user_product_list'))

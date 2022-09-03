@@ -55,10 +55,12 @@ class EditSoftwareInfo(forms.ModelForm):
 
 # Add Image Form
 class AddProductPhoto(forms.ModelForm):
-    model = Image
-    fields = ('photo', 'added')
+    class Meta:
+        model = Image
+        fields = ('photo', 'added')
 
 #Edit Image Form
 class EditProductPhoto(forms.ModelForm):
-    model = Image
-    fields = ('photo', 'added')
+    class Meta:
+        model = Image
+        fields = ('photo', 'added')

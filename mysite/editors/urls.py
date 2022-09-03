@@ -74,4 +74,5 @@ urlpatterns = [
 
     #Images
     path('product/<str:pk>/images', views.show_product_images, name='images'),
+    path('product/<str:product_id>/images/add', views.add_image, name='add_image'),
 ]

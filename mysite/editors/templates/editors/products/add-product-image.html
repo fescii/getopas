@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block title %}Add - Product Image{% endblock %}
+{% block content %}
+<h1>Adding an Image To  {{ product.name}}</h1>
+<form method="post" enctype="multipart/form-data">
+{{ image_form.as_p }}
+{% csrf_token %}
+<input type="submit" value="Add">
+</form>
+{% endblock %}
