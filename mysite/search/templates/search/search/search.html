@@ -1,8 +1,8 @@
-{% extends "blog/base.html" %}
+{% extends "search/base.html" %}
 {% load blog_tags %}
 {% block title %}Search{% endblock %}
 {% block content %}
-<h1>Search for posts</h1>
+<h1>Search an item</h1>
     <form method="get">
     {{ form.as_p }}
     <input type="submit" value="Search">
