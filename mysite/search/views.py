@@ -1,4 +1,3 @@
-from optparse import Option
 from django.shortcuts import render
 from blog.models import Post
 from magazine.models import Issue
