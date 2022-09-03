@@ -1,6 +1,7 @@
 from dataclasses import fields
+from pyexpat import model
 from django import forms
-from .models import PhysicalInfo, Product, Review, SoftwareInfo
+from .models import Image, PhysicalInfo, Product, Review, SoftwareInfo
 
 #Form for entering user review on a particular product
 class ReviewForm(forms.ModelForm):
@@ -51,3 +52,13 @@ class EditSoftwareInfo(forms.ModelForm):
     class Meta:
         model = SoftwareInfo
         fields = ('os_version', 'os_name', 'os_family','os_ui','other_info','added')
+
+# Add Image Form
+class AddProductPhoto(forms.ModelForm):
+    model = Image
+    fields = ('photo', 'added')
+
+#Edit Image Form
+class EditProductPhoto(forms.ModelForm):
+    model = Image
+    fields = ('photo', 'added')
