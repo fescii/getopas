@@ -763,3 +763,16 @@ def delete_product(request,pk):
     product.delete()
     messages.success(request, 'Product was Successfully')
     return HttpResponseRedirect(reverse('user_product_list'))
+
+
+#Viewing Images of  product
+@user_passes_test(is_editor)
+def show_product_images(request, pk):
+    product = get_object_or_404(Product, id=pk)
+
+    #Get The product Physical Information
+    images = Image.product_images_all(Image, product)
+
+    return render(request, 'editors/products/show-product-images.html',
+                  {'images': images,
+                   'product': product})
