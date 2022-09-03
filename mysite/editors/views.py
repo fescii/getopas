@@ -691,8 +691,6 @@ def add_software_info(request, pk):
                           {'info_form': info_form})
 
 
-
-#Editing Physical Info
 @user_passes_test(is_editor)
 def edit_physical_info(request, info_id, product_id):
     physical = get_object_or_404(PhysicalInfo, id=info_id)
@@ -776,3 +774,29 @@ def show_product_images(request, pk):
     return render(request, 'editors/products/show-product-images.html',
                   {'images': images,
                    'product': product})
+
+# Add product image present
+@user_passes_test(is_editor)
+def add_image(request, product_id):
+    image_form = AddProductPhoto()
+    product = get_object_or_404(Product, id=product_id)
+    if request.method == 'POST':
+        image_form = AddProductPhoto(request.POST)
+        if image_form.is_valid():
+            new_info = image_form.save(commit=False)
+            new_info.product = product
+            new_info.save()
+            image_form.save_m2m()
+            messages.success(request, 'Image was added successfully')
+            return HttpResponseRedirect(reverse('images', kwargs={'pk': product_id}))
+        else:
+            messages.error(request, 'An error occurred, Please try again!')
+            image_form = AddProductPhoto()
+            return render(request,
+                          'editors/products/add-product-image.html',
+                          {'info_form': info_form})
+    else:
+        info_form = AddProductPhoto()
+        return render(request,
+                      'editors/products/add-product-image.html',
+                          {'image_form': image_form})
