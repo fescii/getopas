@@ -805,8 +805,8 @@ def add_image(request, product_id):
 
 #Delete Product image
 @user_passes_test(is_editor)
-def delete_product(request,pk):
-    product = get_object_or_404(Product, id=pk)
-    product.delete()
-    messages.success(request, 'Product was Successfully')
-    return HttpResponseRedirect(reverse('user_product_list'))
+def delete_image(request,product_id, image_id):
+    image = get_object_or_404(Image, id=image_id)
+    image.delete()
+    messages.success(request, 'Image deleted successfully')
+    return HttpResponseRedirect(reverse('images', kwargs={'pk': product_id}))
