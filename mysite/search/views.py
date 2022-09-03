@@ -58,9 +58,9 @@ def query_search(request):
             if form.is_valid():
                 query = form.cleaned_data['query']
                 search_vector = SearchVector('name',weight='A') + \
-                    SearchVector('body', weight='B')
+                    SearchVector('about', weight='B')
                 search_query = SearchQuery(query)
-                results = Post.published.annotate(
+                results = Product.published.annotate(
                     search = search_vector,
                     rank=SearchRank(search_vector, search_query)
                     ).filter(rank__gte=0.3).order_by('-rank')
