@@ -77,7 +77,7 @@ class Product(models.Model):
         return reverse('devices:product_detail',
         args=[self.id,self.slug])
 
-#Comments Model
+#Physical Model
 class PhysicalInfo(models.Model):
     product = models.OneToOneField(Product, on_delete=models.CASCADE, related_name='physical_info')
     screen = models.CharField(max_length=250)
@@ -100,6 +100,7 @@ class PhysicalInfo(models.Model):
     """def __str__(self):
         return f'Comment By {self.name} on {self.post}'"""
 
+#Software Info Model
 class SoftwareInfo(models.Model):
     product = models.OneToOneField(Product, on_delete=models.CASCADE, related_name='software_info')
     os_version = models.CharField(max_length=250)
@@ -118,6 +119,8 @@ class SoftwareInfo(models.Model):
     class Meta:
         ordering = ('added',)
 
+
+#Images Models
 class Image(models.Model):
     product = models.ForeignKey(Product, related_name='images', on_delete=models.CASCADE)
     photo = models.ImageField(upload_to='devices/%Y/%m/%d',
