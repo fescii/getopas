@@ -142,6 +142,11 @@ class Image(models.Model):
         photos = [i.photo for i in photos]
         return photos
 
+    #Get List of all photos for a particular product
+    def product_images_all(self, product):
+        photos = Image.objects.filter(product=product)
+        return photos
+
 
     class Meta:
         ordering = ('added',)
