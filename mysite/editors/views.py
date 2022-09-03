@@ -13,7 +13,7 @@ from .forms import UserRegistrationForm,\
                 BlogEditTagsForm, ModerateUserForm
 from devices.forms import CreateProductForm, EditProductForm, EditProductTags,\
     EditPhysicalInfo, EditSoftwareInfo, CreatePhysicalInfo, CreateSoftwareInfo,\
-        AddProductPhoto, EditProductPhoto
+        AddProductPhoto
 from django.core.paginator import Paginator, EmptyPage,\
     PageNotAnInteger
 from django.contrib.auth.decorators import login_required,user_passes_test

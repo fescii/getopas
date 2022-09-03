@@ -58,9 +58,3 @@ class AddProductPhoto(forms.ModelForm):
     class Meta:
         model = Image
         fields = ('photo', 'added')
-
-#Edit Image Form
-class EditProductPhoto(forms.ModelForm):
-    class Meta:
-        model = Image
-        fields = ('photo', 'added')
