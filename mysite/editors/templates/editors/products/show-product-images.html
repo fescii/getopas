@@ -2,7 +2,7 @@
 {% block title %} {{ product.name }} - Images{% endblock %}
 {% block content %}
 <h1>{{ product.name }} Images</h1>
-<a href="">Edit Info</a>
+<a href="{% url 'add_image' product_id=product.id %}">Add Image</a>
 <div class='images'>
     <p>Images: </p>
     {% for image in images %}
