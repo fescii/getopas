@@ -1,12 +1,11 @@
-from secrets import choice
 from django import forms
 
 #Form to search for blog posts
 class SearchForm(forms.Form):
     CHOICES = (
-        ('1', 'Articles'),
-         ('2','Newsletters'),
-         ('3', 'Device'),
+        ('one', 'Articles'),
+         ('two','Newsletters'),
+         ('three', 'Device'),
     )
-    choice = forms.ChoiceField(choices=CHOICES)
+    option = forms.ChoiceField(choices=CHOICES)
     query = forms.CharField()
