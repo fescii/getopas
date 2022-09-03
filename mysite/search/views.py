@@ -19,7 +19,6 @@ def query_search(request):
     if option == 'one':
         if 'query' in request.GET:
             form = SearchForm(request.GET)
-            option = request.Get.get('option')
             if form.is_valid():
                 query = form.cleaned_data['query']
                 search_vector = SearchVector('title',weight='A') + \
@@ -38,7 +37,6 @@ def query_search(request):
     elif option == 'two':
         if 'query' in request.GET:
             form = SearchForm(request.GET)
-            option = request.Get.get('option')
             if form.is_valid():
                 query = form.cleaned_data['query']
                 search_vector = SearchVector('title',weight='A') + \
@@ -57,7 +55,6 @@ def query_search(request):
     elif option == 'three':
         if 'query' in request.GET:
             form = SearchForm(request.GET)
-            option = request.Get.get('option')
             if form.is_valid():
                 query = form.cleaned_data['query']
                 search_vector = SearchVector('title',weight='A') + \
