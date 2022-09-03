@@ -35,6 +35,7 @@ urlpatterns = [
     path('magazine/', include('magazine.urls', namespace='magazine')),
     path('dashboard/', include('editors.urls')),
     path('device-info/', include('devices.urls')),
+    path('search/', include('search.urls')),
     path('sitemap.xml', sitemap, {'sitemaps' : sitemaps},
          name = 'django.contrib.sitemaps.views.sitemap'),
 ]
