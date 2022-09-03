@@ -71,4 +71,7 @@ urlpatterns = [
     path('product/<str:pk>/software-info', views.show_software_info, name='product_software_info'),
     path('product/<str:product_id>/physical-info/edit-<str:info_id>', views.edit_physical_info, name='edit_physical_info'),
     path('product/<str:product_id>/software-info/edit<str:info_id>', views.edit_software_info, name='edit_software_info'),
+
+    #Images
+    path('product/<str:pk>/images', views.show_product_images, name='images'),
 ]

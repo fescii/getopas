@@ -24,6 +24,7 @@
         {% else %}
         <a href="{% url 'add_software_info' pk=product.id%}"> Add Software Info</a>
         {% endif %}
+        <a href="{% url 'images' pk=product.id %}">Product Images</a>
     <a href="{% url 'delete_product' pk=product.id%}">delete</a>
 </div>
 {% if empty %}

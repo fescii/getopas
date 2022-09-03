@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block title %} {{ product.name }} - Images{% endblock %}
+{% block content %}
+<h1>{{ product.name }} Images</h1>
+<a href="">Edit Info</a>
+<div class='images'>
+    <p>Images: </p>
+    {% for image in images %}
+    <div class="product-image">
+        <img src="/media/{{ image.photo }}" width="200px" height="100px" />
+        <a href="">Remove</a>
+    </div>
+    {% empty %}
+    <p>This product has no images yet.<p>
+    {% endfor %}
+</div>
+
+{% endblock %}
