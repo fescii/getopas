@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'magazine.apps.MagazineConfig',
     'editors.apps.EditorsConfig',
     'devices.apps.DevicesConfig',
+    'search.apps.SearchConfig',
     'django.contrib.auth',
     'taggit',
     'django.contrib.sites',
