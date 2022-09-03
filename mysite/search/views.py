@@ -31,7 +31,8 @@ def query_search(request):
                     'search/search/search.html',
                     {'form': form,
                     'query':query,
-                    'results': results})
+                    'results': results,
+                    'option':option})
 
     elif option == 'two':
         if 'query' in request.GET:
@@ -49,7 +50,8 @@ def query_search(request):
                     'search/search/search.html',
                     {'form': form,
                     'query':query,
-                    'results': results})
+                    'results': results,
+                    'option':option})
 
     elif option == 'three':
         if 'query' in request.GET:
@@ -67,4 +69,5 @@ def query_search(request):
                     'search/search/search.html',
                     {'form': form,
                     'query':query,
-                    'results': results})
+                    'results': results,
+                    'option':option})
