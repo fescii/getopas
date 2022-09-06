@@ -58,7 +58,6 @@ class ModerateUserForm(forms.Form):
 
 #User/Editor Creating a Blog Post
 class CreateBlogPostForm(forms.ModelForm):
-    body = forms.CharField(widget=forms.Textarea(attrs={'id': "richtext_field"}))
     class Meta:
         model = Post
         fields = ('title','body','tags','status')
