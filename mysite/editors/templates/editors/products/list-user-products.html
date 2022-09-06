@@ -9,7 +9,7 @@
     </h2>
     <p class="date">Release on {{ product.release_date }} by {{ product.author }}</p>
     <img src="/media/{{product.cover}}" alt="Cover Image" width="300" height="250" title="{{issue.cover}}"/>
-    {{ product.about|truncatewords:30|linebreaks }}
+    {{ product.about|striptags|truncatechars:140}}
     <a href=" {% url 'edit_product' product_id=product.id product_name=product.slug %}">edit</a>
     <a href="{% url 'edit_product_tags' product_id=product.id product_name=product.slug %}">Edit tags</a>
 
