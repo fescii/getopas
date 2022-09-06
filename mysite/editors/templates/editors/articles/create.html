@@ -1,10 +1,28 @@
 {% extends "base.html" %}
-{% block title %}Create A post{% endblock %}
+{% load static %}
+{% block title %}Create | Article{% endblock %}
 {% block content %}
 <h1>Add A new Article</h1>
 <form method="post">
+{{post_form.media }}
 {{ post_form.as_p }}
 {% csrf_token %}
 <input type="submit" value="Create">
 </form>
 {% endblock %}
+{% block footer %}
+<script src="{% static "tinymce/tinymce.min.js" %}"></script>
+<script>
+    tinymce.init({
+        selector: '#id_body',
+        height: 500,
+        plugins: [
+          'advlist autolink lists link image charmap print preview anchor',
+          'searchreplace visualblocks code fullscreen',
+          'insertdatetime media table paste imagetools wordcount'
+        ],
+        toolbar: 'insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image',
+        content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }'
+      });
+  </script>
+  {% endblock footer%}
