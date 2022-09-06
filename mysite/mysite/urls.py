@@ -38,8 +38,6 @@ urlpatterns = [
     path('search/', include('search.urls')),
     path('sitemap.xml', sitemap, {'sitemaps' : sitemaps},
          name = 'django.contrib.sitemaps.views.sitemap'),
-    path('ckeditor/', include('ckeditor_uploader.urls')),
-    path('tinymce/', include('tinymce.urls')),
 ]
 
 if settings.DEBUG:

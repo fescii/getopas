@@ -1,46 +1,30 @@
-{% extends "base.html" %} 
+{% extends "base.html" %}
 {% load static %}
-{% block title %}Editing -{{product.name}}{% endblock %} 
+{% block title %}Editing - {{product.name}}{% endblock %}
 {% block content %}
 <h1>Editing - Software Info of {{ product.name }}</h1>
 <form method="post">
-  {{ software_form.media}} {{ software_form.as_p }} {% csrf_token %}
-  <input type="submit" value="Save" />
+{{ software_form.media}}
+{{ software_form.as_p }}
+{% csrf_token %}
+<input type="submit" value="Save">
 </form>
-{% endblock %} 
+{% endblock %}
 {% block footer %}
-<script src="{% static "ckeditor/build/ckeditor.js" %}"></script>
+<script src="{% static 'tinymce/tinymce.min.js' %}"></script>
 <script>
-  const watchdog = new CKSource.EditorWatchdog();
-
-  window.watchdog = watchdog;
-
-  watchdog.setCreator((element, config) => {
-    return CKSource.Editor.create(element, config).then((editor) => {
-      return editor;
-    });
-  });
-
-  watchdog.setDestructor((editor) => {
-    return editor.destroy();
-  });
-
-  watchdog.on("error", handleError);
-
-  watchdog
-    .create(document.querySelector("#id_other_info"), {
-      licenseKey: "",
-    })
-    .catch(handleError);
-
-  function handleError(error) {
-    console.error("Oops, something went wrong!");
-    console.error(
-      "Please, report the following error on https://github.com/ckeditor/ckeditor5/issues with the build id and the error stack trace:"
-    );
-    console.warn("Build id: j2492l2gk2t-6i3rjgf199i0");
-    console.error(error);
-  }
-</script>
-{% endblock footer%}
-
+    tinymce.init({
+        selector: '#id_other_info',
+        height: 500, menubar: 'edit insert view format table',
+        width: 500,
+        menubar: 'edit insert view format table',
+        plugins: [
+          'advlist autolink lists link image charmap print preview anchor',
+          'searchreplace visualblocks code fullscreen',
+          'insertdatetime media table paste imagetools wordcount'
+        ],
+        toolbar: 'insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image',
+        content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }'
+      });
+  </script>
+  {% endblock footer%}
