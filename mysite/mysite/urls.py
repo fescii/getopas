@@ -33,11 +33,12 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('articles/', include('blog.urls', namespace='blog')),
     path('magazine/', include('magazine.urls', namespace='magazine')),
-    path('dashboard/', include('editors.urls')),
-    path('device-info/', include('devices.urls')),
-    path('search/', include('search.urls')),
+    path('dashboard/', include('editors.urls', namespace='editors')),
+    path('device-info/', include('devices.urls', namespace='devices')),
+    path('search/', include('search.urls', namespace='search')),
     path('sitemap.xml', sitemap, {'sitemaps' : sitemaps},
          name = 'django.contrib.sitemaps.views.sitemap'),
+    path('ckeditor/', include('ckeditor_uploader.urls')),
 ]
 
 if settings.DEBUG:

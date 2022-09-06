@@ -32,6 +32,10 @@ SITE_ID = 1
 # Application definition
 
 INSTALLED_APPS = [
+    #Libs
+    'ckeditor',
+    'ckeditor_uploader',
+    #Apps
     'django.contrib.admin',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -155,3 +159,4 @@ LOGOUT_URL = 'logout'
 #Handling Images
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
+CKEDITOR_UPLOAD_PATH = "uploads/"
