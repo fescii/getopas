@@ -5,6 +5,8 @@ from .models import Profile
 from blog.models import Post
 from magazine.models import Issue, Section
 from devices.models import Product, PhysicalInfo, SoftwareInfo, Review,Image
+from ckeditor.widgets import CKEditorWidget
+from ckeditor_uploader.widgets import CKEditorUploadingWidget
 #User Registration Form
 class UserRegistrationForm(forms.ModelForm):
     password = forms.CharField(label='Password',

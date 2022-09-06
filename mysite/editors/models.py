@@ -1,7 +1,6 @@
-from distutils.command.upload import upload
-from tokenize import blank_re
 from django.db import models
 from django.conf import settings
+
 
 # Create your models here.
 
