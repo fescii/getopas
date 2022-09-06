@@ -1,10 +1,22 @@
 {% extends "base.html" %}
+{% load static %}
 {% block title %}Create A post{% endblock %}
 {% block content %}
 <h1>Edit Article</h1>
 <form method="POST">
+{{ edit_form.media }}
 {{ edit_form.as_p }}
 {% csrf_token %}
 <input type="submit" value="Save">
 </form>
 {% endblock %}
+{% block footer %}
+<script src="{% static "tinymce/tinymce.min.js" %}"></script>
+<script>
+    tinymce.init({
+      selector: '#id_body',
+      plugins: 'advlist autolink lists link image charmap preview anchor pagebreak',
+      toolbar_mode: 'floating',
+    });
+  </script>
+{% endblock footer %}
