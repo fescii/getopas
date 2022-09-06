@@ -12,12 +12,12 @@
     <p class="date">Section Title: {{ section.name }}</p>
     {% if section.added %}
     <p>Added<a href="{% url 'remove_section' issue_id=issue.id  section_id=section.id%}">Remove</a></p>
-    {{ section.body|truncatewords:30|linebreaks }}
+    {{ section.body|striptags|truncatechars:140 }}
     <a href="{% url 'edit_section' issue_id=issue.id  section_id=section.id%}">Edit</a>
     <a href="{% url 'delete_section' issue_id=issue.id  section_id=section.id%}">Delete</a>
     {% else %}
     <p>Not Added<a href="{% url 'add_section' issue_id=issue.id  section_id=section.id%}">Add</a></p>
-    {{ section.body|truncatewords:30|linebreaks }}
+    {{ section.body|striptags|truncatechars:140 }}
     <a href="{% url 'edit_section' issue_id=issue.id  section_id=section.id%}">Edit</a>
     <a href="{% url 'delete_section' issue_id=issue.id  section_id=section.id%}">Delete</a>
     {% endif %}

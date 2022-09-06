@@ -9,7 +9,7 @@
     </h2>
     <p class="date">Published on {{ issue.publish }} by {{ issue.author }}</p>
     <img src="/media/{{issue.cover}}" alt="Cover Image" width="300" height="250" title="{{issue.cover}}"/>
-    {{ issue.description|truncatewords:30|linebreaks }}
+    {{ issue.description|striptags|truncatechars:140 }}
     <a href="/dashboard/edit-newsletter/{{issue.id}}">edit</a>
     <a href="/dashboard/edit-newsletter/tags/{{issue.id}}">Edit tags</a>
     <a href="/dashboard/my-newsletters/{{issue.id}}/sections">Sections</a>
