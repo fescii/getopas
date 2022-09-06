@@ -1,4 +1,3 @@
-import email
 from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import User
@@ -6,8 +5,7 @@ from django.urls import reverse
 from taggit.managers  import TaggableManager
 from django.conf import settings
 from django.utils.text import slugify
-from ckeditor.fields import RichTextField
-from ckeditor_uploader.fields import RichTextUploadingField
+
 
 # Create your models here.
 class PublishedManager(models.Manager):
@@ -22,7 +20,7 @@ class Post(models.Model):
     slug = models.SlugField(max_length=250, blank=True)
     #author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='blog_posts')
     author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    body = RichTextUploadingField()
+    body = models.TextField()
     publish = models.DateTimeField(default=timezone.now)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)

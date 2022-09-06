@@ -5,8 +5,9 @@ from .models import Profile
 from blog.models import Post
 from magazine.models import Issue, Section
 from devices.models import Product, PhysicalInfo, SoftwareInfo, Review,Image
-from ckeditor.widgets import CKEditorWidget
-from ckeditor_uploader.widgets import CKEditorUploadingWidget
+from tinymce.widgets import TinyMCE
+
+
 #User Registration Form
 class UserRegistrationForm(forms.ModelForm):
     password = forms.CharField(label='Password',
@@ -57,6 +58,7 @@ class ModerateUserForm(forms.Form):
 
 #User/Editor Creating a Blog Post
 class CreateBlogPostForm(forms.ModelForm):
+    body = forms.CharField(widget=forms.Textarea(attrs={'id': "richtext_field"}))
     class Meta:
         model = Post
         fields = ('title','body','tags','status')
