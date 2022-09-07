@@ -106,35 +106,35 @@
           <div class="content-nav">
             <ul class="linked-list content-list">
               <li class="content-link">
-                <a class="link" href="#">
+                <a class="link {% if section == 'dashboard' %} data-active {% endif %}" href="#">
                   <span id="select"></span>
                   <span class="iconly-Home icli"></span>
                   <span class="link-text">Dashboard</span>
                 </a>
               </li>
               <li class="content-link">
-                <a class="link" href="#">
+                <a class="link {% if section == 'create' %} data-active {% endif %}" href="#">
                   <span id="select"></span>
                   <span class="iconly-Plus icli"></span>
                   <span class="link-text">Create</span>
                 </a>
               </li>
               <li class="content-link">
-                <a {% if section == "dashboard" %}id="data-active"{% endif %}class="link active-link" href="#">
-                  <span id="select" class="specific-link"></span>
+                <a class="link {% if section == 'articles' %} data-active {% endif %}" href="#">
+                  <span id="select"></span>
                   <span class="iconly-Paper icli"> </span>
                   <span class="link-text">Articles</span>
                 </a>
               </li>
               <li class="content-link">
-                <a class="link" href="#">
+                <a class="link {% if section == 'explore' %} data-active {% endif %}" href="#">
                   <span id="select"></span>
                   <span class="iconly-Discovery icli"> </span>
                   <span class="link-text">Explore</span>
                 </a>
               </li>
               <li class="content-link">
-                <a class="link" href="#">
+                <a class="link {% if section == 'donate' %} data-active {% endif %}" href="#">
                   <span id="select"></span>
                   <span class="iconly-Heart icli"></span>
                   <span class="link-text">Donate</span>
@@ -146,35 +146,35 @@
             <h2 class="settings-title">SETTINGS</h2>
             <ul class="linked-list settings-list">
               <li class="content-link">
-                <a class="link" href="#">
+                <a class="link {% if section == 'settings' %} data-active {% endif %}" href="#">
                   <span id="select"></span>
                   <span class="iconly-Setting icli"></span>
                   <span class="link-text">Settings</span>
                 </a>
               </li>
               <li class="content-link">
-                <a class="link" href="#">
+                <a class="link {% if section == 'bookmark' %} data-active {% endif %}" href="#">
                   <span id="select"></span>
                   <span class="iconly-Bookmark icli"></span>
                   <span class="link-text">My List</span>
                 </a>
               </li>
               <li class="content-link">
-                <a class="link" href="#">
+                <a class="link {% if section == 'trending' %} data-active {% endif %}" href="#">
                   <span id="select"></span>
                   <span class="iconly-Chart icli"></span>
                   <span class="link-text">Trending</span>
                 </a>
               </li>
               <li class="content-link">
-                <a class="link" href="#">
+                <a class="link {% if section == 'themes' %} data-active {% endif %}" href="#">
                   <span id="select"></span>
                   <span class="iconly-More-Circle icli"></span>
                   <span class="link-text">Themes</span>
                 </a>
               </li>
               <li class="content-link">
-                <a class="link" href="#">
+                <a class="link {% if section == 'account' %} data-active {% endif %}" href="#">
                   <span id="select"></span>
                   <span class="iconly-Profile icli"></span>
                   <span class="link-text">Account</span>

@@ -105,7 +105,7 @@ html, body{
     color:   #08b86e;
    /* font-weight: bold;*/
 }
-.linked-list>.content-link> #data-active{
+.data-active{
     color:   #08b86e;
     font-weight: bold;
 }

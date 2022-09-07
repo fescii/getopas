@@ -111,7 +111,7 @@ def dashboard(request):
                  'editors/dashboard.html',
                     {'user': user,
                     'profile': profile,
-                    'section': dashboard})
+                    'section': 'dashboard'})
 
 #Registration View
 def register(request):
