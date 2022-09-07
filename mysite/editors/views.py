@@ -108,6 +108,7 @@ def dashboard(request):
     user = request.user
     profile = user.profile
 
+    #Getting Total articles views and comments of the current user
     user_articles = Post.published.filter(author=user)
     count = 0
     comments = 0
