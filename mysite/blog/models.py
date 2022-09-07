@@ -49,17 +49,10 @@ class Post(models.Model):
 
     #Most Viewed Posts
     def most_viewed(self, count=5):
-        most_viewed = Post.published.order_by('-blog_views')[:count]
-        return {'most_viewed': most_viewed}
+        posts = Post.published.order_by('-blog_views')[:count]
+        return posts
 
-    #Get authors of the most viewed posts
-    def most_viewed_users(Profile):
-        posts = Post.most_viewed(Post)
-        users = []
-        for post in posts:
-            u = Profile.objects.filter(user=post.author)
-            users.append(u.photo)
-        return users
+
 
 
     class Meta:

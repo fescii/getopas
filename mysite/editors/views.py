@@ -122,7 +122,11 @@ def dashboard(request):
     top_issues = Issue.published.order_by('-issue_views')[:3]
 
     #Top Users
-    top_users = Post.most_viewed_users(Profile)
+    top_posts = Post.most_viewed(Post)
+    users = []
+    for post in top_posts:
+        p = get_object_or_404(Profile, user=post.author)
+        users.append(p.photo)
 
     return render(request,
                  'editors/dashboard.html',
@@ -130,7 +134,7 @@ def dashboard(request):
                     'profile': profile,
                     'issues': top_issues,
                     'views': count,
-                    'top_users': top_users,
+                    'top_users': users,
                     'comments': comments,
                     'section': 'dashboard'})
 
