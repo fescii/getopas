@@ -107,6 +107,11 @@ def dashboard(request):
     user = request.user
     profile = user.profile
 
+    user_articles = Post.published.filter(author=user)
+    count = 0
+    for article in user_articles:
+        count = count + article.blog_views
+
     top_issues = Issue.published.order_by('-issue_views')[:3]
 
     return render(request,
@@ -114,6 +119,7 @@ def dashboard(request):
                     {'user': user,
                     'profile': profile,
                     'issues': top_issues,
+                    'views': count,
                     'section': 'dashboard'})
 
 #Registration View
