@@ -20,7 +20,6 @@ main.main-content{
     height: 180px;
     align-self: flex-end;
     margin-right: 35px;
-    background-image: url('img/back.jpg');
     background-repeat: none;
     background-size: cover;
     display: flex;
