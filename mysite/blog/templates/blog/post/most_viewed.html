@@ -2,7 +2,7 @@
     <h3>Most Viewed posts</h3>
     {% for m_post in most_viewed %}
     <h2>
-        <a href="{{ issue.get_absolute_url }}"> {{ m_post.title }} </a>
+        <a href="{{ m_post.get_absolute_url }}"> {{ m_post.title }} </a>
       </h2>
       <p class="date">Published {{ m_post.publish }} by {{ m_post.author }}</p>
       {{ m_post.body|truncatewords:30|linebreaks }}
