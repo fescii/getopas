@@ -100,12 +100,17 @@ def remove_user(request, user_id):
     messages.success(request, 'User account was successfully deleted')
     return HttpResponseRedirect(reverse('list_users'))
 
-
+#Dashboard
 @login_required
 def dashboard(request):
+    user = request.user
+    profile = user.profile
+
     return render(request,
-                  'editors/dashboard.html',
-                  {'section': dashboard})
+                 'editors/dashboard.html',
+                    {'user': user,
+                    'profile': profile,
+                    'section': dashboard})
 
 #Registration View
 def register(request):
@@ -167,16 +172,6 @@ def edit(request):
                       'editors/edit.html',
                       {'user_form': user_form,
                        'profile_form': profile_form})
-#User Info
-@login_required
-def show_user_info(request):
-    user = request.user
-    profile = get_object_or_404(Profile, username=user)
-
-    return render(request,
-                 'base.html',
-                    {'user': user,
-                    'profile': profile})
 
 @login_required
 def create_post(request):
