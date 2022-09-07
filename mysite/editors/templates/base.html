@@ -120,7 +120,7 @@
                 </a>
               </li>
               <li class="content-link">
-                <a class="link active-link data-active" href="#">
+                <a {% if section == "dashboard" %}id="data-active"{% endif %}class="link active-link" href="#">
                   <span id="select" class="specific-link"></span>
                   <span class="iconly-Paper icli"> </span>
                   <span class="link-text">Articles</span>
