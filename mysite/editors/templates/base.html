@@ -64,7 +64,7 @@
               <li class="dropdown-li">
                 <a href=" {% url 'edit' %} " class="dropdown-link">Edit Profile</a>
               </li>
-              <li class="dropdown-li">
+              {% extends "base.html" %}  <li class="dropdown-li">
                 <a href=" {% url 'password_change' %} " class="dropdown-link">Change Password</a>
               </li>
             </ul>
