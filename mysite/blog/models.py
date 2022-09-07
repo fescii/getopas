@@ -65,6 +65,12 @@ class BlogComment(models.Model):
     updated = models.DateTimeField(auto_now=True)
     active = models.BooleanField(default=True)
 
+
+    #Most Viewed Posts
+    def most_viewed(self, count=4):
+        most_viewed = Post.published.order_by('-blog_views')[:count]
+
+        return {'most_viewed': most_viewed}
     class Meta:
         ordering = ('created',)
 
