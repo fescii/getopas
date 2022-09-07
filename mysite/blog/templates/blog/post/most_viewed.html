@@ -1,10 +1,10 @@
 <div class='most-viewed-issues'>
     <h3>Most Viewed posts</h3>
-    {% for post in most_viewed %}
+    {% for m_post in most_viewed %}
     <h2>
-        <a href="{{ issue.get_absolute_url }}"> {{ post.title }} </a>
+        <a href="{{ issue.get_absolute_url }}"> {{ m_post.title }} </a>
       </h2>
-      <p class="date">Published {{ post.publish }} by {{ post.author }}</p>
-      {{ post.body|truncatewords:30|linebreaks }}
+      <p class="date">Published {{ m_post.publish }} by {{ m_post.author }}</p>
+      {{ m_post.body|truncatewords:30|linebreaks }}
     {% endfor %}
 </div>
