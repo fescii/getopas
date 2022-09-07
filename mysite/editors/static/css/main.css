@@ -147,6 +147,20 @@ main.main-content{
     text-decoration: none;
     text-align: center;
 }
+.top-content>.content-wrapper>.content-title-link .read{
+    display: inline-block;
+    margin: 10px;
+    background-color: #08b86e;
+    font-weight: bold;
+    font-size: 16px;
+    padding: 3px 20px;
+    box-shadow: 0rem 2rem 1.5rem #748f741f;
+    -webkit-border-radius: 50px;
+    -moz-border-radius: 50px;
+    -ms-border-radius: 50px;
+    -o-border-radius: 50px;
+    border-radius: 50px;
+}
 .top-people{
    /* border: 1px solid #08b86e;*/
     display: flex;
