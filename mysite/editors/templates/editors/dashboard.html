@@ -29,7 +29,7 @@
             <div class="content-image-container">
               <img src="/media/{{ issue.cover}}" alt="" />
             </div>
-            <a href="{{ issue.get_absolute_url }}" class="content-title-link">{{ issue.title }}</a>
+            <a href="{{ issue.get_absolute_url }}" class="content-title-link">{{ issue.title|truncatechars:20}}</a>
           </div>
         {% endfor %}
       </div>
