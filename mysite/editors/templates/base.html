@@ -46,7 +46,7 @@
                 <img src="/media/{{ profile.photo }}" alt="" />
               </div>
               <div class="name-container">
-                <h4 class="name">Fredrick Femar</h4>
+                <h4 class="name">{{ user.first_name}} {{user.last_name}}</h4>
                 <a href="#" class="profile-link"
                   >View Profile
                   <span class="iconly-Arrow-Right icbo"></span>
@@ -64,7 +64,7 @@
               <li class="dropdown-li">
                 <a href=" {% url 'edit' %} " class="dropdown-link">Edit Profile</a>
               </li>
-              {% extends "base.html" %}  <li class="dropdown-li">
+              <li class="dropdown-li">
                 <a href=" {% url 'password_change' %} " class="dropdown-link">Change Password</a>
               </li>
             </ul>
