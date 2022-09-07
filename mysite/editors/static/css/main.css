@@ -14,8 +14,8 @@ main.main-content{
     flex-flow: column;
 }
 .center-items>.dashboard-card{
-    /*border: 1px solid rgb(11, 175, 126);
-    */box-shadow: 0rem 2rem 1.5rem #748f741f;
+    /*border: 1px solid rgb(11, 175, 126);*/
+    box-shadow: 0rem 2rem 1.5rem #748f741f;
     width: 90%;
     height: 180px;
     align-self: flex-end;
@@ -218,6 +218,7 @@ main.main-content{
     /*border: 1px solid rgb(82, 207, 24);*/
     background-color: #bbf58c;
     box-shadow: 0rem 2rem 1.5rem #748f741f;
+    border: 1px solid #83858421;
     width: 90%;
     height: 180px;
     margin: 0%;
