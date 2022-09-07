@@ -100,6 +100,7 @@ def remove_user(request, user_id):
     messages.success(request, 'User account was successfully deleted')
     return HttpResponseRedirect(reverse('list_users'))
 
+
 #Dashboard
 @login_required
 def dashboard(request):
@@ -145,6 +146,8 @@ def register(request):
 #Edit User Info
 @login_required
 def edit(request):
+    user = request.user
+    profile = user.profile
     if request.method == 'POST':
         user_form = UserEditForm(instance=request.user,
                                  data=request.POST)
@@ -164,14 +167,20 @@ def edit(request):
         return render(request,
                       'editors/edit.html',
                       {'user_form': user_form,
-                       'profile_form': profile_form})
+                       'profile_form': profile_form,
+                       'user': user,
+                       'profile': profile,
+                       'section': edit})
     else:
         user_form = UserEditForm(instance=request.user)
         profile_form = ProfileEditForm(instance=request.user.profile)
         return render(request,
                       'editors/edit.html',
                       {'user_form': user_form,
-                       'profile_form': profile_form})
+                       'profile_form': profile_form,
+                       'user': user,
+                       'profile': profile,
+                       'section': edit})
 
 @login_required
 def create_post(request):
