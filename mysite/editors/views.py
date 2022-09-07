@@ -107,10 +107,13 @@ def dashboard(request):
     user = request.user
     profile = user.profile
 
+    top_issues = Issue.published.order_by('-issue_views')[:3]
+
     return render(request,
                  'editors/dashboard.html',
                     {'user': user,
                     'profile': profile,
+                    'issues': top_issues,
                     'section': 'dashboard'})
 
 #Registration View
