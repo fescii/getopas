@@ -52,7 +52,10 @@ class Post(models.Model):
         posts = Post.published.order_by('-blog_views')[:count]
         return posts
 
-
+    #Recently added Posts
+    def recently_added(self, count):
+        posts = Post.published.order_by('-publish')[:count]
+        return posts
 
 
     class Meta:

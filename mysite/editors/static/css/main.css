@@ -173,6 +173,7 @@ main.main-content{
     border: 1px solid #08b86f46;
     width: 30px;
     height: 30px;
+    object-fit: cover;
     -webkit-border-radius: 50px;
     -moz-border-radius: 50px;
     -ms-border-radius: 50px;

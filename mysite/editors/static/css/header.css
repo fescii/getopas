@@ -200,6 +200,7 @@ header.header>.profile-section>.profile-image-wrapper img{
     width: 100%;
     height: 100%;
     border-radius: 50px;
+    object-fit: cover;
 }
 header.header>.profile-section>.profile-image-wrapper .active-status{
     display: inline-block;

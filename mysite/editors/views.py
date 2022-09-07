@@ -128,6 +128,15 @@ def dashboard(request):
         p = get_object_or_404(Profile, user=post.author)
         users.append(p.photo)
 
+    #Recent Activities
+    top_posts = Post.recently_added(Post)
+    users = []
+    for post in top_posts:
+        p = get_object_or_404(Profile, user=post.author)
+        users.append(p.photo)
+
+
+
     return render(request,
                  'editors/dashboard.html',
                     {'user': user,
