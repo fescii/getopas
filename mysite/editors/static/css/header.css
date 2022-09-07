@@ -27,7 +27,8 @@ header.header{
     justify-content: space-between;
     margin: 0%;
     padding: 5px 0% 2px 0%;
-    box-shadow: 0rem 2rem 1.5rem #748f741f;
+    border-bottom: 1px solid #83858421;
+    box-shadow: 0rem 2rem 1.5rem #748f740e;
 }
 
 /*

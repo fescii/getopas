@@ -114,20 +114,22 @@ main.main-content{
     align-items: center;
     justify-content: space-around;
     border: 1px solid #83858421;
-    box-shadow: 0rem 2rem 2.5rem #748f741f;
+   /* box-shadow: 0rem 2rem 2.5rem #748f741f;*/
 }
 .top-newsletters>.top-content>.content-wrapper{
    /* border: 1px solid #08b86e;*/
     position: relative;
     width: 150px;
     height: 150px;
+    padding: 5px;
     box-shadow: 0rem 2rem 2.5rem #748f741f;
+    background-color: rgba(255, 255, 255, 0.452);
 }
 .top-content>.content-wrapper>.content-image-container{
     width: 100%;
     height: 100%;
     border: 1px solid #83858421;
-    box-shadow: 0rem 2rem 1.5rem #748f741f;
+    /*box-shadow: 0rem 2rem 1.5rem #748f741f;*/
 }
 .top-content>.content-wrapper>.content-image-container img{
     width: 100%;
@@ -136,9 +138,9 @@ main.main-content{
 }
 .top-content>.content-wrapper>.content-title-link{
     position: absolute;
-    bottom: 0px;
-    left: 1px;
-    right: 1px;
+    bottom: 6px;
+    left: 6px;
+    right: 6px;
     display: inline-block;
     background-color: #00000080;
     color: #eff5f2;
@@ -322,6 +324,8 @@ main.main-content{
 .recently-added>.added-content{
     /*border: 1px solid rgb(82, 207, 24);*/
     margin-top: 12px;
+    border: 1px solid #83858421;
+    box-shadow: 0rem 2rem 2.5rem #748f741f;
     display: flex;
     flex-flow: column;
     gap: 20px;
@@ -345,8 +349,8 @@ main.main-content{
     border: 1px solid #83858421;
     grid-column: 1/2;
     grid-row: 1/3;
-    width: 25px;
-    height: 25px;
+    width: 28px;
+    height: 28px;
     -webkit-border-radius: 50px;
     -moz-border-radius: 50px;
     -ms-border-radius: 50px;
@@ -356,6 +360,7 @@ main.main-content{
 .recently-added>.added-content>.added-item>.added-article>.profile img{
     width: 100%;
     height: 100%;
+    border: 1px solid #56b88721;
     object-fit: cover;
     -webkit-border-radius: 50px;
     -moz-border-radius: 50px;
