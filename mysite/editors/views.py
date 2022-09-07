@@ -167,6 +167,16 @@ def edit(request):
                       'editors/edit.html',
                       {'user_form': user_form,
                        'profile_form': profile_form})
+#Edit User Info
+@login_required
+def edit(request):
+    user = request.user
+    profile = user.profile
+
+    return render(request,
+                 'base.html',
+                    {'user': user,
+                    'profile': profile})
 
 @login_required
 def create_post(request):
