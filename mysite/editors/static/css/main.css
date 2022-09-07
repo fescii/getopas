@@ -139,7 +139,8 @@ main.main-content{
     bottom: 0px;
     left: 1px;
     right: 1px;
-    background-color: #0000004b;
+    padding: 5px 10px;
+    background-color: #00000080;
     color: #eff5f2;
     text-decoration: none;
     text-align: center;
