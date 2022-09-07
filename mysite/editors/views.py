@@ -167,11 +167,11 @@ def edit(request):
                       'editors/edit.html',
                       {'user_form': user_form,
                        'profile_form': profile_form})
-#Edit User Info
+#User Info
 @login_required
-def edit(request):
+def show_user_info(request):
     user = request.user
-    profile = user.profile
+    profile = get_object_or_404(Profile, username=user)
 
     return render(request,
                  'base.html',
