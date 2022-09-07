@@ -101,16 +101,16 @@ html, body{
     text-decoration: none;
     color: #808080;
 }
-.linked-list>.content-link #active-link{
+.linked-list>.content-link .active-link{
     color:   #08b86e;
    /* font-weight: bold;*/
 }
-.data-active{
+.linked-list>.content-link .data-active{
     color:   #08b86e;
     font-weight: bold;
+   /* border: 1px solid rgb(247, 23, 7);*/
 }
-.linked-list>.content-link #data-active>span#select,
-span.specific-link{
+.linked-list>.content-link .data-active>span#select{
     display: inline-block;
     /*border: 1px solid rgb(247, 23, 7);*/
     background-color:  #08b86e;
