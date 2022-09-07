@@ -23,6 +23,7 @@ from blog.models import Post
 from django.contrib.auth.models import User
 from django.contrib import messages
 from datetime import datetime
+from django.db.models import Count
 
 
 # Create your views here.
@@ -109,8 +110,13 @@ def dashboard(request):
 
     user_articles = Post.published.filter(author=user)
     count = 0
+    comments = 0
     for article in user_articles:
         count = count + article.blog_views
+        if article.comments:
+            com = article.comments.filter(active=True).count()
+            comments = comments + com
+
 
     top_issues = Issue.published.order_by('-issue_views')[:3]
 
@@ -120,6 +126,7 @@ def dashboard(request):
                     'profile': profile,
                     'issues': top_issues,
                     'views': count,
+                    'comments': comments,
                     'section': 'dashboard'})
 
 #Registration View
