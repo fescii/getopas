@@ -136,10 +136,8 @@ def dashboard(request):
         r_posts.append(f"{post.publish.day}/{post.publish.month}  {post.publish.hour}:{post.publish.minute}")
         u = get_object_or_404(User, username=post.author)
         r_users.append(u)
-
+    #Zipping together list recent users and posts
     activities = list(zip(r_users, r_posts))
-
-
 
     return render(request,
                  'editors/dashboard.html',
