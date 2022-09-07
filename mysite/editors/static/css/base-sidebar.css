@@ -19,14 +19,16 @@ html, body{
    box-shadow: 0rem 2rem 1.5rem #748f741f;
    background-color: rgb(231, 248, 215);
    /* background-color: #fff;*/
-    z-index: 3;
+    z-index: 2;
     margin: 0%;
     padding: 0%;
     height: 100%;
     width: 210px;
+    border-left: 1px solid #83858421;
+    /*border-right: 1px solid #83858421;*/
     position: fixed;
     top: 0%;
-    left: 10px;
+    left: 5px;
     display: flex;
     flex-flow: column;
 }

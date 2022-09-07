@@ -175,6 +175,7 @@ main.main-content{
     border: 1px solid #08b86f46;
     width: 30px;
     height: 30px;
+    padding: 3px;
     object-fit: cover;
     -webkit-border-radius: 50px;
     -moz-border-radius: 50px;
@@ -346,11 +347,12 @@ main.main-content{
     grid-template-rows: 15px auto;
 }
 .recently-added>.added-content>.added-item>.added-article>.profile{
-    border: 1px solid #83858421;
+    border: 1px solid #08b86f46;
     grid-column: 1/2;
     grid-row: 1/3;
-    width: 28px;
-    height: 28px;
+    width: 30px;
+    height: 30px;
+    padding: 3px;
     -webkit-border-radius: 50px;
     -moz-border-radius: 50px;
     -ms-border-radius: 50px;
@@ -360,7 +362,6 @@ main.main-content{
 .recently-added>.added-content>.added-item>.added-article>.profile img{
     width: 100%;
     height: 100%;
-    border: 1px solid #56b88721;
     object-fit: cover;
     -webkit-border-radius: 50px;
     -moz-border-radius: 50px;
