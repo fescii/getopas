@@ -1,0 +1,336 @@
+/*
+
+    Name: Header CSS
+    Version: 1.0.0
+    Author: Fredrick Femar Ochieng'
+    Email: isfescii@gmail.com
+
+
+*/
+
+/*
+    1.0 Header Section
+*/
+
+header.header{
+    position: fixed;
+    z-index: 2;
+    /*background-color: white;*/
+    background-color: rgb(228, 243, 214);
+    top: 0%;
+    right: 5px;
+    left: 220px;
+    z-index: 3;
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: space-between;
+    margin: 0%;
+    padding: 5px 0% 2px 0%;
+    box-shadow: 0rem 2rem 1.5rem #748f741f;
+}
+
+/*
+    1.1 Header Welcome Message
+*/
+header.header>.welcome{
+   /* border: 1px solid rgb(9, 21, 184);*/
+    margin: 0%;
+    padding: 5px 0 5px 0;
+    margin-left: 30px;
+    display: flex;
+    gap: 5px;
+    flex-flow: column;
+    justify-items: center;
+    background-color: #5e6e5802;
+}
+header.header>.welcome>.welcome-title{
+    margin: 0%;
+    padding: 0%;
+    font-size: 20px;
+    color: #404040;
+}
+header.header>.welcome>.welcome-message{
+    margin: 0%;
+    padding: 0%;
+    color: #808080;
+    font-size: 0.9rem;
+}
+
+
+/*
+    1.2 Header Search Section
+*/
+
+header.header>.search{
+   /* border: 1px solid gray;*/
+    margin: 0%;
+    padding: 0%;
+    position: relative;
+    width: 50%;
+}
+header.header>.search>form{
+    padding: 2px 10px;
+    display: flex;
+    flex-flow: row;
+    flex-wrap: nowrap;
+    gap: 5px;
+    align-items: center;
+    justify-content: center;
+}
+header.header>.search>form>select{
+    font-size: 18px;
+    background-color: #9cd66c1e;
+   /* box-shadow: 0rem 2rem 2rem #6b796b50;*/
+    color: #808080;
+    height: 30px;
+    padding: 1px 5px;
+    text-align: center;
+    cursor: pointer;
+    border: 1px solid #08b86f59;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    -ms-border-radius: 2px;
+    -o-border-radius: 2px;
+    border-radius: 2px;
+}
+
+header.header>.search>form>input[type='text']{
+    border: none;
+    outline: 1px solid #08b86f62;
+   /* box-shadow: 0rem 2rem 2rem #6b796b50;*/
+    height: 30px;
+    width: 60%;
+    padding: 0% 10px;
+    overflow: hidden;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    -ms-border-radius: 2px;
+    -o-border-radius: 2px;
+    border-radius: 2px;
+}
+header.header>.search>form>input[type='submit']{
+    display: none;
+    height: 25px;
+    font-size: 16px;
+    color: #72ce26;
+    padding: 3px 10px;
+    background-color: white;
+    border: 1px solid #9cd66c71;
+    -webkit-border-radius: 50px;
+    -moz-border-radius: 50px;
+    -ms-border-radius: 50px;
+    -o-border-radius: 50px;
+    border-radius: 50px;
+}
+header.header>.search>form>span.icli{
+    /*border: 1px solid #9cd66c71;*/
+    display: inline-block;
+    padding: 2px;
+    font-size: 20px;
+    color: #08b86fd7;
+    position: absolute;
+    right: 11%;
+    top: 6px;
+}
+
+
+
+/*
+    1.3 Header Profile Section
+*/
+header.header>.profile-section{
+    margin-right: 30px;
+    padding: 5px 10px 0% 10px;
+    display: flex;
+    flex-flow: row;
+    align-items: center;
+    justify-content: space-between;
+    /*border: 1px solid yellow;*/
+    min-width: 15%;
+    cursor: pointer;
+}
+header.header>.profile-section>.icli{
+    text-align: center;
+    position: relative;
+    display: inline-block;
+    color: #72ce26;
+    background-color: #72ce2600;
+    /*border: 1px solid yellow;*/
+    padding: 0px;
+    font-size: 30px;
+    background-color: none;
+    border-radius: 50px;
+    /*box-shadow: 0rem 2rem 2rem #2a2b2a50;*/
+}
+#text-count{
+    display: inline-block;
+    background-color: #08b86e;
+    width: 16px;
+    height: 16px;
+    color: white;
+    text-align: center;
+    padding-top: 2px;
+    position: absolute;
+    font-size: 0.7rem;
+    top: -5px;
+    right: -4px;
+    -webkit-border-radius: 50px;
+    -moz-border-radius: 50px;
+    -ms-border-radius: 50px;
+    -o-border-radius: 50px;
+    border-radius: 50px;
+}
+
+header.header>.profile-section>.profile-image-wrapper{
+    border: 1px solid #9cd66c71;
+   /* box-shadow: 0rem 2rem 2rem #2a2b2a50;*/
+    position: relative;
+    margin-top: 0px;
+    padding: 2%;
+    width: 34px;
+    height: 34px;
+    -webkit-border-radius: 50px;
+    -moz-border-radius: 50px;
+    -ms-border-radius: 50px;
+    -o-border-radius: 50px;
+    border-radius: 50px;
+}
+header.header>.profile-section>.profile-image-wrapper img{
+    width: 100%;
+    height: 100%;
+    border-radius: 50px;
+}
+header.header>.profile-section>.profile-image-wrapper .active-status{
+    display: inline-block;
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    right: -3px;
+    top: -1px;
+    width: 14px;
+    height: 14px;
+    background-color: white;
+    border: 1px solid rgb(228, 238, 231);
+    -webkit-border-radius: 50px;
+    -moz-border-radius: 50px;
+    -ms-border-radius: 50px;
+    -o-border-radius: 50px;
+    border-radius: 50px;
+}
+.profile-image-wrapper>.active-status>.dot{
+    height: 8px;
+    width: 8px;
+    background-color: rgb(39, 204, 94);
+    -webkit-border-radius: 50px;
+    -moz-border-radius: 50px;
+    -ms-border-radius: 50px;
+    -o-border-radius: 50px;
+    border-radius: 50px;
+}
+
+/*
+    1.3.1 Header Dropdown Section
+*/
+header.header>.profile-section>.profile-dropdown{
+    z-index: inherit;
+    display: none;
+    position: absolute;
+   /* background-color: white;*/
+   background-color: rgb(228, 243, 214);
+    padding: 0%;
+    padding-top: 8px;
+    margin: 0%;
+    width: 200px;
+    top: 75px;
+    right: 10px;
+    box-shadow: 0.1rem 0.5rem 1rem #2a2b2a31;
+}
+.profile-dropdown>.go-to-profile{
+   /* border: 1px solid #72ce26;*/
+    padding: 2px 10px;
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    gap: 10px;
+}
+.profile-dropdown>.go-to-profile>.profile-image-wrapper{
+    align-self: flex-start;
+    width: 34px;
+    height: 34px;
+    padding: 2px;
+    border: 1px solid #73d62252;
+    -webkit-border-radius: 50px;
+    -moz-border-radius: 50px;
+    -ms-border-radius: 50px;
+    -o-border-radius: 50px;
+    border-radius: 50px;
+}
+.profile-dropdown>.go-to-profile>.profile-image-wrapper img{
+    width: 100%;
+    height: 100%;
+    -webkit-border-radius: 50px;
+    -moz-border-radius: 50px;
+    -ms-border-radius: 50px;
+    -o-border-radius: 50px;
+    border-radius: 50px;
+}
+.profile-dropdown>.go-to-profile>.name-container{
+    padding: 0%;
+    margin: 0%;
+   /* border: 1px solid #72ce26;*/
+}
+.profile-dropdown>.go-to-profile>.name-container .name{
+    margin: 0%;
+    padding: 0%;
+    color: #404040;
+}
+.profile-dropdown>.go-to-profile>.name-container .profile-link{
+    padding: 0%;
+    margin: 0%;
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: #808080;
+   /* border: 1px solid  #808080;*/
+    font-size: .9rem;
+    margin-left: 20px;
+}
+.profile-dropdown>.go-to-profile>.name-container .profile-link:hover{
+    color: #08b86e;
+}
+
+.profile-dropdown>.go-to-profile>.name-container>.profile-link .icbo{
+    color: #08b86e;
+    display: inline-block;
+    margin: 0%;
+    /*border: 1px solid  #808080;*/
+    text-align: center;
+    padding-left: 5px;
+    padding-top: 5px;
+    padding-left: 2px;
+}
+.profile-dropdown>.linked-list{
+    margin: 10px 0px 12px 15px;
+}
+.profile-dropdown>.linked-list>.dropdown-li{
+    margin-top: 8px;
+}
+.profile-dropdown>.linked-list .dropdown-link{
+    text-decoration: none;
+    color: #808080;
+    padding: 0px 5px;
+}
+.profile-dropdown>.linked-list .dropdown-link:hover{
+    color: #08b86e;
+}
+.profile-dropdown>.linked-list .log-out{
+    color: rgb(219, 55, 55);
+}
+.profile-dropdown>.linked-list .log-out:hover{
+    color: rgb(219, 55, 55);
+}
+hr{
+    opacity: .3;
+}
