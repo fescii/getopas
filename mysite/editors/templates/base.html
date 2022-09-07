@@ -10,6 +10,17 @@
 <link href="{% static "assets/css/style.css" %}" rel="stylesheet">
 </head>
 <body>
+  {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+            <li class="{{ message.tags }}">
+                {{ message|safe }}
+                <a href="#" class="close">x</a>
+            </li>
+        {% endfor %}
+    </ul>
+  {% endif %}
+
     <header class="header">
         <div class="welcome">
           <h3 class="welcome-title">Welcome to Opus.</h3>
@@ -199,21 +210,12 @@
         </div>
       </div>
 
-{% if messages %}
-    <ul class="messages">
-        {% for message in messages %}
-            <li class="{{ message.tags }}">
-                {{ message|safe }}
-                <a href="#" class="close">x</a>
-            </li>
-        {% endfor %}
-    </ul>
-{% endif %}
+      <main class="main-content">
+        {% block content %}
+        {% endblock %}
+      </main>
 
-{% block content %}
-{% endblock %}
-
-{% block footer %}
-{% endblock footer %}
+      {% block footer %}
+      {% endblock footer %}
 </body>
 </html>
