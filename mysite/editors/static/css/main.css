@@ -154,6 +154,8 @@ main.main-content{
     font-weight: bold;
     font-size: 16px;
     padding: 3px 20px;
+    text-align: center;
+    width: 60%;
     box-shadow: 0rem 2rem 1.5rem #748f741f;
     -webkit-border-radius: 50px;
     -moz-border-radius: 50px;
