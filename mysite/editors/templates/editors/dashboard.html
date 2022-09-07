@@ -111,67 +111,20 @@
           >View all<span class="iconly-Arrow-Right icli"></span
         ></a>
       </div>
-      <div class="added-content">
-        <div class="added-item">
-          <div class="added-article">
-            <div class="profile">
-              <img src="img/img.jpg" alt="" />
+    <div class="added-content">
+        {% for user, date in activities %}
+         <div class="added-item">
+            <div class="added-article">
+              <div class="profile">
+                <img src="/media/{{user.profile.photo}}" alt="" />
+              </div>
+              <p class="name">{{user.first_name}} {{user.last_name}}</p>
+              <p class="action">Added article</p>
             </div>
-            <p class="name">Zachariah Mwangi</p>
-            <p class="action">Added article</p>
+            <div class="time">{{ date }}</div>
           </div>
-          <div class="time">10:05 am</div>
-        </div>
-        <div class="added-item">
-          <div class="added-article">
-            <div class="profile">
-              <img src="img/img.jpg" alt="" />
-            </div>
-            <p class="name">Fredrick Ochieng</p>
-            <p class="action">Added article</p>
-          </div>
-          <div class="time">9:55 am</div>
-        </div>
-        <div class="added-item">
-          <div class="added-article">
-            <div class="profile">
-              <img src="img/img.jpg" alt="" />
-            </div>
-            <p class="name">Alfred Juma</p>
-            <p class="action">Added article</p>
-          </div>
-          <div class="time">9:05 am</div>
-        </div>
-        <div class="added-item">
-          <div class="added-article">
-            <div class="profile">
-              <img src="img/img.jpg" alt="" />
-            </div>
-            <p class="name">Keino Kipchoge</p>
-            <p class="action">Added article</p>
-          </div>
-          <div class="time">8:22 am</div>
-        </div>
-        <div class="added-item">
-          <div class="added-article">
-            <div class="profile">
-              <img src="img/img.jpg" alt="" />
-            </div>
-            <p class="name">Morgan Freeman</p>
-            <p class="action">Added article</p>
-          </div>
-          <div class="time">8:09 am</div>
-        </div>
-        <div class="added-item">
-          <div class="added-article">
-            <div class="profile">
-              <img src="img/img.jpg" alt="" />
-            </div>
-            <p class="name">Mwaikili Angela</p>
-            <p class="action">Added article</p>
-          </div>
-          <div class="time">6:43 am</div>
-        </div>
+        {% endfor %}
+
       </div>
     </div>
   </div>

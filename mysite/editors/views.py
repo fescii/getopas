@@ -129,11 +129,15 @@ def dashboard(request):
         users.append(p.photo)
 
     #Recent Activities
-    top_posts = Post.recently_added(Post)
-    users = []
+    top_posts = Post.recently_added(Post, 6)
+    r_users = []
+    r_posts = []
     for post in top_posts:
-        p = get_object_or_404(Profile, user=post.author)
-        users.append(p.photo)
+        r_posts.append(f"{post.publish.day}/{post.publish.month}  {post.publish.hour}:{post.publish.minute}")
+        u = get_object_or_404(User, username=post.author)
+        r_users.append(u)
+
+    activities = list(zip(r_users, r_posts))
 
 
 
@@ -143,6 +147,7 @@ def dashboard(request):
                     'profile': profile,
                     'issues': top_issues,
                     'views': count,
+                    'activities': activities,
                     'top_users': users,
                     'comments': comments,
                     'section': 'dashboard'})
