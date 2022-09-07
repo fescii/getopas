@@ -139,7 +139,7 @@ main.main-content{
     bottom: 0px;
     left: 1px;
     right: 1px;
-    padding: 5px 10px;
+    display: inline-block;
     background-color: #00000080;
     color: #eff5f2;
     text-decoration: none;
