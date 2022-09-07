@@ -272,6 +272,7 @@ header.header>.profile-section>.profile-dropdown{
 .profile-dropdown>.go-to-profile>.profile-image-wrapper img{
     width: 100%;
     height: 100%;
+    object-fit: cover;
     -webkit-border-radius: 50px;
     -moz-border-radius: 50px;
     -ms-border-radius: 50px;
