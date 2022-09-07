@@ -6,41 +6,104 @@
 <link href="{% static "css/header.css" %}" rel="stylesheet">
 <link href="{% static "css/base-sidebar.css" %}" rel="stylesheet">
 <link href="{% static "css/main.css" %}" rel="stylesheet">
+<link href="{% static "css/main.css" %}" rel="stylesheet">
+<link href="{% static "css/main.css" %}" rel="stylesheet">
 </head>
 <body>
-<div id="header">
-    <span class="logo">Bookmarks</span>
-    {% if request.user.is_authenticated %}
-    <ul class="menu">
-        <li {% if section == "dashboard" %}class="selected"{% endif %}>
-        <a href="{% url "dashboard" %}">My dashboard</a>
-        </li>
-        <li {% if section == "images" %}class="selected"{% endif %}>
-        <a href="#">Images</a>
-        </li>
-        <li {% if section == "people" %}class="selected"{% endif %}>
-        <a href="#">People</a>
-        </li>
-    </ul>
-    {% endif %}
-    <span class="user">
-        {% if request.user.is_authenticated %}Hello {{ request.user.first_name }},
-        <a href="{% url "logout" %}">Logout</a>
-        {% else %}
-        <a href="{% url "login" %}">Log-in</a>
-        {% endif %}
-    </span>
-</div>
+    <header class="header">
+        <div class="welcome">
+          <h3 class="welcome-title">Welcome to Opus.</h3>
+          <p class="welcome-message">Hello femar, welcome back!</p>
+        </div>
+        <div class="search">
+          <form action="" method="get">
+            <select title="select-search" name="select-search" id="select-search">
+              <option value="one">Articles</option>
+              <option value="two">Newsletters</option>
+              <option value="three">Device Info</option>
+            </select>
+            <input type="text" placeholder="Search Opus" />
+            <input class="iconly-Search icli" type="submit" value="Search" />
+            <span class="iconly-Search icli"></span>
+          </form>
+        </div>
+        <div class="profile-section">
+          <span class="iconly-Chat icli">
+            <span id="text-count">8</span>
+          </span>
+          <span class="iconly-Notification icli">
+            <span id="text-count">5</span>
+          </span>
+          <div id="dropdown-btn" class="profile-image-wrapper">
+            <span class="active-status">
+              <span class="dot"></span>
+            </span>
+            <img src="img/img.jpg" alt="" />
+          </div>
+          <div id="profile-dropdown" class="profile-dropdown">
+            <div class="go-to-profile">
+              <div class="profile-image-wrapper">
+                <img src="img/img.jpg" alt="" />
+              </div>
+              <div class="name-container">
+                <h4 class="name">Fredrick Femar</h4>
+                <a href="#" class="profile-link"
+                  >View Profile
+                  <span class="iconly-Arrow-Right icbo"></span>
+                </a>
+              </div>
+            </div>
+            <hr size="1" />
+            <ul class="linked-list top-links">
+              <li class="dropdown-li">
+                <a href="" class="dropdown-link">Dashboard</a>
+              </li>
+              <li class="dropdown-li">
+                <a href="" class="dropdown-link">Your Stats</a>
+              </li>
+              <li class="dropdown-li">
+                <a href="" class="dropdown-link">Your Articles</a>
+              </li>
+              <li class="dropdown-li">
+                <a href="" class="dropdown-link">Your Activity</a>
+              </li>
+            </ul>
+            <hr size="1" />
+            <ul class="linked-list middle-links">
+              <li class="dropdown-li">
+                <a href="" class="dropdown-link">Explore</a>
+              </li>
+              <li class="dropdown-li">
+                <a href="" class="dropdown-link">What's New?</a>
+              </li>
+              <li class="dropdown-li">
+                <a href="" class="dropdown-link">Send Us Feedback</a>
+              </li>
+              <li class="dropdown-li">
+                <a href="" class="dropdown-link">Settings</a>
+              </li>
+            </ul>
+            <hr size="1" />
+            <ul class="linked-list log-out">
+              <li class="dropdown-li">
+                <a href="" class="dropdown-link log-out">Log Out</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+    </header>
+
 {% if messages %}
     <ul class="messages">
         {% for message in messages %}
-        <li class="{{ message.tags }}">
-            {{ message|safe }}
-            <a href="#" class="close">x</a>
-        </li>
-{% endfor %}
-</ul>
+            <li class="{{ message.tags }}">
+                {{ message|safe }}
+                <a href="#" class="close">x</a>
+            </li>
+        {% endfor %}
+    </ul>
 {% endif %}
+
 {% block content %}
 {% endblock %}
 
