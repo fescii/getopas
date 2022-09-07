@@ -2,6 +2,7 @@ from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import User
 from django.urls import reverse
+from editors.models import Profile
 from taggit.managers  import TaggableManager
 from django.conf import settings
 from django.utils.text import slugify
@@ -45,6 +46,22 @@ class Post(models.Model):
         if not self.slug:
             self.slug = slugify(self.title)
             super().save(*args, **kwargs)
+
+    #Most Viewed Posts
+    def most_viewed(self, count=5):
+        most_viewed = Post.published.order_by('-blog_views')[:count]
+        return {'most_viewed': most_viewed}
+
+    #Get authors of the most viewed posts
+    def most_viewed_users(Profile):
+        posts = Post.most_viewed(Post)
+        users = []
+        for post in posts:
+            u = Profile.objects.filter(user=post.author)
+            users.append(u.photo)
+        return users
+
+
     class Meta:
         ordering = ('-publish',)
     def __str__(self):
@@ -65,12 +82,6 @@ class BlogComment(models.Model):
     updated = models.DateTimeField(auto_now=True)
     active = models.BooleanField(default=True)
 
-
-    #Most Viewed Posts
-    def most_viewed(self, count=4):
-        most_viewed = Post.published.order_by('-blog_views')[:count]
-
-        return {'most_viewed': most_viewed}
     class Meta:
         ordering = ('created',)
 

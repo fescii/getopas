@@ -118,8 +118,11 @@ def dashboard(request):
             com = article.comments.filter(active=True).count()
             comments = comments + com
 
-
+    #Top 3 Newsletters
     top_issues = Issue.published.order_by('-issue_views')[:3]
+
+    #Top Users
+    top_users = Post.most_viewed_users(Profile)
 
     return render(request,
                  'editors/dashboard.html',
@@ -127,6 +130,7 @@ def dashboard(request):
                     'profile': profile,
                     'issues': top_issues,
                     'views': count,
+                    'top_users': top_users,
                     'comments': comments,
                     'section': 'dashboard'})
 
