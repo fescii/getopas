@@ -2,12 +2,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>{% block title %}{% endblock %}</title>
-<link href="{% static "css/header.css" %}" rel="stylesheet">
-<link href="{% static "css/base-sidebar.css" %}" rel="stylesheet">
-<link href="{% static "css/main.css" %}" rel="stylesheet">
-<link href="{% static "css/main.css" %}" rel="stylesheet">
-<link href="{% static "assets/css/style.css" %}" rel="stylesheet">
+  <title>{% block title %}{% endblock %}</title>
+  <link href="{% static "css/header.css" %}" rel="stylesheet">
+  <link href="{% static "css/base-sidebar.css" %}" rel="stylesheet">
+  <link href="{% static "css/main.css" %}" rel="stylesheet">
+  <link href="{% static "css/dashboard.css" %}" rel="stylesheet">
+  <link href="{% static "css/article.css" %}" rel="stylesheet">
+  <link href="{% static "assets/css/style.css" %}" rel="stylesheet">
 </head>
 <body>
   {% if messages %}
@@ -117,14 +118,14 @@
           <div class="content-nav">
             <ul class="linked-list content-list">
               <li class="content-link">
-                <a class="link {% if section == 'dashboard' %}data-active{% endif %}" href="#">
+                <a class="link {% if section == 'dashboard' %}data-active{% endif %}" href=" {% url 'dashboard' %}">
                   <span id="select"></span>
                   <span class="iconly-Home icli"></span>
                   <span class="link-text">Dashboard</span>
                 </a>
               </li>
               <li class="content-link">
-                <a class="link {% if section == 'create' %}data-active{% endif %}" href="#">
+                <a class="link {% if section == 'article' %}data-active{% endif %}" href=" {% url 'create_post' %}">
                   <span id="select"></span>
                   <span class="iconly-Plus icli"></span>
                   <span class="link-text">Create</span>
@@ -210,7 +211,7 @@
         </div>
     </div>
 
-    <main class="main-content">
+    <main class="{{ section }}">
         {% block content %}
         {% endblock %}
     </main>

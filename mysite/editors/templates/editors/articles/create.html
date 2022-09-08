@@ -2,7 +2,6 @@
 {% load static %}
 {% block title %}Create | Article{% endblock %}
 {% block content %}
-<h1>Add A new Article</h1>
 <form method="post">
 {{post_form.media }}
 {{ post_form.as_p }}
@@ -12,17 +11,16 @@
 {% endblock %}
 {% block footer %}
 <script src="{% static 'tinymce/tinymce.min.js'  %}"></script>
+<script src=" {% static 'js/base.js' %}"></script>
 <script>
-    tinymce.init({
-        selector: '#id_body',
-        height: 500, menubar: 'edit insert view format table',
-        plugins: [
-          'advlist autolink lists link image charmap print preview anchor',
-          'searchreplace visualblocks code fullscreen',
-          'insertdatetime media table paste imagetools wordcount'
-        ],
-        toolbar: 'insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image',
-        content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }'
-      });
-  </script>
+  tinymce.init({
+      selector: '#id_body',
+      min_height: 520,
+      menubar: 'edit insert view format table',
+      plugins: ["a11ychecker advcode casechange formatpainter", "linkchecker autolink lists checklist", "media mediaembed pageembed permanentpen", "powerpaste table advtable tinymcespellchecker"],
+      toolbar: "formatselect | fontselect | bold italic strikethrough forecolor backcolor formatpainter | alignleft aligncenter alignright alignjustify | numlist bullist outdent indent | link insertfile image | removeformat | code | addcomment | checklist | casechange",
+
+      content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }'
+    });
+</script>
   {% endblock footer%}

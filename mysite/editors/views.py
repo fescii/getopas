@@ -222,6 +222,8 @@ def edit(request):
 
 @login_required
 def create_post(request):
+    user = request.user
+    profile = user.profile
     post_form = None
     if request.method == 'POST':
         #Form is sent
@@ -244,7 +246,10 @@ def create_post(request):
         post_form = CreateBlogPostForm(data=request.GET)
         return render(request,
                       'editors/articles/create.html',
-                      {'post_form': post_form})
+                      {'post_form': post_form,
+                       'user':user,
+                       'profile':profile,
+                       'section': 'article'})
 
 
 #Blog Posts Created By The Current User.
