@@ -241,7 +241,10 @@ def create_post(request):
             post_form = CreateBlogPostForm(data=request.GET)
         return render(request,
                       'editors/articles/create.html',
-                      {'post_form': post_form})
+                      {'post_form': post_form,
+                       'user':user,
+                       'profile':profile,
+                       'section': 'article'})
     else:
         post_form = CreateBlogPostForm(data=request.GET)
         return render(request,
@@ -275,6 +278,8 @@ def user_post_list(request):
 @login_required
 def edit_blog_post(request, pk):
     #post = get_object_or_404(Post, id=pk)
+    user = request.user
+    profile = user.profile
     post = Post.objects.get(id=pk)
     if request.method == 'POST':
         edit_form = BlogEditForm(request.POST or None, instance=post)
@@ -294,12 +299,18 @@ def edit_blog_post(request, pk):
 
         return render(request,
                         'editors/articles/edit.html',
-                        {'edit_form': edit_form})
+                        {'edit_form': edit_form,
+                         'user':user,
+                         'profile':profile,
+                         'section': 'article'})
     else:
         edit_form = BlogEditForm(request.POST or None, instance=post)
         return render(request,
                         'editors/articles/edit.html',
-                        {'edit_form': edit_form})
+                        {'edit_form': edit_form,
+                         'user':user,
+                         'profile':profile,
+                         'section': 'article'})
 
 #Edit Magazine Newsletter Tags
 @login_required
