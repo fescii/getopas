@@ -9,14 +9,14 @@
 html, body{
     margin: 0%;
     font-size: 16px;
-    background-color: rgb(228, 243, 214);
+    background-color: rgb(231, 248, 215);
 }
 *{
     box-sizing: border-box;
 }
 .dashboard-sidebar{
    /* border-right: 1px solid rgba(87, 128, 131, 0.137);*/
-   box-shadow: 0rem 2rem 1.5rem #748f741f;
+  /* box-shadow: 0rem 2rem 1.5rem #748f741f;*/
    background-color: rgb(231, 248, 215);
    /* background-color: #fff;*/
     z-index: 2;
@@ -25,7 +25,7 @@ html, body{
     height: 100%;
     width: 210px;
     border-left: 1px solid #83858421;
-    /*border-right: 1px solid #83858421;*/
+    border-right: 1px solid #83858421;
     position: fixed;
     top: 0%;
     left: 5px;

@@ -2,8 +2,8 @@ main.article{
     position: fixed;
     margin: 0%;
     padding: 0%;
-    left: 220px;
-    padding-left: 15px;
+    left: 210px;
+    padding-left: 30px;
     top: 0px;
     right: 0%;
     bottom: 0%;
@@ -11,7 +11,7 @@ main.article{
     display: flex;
     flex-flow: column;
     align-items: center;
-    box-shadow: 0rem 2rem 1.5rem #748f741f;
+    /*box-shadow: 0rem 2rem 1.5rem #748f741f;*/
 
 }
 
