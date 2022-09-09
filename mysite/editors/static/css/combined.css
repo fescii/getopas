@@ -75,7 +75,8 @@ main.article-list{
     flex-flow: column;
     align-items: center;
     gap: 30px;
-    box-shadow: 0rem 2rem 1.5rem #748f741f;
+    overflow-y: scroll;
+    padding-bottom: 50px;
 
 }
 .article-list>h2{
