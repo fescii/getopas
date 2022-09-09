@@ -9,7 +9,7 @@
             <a href="{{ post.get_absolute_url }}"> {{ post.title }} </a>
         </h2>
         <div class='article-wrapper'>
-            <p class="date">Published on {{ post.publish }}</p>
+            <p class="date">Published on: <span class="published-date">{{ post.publish.date }} {{ post.publish.time }}</span></p>
             {{ post.body|striptags|truncatechars:140}}
             <div class='article-stats'>
                 <span class='stats-title'>Reach</span>
