@@ -1,15 +1,14 @@
 {% extends "base.html" %}
 {% block title %}Edit User{% endblock %}
 {% block content %}
-<h1>Update User Role</h1>
+    <h1>Update User Role</h1>
 {% if user.is_superuser == True %}
-<p>Current Role: {{ role }}</p>
+    <p>Current Role: {{ role }}</p>
 {% else  %}
 {% endif %}
-
-<form method="POST">
+    <form method="POST">
 {{ form }}
 {% csrf_token %}
-<input type="submit" value="Save">
-</form>
+    <input type="submit" value="Save">
+    </form>
 {% endblock %}
