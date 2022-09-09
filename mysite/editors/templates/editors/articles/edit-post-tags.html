@@ -1,7 +1,7 @@
 {% extends "base.html" %}
-{% block title %}Edit | Post Tags{% endblock %}
+{% block title %}Edit | Article Tags{% endblock %}
 {% block content %}
-<h1>Edit {{ post.title }} Tags</h1>
+<h2>Edit {{ post.title }} Tags</h2>
 <form method="POST">
 {{ edit_form.as_p }}
 {% csrf_token %}
