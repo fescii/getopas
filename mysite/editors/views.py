@@ -279,7 +279,6 @@ def user_post_list(request):
                    'user':user,
                    'profile':profile,
                    'section': 'article-list'})
-
 @login_required
 def edit_blog_post(request, pk):
     #post = get_object_or_404(Post, id=pk)
