@@ -1,23 +1,25 @@
 {% extends "base.html" %}
-{% block title %}Opus | Magazine{% endblock %} 
+{% block title %}Opus | My Articles{% endblock %} 
 {% block content %}
-<h1>My Articles</h1>
-{% if tag %}
-    <h2>Posts About  "{{ tag.name }}" </h2>
-{% endif %}
-
+    <h2>My Articles</h2>
 {% for post in posts %}
-<div class="post-summery">
-    <h2>
-        <a href="{{ post.get_absolute_url }}"> {{ post.title }} </a>
-    </h2>
-    <p class="date">Published on {{ post.publish }} by {{ post.author }}</p>
-    {{ post.body|striptags|truncatechars:140}}
-    <a href="/dashboard/edit-article/{{post.id}}">edit</a>
-    <a href="/dashboard/edit-article/tags/{{post.id}}">Edit Tags</a>
-    <a href="/dashboard/delete-article/{{post.id}}">delete</a>
-</div>
+    <div class="post-summery">
+        <h2>
+            <a href="{{ post.get_absolute_url }}"> {{ post.title }} </a>
+        </h2>
+        <div class='article-wrapper'>
+            <p class="date">Published on {{ post.publish }}</p>
+            {{ post.body|striptags|truncatechars:140}}
+            <div class='article-stats'>
+                <span class='views'><span class="iconly-Show icli"></span> {{ post.blog_views }}</span>
+                <span class='comments'>Comments: {{ comments }}</span>
+            </div>
+            <div class="action-links">
+                <a href="/dashboard/edit-article/{{post.id}}">edit</a>
+                <a href="/dashboard/edit-article/tags/{{post.id}}">Edit Tags</a>
+                <a href="/dashboard/delete-article/{{post.id}}">delete</a>
+            </div>
+        </div>
+    </div>
 {% endfor %}
-{% include "pagination.html" with page=posts %}
-<!--{% include "pagination.html" with page=page_obj %}-->
-{% endblock %}
+{% include "pagination.html" with page=posts %} {% endblock %}

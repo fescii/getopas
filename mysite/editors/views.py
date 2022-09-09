@@ -258,6 +258,8 @@ def create_post(request):
 #Blog Posts Created By The Current User.
 @login_required
 def user_post_list(request):
+    user = request.user
+    profile = user.profile
     object_list = Post.published.all().filter(author=request.user)
 
     paginator = Paginator(object_list, 5) # 5 posts in each page
@@ -273,7 +275,10 @@ def user_post_list(request):
 
     return render(request, 'editors/articles/user_articles_list.html',
                   {'page': page,
-                   'posts': posts,})
+                   'posts': posts,
+                   'user':user,
+                   'profile':profile,
+                   'section': 'article'})
 
 @login_required
 def edit_blog_post(request, pk):
