@@ -278,7 +278,7 @@ def user_post_list(request):
                    'posts': posts,
                    'user':user,
                    'profile':profile,
-                   'section': 'article'})
+                   'section': 'article-list'})
 
 @login_required
 def edit_blog_post(request, pk):
