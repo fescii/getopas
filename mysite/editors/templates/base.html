@@ -141,13 +141,13 @@
               </li>
               {% if user.is_staff %}
               <li class="content-link">
-                <a class="link {% if section == 'issue-list' %} data-active {% endif %}" href="{% url 'user_post_list' %}">
+                <a class="link {% if section == 'issue-list' %} data-active {% endif %}" href="{% url 'user_issue_list' %}">
                   <span id="select"></span>
                   <span class="iconly-Document icli"></span>
                   <span class="link-text">Newsletters</span>
                 </a>
               </li>
-              {% endif %}
+              {% else %}
               <li class="content-link">
                 <a class="link {% if section == 'explore' %} data-active {% endif %}" href="#">
                   <span id="select"></span>
@@ -155,6 +155,7 @@
                   <span class="link-text">Explore</span>
                 </a>
               </li>
+              {% endif %}
               <li class="content-link">
                 <a class="link {% if section == 'donate' %} data-active {% endif %}" href="#">
                   <span id="select"></span>
@@ -195,13 +196,24 @@
                   <span class="link-text">Themes</span>
                 </a>
               </li>
+              {% if user.is_superuser %}
+              <li class="content-link">
+                <a class="link {% if section == 'users' %} data-active {% endif %}" href="#">
+                  <span id="select"></span>
+                  <span class="iconly-User3 icli"></span>
+                  <span class="link-text">Users</span>
+                </a>
+              </li>
+              {% else %}
               <li class="content-link">
                 <a class="link {% if section == 'account' %} data-active {% endif %}" href="#">
                   <span id="select"></span>
                   <span class="iconly-Profile icli"></span>
-                  <span class="link-text">Users</span>
+                  <span class="link-text">Account</span>
                 </a>
               </li>
+              {% endif %}
+
             </ul>
           </div>
         </div>
