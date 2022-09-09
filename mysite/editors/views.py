@@ -320,6 +320,8 @@ def edit_blog_post(request, pk):
 @login_required
 def edit_blog_post_tags(request, pk):
     #post = get_object_or_404(Post, id=pk)
+    user = request.user
+    profile = user.profile
     post = Post.objects.get(id=pk)
     if request.method == 'POST':
         edit_form = BlogEditTagsForm(request.POST or None, instance=post)
@@ -336,13 +338,19 @@ def edit_blog_post_tags(request, pk):
 
         return render(request,
                         'editors/articles/edit-post-tags.html',
-                        {'edit_form': edit_form})
+                        {'edit_form': edit_form,
+                         'user':user,
+                         'profile':profile,
+                         'section': 'article-list'})
     else:
         edit_form = BlogEditTagsForm(request.POST or None, instance=post)
         return render(request,
                         'editors/articles/edit-post-tags.html',
                         {'edit_form': edit_form,
-                         'post': post})
+                         'post': post,
+                         'user':user,
+                         'profile':profile,
+                         'section': 'article-list'})
 
 # process delete post
 @login_required
