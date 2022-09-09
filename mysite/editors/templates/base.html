@@ -15,7 +15,7 @@
   {% if messages %}
     <ul class="messages">
         {% for message in messages %}
-            <li id='popup' class="{{ message.tags }}">
+            <li class="{{ message.tags }}">
                 {{ message|safe }}
                 <a href="#" class="close">x</a>
             </li>
