@@ -1,3 +1,15 @@
+/*
+        Name: Opus Layout css
+        Version: 1.0.0
+        Author: Fredrick Ochieng
+*/
+
+
+/*
+
+    Listing Articles
+
+*/
 main.article-list{
     /*border: 1px solid rgb(48, 48, 45);*/
     position: fixed;
@@ -118,4 +130,60 @@ main.article-list{
 }
 .article-list>.post-summery>.article-wrapper>.action-links>a:last-of-type{
     background-color:rgb(196, 36, 15);
+}
+
+
+/*
+    Editing Articles Tags
+
+*/
+main.article-list>form{
+    border: 1px solid #83858421;
+    box-shadow: 0rem 2rem 1.5rem #748f740c;
+    width: 70%;
+    min-height: 200px;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    justify-content: center;
+}
+main.article-list>form>p>label{
+   /* border: 1px solid #808080;*/
+    text-align: center;
+    display: block;
+    font-size: 20px;
+    margin: 8px;
+    color: #404040;
+}
+
+main.article-list>form>p>input[type='text']{
+    width: 100%;
+    padding: 2px 20px;
+    border: none;
+    outline: 1px solid #08b86f4d;
+    font-size: 16px;
+    color: #808080;
+}
+main.article-list>form>input[type='submit']{
+    padding: 4px 30px;
+    border: none;
+    background-color: #08b86f;
+    box-shadow: 0rem 2rem 1.5rem #748f742a;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 18px;
+    color: #ffffffd7;
+    border-radius: 50px;
+    -webkit-border-radius: 50px;
+    -moz-border-radius: 50px;
+    -ms-border-radius: 50px;
+    -o-border-radius: 50px;
+}
+
+form>p>.helptext{
+    color: #808080;
+    display: block;
+    margin: 5px 10px;
+    font-size: 0.9rem;
+    text-align: center;
 }
