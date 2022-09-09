@@ -139,6 +139,15 @@
                   <span class="link-text">Articles</span>
                 </a>
               </li>
+              {% if user.is_staff %}
+              <li class="content-link">
+                <a class="link {% if section == 'issue-list' %} data-active {% endif %}" href="{% url 'user_post_list' %}">
+                  <span id="select"></span>
+                  <span class="iconly-Document icli"></span>
+                  <span class="link-text">Newsletters</span>
+                </a>
+              </li>
+              {% endif %}
               <li class="content-link">
                 <a class="link {% if section == 'explore' %} data-active {% endif %}" href="#">
                   <span id="select"></span>
