@@ -12,8 +12,9 @@
             <p class="date">Published on {{ post.publish }}</p>
             {{ post.body|striptags|truncatechars:140}}
             <div class='article-stats'>
+                <span class='stats-title'>Reach</span>
                 <span class='views'><span class="iconly-Show icli"></span> {{ post.blog_views }}</span>
-                <span class='comments'>Comments: {{ comments }}</span>
+                <span class='comments'><span class="iconly-User2 icli"></span> {{ post.comments.count }}</span>
             </div>
             <div class="action-links">
                 <a href="/dashboard/edit-article/{{post.id}}">edit</a>
