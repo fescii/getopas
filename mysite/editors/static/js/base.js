@@ -31,3 +31,12 @@ sidebarLinks.forEach(link =>{
         dropdownModal.style.setProperty('display', 'none')
     }
  })
+
+// Closing Error and Success Messages
+let closeBtns = document.querySelectorAll('.close')
+
+closeBtns.forEach((btn)=>{
+    btn.addEventListener('click',()=> {
+        btn.parentElement.remove()
+    })
+})
