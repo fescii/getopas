@@ -19,6 +19,5 @@
 <p> You've not Published any Issues Yet!</p>
 {% endif %}
 {% endfor %}
-{% include "pagination.html" with page=posts %}
-<!--{% include "pagination.html" with page=page_obj %}-->
-{% endblock %}
+
+{% include "pagination.html" with page=issues %} {% endblock %}
