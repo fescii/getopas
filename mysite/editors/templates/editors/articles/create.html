@@ -1,13 +1,15 @@
-{% extends "base.html" %}
+{% extends "editing.html" %}
 {% load static %}
 {% block title %}Create | Article{% endblock %}
 {% block content %}
-<form method="post" enctype="multipart/form-data">
-{{post_form.media }}
-{{ post_form.as_p }}
-{% csrf_token %}
-<input type="submit" value="Create">
-</form>
+<div class="main-content">
+    <form method="post" enctype="multipart/form-data">
+    {{post_form.media }}
+    {{ post_form.as_p }}
+  {% csrf_token %}
+  <input type="submit" value="Create">
+  </form>
+</div>
 {% endblock %}
 {% block footer %}
 <script src="{% static 'tinymce/tinymce.min.js'  %}"></script>
