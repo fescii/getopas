@@ -80,13 +80,13 @@ main.issue-list{
     padding-bottom: 50px;
 
 }
-.article-list>h2
+.article-list>h2,
 .issue-list h2{
    /* border: 1px solid rgb(48, 48, 45);*/
     margin: 0%;
     color: #87c44e;
 }
-.article-list>.post-summery
+.article-list>.post-summery,
 .issue-list>.issue-summery{
    /* border: 1px solid rgb(48, 48, 45);*/
     box-shadow: 0rem 2rem 1.5rem #748f740e;
