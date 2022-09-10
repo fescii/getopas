@@ -12,6 +12,8 @@ main.article{
     flex-flow: column;
     align-items: flex-start;
     /*box-shadow: 0rem 2rem 1.5rem #748f741f;*/
+    scroll-behavior: smooth;
+    overflow-y: scroll;
 
 }
 
@@ -33,15 +35,17 @@ main.article>.action-title h2{
 }
 main.article>form{
     width: 100%;
-    display: grid;
-    grid-template-columns: 1fr 200px;
+    display: flex;
+    flex-flow: column;
+    /*grid-template-columns: 1fr 1fr 200px;
     grid-template-rows: 55px;
-    column-gap: 1px;
+    column-gap: 1px;*/
     position: absolute;
     top: 0px;
     border: 1px solid green;
     padding: 0%;
     overflow: scroll;
+    justify-items: left;
 }
 .errorlist{
     display: none;
@@ -75,9 +79,10 @@ main.article>form>p:nth-of-type(2){
     border: 1px solid #08b86f62;
 }
 main.article>form>p:nth-of-type(3){
-    grid-column: 1/2;
+    grid-column: 1/4;
     grid-row: 2/8;
     margin-top: 0%;
+    width: 100%;
     border: none;
     padding: 0px;
     margin: 0%;
