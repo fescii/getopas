@@ -22,7 +22,7 @@ main.article>.main-content{
     margin-left: 50px;
     margin-right: 50px;
 }
-main.article>.action-title{
+main.article>.main-content>.action-title{
     font-size: 1.2rem;
     display: none;
     /*border: 1px solid green;*/
@@ -31,14 +31,14 @@ main.article>.action-title{
     padding: 0%;
     margin: 0%;
 }
-main.article>.action-title h2{
+main.article>.main-content>.action-title h2{
     margin: 0%;
     font-size: 19px;
     box-shadow: 0rem 2rem 1.5rem #748f741f;
     background-color: rgb(231, 248, 215);
     width: max-content;
 }
-main.article>form{
+main.article>.main-content>form{
     width: 100%;
     display: flex;
     flex-flow: column;
@@ -56,7 +56,7 @@ main.article>form{
     display: none;
 }
 
-main.article>form>p:nth-of-type(1){
+main.article>.main-content>form>p:nth-of-type(1){
     grid-column: 1/2;
     width: 100%;
     padding: 0%;
@@ -71,7 +71,7 @@ label{
     margin-right: 10px;
     color: #808080;
 }
-main.article>form>p:nth-of-type(1)>input[type='text']{
+main.article>.main-content>form>p:nth-of-type(1)>input[type='text']{
    /* border: 1px solid green;*/
     width: 90%;
     padding: 2px 20px;
@@ -79,11 +79,11 @@ main.article>form>p:nth-of-type(1)>input[type='text']{
     outline: 1px solid #08b86f4d;
     font-size: 20px;
 }
-main.article>form>p:nth-of-type(2){
+main.article>.main-content>form>p:nth-of-type(2){
     grid-column: 2;
     border: 1px solid #08b86f62;
 }
-main.article>form>p:nth-of-type(3){
+main.article>.main-content>form>p:nth-of-type(3){
     grid-column: 1/4;
     grid-row: 2/8;
     margin-top: 0%;
@@ -99,10 +99,10 @@ main.article>form>p:nth-of-type(3){
     -o-border-radius: 0px;
     border-radius: 0px;
 }
-main.article>form>p:nth-of-type(3)>label{
+main.article>.main-content>form>p:nth-of-type(3)>label{
     display: none;
 }
-main.article>form>input[type='submit']{
+main.article>.main-content>form>input[type='submit']{
     grid-column: 2/3;
     width: 50%;
     grid-row: 6/7;
@@ -122,9 +122,9 @@ main.article>form>input[type='submit']{
     -o-border-radius: 50px;
     border-radius: 50px;
 }
-main.article>form>p:nth-of-type(3),
-main.article>form>p:nth-of-type(2),
-main.article>form>p:nth-of-type(5){
+main.article>.main-content>form>p:nth-of-type(3),
+main.article>.main-content>form>p:nth-of-type(2),
+main.article>.main-content>form>p:nth-of-type(5){
     justify-self: center;
     width: 90%;
    /* border: 1px solid yellow;*/
