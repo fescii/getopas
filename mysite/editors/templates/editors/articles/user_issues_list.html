@@ -4,7 +4,7 @@
 {% block content %}
 <h2>My Issues</h2>
 {% for issue in issues %}
-<div class="post-summery">
+<div class="issue-summery">
     <h2>
         <a href="{{ issue.get_absolute_url }}"> {{ issue.title }} </a>
     </h2>
