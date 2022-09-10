@@ -104,13 +104,13 @@ main.issue-list{
      width: 90%;
      padding: 10px 20px;
      display: grid;
-     grid-template-columns: 1fr 2fr 1fr;
+     grid-template-columns: 1fr 2fr 100px;
      position: relative;
  }
  .issue-list>.issue-summery>h2{
     margin: 0%;
     padding: 0%;
-    grid-column: 2/4;
+    grid-column: 2/3;
     border: 1px solid #838584e0;
 }
 .issue-list>.issue-summery>.date{
@@ -122,13 +122,17 @@ main.issue-list{
 }
 .issue-list>.issue-summery>.image-wrapper{
     height: 200px;
-    grid-template-columns: 1/2;
-    grid-template-rows: 1/5;
+    grid-column: 1/2;
+    grid-row: 1/5;
 }
 .issue-list>.issue-summery>.image-wrapper>img{
     width: 100%;
     height: 100%;
     object-fit: cover;
+}
+.issue-list>.issue-summery>.issue-stats{
+    grid-column: 3/4;
+    border: 1px solid #838584e0;
 }
 .article-list>.post-summery>h2{
     margin: 0%;

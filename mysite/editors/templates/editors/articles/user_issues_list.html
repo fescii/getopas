@@ -16,9 +16,9 @@
         <img src="/media/{{issue.cover}}" alt="Cover Image" title="{{issue.cover}}"/>
     </div>
     <div class="content-summery">
-        {{ issue.description|striptags|truncatechars:140 }}
+        {{ issue.description|striptags|truncatechars:200 }}
     </div>
-    <div class='article-stats'>
+    <div class='issue-stats'>
         <span class='stats-title'>Reach</span>
         <span class='views'><span class="iconly-Show icli"></span> {{ issue.issue_views }}</span>
         <span class='comments'><span class="iconly-User2 icli"></span> {{ issue.feedbacks.count }}</span>
