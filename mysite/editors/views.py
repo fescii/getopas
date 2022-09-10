@@ -293,14 +293,15 @@ def edit_blog_post(request, pk):
             cover = cd['cover']
             body = cd['body']
             status = cd['status']
-            Post.update_post(post,title,body,status,cover)
+            Post.update_post(post,title=title,cover=cover,
+                             body=body, status=status)
             #edit_form.save()
             messages.success(request, 'Post updated successfully')
             return HttpResponseRedirect(reverse('user_post_list'))
 
         else:
             messages.error(request, 'Error updating the Post')
-            edit_form = BlogEditForm(request.POST or None, instance=post)
+            edit_form = BlogEditForm(request.POST or None, instance=post,files=request.FILES)
 
         return render(request,
                         'editors/articles/edit.html',
