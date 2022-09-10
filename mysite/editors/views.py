@@ -227,7 +227,7 @@ def create_post(request):
     post_form = None
     if request.method == 'POST':
         #Form is sent
-        post_form = CreateBlogPostForm(data=request.POST)
+        post_form = CreateBlogPostForm(data=request.POST, files='')
         if post_form.is_valid():
             #Assign The Current User To the Post
             post = post_form.save(commit=False)
