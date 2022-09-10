@@ -1,7 +1,8 @@
 {% extends "base.html" %}
-{% block title %}Opus | Magazine{% endblock %}
+{% load static %}
+{% block title %}Opus | My Issues{% endblock %}
 {% block content %}
-<h1>My Issues</h1>
+<h2>My Issues</h2>
 {% for issue in issues %}
 <div class="post-summery">
     <h2>
@@ -37,3 +38,7 @@
 {% endfor %}
 
 {% include "pagination.html" with page=issues %} {% endblock %}
+
+{% block footer %}
+    <script src=" {% static 'js/base.js' %}"></script>
+{% endblock footer%}
