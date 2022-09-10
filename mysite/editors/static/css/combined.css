@@ -110,7 +110,8 @@ main.issue-list{
  .issue-list>.issue-summery>h2{
     margin: 0%;
     padding: 0%;
-    grid-column: 1/4;
+    grid-column: 2/4;
+    border: 1px solid #838584e0;
 }
 .article-list>.post-summery>h2{
     margin: 0%;
