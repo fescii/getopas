@@ -186,3 +186,9 @@ input[type='file']{
     -o-border-radius: 2px;
     border-radius: 2px;
 }
+input[type='checkbox']{
+    display: block;
+}
+label[for='cover-clear_id']{
+    display: block;
+}
