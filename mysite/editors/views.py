@@ -416,7 +416,7 @@ def user_issue_list(request):
                    'issues': issues,
                    'user': user,
                    'profile': profile,
-                   'section': 'article-list'})
+                   'section': 'issue-list'})
 
 #Edit Magazine Newsletter
 @login_required

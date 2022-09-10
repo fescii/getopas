@@ -61,7 +61,8 @@
 /*
     Listing Articles
 */
-main.article-list{
+main.article-list,
+main.issue-list{
     /*border: 1px solid rgb(48, 48, 45);*/
     position: fixed;
     margin: 0%;
@@ -79,12 +80,14 @@ main.article-list{
     padding-bottom: 50px;
 
 }
-.article-list>h2{
+.article-list>h2
+.issue-list h2{
    /* border: 1px solid rgb(48, 48, 45);*/
     margin: 0%;
     color: #87c44e;
 }
-.article-list>.post-summery{
+.article-list>.post-summery
+.issue-list>.issue-summery{
    /* border: 1px solid rgb(48, 48, 45);*/
     box-shadow: 0rem 2rem 1.5rem #748f740e;
     border: 1px solid #83858421;
@@ -95,11 +98,13 @@ main.article-list{
     gap: 10px;
     position: relative;
 }
-.article-list>.post-summery>h2{
+.article-list>.post-summery>h2,
+.issue-list>.issue-summery>h2{
     margin: 0%;
     padding: 0%;
 }
-.article-list>.post-summery>h2>a{
+.article-list>.post-summery>h2>a,
+.issue-list>.issue-summery>h2>a{
     text-decoration: none;
     color: rgb(15, 138, 196);
 }
