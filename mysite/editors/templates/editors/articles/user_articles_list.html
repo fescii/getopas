@@ -1,8 +1,9 @@
 {% extends "base.html" %}
 {% load static %}
-{% block title %}Opus | My Articles{% endblock %} 
+{% block title %}Opus | My Articles{% endblock %}
 {% block content %}
     <h2>My Articles</h2>
+    <a href="{% url 'create_post' %}" class='add-new'>Create</a>
 {% for post in posts %}
     <div class="post-summery">
         <h2>

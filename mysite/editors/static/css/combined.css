@@ -12,6 +12,20 @@
     position: fixed;
     right: 75px;
     top: 90px;
+    z-index: 10;
+    text-decoration: none;
+    color: rgba(255, 255, 255, 0.938);
+    display: inline-block;
+    padding: 4px 35px;
+    font-weight: bold;
+    font-size: 1.1rem;
+    opacity: .9;
+    background-color:rgb(15, 138, 196);
+    border-radius: 50px;
+    -webkit-border-radius: 50px;
+    -moz-border-radius: 50px;
+    -ms-border-radius: 50px;
+    -o-border-radius: 50px;
 }
 .messages{
     position: absolute;
