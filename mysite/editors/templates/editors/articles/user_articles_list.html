@@ -9,19 +9,24 @@
         <h2>
             <a href="{{ post.get_absolute_url }}"> {{ post.title }} </a>
         </h2>
-        <div class='article-wrapper'>
-            <div class="date">Published on: <span class="published-date">{{ post.publish.date }} {{ post.publish.time }}</span></div>
+        <div class="image-wrapper">
+            <img src="/media/{{post.cover}}" alt="Cover Image" title="{{post.cover}}"/>
+        </div>
+        <div class="date">
+            Published on: <span class="published-date">{{ post.publish.date }} {{ post.publish.time }}</span>
+        </div>
+        <div class='article-summery'>
             {{ post.body|striptags|truncatechars:140}}
-            <div class='article-stats'>
-                <span class='stats-title'>Reach</span>
-                <span class='views'><span class="iconly-Show icli"></span> {{ post.blog_views }}</span>
-                <span class='comments'><span class="iconly-User2 icli"></span> {{ post.comments.count }}</span>
-            </div>
-            <div class="action-links">
-                <a href="/dashboard/edit-article/{{post.id}}">Edit</a>
-                <a href="/dashboard/edit-article/tags/{{post.id}}">Tags</a>
-                <a href="/dashboard/delete-article/{{post.id}}">Delete</a>
-            </div>
+        </div>
+        <div class='article-stats'>
+            <span class='stats-title'>Reach</span>
+            <span class='views'><span class="iconly-Show icli"></span> {{ post.blog_views }}</span>
+            <span class='comments'><span class="iconly-User2 icli"></span> {{ post.comments.count }}</span>
+        </div>
+        <div class="action-links">
+            <a href="/dashboard/edit-article/{{post.id}}">Edit</a>
+            <a href="/dashboard/edit-article/tags/{{post.id}}">Tags</a>
+            <a href="/dashboard/delete-article/{{post.id}}">Delete</a>
         </div>
     </div>
 {% if empty %}
