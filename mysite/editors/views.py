@@ -400,7 +400,7 @@ def user_issue_list(request):
     profile = user.profile
     object_list = Issue.published.all().filter(author=request.user)
 
-    paginator = Paginator(object_list, 1) # 5 issues in each page
+    paginator = Paginator(object_list, 5) # 5 issues in each page
     page = request.GET.get('page')
     try:
         issues = paginator.page(page)
