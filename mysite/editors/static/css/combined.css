@@ -86,8 +86,7 @@ main.issue-list{
     margin: 0%;
     color: #87c44e;
 }
-.article-list>.post-summery,
-.issue-list>.issue-summery{
+.article-list>.post-summery{
    /* border: 1px solid rgb(48, 48, 45);*/
     box-shadow: 0rem 2rem 1.5rem #748f740e;
     border: 1px solid #83858421;
@@ -98,8 +97,22 @@ main.issue-list{
     gap: 10px;
     position: relative;
 }
-.article-list>.post-summery>h2,
-.issue-list>.issue-summery>h2{
+.issue-list>.issue-summery{
+    /* border: 1px solid rgb(48, 48, 45);*/
+     box-shadow: 0rem 2rem 1.5rem #748f740e;
+     border: 1px solid #83858421;
+     width: 90%;
+     padding: 10px 20px;
+     display: grid;
+     grid-template-columns: 1fr 2fr 1fr;
+     position: relative;
+ }
+ .issue-list>.issue-summery>h2{
+    margin: 0%;
+    padding: 0%;
+    grid-column: 1/4;
+}
+.article-list>.post-summery>h2{
     margin: 0%;
     padding: 0%;
 }
