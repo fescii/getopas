@@ -60,11 +60,11 @@ class ModerateUserForm(forms.Form):
 class CreateBlogPostForm(forms.ModelForm):
     class Meta:
         model = Post
-        fields = ('title','body','tags','status')
+        fields = ('title','cover','body','tags','status')
 class BlogEditForm(forms.ModelForm):
     class Meta:
         model = Post
-        fields = ('title', 'body','status')
+        fields = ('title','cover', 'body','status')
         #fields = '__all__'
 
 class BlogEditTagsForm(forms.ModelForm):

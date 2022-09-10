@@ -27,16 +27,18 @@ class Post(models.Model):
     updated = models.DateTimeField(auto_now=True)
     status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='draft')
     blog_views = models.IntegerField(default=0)
+    cover = models.ImageField(upload_to='articles/%Y/%m/%d',
+                              blank=True)
     tags = TaggableManager()
 
     #Updating Blog Post
-    def update_post(self, title, body, status, *args, **kwargs):
+    def update_post(self, title, body, status,cover, *args, **kwargs):
         self.title = title
+        self.cover = cover
         self.body = body
         self.status = status
-        super(Post, self).save(update_fields=['title',
-                                              'body',
-                                              'status'], *args, **kwargs)
+        super(Post, self).save(update_fields=['title','cover',
+                                              'body','status'], *args, **kwargs)
     #Update Views
     def update_views(self, *args, **kwargs):
         self.blog_views =self.blog_views+1

@@ -368,7 +368,7 @@ def create_magazine(request):
     #magazine_form = None
     if request.method == 'POST':
         #Form is sent
-        magazine_form = CreateMagazineForm(data=request.POST)
+        magazine_form = CreateMagazineForm(data=request.POST,files=request.FILES)
         if magazine_form.is_valid():
             issue = magazine_form.save(commit=False)
             issue.author = request.user
@@ -382,15 +382,16 @@ def create_magazine(request):
             return HttpResponseRedirect(reverse('user_issue_list'))
         else:
             messages.error(request, 'Error! Magazine issue was not created')
-            magazine_form = CreateMagazineForm(data=request.GET)
+            magazine_form = CreateMagazineForm(data=request.POST,files=request.FILES)
         return render(request,
                       'editors/articles/create-magazine.html',
                       {'magazine_form': magazine_form})
     else:
-        magazine_form = CreateMagazineForm(data=request.GET)
+        magazine_form = CreateMagazineForm(data=request.POST or None)
         return render(request,
                       'editors/articles/create-magazine.html',
-                      {'magazine_form': magazine_form})
+                      {'magazine_form': magazine_form,
+                       'section': 'issue-list'})
 
 #Newsletter created by The Current User.
 #@login_required
