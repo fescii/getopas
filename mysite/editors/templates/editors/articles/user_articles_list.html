@@ -23,6 +23,9 @@
             </div>
         </div>
     </div>
+{% if empty %}
+<p> You've not Published any Issues Yet!</p>
+{% endif %}
 {% endfor %}
 {% include "pagination.html" with page=posts %} {% endblock %}
 {% block footer %}
