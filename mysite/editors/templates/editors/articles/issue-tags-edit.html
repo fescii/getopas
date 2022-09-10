@@ -1,10 +1,13 @@
 {% extends "base.html" %}
 {% block title %}Updating A Newsletter{% endblock %}
 {% block content %}
-<h1>Edit {{issue.title}} Tags</h1>
+<h2>Edit {{issue.title}} Tags</h2>
 <form method="POST">
 {{ edit_form.as_p }}
 {% csrf_token %}
 <input type="submit" value="Save">
 </form>
 {% endblock %}
+{% block footer %}
+<script src=" {% static 'js/base.js' %}"></script>
+{% endblock footer %}
