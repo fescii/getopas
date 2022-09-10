@@ -139,7 +139,9 @@ main.issue-list{
     font-weight: bold;
     margin: 5px 0px;
 }
-.article-list>.post-summery>.article-wrapper>.date>.published-date{
+.article-list>.post-summery>.article-wrapper>.date>.published-date,
+.issue-list>.issue-summery>.date>.published-date{
+
     color: #808080;
     font-weight: lighter;
     font-size: 0.9rem;
