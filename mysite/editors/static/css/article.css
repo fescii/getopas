@@ -27,13 +27,16 @@ main.article>.main-content{
 }
 
 main.article>.main-content>form{
-    width: 95%;
+    box-sizing: border-box;
+    width: 98%;
+    height: 100%;
     box-shadow: 0rem 2rem 1.5rem #748f740e;
     border: 1px solid #83858421;
-    padding: 10px;
+    padding: 10px 20px;
     display: grid;
     grid-template-columns: 1fr 300px;
     row-gap: 30px;
+    column-gap: 10px;
 }
 .errorlist{
     display: none;
@@ -49,6 +52,7 @@ main.article>.main-content>form>p:nth-of-type(1){
 }
 main.article>.main-content>form>p:nth-of-type(1)>label{
     display: none;
+    color: white;
 }
 
 label{
@@ -74,13 +78,11 @@ main.article>.main-content>form>p:nth-of-type(2){
 }
 main.article>.main-content>form>p:nth-of-type(3){
     border: none;
-    border: 1px solid green;
+    /*border: 1px solid green;*/
     grid-column: 1/2;
     grid-row: 2/8;
     padding: 0px;
     margin: 0%;
-    background-color: white;
-    height: max-content;
     -webkit-border-radius: 0px;
     -moz-border-radius: 0px;
     -ms-border-radius: 0px;
