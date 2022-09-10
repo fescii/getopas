@@ -3,6 +3,7 @@ html,body{
 }
 main.article{
     background-color: rgb(231, 248, 215);
+    position: fixed;
     margin: 0%;
     padding: 0%;
     left: 0px;
@@ -16,11 +17,10 @@ main.article{
 
 }
 main.article>.main-content{
-    margin: 15px;
+    margin: 5px;
     border: 1px solid green;
     display: block;
-    overflow: hidden;
-    height: 100%;
+    padding: 20px;
 }
 
 main.article>.main-content>form{
@@ -69,7 +69,7 @@ main.article>.main-content>form>p:nth-of-type(3){
     padding: 0px;
     margin: 0%;
     background-color: white;
-    height: 520px;
+    height: max-content;
     -webkit-border-radius: 0px;
     -moz-border-radius: 0px;
     -ms-border-radius: 0px;
