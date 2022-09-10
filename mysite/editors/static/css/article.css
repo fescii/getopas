@@ -72,7 +72,7 @@ main.article>form>p:nth-of-type(1)>input[type='text']{
     outline: 1px solid #08b86f4d;
     font-size: 20px;
 }
-main.article>form>p:nth-of-type(2){
+main.article>form>p:nth-of-type(3){
     grid-column: 1/2;
     grid-row: 2/8;
    /* border: 1px solid #08b86f62;*/
@@ -87,7 +87,7 @@ main.article>form>p:nth-of-type(2){
     -o-border-radius: 0px;
     border-radius: 0px;
 }
-main.article>form>p:nth-of-type(2)>label{
+main.article>form>p:nth-of-type(3)>label{
     display: none;
 }
 main.article>form>input[type='submit']{
@@ -111,7 +111,8 @@ main.article>form>input[type='submit']{
     border-radius: 50px;
 }
 main.article>form>p:nth-of-type(3),
-main.article>form>p:nth-of-type(4){
+main.article>form>p:nth-of-type(2),
+main.article>form>p:nth-of-type(5){
     justify-self: center;
     width: 90%;
    /* border: 1px solid yellow;*/
