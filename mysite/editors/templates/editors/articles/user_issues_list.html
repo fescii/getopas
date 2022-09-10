@@ -3,6 +3,7 @@
 {% block title %}Opus | My Issues{% endblock %}
 {% block content %}
 <h2>My Issues</h2>
+<a href="{% url 'new_newsletter' %}" class='add-new'>Create New</a>
 {% for issue in issues %}
 <div class="issue-summery">
     <h2>
