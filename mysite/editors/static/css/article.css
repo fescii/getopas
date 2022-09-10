@@ -1,9 +1,8 @@
 main.article{
-    position: fixed;
     background-color: rgb(231, 248, 215);
     margin: 0%;
     padding: 0%;
-    left: 10px;
+    left: 0px;
     z-index: 10;
     padding-left: 10px;
     top: 0px;
@@ -11,14 +10,13 @@ main.article{
     bottom: 0%;
     top: 0%;
     bottom: 0%;
-    display: flex;
-    flex-flow: column;
-    align-items: flex-start;
     /*box-shadow: 0rem 2rem 1.5rem #748f741f;*/
 
 }
 main.article>.main-content{
     margin: 50px;
+    border: 1px solid green;
+    display: block;
 }
 main.article>.main-content>.action-title{
     font-size: 1.2rem;
