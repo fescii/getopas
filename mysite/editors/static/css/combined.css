@@ -202,22 +202,29 @@ main.issue-list{
 }
 
 .article-list>.post-summery>.article-wrapper>.article-stats>.views,
-.article-list>.post-summery>.article-wrapper>.article-stats>.comments{
+.article-list>.post-summery>.article-wrapper>.article-stats>.comments,
+.issue-list>.issue-summery>.issue-stats>.views,
+.issue-list>.issue-summery>.issue-stats>.comments{
     color: #808080;
     font-weight: unset;
+    padding: 0%;
     font-size: 0.9rem;
-    /*border: 1px solid rgb(48, 48, 45);*/
+   /* border: 1px solid rgb(48, 48, 45);*/
     display: flex;
     align-items: center;
+    justify-content: center;
 }
 .article-list>.post-summery>.article-wrapper>.article-stats>.views>.icli,
-.article-list>.post-summery>.article-wrapper>.article-stats>.comments>.icli{
+.article-list>.post-summery>.article-wrapper>.article-stats>.comments>.icli,
+.issue-list>.issue-summery>.issue-stats>.views>.icli,
+.issue-list>.issue-summery>.issue-stats>.comments>.icli{
     font-size: 16px;
     font-weight: bold;
     color: #df9409;
     /*border: 1px solid rgb(48, 48, 45);*/
     display: inline-block;
     margin-right: 5px;
+    padding-top: 2px;
 }
 .article-list>.post-summery>.article-wrapper>.action-links{
    /* border: 1px solid rgb(48, 48, 45);*/
