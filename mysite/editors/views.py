@@ -460,6 +460,8 @@ def edit_newsletter(request, pk):
 @user_passes_test(is_editor)
 def edit_newsletter_tags(request, pk):
     #post = get_object_or_404(Post, id=pk)
+    user = request.user
+    profile = user.profile
     issue = Issue.objects.get(id=pk)
     if request.method == 'POST':
         edit_form = MagazineEditTagsForm(request.POST or None, instance=issue)
@@ -482,7 +484,10 @@ def edit_newsletter_tags(request, pk):
         return render(request,
                         'editors/articles/issue-tags-edit.html',
                         {'edit_form': edit_form,
-                         'issue': issue})
+                         'issue': issue,
+                         'user':user,
+                         'profile':profile,
+                         'section': 'issue-list'})
 
 #Deleting an Issue
 #@login_required
