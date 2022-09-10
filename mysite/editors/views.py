@@ -382,12 +382,12 @@ def create_magazine(request):
             return HttpResponseRedirect(reverse('user_issue_list'))
         else:
             messages.error(request, 'Error! Magazine issue was not created')
-            magazine_form = CreateMagazineForm(data=request.POST,files=request.FILES)
+            magazine_form = CreateMagazineForm(data=request.POST)
         return render(request,
                       'editors/articles/create-magazine.html',
                       {'magazine_form': magazine_form})
     else:
-        magazine_form = CreateMagazineForm(data=request.POST or None)
+        magazine_form = CreateMagazineForm(data=request.POST)
         return render(request,
                       'editors/articles/create-magazine.html',
                       {'magazine_form': magazine_form,
