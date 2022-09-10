@@ -13,7 +13,7 @@
          <span class="published-date">{{ issue.publish.date }} {{ issue.publish.time }}</span>
     </div>
     <div class="image-wrapper">
-        <img src="/media/{{issue.cover}}" alt="Cover Image" width="300" height="250" title="{{issue.cover}}"/>
+        <img src="/media/{{issue.cover}}" alt="Cover Image" title="{{issue.cover}}"/>
     </div>
     <div class="content-summery">
         {{ issue.description|striptags|truncatechars:140 }}
