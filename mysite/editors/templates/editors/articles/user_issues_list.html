@@ -7,13 +7,29 @@
     <h2>
         <a href="{{ issue.get_absolute_url }}"> {{ issue.title }} </a>
     </h2>
-    <p class="date">Published on {{ issue.publish }} by {{ issue.author }}</p>
-    <img src="/media/{{issue.cover}}" alt="Cover Image" width="300" height="250" title="{{issue.cover}}"/>
-    {{ issue.description|striptags|truncatechars:140 }}
-    <a href="/dashboard/edit-newsletter/{{issue.id}}">edit</a>
-    <a href="/dashboard/edit-newsletter/tags/{{issue.id}}">Edit tags</a>
-    <a href="/dashboard/my-newsletters/{{issue.id}}/sections">Sections</a>
-    <a href="/dashboard/delete-newsletter/{{issue.id}}">delete</a>
+    <div class="date">
+        Published on:
+         <span class="published-date">{{ issue.publish.date }} {{ issue.publish.time }}</span>
+    </div>
+    <div class="image-wrapper">
+        <img src="/media/{{issue.cover}}" alt="Cover Image" width="300" height="250" title="{{issue.cover}}"/>
+    </div>
+    <div class="content-summery">
+        {{ issue.description|striptags|truncatechars:140 }}
+    </div>
+    <div class='article-stats'>
+        <span class='stats-title'>Reach</span>
+        <span class='views'><span class="iconly-Show icli"></span> {{ issue.issue_views }}</span>
+        <span class='comments'><span class="iconly-User2 icli"></span> {{ issue.feedbacks.count }}</span>
+    </div>
+    <div class="action-links">
+        <a href="/dashboard/edit-newsletter/{{issue.id}}">Edit</a>
+        <a href="/dashboard/edit-newsletter/tags/{{issue.id}}">Tags</a>
+        <a href="/dashboard/my-newsletters/{{issue.id}}/sections">Sections</a>
+        <a href="/dashboard/delete-newsletter/{{issue.id}}">Delete</a>
+    </div>
+
+
 </div>
 {% if empty %}
 <p> You've not Published any Issues Yet!</p>
