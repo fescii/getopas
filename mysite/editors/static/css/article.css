@@ -11,6 +11,7 @@ main.article{
     bottom: 0%;
     top: 0%;
     bottom: 0%;
+    height: 100%;
     /*box-shadow: 0rem 2rem 1.5rem #748f741f;*/
 
 }
@@ -18,12 +19,17 @@ main.article>.main-content{
     margin: 15px;
     border: 1px solid green;
     display: block;
+    overflow: hidden;
+    height: 100%;
 }
 
 main.article>.main-content>form{
     width: 100%;
     border: 1px solid green;
     padding: 0%;
+    display: grid;
+    grid-template-columns: 1fr 300px;
+    row-gap: 30px;
 }
 .errorlist{
     display: none;
@@ -33,6 +39,8 @@ main.article>.main-content>form>p:nth-of-type(1){
     width: 100%;
     padding: 0%;
     margin: 0%;
+    grid-column: 1/3;
+    grid-row: 1/2;
     /*border: 1px solid green;*/
 }
 
@@ -52,9 +60,12 @@ main.article>.main-content>form>p:nth-of-type(1)>input[type='text']{
 }
 main.article>.main-content>form>p:nth-of-type(2){
     border: 1px solid #08b86f62;
+    grid-column: 2/3;
 }
 main.article>.main-content>form>p:nth-of-type(3){
     border: none;
+    grid-column: 1/2;
+    grid-row: 2/8;
     padding: 0px;
     margin: 0%;
     background-color: white;
@@ -70,6 +81,7 @@ main.article>.main-content>form>p:nth-of-type(3)>label{
 }
 main.article>.main-content>form>input[type='submit']{
     padding: 5px 10px;
+    grid-column: 2/3;
     justify-self: start;
     margin-left: 15px;
     border: none;
@@ -107,6 +119,7 @@ form>p:nth-of-type(3)>.helptext{
     text-align: center;
 }
 #id_status{
+    grid-column: 2/3;
     background-color: #5eb49034;
     color: #08b86f;
     padding: 2px 5px;
