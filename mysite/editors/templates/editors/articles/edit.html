@@ -1,14 +1,16 @@
 {% extends "base.html" %}
 {% load static %}
-{% block title %}Edit | Article{% endblock %}
-{% block content %}
-<form method="POST">
-{{ edit_form.media }}
-{{ edit_form.as_p }}
-{% csrf_token %}
-<input type="submit" value="Save">
-</form>
-{% endblock %}
+  {% block title %}Edit | Article{% endblock %}
+  {% block content %}
+  <div class="main-content">
+    <form method="POST">
+    {{ edit_form.media }}
+    {{ edit_form.as_p }}
+    {% csrf_token %}
+    <input type="submit" value="Save">
+    </form>
+  </div>
+  {% endblock %}
 {% block footer %}
 <script src="{% static 'tinymce/tinymce.min.js'  %}"></script>
 <script src=" {% static 'js/base.js' %}"></script>

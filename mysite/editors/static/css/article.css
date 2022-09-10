@@ -1,22 +1,27 @@
 main.article{
     position: fixed;
+    background-color: rgb(231, 248, 215);
     margin: 0%;
     padding: 0%;
-    left: 210px;
+    left: 10px;
+    z-index: 10;
     padding-left: 10px;
     top: 0px;
     right: 0%;
     bottom: 0%;
-    margin-top: 75px;
+    top: 0%;
+    bottom: 0%;
     display: flex;
     flex-flow: column;
     align-items: flex-start;
     /*box-shadow: 0rem 2rem 1.5rem #748f741f;*/
-    scroll-behavior: smooth;
-    overflow-y: scroll;
 
 }
-
+main.article>.main-content{
+    margin-top: 75px;
+    margin-left: 50px;
+    margin-right: 50px;
+}
 main.article>.action-title{
     font-size: 1.2rem;
     display: none;
