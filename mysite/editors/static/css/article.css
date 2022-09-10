@@ -1,10 +1,11 @@
+html,body{
+    background-color: rgb(231, 248, 215);
+}
 main.article{
     background-color: rgb(231, 248, 215);
     margin: 0%;
     padding: 0%;
     left: 0px;
-    z-index: 10;
-    padding-left: 10px;
     top: 0px;
     right: 0%;
     bottom: 0%;
@@ -14,26 +15,11 @@ main.article{
 
 }
 main.article>.main-content{
-    margin: 50px;
+    margin: 15px;
     border: 1px solid green;
     display: block;
 }
-main.article>.main-content>.action-title{
-    font-size: 1.2rem;
-    display: none;
-    /*border: 1px solid green;*/
-    padding: 10px;
-    width: 100%;
-    padding: 0%;
-    margin: 0%;
-}
-main.article>.main-content>.action-title h2{
-    margin: 0%;
-    font-size: 19px;
-    box-shadow: 0rem 2rem 1.5rem #748f741f;
-    background-color: rgb(231, 248, 215);
-    width: max-content;
-}
+
 main.article>.main-content>form{
     width: 100%;
     border: 1px solid green;
