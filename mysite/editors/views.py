@@ -227,7 +227,7 @@ def create_post(request):
     post_form = None
     if request.method == 'POST':
         #Form is sent
-        post_form = CreateBlogPostForm(data=request.POST, files='')
+        post_form = CreateBlogPostForm(data=request.POST, files=request.FILES)
         if post_form.is_valid():
             #Assign The Current User To the Post
             post = post_form.save(commit=False)
@@ -286,13 +286,14 @@ def edit_blog_post(request, pk):
     profile = user.profile
     post = Post.objects.get(id=pk)
     if request.method == 'POST':
-        edit_form = BlogEditForm(request.POST or None, instance=post)
+        edit_form = BlogEditForm(request.POST or None, instance=post,files=request.FILES)
         if edit_form.is_valid():
             cd = edit_form.cleaned_data
             title = cd['title']
+            cover = cd['cover']
             body = cd['body']
             status = cd['status']
-            Post.update_post(post,title, body, status)
+            Post.update_post(post,title,body,status,cover)
             #edit_form.save()
             messages.success(request, 'Post updated successfully')
             return HttpResponseRedirect(reverse('user_post_list'))
