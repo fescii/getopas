@@ -396,9 +396,11 @@ def create_magazine(request):
 #@login_required
 @user_passes_test(is_editor)
 def user_issue_list(request):
+    user = request.user
+    profile = user.profile
     object_list = Issue.published.all().filter(author=request.user)
 
-    paginator = Paginator(object_list, 5) # 5 issues in each page
+    paginator = Paginator(object_list, 1) # 5 posts in each page
     page = request.GET.get('page')
     try:
         issues = paginator.page(page)
@@ -411,7 +413,10 @@ def user_issue_list(request):
 
     return render(request, 'editors/articles/user_issues_list.html',
                   {'page': page,
-                   'issues': issues,})
+                   'issues': issues,
+                   'user': user,
+                   'profile': profile,
+                   'section': 'article-list'})
 
 #Edit Magazine Newsletter
 @login_required
