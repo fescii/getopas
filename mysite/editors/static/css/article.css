@@ -57,9 +57,10 @@ main.article>.main-content>form>p:nth-of-type(1)>label{
 
 label{
    /* border: 1px solid green;*/
-    display: inline-block;
+    display: block;
     font-size: 20px;
     margin-right: 10px;
+    margin-bottom: 5px;
     color: #808080;
 }
 main.article>.main-content>form>p:nth-of-type(1)>input[type='text']{
@@ -114,7 +115,6 @@ main.article>.main-content>form>input[type='submit']{
 main.article>.main-content>form>p:nth-of-type(4){
     grid-column: 2/3;
     justify-self: start;
-    grid-row: 3/4;
 }
 main.article>.main-content>form>p:nth-of-type(2),
 main.article>.main-content>form>p:nth-of-type(5){
@@ -152,7 +152,6 @@ form>p:nth-of-type(3)>.helptext{
     border-radius: 2px;
 }
 input[type='file']{
-    grid-column: 2/3;
     /*background-color: #5eb49034;*/
     color: #08b86f;
     padding: 2px 5px;
