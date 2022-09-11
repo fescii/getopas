@@ -378,6 +378,7 @@ def edit_blog_post_cover(request, pk):
                         'editors/articles/edit-post-cover.html',
                         {'edit_form': edit_form,
                          'user':user,
+                         'post': post,
                          'profile':profile,
                          'section': 'article-list'})
     else:
