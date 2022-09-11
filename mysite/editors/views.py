@@ -530,7 +530,7 @@ def edit_newsletter_tags(request, pk):
 
 #Edit Issue Cover Photo
 @login_required
-def edit_blog_post_cover(request, pk):
+def edit_newsletter_cover(request, pk):
     #post = get_object_or_404(Post, id=pk)
     user = request.user
     profile = user.profile
