@@ -48,6 +48,17 @@ main.issue>.main-content{
     padding: 10px;
 }
 
+
+main.issue-list>form{
+    box-sizing: border-box;
+    width: 70%;
+    height: 100%;
+    box-shadow: 0rem 2rem 1.5rem #748f740e;
+    border: 1px solid #83858421;
+    padding: 10px 20px;
+    font-size: 16px;
+}
+
 main.article>.main-content>form,
 main.issue>.main-content>form{
     box-sizing: border-box;
