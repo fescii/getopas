@@ -45,6 +45,7 @@ urlpatterns = [
     path('my-articles/', views.user_post_list, name='user_post_list'),
     path('edit-article/<int:pk>/', views.edit_blog_post, name='edit_blog_post'),
     path('edit-article/tags/<int:pk>/', views.edit_blog_post_tags, name='edit_blog_post_tags'),
+    path('edit-article/cover/<int:pk>/', views.edit_blog_post_cover, name='edit_blog_post_cover'),
     path('delete-article/<int:pk>/', views.delete_post, name='delete_post'),
 
     #Newsletters Paths
