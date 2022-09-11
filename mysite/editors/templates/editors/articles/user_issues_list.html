@@ -1,8 +1,8 @@
 {% extends "base.html" %}
 {% load static %}
-{% block title %}Opus | My Issues{% endblock %}
+{% block title %}Opus - My Newsletters{% endblock %}
 {% block content %}
-<h2>My Issues</h2>
+<h2>My Newsletters</h2>
 <a href="{% url 'new_newsletter' %}" class='add-new'>Create</a>
 {% for issue in issues %}
 <div class="issue-summery">
