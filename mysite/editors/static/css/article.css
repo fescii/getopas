@@ -65,7 +65,7 @@ main.issue-list>form>p{
     display: block;
 }
 main.issue-list>form input[type="submit"]{
-    padding: 5px 10px;
+    padding: 5px 25px;
     border: none;
     display: block;
     background-color: #08b86f;
@@ -79,6 +79,10 @@ main.issue-list>form input[type="submit"]{
     -ms-border-radius: 50px;
     -o-border-radius: 50px;
     border-radius: 50px;
+}
+main.issue-list>form>p>label{
+    text-align: center;
+    margin-bottom: 5px;
 }
 
 main.article>.main-content>form,
@@ -190,6 +194,7 @@ main.article>.main-content>form>p:nth-of-type(4){
     gap: 5px;
 }
 form>p:nth-of-type(3)>input[type='text'],
+main.issue-list>form>p>input[type='text'],
 main.issue>.main-content>form>p:nth-of-type(4)>input[type='text'],
 main.issue>.main-content>form>p:nth-of-type(1)>input[type='text']{
     border: none;
