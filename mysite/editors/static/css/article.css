@@ -57,6 +57,28 @@ main.issue-list>form{
     border: 1px solid #83858421;
     padding: 10px 20px;
     font-size: 16px;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+}
+main.issue-list>form>p{
+    display: block;
+}
+main.issue-list>form input[type="submit"]{
+    padding: 5px 10px;
+    border: none;
+    display: block;
+    background-color: #08b86f;
+    box-shadow: 0rem 2rem 1.5rem #748f7454;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 18px;
+    color: #ffffffd7;
+    -webkit-border-radius: 50px;
+    -moz-border-radius: 50px;
+    -ms-border-radius: 50px;
+    -o-border-radius: 50px;
+    border-radius: 50px;
 }
 
 main.article>.main-content>form,
