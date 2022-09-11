@@ -372,6 +372,8 @@ def create_magazine(request):
         #Form is sent
         magazine_form = CreateMagazineForm(data=request.POST,files=request.FILES)
         if magazine_form.is_valid():
+            cd = magazine_form.cleaned_data
+            cover = cd['cover']
             issue = magazine_form.save(commit=False)
             issue.author = request.user
             issue.save()
