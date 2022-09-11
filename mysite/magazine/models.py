@@ -48,6 +48,12 @@ class Issue(models.Model):
     def update_views(self, *args, **kwargs):
         self.issue_views =self.issue_views+1
         super(Issue, self).save(*args, kwargs)
+
+     #Update Cover
+    def update_cover(self, cover,*args, **kwargs):
+        self.cover = cover
+        super(Issue, self).save(update_fields=['cover'],*args, **kwargs)
+
     class Meta:
         ordering = ('-publish',)
     def __str__(self):

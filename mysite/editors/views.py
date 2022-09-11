@@ -9,7 +9,8 @@ from .forms import UserRegistrationForm,\
     UserEditForm, ProfileEditForm, CreateBlogPostForm,\
         BlogEditForm, CreateMagazineForm, MagazineEditForm,\
             CreateSectionForm, SectionEditForm, MagazineEditTagsForm,\
-                BlogEditTagsForm, ModerateUserForm
+                BlogEditTagsForm, ModerateUserForm, BlogEditCoverForm,\
+                    MagazineEditCoverForm
 from devices.forms import CreateProductForm, EditProductForm, EditProductTags,\
     EditPhysicalInfo, EditSoftwareInfo, CreatePhysicalInfo, CreateSoftwareInfo,\
         AddProductPhoto
@@ -290,11 +291,9 @@ def edit_blog_post(request, pk):
         if edit_form.is_valid():
             cd = edit_form.cleaned_data
             title = cd['title']
-            cover = cd['cover']
             body = cd['body']
             status = cd['status']
-            Post.update_post(post,title=title,cover=cover,
-                             body=body, status=status)
+            Post.update_post(post,title=title,body=body, status=status)
             #edit_form.save()
             messages.success(request, 'Post updated successfully')
             return HttpResponseRedirect(reverse('user_post_list'))
@@ -318,7 +317,7 @@ def edit_blog_post(request, pk):
                          'profile':profile,
                          'section': 'article'})
 
-#Edit Magazine Newsletter Tags
+#Edit Articles Tags
 @login_required
 def edit_blog_post_tags(request, pk):
     #post = get_object_or_404(Post, id=pk)
@@ -353,6 +352,41 @@ def edit_blog_post_tags(request, pk):
                          'user':user,
                          'profile':profile,
                          'section': 'article-list'})
+#Edit Article Cover Photo
+@login_required
+def edit_blog_post_cover(request, pk):
+    #post = get_object_or_404(Post, id=pk)
+    user = request.user
+    profile = user.profile
+    post = Post.objects.get(id=pk)
+    if request.method == 'POST':
+        edit_form = BlogEditCoverForm(request.POST or None, instance=post)
+        if edit_form.is_valid():
+            cd = edit_form.clean
+            cover = cd['cover']
+            Post.update_cover(post,cover)
+            messages.success(request, 'Cover updated successfully')
+            return HttpResponseRedirect(reverse('user_post_list'))
+
+        else:
+            messages.error(request, 'Error updating the Tags')
+            edit_form = BlogEditCoverForm(request.POST or None, instance=post)
+
+        return render(request,
+                        'editors/articles/edit-post-cover.html',
+                        {'edit_form': edit_form,
+                         'user':user,
+                         'profile':profile,
+                         'section': 'article-list'})
+    else:
+        edit_form = BlogEditCoverForm(request.POST or None, instance=post)
+        return render(request,
+                        'editors/articles/edit-post-cover.html',
+                        {'edit_form': edit_form,
+                         'post': post,
+                         'user':user,
+                         'profile':profile,
+                         'section': 'article-list'})
 
 # process delete post
 @login_required
@@ -372,8 +406,6 @@ def create_magazine(request):
         #Form is sent
         magazine_form = CreateMagazineForm(data=request.POST,files=request.FILES)
         if magazine_form.is_valid():
-            cd = magazine_form.cleaned_data
-            cover = cd['cover']
             issue = magazine_form.save(commit=False)
             issue.author = request.user
             issue.save()
@@ -434,11 +466,10 @@ def edit_newsletter(request, pk):
         if edit_form.is_valid():
             cd = edit_form.cleaned_data
             no = cd['no']
-            cover = cd['cover']
             title = cd['title']
             description = cd['description']
             status = cd['status']
-            Issue.update_issue(issue,no,cover,title, description, status)
+            Issue.update_issue(issue,no,title, description, status)
             messages.success(request, 'Issue updated successfully')
             return HttpResponseRedirect(reverse('user_issue_list'))
 

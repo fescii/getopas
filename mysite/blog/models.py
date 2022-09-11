@@ -37,12 +37,18 @@ class Post(models.Model):
         self.cover = cover
         self.body = body
         self.status = status
-        super(Post, self).save(update_fields=['title','cover',
-                                              'body','status'], *args, **kwargs)
+        super(Post, self).save(update_fields=['title','body',
+                                              'status'], *args, **kwargs)
     #Update Views
     def update_views(self, *args, **kwargs):
         self.blog_views =self.blog_views+1
         super(Post, self).save(*args, kwargs)
+
+    #Update Cover
+    def update_cover(self, cover,*args, **kwargs):
+        self.cover = cover
+        super(Post, self).save(update_fields=['cover'],*args, **kwargs)
+
     #Overriding The Save Method
     def save(self, *args, **kwargs):
         if not self.slug:

@@ -64,13 +64,18 @@ class CreateBlogPostForm(forms.ModelForm):
 class BlogEditForm(forms.ModelForm):
     class Meta:
         model = Post
-        fields = ('title','cover', 'body','status')
+        fields = ('title', 'body','status')
         #fields = '__all__'
 
 class BlogEditTagsForm(forms.ModelForm):
     class Meta:
         model = Post
         fields = ('tags',)
+
+class BlogEditCoverForm(forms.ModelForm):
+    class Meta:
+        model = Post
+        fields = ('cover',)
 
 class CreateMagazineForm(forms.ModelForm):
     class Meta:
@@ -80,7 +85,13 @@ class CreateMagazineForm(forms.ModelForm):
 class MagazineEditForm(forms.ModelForm):
     class Meta:
         model = Issue
-        fields = ('no','cover','title','description','status')
+        fields = ('no','title','description','status')
+
+class MagazineEditCoverForm(forms.ModelForm):
+    class Meta:
+        model = Issue
+        fields = ('cover',)
+
 class MagazineEditTagsForm(forms.ModelForm):
     class Meta:
         model = Issue
