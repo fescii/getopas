@@ -483,13 +483,15 @@ def edit_newsletter(request, pk):
 
         return render(request,
                         'editors/articles/issue-edit.html',
-                        {'edit_form': edit_form})
+                        {'edit_form': edit_form,
+                         'section':'issue'})
     else:
         edit_form = MagazineEditForm(request.POST or None,
                                      instance=issue)
         return render(request,
                         'editors/articles/issue-edit.html',
-                        {'edit_form': edit_form})
+                        {'edit_form': edit_form,
+                         'section':'issue'})
 
 #Edit Magazine Newsletter Tags
 #@login_required
