@@ -543,7 +543,7 @@ def edit_newsletter_cover(request, pk):
             #edit_form.save()
             Issue.update_cover(issue,cover)
             messages.success(request, 'Cover updated successfully')
-            return HttpResponseRedirect(reverse('user_post_list'))
+            return HttpResponseRedirect(reverse('user_issue_list'))
 
         else:
             messages.error(request, 'Error updating the cover')
