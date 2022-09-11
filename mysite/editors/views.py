@@ -359,7 +359,7 @@ def edit_blog_post_tags(request, pk):
 def delete_post(request, pk):
     post = get_object_or_404(Post, id=pk)
     post.delete()
-    messages.success(request, 'Post deleted successfully')
+    messages.success(request, 'Article deleted successfully')
     return HttpResponseRedirect(reverse('user_post_list'))
 
 #Create Magazine View
@@ -495,7 +495,7 @@ def edit_newsletter_tags(request, pk):
 def delete_issue(request, pk):
     post = get_object_or_404(Issue, id=pk)
     post.delete()
-    messages.success(request, 'Post deleted successfully')
+    messages.success(request, 'Issue deleted successfully')
     return HttpResponseRedirect(reverse('user_issue_list'))
 
 
