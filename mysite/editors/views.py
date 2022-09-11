@@ -554,7 +554,7 @@ def edit_newsletter_cover(request, pk):
                         {'edit_form': edit_form,
                          'user':user,
                          'profile':profile,
-                         'section': 'article-list'})
+                         'section': 'issue-list'})
     else:
         edit_form = MagazineEditCoverForm(request.POST or None, instance=issue)
         return render(request,
@@ -563,7 +563,7 @@ def edit_newsletter_cover(request, pk):
                          'issue': issue,
                          'user':user,
                          'profile':profile,
-                         'section': 'article-list'})
+                         'section': 'issue-list'})
 
 
 #Deleting an Issue
