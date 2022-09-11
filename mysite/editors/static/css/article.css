@@ -49,7 +49,8 @@ main.issue>.main-content{
 }
 
 
-main.issue-list>form{
+main.issue-list>form,
+main.article-list>form{
     box-sizing: border-box;
     width: 70%;
     height: 100%;
@@ -61,10 +62,12 @@ main.issue-list>form{
     flex-flow: column;
     align-items: center;
 }
-main.issue-list>form>p{
+main.issue-list>form>p,
+main.article-list>form{
     display: block;
 }
-main.issue-list>form input[type="submit"]{
+main.issue-list>form input[type="submit"],
+main.article-list>form input[type="submit"]{
     padding: 5px 25px;
     border: none;
     display: block;
@@ -80,7 +83,8 @@ main.issue-list>form input[type="submit"]{
     -o-border-radius: 50px;
     border-radius: 50px;
 }
-main.issue-list>form>p>label{
+main.issue-list>form>p>label,
+main.article-list>form>p>label{
     text-align: center;
     margin-bottom: 5px;
 }
