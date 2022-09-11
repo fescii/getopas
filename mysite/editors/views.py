@@ -352,6 +352,7 @@ def edit_blog_post_tags(request, pk):
                          'user':user,
                          'profile':profile,
                          'section': 'article-list'})
+
 #Edit Article Cover Photo
 @login_required
 def edit_blog_post_cover(request, pk):
@@ -512,7 +513,11 @@ def edit_newsletter_tags(request, pk):
 
         return render(request,
                         'editors/articles/issue-tags-edit.html',
-                        {'edit_form': edit_form})
+                        {'edit_form': edit_form,
+                         'issue': issue,
+                         'user':user,
+                         'profile':profile,
+                         'section': 'issue-list'})
     else:
         edit_form = MagazineEditTagsForm(request.POST or None, instance=issue)
         return render(request,
@@ -522,6 +527,44 @@ def edit_newsletter_tags(request, pk):
                          'user':user,
                          'profile':profile,
                          'section': 'issue-list'})
+
+#Edit Issue Cover Photo
+@login_required
+def edit_blog_post_cover(request, pk):
+    #post = get_object_or_404(Post, id=pk)
+    user = request.user
+    profile = user.profile
+    issue = Issue.objects.get(id=pk)
+    if request.method == 'POST':
+        edit_form = MagazineEditCoverForm(request.POST or None, instance=issue,files=request.FILES)
+        if edit_form.is_valid():
+            cd = edit_form.cleaned_data
+            cover = cd['cover']
+            #edit_form.save()
+            Issue.update_cover(issue,cover)
+            messages.success(request, 'Cover updated successfully')
+            return HttpResponseRedirect(reverse('user_post_list'))
+
+        else:
+            messages.error(request, 'Error updating the cover')
+            edit_form = MagazineEditCoverForm(request.POST or None, instance=issue, files=request.FILES)
+
+        return render(request,
+                        'editors/articles/edit-issue-cover.html',
+                        {'edit_form': edit_form,
+                         'user':user,
+                         'profile':profile,
+                         'section': 'article-list'})
+    else:
+        edit_form = MagazineEditCoverForm(request.POST or None, instance=issue)
+        return render(request,
+                        'editors/articles/edit-issue-cover.html',
+                        {'edit_form': edit_form,
+                         'issue': issue,
+                         'user':user,
+                         'profile':profile,
+                         'section': 'article-list'})
+
 
 #Deleting an Issue
 #@login_required
