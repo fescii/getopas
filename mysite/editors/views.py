@@ -393,7 +393,7 @@ def create_magazine(request):
         return render(request,
                       'editors/articles/create-magazine.html',
                       {'magazine_form': magazine_form,
-                       'section': 'issue-list'})
+                       'section': 'issue'})
 
 #Newsletter created by The Current User.
 #@login_required

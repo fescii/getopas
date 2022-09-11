@@ -2,12 +2,14 @@
 {% load static %}
 {% block title %}Create - Newsletter{% endblock %}
 {% block content %}
-<form method="post">
-{{ magazine_form.media }}
-{{ magazine_form.as_p }}
-{% csrf_token %}
-<input type="submit" value="Create">
-</form>
+<div class="main-content">
+  <form method="post">
+  {{ magazine_form.media }}
+  {{ magazine_form.as_p }}
+  {% csrf_token %}
+  <input type="submit" value="Create">
+  </form>
+</div>
 {% endblock %}
 {% block footer %}
 <script src="{% static 'tinymce/tinymce.min.js'  %}"></script>

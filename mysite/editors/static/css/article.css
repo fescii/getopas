@@ -21,7 +21,8 @@ html,body{
     -ms-border-radius: 50px;
     -o-border-radius: 50px;
 }
-main.article{
+main.article,
+main.issue{
     background-color: rgb(231, 248, 215);
     position: fixed;
     margin: 0%;
@@ -36,7 +37,8 @@ main.article{
     /*box-shadow: 0rem 2rem 1.5rem #748f741f;*/
 
 }
-main.article>.main-content{
+main.article>.main-content,
+main.issue>.main-content{
     margin: 0%;
    /* border: 1px solid green;*/
     display: flex;
@@ -46,7 +48,8 @@ main.article>.main-content{
     padding: 10px;
 }
 
-main.article>.main-content>form{
+main.article>.main-content>form,
+main.issue>.main-content>form{
     box-sizing: border-box;
     width: 98%;
     height: 100%;
@@ -62,7 +65,8 @@ main.article>.main-content>form{
     display: none;
 }
 
-main.article>.main-content>form>p:nth-of-type(1){
+main.article>.main-content>form>p:nth-of-type(1),
+main.issue>.main-content>form>p:nth-of-type(3){
     width: 95%;
     padding: 0%;
     margin: 0%;
@@ -70,7 +74,8 @@ main.article>.main-content>form>p:nth-of-type(1){
     grid-row: 1/2;
     /*border: 1px solid green;*/
 }
-main.article>.main-content>form>p:nth-of-type(1)>label{
+main.article>.main-content>form>p:nth-of-type(1)>label,
+main.issue>.main-content>form>p:nth-of-type(3)>label{
     display: none;
     color: white;
 }
@@ -83,7 +88,8 @@ label{
     margin-bottom: 5px;
     color: #808080;
 }
-main.article>.main-content>form>p:nth-of-type(1)>input[type='text']{
+main.article>.main-content>form>p:nth-of-type(1)>input[type='text'],
+main.issue>.main-content>form>p:nth-of-type(3)>input[type="text"]{
    /* border: 1px solid green;*/
    width: 100%;
     padding: 2px 20px;
