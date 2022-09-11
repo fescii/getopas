@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "editing.html" %}
 {% load static %}
 {% block title %}Create | Magazine{% endblock %}
 {% block content %}
@@ -15,7 +15,7 @@
 <script>
     tinymce.init({
         selector: '#id_description',
-        height: 500, menubar: 'edit insert view format table',
+        height: 550, menubar: 'edit insert view format table',
         plugins: [
           'advlist autolink lists link image charmap print preview anchor',
           'searchreplace visualblocks code fullscreen',
