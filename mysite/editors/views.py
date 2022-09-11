@@ -360,17 +360,18 @@ def edit_blog_post_cover(request, pk):
     profile = user.profile
     post = Post.objects.get(id=pk)
     if request.method == 'POST':
-        edit_form = BlogEditCoverForm(request.POST or None, instance=post)
+        edit_form = BlogEditCoverForm(request.POST or None, instance=post,files=request.FILES)
         if edit_form.is_valid():
-            cd = edit_form.clean
+            cd = edit_form.cleaned_data
             cover = cd['cover']
+            #edit_form.save()
             Post.update_cover(post,cover)
             messages.success(request, 'Cover updated successfully')
             return HttpResponseRedirect(reverse('user_post_list'))
 
         else:
             messages.error(request, 'Error updating the Tags')
-            edit_form = BlogEditCoverForm(request.POST or None, instance=post)
+            edit_form = BlogEditCoverForm(request.POST or None, instance=post, files=request.FILES)
 
         return render(request,
                         'editors/articles/edit-post-cover.html',
