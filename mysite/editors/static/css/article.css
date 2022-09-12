@@ -93,7 +93,6 @@ main.issue>.main-content>form,
 main.create-section>.create-section>form{
     box-sizing: border-box;
     width: 98%;
-    height: 98%;
     box-shadow: 0rem 2rem 1.5rem #748f740e;
     border: 1px solid #83858421;
     padding: 20px;
