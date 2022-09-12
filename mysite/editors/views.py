@@ -587,7 +587,8 @@ def user_issue_section_list(request, pk):
     sections = issue.sections.all().order_by('-page')
     return render(request, 'editors/articles/user_issues_sections.html',
                   {'sections': sections,
-                   'issue': issue})
+                   'issue': issue,
+                   'section': 'issue-list'})
 
 #Edit Newsletter Section
 @login_required
