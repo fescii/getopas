@@ -8,29 +8,28 @@
 <div class="issue-section">
     <h2 class="title">{{ section.name }}</h2>
     {% if section.added %}
-    <a class="add" href="{% url 'remove_section' issue_id=issue.id  section_id=section.id%}">Unpublish</a>
-    <div class="section-content">
-        {{ section.body|striptags|truncatechars:200 }}
-    </div>
-    <div class="section-links">
-        <a href="{% url 'edit_section' issue_id=issue.id  section_id=section.id%}">Edit</a>
-        <a href="{% url 'delete_section' issue_id=issue.id  section_id=section.id%}">Delete</a>
-    </div>
+        <a class="add" href="{% url 'remove_section' issue_id=issue.id  section_id=section.id%}">Unpublish</a>
+        <div class="section-content">
+            {{ section.body|striptags|truncatechars:200 }}
+        </div>
+        <div class="section-links">
+            <a href="{% url 'edit_section' issue_id=issue.id  section_id=section.id%}">Edit</a>
+            <a href="{% url 'delete_section' issue_id=issue.id  section_id=section.id%}">Delete</a>
+        </div>
     {% else %}
         <a class="add" href="{% url 'add_section' issue_id=issue.id  section_id=section.id%}">Publish</a>
-    <div class="section-content">
-        {{ section.body|striptags|truncatechars:200 }}
-    </div>
-    <div class="section-links">
-        <a href="{% url 'edit_section' issue_id=issue.id  section_id=section.id%}">Edit</a>
-        <a href="{% url 'delete_section' issue_id=issue.id  section_id=section.id%}">Delete</a>
-    </div>
+        <div class="section-content">
+            {{ section.body|striptags|truncatechars:200 }}
+        </div>
+        <div class="section-links">
+            <a href="{% url 'edit_section' issue_id=issue.id  section_id=section.id%}">Edit</a>
+            <a href="{% url 'delete_section' issue_id=issue.id  section_id=section.id%}">Delete</a>
+        </div>
     {% endif %}
 </div>
 {% if empty %}
 <p> You've not Published any Sections For This Newsletter Yet!</p>
 
-{% else %}
 {% endif %}
 {% endfor %}
 {% include "pagination.html" with page=sections %}
