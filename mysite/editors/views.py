@@ -583,12 +583,16 @@ def delete_issue(request, pk):
 #@login_required
 @user_passes_test(is_editor)
 def user_issue_section_list(request, pk):
+    user = request.user
+    profile = user.profile
     issue = get_object_or_404(Issue, id=pk)
     sections = issue.sections.all().order_by('-page')
     return render(request, 'editors/articles/user_issues_sections.html',
                   {'sections': sections,
                    'issue': issue,
-                   'section': 'issue-list'})
+                   'section': 'issue-list',
+                   'user': user,
+                   'profile': profile})
 
 #Edit Newsletter Section
 @login_required
@@ -616,7 +620,8 @@ def create_section(request, pk):
         return render(request,
                       'editors/articles/create-section.html',
                       {'post_form': section_form,
-                       'issue':issue})
+                       'issue':issue,
+                       'section': 'issue-list'})
 
 
 # Add Section To Issue
