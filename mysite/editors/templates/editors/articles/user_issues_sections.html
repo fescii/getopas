@@ -6,12 +6,12 @@
     <a href="/dashboard/my-newsletters/{{issue.id}}/sections/add" class='add-new'>New Section</a>
 {% for section in sections %}
 <div class="issue-section">
-    <p class="date">Section Title: {{ section.name }}</p>
+    <div class="title">Section Title: {{ section.name }}</div>
     {% if section.added %}
     <div class="add">
         <p>Added<a href="{% url 'remove_section' issue_id=issue.id  section_id=section.id%}">Remove</a></p>
     </div>
-    <div class="issue-content">
+    <div class="section-content">
         {{ section.body|striptags|truncatechars:200 }}
     </div>
     <div class="section-links">
@@ -22,7 +22,7 @@
     <div class="add">
         <p>Not Added<a href="{% url 'add_section' issue_id=issue.id  section_id=section.id%}">Add</a></p>
     <div>
-    <div class="issue-content">
+    <div class="section-content">
         {{ section.body|striptags|truncatechars:200 }}
     </div>
     <div class="section-links">
