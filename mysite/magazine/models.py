@@ -78,7 +78,7 @@ class Issue(models.Model):
 #Section Model
 class Section(models.Model):
     issue = models.ForeignKey(Issue, on_delete=models.CASCADE, related_name='sections')
-    name = models.TextField(max_length=250)
+    name = models.CharField(max_length=250)
     page = models.IntegerField()
     body = models.TextField()
     added = models.BooleanField(default=False)
