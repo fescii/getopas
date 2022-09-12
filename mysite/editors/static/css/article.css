@@ -108,7 +108,8 @@ main.create-section>.create-section>form{
 }
 
 main.article>.main-content>form>p:nth-of-type(1),
-main.issue>.main-content>form>p:nth-of-type(2){
+main.issue>.main-content>form>p:nth-of-type(2),
+main.create-section>.create-section>h2{
     width: 95%;
     padding: 0%;
     margin: 0%;
@@ -147,7 +148,8 @@ main.issue>.main-content>form>p:nth-of-type(1){
     justify-self: start;
 }
 main.article>.main-content>form>p:nth-of-type(2),
-main.issue>.main-content>form>p:nth-of-type(3){
+main.issue>.main-content>form>p:nth-of-type(3),
+main.create-section>.create-section>form>p:nth-of-type(3){
     border: none;
     /*border: 1px solid green;*/
     grid-column: 1/2;
@@ -161,11 +163,13 @@ main.issue>.main-content>form>p:nth-of-type(3){
     border-radius: 0px;
 }
 main.article>.main-content>form>p:nth-of-type(2)>label,
-main.issue>.main-content>form>p:nth-of-type(3)>label{
+main.issue>.main-content>form>p:nth-of-type(3)>label,
+main.create-section>.create-section>form>p:nth-of-type(3)>label{
     display: none;
 }
 main.article>.main-content>form>input[type='submit'],
-main.issue>.main-content>form>input[type="submit"]{
+main.issue>.main-content>form>input[type="submit"],
+main.create-section>.create-section>form>input[type="submit"]{
     padding: 5px 10px;
     grid-column: 2/3;
     border: none;
