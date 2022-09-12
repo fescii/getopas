@@ -586,7 +586,19 @@ def user_issue_section_list(request, pk):
     user = request.user
     profile = user.profile
     issue = get_object_or_404(Issue, id=pk)
-    sections = issue.sections.all().order_by('-page')
+    all_sections = issue.sections.all().order_by('-page')
+
+    paginator = Paginator(all_sections, 5) # 5 sections in each page
+    page = request.GET.get('page')
+    try:
+        sections = paginator.page(page)
+    except PageNotAnInteger:
+    # If page is not an integer deliver the first page
+        sections = paginator.page(1)
+    except EmptyPage:
+    # If page is out of range deliver last page of results
+        sections = paginator.page(paginator.num_pages)
+
     return render(request, 'editors/articles/user_issues_sections.html',
                   {'sections': sections,
                    'issue': issue,
