@@ -677,6 +677,8 @@ def delete_section(request,issue_id, section_id):
 @user_passes_test(is_editor)
 def edit_section(request, issue_id, section_id):
     issue = Issue.objects.get(id=issue_id)
+    user = request.user
+    profile =  user.profile
     section = Section.objects.get(id=section_id)
     section_edit_form = SectionEditForm(request.POST or None, instance=section)
     if request.method == 'POST':
@@ -693,12 +695,18 @@ def edit_section(request, issue_id, section_id):
         return render(request,
                         'editors/articles/section-edit.html',
                         {'section_edit_form': section_edit_form,
-                        'issue': issue})
+                        'issue': issue,
+                        'section': 'create-section',
+                        'user':user,
+                        'profile': profile})
     else:
         return render(request,
                         'editors/articles/section-edit.html',
                         {'section_edit_form': section_edit_form,
-                        'issue': issue})
+                        'issue': issue,
+                        'section': 'create-section',
+                        'user': user,
+                        'profile': profile})
 
 
 #List Users Products

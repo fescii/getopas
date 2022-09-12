@@ -1,22 +1,22 @@
-{% extends "base.html" %}
+{% extends "editing.html" %}
 {% load static %}
-{% block title %}Updating A Newsletter{% endblock %}
+{% block title %}Edit Section For {{ issue.title }}{% endblock %}
 {% block content %}
-<h2>Title: {{issue.title}}</h2>
-<h1>Edit Issue Section</h1>
-<form method="POST">
-    {{ section_edit_form.media}}
-{{ section_edit_form.as_p }}
-{% csrf_token %}
-<input type="submit" value="Save">
-</form>
+<div class="create-section">
+  <form method="POST">
+      {{ section_edit_form.media}}
+  {{ section_edit_form.as_p }}
+  {% csrf_token %}
+  <input type="submit" value="Save">
+  </form>
+</div>
 {% endblock %}
 {% block footer %}
 <script src="{% static 'tinymce/tinymce.min.js'  %}"></script>
 <script>
     tinymce.init({
         selector: '#id_body',
-        height: 500, menubar: 'edit insert view format table',
+        height: 550, menubar: 'edit insert view format table',
         plugins: [
           'advlist autolink lists link image charmap print preview anchor',
           'searchreplace visualblocks code fullscreen',
