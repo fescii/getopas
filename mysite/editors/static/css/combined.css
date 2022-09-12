@@ -127,15 +127,20 @@ main.issue-list{
     font-size: 0.9rem;
     border: #83858421;
     opacity: .9;
-    background-color:rgb(15, 138, 196);
+    background-color:rgb(133, 205, 39);
     border-radius: 50px;
  }
  .issue-list>.issue-section>.section-content{
     grid-column: 1/2;
-    grid-row: 2/4;
+    grid-row: 2/5;
  }
  .issue-list>.issue-section>.section-links{
     grid-column: 2/3;
+    grid-row: 4/5;
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    gap: 10px;
  }
  .issue-list>.issue-summery>h2,
  .article-list>.post-summery>h2{
@@ -250,7 +255,8 @@ main.issue-list{
     gap: 10px;
 }
 .article-list>.post-summery>.action-links>a,
-.issue-list>.issue-summery>.action-links>a{
+.issue-list>.issue-summery>.action-links>a,
+.issue-list>.issue-section>.section-links>a{
     text-decoration: none;
     color: rgba(255, 255, 255, 0.938);
     display: inline-block;
@@ -266,7 +272,8 @@ main.issue-list{
     -o-border-radius: 50px;
 }
 .article-list>.post-summery>.action-links>a:last-of-type,
-.issue-list>.issue-summery>.action-links>a:last-of-type{
+.issue-list>.issue-summery>.action-links>a:last-of-type,
+.issue-list>.issue-section>.section-links>a:last-of-type{
     background-color:rgb(196, 36, 15);
 }
 
