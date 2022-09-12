@@ -6,7 +6,7 @@
     <a href="/dashboard/my-newsletters/{{issue.id}}/sections/add" class='add-new'>New Section</a>
 {% for section in sections %}
 <div class="issue-section">
-    <div class="title">Section Title: {{ section.name }}</div>
+    <h2 class="title">{{ section.name }}</h2>
     {% if section.added %}
     <div class="add">
         <p>Added<a href="{% url 'remove_section' issue_id=issue.id  section_id=section.id%}">Remove</a></p>
