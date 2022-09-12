@@ -47,13 +47,21 @@ main.issue>.main-content{
     justify-content: center;
     padding: 10px;
 }
+main.issue-list>.create-section{
+    margin: 0%;
+   /* border: 1px solid green;*/
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+}
+
 
 
 main.issue-list>form,
 main.article-list>form{
     box-sizing: border-box;
-    width: 70%;
-    height: 100%;
     box-shadow: 0rem 2rem 1.5rem #748f740e;
     border: 1px solid #83858421;
     padding: 10px 20px;

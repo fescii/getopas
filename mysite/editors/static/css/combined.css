@@ -80,6 +80,22 @@ main.issue-list{
     padding-bottom: 50px;
 
 }
+main.issue-list>.create-section{
+    margin: 0%;
+   /* border: 1px solid green;*/
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+}
+main.issue-list>.create-section>form{
+    box-sizing: border-box;
+    border: 1px solid green;
+    display: grid;
+    grid-template-columns: 1fr 100px;
+    justify-items: center;
+}
 .article-list>h2,
 .issue-list>h2{
    /* border: 1px solid rgb(48, 48, 45);*/
