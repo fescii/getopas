@@ -8,15 +8,27 @@
 <div class="issue-section">
     <p class="date">Section Title: {{ section.name }}</p>
     {% if section.added %}
-    <p>Added<a href="{% url 'remove_section' issue_id=issue.id  section_id=section.id%}">Remove</a></p>
-    {{ section.body|striptags|truncatechars:200 }}
-    <a href="{% url 'edit_section' issue_id=issue.id  section_id=section.id%}">Edit</a>
-    <a href="{% url 'delete_section' issue_id=issue.id  section_id=section.id%}">Delete</a>
+    <div class="add">
+        <p>Added<a href="{% url 'remove_section' issue_id=issue.id  section_id=section.id%}">Remove</a></p>
+    </div>
+    <div class="issue-content">
+        {{ section.body|striptags|truncatechars:200 }}
+    </div>
+    <div class="section-links">
+        <a href="{% url 'edit_section' issue_id=issue.id  section_id=section.id%}">Edit</a>
+        <a href="{% url 'delete_section' issue_id=issue.id  section_id=section.id%}">Delete</a>
+    </div>
     {% else %}
-    <p>Not Added<a href="{% url 'add_section' issue_id=issue.id  section_id=section.id%}">Add</a></p>
-    {{ section.body|striptags|truncatechars:200 }}
-    <a href="{% url 'edit_section' issue_id=issue.id  section_id=section.id%}">Edit</a>
-    <a href="{% url 'delete_section' issue_id=issue.id  section_id=section.id%}">Delete</a>
+    <div class="add">
+        <p>Not Added<a href="{% url 'add_section' issue_id=issue.id  section_id=section.id%}">Add</a></p>
+    <div>
+    <div class="issue-content">
+        {{ section.body|striptags|truncatechars:200 }}
+    </div>
+    <div class="section-links">
+        <a href="{% url 'edit_section' issue_id=issue.id  section_id=section.id%}">Edit</a>
+        <a href="{% url 'delete_section' issue_id=issue.id  section_id=section.id%}">Delete</a>
+    </div>
     {% endif %}
 </div>
 {% if empty %}
