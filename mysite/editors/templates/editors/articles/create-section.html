@@ -3,12 +3,14 @@
 {% block title %}Create - Issue Section{% endblock %}
 {% block content %}
 <h2>Section For: {{ issue.title }}</h2>
-<form method="post">
-    {{ post_form.media }}
-{{ post_form.as_p }}
-{% csrf_token %}
-<input type="submit" value="Create">
-</form>
+<div class="create-section">
+  <form method="post">
+      {{ post_form.media }}
+  {{ post_form.as_p }}
+  {% csrf_token %}
+  <input type="submit" value="Create">
+  </form>
+</div>
 {% endblock %}
 {% block footer %}
 <script src="{% static 'tinymce/tinymce.min.js'  %}"></script>
