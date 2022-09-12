@@ -598,6 +598,8 @@ def user_issue_section_list(request, pk):
 @login_required
 def create_section(request, pk):
     issue = Issue.objects.get(id=pk)
+    user = request.user
+    profile =  user.profile
     if request.method == 'POST':
         #Form is sent
         section_form = CreateSectionForm(data=request.POST)
@@ -614,7 +616,10 @@ def create_section(request, pk):
         return render(request,
                       'editors/articles/create-section.html',
                       {'post_form': section_form,
-                       'issue':issue})
+                       'issue':issue,
+                       'section': 'issue-list',
+                       'user': user,
+                       'profile':profile})
     else:
         section_form = CreateSectionForm(data=request.GET)
         return render(request,
