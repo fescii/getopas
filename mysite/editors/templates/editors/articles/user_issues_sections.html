@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
-{% block title %}Opus - Issues Sections{% endblock %}
+{% block title %}{{issue.title}} - Sections{% endblock %}
 {% block content %}
 <h2>{{issue.title}}: Sections</h2>
     <a href="/dashboard/my-newsletters/{{issue.id}}/sections/add" class='add-new'>New Section</a>
@@ -9,7 +9,7 @@
     <h2 class="title">{{ section.name }}</h2>
     {% if section.added %}
     <div class="add">
-        <p>Added<a href="{% url 'remove_section' issue_id=issue.id  section_id=section.id%}">Remove</a></p>
+        <a href="{% url 'remove_section' issue_id=issue.id  section_id=section.id%}">Unpublish</a>
     </div>
     <div class="section-content">
         {{ section.body|striptags|truncatechars:200 }}
@@ -20,7 +20,7 @@
     </div>
     {% else %}
     <div class="add">
-        <p>Not Added<a href="{% url 'add_section' issue_id=issue.id  section_id=section.id%}">Add</a></p>
+        <a href="{% url 'add_section' issue_id=issue.id  section_id=section.id%}">Publish</a>
     </div>
     <div class="section-content">
         {{ section.body|striptags|truncatechars:200 }}
