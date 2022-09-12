@@ -2,8 +2,7 @@
 {% load static %}
 {% block title %}Create - Issue Section{% endblock %}
 {% block content %}
-<h1>Add Section</h1>
-<h2>Issue Title {{ issue.title }}</h2>
+<h2>Section For: {{ issue.title }}</h2>
 <form method="post">
     {{ post_form.media }}
 {{ post_form.as_p }}
