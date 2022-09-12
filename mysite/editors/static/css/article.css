@@ -22,7 +22,8 @@ html,body{
     -o-border-radius: 50px;
 }
 main.article,
-main.issue{
+main.issue,
+main.create-section{
     background-color: rgb(231, 248, 215);
     position: fixed;
     margin: 0%;
@@ -38,7 +39,8 @@ main.issue{
 
 }
 main.article>.main-content,
-main.issue>.main-content{
+main.issue>.main-content,
+main.create-section>.create-section{
     margin: 0%;
    /* border: 1px solid green;*/
     display: flex;
@@ -60,7 +62,7 @@ main.article-list>form{
     align-items: center;
 }
 main.issue-list>form>p,
-main.article-list>form{
+main.article-list>form>p{
     display: block;
 }
 main.issue-list>form input[type="submit"],
@@ -87,7 +89,8 @@ main.article-list>form>p>label{
 }
 
 main.article>.main-content>form,
-main.issue>.main-content>form{
+main.issue>.main-content>form,
+main.create-section>.create-section>form{
     box-sizing: border-box;
     width: 98%;
     height: 100%;
