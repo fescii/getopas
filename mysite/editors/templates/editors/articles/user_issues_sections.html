@@ -21,7 +21,7 @@
     {% else %}
     <div class="add">
         <p>Not Added<a href="{% url 'add_section' issue_id=issue.id  section_id=section.id%}">Add</a></p>
-    <div>
+    </div>
     <div class="section-content">
         {{ section.body|striptags|truncatechars:200 }}
     </div>
@@ -37,7 +37,7 @@
 {% else %}
 {% endif %}
 {% endfor %}
-{% include "pagination.html" with page=posts %}
+{% include "pagination.html" with page=sections %}
 <!--{% include "pagination.html" with page=page_obj %}-->
 {% endblock %}
 {% block footer %}
