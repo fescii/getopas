@@ -100,10 +100,10 @@ class MagazineEditTagsForm(forms.ModelForm):
 class CreateSectionForm(forms.ModelForm):
     class Meta:
         model = Section
-        fields =('name','page','body','added')
+        fields =('name','page','body')
 
 class SectionEditForm(forms.ModelForm):
     class Meta:
         model = Section
-        fields =('name','page','body','added')
+        fields =('name','page','body')
 

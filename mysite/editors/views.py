@@ -617,7 +617,7 @@ def create_section(request, pk):
                       'editors/articles/create-section.html',
                       {'post_form': section_form,
                        'issue':issue,
-                       'section': 'issue-list',
+                       'section': 'create-section',
                        'user': user,
                        'profile':profile})
     else:
@@ -626,7 +626,9 @@ def create_section(request, pk):
                       'editors/articles/create-section.html',
                       {'post_form': section_form,
                        'issue':issue,
-                       'section': 'issue-list'})
+                       'section': 'create-section',
+                       'user': user,
+                       'profile':profile})
 
 
 # Add Section To Issue

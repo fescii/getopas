@@ -2,9 +2,9 @@
 {% load static %}
 {% block title %}Create - Issue Section{% endblock %}
 {% block content %}
-<h2>Section For: {{ issue.title }}</h2>
 <div class="create-section">
   <form method="post">
+    <h2>Section For: {{ issue.title }}</h2>
       {{ post_form.media }}
   {{ post_form.as_p }}
   {% csrf_token %}
@@ -17,7 +17,7 @@
 <script>
     tinymce.init({
         selector: '#id_body',
-        height: 550, menubar: 'edit insert view format table',
+        height: 500, menubar: 'edit insert view format table',
         plugins: [
           'advlist autolink lists link image charmap print preview anchor',
           'searchreplace visualblocks code fullscreen',

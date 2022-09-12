@@ -80,16 +80,34 @@ main.issue-list{
     padding-bottom: 50px;
 
 }
-main.issue-list>.create-section{
+main.create-section{
+    /*border: 1px solid rgb(48, 48, 45);*/
+    position: fixed;
+    margin: 0%;
+    padding: 0%;
+    left: 200px;
+    top: 0px;
+    right: 0%;
+    bottom: 0%;
+    margin-top: 75px;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    gap: 30px;
+    padding-bottom: 50px;
+
+}
+main.create-section>.create-section{
     margin: 0%;
     border: 1px solid green;
     width: max-content;
     display: flex;
     flex-flow: column;
     padding: 10px;
+    column-gap: 0px;
     width: 98%;
 }
-main.issue-list>.create-section>form{
+main.create-section>.create-section>form{
     box-sizing: border-box;
     width: 100%;
     border: 1px solid rgb(235, 156, 8);
@@ -97,17 +115,17 @@ main.issue-list>.create-section>form{
     grid-template-columns: 4fr 1fr;
     justify-items: start;
 }
-main.issue-list>.create-section>form>p:nth-of-type(1),
-main.issue-list>.create-section>form>p:nth-of-type(2){
+main.create-section>.create-section>form>p:nth-of-type(1),
+main.create-section>.create-section>form>p:nth-of-type(2){
     grid-column: 2/3;
     border: 1px solid rgb(48, 48, 45);
     display: block;
     margin: 0%;
 }
-main.issue-list>.create-section>form>p:nth-of-type(2)>input[type="number"]{
+main.create-section>.create-section>form>p:nth-of-type(2)>input[type="number"]{
     width: 60px;
 }
-main.issue-list>.create-section>form>p:nth-of-type(3){
+main.create-section>.create-section>form>p:nth-of-type(3){
     grid-column: 1/2;
     grid-row: 1/8;
     margin: 0%;
