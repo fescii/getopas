@@ -106,7 +106,7 @@ main.issue-list{
      width: 90%;
      padding: 10px 20px;
      display: grid;
-     grid-template-columns: 3fr 150px;
+     grid-template-columns: 3fr 50px;
      row-gap: 10px;
      column-gap: 10px;
      position: relative;
@@ -117,8 +117,8 @@ main.issue-list{
  }
  .issue-list>.issue-section>.add{
     position: absolute;
-    top: 5px;
-    right: 5px;
+    bottom: 15px;
+    right: 15px;
     text-decoration: none;
     color: rgba(255, 255, 255, 0.938);
     display: inline-block;
@@ -132,14 +132,15 @@ main.issue-list{
  }
  .issue-list>.issue-section>.section-content{
     grid-column: 1/2;
-    grid-row: 2/5;
+    grid-row: 2/4;
+    padding: 0px 0px 10px;
  }
  .issue-list>.issue-section>.section-links{
-    grid-column: 2/3;
+    grid-column: 1/2;
     grid-row: 4/5;
     display: flex;
     align-items: center;
-    justify-content: end;
+    justify-content: start;
     gap: 10px;
  }
  .issue-list>.issue-summery>h2,
