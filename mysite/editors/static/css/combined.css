@@ -113,7 +113,19 @@ main.issue-list{
     grid-column: 1/3;
  }
  .issue-list>.issue-section>.add{
-    grid-column: 1/3;
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    text-decoration: none;
+    color: rgba(255, 255, 255, 0.938);
+    display: inline-block;
+    padding: 2px 15px;
+    font-weight: bold;
+    font-size: 0.9rem;
+    border: #83858421;
+    opacity: .9;
+    background-color:rgb(15, 138, 196);
+    border-radius: 50px;
  }
  .issue-list>.issue-section>.section-content{
     grid-column: 1/2;

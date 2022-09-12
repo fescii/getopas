@@ -8,9 +8,7 @@
 <div class="issue-section">
     <h2 class="title">{{ section.name }}</h2>
     {% if section.added %}
-    <div class="add">
-        <a href="{% url 'remove_section' issue_id=issue.id  section_id=section.id%}">Unpublish</a>
-    </div>
+    <a class="add" href="{% url 'remove_section' issue_id=issue.id  section_id=section.id%}">Unpublish</a>
     <div class="section-content">
         {{ section.body|striptags|truncatechars:200 }}
     </div>
@@ -19,9 +17,7 @@
         <a href="{% url 'delete_section' issue_id=issue.id  section_id=section.id%}">Delete</a>
     </div>
     {% else %}
-    <div class="add">
-        <a href="{% url 'add_section' issue_id=issue.id  section_id=section.id%}">Publish</a>
-    </div>
+        <a class="add" href="{% url 'add_section' issue_id=issue.id  section_id=section.id%}">Publish</a>
     <div class="section-content">
         {{ section.body|striptags|truncatechars:200 }}
     </div>
