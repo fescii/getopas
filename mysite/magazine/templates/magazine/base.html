@@ -5,6 +5,7 @@
   <head>
     <title>{% block title %}{% endblock %}</title>
     <link href="{% static "css/blog.css" %}" rel="stylesheet">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/styles/default.min.css">
   </head>
   <body>
     <div id="content">
@@ -17,5 +18,7 @@
       <p>This is my blog. I've Created {% total_issues %} Magazine issues so far.</
         p>
     </div>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/highlight.min.js"></script>
+<script>hljs.highlightAll();</script>
   </body>
 </html>
