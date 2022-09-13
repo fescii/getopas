@@ -92,7 +92,8 @@ main.devices-info>h2{
 
 .article-list>.post-summery,
 .issue-list>.issue-summery,
-.devices>.product-summery{
+.devices>.product-summery,
+.devices-info>.info-summery{
     /* border: 1px solid rgb(48, 48, 45);*/
      box-shadow: 0rem 2rem 1.5rem #748f740e;
      border: 1px solid #83858421;
