@@ -756,17 +756,21 @@ def create_product(request):
             product_form = CreateProductForm()
             return render(request,
                           'editors/products/create-product.html',
-                          {'product_form': product_form})
+                          {'product_form': product_form,
+                           'section': 'devices'})
     else:
         product_form = CreateProductForm()
         return render(request,
                       'editors/products/create-product.html',
-                          {'product_form': product_form})
+                          {'product_form': product_form,
+                           'section': 'devices'})
 
 #Edit Issue Cover Photo
 @login_required
 def edit_product_cover(request, pk):
     #post = get_object_or_404(Post, id=pk)
+    user = request.user
+    profile = user.profile
     product = Product.objects.get(id=pk)
     if request.method == 'POST':
         edit_form = EditProductCover(request.POST or None, instance=product,files=request.FILES)
@@ -786,14 +790,18 @@ def edit_product_cover(request, pk):
                         'editors/products/edit-product-cover.html',
                         {'edit_form': edit_form,
                          'product': product,
-                         'section': 'devices'})
+                         'section': 'devices',
+                         'user': user,
+                         'profile': profile})
     else:
         edit_form = EditProductCover(request.POST or None, instance=product)
         return render(request,
                         'editors/products/edit-product-cover.html',
                         {'edit_form': edit_form,
                          'product': product,
-                         'section': 'devices'})
+                         'section': 'devices',
+                         'user': user,
+                         'profile': profile})
 
 #Editing a product
 @user_passes_test(is_editor)

@@ -23,7 +23,8 @@ html,body{
 }
 main.article,
 main.issue,
-main.create-section{
+main.create-section,
+main.devices{
     background-color: rgb(231, 248, 215);
     position: fixed;
     margin: 0%;
@@ -77,6 +78,7 @@ main.article-list>form>p>label{
 }
 main.article>.main-content,
 main.issue>.main-content,
+main.devices>.main-content,
 main.create-section>.create-section{
     margin: 0%;
    /*border: 1px solid green;*/
@@ -89,6 +91,7 @@ main.create-section>.create-section{
 }
 
 main.article>.main-content>form,
+main.devices>.main-content>form,
 main.issue>.main-content>form,
 main.create-section>.create-section>form{
     box-sizing: border-box;
@@ -107,6 +110,7 @@ main.create-section>.create-section>form{
 }
 
 main.article>.main-content>form>p:nth-of-type(1),
+main.devices>.main-content>form>p:nth-of-type(1),
 main.issue>.main-content>form>p:nth-of-type(2){
     width: 100%;
     padding: 0%;
