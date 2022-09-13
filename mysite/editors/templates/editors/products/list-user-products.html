@@ -3,6 +3,7 @@
 {% block title %}Opus - Products{% endblock %}
 {% block content %}
 {% for product in products %}
+<a href="{% url 'new_product' %}" class='add-new'>New Product</a>
 <div class="product-summery">
     <h2>
         <a href="{{ product.get_absolute_url }}"> {{ product.name }} </a>
