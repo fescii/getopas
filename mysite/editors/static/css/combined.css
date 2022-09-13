@@ -280,11 +280,13 @@ main.devices-info>h2{
     justify-content: end;
     gap: 10px;
 }
+
 .article-list>.post-summery>.action-links>a,
 .issue-list>.issue-summery>.action-links>a,
 .issue-list>.issue-section>.section-links>a,
 .devices>.product-summery>.action-links>a,
-.devices-info>.info-summery>.info-links>a{
+.devices-info>.info-summery>.info-links>a,
+main.devices>.main-content>.image>.action-links>a{
     text-decoration: none;
     color: rgba(255, 255, 255, 0.938);
     display: inline-block;
