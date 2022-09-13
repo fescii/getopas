@@ -8,7 +8,7 @@
     </h2>
     <div class="date">
         Release on:
-         <span class="published-date">{{ product.release_date }} </span>
+         <span class="release-date">{{ product.release_date }} </span>
     </div>
     <div class="image-wrapper">
         <img src="/media/{{product.cover}}" alt="Cover Image"  title="{{issue.cover}}"/>
@@ -19,7 +19,7 @@
     <div class='product-stats'>
         <span class='stats-title'>Reach</span>
         <span class='views'><span class="iconly-Show icli"></span> {{ product.product_views }}</span>
-        <span class='comments'><span class="iconly-User2 icli"></span> {{ product.reviews.count }}</span>
+        <span class='reviews'><span class="iconly-User2 icli"></span> {{ product.reviews.count }}</span>
     </div>
     <div class="action-links">
         <a href=" {% url 'edit_product' product_id=product.id product_name=product.slug %}">edit</a>

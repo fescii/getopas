@@ -92,7 +92,7 @@ main.devices{
 
 .article-list>.post-summery,
 .issue-list>.issue-summery,
-main.devices>.product-summery{
+.devices>.product-summery{
     /* border: 1px solid rgb(48, 48, 45);*/
      box-shadow: 0rem 2rem 1.5rem #748f740e;
      border: 1px solid #83858421;
@@ -146,14 +146,16 @@ main.devices>.product-summery{
     gap: 10px;
  }
  .issue-list>.issue-summery>h2,
- .article-list>.post-summery>h2{
+ .article-list>.post-summery>h2,
+ .devices>.product-summery>h2{
     margin: 0%;
     padding: 0%;
     grid-column: 2/3;
     /*border: 1px solid #838584e0;*/
 }
 .issue-list>.issue-summery>.date,
-.article-list>.post-summery>.date{
+.article-list>.post-summery>.date,
+.devices>.product-summery>.date{
     grid-column: 2/3;
     grid-row: 2/3;
     margin: 0%;
@@ -163,25 +165,29 @@ main.devices>.product-summery{
 }
 
 .issue-list>.issue-summery>.image-wrapper,
-.article-list>.post-summery>.image-wrapper{
+.article-list>.post-summery>.image-wrapper,
+.devices>.product-summery>.image-wrapper{
     height: 150px;
     grid-column: 1/2;
     grid-row: 1/8;
     margin-right: 20px;
 }
 .issue-list>.issue-summery>.image-wrapper>img,
-.article-list>.post-summery>.image-wrapper>img{
+.article-list>.post-summery>.image-wrapper>img,
+.devices>.product-summery>.image-wrapper>img{
     width: 100%;
     height: 100%;
     object-fit: cover;
 }
 .issue-list>.issue-summery>.content-summery,
-.article-list>.post-summery>.article-summery{
+.article-list>.post-summery>.article-summery,
+.devices>.product-summery>.content-summery{
     grid-column: 2/3;
     grid-row: 3/6;
 }
 .issue-list>.issue-summery>.issue-stats,
-.article-list>.post-summery>.article-stats{
+.article-list>.post-summery>.article-stats,
+.devices>.product-summery>.product-stats{
     grid-column: 3/4;
     grid-row: 1/8;
     background-color: rgb(231, 248, 215);
@@ -197,24 +203,28 @@ main.devices>.product-summery{
     color: #a2bb69;
 }
 .issue-list>.issue-summery>.issue-stats>.stats-title,
-.article-list>.post-summery>.article-stats>.stats-title{
+.article-list>.post-summery>.article-stats>.stats-title,
+.devices>.product-summery>.product-stats>.stats-title{
     font-weight: bold;
 }
 .issue-list>.issue-summery>.action-links,
-.article-list>.post-summery>.action-links{
+.article-list>.post-summery>.action-links,
+.devices>.product-summery>.action-links{
     grid-row: 7/8;
     grid-column: 2/3;
 }
 
 .article-list>.post-summery>h2>a,
-.issue-list>.issue-summery>h2>a{
+.issue-list>.issue-summery>h2>a,
+.devices>.product-summery>h2>a{
     text-decoration: none;
     color: rgb(15, 138, 196);
 }
 
 
 .article-list>.post-summery>.date>.published-date,
-.issue-list>.issue-summery>.date>.published-date{
+.issue-list>.issue-summery>.date>.published-date,
+.devices>.product-summery>.date>.release-date{
     color: #808080;
     font-weight: lighter;
     font-size: 0.9rem;
@@ -225,7 +235,9 @@ main.devices>.product-summery{
 .article-list>.post-summery>.article-stats>.views,
 .article-list>.post-summery>.article-stats>.comments,
 .issue-list>.issue-summery>.issue-stats>.views,
-.issue-list>.issue-summery>.issue-stats>.comments{
+.issue-list>.issue-summery>.issue-stats>.comments,
+.devices>.product-summery>.product-stats>.views,
+.devices>.product-summery>.product-stats>.reviews{
     color: #808080;
     font-weight: unset;
     padding: 0%;
