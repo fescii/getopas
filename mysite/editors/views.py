@@ -757,13 +757,13 @@ def create_product(request):
             return render(request,
                           'editors/products/create-product.html',
                           {'product_form': product_form,
-                           'section': 'devices'})
+                           'section': 'devices-create'})
     else:
         product_form = CreateProductForm()
         return render(request,
                       'editors/products/create-product.html',
                           {'product_form': product_form,
-                           'section': 'devices'})
+                           'section': 'devices-create'})
 
 #Edit Issue Cover Photo
 @login_required
