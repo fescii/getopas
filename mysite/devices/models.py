@@ -133,12 +133,10 @@ class Image(models.Model):
     added = models.BooleanField(default=True)
 
     #Updating Software Info
-    def update_image(self, photo, cover, added,*args, **kwargs):
+    def update_image(self, photo, cover,*args, **kwargs):
         self.photo = photo
         self.cover = cover
-        self.added = added
-        super(Image, self).save(update_fields=['photo','cover','added',], *args, **kwargs)
-
+        super(Image, self).save(update_fields=['photo','cover'], *args, **kwargs)
 
     #Get List of Photos Excluding The Non Published Photos
     def product_images(self, product):
