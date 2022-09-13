@@ -55,6 +55,12 @@ class Product(models.Model):
         super(Product, self).save(update_fields=['title','name','model',
                                               'series','company','release_date',
                                               'price','about'], *args, **kwargs)
+
+    #Updating Product Cover Image
+    def update_cover(self, cover, *args, **kwargs):
+        self.cover = cover
+        super(Product, self).save(update_fields=['cover'], *args, **kwargs)
+
     #Update Views
     def update_views(self, *args, **kwargs):
         self.product_views = self.product_views+1
