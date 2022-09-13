@@ -298,10 +298,17 @@ main.devices-create>.main-content>form{
     box-shadow: 0rem 2rem 1.5rem #748f740e;
     border: 1px solid #83858421;
     padding: 20px;
+    gap: 20px;
     display: flex;
     flex-flow: column;
     align-items: flex-start;
     overflow-y: scroll;
+}
+main.devices-create>.main-content>form> *{
+    font-size: 1.3rem;
+    line-height: 1.2;
+    margin: 0%;
+    padding: 0%;
 }
 main.devices-create>.main-content>form>h2{
         border-bottom: 1px solid rgba(48, 48, 45, 0.355);
