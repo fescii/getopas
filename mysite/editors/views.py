@@ -1098,6 +1098,8 @@ def show_product_images(request, pk):
 # Add product image present
 @user_passes_test(is_editor)
 def add_image(request, product_id):
+    user = request.user
+    profile = user.profile
     image_form = AddProductPhoto(files=request.FILES)
     product = get_object_or_404(Product, id=product_id)
     if request.method == 'POST':
@@ -1115,13 +1117,21 @@ def add_image(request, product_id):
             return render(request,
                           'editors/products/add-product-image.html',
                           {'info_form': info_form,
+                           'product': product,
+                           'section': 'devices-create',
+                           'profile': profile,
+                           'user': user,
                            'product': product})
     else:
         info_form = AddProductPhoto(files=request.FILES)
         return render(request,
                       'editors/products/add-product-image.html',
                           {'image_form': image_form,
-                           'product':product})
+                           'product':product,
+                           'section': 'devices-create',
+                           'profile': profile,
+                           'user': user,
+                           'product': product})
 
 #Delete Product image
 @user_passes_test(is_editor)
