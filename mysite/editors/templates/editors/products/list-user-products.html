@@ -1,36 +1,46 @@
 {% extends "base.html" %}
-{% block title %}Opus | Products{% endblock %}
+{% block title %}Opus - Products{% endblock %}
 {% block content %}
-<h1>My Products</h1>
 {% for product in products %}
-<div class="post-summery">
+<div class="product-summery">
     <h2>
         <a href="{{ product.get_absolute_url }}"> {{ product.name }} </a>
     </h2>
-    <p class="date">Release on {{ product.release_date }} by {{ product.author }}</p>
-    <img src="/media/{{product.cover}}" alt="Cover Image" width="300" height="250" title="{{issue.cover}}"/>
-    {{ product.about|striptags|truncatechars:140}}
-    <a href=" {% url 'edit_product' product_id=product.id product_name=product.slug %}">edit</a>
-    <a href="{% url 'edit_product_tags' product_id=product.id product_name=product.slug %}">Edit tags</a>
-
+    <div class="date">
+        Release on:
+         <span class="published-date">{{ product.release_date }} </span>
+    </div>
+    <div class="image-wrapper">
+        <img src="/media/{{product.cover}}" alt="Cover Image"  title="{{issue.cover}}"/>
+    </div>
+    <div class="content-summery">
+        {{ product.about|striptags|truncatechars:200}}
+    </div>
+    <div class='product-stats'>
+        <span class='stats-title'>Reach</span>
+        <span class='views'><span class="iconly-Show icli"></span> {{ product.product_views }}</span>
+        <span class='comments'><span class="iconly-User2 icli"></span> {{ product.reviews.count }}</span>
+    </div>
+    <div class="action-links">
+        <a href=" {% url 'edit_product' product_id=product.id product_name=product.slug %}">edit</a>
+        <a href="{% url 'edit_product_tags' product_id=product.id product_name=product.slug %}">Edit tags</a>
         {% if product.physical_info %}
-        <a href="{% url 'product_physical_info' pk=product.id %}">Physical Info</a>
+            <a href="{% url 'product_physical_info' pk=product.id %}">Physical Info</a>
         {% else %}
-        <a href="{% url 'add_physical_info' pk=product.id %}">Add Physical Info</a>
+            <a href="{% url 'add_physical_info' pk=product.id %}">Add Physical Info</a>
         {% endif %}
 
         {% if product.software_info %}
-        <a href="{% url 'product_software_info' pk=product.id%}">Software Info</a>
+            <a href="{% url 'product_software_info' pk=product.id%}">Software Info</a>
         {% else %}
-        <a href="{% url 'add_software_info' pk=product.id%}"> Add Software Info</a>
+            <a href="{% url 'add_software_info' pk=product.id%}"> Add Software Info</a>
         {% endif %}
-        <a href="{% url 'images' pk=product.id %}">Product Images</a>
-    <a href="{% url 'delete_product' pk=product.id%}">delete</a>
+            <a href="{% url 'images' pk=product.id %}">Product Images</a>
+        <a href="{% url 'delete_product' pk=product.id%}">delete</a>
+    </div>
 </div>
 {% if empty %}
-<p> You've Added Any Products Yet!</p>
-
-{% else %}
+<p> You've Not Added Any Products Yet!</p>
 {% endif %}
 {% endfor %}
 {% include "pagination.html" with page=posts %}

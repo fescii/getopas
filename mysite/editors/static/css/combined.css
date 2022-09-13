@@ -62,7 +62,8 @@
     Listing Articles
 */
 main.article-list,
-main.issue-list{
+main.issue-list,
+main.devices{
     /*border: 1px solid rgb(48, 48, 45);*/
     position: fixed;
     margin: 0%;
