@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "editing.html" %}
 {% load static %}
 {% block title %}Create - Product Information{% endblock %}
 {% block content %}
@@ -13,7 +13,6 @@
 {% endblock %}
 {% block footer %}
 <script src="{% static 'tinymce/tinymce.min.js'  %}"></script>
-<script src="{% static 'tinymce/tinymce.min.js'  %}"></script>
 <script>
     tinymce.init({
         selector: '#id_about',
@@ -27,4 +26,4 @@
         content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:16px }'
       });
   </script>
-  {% endblock footer%}
+{% endblock footer%}
