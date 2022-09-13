@@ -1,14 +1,24 @@
 {% extends "base.html" %}
-{% block title %} {{ product.name }}| Info{% endblock %}
+{% load static %}
+{% block title %} {{ product.name }} - Software Info{% endblock %}
 {% block content %}
-<h1>{{ product.name }} Software Information</h1>
-<a href="{% url 'edit_software_info' info_id=software_info.id product_id=product.id %}">Edit Info</a>
-<div class="software_info">
-    <h2 class="info"> Software Info</h2>
-    <p class="info"> OS Version: {{ software_info.os_version }}</p>
-    <p class="info"> OS Name: {{ software_info.os_name }}</p>
-    <p class="info"> OS Family: {{ software_info.os_family}}</p>
-    <p class="info"> OS UI: {{ software_info.os_ui }}</p>
-    <div class="info"> Other Info: {{ software_info.other_info|striptags|truncatechars:140 }}</div>
+<h2>{{ product.name }} Software Information</h2>
+<div class="info-summery">
+    <div class="info-content">
+        <h2 class="info"> Software Info</h2>
+        <p class="info"> OS Version: {{ software_info.os_version }}</p>
+        <p class="info"> OS Name: {{ software_info.os_name }}</p>
+        <p class="info"> OS Family: {{ software_info.os_family}}</p>
+        <p class="info"> OS UI: {{ software_info.os_ui }}</p>
+        <div class="info"> 
+            Other Info: {{ software_info.other_info|striptags|truncatechars:140 }}
+        </div>
+    </div>
+    <div class="info-links">
+        <a href="{% url 'edit_software_info' info_id=software_info.id product_id=product.id %}">Edit Info</a>
+    </div>
 </div>
 {% endblock %}
+{% block footer %}
+    <script src=" {% static 'js/base.js' %}"></script>
+{% endblock footer%}
