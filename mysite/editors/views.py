@@ -851,6 +851,8 @@ def edit_product(request, product_id, product_name):
 #Edit Products Tags
 @user_passes_test(is_editor)
 def edit_product_tags(request, product_id, product_name):
+    user = request.user
+    profile = user.profile
     product = Product.objects.get(id=product_id)
     product_name = product.name
     if request.method == 'POST':
@@ -869,13 +871,19 @@ def edit_product_tags(request, product_id, product_name):
         return render(request,
                         'editors/products/edit-product-tags.html',
                         {'edit_form': edit_form,
-                         'name': product_name})
+                         'name': product_name,
+                         'section': 'devices-create',
+                         'user': user,
+                         'profile': profile})
     else:
         edit_form = EditProductTags(request.POST or None, instance=product)
         return render(request,
                         'editors/products/edit-product-tags.html',
                         {'edit_form': edit_form,
-                         'name': product_name})
+                         'name': product_name,
+                         'section': 'devices-create',
+                         'user': user,
+                         'profile': profile})
 
 #Viewing Physical Information of a  product
 @user_passes_test(is_editor)
