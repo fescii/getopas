@@ -712,6 +712,8 @@ def edit_section(request, issue_id, section_id):
 #List Users Products
 @user_passes_test(is_editor)
 def user_product_list(request):
+    user = request.user
+    profile = user.profile
     object_list = Product.published.all().filter(author=request.user).order_by('-release_date')
 
     paginator = Paginator(object_list, 5) # 5 issues in each page
@@ -727,7 +729,10 @@ def user_product_list(request):
 
     return render(request, 'editors/products/list-user-products.html',
                   {'page': page,
-                   'products': products,})
+                   'products': products,
+                   'user': user,
+                   'profile': profile,
+                   'section': 'devices'})
 
 
 #Creating a new product
