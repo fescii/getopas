@@ -1,10 +1,16 @@
 {% extends "base.html" %}
+{% load static %}
 {% block title %}Add - Product Image{% endblock %}
 {% block content %}
-<h1>Adding an Image To  {{ product.name}}</h1>
-<form method="post" enctype="multipart/form-data">
-{{ image_form.as_p }}
-{% csrf_token %}
-<input type="submit" value="Add">
-</form>
+<div class="main-content">
+    <form method="post" enctype="multipart/form-data">
+    <h2>Adding an Image To  {{ product.name}}</h2>
+    {{ image_form.as_p }}
+    {% csrf_token %}
+    <input type="submit" value="Add">
+    </form>
+</div>
 {% endblock %}
+{% block footer %}
+    <script src=" {% static 'js/base.js' %}"></script>
+{% endblock footer%}
