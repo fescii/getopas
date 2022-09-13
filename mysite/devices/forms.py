@@ -38,28 +38,28 @@ class EditProductTags(forms.ModelForm):
 class CreatePhysicalInfo(forms.ModelForm):
     class Meta:
         model = PhysicalInfo
-        fields = ('screen', 'battery', 'camera', 'ram', 'rom','processor','added')
+        fields = ('screen', 'battery', 'camera', 'ram', 'rom','processor')
 
 #Edit Physical Information Form
 class CreateSoftwareInfo(forms.ModelForm):
     class Meta:
         model = SoftwareInfo
-        fields = ('os_version', 'os_name', 'os_family','os_ui','other_info','added')
+        fields = ('os_version', 'os_name', 'os_family','os_ui','other_info')
 
 #Edit Physical Information Form
 class EditPhysicalInfo(forms.ModelForm):
     class Meta:
         model = PhysicalInfo
-        fields = ('screen', 'battery', 'camera', 'ram', 'rom','processor','added')
+        fields = ('screen', 'battery', 'camera', 'ram', 'rom','processor')
 
 #Edit Physical Information Form
 class EditSoftwareInfo(forms.ModelForm):
     class Meta:
         model = SoftwareInfo
-        fields = ('os_version', 'os_name', 'os_family','os_ui','other_info','added')
+        fields = ('os_version', 'os_name', 'os_family','os_ui','other_info')
 
 # Add Image Form
 class AddProductPhoto(forms.ModelForm):
     class Meta:
         model = Image
-        fields = ('photo', 'added')
+        fields = ('photo',)

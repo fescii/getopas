@@ -91,7 +91,7 @@ class PhysicalInfo(models.Model):
     ram = models.CharField(max_length=250)
     rom = models.CharField(max_length=250)
     processor = models.TextField()
-    added = models.BooleanField(default=False)
+    added = models.BooleanField(default=True)
 
 
     #Get Physical Information
@@ -113,7 +113,7 @@ class SoftwareInfo(models.Model):
     os_family = models.TextField()
     os_ui = models.CharField(max_length=250)
     other_info = models.TextField()
-    added = models.BooleanField(default=False)
+    added = models.BooleanField(default=True)
 
 
     #Get Software Information
@@ -130,7 +130,7 @@ class Image(models.Model):
     product = models.ForeignKey(Product, related_name='images', on_delete=models.CASCADE)
     photo = models.ImageField(upload_to='devices/%Y/%m/%d',
                               blank=True)
-    added = models.BooleanField(default=False)
+    added = models.BooleanField(default=True)
 
     #Updating Software Info
     def update_image(self, photo, cover, added,*args, **kwargs):
