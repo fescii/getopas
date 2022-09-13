@@ -1081,6 +1081,8 @@ def delete_product(request,pk):
 #Viewing Images of  product
 @user_passes_test(is_editor)
 def show_product_images(request, pk):
+    user = request.user
+    profile = user.profile
     product = get_object_or_404(Product, id=pk)
 
     #Get The product Physical Information
@@ -1088,7 +1090,10 @@ def show_product_images(request, pk):
 
     return render(request, 'editors/products/show-product-images.html',
                   {'images': images,
-                   'product': product})
+                   'product': product
+                   'user': user,
+                   'profile': profile,
+                   'section': 'devices'})
 
 # Add product image present
 @user_passes_test(is_editor)
