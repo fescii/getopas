@@ -1000,7 +1000,7 @@ def edit_physical_info(request, info_id, product_id):
     product = get_object_or_404(Product, id=product_id)
 
     if request.method == 'POST':
-        physical_form = EditPhysicalInfo(request.POST or None, instance=physical)
+        physical_form = EditPhysicalInfo(request.POST, instance=physical)
 
         if physical_form.is_valid():
             cd = physical_form.cleaned_data
