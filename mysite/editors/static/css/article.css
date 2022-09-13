@@ -23,8 +23,7 @@ html,body{
 }
 main.article,
 main.issue,
-main.create-section,
-main.devices-create{
+main.create-section{
     background-color: rgb(231, 248, 215);
     position: fixed;
     margin: 0%;
