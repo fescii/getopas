@@ -1,17 +1,10 @@
 {% extends "base.html" %}
-{% load static %}
 {% block title %}Editing - {{product.name}}{% endblock %}
 {% block content %}
-<div class="main-content">
-  <form method="post">
-  <h2>Editing - {{ product.name }} Information</h2>
-  {{info_form.media}}
-  {{ info_form.as_p }}
-  {% csrf_token %}
-  <input type="submit" value="Save">
-  </form>
-</div>
+<h1>Editing - Physical Info of {{ product.name }}</h1>
+<form method="post">
+{{ physical_form.as_p }}
+{% csrf_token %}
+<input type="submit" value="Save">
+</form>
 {% endblock %}
-{% block footer %}
-<script src=" {% static 'js/base.js' %}"></script>
-{% endblock footer%}
