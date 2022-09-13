@@ -288,7 +288,31 @@ main.devices-create>.main-content{
     width: 100%;
     margin-top: 75px;
 }
+/* Product Images */
+main.devices>.main-content{
+    display: flex;
+    align-items: flex-start;
+    flex-flow: row;
+    width: 90%;
+    gap: 20px;
 
+}
+main.devices>.main-content>.image{
+    display: flex;
+    box-shadow: 0rem 2rem 1.5rem hsla(120, 11%, 51%, 0.055);
+    border: 1px solid #83858421;
+    gap: 20px;
+    flex-flow: column;
+    padding: 30px;
+}
+main.devices>.main-content>.image>.product-image{
+    width: 200px;
+    height: 150px;
+}
+main.devices>.main-content>.image>.product-image>img{
+    width: 100%;
+    height: 100%;
+}
 
 main.devices-create>.main-content>form{
     box-sizing: border-box;
