@@ -293,6 +293,7 @@ main.devices>.main-content{
     display: flex;
     align-items: flex-start;
     flex-flow: row;
+    flex-wrap: wrap;
     width: 90%;
     gap: 20px;
 
@@ -306,12 +307,16 @@ main.devices>.main-content>.image{
     padding: 30px;
 }
 main.devices>.main-content>.image>.product-image{
+    box-sizing: border-box;
     width: 200px;
     height: 150px;
+    background-color: white;
+    padding: 10px;
 }
 main.devices>.main-content>.image>.product-image>img{
     width: 100%;
     height: 100%;
+    object-fit: cover;
 }
 
 main.devices-create>.main-content>form{

@@ -1,9 +1,9 @@
 {% extends "base.html" %}
 {% block title %} {{ product.name }} - Images{% endblock %}
 {% block content %}
+<a class='add-new' href="{% url 'add_image' product_id=product.id %}">Add Image</a>
+<h2>{{ product.name }} Images</h2>
 <div class="main-content">
-    <h1>{{ product.name }} Images</h1>
-    <a href="{% url 'add_image' product_id=product.id %}">Add Image</a>
     {% for image in images %}
     <div class='image'>
         <div class="product-image">
