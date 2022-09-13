@@ -4,7 +4,6 @@
 {% block content %}
 <h2>{{ product.name }} Physical Information</h2>
 <div class="info-summery">
-    <a href="{% url 'edit_physical_info' info_id=physical_info.id product_id=product.id %}">Edit Info</a>
     <div class="info-content">
         <p class="info"> Screen: {{ physical_info.screen }}</p>
         <p class="info"> Battery: {{ physical_info.battery }}</p>
@@ -12,6 +11,9 @@
         <p class="info"> Ram: {{ physical_info.ram }}</p>
         <p class="info"> Storage: {{ physical_info.rom }}</p>
         <p class="info"> Processor:{{ physical_info.processor }}</p>
+    </div>
+    <div class="info-links">
+        <a href="{% url 'edit_physical_info' info_id=physical_info.id product_id=product.id %}">Edit Info</a>
     </div>
 </div>
 {% endblock %}
