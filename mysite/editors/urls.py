@@ -52,7 +52,7 @@ urlpatterns = [
     path('add-newsletter/', views.create_magazine, name='new_newsletter'),
     path('my-newsletters/', views.user_issue_list, name='user_issue_list'),
     path('edit-newsletter/<int:pk>/', views.edit_newsletter, name='edit_newsletter'),
-     path('edit-newsletter/cover/<int:pk>/', views.edit_newsletter_cover, name='edit_newsletter_cover'),
+    path('edit-newsletter/cover/<int:pk>/', views.edit_newsletter_cover, name='edit_newsletter_cover'),
     path('edit-newsletter/tags/<int:pk>/', views.edit_newsletter_tags, name='edit_newsletter_tags'),
     path('delete-newsletter/<int:pk>/', views.delete_issue, name='delete_issue'),
     path('my-newsletters/<int:pk>/sections', views.user_issue_section_list, name='user_issue_section_list'),
@@ -64,6 +64,7 @@ urlpatterns = [
 
     #Products Path
     path('add-product/', views.create_product, name='new_product'),
+    path('product/cover/<int:pk>/', views.edit_product_cover, name='edit_product_cover'),
     path('products/', views.user_product_list, name='user_product_list'),
     path('product/<str:product_id>/<str:product_name>/edit', views.edit_product, name='edit_product'),
     path('product/<str:product_id>/<str:product_name>/tags-edit', views.edit_product_tags, name='edit_product_tags'),

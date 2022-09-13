@@ -22,8 +22,9 @@
         <span class='reviews'><span class="iconly-User2 icli"></span> {{ product.reviews.count }}</span>
     </div>
     <div class="action-links">
-        <a href=" {% url 'edit_product' product_id=product.id product_name=product.slug %}">edit</a>
-        <a href="{% url 'edit_product_tags' product_id=product.id product_name=product.slug %}">Edit tags</a>
+        <a href=" {% url 'edit_product' product_id=product.id product_name=product.slug %}">Edit</a>
+        <a href="{% url 'edit_product_tags' product_id=product.id product_name=product.slug %}">Tags</a>
+        <a href="/dashboard/product/cover/{{product.id}}">Cover</a>
         {% if product.physical_info %}
             <a href="{% url 'product_physical_info' pk=product.id %}">Physical Info</a>
         {% else %}
