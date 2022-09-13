@@ -1090,7 +1090,7 @@ def show_product_images(request, pk):
 
     return render(request, 'editors/products/show-product-images.html',
                   {'images': images,
-                   'product': product
+                   'product': product,
                    'user': user,
                    'profile': profile,
                    'section': 'devices'})
