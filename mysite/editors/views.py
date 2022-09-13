@@ -796,7 +796,7 @@ def edit_product_cover(request, pk):
                         'editors/products/edit-product-cover.html',
                         {'edit_form': edit_form,
                          'product': product,
-                         'section': 'devices',
+                         'section': 'devices-create',
                          'user': user,
                          'profile': profile})
     else:
@@ -805,7 +805,7 @@ def edit_product_cover(request, pk):
                         'editors/products/edit-product-cover.html',
                         {'edit_form': edit_form,
                          'product': product,
-                         'section': 'devices',
+                         'section': 'devices-create',
                          'user': user,
                          'profile': profile})
 
