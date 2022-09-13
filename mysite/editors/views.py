@@ -812,6 +812,8 @@ def edit_product_cover(request, pk):
 #Editing a product
 @user_passes_test(is_editor)
 def edit_product(request, product_id, product_name):
+    user = request.user
+    profile = user.profile
     product = Product.objects.get(id=product_id)
     product_name = product.name
     product_form = EditProductForm(request.POST or None, instance=product)
@@ -833,12 +835,18 @@ def edit_product(request, product_id, product_name):
             return render(request,
                           'editors/products/edit-product.html',
                           {'product_form': product_form,
-                          'name': product_name})
+                          'name': product_name,
+                          'section': 'devices-create',
+                           'profile': profile,
+                           'user': user})
     else:
         return render(request,
                       'editors/products/edit-product.html',
                           {'product_form': product_form,
-                           'name': product_name})
+                           'name': product_name,
+                           'section': 'devices-create',
+                           'profile': profile,
+                           'user': user})
 
 #Edit Products Tags
 @user_passes_test(is_editor)
