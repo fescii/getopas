@@ -307,7 +307,7 @@ main.devices-create>.main-content>form{
 main.devices-create>.main-content>form> *{
     font-size: 1.3rem;
     line-height: 1.2;
-    margin: 0%;
+    margin: 0% 5%;
     padding: 0%;
 }
 main.devices-create>.main-content>form>h2{
@@ -322,4 +322,19 @@ main.devices-create>.main-content>form>p>label{
 }
 main.devices-create>.main-content>form>input[type="submit"]{
     width: 100px;
+}
+main.devices-create>.main-content>form>p{
+    align-self: stretch;
+}
+main.devices-create>.main-content>form>p>input[type='number'],
+main.devices-create>.main-content>form>p>input[type='text']{
+    border: none;
+    outline: none;
+    border-bottom: 1px solid #08b86f4d;
+    background-color: transparent;
+    padding: 2px 5px;
+    font-size: 1.1rem;
+    line-height: 1.2;
+    color: #404040;
+    width: 70%;
 }

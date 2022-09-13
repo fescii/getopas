@@ -750,7 +750,7 @@ def create_product(request):
             new_product.save()
             product_form.save_m2m()
             messages.success(request, f'The Product {name} was created successfully')
-            return HttpResponseRedirect(reverse('user_products_list'))
+            return HttpResponseRedirect(reverse('user_product_list'))
         else:
             messages.error(request, 'An error occurred, Please try again!')
             product_form = CreateProductForm()
