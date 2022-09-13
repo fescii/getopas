@@ -1000,12 +1000,10 @@ def edit_physical_info(request, info_id, product_id):
     product = get_object_or_404(Product, id=product_id)
 
     if request.method == 'POST':
-        physical_form = EditPhysicalInfo(request.POST, instance=physical)
+        physical_form = EditPhysicalInfo(request.POST or None, instance=physical)
 
         if physical_form.is_valid():
             cd = physical_form.cleaned_data
-
-            #Saving The Form
             #Saving The Form
             updated = physical_form.save(commit=False)
             updated.save()
@@ -1018,7 +1016,6 @@ def edit_physical_info(request, info_id, product_id):
             physical_form = EditPhysicalInfo(request.POST or None, instance=physical)
             return render(request, 'editors/products/edit-physical-info.html',
                           {'physical_form': physical_form,
-                           'product':product,
                            'section': 'devices-create',
                            'profile': profile,
                            'user': user,
@@ -1027,7 +1024,6 @@ def edit_physical_info(request, info_id, product_id):
         physical_form = EditPhysicalInfo(request.POST or None, instance=physical)
         return render(request, 'editors/products/edit-physical-info.html',
                           {'physical_form': physical_form,
-                           'product': product,
                            'section': 'devices-create',
                            'profile': profile,
                            'user': user,
@@ -1060,7 +1056,6 @@ def edit_software_info(request, info_id, product_id):
             physical_form = EditSoftwareInfo(request.POST or None, instance=software)
             return render(request, 'editors/products/edit-software-info.html',
                           {'software_form': physical_form,
-                           'product':product,
                            'section': 'devices-create',
                            'profile': profile,
                            'user': user,
@@ -1069,7 +1064,6 @@ def edit_software_info(request, info_id, product_id):
         physical_form = EditSoftwareInfo(request.POST or None, instance=software)
         return render(request, 'editors/products/edit-software-info.html',
                           {'software_form': physical_form,
-                           'product': product,
                            'section': 'devices-create',
                            'profile': profile,
                            'user': user,
