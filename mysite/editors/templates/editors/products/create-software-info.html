@@ -1,9 +1,9 @@
 {% extends "base.html" %}
 {% load static %}
-{% block title %}Create | Software Info{% endblock %}
+{% block title %}Add Software Information{% endblock %}
 {% block content %}
 <div class="main-content">
-  <h2>Add Product Physical Information</h2>
+  <h2>Add {{product.name}} Software Information</h2>
   <form method="post">
   {{info_form.media}}
   {{ info_form.as_p }}

@@ -922,6 +922,8 @@ def show_software_info(request, pk):
 # Adding Physical Information of a  product if no present
 @user_passes_test(is_editor)
 def add_physical_info(request, pk):
+    user = request.user
+    profile = user.profile
     info_form = CreatePhysicalInfo()
     product = get_object_or_404(Product, id=pk)
     if request.method == 'POST':
@@ -939,16 +941,24 @@ def add_physical_info(request, pk):
             info_form = CreatePhysicalInfo()
             return render(request,
                           'editors/products/create-physical-info.html',
-                          {'info_form': info_form})
+                          {'info_form': info_form,
+                           'section': 'devices-create',
+                           'profile': profile,
+                           'user': user})
     else:
         info_form = CreatePhysicalInfo()
         return render(request,
                       'editors/products/create-physical-info.html',
-                          {'info_form': info_form})
+                          {'info_form': info_form,
+                           'section': 'devices-create',
+                           'profile': profile,
+                           'user': user})
 
 # Adding Physical Information of a  product if no present
 @user_passes_test(is_editor)
 def add_software_info(request, pk):
+    user = request.user
+    profile = user.profile
     info_form = CreateSoftwareInfo()
     product = get_object_or_404(Product, id=pk)
     if request.method == 'POST':
@@ -966,12 +976,20 @@ def add_software_info(request, pk):
             info_form = CreateSoftwareInfo()
             return render(request,
                           'editors/products/create-software-info.html',
-                          {'info_form': info_form})
+                          {'info_form': info_form,
+                           'section': 'devices-create',
+                           'profile': profile,
+                           'user': user,
+                           'product': product})
     else:
         info_form = CreateSoftwareInfo()
         return render(request,
                       'editors/products/create-software-info.html',
-                          {'info_form': info_form})
+                          {'info_form': info_form,
+                           'section': 'devices-create',
+                           'profile': profile,
+                           'user': user,
+                           'product': product})
 
 
 @user_passes_test(is_editor)
