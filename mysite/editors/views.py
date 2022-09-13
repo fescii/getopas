@@ -739,6 +739,8 @@ def user_product_list(request):
 #Creating a new product
 @user_passes_test(is_editor)
 def create_product(request):
+    user = request.user
+    profile = user.profile
     product_form = CreateProductForm()
     if request.method == 'POST':
         product_form = CreateProductForm(request.POST, files=request.FILES)
@@ -757,13 +759,17 @@ def create_product(request):
             return render(request,
                           'editors/products/create-product.html',
                           {'product_form': product_form,
-                           'section': 'devices-create'})
+                           'section': 'devices-create',
+                           'profile': profile,
+                           'user': user})
     else:
         product_form = CreateProductForm()
         return render(request,
                       'editors/products/create-product.html',
                           {'product_form': product_form,
-                           'section': 'devices-create'})
+                           'section': 'devices-create',
+                           'profile': profile,
+                           'user': user})
 
 #Edit Issue Cover Photo
 @login_required
