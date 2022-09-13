@@ -178,7 +178,8 @@ main.create-section>.create-section>form>p:nth-of-type(3)>label{
 }
 main.article>.main-content>form>input[type='submit'],
 main.issue>.main-content>form>input[type="submit"],
-main.create-section>.create-section>form>input[type="submit"]{
+main.create-section>.create-section>form>input[type="submit"],
+main.devices-create>.main-content>form>input[type="submit"]{
     padding: 5px 10px;
     grid-column: 2/3;
     grid-row: 6/7;
@@ -290,9 +291,12 @@ main.devices-create>.main-content>form{
     padding: 20px;
     display: flex;
     flex-flow: column;
-    align-items: center;
+    align-items: flex-start;
     overflow-y: scroll;
 }
 main.devices-create>.main-content>form>p>label{
-    display: inline-block;
+    display: block;
+}
+main.devices-create>.main-content>form>input[type="submit"]{
+    width: 100px;
 }
