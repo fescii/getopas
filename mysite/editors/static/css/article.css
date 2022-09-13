@@ -9,9 +9,9 @@ html,body{
     z-index: 10;
     text-decoration: none;
     color: rgba(255, 255, 255, 0.938);
-    box-shadow: 0rem 2rem 1.5rem #748f740e;
+    box-shadow: 0.1rem 0.1rem 0.5rem #18181847;
     display: inline-block;
-    padding: 4px 35px;
+    padding: 4px 20px;
     font-weight: bold;
     font-size: 1.1rem;
     background-color:rgb(15, 138, 196);
@@ -312,10 +312,10 @@ main.devices-create>.main-content>form> *{
 }
 main.devices-create>.main-content>form>h2{
         border-bottom: 1px solid rgba(48, 48, 45, 0.355);
-         margin: 0%;
          text-align: center;
          align-self: stretch;
          color: #08b86f;
+         padding-bottom: 10px;
 }
 main.devices-create>.main-content>form>p>label{
     display: block;
