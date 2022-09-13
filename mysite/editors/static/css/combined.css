@@ -91,7 +91,8 @@ main.devices{
 }
 
 .article-list>.post-summery,
-.issue-list>.issue-summery{
+.issue-list>.issue-summery,
+main.devices>.product-summery{
     /* border: 1px solid rgb(48, 48, 45);*/
      box-shadow: 0rem 2rem 1.5rem #748f740e;
      border: 1px solid #83858421;
