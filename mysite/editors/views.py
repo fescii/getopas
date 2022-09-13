@@ -788,7 +788,7 @@ def edit_product_cover(request, pk):
                          'product': product,
                          'section': 'devices'})
     else:
-        edit_form = EditProductCover(request.POST or None, instance=issue)
+        edit_form = EditProductCover(request.POST or None, instance=product)
         return render(request,
                         'editors/products/edit-product-cover.html',
                         {'edit_form': edit_form,
