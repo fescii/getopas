@@ -2,15 +2,16 @@
 {% block title %} {{ product.name }}| Info{% endblock %}
 {% block content %}
 <h1>{{ product.name }} Physical Information</h1>
-<a href="{% url 'edit_physical_info' info_id=physical_info.id product_id=product.id %}">Edit Info</a>
-<div class="physical_info">
-    <h2 class="info"> Physical Info</h2>
-    <p class="info"> Screen: {{ physical_info.screen }}</p>
-    <p class="info"> Battery: {{ physical_info.battery }}</p>
-    <p class="info"> Camera: {{ physical_info.camera}}</p>
-    <p class="info"> RAM: {{ physical_info.ram }}</p>
-    <p class="info"> Storage: {{ physical_info.rom }}</p>
-    <p class="info"> Process:{{ physical_info.processor }}</p>
+<div class="info-summery">
+    <a href="{% url 'edit_physical_info' info_id=physical_info.id product_id=product.id %}">Edit Info</a>
+    <div class="info-content">
+        <p class="info"> Screen: {{ physical_info.screen }}</p>
+        <p class="info"> Battery: {{ physical_info.battery }}</p>
+        <p class="info"> Camera: {{ physical_info.camera}}</p>
+        <p class="info"> RAM: {{ physical_info.ram }}</p>
+        <p class="info"> Storage: {{ physical_info.rom }}</p>
+        <p class="info"> Process:{{ physical_info.processor }}</p>
+    </div>
 </div>
 
 {% endblock %}
