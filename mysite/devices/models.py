@@ -43,17 +43,16 @@ class Product(models.Model):
     tags = TaggableManager()
 
     #Updating Product
-    def update_product(self, title, name, cover, model, series, company, release,price, about, *args, **kwargs):
+    def update_product(self, title, name, model, series, company, release,price, about, *args, **kwargs):
         self.title = title
         self.name = name
-        self.cover = cover
         self.model = model
         self.series = series
         self.company = company
         self.release_date = release
         self.price = price
         self.about = about
-        super(Product, self).save(update_fields=['title','name','cover','model',
+        super(Product, self).save(update_fields=['title','name','model',
                                               'series','company','release_date',
                                               'price','about'], *args, **kwargs)
     #Update Views

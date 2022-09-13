@@ -459,7 +459,7 @@ def user_issue_list(request):
                    'section': 'issue-list'})
 
 #Edit Magazine Newsletter
-@login_required
+@user_passes_test(is_editor)
 def edit_newsletter(request, pk):
     #post = get_object_or_404(Post, id=pk)
     issue = Issue.objects.get(id=pk)
@@ -532,7 +532,7 @@ def edit_newsletter_tags(request, pk):
                          'section': 'issue-list'})
 
 #Edit Issue Cover Photo
-@login_required
+@user_passes_test(is_editor)
 def edit_newsletter_cover(request, pk):
     #post = get_object_or_404(Post, id=pk)
     user = request.user
@@ -607,7 +607,7 @@ def user_issue_section_list(request, pk):
                    'profile': profile})
 
 #Edit Newsletter Section
-@login_required
+@user_passes_test(is_editor)
 def create_section(request, pk):
     issue = Issue.objects.get(id=pk)
     user = request.user
@@ -762,6 +762,43 @@ def create_product(request):
                       'editors/products/create-product.html',
                           {'product_form': product_form})
 
+#Edit Issue Cover Photo
+@login_required
+def edit_product_cover(request, pk):
+    #post = get_object_or_404(Post, id=pk)
+    user = request.user
+    profile = user.profile
+    issue = Issue.objects.get(id=pk)
+    if request.method == 'POST':
+        edit_form = MagazineEditCoverForm(request.POST or None, instance=issue,files=request.FILES)
+        if edit_form.is_valid():
+            cd = edit_form.cleaned_data
+            cover = cd['cover']
+            #edit_form.save()
+            Issue.update_cover(issue,cover)
+            messages.success(request, 'Cover updated successfully')
+            return HttpResponseRedirect(reverse('user_issue_list'))
+
+        else:
+            messages.error(request, 'Error updating the cover')
+            edit_form = MagazineEditCoverForm(request.POST or None, instance=issue, files=request.FILES)
+
+        return render(request,
+                        'editors/products/edit-product-cover.html',
+                        {'edit_form': edit_form,
+                         'user':user,
+                         'profile':profile,
+                         'section': 'devices'})
+    else:
+        edit_form = MagazineEditCoverForm(request.POST or None, instance=issue)
+        return render(request,
+                        'editors/products/edit-product-cover.html',
+                        {'edit_form': edit_form,
+                         'issue': issue,
+                         'user':user,
+                         'profile':profile,
+                         'section': 'devices'})
+
 #Editing a product
 @user_passes_test(is_editor)
 def edit_product(request, product_id, product_name):
@@ -774,7 +811,7 @@ def edit_product(request, product_id, product_name):
         if product_form.is_valid():
             cd = product_form.cleaned_data
             Product.update_product(product, cd['title'], cd['name'],
-                                   cd['cover'], cd['model'],cd['series'],
+                                   cd['model'],cd['series'],
                                    cd['company'], cd['release_date'], cd['price'],
                                    cd['about'])
             messages.success(request, f"The Product was updated successfully")
