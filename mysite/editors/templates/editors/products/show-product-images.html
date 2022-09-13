@@ -5,10 +5,12 @@
     <h1>{{ product.name }} Images</h1>
     <a href="{% url 'add_image' product_id=product.id %}">Add Image</a>
     <div class='images'>
-        <p>Images: </p>
+        <h2>Images: </h2>
         {% for image in images %}
         <div class="product-image">
             <img src="/media/{{ image.photo }}" width="200px" height="100px" />
+        </div>
+        <div class="action-links">
             <a href="{% url 'delete_image' product_id=product.id image_id=image.id %}">Remove</a>
         </div>
         {% empty %}
