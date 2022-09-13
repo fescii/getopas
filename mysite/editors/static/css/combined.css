@@ -250,7 +250,9 @@ main.devices{
 .article-list>.post-summery>.article-stats>.views>.icli,
 .article-list>.post-summery>.article-stats>.comments>.icli,
 .issue-list>.issue-summery>.issue-stats>.views>.icli,
-.issue-list>.issue-summery>.issue-stats>.comments>.icli{
+.issue-list>.issue-summery>.issue-stats>.comments>.icli,
+.devices>.product-summery>.product-stats>.views>.icli,
+.devices>.product-summery>.product-stats>.reviews>.icli{
     font-size: 16px;
     font-weight: bold;
     color: #df9409;
@@ -260,18 +262,21 @@ main.devices{
     padding-top: 2px;
 }
 .article-list>.post-summery>.action-links,
-.issue-list>.issue-summery>.action-links{
+.issue-list>.issue-summery>.action-links,
+.devices>.product-summery>.action-links{
     /*border: 1px solid rgb(48, 48, 45);*/
     margin: 30px 0px 10px 0px;
     padding: 2px 10px;
     display: flex;
     align-items: center;
+    flex-wrap: wrap;
     justify-content: end;
     gap: 10px;
 }
 .article-list>.post-summery>.action-links>a,
 .issue-list>.issue-summery>.action-links>a,
-.issue-list>.issue-section>.section-links>a{
+.issue-list>.issue-section>.section-links>a,
+.devices>.product-summery>.action-links>a{
     text-decoration: none;
     color: rgba(255, 255, 255, 0.938);
     display: inline-block;
@@ -288,7 +293,8 @@ main.devices{
 }
 .article-list>.post-summery>.action-links>a:last-of-type,
 .issue-list>.issue-summery>.action-links>a:last-of-type,
-.issue-list>.issue-section>.section-links>a:last-of-type{
+.issue-list>.issue-section>.section-links>a:last-of-type,
+.devices>.product-summery>.action-links>a:last-of-type{
     background-color:rgb(196, 36, 15);
 }
 
