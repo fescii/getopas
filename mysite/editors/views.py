@@ -472,7 +472,7 @@ def edit_newsletter(request, pk):
             title = cd['title']
             description = cd['description']
             status = cd['status']
-            Issue.update_issue(issue,no,title, description, status)
+            Issue.update_issue(issue,no,title,description,status)
             messages.success(request, 'Issue updated successfully')
             return HttpResponseRedirect(reverse('user_issue_list'))
 
