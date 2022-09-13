@@ -4,19 +4,18 @@
 <div class="main-content">
     <h1>{{ product.name }} Images</h1>
     <a href="{% url 'add_image' product_id=product.id %}">Add Image</a>
-    <div class='images'>
-        <h2>Images: </h2>
-        {% for image in images %}
+    {% for image in images %}
+    <div class='image'>
         <div class="product-image">
             <img src="/media/{{ image.photo }}"/>
         </div>
         <div class="action-links">
             <a href="{% url 'delete_image' product_id=product.id image_id=image.id %}">Remove</a>
         </div>
-        {% empty %}
-        <p>This product has no images yet.<p>
-        {% endfor %}
     </div>
+    {% empty %}
+        <p>This product has no images yet.<p>
+    {% endfor %}
 </div>
 
 {% endblock %}
