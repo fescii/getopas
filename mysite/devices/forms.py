@@ -13,15 +13,20 @@ class ReviewForm(forms.ModelForm):
 class CreateProductForm(forms.ModelForm):
     class Meta:
         model = Product
-        fields = ('title', 'name', 'cover','model', 'series',
+        fields = ('title', 'name','model', 'series',
                   'type','company','release_date','price','about', 'tags','status')
 
 #Edit Product Form
 class EditProductForm(forms.ModelForm):
     class Meta:
         model = Product
-        fields = ('title', 'name', 'cover','model', 'series',
+        fields = ('title', 'name','model', 'series',
                   'type','company','release_date','price','about','status')
+
+class EditProductCover(forms.ModelForm):
+    class Meta:
+        model = Product
+        fields = ('cover',)
 
 #Edit Product Tags Form
 class EditProductTags(forms.ModelForm):
