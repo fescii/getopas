@@ -303,6 +303,13 @@ main.devices-create>.main-content>form{
     align-items: flex-start;
     overflow-y: scroll;
 }
+main.devices-create>.main-content>form>h2{
+        border-bottom: 1px solid rgba(48, 48, 45, 0.355);
+         margin: 0%;
+         text-align: center;
+         align-self: stretch;
+         color: #87c44e;
+}
 main.devices-create>.main-content>form>p>label{
     display: block;
 }
