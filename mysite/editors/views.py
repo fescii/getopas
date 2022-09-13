@@ -994,6 +994,8 @@ def add_software_info(request, pk):
 
 @user_passes_test(is_editor)
 def edit_physical_info(request, info_id, product_id):
+    user = request.user
+    profile = user.profile
     physical = get_object_or_404(PhysicalInfo, id=info_id)
     product = get_object_or_404(Product, id=product_id)
 
@@ -1016,16 +1018,26 @@ def edit_physical_info(request, info_id, product_id):
             physical_form = EditPhysicalInfo(request.POST or None, instance=physical)
             return render(request, 'editors/products/edit-physical-info.html',
                           {'physical_form': physical_form,
-                           'product':product})
+                           'product':product,
+                           'section': 'devices-create',
+                           'profile': profile,
+                           'user': user,
+                           'product': product})
     else:
         physical_form = EditPhysicalInfo(request.POST or None, instance=physical)
         return render(request, 'editors/products/edit-physical-info.html',
                           {'physical_form': physical_form,
+                           'product': product,
+                           'section': 'devices-create',
+                           'profile': profile,
+                           'user': user,
                            'product': product})
 
 #Editing Software Info
 @user_passes_test(is_editor)
 def edit_software_info(request, info_id, product_id):
+    user = request.user
+    profile = user.profile
     software = get_object_or_404(SoftwareInfo, id=info_id)
     product = get_object_or_404(Product, id=product_id)
 
@@ -1048,11 +1060,19 @@ def edit_software_info(request, info_id, product_id):
             physical_form = EditSoftwareInfo(request.POST or None, instance=software)
             return render(request, 'editors/products/edit-software-info.html',
                           {'software_form': physical_form,
-                           'product':product})
+                           'product':product,
+                           'section': 'devices-create',
+                           'profile': profile,
+                           'user': user,
+                           'product': product})
     else:
         physical_form = EditSoftwareInfo(request.POST or None, instance=software)
         return render(request, 'editors/products/edit-software-info.html',
                           {'software_form': physical_form,
+                           'product': product,
+                           'section': 'devices-create',
+                           'profile': profile,
+                           'user': user,
                            'product': product})
 
 #Delete Product
