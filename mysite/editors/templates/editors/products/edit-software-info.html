@@ -2,29 +2,30 @@
 {% load static %}
 {% block title %}Editing - {{product.name}}{% endblock %}
 {% block content %}
-<h1>Editing - Software Info of {{ product.name }}</h1>
-<form method="post">
-{{ software_form.media}}
-{{ software_form.as_p }}
-{% csrf_token %}
-<input type="submit" value="Save">
-</form>
+<div class="main-content">
+  <form method="post">
+  <h2>Editing - Software Info of {{ product.name }}</h2>
+  {{ software_form.media}}
+  {{ software_form.as_p }}
+  {% csrf_token %}
+  <input type="submit" value="Save">
+  </form>
+</div>
 {% endblock %}
 {% block footer %}
 <script src="{% static 'tinymce/tinymce.min.js' %}"></script>
+<script src=" {% static 'js/base.js' %}"></script>
 <script>
-    tinymce.init({
-        selector: '#id_other_info',
-        height: 500, menubar: 'edit insert view format table',
-        width: 500,
-        menubar: 'edit insert view format table',
-        plugins: [
-          'advlist autolink lists link image charmap print preview anchor',
-          'searchreplace visualblocks code fullscreen',
-          'insertdatetime media table paste imagetools wordcount'
-        ],
-        toolbar: 'insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image',
-        content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }'
-      });
-  </script>
+  tinymce.init({
+      selector: '#id_other_info',
+      height: 550, menubar: false,
+      plugins: [
+        'advlist autolink lists link image charmap print preview anchor',
+        'searchreplace visualblocks code fullscreen',
+        'insertdatetime media table paste imagetools wordcount'
+      ],
+      toolbar: 'insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image',
+      content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:16px }'
+    });
+</script>
   {% endblock footer%}
