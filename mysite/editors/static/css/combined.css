@@ -63,7 +63,8 @@
 */
 main.article-list,
 main.issue-list,
-main.devices{
+main.devices,
+main.devices-info{
     /*border: 1px solid rgb(48, 48, 45);*/
     position: fixed;
     margin: 0%;
@@ -81,8 +82,6 @@ main.devices{
     padding-bottom: 50px;
 
 }
-
-
 .article-list>h2,
 .issue-list>h2{
    /* border: 1px solid rgb(48, 48, 45);*/
