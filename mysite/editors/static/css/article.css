@@ -268,15 +268,25 @@ input[type='file']{
 main.devices-create{
     overflow-y: scroll;
     overflow-x: hidden;
+    background-color: rgb(231, 248, 215);
+    position: fixed;
+    margin: 0%;
+    padding: 0%;
+    left: 200px;
+    top: 100px;
+    right: 0%;
+    bottom: 0%;
+    top: 0%;
+    bottom: 5px;
     /*box-shadow: 0rem 2rem 1.5rem #748f741f;*/
 
 }
 main.devices-create>.main-content{
     margin: 0%;
-    border: 1px solid green;
+    /*border: 1px solid green;*/
     height: max-content;
-    width: 95%;
-    margin-left: 5%;
+    width: 100%;
+    margin-top: 75px;
 }
 
 
