@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load static %}
 {% block title %}Opus - Products{% endblock %}
 {% block content %}
 {% for product in products %}
@@ -47,3 +48,6 @@
 {% include "pagination.html" with page=products %}
 <!--{% include "pagination.html" with page=page_obj %}-->
 {% endblock %}
+{% block footer %}
+<script src=" {% static 'js/base.js' %}"></script
+{% endblock footer %}
