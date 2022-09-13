@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load static %}
 {% block title %} {{ product.name }}| Info{% endblock %}
 {% block content %}
 <h1>{{ product.name }} Physical Information</h1>
@@ -13,5 +14,7 @@
         <p class="info"> Processor:{{ physical_info.processor }}</p>
     </div>
 </div>
-
 {% endblock %}
+{% block footer %}
+    <script src=" {% static 'js/base.js' %}"></script>
+{% endblock footer%}
