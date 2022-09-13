@@ -888,17 +888,24 @@ def edit_product_tags(request, product_id, product_name):
 #Viewing Physical Information of a  product
 @user_passes_test(is_editor)
 def show_physical_info(request, pk):
+    user = request.user
+    profile = user.profile
     product = get_object_or_404(Product, id=pk)
 
     #Get The product Physical Information
     info = PhysicalInfo.get_physical(PhysicalInfo, product)
     return render(request, 'editors/products/physical-product-info.html',
                   {'physical_info': info,
-                   'product': product})
+                   'product': product,
+                   'section': 'devices-info',
+                   'user': user,
+                   'profile': profile})
 
 #Viewing Physical Information of a  product
 @user_passes_test(is_editor)
 def show_software_info(request, pk):
+    user = request.user
+    profile = user.profile
     product = get_object_or_404(Product, id=pk)
 
     #Get The product Physical Information
@@ -906,7 +913,10 @@ def show_software_info(request, pk):
 
     return render(request, 'editors/products/software-product-info.html',
                   {'software_info': info,
-                   'product': product})
+                   'product': product,
+                   'section': 'devices-info',
+                   'user': user,
+                   'profile': profile})
 
 
 # Adding Physical Information of a  product if no present
