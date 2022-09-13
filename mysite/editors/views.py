@@ -1,4 +1,5 @@
 from email import message
+from itertools import product
 from django.http import HttpResponse
 from django.shortcuts import render,get_object_or_404
 from django.contrib.auth import authenticate, login
@@ -13,7 +14,7 @@ from .forms import UserRegistrationForm,\
                     MagazineEditCoverForm
 from devices.forms import CreateProductForm, EditProductForm, EditProductTags,\
     EditPhysicalInfo, EditSoftwareInfo, CreatePhysicalInfo, CreateSoftwareInfo,\
-        AddProductPhoto
+        AddProductPhoto, EditProductCover
 from django.core.paginator import Paginator, EmptyPage,\
     PageNotAnInteger
 from django.contrib.auth.decorators import login_required,user_passes_test
@@ -766,37 +767,32 @@ def create_product(request):
 @login_required
 def edit_product_cover(request, pk):
     #post = get_object_or_404(Post, id=pk)
-    user = request.user
-    profile = user.profile
-    issue = Issue.objects.get(id=pk)
+    product = Product.objects.get(id=pk)
     if request.method == 'POST':
-        edit_form = MagazineEditCoverForm(request.POST or None, instance=issue,files=request.FILES)
+        edit_form = EditProductCover(request.POST or None, instance=product,files=request.FILES)
         if edit_form.is_valid():
             cd = edit_form.cleaned_data
             cover = cd['cover']
             #edit_form.save()
-            Issue.update_cover(issue,cover)
+            Product.update_cover(product,cover)
             messages.success(request, 'Cover updated successfully')
             return HttpResponseRedirect(reverse('user_issue_list'))
 
         else:
             messages.error(request, 'Error updating the cover')
-            edit_form = MagazineEditCoverForm(request.POST or None, instance=issue, files=request.FILES)
+            edit_form = EditProductCover(request.POST or None, instance=product, files=request.FILES)
 
         return render(request,
                         'editors/products/edit-product-cover.html',
                         {'edit_form': edit_form,
-                         'user':user,
-                         'profile':profile,
+                         'product': product,
                          'section': 'devices'})
     else:
-        edit_form = MagazineEditCoverForm(request.POST or None, instance=issue)
+        edit_form = EditProductCover(request.POST or None, instance=issue)
         return render(request,
                         'editors/products/edit-product-cover.html',
                         {'edit_form': edit_form,
-                         'issue': issue,
-                         'user':user,
-                         'profile':profile,
+                         'product': product,
                          'section': 'devices'})
 
 #Editing a product
