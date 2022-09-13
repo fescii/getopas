@@ -84,7 +84,8 @@ main.devices-info{
 }
 .article-list>h2,
 .issue-list>h2,
-main.devices-info>h2{
+main.devices-info>h2,
+.devices>h2{
    /* border: 1px solid rgb(48, 48, 45);*/
     margin: 0%;
     color: #08b86f;
