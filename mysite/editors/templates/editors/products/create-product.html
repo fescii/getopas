@@ -1,8 +1,7 @@
 {% extends "base.html" %}
 {% load static %}
-{% block title %}Create | Product{% endblock %}
+{% block title %}Create - Product Information{% endblock %}
 {% block content %}
-<h1>Add A new Product</h1>
 <form method="post" enctype="multipart/form-data">
 {{ product_form.media}}
 {{ product_form.as_p }}

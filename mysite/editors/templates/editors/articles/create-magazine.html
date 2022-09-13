@@ -4,10 +4,10 @@
 {% block content %}
 <div class="main-content">
   <form method="post">
-  {{ magazine_form.media }}
-  {{ magazine_form.as_p }}
-  {% csrf_token %}
-  <input type="submit" value="Create">
+    {{ magazine_form.media }}
+    {{ magazine_form.as_p }}
+    {% csrf_token %}
+    <input type="submit" value="Create">
   </form>
 </div>
 {% endblock %}
