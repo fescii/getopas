@@ -776,7 +776,7 @@ def edit_product_cover(request, pk):
             #edit_form.save()
             Product.update_cover(product,cover)
             messages.success(request, 'Cover updated successfully')
-            return HttpResponseRedirect(reverse('user_issue_list'))
+            return HttpResponseRedirect(reverse('user_product_list'))
 
         else:
             messages.error(request, 'Error updating the cover')
