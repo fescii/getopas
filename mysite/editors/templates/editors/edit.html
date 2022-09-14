@@ -1,15 +1,16 @@
 {% extends "base.html" %}
 {% load static %}
-{% block title %}Edit your account{% endblock %}
+{% block title %}Edit Your Information{% endblock %}
 {% block content %}
-    <h1>Edit your account</h1>
-    <p>You can edit your account:</p>
+<div class="main-content">
     <form method="post" enctype="multipart/form-data">
+        <h2>Edit your account profile</h2>
     {{ user_form.as_p }}
     {{ profile_form.as_p }}
     {% csrf_token %}
-    <p><input type="submit" value="Save changes"></p>
+    <input type="submit" value="Save changes">
     </form>
+</div>
 {% endblock %}
 {% block footer %}
 <script src=" {% static 'js/base.js' %}"></script>
