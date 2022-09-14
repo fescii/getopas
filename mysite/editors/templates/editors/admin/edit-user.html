@@ -5,9 +5,9 @@
 <div class="main-content">
     {% if user.is_superuser == True %}
         <form method="POST">
-            <h2>Update {{ user.first_name}} Role</h2>
+            <h2>Update {{ u.first_name}} Role</h2>
             <div class="role"><span class="role-title"> Current Role:</span> {{ role }}</div>
-            {{ form }}
+            {{ form.as_p }}
             {% csrf_token %}
             <input type="submit" value="Save">
         </form>
