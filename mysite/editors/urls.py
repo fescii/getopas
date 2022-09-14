@@ -34,6 +34,7 @@ urlpatterns = [
 
     #Register urls
     path('register/', views.register, name='register'),
+
     #Dashboard path
     path('', views.dashboard, name='dashboard'),
     #Edit user info path
