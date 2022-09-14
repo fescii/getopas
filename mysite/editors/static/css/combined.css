@@ -102,7 +102,7 @@ main.profile>.main-content{
     row-gap: 20px;
     column-gap: 20px;
     justify-content: center;
-    box-shadow: 0rem 2rem 1.5rem #6366630e;
+    box-shadow: -0.5rem 0.5rem 1.5rem #6366630e;
     border: 1px solid #83858421;
     padding: 10px;
 }
