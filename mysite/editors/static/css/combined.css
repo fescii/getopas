@@ -132,8 +132,8 @@ main.profile>.main-content>.action-links{
 
 main.users>.user-wrapper>.image-wrapper,
 main.profile>.main-content>.bio>.user-image{
-    height: 40px;
-    width: 40px;
+    height: 35px;
+    width: 35px;
     padding: 3px;
     border: 1px solid #34d63471;
     border-radius: 50px;
