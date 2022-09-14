@@ -17,6 +17,12 @@
     <div class="about">
         {{profile.about}}
     </div>
+    {% if user == r_user %}
+    <div class="action-links">
+        <a href="{% url 'edit' %}">Edit Profile</a>
+    </div>
+    {% endif %}
+
 </div>
 {% endblock %}
 {% block footer %}
