@@ -129,7 +129,7 @@ main.users>.user-wrapper>.image-wrapper>img{
 main.users>.user-wrapper>.action-links{
     justify-self: end;
     display: flex;
-    align-items: flex-start;
+    align-items: center;
     gap: 20px;
 }
 main.users>.user-wrapper>.action-links>a{
@@ -306,8 +306,6 @@ main.users>h2{
     font-size: 0.9rem;
 }
 
-
-
 .article-list>.post-summery>.article-stats>.views,
 .article-list>.post-summery>.article-stats>.comments,
 .issue-list>.issue-summery>.issue-stats>.views,
@@ -360,12 +358,12 @@ main.users>h2{
 main.devices>.main-content>.image>.action-links>a{
     text-decoration: none;
     color: rgba(255, 255, 255, 0.938);
+    box-shadow: 0rem 0.5rem 1.5rem #6366630e;
     display: inline-block;
-    padding: 2px 15px;
-    font-weight: bold;
-    font-size: 0.9rem;
-    opacity: .9;
-    background-color:rgb(15, 138, 196);
+    padding: 3px 15px;
+    font-size: 1rem;
+    border: 1px solid #83858421;
+    color: #08b86f;
     border-radius: 50px;
     -webkit-border-radius: 50px;
     -moz-border-radius: 50px;
@@ -376,7 +374,7 @@ main.devices>.main-content>.image>.action-links>a{
 .issue-list>.issue-summery>.action-links>a:last-of-type,
 .issue-list>.issue-section>.section-links>a:last-of-type,
 .devices>.product-summery>.action-links>a:last-of-type{
-    background-color:rgb(196, 36, 15);
+    color:rgb(200, 62, 44);
 }
 
 

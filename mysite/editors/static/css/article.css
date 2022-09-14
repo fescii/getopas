@@ -9,12 +9,12 @@ html,body{
     z-index: 10;
     text-decoration: none;
     color: rgba(255, 255, 255, 0.938);
-    box-shadow: 0.1rem 0.1rem 0.5rem #18181847;
+    box-shadow: 0.3rem 0.3rem 0.5rem #6366630e;
     display: inline-block;
     padding: 4px 20px;
     font-weight: bold;
     font-size: 1.1rem;
-    background-color:rgb(15, 138, 196);
+    background-color:#08b86f;
     border-radius: 50px;
     -webkit-border-radius: 50px;
     -moz-border-radius: 50px;
