@@ -3,13 +3,13 @@
 {% block title %}Opus - Edit User Role{% endblock %}
 {% block content %}
 <div class="main-content">
-    <h1>Update User Role</h1>
     {% if user.is_superuser == True %}
-        <div>Current Role: {{ role }}</div>
         <form method="POST">
-        {{ form }}
-        {% csrf_token %}
-        <input type="submit" value="Save">
+            <h2>Update User Role</h2>
+            <div class="role"><span class="role-title"> Current Role:</span> {{ role }}</div>
+            {{ form }}
+            {% csrf_token %}
+            <input type="submit" value="Save">
         </form>
     {% else %}
         <p>Permission Denied</p>
