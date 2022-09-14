@@ -46,7 +46,18 @@ def is_author(user):
 def list_users(request):
     user = request.user
     profile = user.profile
-    users = User.objects.all()
+    user_list = User.objects.all()
+
+    paginator = Paginator(user_list, 5) # 5 users in each page
+    page = request.GET.get('page')
+    try:
+        users = paginator.page(page)
+    except PageNotAnInteger:
+    # If page is not an integer deliver the first page
+        users = paginator.page(1)
+    except EmptyPage:
+    # If page is out of range deliver last page of results
+        users = paginator.page(paginator.num_pages)
     return render(request,
                   'editors/admin/users.html',
                   {'users': users,
