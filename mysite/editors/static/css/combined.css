@@ -111,12 +111,16 @@ main.users>.user-wrapper>.info-wrapper{
     align-items: center;
     justify-content: space-around;
 }
+main.devices-create>.main-content>form>.role{
+    color: #808080;
+}
 main.users>.user-wrapper>.info-wrapper>.detail,
 main.users>.user-wrapper>.info-wrapper>.role{
     margin: 5px 0%;
 }
 main.users>.user-wrapper>.info-wrapper>.role>.role-title,
-main.users>.user-wrapper>.info-wrapper>.detail>.title{
+main.users>.user-wrapper>.info-wrapper>.detail>.title,
+main.devices-create>.main-content>form>.role>.role-title{
     color: #404040;
     font-size: 1.05rem;
 }
