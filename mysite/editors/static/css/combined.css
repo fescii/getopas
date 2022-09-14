@@ -95,6 +95,9 @@ main.profile>.main-content{
     border: 1px solid #83858421;
     padding: 10px;
 }
+main.profile>.main-content>div{
+    border: 1px solid #83858421;
+}
 main.users>.user-wrapper>.image-wrapper,
 main.profile>.main-content>.bio>.user-image{
     height: 40px;
