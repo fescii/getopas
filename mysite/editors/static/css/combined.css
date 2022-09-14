@@ -107,6 +107,9 @@ main.users>.user-wrapper>.image-wrapper{
 main.users>.user-wrapper>.info-wrapper{
     margin: 0%;
     color: #808080;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
 }
 main.users>.user-wrapper>.info-wrapper>.detail,
 main.users>.user-wrapper>.info-wrapper>.role{
@@ -132,10 +135,10 @@ main.users>.user-wrapper>.action-links{
 main.users>.user-wrapper>.action-links>a{
     text-decoration: none;
     color: rgba(255, 255, 255, 0.938);
-    box-shadow: 0rem 2rem 1.5rem #6366630e;
+    box-shadow: 0rem 0.5rem 1.5rem #6366630e;
     display: inline-block;
     padding: 3px 15px;
-    font-size: 1.05rem;
+    font-size: 1rem;
     border: 1px solid #83858421;
     color: #08b86f;
     border-radius: 50px;

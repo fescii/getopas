@@ -241,6 +241,7 @@ header.header>.profile-section>.profile-dropdown{
     position: absolute;
     background-color: white;
    /*background-color: rgb(228, 243, 214);*/
+   border: 1px solid #83858421;
     padding: 0%;
     padding-top: 8px;
     margin: 0%;
