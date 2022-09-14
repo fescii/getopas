@@ -18,10 +18,17 @@
 </div>
 {% endif %}
 <div class="user-wrapper">
-    <p class="name">Name: {{ user.first_name}} {{ user.last_name }}</p>
-    <p class="name">Email: {{ user.email}}</p>
-    <a href="{% url 'moderate_user' user_id=user.id%}">edit role</a>
-    <a href=" {% url 'remove_user' user_id=user.id%}">remove user</a>
+    <div class="image-wrapper">
+        <img src="media/{{ user.profile.photo }}"
+    </div>
+    <div class="info-wrapper">
+        <p class="name">Name: {{ user.first_name}} {{ user.last_name }}</p>
+        <p class="name">Email: {{ user.email}}</p>
+    </div>
+    <div class="action-links">
+        <a href="{% url 'moderate_user' user_id=user.id%}">edit role</a>
+        <a href=" {% url 'remove_user' user_id=user.id%}">remove user</a>
+    </div>
 </div>
 {% endfor %}
 {% include "pagination.html" with page=posts %}
