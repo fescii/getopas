@@ -251,7 +251,7 @@ def user_profile(request, user_id):
     profile = user.profile
 
     return render(request,
-                  'editors/admin/users.html',
+                  'editors/editors/user-profile.html',
                   {'user': user,
                    'profile': profile,
                    'section': 'profile'})
