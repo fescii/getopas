@@ -123,9 +123,15 @@ main.users>.user-wrapper>.action-links>a{
     padding: 3px 15px;
     font-size: 1.05rem;
     background-color: #08b86f;
-    border-radius: 50px;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
 }
-
+main.users>.user-wrapper>.action-links>a:last-of-type{
+    background-color:rgb(200, 62, 44);
+}
 /* Other Lists */
 .article-list>h2,
 .issue-list>h2,
