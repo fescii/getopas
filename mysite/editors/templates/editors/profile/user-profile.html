@@ -3,17 +3,19 @@
 {% block title %}{{r_user.username}} - Profile{% endblock %}
 {% block content %}
 <div class="main-content">
-<div class="bio">
-    <div class="user-image">
-        <img src="/media/{{ profile.photo }}"/>
-    </div>
-    <div class="data">
-        <div class="name">{{r_user.first_name}} {{r_user.last_name}}
+    <div class="bio">
+        <div class="user-image">
+            <img src="/media/{{ profile.photo }}"/>
         </div>
-        <div class="email">{{r_user.email}}
+        <div class="data">
+            <div class="name">{{r_user.first_name}} {{r_user.last_name}}
+            </div>
+            <div class="email">{{r_user.email}}
+            </div>
         </div>
     </div>
-</div>
+    <div class="about">
+    </div>
 </div>
 {% endblock %}
 {% block footer %}
