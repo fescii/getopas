@@ -94,7 +94,8 @@ main.users>.user-wrapper{
      border: 1px solid #83858421;
      padding: 10px;
 }
-main.users>.user-wrapper>.image-wrapper{
+main.users>.user-wrapper>.image-wrapper,
+main.profile>.main-content>.user-image{
     height: 40px;
     width: 40px;
     padding: 3px;
@@ -125,7 +126,8 @@ main.devices-create>.main-content>form>.role>.role-title{
     color: #404040;
     font-size: 1.05rem;
 }
-main.users>.user-wrapper>.image-wrapper>img{
+main.users>.user-wrapper>.image-wrapper>img,
+main.profile>.main-content>.user-image>img{
     width: 100%;
     height: 100%;
     object-fit: cover;
