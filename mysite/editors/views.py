@@ -231,7 +231,7 @@ def edit(request):
                        'profile_form': profile_form,
                        'user': user,
                        'profile': profile,
-                       'section': edit})
+                       'section': 'devices-create'})
     else:
         user_form = UserEditForm(instance=request.user)
         profile_form = ProfileEditForm(instance=request.user.profile)
