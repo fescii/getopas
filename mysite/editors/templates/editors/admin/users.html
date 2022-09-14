@@ -3,17 +3,17 @@
 {% block title %}Opus | Magazine{% endblock %}
 {% block content %}
 <h2>Users</h2>
-{% for user in users %}
+{% for user_info in users %}
 <div class="user-wrapper">
     <div class="image-wrapper">
-        <img src="/media/{{ user.profile.photo }}"/>
+        <img src="/media/{{ user_info.profile.photo }}"/>
     </div>
     <div class="info-wrapper">
-        {% if user.is_superuser == True %}
+        {% if user_info.is_superuser == True %}
         <div class="role">
             <span class="role-title">Role:</span> Admin
         </div>
-        {% elif user.is_staff == True and user.is_superuser == False %}
+        {% elif user_info.is_staff == True and user_info.is_superuser == False %}
         <div class="role">
             <span class="role-title">Role:</span> Editor
         </div>
@@ -23,15 +23,16 @@
         </div>
         {% endif %}
         <div class="detail">
-            <span class="title">Name: </span> {{ user.first_name}} {{ user.last_name }}
+            <span class="title">Name: </span> {{ user_info.first_name}} {{ user_info.last_name }}
         </div>
         <div class="detail">
-            <span class="title">Email: </span> {{ user.email}}
+            <span class="title">Email: </span> {{ user_info.email}}
         </div>
     </div>
+
     <div class="action-links">
-        <a href="{% url 'moderate_user' user_id=user.id%}">Edit Role</a>
-        <a href=" {% url 'remove_user' user_id=user.id%}">Remove</a>
+        <a href="{% url 'moderate_user' user_id=user_info.id%}">Edit Role</a>
+        <a href=" {% url 'remove_user' user_id=user_info.id%}">Remove</a>
     </div>
 </div>
 {% endfor %}
