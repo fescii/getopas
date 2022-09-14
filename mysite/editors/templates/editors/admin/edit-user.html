@@ -4,15 +4,17 @@
 {% block content %}
 <div class="main-content">
     <h1>Update User Role</h1>
-{% if user.is_superuser == True %}
-    <p>Current Role: {{ role }}</p>
-{% else  %}
-{% endif %}
-    <form method="POST">
-{{ form }}
-{% csrf_token %}
-    <input type="submit" value="Save">
-    </form>
+    {% if user.is_superuser == True %}
+        <div>Current Role: {{ role }}</div>
+        <form method="POST">
+        {{ form }}
+        {% csrf_token %}
+        <input type="submit" value="Save">
+        </form>
+    {% else %}
+        <p>Permission Denied</p>
+    {% endif %}
+</div>
 {% endblock %}
 {% block footer %}
  <script src=" {% static 'js/base.js' %}"></script>
