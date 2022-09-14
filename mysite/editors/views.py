@@ -68,6 +68,8 @@ def list_users(request):
 # modify an user based on action
 @user_passes_test(is_admin)
 def moderate_user(request, user_id):
+    user = request.user
+    profile = user.profile
     form = ModerateUserForm(request.GET)
     u = User.objects.get(id=user_id)
 
@@ -109,7 +111,10 @@ def moderate_user(request, user_id):
         return render(request,
                           'editors/admin/edit-user.html',
                           {'form': form,
-                           'role': role})
+                           'role': role,
+                           'section': 'devices-create',
+                           'profile': profile,
+                           'user': user})
 
 # Removing a user based on action
 @user_passes_test(is_admin)
