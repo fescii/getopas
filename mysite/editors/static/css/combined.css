@@ -92,6 +92,7 @@ main.users>.user-wrapper{
 main.users>.user-wrapper>.image-wrapper{
     height: 30px;
     width: 30px;
+    padding: 3px;
 }
 main.users>.user-wrapper>.image-wrapper>img{
     width: 100%;
@@ -99,7 +100,7 @@ main.users>.user-wrapper>.image-wrapper>img{
     object-fit: cover;
 }
 
-
+/* Other Lists */
 .article-list>h2,
 .issue-list>h2,
 main.devices-info>h2,
