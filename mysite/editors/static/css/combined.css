@@ -98,6 +98,7 @@ main.profile>.main-content{
     width: 90%;
     display: grid;
     grid-template-columns: 1fr 3fr;
+    grid-template-rows: minmax(150px, 200px);
     justify-content: center;
     box-shadow: 0rem 2rem 1.5rem #6366630e;
     border: 1px solid #83858421;
@@ -109,7 +110,8 @@ main.profile>.main-content>div{
 main.profile>.main-content>.bio{
     grid-column: 1/2;
     display: flex;
-    align-items: center;
+    align-items: flex-start;
+    padding: 10px;
     justify-content: space-around;
 }
 
