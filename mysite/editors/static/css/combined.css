@@ -85,8 +85,7 @@ main.profile{
 
 }
 /* Users  and Profile*/
-main.users>.user-wrapper,
-main.profile>.main-content{
+main.users>.user-wrapper{
     width: 90%;
     display: grid;
     grid-template-columns: 60px 2fr 1fr;
@@ -95,9 +94,27 @@ main.profile>.main-content{
     border: 1px solid #83858421;
     padding: 10px;
 }
+main.profile>.main-content{
+    width: 90%;
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    justify-content: center;
+    box-shadow: 0rem 2rem 1.5rem #6366630e;
+    border: 1px solid #83858421;
+    padding: 10px;
+}
 main.profile>.main-content>div{
     border: 1px solid #83858421;
 }
+main.profile>.main-content>.bio{
+    grid-column: 1/2;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+
+
 main.users>.user-wrapper>.image-wrapper,
 main.profile>.main-content>.bio>.user-image{
     height: 40px;
