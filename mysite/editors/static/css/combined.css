@@ -431,3 +431,8 @@ form>p>.helptext{
     font-size: 0.9rem;
     text-align: center;
 }
+/* Pagination */
+.pagination>.step-links>a{
+    text-decoration: none;
+    color: #08b86f;
+}
