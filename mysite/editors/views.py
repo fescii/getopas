@@ -112,6 +112,7 @@ def moderate_user(request, user_id):
                           'editors/admin/edit-user.html',
                           {'form': form,
                            'role': role,
+                           'u': u,
                            'section': 'devices-create',
                            'profile': profile,
                            'user': user})
