@@ -132,18 +132,20 @@ main.users>.user-wrapper>.action-links{
 main.users>.user-wrapper>.action-links>a{
     text-decoration: none;
     color: rgba(255, 255, 255, 0.938);
+    box-shadow: 0rem 2rem 1.5rem #6366630e;
     display: inline-block;
     padding: 3px 15px;
     font-size: 1.05rem;
-    background-color: #08b86f;
-    border-radius: 5px;
-    -webkit-border-radius: 5px;
-    -moz-border-radius: 5px;
-    -ms-border-radius: 5px;
-    -o-border-radius: 5px;
+    border: 1px solid #83858421;
+    color: #08b86f;
+    border-radius: 50px;
+    -webkit-border-radius: 50px;
+    -moz-border-radius: 50px;
+    -ms-border-radius: 50px;
+    -o-border-radius: 50px;
 }
 main.users>.user-wrapper>.action-links>a:last-of-type{
-    background-color:rgb(200, 62, 44);
+    color:rgb(200, 62, 44);
 }
 /* Other Lists */
 .article-list>h2,
