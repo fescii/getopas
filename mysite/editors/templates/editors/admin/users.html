@@ -22,8 +22,12 @@
             <span class="role-title">Role:</span> Author
         </div>
         {% endif %}
-        <p class="name">Name: {{ user.first_name}} {{ user.last_name }}</p>
-        <p class="name">Email: {{ user.email}}</p>
+        <div class="detail">
+            <span class="title">Name: </span> {{ user.first_name}} {{ user.last_name }}
+        </div>
+        <div class="detail">
+            <span class="title">Email: </span> {{ user.email}}
+        </div>
     </div>
     <div class="action-links">
         <a href="{% url 'moderate_user' user_id=user.id%}">Edit Role</a>
