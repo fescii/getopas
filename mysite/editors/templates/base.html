@@ -154,6 +154,17 @@
                   <span class="link-text">Device Info</span>
                 </a>
               </li>
+              {% else %}
+              <li class="content-link">
+                <a class="link {% if section == 'account' %} data-active {% endif %}" href="#">
+                  <span id="select"></span>
+                  <span class="iconlyBulk-Discovery">
+                    <span class="path1"></span>
+                    <span class="path2"></span>
+                  </span>
+                  <span class="link-text">Explore</span>
+                </a>
+              </li>
               {% endif %}
               <li class="content-link">
                 <a class="link {% if section == 'donate' %} data-active {% endif %}" href="#">
