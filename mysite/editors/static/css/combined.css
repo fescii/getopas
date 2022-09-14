@@ -110,6 +110,9 @@ main.users>.user-wrapper>.image-wrapper>img{
     object-fit: cover;
     border-radius: 50px;
 }
+main.users>.user-wrapper>.action-links{
+    justify-self: end;
+}
 
 /* Other Lists */
 .article-list>h2,
