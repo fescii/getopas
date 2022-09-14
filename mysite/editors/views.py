@@ -44,10 +44,15 @@ def is_author(user):
 #List Users
 @user_passes_test(is_admin)
 def list_users(request):
+    user = request.user
+    profile = user.profile
     users = User.objects.all()
     return render(request,
                   'editors/admin/users.html',
-                  {'users': users,})
+                  {'users': users,
+                   'user': user,
+                   'profile': profile,
+                   'section': 'users'})
 
 # modify an user based on action
 @user_passes_test(is_admin)
