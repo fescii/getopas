@@ -241,7 +241,7 @@ def edit(request):
                        'profile_form': profile_form,
                        'user': user,
                        'profile': profile,
-                       'section': edit})
+                       'section': 'devices-create'})
 
 #User Profile Page
 @login_required
