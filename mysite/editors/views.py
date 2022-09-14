@@ -244,6 +244,13 @@ def edit(request):
                        'profile': profile,
                        'section': edit})
 
+#User Profile Page
+@login_required
+def user_profile(request, user_id):
+    user = User.objects.get(id=user_id)
+    profile = user.profile
+
+
 @login_required
 def create_post(request):
     user = request.user
