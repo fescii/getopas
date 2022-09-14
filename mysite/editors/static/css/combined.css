@@ -91,8 +91,8 @@ main.users>.user-wrapper{
     grid-template-columns: 60px 2fr 1fr;
     justify-content: center;
     box-shadow: 0rem 2rem 1.5rem #6366630e;
-     border: 1px solid #83858421;
-     padding: 10px;
+    border: 1px solid #83858421;
+    padding: 10px;
 }
 main.users>.user-wrapper>.image-wrapper,
 main.profile>.main-content>.bio>.user-image{
