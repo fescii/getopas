@@ -250,6 +250,12 @@ def user_profile(request, user_id):
     user = User.objects.get(id=user_id)
     profile = user.profile
 
+    return render(request,
+                  'editors/admin/users.html',
+                  {'user': user,
+                   'profile': profile,
+                   'section': 'profile'})
+
 
 @login_required
 def create_post(request):
