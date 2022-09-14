@@ -260,6 +260,7 @@ main.users>h2{
 .devices>.product-summery>.content-summery{
     grid-column: 2/3;
     grid-row: 3/6;
+    color: #404040;
 }
 .issue-list>.issue-summery>.issue-stats,
 .article-list>.post-summery>.article-stats,
@@ -294,6 +295,7 @@ main.users>h2{
 .devices>.product-summery>h2>a{
     text-decoration: none;
     color: rgb(15, 138, 196);
+    font-weight: 400;
 }
 
 
@@ -434,5 +436,5 @@ form>p>.helptext{
 /* Pagination */
 .pagination>.step-links>a{
     text-decoration: none;
-    color: #08b86f;
+    color: rgb(15, 138, 196);
 }
