@@ -759,7 +759,7 @@ def create_product(request):
             return render(request,
                           'editors/products/create-product.html',
                           {'product_form': product_form,
-                           'section': 'devices-create',
+                           'section': 'devices-create create',
                            'profile': profile,
                            'user': user})
     else:
