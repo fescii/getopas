@@ -83,6 +83,23 @@ main.users{
     padding-bottom: 50px;
 
 }
+/* Users */
+main.users>.user-wrapper{
+    width: 90%;
+    display: grid;
+    grid-template-columns: 50px 2fr 1fr;
+}
+main.users>.user-wrapper>.image-wrapper{
+    height: 30px;
+    width: 30px;
+}
+main.users>.user-wrapper>.image-wrapper>img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+
 .article-list>h2,
 .issue-list>h2,
 main.devices-info>h2,
