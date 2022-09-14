@@ -176,10 +176,10 @@
             <h2 class="settings-title">SETTINGS</h2>
             <ul class="linked-list settings-list">
               <li class="content-link">
-                <a class="link {% if section == 'settings' %} data-active {% endif %}" href="#">
+                <a class="link {% if section == 'profile' %} data-active {% endif %}" href=" {% url 'profile' username=user.username %}">
                   <span id="select"></span>
-                  <span class="iconly-Setting icli"></span>
-                  <span class="link-text">Settings</span>
+                  <span class="iconly-Profile icli"></span>
+                  <span class="link-text">Profile</span>
                 </a>
               </li>
               <li class="content-link">
@@ -209,14 +209,6 @@
                   <span id="select"></span>
                   <span class="iconly-User3 icli"></span>
                   <span class="link-text">Users</span>
-                </a>
-              </li>
-              {% else %}
-              <li class="content-link">
-                <a class="link {% if section == 'account' %} data-active {% endif %}" href="#">
-                  <span id="select"></span>
-                  <span class="iconly-Profile icli"></span>
-                  <span class="link-text">Account</span>
                 </a>
               </li>
               {% endif %}
