@@ -274,14 +274,13 @@ main.users>h2{
     display: flex;
     flex-flow: column;
     align-items: center;
-    justify-content: center;
     gap: 10px;
-    color: #a2bb69;
 }
 .issue-list>.issue-summery>.issue-stats>.stats-title,
 .article-list>.post-summery>.article-stats>.stats-title,
 .devices>.product-summery>.product-stats>.stats-title{
-    font-weight: bold;
+    color: #3fb886;
+    font-size: 1.2rem;
 }
 .issue-list>.issue-summery>.action-links,
 .article-list>.post-summery>.action-links,
