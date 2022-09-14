@@ -112,6 +112,18 @@ main.users>.user-wrapper>.image-wrapper>img{
 }
 main.users>.user-wrapper>.action-links{
     justify-self: end;
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+}
+main.users>.user-wrapper>.action-links>a{
+    text-decoration: none;
+    color: rgba(255, 255, 255, 0.938);
+    display: inline-block;
+    padding: 3px 15px;
+    font-size: 1.2rem;
+    background-color: #08b86f;
+    border-radius: 50px;
 }
 
 /* Other Lists */
