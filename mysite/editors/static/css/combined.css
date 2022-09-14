@@ -106,8 +106,11 @@ main.profile>.main-content{
     border: 1px solid #83858421;
     padding: 10px;
 }
-main.profile>.main-content>div{
-    border: 1px solid #83858421;
+main.profile>.main-content>.about{
+    padding: 10px;
+}
+main.profile>.main-content>.about>h2{
+    margin: 0%;
 }
 main.profile>.main-content>.bio{
     grid-column: 1/2;
