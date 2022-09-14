@@ -196,7 +196,7 @@ main.devices-info>h2,
 .devices>.product-summery>.product-stats{
     grid-column: 3/4;
     grid-row: 1/8;
-    background-color: rgb(231, 248, 215);
+    background-color:  white;
     border-left: 1px solid #83858421;
     margin: 0px 0px;
     padding: 10px 10px;

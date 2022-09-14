@@ -1,5 +1,5 @@
 html,body{
-    background-color: rgb(231, 248, 215);
+    background-color:  white;
 }
 .add-new{
     position: fixed;
@@ -24,7 +24,7 @@ html,body{
 main.article,
 main.issue,
 main.create-section{
-    background-color: rgb(231, 248, 215);
+    background-color:  white;
     position: fixed;
     margin: 0%;
     padding: 0%;
@@ -141,7 +141,7 @@ main.issue>.main-content>form>p:nth-of-type(2)>input[type="text"]{
    width: 90%;
     padding: 2px 20px;
     border: none;
-    background-color: rgb(231, 248, 215);
+    background-color:  white;
     outline: none;
     border-bottom: 1px solid #838584b2;
     font-size: 20px;
@@ -268,7 +268,7 @@ input[type='file']{
 main.devices-create{
     overflow-y: scroll;
     overflow-x: hidden;
-    background-color: rgb(231, 248, 215);
+    background-color:  white;
     position: fixed;
     margin: 0%;
     padding: 0%;
