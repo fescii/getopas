@@ -1,6 +1,8 @@
 {% extends "base.html" %}
+{% load static %}
 {% block title %}Opus - Edit User Role{% endblock %}
 {% block content %}
+<div class="main-content">
     <h1>Update User Role</h1>
 {% if user.is_superuser == True %}
     <p>Current Role: {{ role }}</p>
