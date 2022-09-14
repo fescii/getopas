@@ -126,7 +126,7 @@
                 </a>
               </li>
               <li class="content-link">
-                <a class="link {% if section == 'article' %}data-active{% endif %}" href=" {% url 'create_post' %}">
+                <a class="link {% if section == 'article' or section == 'devices-create' %}data-active{% endif %}" href=" {% url 'create_post' %}">
                   <span id="select"></span>
                   <span class="iconly-Plus icli"></span>
                   <span class="link-text">Create</span>
