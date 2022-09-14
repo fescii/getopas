@@ -112,6 +112,7 @@ main.profile>.main-content>.bio{
     display: flex;
     align-items: flex-start;
     padding: 10px;
+    gap: 10px;
 }
 main.profile>.main-content>.action-links{
     grid-column: 1/4;
