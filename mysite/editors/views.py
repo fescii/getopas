@@ -125,7 +125,6 @@ def remove_user(request, user_id):
     messages.success(request, 'User account was successfully deleted')
     return HttpResponseRedirect(reverse('list_users'))
 
-
 #Dashboard
 @login_required
 def dashboard(request):
@@ -251,7 +250,7 @@ def user_profile(request, user_id):
     profile = user.profile
 
     return render(request,
-                  'editors/editors/user-profile.html',
+                  'editors/profile/user-profile.html',
                   {'user': user,
                    'profile': profile,
                    'section': 'profile'})
