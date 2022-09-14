@@ -26,8 +26,8 @@
         <p class="name">Email: {{ user.email}}</p>
     </div>
     <div class="action-links">
-        <a href="{% url 'moderate_user' user_id=user.id%}">edit role</a>
-        <a href=" {% url 'remove_user' user_id=user.id%}">remove user</a>
+        <a href="{% url 'moderate_user' user_id=user.id%}">Edit Role</a>
+        <a href=" {% url 'remove_user' user_id=user.id%}">Remove</a>
     </div>
 </div>
 {% endfor %}
