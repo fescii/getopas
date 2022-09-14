@@ -16,7 +16,7 @@
     </div>
     <div class="about">
         <h2>About</h2>
-        {{profile.about}}
+        {{profile.about|safe}}
     </div>
     {% if user == r_user %}
     <div class="action-links">
