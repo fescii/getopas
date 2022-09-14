@@ -245,8 +245,8 @@ def edit(request):
 
 #User Profile Page
 @login_required
-def user_profile(request, user_id):
-    r_user = User.objects.get(id=user_id)
+def user_profile(request, username):
+    r_user = User.objects.get(username=username)
     profile = r_user.profile
 
     return render(request,
