@@ -219,7 +219,7 @@ def edit(request):
             user_form.save()
             profile_form.save()
             messages.success(request, 'Profile updated successfully')
-            return HttpResponseRedirect(reverse('dashboard'))
+            return HttpResponseRedirect(reverse('profile'))
 
         else:
             messages.error(request, 'Error updating your profile')
