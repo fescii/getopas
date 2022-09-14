@@ -38,6 +38,7 @@ urlpatterns = [
     path('', views.dashboard, name='dashboard'),
     #Edit user info path
     path('edit-info/', views.edit, name='edit'),
+    path('profile/', views.user_profile, name='profile'),
     path('users/', views.list_users, name='list_users'),
     path('users/edit-user-<str:user_id>', views.moderate_user, name='moderate_user'),
     path('users/remove-user-<str:user_id>', views.remove_user, name='remove_user'),
