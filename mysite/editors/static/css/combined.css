@@ -85,7 +85,8 @@ main.profile{
 
 }
 /* Users  and Profile*/
-main.users>.user-wrapper{
+main.users>.user-wrapper,
+main.profile>.main-content{
     width: 90%;
     display: grid;
     grid-template-columns: 60px 2fr 1fr;
