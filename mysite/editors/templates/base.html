@@ -197,7 +197,7 @@
               </li>
               {% if user.is_superuser %}
               <li class="content-link">
-                <a class="link {% if section == 'users' %} data-active {% endif %}" href="#">
+                <a class="link {% if section == 'users' %} data-active {% endif %}" href=" {% url 'list_users' %}">
                   <span id="select"></span>
                   <span class="iconly-User3 icli"></span>
                   <span class="link-text">Users</span>
