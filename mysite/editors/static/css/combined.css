@@ -84,7 +84,7 @@ main.profile{
     padding-bottom: 50px;
 
 }
-/* Users */
+/* Users  and Profile*/
 main.users>.user-wrapper{
     width: 90%;
     display: grid;
@@ -157,6 +157,9 @@ main.users>.user-wrapper>.action-links>a{
 main.users>.user-wrapper>.action-links>a:last-of-type{
     color:rgb(200, 62, 44);
 }
+
+
+
 /* Other Lists */
 .article-list>h2,
 .issue-list>h2,
