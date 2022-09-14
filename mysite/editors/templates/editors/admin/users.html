@@ -4,25 +4,24 @@
 {% block content %}
 <h2>Users</h2>
 {% for user in users %}
-{% if user.is_superuser == True %}
-<div class="role">
-    <span class="role-title">Role:</span> Admin
-</div>
-
 <div class="user-wrapper">
     <div class="image-wrapper">
         <img src="/media/{{ user.profile.photo }}"/>
     </div>
     <div class="info-wrapper">
+        {% if user.is_superuser == True %}
+        <div class="role">
+            <span class="role-title">Role:</span> Admin
+        </div>
         {% elif user.is_staff == True and user.is_superuser == False %}
-    <div class="role">
-        <span class="role-title">Role:</span> Editor
-    </div>
-    {% else %}
-    <div class="role">
-        <span class="role-title">Role:</span> Author
-    </div>
-    {% endif %}
+        <div class="role">
+            <span class="role-title">Role:</span> Editor
+        </div>
+        {% else %}
+        <div class="role">
+            <span class="role-title">Role:</span> Author
+        </div>
+        {% endif %}
         <p class="name">Name: {{ user.first_name}} {{ user.last_name }}</p>
         <p class="name">Email: {{ user.email}}</p>
     </div>
@@ -32,7 +31,7 @@
     </div>
 </div>
 {% endfor %}
-{% include "pagination.html" with page=posts %}
+{% include "pagination.html" with page=users %}
 <!--{% include "pagination.html" with page=page_obj %}-->
 {% endblock %}
 
