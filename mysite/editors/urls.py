@@ -42,7 +42,7 @@ urlpatterns = [
     path('users/edit-user-<str:user_id>', views.moderate_user, name='moderate_user'),
     path('users/remove-user-<str:user_id>', views.remove_user, name='remove_user'),
 
-     #Articles
+    #Articles
     path('add-article/', views.create_post, name='create_post'),
     path('my-articles/', views.user_post_list, name='user_post_list'),
     path('edit-article/<int:pk>/', views.edit_blog_post, name='edit_blog_post'),
