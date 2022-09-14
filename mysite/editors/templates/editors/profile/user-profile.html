@@ -1,19 +1,19 @@
 {% extends "base.html" %}
 {% load static %}
-{% block title %}Opus - Edit User Role{% endblock %}
+{% block title %}{{r_user.username}} - Profile{% endblock %}
 {% block content %}
 <div class="main-content">
-    {% if user.is_superuser == True %}
-        <form method="POST">
-            <h2>Update {{ u.first_name}}'s Role</h2>
-            <div class="role"><span class="role-title"> Current Role:</span> {{ role }}</div>
-            {{ form.as_p }}
-            {% csrf_token %}
-            <input type="submit" value="Save">
-        </form>
-    {% else %}
-        <p>Permission Denied</p>
-    {% endif %}
+<div class="bio">
+    <div class="user-image">
+        <img src="/media/{{ profile.photo }}"/>
+    </div>
+    <div class="data">
+        <div class="name">{{r_user.first_name}} {{r_user.last_name}}
+        </div>
+        <div class="email">{{r_user.email}}
+        </div>
+    </div>
+</div>
 </div>
 {% endblock %}
 {% block footer %}

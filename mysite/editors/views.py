@@ -246,12 +246,12 @@ def edit(request):
 #User Profile Page
 @login_required
 def user_profile(request, user_id):
-    user = User.objects.get(id=user_id)
-    profile = user.profile
+    r_user = User.objects.get(id=user_id)
+    profile = r_user.profile
 
     return render(request,
                   'editors/profile/user-profile.html',
-                  {'user': user,
+                  {'r_user': r_user,
                    'profile': profile,
                    'section': 'profile'})
 
