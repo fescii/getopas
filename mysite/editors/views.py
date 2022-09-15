@@ -1227,3 +1227,4 @@ def new_articles(request):
                    'user':user,
                    'profile':profile,
                    'section': 'article-list'})
+
