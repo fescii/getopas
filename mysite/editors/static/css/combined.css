@@ -226,7 +226,6 @@ main.users>h2{
     display: flex;
     align-items: center;
     gap: 5px;
-    border: 1px solid #08b86f5f;
     grid-row: 6/8;
     color: #404040;
  }
