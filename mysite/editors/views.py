@@ -1174,3 +1174,29 @@ def delete_image(request,product_id, image_id):
     image.delete()
     messages.success(request, 'Image deleted successfully')
     return HttpResponseRedirect(reverse('images', kwargs={'pk': product_id}))
+
+#Most Viewed Articles
+@login_required
+def top_newsletters(request):
+    user = request.user
+    profile = user.profile
+    #Top 10 Newsletters
+    top_issues = Issue.published.order_by('-issue_views')
+
+    paginator = Paginator(top_issues, 5) # 5 posts in each page
+    page = request.GET.get('page')
+    try:
+        issues = paginator.page(page)
+    except PageNotAnInteger:
+    # If page is not an integer deliver the first page
+        issues = paginator.page(1)
+    except EmptyPage:
+    # If page is out of range deliver last page of results
+        issues = paginator.page(paginator.num_pages)
+
+    return render(request, 'editors/articles/user_articles_list.html',
+                  {'page': page,
+                   'issues': issues,
+                   'user':user,
+                   'profile':profile,
+                   'section': 'issue-list'})
