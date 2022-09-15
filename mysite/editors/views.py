@@ -1221,9 +1221,9 @@ def new_articles(request):
     # If page is out of range deliver last page of results
         articles = paginator.page(paginator.num_pages)
 
-    return render(request, 'editors/articles/top-newsletters.html',
+    return render(request, 'editors/articles/recent-articles.html',
                   {'page': page,
                    'articles': articles,
                    'user':user,
                    'profile':profile,
-                   'section': 'issue-list'})
+                   'section': 'article-list'})
