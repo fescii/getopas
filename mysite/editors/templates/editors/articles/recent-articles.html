@@ -22,15 +22,17 @@
             <span class='views'><span class="iconly-Show icli"></span> {{ post.blog_views }}</span>
             <span class='comments'><span class="iconly-User2 icli"></span> {{ post.comments.count }}</span>
         </div>
-        <div class="action-links">
-            <a href="/dashboard/edit-article/{{post.id}}">Edit</a>
-            <a href="/dashboard/edit-article/cover/{{post.id}}">Cover</a>
-            <a href="/dashboard/edit-article/tags/{{post.id}}">Tags</a>
-            <a href="/dashboard/delete-article/{{post.id}}">Delete</a>
+        <div class="author-info">
+            <div class="profile-wrapper">
+                <img src="/media/{{post.author.profile.photo}}"/>
+            </div>
+            <div class="user-name">
+                {{post.author.first_name}} {{post.author.last_name}}
+            </div>
         </div>
     </div>
 {% if empty %}
-<p> You've not Published any Articles Yet!</p>
+<p> There Are No Published Articles Yet!</p>
 {% endif %}
 {% endfor %}
 {% include "pagination.html" with page=posts %} {% endblock %}
