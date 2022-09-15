@@ -1223,7 +1223,7 @@ def new_articles(request):
 
     return render(request, 'editors/articles/recent-articles.html',
                   {'page': page,
-                   'articles': articles,
+                   'posts': articles,
                    'user':user,
                    'profile':profile,
                    'section': 'article-list'})
