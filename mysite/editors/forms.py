@@ -42,6 +42,7 @@ class UserEditForm(forms.ModelForm):
         return data
 
 class ProfileEditForm(forms.ModelForm):
+    date_of_birth = forms.DateField(widget=forms.DateInput)
     class Meta:
         model = Profile
         fields = ('date_of_birth','about','photo')
