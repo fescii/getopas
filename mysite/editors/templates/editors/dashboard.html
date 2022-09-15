@@ -44,10 +44,9 @@
         </div>
         <div class="people-content-wrapper">
           <div class="people-profile">
-            <img src="img/img.jpg" alt="" />
-            <img src="img/img.jpg" alt="" />
-            <img src="img/img.jpg" alt="" />
-            <img src="img/img.jpg" alt="" />
+            {% for editor in editors %}
+             <img src="/media/{{ editor.author.profile.photo }}" alt="" />
+            {% endfor %}
           </div>
           <div class="content">
             <div class="viewers">Most Viewed</div>
