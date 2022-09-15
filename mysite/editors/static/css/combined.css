@@ -220,10 +220,19 @@ main.users>h2{
      display: grid;
      grid-template-columns: 1fr 3fr 100px;
      position: relative;
+     row-gap: 10px;
+ }
+ .issue-list>.issue-summery>.author-info{
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    border: 1px solid #08b86f5f;
+    grid-row: 6/8;
+    color: #404040;
  }
  .issue-list>.issue-summery>.author-info>.profile-wrapper{
-    width: 35px;
-    height: 35px;
+    width: 30px;
+    height: 30px;
     padding: 3px;
     border: 1px solid #08b86f5f;
     border-radius: 50px;
