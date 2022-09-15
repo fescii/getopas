@@ -1181,7 +1181,7 @@ def top_newsletters(request):
     user = request.user
     profile = user.profile
     #Top 10 Newsletters
-    top_issues = Issue.published.order_by('-issue_views')
+    top_issues = Issue.published.order_by('-issue_views')[:30]
 
     paginator = Paginator(top_issues, 5) # 5 newsletters in each page
     page = request.GET.get('page')
