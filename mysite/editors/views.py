@@ -1180,7 +1180,7 @@ def delete_image(request,product_id, image_id):
 def top_newsletters(request):
     user = request.user
     profile = user.profile
-    #Top 10 Newsletters
+    #Top 30 Newsletters
     top_issues = Issue.published.order_by('-issue_views')[:30]
 
     paginator = Paginator(top_issues, 5) # 5 newsletters in each page
@@ -1197,6 +1197,33 @@ def top_newsletters(request):
     return render(request, 'editors/articles/top-newsletters.html',
                   {'page': page,
                    'issues': issues,
+                   'user':user,
+                   'profile':profile,
+                   'section': 'issue-list'})
+
+
+#Recent Articles
+@login_required
+def new_articles(request):
+    user = request.user
+    profile = user.profile
+    #30 most recent articles
+    recent_articles = Post.published.order_by('-publish')[:30]
+
+    paginator = Paginator(recent_articles, 5) # 5 newsletters in each page
+    page = request.GET.get('page')
+    try:
+        articles = paginator.page(page)
+    except PageNotAnInteger:
+    # If page is not an integer deliver the first page
+        articles = paginator.page(1)
+    except EmptyPage:
+    # If page is out of range deliver last page of results
+        articles = paginator.page(paginator.num_pages)
+
+    return render(request, 'editors/articles/top-newsletters.html',
+                  {'page': page,
+                   'articles': articles,
                    'user':user,
                    'profile':profile,
                    'section': 'issue-list'})
