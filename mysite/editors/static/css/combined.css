@@ -222,6 +222,7 @@ main.users>h2{
      position: relative;
      row-gap: 10px;
  }
+ .article-list>.post-summery>.author-info,
  .issue-list>.issue-summery>.author-info{
     display: flex;
     align-items: center;
@@ -229,6 +230,7 @@ main.users>h2{
     grid-row: 6/8;
     color: #404040;
  }
+ .article-list>.post-summery>.author-info>.profile-wrapper,
  .issue-list>.issue-summery>.author-info>.profile-wrapper{
     width: 30px;
     height: 30px;
@@ -240,6 +242,7 @@ main.users>h2{
     -ms-border-radius: 50px;
     -o-border-radius: 50px;
 }
+.article-list>.post-summery>.author-info>.profile-wrapper>img,
  .issue-list>.issue-summery>.author-info>.profile-wrapper>img{
     width: 100%;
     height: 100%;
