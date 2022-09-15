@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Opus - Top Newsletters{% endblock %}
+{% block content %}
+<h2>Top Newsletters</h2>
+{% for issue in issues %}
+<div class="issue-summery">
+    <h2>
+        <a href="{{ issue.get_absolute_url }}"> {{ issue.title }} </a>
+    </h2>
+    <div class="date">
+        Published on:
+         <span class="published-date">{{ issue.publish.date }} {{ issue.publish.time }}</span>
+    </div>
+    <div class="image-wrapper">
+        <img src="/media/{{issue.cover}}" alt="Cover Image" title="{{issue.cover}}"/>
+    </div>
+    <div class="content-summery">
+        {{ issue.description|striptags|truncatechars:200 }}
+    </div>
+    <div class='issue-stats'>
+        <span class='stats-title'>Reach</span>
+        <span class='views'><span class="iconly-Show icli"></span> {{ issue.issue_views }}</span>
+        <span class='comments'><span class="iconly-User2 icli"></span> {{ issue.feedbacks.count }}</span>
+    </div>
+    <div class="author-info">
+        <div class="image-wrapper">
+            <img src="/media/{{issue.author.profile.photo}}"/>
+        </div>
+        <div class="user-name">
+            {{issue.author.first_name}} {{issue.author.last_name}}
+        </div>
+    </div>
+</div>
+{% if empty %}
+<p> There are no Published Issues Yet!</p>
+{% endif %}
+{% endfor %}
+
+{% include "pagination.html" with page=issues %} {% endblock %}
+
+{% block footer %}
+    <script src=" {% static 'js/base.js' %}"></script>
+{% endblock footer%}

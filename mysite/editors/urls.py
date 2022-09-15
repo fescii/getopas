@@ -54,6 +54,7 @@ urlpatterns = [
 
     #Newsletters Paths
     path('add-newsletter/', views.create_magazine, name='new_newsletter'),
+    path('top-newsletters/', views.top_newsletters, name='top_newsletters'),
     path('my-newsletters/', views.user_issue_list, name='user_issue_list'),
     path('edit-newsletter/<int:pk>/', views.edit_newsletter, name='edit_newsletter'),
     path('edit-newsletter/cover/<int:pk>/', views.edit_newsletter_cover, name='edit_newsletter_cover'),
