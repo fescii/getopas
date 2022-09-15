@@ -1175,7 +1175,7 @@ def delete_image(request,product_id, image_id):
     messages.success(request, 'Image deleted successfully')
     return HttpResponseRedirect(reverse('images', kwargs={'pk': product_id}))
 
-#Most Viewed Articles
+#Most Viewed Newsletters
 @login_required
 def top_newsletters(request):
     user = request.user
