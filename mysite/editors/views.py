@@ -144,6 +144,9 @@ def dashboard(request):
     #Top 3 Newsletters
     top_issues = Issue.published.order_by('-issue_views')[:3]
 
+    #Top 5 Newsletters
+    top_editors = Issue.published.order_by('-issue_views')[:5]
+
     #Top Users
     top_posts = Post.most_viewed(Post)
     users = []
@@ -168,6 +171,7 @@ def dashboard(request):
                     {'user': user,
                     'profile': profile,
                     'issues': top_issues,
+                    'editors': top_editors,
                     'views': count,
                     'activities': activities,
                     'top_users': users,
