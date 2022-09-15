@@ -1183,7 +1183,7 @@ def top_newsletters(request):
     #Top 10 Newsletters
     top_issues = Issue.published.order_by('-issue_views')
 
-    paginator = Paginator(top_issues, 5) # 5 posts in each page
+    paginator = Paginator(top_issues, 5) # 5 newsletters in each page
     page = request.GET.get('page')
     try:
         issues = paginator.page(page)
