@@ -1194,7 +1194,7 @@ def top_newsletters(request):
     # If page is out of range deliver last page of results
         issues = paginator.page(paginator.num_pages)
 
-    return render(request, 'editors/articles/user_articles_list.html',
+    return render(request, 'editors/articles/top-newsletters.html',
                   {'page': page,
                    'issues': issues,
                    'user':user,
