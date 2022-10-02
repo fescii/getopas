@@ -1061,12 +1061,9 @@
     main.profile{
         /*border: 1px solid rgb(0, 255, 157);*/
          margin: 0px;
-         width: 100%;
-         display: grid;
-         grid-template-columns:1fr;
-         grid-template-rows: max-content;
-         column-gap: 0px;
-         row-gap: 0px;
+         padding: 0%;
+         display: flex;
+         flex-flow: column;
      }
     main.profile>.site-title{
         border:none;
@@ -1079,7 +1076,7 @@
         position: sticky;
         z-index: 5;
         top: 0px;
-        padding-top: 60px;
+        padding-top: 70px;
         padding-bottom: 3px;
         box-shadow: var(--box-shadow);
     }
@@ -1093,6 +1090,9 @@
         align-items: center;
         justify-content: center;
 
+    }
+    main.profile>.profile-info{
+        background-color: var(--background-color);
     }
     main.search>.search-wrapper{
         padding-top: 18px;
@@ -1162,7 +1162,7 @@
         box-shadow: var(--box-shadow);
         border: var(--border);
         z-index: 12;
-        top: 50px;
+        top: 105px;
         right: 5px;
         max-width: 200px;
         padding: 10px 10px;
