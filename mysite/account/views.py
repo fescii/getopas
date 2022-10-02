@@ -181,7 +181,7 @@ def user_profile(request, username):
     profile = r_user.profile
 
     return render(request,
-                  'editors/profile/user-profile.html',
+                  'account/profile/user-profile.html',
                   {'r_user': r_user,
                    'profile': profile,
                    'section': 'profile'})

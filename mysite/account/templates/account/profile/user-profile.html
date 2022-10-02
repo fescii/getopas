@@ -2,30 +2,94 @@
 {% load static %}
 {% block title %}{{r_user.username}} - Profile{% endblock %}
 {% block content %}
-<div class="main-content">
-    <div class="bio">
-        <div class="user-image">
-            <img src="/media/{{ profile.photo }}"/>
-        </div>
-        <div class="data">
-            <div class="name">{{r_user.first_name}} {{r_user.last_name}}
+    <div class="site-title">
+        <div class="section-title">Profile</div>
+        {% if user == r_user %}
+            <a href="{% url 'edit' %}" class="edit">
+                <i class="iconly-Edit icli"></i>
+                <span class="edit-text">Edit</span>
+            </a>
+        {% endif %}
+    </div>
+    <div class="profile-info">
+        <div class="general-info">
+            <div class="profile-title">
+                <div class="section-title">General Info</div>
             </div>
-            <div class="email">{{r_user.email}}
+            {% if user == r_user %}
+            <div class="profile-image">
+                <div class="avatar-upload">
+                    <div class="avatar-edit">
+                        <input type='file' id="imageUpload" accept=".png, .jpg, .jpeg" />
+                        <label for="imageUpload"></label>
+                    </div>
+                    <div class="avatar-preview">
+                        <div id="clock"
+                            style="background-image: url('../media/{{profile.photo}}');">
+                        </div>
+                    </div>
+                </div>
+                <input type="submit" value="Update">
+            </div>
+            {% endif %}
+            <div class="info-container">
+                <div class="info">
+                    <div class="info-title">Name</div>
+                    <div class="info-content">{{r_user.first_name}} {{r_user.last_name}}</div>
+                </div>
+                <div class="info">
+                    <div class="info-title">Email</div>
+                    <div class="info-content">{{r_user.email}}</div>
+                </div>
+                <div class="info">
+                    <div class="info-title">Occupation</div>
+                    <div class="info-content">{{profile.occupation}}</div>
+                </div>
+                <div class="info">
+                    <div class="info-title">Bio</div>
+                    <div class="info-content">{{profile.about|safe}}</div>
+                </div>
+            </div>
+        </div>
+        <div class="contact-info">
+            <div class="profile-title">
+                <div class="section-title">Contact Info</div>
+            </div>
+            <div class="info-container">
+                <div class="info">
+                    <div class="info-title">Website</div>
+                    <div class="info-content">{{profile.website}}</div>
+                </div>
+                <div class="info">
+                    <div class="info-title">Twitter</div>
+                    <div class="info-content">@{{profile.twitter}}</div>
+                </div>
+                <div class="info">
+                    <div class="info-title">Linkedin</div>
+                    <div class="info-content">{{profile.likedin}}</div>
+                </div>
+                <div class="info">
+                    <div class="info-title">Location</div>
+                    <div class="info-content">{{profile.location}}</div>
+                </div>
             </div>
         </div>
     </div>
-    <div class="about">
-        <h2>About</h2>
-        {{profile.about|safe}}
-    </div>
-    {% if user == r_user %}
-    <div class="action-links">
-        <a href="{% url 'edit' %}">Edit Profile</a>
-    </div>
-    {% endif %}
-
-</div>
 {% endblock %}
 {% block footer %}
- <script src=" {% static 'js/base.js' %}"></script>
+<script>
+    document.getElementById('imageUpload').addEventListener('change', readURL, true);
+    function readURL() {
+        const file = document.getElementById("imageUpload").files[0];
+        const reader = new FileReader();
+        reader.onloadend = function () {
+            document.getElementById('clock').style.backgroundImage = "url(" + reader.result + ")";
+        }
+        if (file) {
+            reader.readAsDataURL(file);
+        } else {
+        }
+    }
+</script>
+<script src="{% static "js/dropdown.js" %}"></script>
 {% endblock footer%}

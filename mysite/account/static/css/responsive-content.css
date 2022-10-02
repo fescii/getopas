@@ -1,0 +1,100 @@
+@media screen and (max-width: 1000px) {
+   .content{
+    margin: 80px 1% 30px 1%;
+   }
+}
+
+@media screen and (max-width: 930px){
+    .content{
+        grid-template-columns: 1fr;
+    }
+    #side-bar{
+        display: none;
+    }
+}
+@media screen and (max-width: 700px){
+    html,body{
+        margin: 0%;
+        padding: 0%;
+    }
+    .content{
+        margin: 50px 5px 30px 5px;
+        padding: 0%;
+        gap: 0%;
+       }
+    .content>.section{
+        display: grid;
+        grid-template-columns: 1fr;
+        height: max-content;
+        position: unset;
+    }
+    .main-content{
+        display: flex;
+        flex-flow: column;
+        position: unset;
+    }
+    .content-info{
+        overflow: unset;
+        height: max-content;
+        margin: 0%;
+        padding-bottom: 0%;
+    }
+    .content-footer{
+        display: none;
+        position: unset;
+        padding: unset;
+        padding-left: 5px;
+        padding-top: 5px;
+        gap: 5px;
+        flex-wrap: wrap;
+        margin-bottom: 10px;
+    }
+    /* Cover Page */
+    .content>.main-title{
+        min-height: 250px;
+    }
+    .content>.main-title  .info{
+        margin-top: 80px;
+       /* border: 1px solid greenyellow;*/
+       padding-left: 20px;
+    }
+
+    .main-title>.info h1{
+        color: #fff;
+        font-size: 2.0rem;;
+    }
+    .main-title>.info h2{
+        color: rgb(239, 255, 254);
+        font-size: 1.5rem;
+        text-shadow: 0em 0.05em 0.5em rgb(55, 59, 59);
+    }
+    .main-title>.info p{
+        margin-bottom: 30px;
+        color: rgb(174, 248, 243);
+        font-size: 1.0rem;
+    }
+}
+@media screen and (max-width: 500px){
+    .content-info{
+        height: max-content;
+        padding-left: 10px;
+    }
+    .content-info>.info-title{
+        font-size: 1.5rem;
+    }
+    .content-info>p{
+        font-size: 1.0rem;
+        margin: 0%;
+        padding: 0%;
+       /* border: 1px solid greenyellow;*/
+    }
+    .side-content>.fixed-top{
+        font-size: 1.3rem;
+    }
+    .side-content>.quick-info h3{
+        font-size: 1.2rem;
+    }
+    .side-content>.quick-info p{
+        font-size: 1.0rem;
+    }
+}
