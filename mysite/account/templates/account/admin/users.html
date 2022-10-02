@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Opus | Magazine{% endblock %}
+{% block content %}
+<h2>Users</h2>
+{% for user_info in users %}
+<div class="user-wrapper">
+    <div class="image-wrapper">
+        <img src="/media/{{ user_info.profile.photo }}"/>
+    </div>
+    <div class="info-wrapper">
+        {% if user_info.is_superuser == True %}
+        <div class="role">
+            <span class="role-title">Role:</span> Admin
+        </div>
+        {% elif user_info.is_staff == True and user_info.is_superuser == False %}
+        <div class="role">
+            <span class="role-title">Role:</span> Editor
+        </div>
+        {% else %}
+        <div class="role">
+            <span class="role-title">Role:</span> Author
+        </div>
+        {% endif %}
+        <div class="detail">
+            <span class="title">Name: </span> {{ user_info.first_name}} {{ user_info.last_name }}
+        </div>
+        <div class="detail">
+            <span class="title">Email: </span> {{ user_info.email}}
+        </div>
+    </div>
+
+    <div class="action-links">
+        <a href="{% url 'moderate_user' user_id=user_info.id%}">Edit Role</a>
+        <a href=" {% url 'remove_user' user_id=user_info.id%}">Remove</a>
+    </div>
+</div>
+{% endfor %}
+{% include "pagination.html" with page=users %}
+<!--{% include "pagination.html" with page=page_obj %}-->
+{% endblock %}
+
+{% block footer %}
+    <script src=" {% static 'js/base.js' %}"></script>
+{% endblock footer %}

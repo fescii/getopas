@@ -2,7 +2,7 @@ from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import User
 from django.urls import reverse
-from editors.models import Profile
+from account.models import Profile
 from taggit.managers  import TaggableManager
 from django.conf import settings
 from django.utils.text import slugify

@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'blog.apps.BlogConfig',
+    'account.apps.AccountConfig',
     'magazine.apps.MagazineConfig',
     'editors.apps.EditorsConfig',
     'devices.apps.DevicesConfig',
@@ -121,7 +122,7 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
-    'editors.authentication.EmailAuthBackend',
+    'account.authentication.EmailAuthBackend',
 ]
 
 

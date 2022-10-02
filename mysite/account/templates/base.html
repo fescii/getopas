@@ -1,0 +1,243 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+  <title>{% block title %}{% endblock %}</title>
+  <link href="{% static "css/header.css" %}" rel="stylesheet">
+  <link href="{% static "css/base-sidebar.css" %}" rel="stylesheet">
+  <link href="{% static "css/main.css" %}" rel="stylesheet">
+  <link href="{% static "css/dashboard.css" %}" rel="stylesheet">
+  <link href="{% static "css/article.css" %}" rel="stylesheet">
+  <link href="{% static "assets/css/style.css" %}" rel="stylesheet">
+  <link href="{% static "css/combined.css" %}" rel="stylesheet">
+</head>
+<body>
+  {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+            <li class="{{ message.tags }}">
+                {{ message|safe }}
+                <a href="#" class="close">x</a>
+            </li>
+        {% endfor %}
+    </ul>
+  {% endif %}
+
+    <header class="header">
+        <div class="welcome">
+          <h3 class="welcome-title">Welcome to Opus.</h3>
+          <p class="welcome-message">Hello {{user.username}}, welcome back!</p>
+        </div>
+        <div class="search">
+          <form action="" method="get">
+            <select title="select-search" name="select-search" id="select-search">
+              <option value="one">Articles</option>
+              <option value="two">Newsletters</option>
+              <option value="three">Device Info</option>
+            </select>
+            <input type="text" placeholder="Search Opus" />
+            <input class="iconly-Search icli" type="submit" value="Search" />
+            <span class="iconly-Search icli"></span>
+          </form>
+        </div>
+        <div class="profile-section">
+          <span class="iconly-Chat icli">
+            <span id="text-count">8</span>
+          </span>
+          <span class="iconly-Notification icli">
+            <span id="text-count">5</span>
+          </span>
+          <div id="dropdown-btn" class="profile-image-wrapper">
+            <span class="active-status">
+              <span class="dot"></span>
+            </span>
+            <img src="/media/{{ profile.photo }}" alt="" />
+          </div>
+          <div id="profile-dropdown" class="profile-dropdown">
+            <div class="go-to-profile">
+              <div class="profile-image-wrapper">
+                <img src="/media/{{ profile.photo }}" alt="" />
+              </div>
+              <div class="name-container">
+                <h4 class="name">{{ user.first_name}} {{user.last_name}}</h4>
+                <a href=" {% url 'profile' username=user.username %} " class="profile-link"
+                  >View Profile
+                  <span class="iconly-Arrow-Right icbo"></span>
+                </a>
+              </div>
+            </div>
+            <hr size="1" />
+            <ul class="linked-list top-links">
+              <li class="dropdown-li">
+                <a href="" class="dropdown-link">Dashboard</a>
+              </li>
+              <li class="dropdown-li">
+                <a href="{% url 'user_post_list' %}" class="dropdown-link">Your Stats</a>
+              </li>
+              <li class="dropdown-li">
+                <a href=" {% url 'profile' username=user.username %} " class="dropdown-link">Your Profile</a>
+              </li>
+              <li class="dropdown-li">
+                <a href=" {% url 'user_post_list' %} " class="dropdown-link">Your Articles</a>
+              </li>
+            </ul>
+            <hr size="1" />
+            <ul class="linked-list middle-links">
+              <li class="dropdown-li">
+                <a href="" class="dropdown-link">Explore</a>
+              </li>
+              <li class="dropdown-li">
+                <a href="" class="dropdown-link">What's New?</a>
+              </li>
+              <li class="dropdown-li">
+                <a href="" class="dropdown-link">Send Us Feedback</a>
+              </li>
+              <li class="dropdown-li">
+                <a href="" class="dropdown-link">Settings</a>
+              </li>
+            </ul>
+            <hr size="1" />
+            <ul class="linked-list log-out">
+              <li class="dropdown-li">
+                <a href="{% url 'logout' %}" class="dropdown-link log-out">Log Out</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+    </header>
+
+    <div class="dashboard-sidebar">
+        <div class="logo-container">
+          <div class="site-logo">
+            <img src="" alt="" />
+          </div>
+          <div class="site-title">
+            <h1 class="title-text">Opus</h1>
+          </div>
+        </div>
+        <div class="sidebar-nav">
+          <div class="content-nav">
+            <ul class="linked-list content-list">
+              <li class="content-link">
+                <a class="link {% if section == 'dashboard' %}data-active{% endif %}" href=" {% url 'dashboard' %}">
+                  <span id="select"></span>
+                  <span class="iconly-Home icli"></span>
+                  <span class="link-text">Dashboard</span>
+                </a>
+              </li>
+              <li class="content-link">
+                <a class="link {% if section == 'article' or section == 'devices-create' %}data-active{% endif %}" href=" {% url 'create_post' %}">
+                  <span id="select"></span>
+                  <span class="iconly-Plus icli"></span>
+                  <span class="link-text">Create</span>
+                </a>
+              </li>
+              <li class="content-link">
+                <a class="link {% if section == 'article-list' %} data-active {% endif %}" href="{% url 'user_post_list' %}">
+                  <span id="select"></span>
+                  <span class="iconly-Paper icli"> </span>
+                  <span class="link-text">Articles</span>
+                </a>
+              </li>
+              {% if user.is_staff %}
+              <li class="content-link">
+                <a class="link {% if section == 'issue-list' %} data-active {% endif %}" href="{% url 'user_issue_list' %}">
+                  <span id="select"></span>
+                  <span class="iconly-Document icli"></span>
+                  <span class="link-text">Newsletters</span>
+                </a>
+              </li>
+              <li class="content-link">
+                <a class="link {% if section == 'devices' %} data-active {% endif %}" href="{% url 'user_product_list' %}">
+                  <span id="select"></span>
+                  <span class="iconly-Info-Circle icli"></span>
+                  <span class="link-text">Device Info</span>
+                </a>
+              </li>
+              {% else %}
+              <li class="content-link">
+                <a class="link {% if section == 'account' %} data-active {% endif %}" href="#">
+                  <span id="select"></span>
+                  <span class="iconly-Discovery icli"></span>
+                  <span class="link-text">Explore</span>
+                </a>
+              </li>
+              {% endif %}
+              <li class="content-link">
+                <a class="link {% if section == 'donate' %} data-active {% endif %}" href="#">
+                  <span id="select"></span>
+                  <span class="iconly-Heart icli"></span>
+                  <span class="link-text">Donate</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+          <div class="settings-nav">
+            <h2 class="settings-title">SETTINGS</h2>
+            <ul class="linked-list settings-list">
+              <li class="content-link">
+                <a class="link {% if section == 'profile' %} data-active {% endif %}" href=" {% url 'profile' username=user.username %}">
+                  <span id="select"></span>
+                  <span class="iconly-Profile icli"></span>
+                  <span class="link-text">Profile</span>
+                </a>
+              </li>
+              <li class="content-link">
+                <a class="link {% if section == 'bookmark' %} data-active {% endif %}" href="#">
+                  <span id="select"></span>
+                  <span class="iconly-Bookmark icli"></span>
+                  <span class="link-text">My List</span>
+                </a>
+              </li>
+              <li class="content-link">
+                <a class="link {% if section == 'trending' %} data-active {% endif %}" href="#">
+                  <span id="select"></span>
+                  <span class="iconly-Chart icli"></span>
+                  <span class="link-text">Trending</span>
+                </a>
+              </li>
+              <li class="content-link">
+                <a class="link {% if section == 'themes' %} data-active {% endif %}" href="#">
+                  <span id="select"></span>
+                  <span class="iconly-More-Circle icli"></span>
+                  <span class="link-text">Themes</span>
+                </a>
+              </li>
+              {% if user.is_superuser %}
+              <li class="content-link">
+                <a class="link {% if section == 'users' %} data-active {% endif %}" href=" {% url 'list_users' %}">
+                  <span id="select"></span>
+                  <span class="iconly-User3 icli"></span>
+                  <span class="link-text">Users</span>
+                </a>
+              </li>
+              {% endif %}
+
+            </ul>
+          </div>
+        </div>
+        <div class="help">
+          <div class="help-icon">
+            <span class="iconly-Info-Circle icbo"></span>
+          </div>
+          <div class="help-container">
+            <h3 class="help-title">Help Centre</h3>
+            <p class="help-text">
+              Having trouble with Opus. Please contact us for more Questions.
+            </p>
+          </div>
+          <div class="help-contact-link">
+            <a href="#">Help Center</a>
+          </div>
+        </div>
+    </div>
+
+    <main class="{{ section }}">
+        {% block content %}
+        {% endblock %}
+    </main>
+
+      {% block footer %}
+      {% endblock footer %}
+</body>
+</html>
