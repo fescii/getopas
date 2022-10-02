@@ -4,8 +4,6 @@ from django.contrib.auth.models import User
 from .models import Profile
 from blog.models import Post
 from magazine.models import Issue, Section
-from devices.models import Product, PhysicalInfo, SoftwareInfo, Review,Image
-from tinymce.widgets import TinyMCE
 
 
 #User Registration Form
