@@ -1205,7 +1205,6 @@ def top_newsletters(request):
                    'profile':profile,
                    'section': 'issue-list'})
 
-
 #Recent Articles
 @login_required
 def new_articles(request):
@@ -1231,4 +1230,3 @@ def new_articles(request):
                    'user':user,
                    'profile':profile,
                    'section': 'article-list'})
-

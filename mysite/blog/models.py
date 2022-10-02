@@ -32,9 +32,8 @@ class Post(models.Model):
     tags = TaggableManager()
 
     #Updating Blog Post
-    def update_post(self, title, body, status,cover, *args, **kwargs):
+    def update_post(self, title, body, status, *args, **kwargs):
         self.title = title
-        self.cover = cover
         self.body = body
         self.status = status
         super(Post, self).save(update_fields=['title','body',
