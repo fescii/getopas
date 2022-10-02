@@ -45,35 +45,36 @@
                 <div class="content-nav">
                     <ul class="linked-list content-list">
                         <li class="content-link">
-                            <a class="link" href=" {% url 'dashboard' %}">
+                            <a class="link {% if section == 'home' %}data-active{% endif %}" href=" {% url 'dashboard' %}">
                                 <span id="select"></span>
                                 <span class="iconly-Home icli"></span>
                                 <span class="link-text">Home</span>
                             </a>
                         </li>
                         <li class="content-link">
-                            <a class="link" href=" {% url 'create_post' %}">
+                            <a class="link {% if section == 'create' %}data-active{% endif %}" href=" {% url 'create_post' %}">
                                 <span id="select"></span>
                                 <span class="iconly-Plus icli"></span>
                                 <span class="link-text">Create</span>
                             </a>
                         </li>
                         <li class="content-link">
-                            <a class="link" href="{% url 'user_issue_list' %}">
+                            <a class="link {% if section == 'search' %}data-active{% endif %}" href="{% url 'user_issue_list' %}">
                                 <span id="select"></span>
                                 <span class="iconly-Search icli"></span>
                                 <span class="link-text">Search</span>
                             </a>
                         </li>
                         <li class="content-link">
-                            <a class="link " href="{% url 'user_product_list' %}">
+                            <a class="link {% if section == 'products' %}data-active{% endif %}" href="{% url 'user_product_list' %}">
                                 <span id="select"></span>
                                 <span class="iconly-Bag-2 icli"></span>
-                                <span class="link-text">Products</span>
+                                <span c
+                                lass="link-text">Products</span>
                             </a>
                         </li>
                         <li class="content-link">
-                            <a class="link" href="#">
+                            <a class="link {% if section == 'explore' %}data-active{% endif %}" href="#">
                                 <span id="select"></span>
                                 <span class="iconly-Discovery icli"></span>
                                 <span class="link-text">Explore</span>
@@ -85,28 +86,28 @@
                 <div class="settings-nav">
                     <ul class="linked-list settings-list">
                         <li class="content-link">
-                            <a class="link data-active" href=" {% url 'profile' username=user.username %}">
+                            <a class="link {% if section == 'profile' %}data-active{% endif %}" href=" {% url 'profile' username=user.username %}">
                                 <span id="select"></span>
                                 <span class="iconly-Profile icli"></span>
                                 <span class="link-text">Profile</span>
                             </a>
                         </li>
                         <li class="content-link">
-                            <a class="link" href="#">
+                            <a class="link {% if section == 'my_list' %}data-active{% endif %}" href="#">
                                 <span id="select"></span>
                                 <span class="iconly-Bookmark icli"></span>
                                 <span class="link-text">My List</span>
                             </a>
                         </li>
                         <li class="content-link">
-                            <a class="link " href="#">
+                            <a class="link {% if section == 'themes' %}data-active{% endif %}" href="#">
                                 <span id="select"></span>
                                 <span class="iconly-Info-Circle icli"></span>
                                 <span class="link-text">Themes</span>
                             </a>
                         </li>
                         <li class="content-link">
-                            <a class="link" href="#">
+                            <a class="link {% if section == 'donate' %}data-active{% endif %}" href="#">
                                 <span id="select"></span>
                                 <span class="iconly-Heart icli"></span>
                                 <span class="link-text">Donate</span>
