@@ -53,7 +53,6 @@
     main.profile{
         /* border: 1px solid rgb(0, 255, 157);*/
          margin-top: 0px;
-         width: 100%;
          display: grid;
          grid-template-columns:120px 1fr;
          grid-template-rows: max-content;
@@ -108,7 +107,7 @@
     main.profile{
         /* border: 1px solid rgb(0, 255, 157);*/
          margin-top: 0px;
-         width: 100%;
+         width: 95%;
          display: grid;
          grid-template-columns:120px 1fr;
          grid-template-rows: max-content;
@@ -288,7 +287,7 @@
     main.profile{
         /* border: 1px solid rgb(0, 255, 157);*/
          margin-top: 0px;
-         width: 100%;
+         width: 95%;
          margin-left: 20px;
          display: grid;
          grid-template-columns:120px 1fr;
@@ -592,7 +591,7 @@
     main.profile{
         /* border: 1px solid rgb(0, 255, 157);*/
          margin-top: 0px;
-         width: 100%;
+         width: 95%;
          display: grid;
          grid-template-columns:50px 1fr;
          grid-template-rows: max-content;
@@ -1062,6 +1061,7 @@
         /*border: 1px solid rgb(0, 255, 157);*/
          margin: 0px;
          padding: 0%;
+         width: 100%;
          display: flex;
          flex-flow: column;
      }
@@ -1077,6 +1077,7 @@
         z-index: 5;
         top: 0px;
         padding-top: 70px;
+        padding-right: 5px;
         padding-bottom: 3px;
         box-shadow: var(--box-shadow);
     }
@@ -1085,7 +1086,8 @@
         right: 10px;
         top: 70px;
         border: 1px solid rgb(0, 255, 157);*/
-        padding: 4px 15px;
+        padding: 3px 10px;
+        font-size: 0.93rem;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -1200,14 +1202,18 @@
 /* Hamburger Menu*/
 .hamburger{
     z-index: 12;
+    padding: 0%;
     display: inline-block;
-    background-color: transparent;
+    background-color: unset;
     position: fixed;
-    top: 8px;
+    top: 15px;
     right: 12px;
     border: none;
     outline: none;
     cursor:unset;
+  }
+  .hamburger:hover{
+    background-color: unset;
   }
   .search>.hamburger{
     position: fixed;
