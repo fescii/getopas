@@ -40,7 +40,14 @@ class ProfileEditForm(forms.ModelForm):
     date_of_birth = forms.DateField(widget=forms.DateInput)
     class Meta:
         model = Profile
-        fields = ('date_of_birth','about','photo')
+        fields = ('date_of_birth','occupation','website','twitter','linkedin','location','about')
+
+class ProfilePhotoEditForm(forms.ModelForm):
+    class Meta:
+        model = Profile
+        fields = ('photo',)
+        labels = {"photo": " "}
+
 
 
 #Moderate User Form

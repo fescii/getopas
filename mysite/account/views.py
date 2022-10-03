@@ -9,7 +9,7 @@ from .models import Profile
 from django.contrib import messages
 from django.shortcuts import render,get_object_or_404
 from .forms import UserRegistrationForm,\
-    UserEditForm, ProfileEditForm,ModerateUserForm
+    UserEditForm, ProfileEditForm,ModerateUserForm, ProfilePhotoEditForm
 
 # Create your views here.
 #verify if an user is an admin
@@ -179,9 +179,31 @@ def edit(request):
 def user_profile(request, username):
     r_user = User.objects.get(username=username)
     profile = r_user.profile
+    if request.method == 'POST':
+        profile_photo_form = ProfilePhotoEditForm(data=request.POST,
+                                       files=request.FILES)
+        if profile_photo_form.is_valid():
+            cd = profile_photo_form.cleaned_data
+            photo = cd['photo']
+            Profile.update_profile_picture(profile,  photo=photo)
+            messages.success(request, 'Profile photo updated successfully')
+            return HttpResponseRedirect(reverse('profile',kwargs={'username': r_user.username}))
 
-    return render(request,
-                  'account/profile/user-profile.html',
-                  {'r_user': r_user,
-                   'profile': profile,
-                   'section': 'profile'})
+        else:
+            messages.error(request, 'Error updating your profile')
+            profile_photo_form = ProfilePhotoEditForm()
+            return render(request,
+                      'editors/edit.html',
+                      {'profile_photo_form': profile_photo_form,
+                       'r_user': r_user,
+                       'profile': profile,
+                       'section': 'profile'})
+
+    else:
+        profile_photo_form = ProfilePhotoEditForm()
+        return render(request,
+                    'account/profile/user-profile.html',
+                    {'r_user': r_user,
+                    'profile': profile,
+                    'section': 'profile',
+                    'profile_photo_form': profile_photo_form})

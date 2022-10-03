@@ -1053,10 +1053,21 @@ main.profile>.profile-info>.general-info>.profile-title{
     right: 0px;
     top: 5px;
   }
-  .avatar-upload .avatar-edit input {
+  /*
+  .avatar-upload .avatar-edit{
+    visibility: hidden;
+  }
+  .avatar-upload .avatar-edit>p label,
+  .avatar-upload .avatar-edit>p *{
+    visibility: visible;
+  }
+*/
+
+  .avatar-upload .avatar-edit> input {
     display: none;
   }
-  .avatar-upload .avatar-edit input + label {
+
+  .avatar-upload .avatar-edit> input + label {
     display: inline-block;
     width: 30px;
     height: 30px;
@@ -1069,11 +1080,11 @@ main.profile>.profile-info>.general-info>.profile-title{
     font-weight: normal;
     transition: all 0.2s ease-in-out;
   }
-  .avatar-upload .avatar-edit input + label:hover {
+  .avatar-upload .avatar-edit> input + label:hover {
     background: #f1f1f1;
     border-color: #d6d6d6;
   }
-  .avatar-upload .avatar-edit input + label:after {
+  .avatar-upload .avatar-edit> input + label:after {
     content: "\f040";
     font-family: 'FontAwesome';
     color: #757575;

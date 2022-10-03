@@ -18,6 +18,25 @@
                 <div class="section-title">General Info</div>
             </div>
             {% if user == r_user %}
+            <form class="profile-image" method="post" enctype="multipart/form-data">
+                <div class="avatar-upload">
+                    <div class="avatar-edit">
+                            {{ profile_photo_form.photo.label_tag }}
+                            {{ profile_photo_form.photo }}
+                    <!-- <input type='file' id="imageUpload" accept=".png, .jpg, .jpeg" />
+                        <label for="imageUpload"></label>
+                        -->
+                    </div>
+                    <div class="avatar-preview">
+                        <div id="clock"
+                            style="background-image: url('..{% thumbnail profile.photo 300x0 %}');">
+                        </div>
+                    </div>
+                </div>
+            {% csrf_token %}
+            <input type="submit" value="Update">
+            </form>
+            {% else %}
             <div class="profile-image">
                 <div class="avatar-upload">
                     <div class="avatar-edit">
@@ -79,9 +98,9 @@
 {% endblock %}
 {% block footer %}
 <script>
-    document.getElementById('imageUpload').addEventListener('change', readURL, true);
+    document.getElementById('id_photo').addEventListener('change', readURL, true);
     function readURL() {
-        const file = document.getElementById("imageUpload").files[0];
+        const file = document.getElementById("id_photo").files[0];
         const reader = new FileReader();
         reader.onloadend = function () {
             document.getElementById('clock').style.backgroundImage = "url(" + reader.result + ")";

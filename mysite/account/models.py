@@ -1,3 +1,5 @@
+from django.contrib.auth.models import User
+from urllib import request
 from django.db import models
 from django.conf import settings
 
@@ -19,3 +21,7 @@ class Profile(models.Model):
                               blank=True)
     def __str__(self):
         return f'Profile for user {self.user.username}'
+
+    def update_profile_picture(self, photo, *args, **kwargs):
+        self.photo = photo
+        super(Profile, self).save(update_fields=['photo'], *args, **kwargs)
