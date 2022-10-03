@@ -12,7 +12,7 @@ class Profile(models.Model):
                                 on_delete=models.CASCADE, related_name='profile')
     about = models.TextField()
     date_of_birth = models.DateField(blank=True, null=True)
-    occupation = models.TextField()
+    occupation = models.CharField(blank=True,max_length=250)
     website = models.CharField(blank=True,max_length=250)
     twitter = models.CharField(blank=True,max_length=250)
     linkedin = models.CharField(blank=True,max_length=250)

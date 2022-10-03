@@ -46,7 +46,7 @@ class ProfilePhotoEditForm(forms.ModelForm):
     class Meta:
         model = Profile
         fields = ('photo',)
-        labels = {"photo": " "}
+        labels = {"photo": "Select"}
 
 
 

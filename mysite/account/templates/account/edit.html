@@ -1,31 +1,43 @@
 {% extends "base.html" %}
 {% load static %}
-{% block title %}Edit Your Information{% endblock %}
+{% block title %}Edit Profile{% endblock %}
 {% block content %}
-<div class="main-content">
+  <div class="site-title">
+    <div class="section-title">Edit Profile</div>
+  </div>
+  <div class="profile-info">
     <form method="post" enctype="multipart/form-data">
-        <h2>Edit your account profile</h2>
-    {{ user_form.as_p }}
-    {{ profile_form.as_p }}
-    {% csrf_token %}
-    <input type="submit" value="Save">
+      {% for field in user_form.visible_fields %}
+      <div class="field">
+        {{ field.label_tag }}
+        {{ field }}
+      </div>
+      {% endfor %}
+      {% for field in profile_form.visible_fields %}
+      <div class="field">
+        {{ field.label_tag }}
+        {{ field }}
+      </div>
+      {% endfor %}
+      {% csrf_token %}
+      <input type="submit" value="Update">
     </form>
-</div>
-{% endblock %}
+  </div>
+{% endblock content%}
 {% block footer %}
-<script src="{% static 'tinymce/tinymce.min.js' %}"></script>
-<script src=" {% static 'js/base.js' %}"></script>
-<script>
-  tinymce.init({
-      selector: '#id_about',
-      height: 500, menubar: false,
-      plugins: [
-        'advlist autolink lists link image charmap print preview anchor',
-        'searchreplace visualblocks code fullscreen',
-        'insertdatetime media table paste imagetools wordcount'
-      ],
-      toolbar: 'insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image',
-      content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:16px }'
-    });
-</script>
+  <script src="{% static 'tinymce/tinymce.min.js' %}"></script>
+  <script src=" {% static 'js/dropdown.js' %}"></script>
+  <script>
+    tinymce.init({
+        selector: '#id_about',
+        height: 500, menubar: false,
+        plugins: [
+          'advlist autolink lists link image charmap print preview anchor',
+          'searchreplace visualblocks code fullscreen',
+          'insertdatetime media table paste imagetools wordcount'
+        ],
+        toolbar: 'insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image',
+        content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:16px }'
+      });
+  </script>
 {% endblock footer %}

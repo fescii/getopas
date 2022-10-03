@@ -1119,7 +1119,7 @@ main.profile>.profile-info>.general-info>.profile-title{
 
   .avatar-upload .avatar-edit> input + label {
     display: inline-block;
-    width: 30px;
+    width: max-content;
     height: 30px;
     margin-bottom: 0;
     border-radius: 100%;
@@ -1127,14 +1127,25 @@ main.profile>.profile-info>.general-info>.profile-title{
     border: 1px solid transparent;
     box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.12);
     cursor: pointer;
+    position: absolute;
+    right: 20px;
+    top: 50%;
     font-weight: normal;
     transition: all 0.2s ease-in-out;
   }
-  .avatar-upload .avatar-edit> input + label:hover {
+  .avatar-upload .avatar-edit> label{
     background: #f1f1f1;
-    border-color: #d6d6d6;
-  }
-  .avatar-upload .avatar-edit> input + label:after {
+    border-color: var(--border-shadow);
+    box-shadow: var(--box-shadow);
+    color: var(--accent-color);
+    padding:  5px 10px;
+    -webkit-border-radius: 50px;
+    -moz-border-radius: 50px;
+    -ms-border-radius: 50px;
+    -o-border-radius: 50px;
+    border-radius: 50px;
+}
+ /* .avatar-upload .avatar-edit> input + label:after {
     content: "\f040";
     font-family: 'FontAwesome';
     color: #757575;
@@ -1144,7 +1155,7 @@ main.profile>.profile-info>.general-info>.profile-title{
     right: 0;
     text-align: center;
     margin: auto;
-  }
+  }*/
   .avatar-upload .avatar-preview {
     width: 120px;
     height: 120px;

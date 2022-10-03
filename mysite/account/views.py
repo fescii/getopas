@@ -139,8 +139,8 @@ def register(request):
 
 #Edit User Info
 @login_required
-def edit(request):
-    user = request.user
+def edit(request,username):
+    user = get_object_or_404(User,username=username)
     profile = user.profile
     if request.method == 'POST':
         user_form = UserEditForm(instance=request.user,
@@ -159,20 +159,22 @@ def edit(request):
             user_form = UserEditForm(instance=request.user)
             profile_form = ProfileEditForm(instance=request.user.profile)
             return render(request,
-                      'editors/edit.html',
+                      'account/edit.html',
                       {'user_form': user_form,
                        'profile_form': profile_form,
                        'user': user,
-                       'profile': profile})
+                       'profile': profile,
+                       'section': 'profile'})
     else:
         user_form = UserEditForm(instance=request.user)
         profile_form = ProfileEditForm(instance=request.user.profile)
         return render(request,
-                      'editors/edit.html',
+                      'account/edit.html',
                       {'user_form': user_form,
                        'profile_form': profile_form,
                        'user': user,
-                       'profile': profile})
+                       'profile': profile,
+                       'section': 'profile'})
 
 #User Profile Page
 @login_required

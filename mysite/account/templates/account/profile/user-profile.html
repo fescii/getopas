@@ -6,7 +6,7 @@
     <div class="site-title">
         <div class="section-title">Profile</div>
         {% if user == r_user %}
-            <a href="{% url 'edit' %}" class="edit">
+            <a href="{% url 'edit' username=r_user.username%}" class="edit">
                 <i class="iconly-Edit icli"></i>
                 <span class="edit-text">Edit</span>
             </a>
@@ -39,17 +39,12 @@
             {% else %}
             <div class="profile-image">
                 <div class="avatar-upload">
-                    <div class="avatar-edit">
-                        <input type='file' id="imageUpload" accept=".png, .jpg, .jpeg" />
-                        <label for="imageUpload"></label>
-                    </div>
                     <div class="avatar-preview">
                         <div id="clock"
                             style="background-image: url('..{% thumbnail profile.photo 300x0 %}');">
                         </div>
                     </div>
                 </div>
-                <input type="submit" value="Update">
             </div>
             {% endif %}
             <div class="info-container">

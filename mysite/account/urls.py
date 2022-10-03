@@ -36,7 +36,7 @@ urlpatterns = [
     path('register/', views.register, name='register'),
 
     #Edit user info path
-    path('edit-info/', views.edit, name='edit'),
+    path('@<str:username>/edit', views.edit, name='edit'),
     path('@<str:username>', views.user_profile, name='profile'),
     path('users/', views.list_users, name='list_users'),
     path('users/edit-user-<str:user_id>', views.moderate_user, name='moderate_user'),
