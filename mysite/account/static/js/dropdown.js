@@ -65,21 +65,6 @@ if(createButtons != null){
     })
 }
 
-/* Create Dropdown*/
-createButton = document.querySelector('#create-Btn')
-createModal = document.querySelector('.create-dropdown')
-
-if(createButton != null && createModal !=null){
-    createButton.addEventListener('click', ()=>{
-        createModal.style.setProperty('display', 'flex')
-    })
-}
-window.onclick = function(event) {
-    if (!event.target.matches('#create-Btn')) {
-          createModal.style.setProperty("display", 'none');
-      }
-  }
-
 
 // All Sidebar Links
 let sidebarLinks = document.querySelectorAll('.link')
@@ -98,6 +83,15 @@ if(sidebarLinks != null){
             let span = link.querySelector('#select')
         // span.classList.remove('specific-link')
             link.classList.remove('active-link')
+        })
+    })
+}
+// Closing Error and Success Messages
+let closeButtons = document.querySelectorAll('.close')
+if(closeButtons != null){
+    closeButtons.forEach((btn)=>{
+        btn.addEventListener('click',()=> {
+            btn.parentElement.remove()
         })
     })
 }
