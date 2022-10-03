@@ -13,7 +13,8 @@
     padding: 5px 15px;
     margin: 5px;
     font-size: 1rem;
-    background-color:rgb(7, 133, 165);
+    background-color: var(--accent-color);
+    box-shadow: var(--box-shadow);
 }
 .messages>.success>span{
     position: absolute;
@@ -978,7 +979,7 @@ main.search>.sidebar-content{
 main.profile{
    /* border: 1px solid rgb(0, 255, 157);*/
     margin-top: 0px;
-    width: 80%;
+    width: 85%;
     display: grid;
     grid-template-columns:120px 1fr;
     grid-template-rows: max-content;
