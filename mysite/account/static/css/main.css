@@ -1,11 +1,11 @@
 .messages{
-    position: absolute;
+    position: fixed;
     top: 12%;
-    left: 40%;
+    left: 15px;
     list-style-type: none;
     padding: 0%;
     margin: 0%;
-    z-index: 10;
+    z-index: 20;
 }
 .messages>.success{
     color: rgba(255, 255, 255, 0.938);
@@ -1098,11 +1098,12 @@ main.profile>.profile-info>form>input[type="submit"]{
     border-radius: 50px;
 }
 main.profile>.profile-info>.general-info{
-    /*border: 1px solid gray;*/
+   /* border: 1px solid gray;*/
     display: grid;
     grid-template-columns: 2fr 1fr;
     column-gap: 30px;
     row-gap: 10px;
+    max-height: max-content;
 }
 main.profile>.profile-info>.contact-info{
     display: flex;
@@ -1138,6 +1139,7 @@ main.profile>.profile-info>.general-info>.profile-title{
     gap: 20px;
     grid-column: 2/3;
     grid-row: 2/3;
+    height: max-content;
 
   }
 .avatar-upload {

@@ -203,6 +203,11 @@
     footer>.copyright {
         flex-flow: column;
     }
+    main.profile>.profile-info>form>input[type="submit"]{
+        right: 30px;
+        top: unset;
+        bottom: 75px;
+}
 }
 
 @media screen and (max-width: 930px) {
