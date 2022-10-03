@@ -30,13 +30,11 @@
   <script>
     tinymce.init({
         selector: '#id_about',
-        height: 500, menubar: false,
+        height: 300, menubar: false,
         plugins: [
-          'advlist autolink lists link image charmap print preview anchor',
-          'searchreplace visualblocks code fullscreen',
-          'insertdatetime media table paste imagetools wordcount'
+          'advlist autolink lists link charmap anchor',
         ],
-        toolbar: 'insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image',
+        toolbar: 'insertfile undo redo | bold italic | alignleft aligncenter alignright alignjustify |',
         content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:16px }'
       });
   </script>
