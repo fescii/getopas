@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
+{% load blog_tags %}
 {% load thumbnail %}
 {% block title %}Opas-Home{% endblock %}
 
@@ -18,7 +19,7 @@
   </div>
   <div class="article-feeds feed-contents">
       <div class="feed-title">
-          <div class="section-title">For you</div>
+          <div class="section-title">Trending</div>
           <i class="iconly-Arrow-Right-Circle icli"></i>
           <hr size="1" />
       </div>
@@ -26,10 +27,14 @@
          <div class="article-wrapper">
           <div class="article-info">
               <div class="profile-wrapper">
+                {% if post.author.profile.photo %}
                   <img src="{% thumbnail post.author.profile.photo 300x0 %}" alt="Profile">
+                {% else %}
+                  <img src="https://eu.ui-avatars.com/api/?name={{post.author.first_name}}+{{post.author.last_name}}&size=250" alt="Profile">
+                {% endif %}
               </div>
-              <a href="#" class="author">{{post.author.first_name}} {{post.author.last_name}}</a>
-              <span class="read-time posted"><span class="dot">&#183;</span> 9 min read </span>
+              <a href="{% url 'profile' username=post.author%}" class="author">{{post.author.first_name}} {{post.author.last_name}}</a>
+              <span class="read-time posted"><span class="dot">&#183;</span> {{post.body|read_time}} </span>
               <span class="posted right"><i class="iconly-Time-Circle icli"></i> <span class="date">{{post.created|date:"M"}} {{post.created.day}}, {{post.created|date:"Y"}} </span></span>
           </div>
           <div class="summery-content">
@@ -41,7 +46,7 @@
                       <img id="" src="{% thumbnail post.cover 300x0 %}" alt="Post-Image">
                   </div>
                   <p class="summery-text">
-                      {{post.body|striptags|safe}}
+                      {{post.body|striptags|safe|truncatechars:300 }}
                   </p>
               </div>
               <div class="article-footer">

@@ -1,4 +1,4 @@
-from dbm.ndbm import library
+import readtime
 from django import template
 from ..models import Post
 from django.db.models import Count
@@ -28,3 +28,8 @@ def get_most_commented_posts(count=5):
 def show_most_viewed_posts(count=4):
     most_viewed = Post.published.order_by('-blog_views')[:count]
     return {'most_viewed': most_viewed}
+
+def read_time(html):
+    return readtime.of_html(html)
+
+register.filter('read_time',read_time)
