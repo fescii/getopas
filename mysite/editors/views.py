@@ -64,11 +64,10 @@ def dashboard(request):
                  'editors/dashboard.html',
                     {'user': user,
                     'profile': profile,
-                    'issues': top_issues,
-                    'editors': top_editors,
                     'activities': activities,
                     'comments': comments,
                     'views': count,
+                    'top_posts': top_posts,
                     'section': 'dashboard'})
 
 

@@ -94,7 +94,7 @@ class BlogComment(models.Model):
 #Saved Posts
 class Saved(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='comments')
+    post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='saved')
     added = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
