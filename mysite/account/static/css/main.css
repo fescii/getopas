@@ -1151,8 +1151,9 @@ main.profile>.profile-info>.general-info>.profile-title{
   }
   .avatar-upload .avatar-edit {
     position: absolute;
-    right: 0px;
-    top: 5px;
+    left: 20px;
+    top: 35%;
+    background: transparent;
   }
   /*
   .avatar-upload .avatar-edit{
@@ -1174,7 +1175,7 @@ main.profile>.profile-info>.general-info>.profile-title{
     height: 30px;
     margin-bottom: 0;
     border-radius: 100%;
-    background: #FFFFFF;
+    background-color: #ffffff1b;
     border: 1px solid transparent;
     box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.12);
     cursor: pointer;
@@ -1185,16 +1186,22 @@ main.profile>.profile-info>.general-info>.profile-title{
     transition: all 0.2s ease-in-out;
   }
   .avatar-upload .avatar-edit> label{
-    background: #f1f1f1;
+    background-color: #ffffff82;
     border-color: var(--border-shadow);
     box-shadow: var(--box-shadow);
     color: var(--accent-color);
-    padding:  5px 10px;
+    font-weight: bold;
+    padding:  5px 18px;
     -webkit-border-radius: 50px;
     -moz-border-radius: 50px;
     -ms-border-radius: 50px;
     -o-border-radius: 50px;
     border-radius: 50px;
+}
+.avatar-upload .avatar-edit> label:hover{
+    background-color: #ffffffb9;
+    border-color: var(--border-shadow);
+    box-shadow: var(--box-shadow);
 }
  /* .avatar-upload .avatar-edit> input + label:after {
     content: "\f040";
