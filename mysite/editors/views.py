@@ -68,7 +68,7 @@ def dashboard(request):
                     'comments': comments,
                     'views': count,
                     'top_posts': top_posts,
-                    'section': 'dashboard'})
+                    'section': 'home'})
 
 
 @login_required

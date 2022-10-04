@@ -63,7 +63,7 @@
                 </div>
                 <div class="info">
                     <div class="info-title">Bio</div>
-                    <div class="info-content">{{profile.about|safe}}</div>
+                    <div class="info-content">{{profile.about|striptags|safe}}</div>
                 </div>
             </div>
         </div>
@@ -107,5 +107,4 @@
         }
     }
 </script>
-<script src="{% static "js/dropdown.js" %}"></script>
 {% endblock footer%}

@@ -1,7 +1,52 @@
-<ul>
+{% load thumbnail %}
+{% load blog_tags %}
     {% for post in latest_posts %}
-    <li>
-        <a href="{{ post.get_absolute_url }}">{{ post.title }}</a>
-    </li>
+        <div class="article-wrapper">
+            <div class="article-info">
+                <div class="profile-wrapper">
+                {% if post.author.profile.photo %}
+                    <img src="{% thumbnail post.author.profile.photo 300x0 %}" alt="Profile">
+                {% else %}
+                    <img src="https://eu.ui-avatars.com/api/?name={{post.author.first_name}}+{{post.author.last_name}}&size=250" alt="Profile">
+                {% endif %}
+                </div>
+                <a href="{% url 'profile' username=post.author%}" class="author">{{post.author.first_name}} {{post.author.last_name}}</a>
+                <span class="read-time posted"><span class="dot">&#183;</span> {{post.body|read_time}} </span>
+                <span class="posted right"><i class="iconly-Time-Circle icli"></i> <span class="date">{{post.created|date:"M"}} {{post.created.day}}, {{post.created|date:"Y"}} </span></span>
+            </div>
+            <div class="summery-content">
+                <h2 class="article-title">
+                    <a href="{{post.get_absolute_url}}" title="Article Title" class="article-title-link"> {{post.title}} </a>
+                </h2>
+                <div class="article-summery">
+                    <div id="mobile-image">
+                        <img id="" src="{% thumbnail post.cover 300x0 %}" alt="Post-Image">
+                    </div>
+                    <p class="summery-text">
+                        {{post.body|striptags|safe|truncatechars:300 }}
+                    </p>
+                </div>
+                <div class="article-footer">
+                    <div class="article-tags">
+                        <a href="#" class="tag">Javascript</a>
+                        <a href="#" class="tag">Programming</a>
+                        <a href="#" class="tag">Recent</a>
+                    </div>
+                    <div class="article-actions">
+                        <a title="Save" href="">
+                            <span>Save</span>
+                            <i class="iconly-Bookmark icli"></i>
+                        </a>
+                        <a title="Share" href="">
+                            <span>Share</span>
+                            <i class="iconly-Send icli"> </i>
+                        </a>
+                        <a title="Share" href="">
+                            <span>Report</span>
+                            <i class="iconly-Info-Circle icli"> </i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
     {% endfor %}
-</ul>
