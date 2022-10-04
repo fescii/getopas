@@ -43,18 +43,10 @@ def dashboard(request):
             com = article.comments.filter(active=True).count()
             comments = comments + com
 
-    #Top 3 Newsletters
-    top_issues = Issue.published.order_by('-issue_views')[:3]
-
-    #Top 5 Newsletters
-    top_editors = Issue.published.order_by('-issue_views')[:5]
 
     #Top Users
     top_posts = Post.most_viewed(Post)
-    users = []
-    for post in top_posts:
-        p = get_object_or_404(Profile, user=post.author)
-        users.append(p.photo)
+
 
     #Recent Activities
     top_posts = Post.recently_added(Post, 6)
@@ -74,10 +66,9 @@ def dashboard(request):
                     'profile': profile,
                     'issues': top_issues,
                     'editors': top_editors,
-                    'views': count,
                     'activities': activities,
-                    'top_users': users,
                     'comments': comments,
+                    'views': count,
                     'section': 'dashboard'})
 
 
