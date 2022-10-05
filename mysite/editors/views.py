@@ -73,18 +73,18 @@ def dashboard(request):
 #   Add-Post-To-Myist
 @login_required
 @require_POST
-def image_like(request):
+def save_post(request):
     post_id = request.POST.get('id')
     action = request.POST.get('action')
     if post_id and action:
         try:
             post = Post.objects.get(id=post_id)
-            if action == 'like':
-                post.users_like.add(request.user)
+            if action == 'save':
+                post.users_save.add(request.user)
             else:
-                post.users_like.remove(request.user)
+                post.users_save.remove(request.user)
             return JsonResponse({'status': 'ok'})
-        except Image.DoesNotExist:
+        except Post.DoesNotExist:
             pass
     return JsonResponse({'status': 'error'})
 

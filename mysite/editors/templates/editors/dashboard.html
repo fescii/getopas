@@ -56,8 +56,12 @@
                       <a href="#" class="tag">Recent</a>
                   </div>
                   <div class="article-actions">
-                      <a title="Save" href="">
-                          <span>Save</span>
+                      <a class="save" href="" data-id="{{ post.id }}" data-action="{% if request.user in post_save %}un{% endif %}save" >
+                        {% if request.user in post_save %}
+                            <span>UnSave</span>
+                        {% else %}
+                            <span>Save</span>
+                        {% endif %}
                           <i class="iconly-Bookmark icli"></i>
                       </a>
                       <a title="Share" href="">
@@ -397,7 +401,7 @@
               <span class="iconly-User2 icbo"></span>47 Comments
             </p>
           </div>
-          <a href=" {% url 'user_post_list' %}" class="go-to-articles"
+          <a href=" {% url 'editors:user_post_list' %}" class="go-to-articles"
             >See your articles performance
             <span class="iconly-Arrow-Right icli"></span>
           </a>
@@ -422,5 +426,40 @@
           </ul>
       </div>
   </div>
+{% endblock %}
+{% block domready %}
+    const url = '{% url "editors:save" %}';
+    let options = {
+        method: 'POST',
+        headers: {'X-CSRFToken': csrftoken},
+        mode: 'same-origin'
+    }
+    document.querySelector('a.save').addEventListener('click', function(e){
+        e.preventDefault();
+        let saveButton = this;
+
+        // add request body
+        var formData = new FormData();
+        formData.append('id', saveButton.dataset.id);
+        formData.append('action', saveButton.dataset.action);
+        options['body'] = formData;
+
+        // send HTTP request
+        fetch(url, options).then(response => response.json()).then(data => {
+            if (data['status'] === 'ok'){
+                let previousAction = saveButton.dataset.action;
+
+                // toggle button text and data-action
+                let action = previousAction === 'save' ? 'unsave' : 'save';
+                saveButton.dataset.action = action;
+                saveButton.innerHTML = action;
+
+                // update save count
+                let saveCount = document.querySelector('span.count .total');
+                let totalSaves = parseInt(saveCount.innerHTML);
+                saveCount.innerHTML = previousAction === 'save' ? totalSaves + 1 :totalSaves - 1;
+            }
+        });
+    });
 {% endblock %}
 

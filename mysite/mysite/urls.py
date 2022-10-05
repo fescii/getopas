@@ -33,13 +33,15 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('articles/', include('blog.urls', namespace='blog')),
     path('magazine/', include('magazine.urls', namespace='magazine')),
+    path('dashboard/', include('editors.urls', namespace='editors')),
+    #path('dashboard/', include(("editors.urls", 'editors'), namespace="editors")),
     path('', include('account.urls')),
-    path('dashboard/', include('editors.urls')),
     path('device-info/', include('devices.urls')),
     path('search/', include('search.urls')),
     path('sitemap.xml', sitemap, {'sitemaps' : sitemaps},
          name = 'django.contrib.sitemaps.views.sitemap'),
 ]
+
 
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL,

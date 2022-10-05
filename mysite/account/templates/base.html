@@ -45,28 +45,28 @@
                 <div class="content-nav">
                     <ul class="linked-list content-list">
                         <li class="content-link">
-                            <a class="link {% if section == 'home' %}data-active{% endif %}" href=" {% url 'dashboard' %}">
+                            <a class="link {% if section == 'home' %}data-active{% endif %}" href=" {% url 'editors:dashboard' %}">
                                 <span id="select"></span>
                                 <span class="iconly-Home icli"></span>
                                 <span class="link-text">Home</span>
                             </a>
                         </li>
                         <li class="content-link">
-                            <a class="link {% if section == 'create' %}data-active{% endif %}" href=" {% url 'create_post' %}">
+                            <a class="link {% if section == 'create' %}data-active{% endif %}" href=" {% url 'editors:create_post' %}">
                                 <span id="select"></span>
                                 <span class="iconly-Plus icli"></span>
                                 <span class="link-text">Create</span>
                             </a>
                         </li>
                         <li class="content-link">
-                            <a class="link {% if section == 'search' %}data-active{% endif %}" href="{% url 'user_issue_list' %}">
+                            <a class="link {% if section == 'search' %}data-active{% endif %}" href="{% url 'editors:user_issue_list' %}">
                                 <span id="select"></span>
                                 <span class="iconly-Search icli"></span>
                                 <span class="link-text">Search</span>
                             </a>
                         </li>
                         <li class="content-link">
-                            <a class="link {% if section == 'products' %}data-active{% endif %}" href="{% url 'user_product_list' %}">
+                            <a class="link {% if section == 'products' %}data-active{% endif %}" href="{% url 'editors:user_product_list' %}">
                                 <span id="select"></span>
                                 <span class="iconly-Bag-2 icli"></span>
                                 <span class="link-text">Products</span>
@@ -140,6 +140,15 @@
         </a>-->
     </div>
     <script src=" {% static 'js/dropdown.js' %}"></script>
+    <script src="//cdn.jsdelivr.net/npm/js-cookie@3.0.1/dist/js.cookie.min.js"></script>
+    <script>
+        const csrftoken = Cookies.get('csrftoken');
+        document.addEventListener('DOMContentLoaded', (event) => {
+            // DOM loaded
+            {% block domready %}
+            {% endblock %}
+        });
+    </script>
     {% block footer %}
     {% endblock footer %}
 </body>
