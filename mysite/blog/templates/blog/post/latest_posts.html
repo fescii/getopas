@@ -7,7 +7,7 @@
                 {% if post.author.profile.photo %}
                     <img src="{% thumbnail post.author.profile.photo 300x0 %}" alt="Profile">
                 {% else %}
-                    <img src="https://eu.ui-avatars.com/api/?name={{post.author.first_name}}+{{post.author.last_name}}&size=250" alt="Profile">
+                    <img src="https://eu.ui-avatars.com/api/?background=08b86f&name={{post.author.first_name}}+{{post.author.last_name}}&size=250&color=fff" alt="Profile">
                 {% endif %}
                 </div>
                 <a href="{% url 'profile' username=post.author%}" class="author">{{post.author.first_name}} {{post.author.last_name}}</a>
