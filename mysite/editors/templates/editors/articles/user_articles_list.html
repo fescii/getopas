@@ -24,10 +24,10 @@
             <span class='comments'><span class="iconly-User2 icli"></span> {{ post.comments.count }}</span>
         </div>
         <div class="action-links">
-            <a href="/dashboard/edit-article/{{post.id}}">Edit</a>
-            <a href="/dashboard/edit-article/cover/{{post.id}}">Cover</a>
-            <a href="/dashboard/edit-article/tags/{{post.id}}">Tags</a>
-            <a href="/dashboard/delete-article/{{post.id}}">Delete</a>
+            <a href="/edit-article/{{post.id}}">Edit</a>
+            <a href="/edit-article/cover/{{post.id}}">Cover</a>
+            <a href="/edit-article/tags/{{post.id}}">Tags</a>
+            <a href="/delete-article/{{post.id}}">Delete</a>
         </div>
     </div>
 {% if empty %}

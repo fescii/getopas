@@ -114,7 +114,7 @@ def create_post(request):
             post.save()
             post_form.save_m2m()
             messages.success(request, 'Blog Post Created Successfully')
-            return HttpResponseRedirect(reverse('user_post_list'))
+            return HttpResponseRedirect(reverse('editors:user_post_list'))
         else:
             messages.error(request, 'Error! Blog post was not created')
             post_form = CreateBlogPostForm(data=request.GET)
@@ -245,7 +245,7 @@ def edit_blog_post_cover(request, pk):
             #edit_form.save()
             Post.update_cover(post,cover)
             messages.success(request, 'Cover updated successfully')
-            return HttpResponseRedirect(reverse('user_post_list'))
+            return HttpResponseRedirect(reverse('editors:user_post_list'))
 
         else:
             messages.error(request, 'Error updating the Tags')
@@ -274,7 +274,7 @@ def delete_post(request, pk):
     post = get_object_or_404(Post, id=pk)
     post.delete()
     messages.success(request, 'Article deleted successfully')
-    return HttpResponseRedirect(reverse('user_post_list'))
+    return HttpResponseRedirect(reverse('editors:user_post_list'))
 
 #Create Magazine View
 #@login_required
@@ -295,7 +295,7 @@ def create_magazine(request):
             #new_magazine.tags = cd['tags']
             #new_magazine.save()
             messages.success(request, 'Magazine issue was created Successfully')
-            return HttpResponseRedirect(reverse('user_issue_list'))
+            return HttpResponseRedirect(reverse('editors:user_issue_list'))
         else:
             messages.error(request, 'Error! Magazine issue was not created')
             magazine_form = CreateMagazineForm(data=request.POST)
