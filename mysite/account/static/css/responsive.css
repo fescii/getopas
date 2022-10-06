@@ -1144,7 +1144,7 @@
         box-shadow: var(--box-shadow);
         border: var(--border);
         z-index: 4;
-        top: 105px;
+        top: 115px;
         right: 5px;
         min-width: 200px;
         padding: 10px 10px;
@@ -1156,7 +1156,7 @@
         box-shadow: var(--box-shadow);
         border: var(--border);
         z-index: 4;
-        top: 70px;
+        top: 100px;
         right: 5px;
         min-width: 200px;
         padding: 10px 10px;
@@ -1169,7 +1169,7 @@
         box-shadow: var(--box-shadow);
         border: var(--border);
         z-index: 12;
-        top: 105px;
+        top: 115px;
         right: 5px;
         max-width: 200px;
         padding: 10px 10px;
@@ -1406,7 +1406,8 @@
        /*border: 1px solid gray;*/
         font-size: 17px;
         display: inline;
-        padding-top: 0px;
+        padding: 0px;
+        margin-top: 5px;
     }
     main.feeds>.feed-contents>.article-wrapper>.article-info .right{
         display: grid;
@@ -1432,7 +1433,8 @@
         padding: 0px;
         margin: 0%;
         align-self: baseline;
-        padding-bottom: 3px;
+        padding: 0px;
+        margin-top: 5px;
     }
     main.feeds>.feed-contents>.article-wrapper>.summery-content{
         /* border: 1px solid rgb(250, 27, 27);*/
@@ -1738,4 +1740,32 @@
         font-weight: 600;
     }
 
+}
+@media screen and (max-width: 380px){
+    main.feeds>.feed-contents>.article-wrapper>.article-info{
+        /*border: 1px solid gray;*/
+         padding-left: 7px;
+         display: flex;
+         flex-flow: row;
+         flex-wrap: wrap;
+         align-items: flex-start;
+         height: 55px;
+    }
+
+      main.feeds>.feed-contents>.article-wrapper>.article-info .posted{
+        font-size: 0.9rem;
+        text-align: center;
+       /* border: 1px solid gray;*/
+        padding: 0%;
+    }
+    main.feeds>.feed-contents>.article-wrapper>.article-info .right{
+        /*border: 1px solid gray;*/
+        top: 35px;
+        left: 10px;
+        right: unset;
+    }
+    main.feeds>.feed-contents>.article-wrapper>.article-info a{
+       /* border: 1px solid gray;*/
+        margin-top: 5px;
+    }
 }
