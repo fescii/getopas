@@ -31,7 +31,7 @@ class Post(models.Model):
                               blank=True)
     tags = TaggableManager()
 
-    users_save = models.ManyToManyField(settings.AUTH_USER_MODEL,related_name='posts_saved',blank=True)
+   # users_save = models.ManyToManyField(settings.AUTH_USER_MODEL,related_name='posts_saved',blank=True)
 
 
     #Updating Blog Post

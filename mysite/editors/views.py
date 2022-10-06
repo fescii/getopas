@@ -49,25 +49,16 @@ def dashboard(request):
 
 
     #Recent Activities
-    top_posts = Post.recently_added(Post, 6)
-    r_users = []
-    r_posts = []
-    for post in top_posts:
-        r_posts.append(f"{post.publish.day}/{post.publish.month}  {post.publish.hour}:{post.publish.minute}")
-        u = get_object_or_404(User, username=post.author)
-        r_users.append(u)
-
-    #Zipping together list users and posts
-    activities = list(zip(r_users, r_posts))
+    recently_added = Post.recently_added(Post, 5)
 
     return render(request,
                  'editors/dashboard.html',
                     {'user': user,
                     'profile': profile,
-                    'activities': activities,
                     'comments': comments,
                     'views': count,
-                    'top_posts': top_posts,
+                    'most_viewed':top_posts,
+                    'recently_added': recently_added,
                     'section': 'home'})
 
 #   Add-Post-To-My-list
