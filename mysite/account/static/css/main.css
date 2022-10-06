@@ -789,11 +789,12 @@ main.feeds>.feed-contents>.article-wrapper>.summery-content>.article-footer{
     cursor: pointer;
     color: var(--gray-color);
    /* border: var(--border);*/
+    font-size: 16px;
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 5px;
-    padding: 5px 15px 5px 15px;
+    padding: 4px 13px 4px 13px;
     background-color: rgba(57, 56, 56, 0.087);
    /* background-color: var(--alt-accent-color);*/
     -webkit-border-radius: 50px;
@@ -803,6 +804,11 @@ main.feeds>.feed-contents>.article-wrapper>.summery-content>.article-footer{
     border-radius: 50px;
 
 }
+/*
+.feed-contents>.article-wrapper>.summery-content>.article-footer>.article-actions>a.Remove{
+    background-color: var(--alt-accent-color);
+    color: var(--background-color);
+}*/
 .feed-contents>.article-wrapper>.summery-content>.article-footer>.article-actions>a>span{
     font-size: 1rem;
 }

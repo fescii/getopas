@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 # Register your models here.
-from .models import Post, BlogComment
+from .models import Post, BlogComment,Bookmark
 @admin.register(Post)
 class PostAdmin(admin.ModelAdmin):
     list_display = ('title', 'slug', 'author', 'publish', 'status')
@@ -16,3 +16,8 @@ class PostAdmin(admin.ModelAdmin):
 class BlogCommentAdmin(admin.ModelAdmin):
     list_display = ('post', 'created', 'active')
     list_filter = ('active', 'created', 'updated')
+
+@admin.register(Bookmark)
+class BookmarkAdmin(admin.ModelAdmin):
+    list_display = ('post', 'added', 'user')
+    list_filter = ('added',)

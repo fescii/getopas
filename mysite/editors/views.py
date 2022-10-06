@@ -18,7 +18,7 @@ from django.contrib.auth.decorators import login_required,user_passes_test
 from django.http import HttpResponseRedirect, HttpResponse
 from django.urls import reverse
 from account.models import Profile
-from blog.models import Post
+from blog.models import Post,Bookmark
 from django.contrib.auth.models import User
 from django.contrib import messages
 from django.http import JsonResponse
@@ -79,10 +79,13 @@ def save_post(request):
     if post_id and action:
         try:
             post = Post.objects.get(id=post_id)
-            if action == 'save':
-                post.users_save.add(request.user)
+            if action == 'Save':
+                #post.users_save.add(request.user)
+                bookmark = Bookmark.objects.create(post=post,user=request.user)
+                bookmark.save()
             else:
-                post.users_save.remove(request.user)
+                saved_post = Bookmark.objects.get(post=post_id,user=request.user)
+                saved_post.delete()
             return JsonResponse({'status': 'ok'})
         except Post.DoesNotExist:
             pass

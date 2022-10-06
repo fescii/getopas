@@ -33,6 +33,7 @@ class Post(models.Model):
 
     users_save = models.ManyToManyField(settings.AUTH_USER_MODEL,related_name='posts_saved',blank=True)
 
+
     #Updating Blog Post
     def update_post(self, title, body, status, *args, **kwargs):
         self.title = title
@@ -96,3 +97,21 @@ class BlogComment(models.Model):
 
     def __str__(self):
         return f'Saved By {self.name} on {self.post}'
+
+
+#Bookmark Model
+class Bookmark(models.Model):
+    post = models.ForeignKey(Post, on_delete=models.CASCADE,related_name='saved')
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    added = models.DateTimeField(default=timezone.now)
+
+    class Meta:
+        ordering = ('added',)
+    # Save Article
+    def save_article(self,post, user,*args, **kwargs):
+        self.post = post
+        self.user = user
+        super(Bookmark, self).save(update_fields=['post','user'],*args, **kwargs)
+
+    def __str__(self):
+        return f'Saved By {self.user} on {self.post}'

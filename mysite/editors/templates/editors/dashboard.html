@@ -56,13 +56,8 @@
                       <a href="#" class="tag">Recent</a>
                   </div>
                   <div class="article-actions">
-                      <a class="save" href="" data-id="{{ post.id }}" data-action="{% if request.user in post_save %}un{% endif %}save" >
-                        {% if request.user in post_save %}
-                            <span>UnSave</span>
-                        {% else %}
-                            <span>Save</span>
-                        {% endif %}
-                          <i class="iconly-Bookmark icli"></i>
+                      <a class="save {% check_saved post.id request.user%}" href="" data-id="{{ post.id }}" data-action="{% check_saved post.id request.user%}" >
+                        <span>{% check_saved post.id request.user%}</span>
                       </a>
                       <a title="Share" href="">
                           <span>Share</span>
@@ -119,9 +114,8 @@
                       <a href="#" class="tag">Recent</a>
                   </div>
                   <div class="article-actions">
-                      <a title="Save" href="">
-                          <span>Save</span>
-                          <i class="iconly-Bookmark icli"></i>
+                    <a class="save {% check_saved post.id request.user%}" href="" data-id="{{ post.id }}" data-action="{% check_saved post.id request.user%}" >
+                        <span>{% check_saved post.id request.user%}</span>
                       </a>
                       <a title="Share" href="">
                           <span>Share</span>
@@ -434,31 +428,34 @@
         headers: {'X-CSRFToken': csrftoken},
         mode: 'same-origin'
     }
-    document.querySelector('a.save').addEventListener('click', function(e){
-        e.preventDefault();
-        let saveButton = this;
+    saveButtons = document.querySelectorAll('a.save')
+    saveButtons.forEach(saveButton =>{
+        saveButton.addEventListener('click', function(e){
+            e.preventDefault();
 
-        // add request body
-        var formData = new FormData();
-        formData.append('id', saveButton.dataset.id);
-        formData.append('action', saveButton.dataset.action);
-        options['body'] = formData;
+            // add request body
+            let formData = new FormData();
+            formData.append('id', saveButton.dataset.id);
+            formData.append('action', saveButton.dataset.action);
+            options['body'] = formData;
 
-        // send HTTP request
-        fetch(url, options).then(response => response.json()).then(data => {
-            if (data['status'] === 'ok'){
-                let previousAction = saveButton.dataset.action;
+            // send HTTP request
+            fetch(url, options).then(response => response.json()).then(data => {
+                if (data['status'] === 'ok'){
+                    let previousAction = saveButton.dataset.action;
 
-                // toggle button text and data-action
-                let action = previousAction === 'save' ? 'unsave' : 'save';
-                saveButton.dataset.action = action;
-                saveButton.innerHTML = action;
+                    // toggle button text and data-action
+                    let action = previousAction === 'Save' ? 'Remove' : 'Save';
+                    saveButton.dataset.action = action;
+                    saveButton.classList.add("Remove")
+                    saveButton.innerHTML = `<span>${action}</span>`;
 
-                // update save count
-                let saveCount = document.querySelector('span.count .total');
-                let totalSaves = parseInt(saveCount.innerHTML);
-                saveCount.innerHTML = previousAction === 'save' ? totalSaves + 1 :totalSaves - 1;
-            }
+                    // update save count
+                    let saveCount = document.querySelector('span.count .total');
+                    let totalSaves = parseInt(saveCount.innerHTML);
+                    saveCount.innerHTML = previousAction === 'save' ? totalSaves + 1 :totalSaves - 1;
+                }
+            });
         });
     });
 {% endblock %}

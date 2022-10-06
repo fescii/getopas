@@ -1,6 +1,6 @@
 import readtime
 from django import template
-from ..models import Post
+from ..models import Post,Bookmark
 from django.db.models import Count
 
 register = template.Library()
@@ -33,3 +33,17 @@ def read_time(html):
     return readtime.of_html(html)
 
 register.filter('read_time',read_time)
+
+
+#Get Most commented posts
+@register.simple_tag
+def check_saved(id,user):
+    try:
+        saved_post = Bookmark.objects.get(post=id,user=user)
+        if saved_post:
+            return 'Remove'
+        else:
+            return 'Save'
+    except Bookmark.DoesNotExist:
+        return 'Save'
+#register.filter('check_saved',check_saved)
