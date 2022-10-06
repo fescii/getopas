@@ -70,7 +70,7 @@ def dashboard(request):
                     'top_posts': top_posts,
                     'section': 'home'})
 
-#   Add-Post-To-Myist
+#   Add-Post-To-My-list
 @login_required
 @require_POST
 def save_post(request):
