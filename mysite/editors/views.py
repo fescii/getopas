@@ -61,6 +61,22 @@ def dashboard(request):
                     'recently_added': recently_added,
                     'section': 'home'})
 
+#Dashboard
+@login_required
+def explore(request,topic):
+    user = request.user
+    profile = user.profile
+
+    #Getting Total articles views and comments of the current user
+    topic_posts = Post.published.filter(tags__in=topic)
+
+    return render(request,
+                 'editors/explore.html',
+                    {'user': user,
+                    'profile': profile,
+                    'topic_posts': topic_posts,
+                    'section': 'explore'})
+
 #   Add-Post-To-My-list
 @login_required
 @require_POST

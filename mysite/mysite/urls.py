@@ -33,7 +33,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('articles/', include('blog.urls', namespace='blog')),
     path('magazine/', include('magazine.urls', namespace='magazine')),
-    path('dashboard/', include('editors.urls', namespace='editors')),
+    path('', include('editors.urls', namespace='editors')),
     #path('dashboard/', include(("editors.urls", 'editors'), namespace="editors")),
     path('', include('account.urls')),
     path('device-info/', include('devices.urls')),
