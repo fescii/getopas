@@ -195,7 +195,7 @@ def user_profile(request, username):
             messages.error(request, 'Error updating your profile')
             profile_photo_form = ProfilePhotoEditForm()
             return render(request,
-                      'editors/edit.html',
+                      'account/profile/user-profile.html',
                       {'profile_photo_form': profile_photo_form,
                        'r_user': r_user,
                        'profile': profile,

@@ -9,12 +9,12 @@ urlpatterns = [
 
     #Dashboard path
     path('home', views.dashboard, name='dashboard'),
-   # path('<str:topic>', views.explore, name='explore'),
 
     #Articles
     path('add-article/', views.create_post, name='create_post'),
     path('my-articles/', views.user_post_list, name='user_post_list'),
     path('recent-articles/', views.new_articles, name='new_articles'),
+    path('explore/<str:topic>', views.explore, name='explore'),
     path('edit-article/<int:pk>/', views.edit_blog_post, name='edit_blog_post'),
     path('edit-article/tags/<int:pk>/', views.edit_blog_post_tags, name='edit_blog_post_tags'),
     path('edit-article/cover/<int:pk>/', views.edit_blog_post_cover, name='edit_blog_post_cover'),

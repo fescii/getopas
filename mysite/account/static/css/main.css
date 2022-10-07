@@ -48,7 +48,15 @@
     background-color: #e74f3b;
     color: white;
 }
-
+.pagination{
+    align-items: center;
+    justify-content: center;
+}
+/* Pagination */
+.pagination>.step-links>a{
+    text-decoration: none;
+    color: rgb(15, 138, 196);
+}
 main {
     margin-top: 50px;
     margin: 70px 6%;

@@ -23,6 +23,7 @@ from django.contrib.auth.models import User
 from django.contrib import messages
 from django.http import JsonResponse
 from django.views.decorators.http import require_POST
+from taggit.models import Tag
 
 
 # Create your views here.
@@ -68,13 +69,29 @@ def explore(request,topic):
     profile = user.profile
 
     #Getting Total articles views and comments of the current user
-    topic_posts = Post.published.filter(tags__in=topic)
+    object_list = Post.published.all()
+    tag = None
+    if topic:
+        tag = get_object_or_404(Tag, slug=topic)
+        topic_posts = object_list.filter(tags__in=[tag])
+
+    paginator = Paginator(topic_posts, 5) # 5 posts in each page
+    page = request.GET.get('page')
+    try:
+        posts = paginator.page(page)
+    except PageNotAnInteger:
+    # If page is not an integer deliver the first page
+        posts = paginator.page(1)
+    except EmptyPage:
+    # If page is out of range deliver last page of results
+        posts = paginator.page(paginator.num_pages)
 
     return render(request,
                  'editors/explore.html',
                     {'user': user,
                     'profile': profile,
-                    'topic_posts': topic_posts,
+                    'topic': topic,
+                    'topic_posts': posts,
                     'section': 'explore'})
 
 #   Add-Post-To-My-list
@@ -498,7 +515,7 @@ def create_section(request, pk):
             new_section.issue = issue
             new_section.save()
             messages.success(request, 'Your Section Was added Successfully')
-            return HttpResponseRedirect(reverse('user_issue_section_list',kwargs={'pk': pk}))
+            return HttpResponseRedirect(reverse('editors:user_issue_section_list',kwargs={'pk': pk}))
         else:
             messages.error(request, 'Error! Issue Section was not created')
             section_form = CreateSectionForm(data=request.GET)
@@ -528,7 +545,7 @@ def add_section(request,issue_id, section_id):
     section.added = True
     section.save()
     messages.success(request, 'Section added')
-    return HttpResponseRedirect(reverse('user_issue_section_list',kwargs={'pk': issue_id}))
+    return HttpResponseRedirect(reverse('editors:user_issue_section_list',kwargs={'pk': issue_id}))
 
 # Remove Section From An Issue
 #@login_required
@@ -538,7 +555,7 @@ def remove_section(request,issue_id, section_id):
     section.added = False
     section.save()
     messages.success(request, 'Section was removed')
-    return HttpResponseRedirect(reverse('user_issue_section_list', kwargs={'pk': issue_id}))
+    return HttpResponseRedirect(reverse('editors:user_issue_section_list', kwargs={'pk': issue_id}))
 
 # Delete Section
 #@login_required
@@ -547,7 +564,7 @@ def delete_section(request,issue_id, section_id):
     section = get_object_or_404(Section, id=section_id)
     section.delete()
     messages.success(request, 'Section was deleted')
-    return HttpResponseRedirect(reverse('user_issue_section_list',kwargs={'pk': issue_id}))
+    return HttpResponseRedirect(reverse('editors:user_issue_section_list',kwargs={'pk': issue_id}))
 
 #Edit Edit Section
 #@login_required
@@ -563,7 +580,7 @@ def edit_section(request, issue_id, section_id):
         if section_edit_form.is_valid():
             section_edit_form.save()
             messages.success(request, 'Section updated successfully')
-            return HttpResponseRedirect(reverse('user_issue_section_list',kwargs={'pk': issue_id}))
+            return HttpResponseRedirect(reverse('editors:user_issue_section_list',kwargs={'pk': issue_id}))
 
         else:
             messages.error(request, 'Error updating the Section')
@@ -628,7 +645,7 @@ def create_product(request):
             new_product.save()
             product_form.save_m2m()
             messages.success(request, f'The Product {name} was created successfully')
-            return HttpResponseRedirect(reverse('user_product_list'))
+            return HttpResponseRedirect(reverse('editors:user_product_list'))
         else:
             messages.error(request, 'An error occurred, Please try again!')
             product_form = CreateProductForm()
@@ -662,7 +679,7 @@ def edit_product_cover(request, pk):
             #edit_form.save()
             Product.update_cover(product,cover)
             messages.success(request, 'Cover updated successfully')
-            return HttpResponseRedirect(reverse('user_product_list'))
+            return HttpResponseRedirect(reverse('editors:user_product_list'))
 
         else:
             messages.error(request, 'Error updating the cover')
@@ -703,7 +720,7 @@ def edit_product(request, product_id, product_name):
                                    cd['company'], cd['release_date'], cd['price'],
                                    cd['about'])
             messages.success(request, f"The Product was updated successfully")
-            return HttpResponseRedirect(reverse('user_product_list'))
+            return HttpResponseRedirect(reverse('editors:user_product_list'))
         else:
             messages.error(request, 'An error occurred, Please try again!')
             product_form = EditProductForm(request.POST or None, instance=product,
@@ -738,7 +755,7 @@ def edit_product_tags(request, product_id, product_name):
             edit_form.save_m2m()
             tags.save()
             messages.success(request, 'Product Tags updated successfully')
-            return HttpResponseRedirect(reverse('user_product_list'))
+            return HttpResponseRedirect(reverse('editors:user_product_list'))
 
         else:
             messages.error(request, 'Error updating the Tags')
@@ -811,7 +828,7 @@ def add_physical_info(request, pk):
             new_info.save()
             info_form.save_m2m()
             messages.success(request, f'Physical information was added successfully')
-            return HttpResponseRedirect(reverse('user_product_list'))
+            return HttpResponseRedirect(reverse('editors:user_product_list'))
         else:
             messages.error(request, 'An error occurred, Please try again!')
             info_form = CreatePhysicalInfo()
@@ -846,7 +863,7 @@ def add_software_info(request, pk):
             new_info.save()
             info_form.save_m2m()
             messages.success(request, f'Software information for  was added successfully')
-            return HttpResponseRedirect(reverse('user_product_list'))
+            return HttpResponseRedirect(reverse('editors:user_product_list'))
         else:
             messages.error(request, 'An error occurred, Please try again!')
             info_form = CreateSoftwareInfo()
@@ -886,7 +903,7 @@ def edit_physical_info(request, info_id, product_id):
             physical_form.save_m2m()
             #On Success
             messages.success(request,'Physical Information updated successfully')
-            return HttpResponseRedirect(reverse('product_physical_info', kwargs={'pk': product_id}))
+            return HttpResponseRedirect(reverse('editors:product_physical_info', kwargs={'pk': product_id}))
         else:
             messages.error(request,'An error occurred, Please Try again')
             physical_form = EditPhysicalInfo(request.POST or None, instance=physical)
@@ -926,7 +943,7 @@ def edit_software_info(request, info_id, product_id):
 
             #On Success
             messages.success(request,'Software Information updated successfully')
-            return HttpResponseRedirect(reverse('product_software_info', kwargs={'pk': product_id}))
+            return HttpResponseRedirect(reverse('editors:product_software_info', kwargs={'pk': product_id}))
         else:
             messages.error(request,'An error occurred, Please Try again')
             physical_form = EditSoftwareInfo(request.POST or None, instance=software)
@@ -951,7 +968,7 @@ def delete_product(request,pk):
     product = get_object_or_404(Product, id=pk)
     product.delete()
     messages.success(request, 'Product was Successfully')
-    return HttpResponseRedirect(reverse('user_product_list'))
+    return HttpResponseRedirect(reverse('editors:user_product_list'))
 
 
 #Viewing Images of  product
@@ -986,7 +1003,7 @@ def add_image(request, product_id):
             new_info.save()
             image_form.save_m2m()
             messages.success(request, 'Image was added successfully')
-            return HttpResponseRedirect(reverse('images', kwargs={'pk': product_id}))
+            return HttpResponseRedirect(reverse('editors:images', kwargs={'pk': product_id}))
         else:
             messages.error(request, 'An error occurred, Please try again!')
             image_form = AddProductPhoto(files=request.FILES)
@@ -1015,7 +1032,7 @@ def delete_image(request,product_id, image_id):
     image = get_object_or_404(Image, id=image_id)
     image.delete()
     messages.success(request, 'Image deleted successfully')
-    return HttpResponseRedirect(reverse('images', kwargs={'pk': product_id}))
+    return HttpResponseRedirect(reverse('editors:images', kwargs={'pk': product_id}))
 
 #Most Viewed Newsletters
 @login_required

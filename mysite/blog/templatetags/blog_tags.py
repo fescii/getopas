@@ -46,3 +46,8 @@ def check_saved(id,user):
     except Bookmark.DoesNotExist:
         return 'Save'
 #register.filter('check_saved',check_saved)
+#Truncate Tags
+def truncate_tags(tags):
+    return tags[:3]
+
+register.filter('truncate_tags',truncate_tags)
