@@ -21,64 +21,62 @@
   <div class="feed-title">
     <div class="section-title">{{title|capfirst}}</div>
     <i class="iconly-Arrow-Right-Circle icli"></i>
-    <hr size="1" />
   </div>
   {% for save in saved_posts %}
         <div class="article-wrapper">
             <div class="article-info">
-            <div class="profile-wrapper">
-                {% if save.post.author.profile.photo %}
-                <img src="{% thumbnail save.post.author.profile.photo 300x0 %}"/>
-                {% else %}
-                <img src="https://eu.ui-avatars.com/api/?background=08b86f&name={{save.post.author.first_name}}+{{save.post.author.last_name}}&size=250&color=fff"/>
-                {% endif %}
-            </div>
-            <a href="{% url 'profile' username=save.post.author%}" class="author" >{{save.post.author.first_name}} {{save.post.author.last_name}}</a>
-            <span class="read-time posted"
-                ><span class="dot">&#183;</span> {{save.post.body|read_time}}
-            </span>
-            <span class="posted right"
-                ><i class="iconly-Time-Circle icli"></i>
-                <span class="date">{{save.post.created|date:"M"}} {{save.post.created.day}},
-                {{save.post.created|date:"Y"}}
-                </span></span>
+                <div class="profile-wrapper">
+                    {% if save.post.author.profile.photo %}
+                    <img src="{% thumbnail save.post.author.profile.photo 300x0 %}"/>
+                    {% else %}
+                    <img src="https://eu.ui-avatars.com/api/?background=08b86f&name={{save.post.author.first_name}}+{{save.post.author.last_name}}&size=250&color=fff"/>
+                    {% endif %}
+                </div>
+                <a href="{% url 'profile' username=save.post.author%}" class="author" >{{save.post.author.first_name}} {{save.post.author.last_name}}</a>
+                <span class="read-time posted" >
+                    <span class="dot">&#183;</span>
+                    {{save.post.body|read_time}}
+                </span>
+                <span class="posted right"><i class="iconly-Time-Circle icli"></i>
+                    <span class="date">{{save.post.created|date:"M"}} {{save.post.created.day}},{{save.post.created|date:"Y"}}</span>
+                </span>
             </div>
             <div class="summery-content">
-            <h2 class="article-title">
-                <a href="{{post.get_absolute_url}}" title="Article Title" class="article-title-link"> {{save.post.title}}</a>
-            </h2>
-            <div class="article-summery">
-                <div id="mobile-image">
-                <img id="" src="{% thumbnail save.post.cover 300x0 %}" alt="Post-Image" />
+                <h2 class="article-title">
+                    <a href="{{post.get_absolute_url}}" title="Article Title" class="article-title-link"> {{save.post.title}}</a>
+                </h2>
+                <div class="article-summery">
+                    <div id="mobile-image">
+                        <img id="" src="{% thumbnail save.post.cover 300x0 %}" alt="Post-Image" />
+                    </div>
+                    <p class="summery-text">
+                        {{save.post.body|striptags|safe|truncatechars:300 }}
+                    </p>
                 </div>
-                <p class="summery-text">
-                {{save.post.body|striptags|safe|truncatechars:300 }}
-                </p>
+                <div class="article-footer">
+                    <div class="article-tags">
+                        {% for tag in save.post.tags.names|truncate_tags %}
+                        <a href="{% url 'editors:explore' topic=tag|slug_tag %}" class="tag">{{tag|capfirst}}</a>
+                        {% endfor %}
+                    </div>
+                    <div class="article-actions">
+                        <a class="save {% check_saved save.post.id request.user%}" href="" data-id="{{ save.post.id }}" data-action="{% check_saved save.post.id request.user%}">
+                            <span>{% check_saved save.post.id request.user%}</span>
+                        </a>
+                        <a title="Share" href="">
+                            <span>Share</span>
+                            <i class="iconly-Send icli"> </i>
+                        </a>
+                        <a title="Share" href="">
+                            <span>Report</span>
+                            <i class="iconly-Info-Circle icli"> </i>
+                        </a>
+                    </div>
+                </div>
             </div>
-            <div class="article-footer">
-                <div class="article-tags">
-                {% for tag in save.post.tags.names|truncate_tags %}
-                  <a href="{% url 'editors:explore' topic=tag|slug_tag %}" class="tag">{{tag|capfirst}}</a>
-                {% endfor %}
         </div>
-        <div class="article-actions">
-          <a class="save {% check_saved save.post.id request.user%}" href="" data-id="{{ save.post.id }}" data-action="{% check_saved save.post.id request.user%}">
-            <span>{% check_saved save.post.id request.user%}</span>
-          </a>
-          <a title="Share" href="">
-            <span>Share</span>
-            <i class="iconly-Send icli"> </i>
-          </a>
-          <a title="Share" href="">
-            <span>Report</span>
-            <i class="iconly-Info-Circle icli"> </i>
-          </a>
-        </div>
-      </div>
-    </div>
-  </div>
-  {% endfor %}
-  {% include "pagination.html" with page=saved_posts %}
+        {% endfor %}
+        {% include "pagination.html" with page=saved_posts %}
 </div>
 <div class="sidebar-content">
   <div class="stats">

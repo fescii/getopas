@@ -145,8 +145,6 @@
         const csrftoken = Cookies.get('csrftoken');
         document.addEventListener('DOMContentLoaded', (event) => {
             // DOM loaded
-            {% block domready %}
-            {% endblock %}
             const url = '{% url "editors:save" %}';
             let options = {
                 method: 'POST',
@@ -183,6 +181,9 @@
                     });
                 });
             });
+
+            {% block domready %}
+            {% endblock %}
         });
     </script>
     {% block footer %}
