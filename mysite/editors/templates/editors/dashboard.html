@@ -9,8 +9,8 @@
     <div class="header-content">
         <h2 class="site-title">Explore</h2>
         <div class="header-links">
-            <a href="" title="Feed" class="header-link active">Feeds</a>
-            <a href="" title="For Your" class="header-link">Interest</a>
+            <a href="{% url 'editors:feeds' %}" title="Feed" class="header-link">Feeds</a>
+            <a href="" title="Interest" class="header-link">Interest</a>
             <a href="" title="Trending" class="header-link">Trending</a>
             <a href="" title="Recent" class="header-link">Recent</a>
             <a href="" title="Topics" class="header-link">Topics</a>
@@ -456,42 +456,3 @@
     </div>
 </div>tags
 {% endblock %}
-{% block domready %}
-    const url = '{% url "editors:save" %}';
-    let options = {
-        method: 'POST',
-        headers: {'X-CSRFToken': csrftoken},
-        mode: 'same-origin'
-    }
-    saveButtons = document.querySelectorAll('a.save')
-    saveButtons.forEach(saveButton =>{
-        saveButton.addEventListener('click', function(e){
-            e.preventDefault();
-
-            // add request body
-            let formData = new FormData();
-            formData.append('id', saveButton.dataset.id);
-            formData.append('action', saveButton.dataset.action);
-            options['body'] = formData;
-
-            // send HTTP request
-            fetch(url, options).then(response => response.json()).then(data => {
-                if (data['status'] === 'ok'){
-                    let previousAction = saveButton.dataset.action;
-
-                    // toggle button text and data-action
-                    let action = previousAction === 'Save' ? 'Remove' : 'Save';
-                    saveButton.dataset.action = action;
-                    saveButton.classList.add("Remove")
-                    saveButton.innerHTML = `<span>${action}</span>`;
-
-                    // update save count
-                    let saveCount = document.querySelector('span.count .total');
-                    let totalSaves = parseInt(saveCount.innerHTML);
-                    saveCount.innerHTML = previousAction === 'save' ? totalSaves + 1 :totalSaves - 1;
-                }
-            });
-        });
-    });
-{% endblock %}
-

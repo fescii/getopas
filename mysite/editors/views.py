@@ -46,7 +46,7 @@ def dashboard(request):
                     'profile': profile,
                     'most_viewed':top_posts,
                     'recently_added': recently_added,
-                    'section': 'home'})
+                    'section':'home'})
 
 #Dashboard
 @login_required
@@ -79,6 +79,39 @@ def explore(request,topic=None):
                     'topic': topic,
                     'topic_posts': posts,
                     'section': 'explore'})
+
+#Feeds Infinite Scroll.
+@login_required
+def feeds(request):
+    posts = Post.published.all()
+    paginator = Paginator(posts, 5)
+    page = request.GET.get('page')
+    post_only = request.GET.get('post_only')
+    try:
+        posts = paginator.page(page)
+    except PageNotAnInteger:
+        # If page is not an integer deliver the first page
+        posts = paginator.page(1)
+    except EmptyPage:
+        if post_only:
+            # If AJAX request and page out of range
+            # return an empty page
+            return HttpResponse('')
+        # If page out of range return last page of results
+        posts = paginator.page(paginator.num_pages)
+    if post_only:
+        return render(request,
+        'editors/list-feeds.html',
+        {'section': 'feeds',
+         'posts': posts})
+
+    return render(request,
+                  'editors/feed.html',
+                  {'section': 'home',
+                   'title': 'feeds',
+                   'posts': posts})
+
+
 
 #Saved-Posts
 @login_required
