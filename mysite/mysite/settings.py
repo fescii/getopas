@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 
 from pathlib import Path
 import os
+from django.urls import reverse_lazy
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -164,3 +165,5 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 
 #TinyMc
 TINYMCE_JS_URL = os.path.join(STATIC_URL, 'tinymce/tinymce.min.js')
+
+ABSOLUTE_URL_OVERRIDES = {'auth.user': lambda u: reverse_lazy('profile',args=[u.username])}

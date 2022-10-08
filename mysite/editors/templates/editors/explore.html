@@ -120,3 +120,37 @@
   </div>
 </div>
 {% endblock content%}
+{% block domready %}
+    const url = '{% url "editors:save" %}';
+    let options = {
+        method: 'POST',
+        headers: {'X-CSRFToken': csrftoken},
+        mode: 'same-origin'
+    }
+
+      saveButtons = document.querySelectorAll('a.save')
+      saveButtons.forEach(saveButton =>{
+      saveButton.addEventListener('click', function(e){
+        e.preventDefault();
+
+        // add request body
+        let formData = new FormData();
+        formData.append('id', saveButton.dataset.id);
+        formData.append('action', saveButton.dataset.action);
+        options['body'] = formData;
+
+        // send HTTP request
+        fetch(url, options).then(response => response.json()).then(data => {
+          if (data['status'] === 'ok'){
+            let previousAction = saveButton.dataset.action;
+
+            // toggle button text and data-action
+            let action = previousAction === 'Save' ? 'Remove' : 'Save';
+            saveButton.dataset.action = action;
+            saveButton.classList.add("Remove")
+            saveButton.innerHTML = `<span>${action}</span>`;
+          }
+        });
+      });
+    });
+{% endblock %}

@@ -3,7 +3,6 @@
 let toggler = document.querySelector("#menu-btn");
 let mobile = document.querySelector(".header-mobile")
 
-
 // Mobile NavBar
 toggler.addEventListener("click", () =>{
     if (mobile.style.display == 'flex') {

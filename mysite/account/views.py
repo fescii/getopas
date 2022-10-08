@@ -4,12 +4,16 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django.urls import reverse
 from django.core.paginator import Paginator, EmptyPage,\
     PageNotAnInteger
-from django.contrib.auth.models import User
-from .models import Profile
-from django.contrib import messages
-from django.shortcuts import render,get_object_or_404
 from .forms import UserRegistrationForm,\
     UserEditForm, ProfileEditForm,ModerateUserForm, ProfilePhotoEditForm
+from django.http import JsonResponse
+from django.views.decorators.http import require_POST
+from .models import Contact
+from django.contrib import messages
+from django.shortcuts import render,get_object_or_404
+from django.contrib.auth.models import User
+from .models import Profile
+
 
 # Create your views here.
 #verify if an user is an admin
@@ -179,7 +183,7 @@ def edit(request,username):
 #User Profile Page
 @login_required
 def user_profile(request, username):
-    r_user = User.objects.get(username=username)
+    r_user = get_object_or_404(User,username=username,is_active=True)
     profile = r_user.profile
     if request.method == 'POST':
         profile_photo_form = ProfilePhotoEditForm(data=request.POST,
@@ -209,3 +213,28 @@ def user_profile(request, username):
                     'profile': profile,
                     'section': 'profile',
                     'profile_photo_form': profile_photo_form})
+
+@login_required
+def user_list(request):
+    users = User.objects.filter(is_active=True)
+    return render(request,
+                  'account/user/list.html',
+                  {'section': 'people',
+                   'users': users})
+
+@require_POST
+@login_required
+def user_follow(request):
+    user_id = request.POST.get('id')
+    action = request.POST.get('action')
+    if user_id and action:
+        try:
+            user = User.objects.get(id=user_id)
+            if action == 'Follow':
+                Contact.objects.get_or_create(user_from=request.user,user_to=user)
+            else:
+                Contact.objects.filter(user_from=request.user,user_to=user).delete()
+                return JsonResponse({'status':'ok'})
+        except User.DoesNotExist:
+            return JsonResponse({'status':'error'})
+    return JsonResponse({'status':'error'})
