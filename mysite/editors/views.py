@@ -34,30 +34,16 @@ def dashboard(request):
     user = request.user
     profile = user.profile
 
-    #Getting Total articles views and comments of the current user
-    user_articles = Post.published.filter(author=user)
-    count = 0
-    comments = 0
-    for article in user_articles:
-        count = count + article.blog_views
-        if article.comments:
-            com = article.comments.filter(active=True).count()
-            comments = comments + com
-
-
-    #Top Users
+    #Top Posts
     top_posts = Post.most_viewed(Post)
 
-
-    #Recent Activities
+    #Recent Added-Posts
     recently_added = Post.recently_added(Post, 5)
 
     return render(request,
                  'editors/dashboard.html',
                     {'user': user,
                     'profile': profile,
-                    'comments': comments,
-                    'views': count,
                     'most_viewed':top_posts,
                     'recently_added': recently_added,
                     'section': 'home'})
@@ -93,6 +79,31 @@ def explore(request,topic=None):
                     'topic': topic,
                     'topic_posts': posts,
                     'section': 'explore'})
+
+#Saved-Posts
+@login_required
+def my_list(request):
+    user = request.user
+
+    #Getting Saved-Posts
+    saved_posts = Bookmark.objects.filter(user=user).order_by('-added')
+
+    paginator = Paginator(saved_posts, 5) # 5 posts in each page
+    page = request.GET.get('page')
+    try:
+        posts = paginator.page(page)
+    except PageNotAnInteger:
+    # If page is not an integer deliver the first page
+        posts = paginator.page(1)
+    except EmptyPage:
+    # If page is out of range deliver last page of results
+        posts = paginator.page(paginator.num_pages)
+
+    return render(request,
+                 'editors/bookmark.html',
+                    {'saved_posts': posts,
+                    'title': 'My List',
+                    'section': 'my-list'})
 
 #   Add-Post-To-My-list
 @login_required

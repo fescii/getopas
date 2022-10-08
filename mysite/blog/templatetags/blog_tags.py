@@ -65,3 +65,23 @@ register.filter('slug_tag',slug_tag)
 def show_most_common_tags(count=15):
     common_tags = Post.tags.most_common()[:count]
     return {'common_tags': common_tags}
+
+#Getting Total articles views of the current user
+def get_views(user):
+    user_articles = Post.published.filter(author=user)
+    count = 0
+    for article in user_articles:
+        count = count + article.blog_views
+    return count
+register.filter('get_views',get_views)
+
+#Getting Total articles comments of the current user
+def get_comments(user):
+    user_articles = Post.published.filter(author=user)
+    comments = 0
+    for article in user_articles:
+        if article.comments:
+            com = article.comments.filter(active=True).count()
+            comments = comments + com
+    return comments
+register.filter('get_comments',get_comments)

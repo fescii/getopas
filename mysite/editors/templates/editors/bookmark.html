@@ -3,7 +3,7 @@
 {% load blog_tags %}
 {% load thumbnail %}
 
-{% block title %}Opas-{{topic}}{% endblock %}
+{% block title %}{{title}}{% endblock %}
 {% block content %}
 <div class="feeds-header">
     <div class="header-content">
@@ -13,70 +13,57 @@
           <a href="" title="For Your" class="header-link">Interest</a>
           <a href="" title="Trending" class="header-link">Trending</a>
           <a href="" title="Recent" class="header-link">Recent</a>
-          <a href="" title="Topics" class="header-link active">Topics</a>
+          <a href="" title="Topics" class="header-link">Topics</a>
         </div>
     </div>
 </div>
 <div class="article-feeds feed-contents">
   <div class="feed-title">
-    <div class="section-title">{{topic|capfirst}}</div>
+    <div class="section-title">{{title|capfirst}}</div>
     <i class="iconly-Arrow-Right-Circle icli"></i>
     <hr size="1" />
   </div>
-  {% for post in topic_posts %}
+  {% for save in saved_posts %}
         <div class="article-wrapper">
             <div class="article-info">
             <div class="profile-wrapper">
-                {% if post.author.profile.photo %}
-                <img
-                src="{% thumbnail post.author.profile.photo 300x0 %}"
-                alt="Profile"
-                />
+                {% if save.post.author.profile.photo %}
+                <img src="{% thumbnail save.post.author.profile.photo 300x0 %}"/>
                 {% else %}
-                <img src="https://eu.ui-avatars.com/api/?background=08b86f&name={{post.author.first_name}}+{{post.author.last_name}}&size=250&color=fff"/>
+                <img src="https://eu.ui-avatars.com/api/?background=08b86f&name={{save.post.author.first_name}}+{{save.post.author.last_name}}&size=250&color=fff"/>
                 {% endif %}
             </div>
-            <a href="{% url 'profile' username=post.author%}" class="author"
-                >{{post.author.first_name}} {{post.author.last_name}}</a
-            >
+            <a href="{% url 'profile' username=save.post.author%}" class="author" >{{save.post.author.first_name}} {{save.post.author.last_name}}</a>
             <span class="read-time posted"
-                ><span class="dot">&#183;</span> {{post.body|read_time}}
+                ><span class="dot">&#183;</span> {{save.post.body|read_time}}
             </span>
             <span class="posted right"
                 ><i class="iconly-Time-Circle icli"></i>
-                <span class="date"
-                >{{post.created|date:"M"}} {{post.created.day}},
-                {{post.created|date:"Y"}}
-                </span></span
-            >
+                <span class="date">{{save.post.created|date:"M"}} {{save.post.created.day}},
+                {{save.post.created|date:"Y"}}
+                </span></span>
             </div>
             <div class="summery-content">
             <h2 class="article-title">
-                <a
-                href="{{post.get_absolute_url}}"
-                title="Article Title"
-                class="article-title-link"
-                >
-                {{post.title}}
-                </a>
+                <a href="{{post.get_absolute_url}}" title="Article Title" class="article-title-link"> {{save.post.title}}</a>
             </h2>
             <div class="article-summery">
                 <div id="mobile-image">
-                <img id="" src="{% thumbnail post.cover 300x0 %}" alt="Post-Image" />
+                <img id="" src="{% thumbnail save.post.cover 300x0 %}" alt="Post-Image" />
                 </div>
                 <p class="summery-text">
-                {{post.body|striptags|safe|truncatechars:300 }}
+                {{save.post.body|striptags|safe|truncatechars:300 }}
                 </p>
             </div>
             <div class="article-footer">
                 <div class="article-tags">
-                {% for tag in post.tags.names|truncate_tags %}
+                {% for tag in save.post.tags.names|truncate_tags %}
                   <a href="{% url 'editors:explore' topic=tag|slug_tag %}" class="tag">{{tag|capfirst}}</a>
                 {% endfor %}
         </div>
         <div class="article-actions">
-          <a class="save {% check_saved post.id request.user%}" href="" data-id="{{ post.id }}" data-action="{% check_saved post.id request.user%}">
-            <span>{% check_saved post.id request.user%}</span>
+          <a class="save {% check_saved save.post.id request.user%}" href="" data-id="{{ save.post.id }}" data-action="{% check_saved save.post.id request.user%}">
+            <span>{% check_saved save.post.id request.user%}</span>
           </a>
           <a title="Share" href="">
             <span>Share</span>
@@ -91,7 +78,7 @@
     </div>
   </div>
   {% endfor %}
-  {% include "pagination.html" with page=topic_posts %}
+  {% include "pagination.html" with page=saved_posts %}
 </div>
 <div class="sidebar-content">
   <div class="stats">

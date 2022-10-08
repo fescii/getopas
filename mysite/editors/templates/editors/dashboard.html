@@ -5,18 +5,18 @@
 {% block title %}Opas-Home{% endblock %}
 
 {% block content %}
-  <div class="feeds-header">
-      <div class="header-content">
-          <h2 class="site-title">Articles</h2>
-          <div class="header-links">
-              <a href="" title="Feed" class="header-link active">Feeds</a>
-              <a href="" title="For Your" class="header-link">Interest</a>
-              <a href="" title="Trending" class="header-link">Trending</a>
-              <a href="" title="Recent" class="header-link">Recent</a>
-              <a href="" title="Topics" class="header-link">Topics</a>
-          </div>
-      </div>
-  </div>
+<div class="feeds-header">
+    <div class="header-content">
+        <h2 class="site-title">Explore</h2>
+        <div class="header-links">
+            <a href="" title="Feed" class="header-link active">Feeds</a>
+            <a href="" title="For Your" class="header-link">Interest</a>
+            <a href="" title="Trending" class="header-link">Trending</a>
+            <a href="" title="Recent" class="header-link">Recent</a>
+            <a href="" title="Topics" class="header-link">Topics</a>
+        </div>
+    </div>
+</div>
   <div class="article-feeds feed-contents">
       <div class="feed-title">
           <div class="section-title">Trending</div>
@@ -434,13 +434,13 @@
         <div class="stats-today">
           <h4 class="today">Impressions</h4>
           <p class="today-stats">
-            <span class="iconly-Show icbo"></span>{{ views }} View{{ views | pluralize }}
+            <span class="iconly-Show icbo"></span>{{ request.user|get_views }} View{{ request.user|get_views| pluralize }}
           </p>
         </div>
         <div class="stats-month">
           <h4 class="month">Engagements</h4>
           <p class="month-stats">
-            <span class="iconly-User2 icbo"></span>{{ comments }} Comment{{ comments | pluralize }}
+            <span class="iconly-User2 icbo"></span>{{ request.user|get_comments }} Comment{{ request.user|get_comments | pluralize }}
           </p>
         </div>
         <a href=" {% url 'editors:user_post_list' %}" class="go-to-articles"
