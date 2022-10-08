@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 {% load static %}
 {% load blog_tags %}
+{% load taggit_extras %}
 {% load thumbnail %}
 {% block title %}Opas-Home{% endblock %}
 
@@ -451,20 +452,10 @@
     <div class="topics">
         <h2 class="sidebar-title">Discover Topics</h2>
         <ul class="topic-list">
-            <li> <a href="">Technology</a></li>
-            <li><a href="">Science</a></li>
-            <li><a href="">Web</a></li>
-            <li><a href="">5G</a></li>
-            <li><a href="">Food</a></li>
-            <li><a href="">Health Care</a></li>
-            <li><a href="">Metaverse</a></li>
-            <li><a href="">Business</a></li>
-            <li><a href="">Web</a></li>
-            <li><a href="">5G</a></li>
-            <li><a href="">Food</a></li>
-            <li><a href="">Health & Fitness</a></li>
-            <li><a href="">Personal Finance</a></li>
-            <li><a href="">Self Improvement</a></li>
+            {% get_tagcloud as tags %}
+            {% for tag in tags %}
+                <li><a href="">{{tag}}</a></li>
+            {% endfor %}
         </ul>
     </div>
 </div>
