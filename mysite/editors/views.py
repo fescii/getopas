@@ -107,8 +107,7 @@ def feeds(request):
 
     return render(request,
                   'editors/feed.html',
-                  {'section': 'home',
-                   'title': 'feeds',
+                  {'title': 'feeds',
                    'posts': posts})
 
 
