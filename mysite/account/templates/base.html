@@ -144,7 +144,9 @@
     <script>
         const csrftoken = Cookies.get('csrftoken');
         document.addEventListener('DOMContentLoaded', (event) => {
-            // DOM loaded
+
+            {% block domready %}
+            {% endblock %}
             const url = '{% url "editors:save" %}';
             let options = {
                 method: 'POST',
@@ -172,18 +174,10 @@
                             saveButton.dataset.action = action;
                             saveButton.classList.add("Remove")
                             saveButton.innerHTML = `<span>${action}</span>`;
-
-                            // update save count
-                        /* let saveCount = document.querySelector('span.count .total');
-                            let totalSaves = parseInt(saveCount.innerHTML);
-                            saveCount.innerHTML = previousAction === 'save' ? totalSaves + 1 :totalSaves - 1;*/
                         }
                     });
                 });
             });
-
-            {% block domready %}
-            {% endblock %}
         });
     </script>
     {% block footer %}

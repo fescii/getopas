@@ -72,8 +72,40 @@
                     var imageList = document.getElementById('post-list');
                     imageList.insertAdjacentHTML('beforeEnd', html);
                     blockRequest = false;
+                    const url = '{% url "editors:save" %}';
+                    let options = {
+                        method: 'POST',
+                        headers: {'X-CSRFToken': csrftoken},
+                        mode: 'same-origin'
+                    }
+                    Buttons= document.querySelectorAll('a#save')
+                    Buttons.forEach(Button =>{
+                            Button.addEventListener('click', function(e){
+                            e.preventDefault();
+
+                            // add request body
+                            let formData = new FormData();
+                            formData.append('id', Button.dataset.id);
+                            formData.append('action', Button.dataset.action);
+                            options['body'] = formData;
+
+                            // send HTTP request
+                            fetch(url, options).then(response => response.json()).then(data => {
+                                if (data['status'] === 'ok'){
+                                    let previousAction = Button.dataset.action;
+
+                                    // toggle button text and data-action
+                                    let action = previousAction === 'Save' ? 'Remove' : 'Save';
+                                    Button.dataset.action = action;
+                                    Button.classList.add("Remove")
+                                    Button.innerHTML = `<span>${action}</span>`;
+                                }
+                            });
+                        });
+                    });
                 }
             })
+
         }
     });
     // Launch scroll event

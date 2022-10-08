@@ -147,8 +147,8 @@ def save_post(request):
     if post_id and action:
         try:
             post = Post.objects.get(id=post_id)
+            #ext = Bookmark.objects.get(post=post,user=request.user)
             if action == 'Save':
-                #post.users_save.add(request.user)
                 bookmark = Bookmark.objects.create(post=post,user=request.user)
                 bookmark.save()
             else:
