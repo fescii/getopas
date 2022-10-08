@@ -1,0 +1,3 @@
+{% for tag in common_tags %}
+    <li><a href="{% url 'editors:explore' topic=tag.slug %}">{{tag|capfirst}}</a></li>
+{% endfor %}

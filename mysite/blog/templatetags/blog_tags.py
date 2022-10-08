@@ -2,6 +2,8 @@ import readtime
 from django import template
 from ..models import Post,Bookmark
 from django.db.models import Count
+from django.template.defaultfilters import slugify
+from unidecode import unidecode
 
 register = template.Library()
 
@@ -51,3 +53,15 @@ def truncate_tags(tags):
     return tags[:3]
 
 register.filter('truncate_tags',truncate_tags)
+
+#Slugify Tags
+def slug_tag(tag):
+   return slugify(unidecode(tag))
+
+register.filter('slug_tag',slug_tag)
+
+#Fetching 4 most viewed  Blog
+@register.inclusion_tag('blog/post/tags.html')
+def show_most_common_tags(count=15):
+    common_tags = Post.tags.most_common()[:count]
+    return {'common_tags': common_tags}

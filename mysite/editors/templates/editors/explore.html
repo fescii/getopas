@@ -1,17 +1,18 @@
 {% extends "base.html" %}
 {% load static %}
 {% load blog_tags %}
-{% load taggit_extras %}
 {% load thumbnail %}
+
 {% block title %}Opas-{{topic}}{% endblock %}
 {% block content %}
 <div class="feeds-header">
     <div class="header-content">
-        <h2 class="site-title">Topic</h2>
+        <h2 class="site-title">Articles</h2>
         <div class="header-links">
-            <a href="" title="Topic" class="header-link active">For you</a>
+            <a href="" title="Feeds" class="header-link">Feeds</a>
             <a href="" title="For Your" class="header-link">Interest</a>
             <a href="" title="Trending" class="header-link">Trending</a>
+            <a href="" title="Topic" class="header-link active">Topic</a>
             <a href="" title="Recent" class="header-link">Recent</a>
         </div>
     </div>
@@ -70,8 +71,8 @@
             <div class="article-footer">
                 <div class="article-tags">
                 {% for tag in post.tags.names|truncate_tags %}
-                <a href="{% url 'editors:explore' topic=tag %}" class="tag">{{tag|capfirst}}</a>
-          {% endfor %}
+                  <a href="{% url 'editors:explore' topic=tag|slug_tag %}" class="tag">{{tag|capfirst}}</a>
+                {% endfor %}
         </div>
         <div class="article-actions">
           <a class="save {% check_saved post.id request.user%}" href="" data-id="{{ post.id }}" data-action="{% check_saved post.id request.user%}">
@@ -113,20 +114,7 @@
   <div class="topics">
     <h2 class="sidebar-title">Discover Topics</h2>
     <ul class="topic-list">
-      <li><a href="">Technology</a></li>
-      <li><a href="">Science</a></li>
-      <li><a href="">Web</a></li>
-      <li><a href="">5G</a></li>
-      <li><a href="">Food</a></li>
-      <li><a href="">Health Care</a></li>
-      <li><a href="">Metaverse</a></li>
-      <li><a href="">Business</a></li>
-      <li><a href="">Web</a></li>
-      <li><a href="">5G</a></li>
-      <li><a href="">Food</a></li>
-      <li><a href="">Health & Fitness</a></li>
-      <li><a href="">Personal Finance</a></li>
-      <li><a href="">Self Improvement</a></li>
+      {% show_most_common_tags %}
     </ul>
   </div>
 </div>

@@ -64,7 +64,7 @@ def dashboard(request):
 
 #Dashboard
 @login_required
-def explore(request,topic):
+def explore(request,topic=None):
     user = request.user
     profile = user.profile
 
@@ -225,7 +225,7 @@ def edit_blog_post_tags(request, pk):
             edit_form.save_m2m()
             tags.save()
             messages.success(request, 'Tags updated successfully')
-            return HttpResponseRedirect(reverse('user_post_list'))
+            return HttpResponseRedirect(reverse('editors:user_post_list'))
 
         else:
             messages.error(request, 'Error updating the Tags')
