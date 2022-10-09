@@ -120,10 +120,11 @@ def actions(request):
     following_ids = request.user.following.values_list('id',flat=True)
     if following_ids:
         # If user is following others, retrieve only their actions
-        actions = actions.filter(user_id__in=following_ids,status='unread')
-        actions = actions[:10]
+        actions = actions.filter(user_id__in=following_ids)
+        actions = actions.select_related('user', 'user__profile')\
+            .prefetch_related('target')[:10]
     return render(request,
-                  'editors/action.html',
+                  'editors/actions.html',
                   {'section': 'notification',
                    'actions': actions})
 

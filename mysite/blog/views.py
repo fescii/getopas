@@ -12,6 +12,7 @@ from django.contrib.auth.decorators import login_required
 from django.core.mail import send_mail
 from taggit.models import Tag
 from django.db.models import Count
+from actions.utils import create_action
 
 # Create your views here.
 def post_list(request, tag_slug=None):
@@ -70,6 +71,7 @@ def post_detail(request, year, month, day, slug):
                 new_comment.author = user
                 #Save the comment to the database
                 new_comment.save()
+                create_action(request.user, 'commented on', post)
             else:
                 comment_form = BlogCommentForm()
         else:
