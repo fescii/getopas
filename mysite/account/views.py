@@ -13,6 +13,7 @@ from django.contrib import messages
 from django.shortcuts import render,get_object_or_404
 from django.contrib.auth.models import User
 from .models import Profile
+from actions.utils import create_action
 
 
 # Create your views here.
@@ -125,6 +126,7 @@ def register(request):
             #Saving The User Object
             new_user.save()
             Profile.objects.create(user=new_user)
+            create_action(new_user, 'has created an account')
             return render(request,
                           'editors/register_done.html',
                           {'new_user': new_user})
@@ -230,11 +232,13 @@ def user_follow(request):
     if user_id and action:
         try:
             user = User.objects.get(id=user_id)
-            if action == 'Follow':
-                Contact.objects.get_or_create(user_from=request.user,user_to=user)
-            else:
+            if action == 'Unfollow':
                 Contact.objects.filter(user_from=request.user,user_to=user).delete()
-                return JsonResponse({'status':'ok'})
+                create_action(request.user, 'unfollowed', user)
+            else:
+                Contact.objects.get_or_create(user_from=request.user,user_to=user)
+                create_action(request.user, 'is following', user)
+            return JsonResponse({'status':'ok'})
         except User.DoesNotExist:
             return JsonResponse({'status':'error'})
     return JsonResponse({'status':'error'})

@@ -6,7 +6,7 @@
 {% block content %}
     <div class="site-title">
         <div class="section-title">Profile</div>
-            {% with total_followers=user.followers.count %}
+            {% with total_followers=r_user.followers.count %}
                 <span class="count">
                     <span class="total">{{ total_followers }}</span>
                     follower{{ total_followers|pluralize }}
@@ -19,7 +19,7 @@
             </a>
         {% else %}
             <a href="" class="edit follow" data-id="{{ r_user.id }}"  data-action="{% check_follow request.user r_user %}">
-                <span>{% check_follow request.user r_user %}</span>
+               {% check_follow request.user r_user %}
             </a>
         {% endif %}
     </div>
@@ -130,18 +130,21 @@
             .then(response => response.json())
             .then(data => {
                 if (data['status'] === 'ok'){
-                    let previousAction = followButton.dataset.action;
-
-                    // toggle button text and data-action
-                    let action = previousAction === 'Follow' ? 'Unfollow' : 'Follow';
-                    followButton.dataset.action = action;
-                    followButton.classList.add("Remove")
-                    followButton.innerHTML = `<span>${action}</span>`;
-
-                    // update follower count
+                    //let previousAction = followButton.dataset.action;
+                    let action = followButton.dataset.action
                     let followerCount = document.querySelector('span.count .total');
                     let totalFollowers = parseInt(followerCount.innerHTML);
-                    followerCount.innerHTML = previousAction === 'Follow' ? totalFollowers + 1 : totalFollowers - 1;
+
+                    if( action === 'Follow'){
+                        followButton.dataset.action = 'Unfollow';
+                        followButton.textContent = 'Unfollow';
+                        followerCount.innerHTML = totalFollowers + 1;
+                    }
+                    else if( action === 'Unfollow'){
+                        followButton.dataset.action = 'Follow';
+                        followButton.textContent = 'Follow';
+                        followerCount.innerHTML = totalFollowers - 1;
+                    }
                 }
             })
         });

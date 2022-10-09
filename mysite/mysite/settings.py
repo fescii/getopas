@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'editors.apps.EditorsConfig',
     'devices.apps.DevicesConfig',
     'search.apps.SearchConfig',
+    'actions.apps.ActionsConfig',
     'django.contrib.auth',
     'taggit',
     'django.contrib.sites',

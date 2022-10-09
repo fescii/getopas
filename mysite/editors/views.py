@@ -24,6 +24,7 @@ from django.contrib import messages
 from django.http import JsonResponse
 from django.views.decorators.http import require_POST
 from taggit.models import Tag
+from actions.utils import create_action
 
 
 # Create your views here.
@@ -150,9 +151,11 @@ def save_post(request):
             if action == 'Save':
                 bookmark = Bookmark.objects.create(post=post,user=request.user)
                 bookmark.save()
+                create_action(request.user, 'saved article', post)
             else:
                 saved_post = Bookmark.objects.get(post=post_id,user=request.user)
                 saved_post.delete()
+                create_action(request.user, 'remove from saved', post)
             return JsonResponse({'status': 'ok'})
         except Post.DoesNotExist:
             pass
@@ -173,6 +176,7 @@ def create_post(request):
             post.author = request.user
             post.save()
             post_form.save_m2m()
+            create_action(request.user, 'created', post)
             messages.success(request, 'Blog Post Created Successfully')
             return HttpResponseRedirect(reverse('editors:user_post_list'))
         else:
