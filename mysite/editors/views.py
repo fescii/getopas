@@ -162,11 +162,13 @@ def save_post(request):
     if post_id and action:
         try:
             post = Post.objects.get(id=post_id)
-            #ext = Bookmark.objects.get(post=post,user=request.user)
             if action == 'Save':
-                bookmark = Bookmark.objects.create(post=post,user=request.user)
-                bookmark.save()
-                create_action(request.user, 'saved article', post)
+                try:
+                    Bookmark.objects.get(post=post,user=request.user)
+                except Bookmark.DoesNotExist:
+                    bookmark = Bookmark.objects.create(post=post,user=request.user)
+                    bookmark.save()
+                    create_action(request.user, 'saved article', post)
             else:
                 saved_post = Bookmark.objects.get(post=post_id,user=request.user)
                 saved_post.delete()
