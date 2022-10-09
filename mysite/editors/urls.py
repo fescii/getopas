@@ -8,7 +8,7 @@ urlpatterns = [
     #path('', include('django.contrib.auth.urls')),
 
     #Dashboard path
-    path('home', views.dashboard, name='dashboard'),
+    path('home', views.dashboard, name='home'),
 
     #Articles
     path('add-article/', views.create_post, name='create_post'),

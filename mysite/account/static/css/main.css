@@ -606,7 +606,7 @@ main.feeds>.feed-contents>.feed-title>.section-title{
     /*border: 1px solid gray;*/
     margin: 0%;
     width: max-content;
-    margin-right: 5px;
+    margin-right: 3px;
     font-weight: 500;
     font-size: 1.5rem;
     color: var(--alt-accent-color);
