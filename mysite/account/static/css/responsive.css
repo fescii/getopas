@@ -1052,9 +1052,9 @@
         margin: 0%;
         margin-bottom: 60px;
         padding: 0%;
-        display: grid;
-        grid-template-columns: 1fr;
-        row-gap: 20px;
+        display: flex;
+       flex-flow: column;
+       gap: 20px;
     }
     main.newsletters>.newsletters-feeds{
        /*border: 1px solid rgb(0, 255, 157);*/
@@ -1083,20 +1083,31 @@
         top: 0px;
         padding-top: 70px;
         padding-right: 5px;
-        padding-bottom: 3px;
+        padding-bottom: 5px;
         box-shadow: var(--box-shadow);
     }
     main.profile>.site-title>.edit{
-        /*position: fixed;
-        right: 10px;
-        top: 70px;
-        border: 1px solid rgb(0, 255, 157);*/
         padding: 3px 10px;
         font-size: 0.93rem;
+        margin-bottom: 5px;
         display: flex;
         align-items: center;
         justify-content: center;
 
+    }
+    main.profile>.site-title>.count{
+        font-size: 0.95rem;
+        /*border: 1px solid var(--border-color);*/
+        cursor: pointer;
+        padding: 8px 10px 5px 10px;
+        text-align: end;
+    }
+    main.profile>.site-title>.count>.icbo{
+        font-size: 18px;
+        padding: 0px;
+        margin-top: 3px;
+        /*border: 1px solid var(--border-color);*/
+        color: var(--accent-color);
     }
     main.profile>.profile-info{
         background-color: var(--background-color);
@@ -1110,13 +1121,14 @@
     }
     main.feeds>.feeds-header{
         border: none;
-       /* border: 1px solid var(--border-color);*/
+        /*border: 1px solid var(--border-color);*/
         box-shadow: 0.1rem 0.5rem 3rem #2a2b2a11;
         padding: 0%;
         padding-left: 10px;
         margin: 0%;
         width: 100%;
         position: sticky;
+        padding-top: 10px;
         top: 0px;
         display: flex;
         align-items: flex-start;

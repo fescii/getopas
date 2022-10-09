@@ -596,7 +596,7 @@ main.search>.feed-contents{
 main.feeds>.feed-contents>.feed-title{
    /* border: 1px solid rgba(18, 18, 18, 0.198);*/
     margin: 0%;
-    padding:0px 0px 10px 15px ;
+    padding:0px 0px 10px 0px ;
     display: flex;
     align-items: center;
     justify-content: start;
@@ -606,6 +606,7 @@ main.feeds>.feed-contents>.feed-title>.section-title{
     /*border: 1px solid gray;*/
     margin: 0%;
     width: max-content;
+    margin-right: 5px;
     font-weight: 500;
     font-size: 1.5rem;
     color: var(--alt-accent-color);
@@ -1027,11 +1028,37 @@ main.profile>.site-title{
 }
 main.profile>.site-title>.section-title{
     color: var(--accent-color);
-    background-color: var(--background-color);
+    /*background-color: var(--background-color);*/
     font-size: 1.2rem;
+    padding: 0%;
+    margin: 0%;
+}
+main.profile>.site-title>.count{
+    display: flex;
+    flex-flow: row;
+    flex-wrap: nowrap;
+    align-items: center;
+    gap: 5px;
+    margin: 0;
+    margin-right: 5px;
+    margin-bottom: 0px;
+    color: var(--gray-color);
+    font-size: 0.95rem;
+    /*border: 1px solid var(--border-color);*/
+    cursor: pointer;
+    padding: 0px 10px 0px 10px;
+    text-align: center;
+}
+main.profile>.site-title>.count>.icbo{
+    font-size: 18px;
+    padding: 0px;
+    margin-top: 3px;
+    /*border: 1px solid var(--border-color);*/
+    color: var(--accent-color);
 }
 main.profile>.site-title>.edit{
     text-decoration: none;
+    margin-right: 5px;
     margin-bottom: 5px;
     display: flex;
     flex-wrap: nowrap;
@@ -1039,7 +1066,7 @@ main.profile>.site-title>.edit{
     color: var(--hover-link-color);
     border: 1px solid var(--border-color);
     cursor: pointer;
-    padding: 2px 15px;
+    padding: 2px 15px 2px 15px;
     text-align: center;
     -webkit-border-radius: 50px;
     -moz-border-radius: 50px;

@@ -8,8 +8,9 @@
         <div class="section-title">Profile</div>
             {% with total_followers=r_user.followers.count %}
                 <span class="count">
+                    <span class="iconly-User2 icbo"></span>
                     <span class="total">{{ total_followers }}</span>
-                    follower{{ total_followers|pluralize }}
+                    <span>Follower{{ total_followers|pluralize }}</span>
                 </span>
             {% endwith %}
         {% if user == r_user %}

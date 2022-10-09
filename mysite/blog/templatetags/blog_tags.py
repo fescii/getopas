@@ -93,7 +93,7 @@ def split(string, sep):
         splitted = string.split(sep)
         word = " "
         for text in splitted:
-             word = word+ " "+text.capitalize()
+             word = word+" "+text.capitalize()
         #word = f"{splitted[0].capitalize()} {splitted[1].capitalize()}"
         return word
     except:
