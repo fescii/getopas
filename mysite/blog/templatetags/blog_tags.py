@@ -85,3 +85,17 @@ def get_comments(user):
             comments = comments + com
     return comments
 register.filter('get_comments',get_comments)
+
+
+def split(string, sep):
+    #Return the string split by sep.
+    try:
+        splitted = string.split(sep)
+        word = " "
+        for text in splitted:
+             word = word+ " "+text.capitalize()
+        #word = f"{splitted[0].capitalize()} {splitted[1].capitalize()}"
+        return word
+    except:
+        return string.capitalize()
+register.filter('split',split)
