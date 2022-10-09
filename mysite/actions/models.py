@@ -4,6 +4,10 @@ from django.contrib.contenttypes.fields import GenericForeignKey
 
 # Create your models here.
 class Action(models.Model):
+    STATUS_CHOICES = (
+        ('read', 'Read'),
+        ('unread', 'Unread'),)
+    status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='unread')
     user = models.ForeignKey('auth.User',related_name='actions',on_delete=models.CASCADE)
     verb = models.CharField(max_length=255)
     created = models.DateTimeField(auto_now_add=True)
@@ -16,7 +20,10 @@ class Action(models.Model):
                                             blank=True)
     target = GenericForeignKey('target_ct', 'target_id')
 
-
+    #Update Status
+    def update_status(self, status,*args, **kwargs):
+        self.status = status
+        super(Action, self).save(update_fields=['status'],*args, **kwargs)
     class Meta:
         indexes = [models.Index(fields=['-created']),
                    models.Index(fields=['target_ct', 'target_id']),

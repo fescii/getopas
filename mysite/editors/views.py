@@ -25,6 +25,7 @@ from django.http import JsonResponse
 from django.views.decorators.http import require_POST
 from taggit.models import Tag
 from actions.utils import create_action
+from actions.models import Action
 
 
 # Create your views here.
@@ -111,7 +112,20 @@ def feeds(request):
                   {'title': 'feeds',
                    'posts': posts})
 
-
+#Actions.
+@login_required
+def actions(request):
+    # Display all actions by default
+    actions = Action.objects.exclude(user=request.user)
+    following_ids = request.user.following.values_list('id',flat=True)
+    if following_ids:
+        # If user is following others, retrieve only their actions
+        actions = actions.filter(user_id__in=following_ids,status='unread')
+        actions = actions[:10]
+    return render(request,
+                  'editors/action.html',
+                  {'section': 'notification',
+                   'actions': actions})
 
 #Saved-Posts
 @login_required

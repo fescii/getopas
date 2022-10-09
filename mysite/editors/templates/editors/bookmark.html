@@ -75,8 +75,10 @@
                 </div>
             </div>
         </div>
+        {% empty %}
+        <p>You have no saved articles yet.</p>
         {% endfor %}
-        {% include "pagination.html" with page=saved_posts %}
+  {% include "pagination.html" with page=saved_posts %}
 </div>
 <div class="sidebar-content">
   <div class="stats">
