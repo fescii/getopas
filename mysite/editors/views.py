@@ -156,6 +156,67 @@ def interest(request):
                   {'title': 'interests',
                    'posts': posts})
 
+#Feeds Infinite Scroll.
+@login_required
+def trending(request):
+    posts = Post.published.all().order_by('-blog_views')
+    paginator = Paginator(posts, 5)
+    page = request.GET.get('page')
+    post_only = request.GET.get('post_only')
+    try:
+        posts = paginator.page(page)
+    except PageNotAnInteger:
+        # If page is not an integer deliver the first page
+        posts = paginator.page(1)
+    except EmptyPage:
+        if post_only:
+            # If AJAX request and page out of range
+            # return an empty page
+            return HttpResponse('')
+        # If page out of range return last page of results
+        posts = paginator.page(paginator.num_pages)
+    if post_only:
+        return render(request,
+        'editors/list-feeds.html',
+        {'section': 'feeds',
+         'posts': posts})
+
+    return render(request,
+                  'editors/feed.html',
+                  {'title': 'trending',
+                   'posts': posts})
+
+#Feeds Infinite Scroll.
+@login_required
+def recent(request):
+    posts = Post.published.all().order_by('-publish')
+    paginator = Paginator(posts, 5)
+    page = request.GET.get('page')
+    post_only = request.GET.get('post_only')
+    try:
+        posts = paginator.page(page)
+    except PageNotAnInteger:
+        # If page is not an integer deliver the first page
+        posts = paginator.page(1)
+    except EmptyPage:
+        if post_only:
+            # If AJAX request and page out of range
+            # return an empty page
+            return HttpResponse('')
+        # If page out of range return last page of results
+        posts = paginator.page(paginator.num_pages)
+    if post_only:
+        return render(request,
+        'editors/list-feeds.html',
+        {'section': 'feeds',
+         'posts': posts})
+
+    return render(request,
+                  'editors/feed.html',
+                  {'title': 'recent',
+                   'posts': posts})
+
+
 #Actions.
 @login_required
 def actions(request):

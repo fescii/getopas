@@ -5,19 +5,7 @@
 
 {% block title %}{{title}}{% endblock %}
 {% block content %}
-<div class="feeds-header">
-    <div class="header-content">
-        <h2 class="site-title">Explore</h2>
-        <div class="header-links">
-          <a href="{% url 'editors:feeds' %}" title="Feed" class="header-link">Feeds</a>
-          <a href="" title="For Your" class="header-link">Interest</a>
-          <a href="" title="Trending" class="header-link">Trending</a>
-          <a href="" title="Recent" class="header-link">Recent</a>
-          <a href="" title="Topics" class="header-link">Topics</a>
-        </div>
-    </div>
-    {% include "account/user/header.html" %}
-</div>
+{% include "editors/feeds-header.html" %}
 <div class="article-feeds feed-contents">
   <div class="feed-title">
     <div class="section-title">{{title|capfirst}}</div>
@@ -77,7 +65,7 @@
             </div>
         </div>
         {% empty %}
-        <p>You have no saved articles yet.</p>
+        <p>You have not saved any articles yet.</p>
         {% endfor %}
   {% include "pagination.html" with page=saved_posts %}
 </div>

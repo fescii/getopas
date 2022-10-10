@@ -5,19 +5,7 @@
 
 {% block title %}Opas-Feeds{% endblock %}
 {% block content %}
-<div class="feeds-header">
-    <div class="header-content">
-        <h2 class="site-title">Explore</h2>
-        <div class="header-links">
-          <a href="{% url 'editors:feeds' %}" title="Feed" class="header-link">Feeds</a>
-          <a href="{% url 'editors:interest' %}" title="For Your" class="header-link active">Interest</a>
-          <a href="" title="Trending" class="header-link">Trending</a>
-          <a href="" title="Recent" class="header-link">Recent</a>
-        </div>
-    </div>
-    {% include "account/user/header.html" %}
-</div>
-
+{% include "editors/feeds-header.html" %}
 <div id="post-list" class="article-feeds feed-contents">
     <div class="feed-title">
         <div class="section-title">{{title|capfirst}}</div>
