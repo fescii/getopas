@@ -242,3 +242,10 @@ def user_follow(request):
         except User.DoesNotExist:
             return JsonResponse({'status':'error'})
     return JsonResponse({'status':'error'})
+
+def header_content(request):
+    user = request.user
+    return render(request,
+                  'account/user/header.html',
+                  {'section': 'people',
+                   'user': user})
