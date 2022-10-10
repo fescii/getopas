@@ -6,6 +6,7 @@ if (hamburgerMenu != null) {
     const menuIsActive = () => {
         //Selecting the hamburger menu and adding and removing the class of active on click.
         try{
+            footerBtn.style.setProperty('color', '#808080');
             footerModal.style.setProperty('display', 'none');
         }
         finally{
@@ -44,6 +45,7 @@ if (footerBtn != null && footerModal != null) {
     footerBtn.addEventListener('click', (e) => {
         if (footerModal.style.display === 'block') {
             footerModal.style.setProperty('display', 'none')
+            e.target.style.setProperty('color', '#808080')
         }
         else {
             try{
@@ -54,6 +56,7 @@ if (footerBtn != null && footerModal != null) {
             }
             finally{
                 footerModal.style.setProperty('display', 'block')
+                e.target.style.setProperty('color', '#08b86f')
             }
         }
     })

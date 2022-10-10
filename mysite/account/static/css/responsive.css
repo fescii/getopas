@@ -1037,7 +1037,7 @@
         left: 10px;
         color: var(--accent-color);
         position:fixed;
-        top: 15px;
+        top: 13px;
         z-index: 10;
     }
     .profile-section{
@@ -1145,7 +1145,7 @@
         height: max-content;
     }
     main.feeds>.feeds-header>.header-content{
-       /* border: 1px solid rgb(218, 20, 20);*/
+       /*border: 1px solid rgb(218, 20, 20);*/
         display: flex;
         align-items: flex-start;
         flex-flow: column;
@@ -1154,6 +1154,8 @@
     }
     main.feeds>.feeds-header>.header-content>.site-title{
        /*border: 1px solid rgb(218, 20, 20);*/
+       padding: 0%;
+       margin: 0%;
        font-size: 23px;
        margin-top: 10px;
        /* position: fixed;
@@ -1166,7 +1168,7 @@
         box-shadow: var(--box-shadow);
         border: var(--border);
         z-index: 4;
-        top: 115px;
+        top: 103px;
         right: 5px;
         min-width: 200px;
         padding: 10px 10px;
@@ -1233,7 +1235,7 @@
     display: inline-block;
     background-color: unset;
     position: fixed;
-    top: 15px;
+    top: 11px;
     right: 12px;
     border: none;
     outline: none;
@@ -1250,10 +1252,10 @@
   /* General styles for the lines */
   .hamburger .line{
     display: block;
-    width: 28px;
-    height: 4px;
-    background-color: var(--gray-color);
-    margin-block: 6px;
+    width: 29px;
+    height: 6px;
+    background-color: var(--accent-color);
+    margin-block: 11px;
     -webkit-border-radius: 4px;
     -moz-border-radius: 4px;
     -ms-border-radius: 4px;
@@ -1267,21 +1269,19 @@
 }
   /* Selecting the lines individually to add different effects when the active class is added to the hamburger menu.*/
   .hamburger.active .line:nth-child(1){
-    -webkit-transform: translateY(6px)    rotate(45deg);
-    -moz-transform: translateY(6px)    rotate(45deg);
-    -ms-transform: translateY(6px)    rotate(45deg);
-    -o-transform: translateY(6px)    rotate(45deg);
-    transform: translateY(6px)    rotate(45deg);
+    transform: translateY(12px)    rotate(45deg);
+    -webkit-transform: translateY(12px)    rotate(45deg);
+    -moz-transform: translateY(12px)    rotate(45deg);
+    -ms-transform: translateY(12px)    rotate(45deg);
+    -o-transform: translateY(12px)    rotate(45deg);
 }
-  .hamburger.active .line:nth-child(2){
-    opacity: 0; /*Hides this line.*/
-  }
-  .hamburger.active .line:nth-child(3){
-    -webkit-transform: translateY(-15px)    rotate(-45deg);
-    -moz-transform: translateY(-15px)    rotate(-45deg);
-    -ms-transform: translateY(-15px)    rotate(-45deg);
-    -o-transform: translateY(-15px)    rotate(-45deg);
-    transform: translateY(-15px)    rotate(-45deg);
+
+  .hamburger.active .line:last-of-type{
+    transform: translateY(-6px)    rotate(-45deg);
+    -webkit-transform: translateY(-6px)    rotate(-45deg);
+    -moz-transform: translateY(-6px)    rotate(-45deg);
+    -ms-transform: translateY(-6px)    rotate(-45deg);
+    -o-transform: translateY(-6px)    rotate(-45deg);
 }
     main.feeds>.sidebar-content{
         margin: 0%;
@@ -1736,6 +1736,7 @@
         padding: 0%;
        /* border: 1px solid rgb(8, 8, 8);*/
     }
+    
     .mobile-footer>.profile-section>.profile-image-wrapper{
         display: flex;
         margin-top: 0px;
@@ -1743,9 +1744,16 @@
         width: 30px;
         height: 30px;
     }
+    .mobile-footer>.profile-section>.profile-icon{
+        border: none;
+    }
+    .mobile-footer>.profile-section>.profile-icon>.icli{
+        font-size: 24px;
+        color: var(--gray-color);
+    }
     .mobile-footer>.profile-section>.profile-dropdown{
         z-index: inherit;
-        display: block;
+        display: none;
         position: absolute;
         background-color: white;
        /*background-color: rgb(228, 243, 214);*/
@@ -1753,12 +1761,23 @@
         padding: 0%;
         padding-top: 8px;
         margin: 0%;
-        width: 220px;
+        width: 230px;
         bottom: 50px;
         top: unset;
         right: 2px;
         box-shadow: var(--box-shadow);
+    }
+    .mobile-footer>.profile-section>.profile-dropdown>.go-to-profile>.name-container .name{
+        margin: 0%;
+        padding: 0%;
+        font-weight: 500;
+        font-size: 1rem;
+        color: #404040;
       }
+    .mobile-footer>.profile-section>.profile-dropdown .linked-list{
+        /*border: 1px solid  #808080;*/
+        margin: 15px 0px 12px 5px;
+    }
 
 }
 @media screen and (max-width: 380px){

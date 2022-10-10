@@ -34,7 +34,6 @@
         <button type="button" class="hamburger">
             <span class="line"></span>
             <span class="line"></span>
-            <span class="line"></span>
         </button>
         <div class="dashboard-sidebar">
             <div class="logo-container">
@@ -121,16 +120,17 @@
         {% endblock %}
     </main>
     <div class="mobile-footer">
-        <a href="" title="Home" class="mobile-footer-link">
+        <a href="" title="Home" class="mobile-footer-link {% if section == 'home' %}active{% endif %}">
             <span class="iconly-Home icli"></span>
         </a>
-        <a href="" title="Search" class="mobile-footer-link">
+        <a href="" title="Search" class="mobile-footer-link {% if section == 'search' %}active{% endif %}">
             <span class="iconly-Search icli"></span>
         </a>
-        <a href="" title="Search" class="mobile-footer-link">
+        <a href="" title="Search" class="mobile-footer-link {% if section == 'newsletter' %}active{% endif %}">
             <span class="iconly-Message icli"></span>
         </a>
         <div class="profile-section">
+            {% if user.profile.photo %}
             <div id="footer-btn" class="profile-image-wrapper">
                <!-- <span class="active-status">
                   <span class="dot"></span>
@@ -142,6 +142,11 @@
                     <img src="https://eu.ui-avatars.com/api/?background=08b86f&name={{user.first_name}}+{{user.last_name}}&size=100&color=fff" alt="{{ user.username }}" class="item-img" />
                 {% endif %}
             </div>
+            {% else %}
+            <div id="footer-btn" class="profile-icon profile-image-wrapper">
+                <span class="iconly-Profile icli"></span>
+            </div>
+            {% endif %}
             <div id="profile-footer" class="profile-dropdown">
                 <div class="go-to-profile">
                   <div class="profile-image-wrapper">

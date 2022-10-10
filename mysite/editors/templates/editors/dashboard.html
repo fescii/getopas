@@ -16,7 +16,7 @@
         </div>
     </div>
     <div class="profile-section">
-        <span class="iconly-Notification icli">
+        <span class="iconly-Notification icbo">
             <span id="text-count">5</span>
         </span>
         <div id="dropdown-btn" class="profile-image-wrapper">
@@ -146,7 +146,7 @@
   {% get_most_commented_posts as most_commented_posts %}
   <div class="article-feeds feed-contents">
       <div class="feed-title">
-          <div class="section-title">Most Engagements</div>
+          <div class="section-title">Editor's Pick</div>
           <i class="iconly-Arrow-Right-Circle icli"></i>
           <hr size="1" />
       </div>
@@ -523,7 +523,7 @@
             {% show_most_common_tags %}
         </ul>
     </div>
-</div>tags
+</div>
 {% endblock %}
 {% block domready %}
     const url = '{% url "editors:save" %}';

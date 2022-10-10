@@ -115,15 +115,15 @@ header #start{
   gap: 30px;
  /*border: 1px solid rgb(8, 8, 8);*/
 }
-.profile-section>.icli{
+.profile-section>.icbo{
   text-align: center;
   position: relative;
   display: inline-block;
   color: var(--accent-color);
-  background-color: #72ce2600;
+  /*background-color:var(--accent-color);*/
   cursor: pointer;
   /*border: 1px solid yellow;*/
-  margin-top: 5px;
+  margin-top: 6px;
   padding: 0px;
   font-size: 32px;
   background-color: none;
@@ -133,19 +133,19 @@ header #start{
 #text-count{
   display: inline-block;
   /*border: var(--border);*/
-  /*border: 1px solid #1dbd7ac2;*/
-  background-color: var(--alt-accent-color);
+  border: 1px solid #1dbd7a7c;
+ /* background-color: var(--alt-accent-color);*/
   width: 16px;
   height: 16px;
-  /*background-color: white;*/
-  color: white;
+  background-color: white;
+  color: var(--alt-accent-color);
   font-weight: bold;
   text-align: center;
-  padding-top: 7%;
+  padding-top: 5%;
   position: absolute;
   font-size: 0.7rem;
-  top: -1px;
-  right: 1px;
+  top: 0px;
+  right: -1px;
   -webkit-border-radius: 50px;
   -moz-border-radius: 50px;
   -ms-border-radius: 50px;
@@ -268,7 +268,7 @@ header #start{
 .profile-dropdown>.go-to-profile>.name-container .name{
   margin: 0%;
   padding: 0%;
-  font-size: 1.1rem;
+  font-size: 1rem;
   color: #404040;
 }
 .profile-dropdown>.go-to-profile>.name-container .profile-link{
