@@ -120,10 +120,10 @@
         {% endblock %}
     </main>
     <div class="mobile-footer">
-        <a href="" title="Home" class="mobile-footer-link {% if section == 'home' %}active{% endif %}">
+        <a href="{% url 'editors:home' %}" title="Home" class="mobile-footer-link {% if section == 'home' %}active{% endif %}">
             <span class="iconly-Home icli"></span>
         </a>
-        <a href="" title="Search" class="mobile-footer-link {% if section == 'search' %}active{% endif %}">
+        <a href="{% url 'search:item_search' %}" title="Search" class="mobile-footer-link {% if section == 'search' %}active{% endif %}">
             <span class="iconly-Search icli"></span>
         </a>
         <a href="" title="Search" class="mobile-footer-link {% if section == 'newsletter' %}active{% endif %}">

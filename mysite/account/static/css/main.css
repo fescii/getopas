@@ -49,13 +49,30 @@
     color: white;
 }
 .pagination{
+    /*border: 1px solid gray;*/
+    margin: 10px 0px 20px 0px;
+    padding: 5px;
+    display: flex;
     align-items: center;
     justify-content: center;
+}
+.pagination>.step-links>.current{
+    color: var(--gray-color);
 }
 /* Pagination */
 .pagination>.step-links>a{
     text-decoration: none;
-    color: rgb(15, 138, 196);
+    display: inline-block;
+    padding: 3px 15px;
+    margin: 0px 5px;
+    color: var(--accent-color);
+    box-shadow: var(--box-shadow);
+    border: var(--border);
+    -webkit-border-radius: 50px;
+    -moz-border-radius: 50px;
+    -ms-border-radius: 50px;
+    -o-border-radius: 50px;
+    border-radius: 50px;
 }
 main {
     margin-top: 50px;
@@ -1029,7 +1046,7 @@ main.profile>.site-title{
 main.profile>.site-title>.section-title{
     color: var(--accent-color);
     /*background-color: var(--background-color);*/
-    font-size: 1.2rem;
+    font-size: 24px;
     padding: 0%;
     margin: 0%;
 }
@@ -1222,7 +1239,7 @@ main.profile>.profile-info>.general-info>.profile-title{
     height: 30px;
     margin-bottom: 0;
     border-radius: 100%;
-    background-color: #ffffff1b;
+    background-color: #ffffff45;
     border: 1px solid transparent;
     box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.12);
     cursor: pointer;
@@ -1233,7 +1250,7 @@ main.profile>.profile-info>.general-info>.profile-title{
     transition: all 0.2s ease-in-out;
   }
   .avatar-upload .avatar-edit> label{
-    background-color: #ffffff82;
+    background-color: #ffffffcf;
     border-color: var(--border-shadow);
     box-shadow: var(--box-shadow);
     color: var(--accent-color);
@@ -1246,7 +1263,7 @@ main.profile>.profile-info>.general-info>.profile-title{
     border-radius: 50px;
 }
 .avatar-upload .avatar-edit> label:hover{
-    background-color: #ffffffb9;
+    background-color: #ffffff;
     border-color: var(--border-shadow);
     box-shadow: var(--box-shadow);
 }
@@ -1288,7 +1305,7 @@ main.profile>.profile-info>.general-info>.profile-title{
     box-shadow: var(--box-shadow);
     background-color: var(--accent-color);
     cursor: pointer;
-    padding: 2px 15px;
+    padding: 5px 15px;
     text-align: center;
     -webkit-border-radius: 50px;
     -moz-border-radius: 50px;

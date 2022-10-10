@@ -4,6 +4,7 @@
 {% load thumbnail %}
 {% block title %}{{r_user.username}} - Profile{% endblock %}
 {% block content %}
+
     <div class="site-title">
         <div class="section-title">Profile</div>
             {% with total_followers=r_user.followers.count %}

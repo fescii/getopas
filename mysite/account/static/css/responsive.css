@@ -498,7 +498,7 @@
       }
       .profile-image>input[type="submit"]{
         width: 150px;
-        padding: 4px;
+        padding: 5px;
       }
     main.profile>.profile-info>.contact-info>.info-container{
         display: flex;
@@ -1130,6 +1130,7 @@
         width: 100%;
     }
     main.feeds>.feeds-header{
+        order: -2;
         border: none;
         /*border: 1px solid var(--border-color);*/
         box-shadow: 0.1rem 0.5rem 3rem #2a2b2a11;
@@ -1541,8 +1542,9 @@
     .feed-contents>.article-wrapper>.summery-content>.article-footer>.article-actions>div{
         cursor: unset;
     }
-    /* Sidebar Content- DeskTop */
+    /* Sidebar Content */
     main.feeds>.sidebar-content{
+        order: -1;
         position: unset;
         height: max-content;
         background-color: var(--background-color);
