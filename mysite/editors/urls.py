@@ -16,6 +16,7 @@ urlpatterns = [
     path('recent-articles/', views.new_articles, name='new_articles'),
     path('explore/<str:topic>', views.explore, name='explore'),
     path('feeds', views.feeds, name='feeds'),
+    path('interest', views.interest, name='interest'),
     path('notifications', views.actions, name='actions'),
     path('my-list', views.my_list, name='my_list'),
     path('edit-article/<int:pk>/', views.edit_blog_post, name='edit_blog_post'),

@@ -36,6 +36,13 @@ def dashboard(request):
     user = request.user
     profile = user.profile
 
+    # Display all actions by default
+    posts_interest = Post.objects.exclude(author=request.user)
+    following_ids = request.user.following.values_list('id',flat=True)
+    if following_ids:
+        # If user is following others, retrieve only their actions
+        posts_interest = posts_interest.filter(author__in=following_ids)
+        posts_interest = posts_interest.select_related('author', 'author__profile')[:5]
     #Top Posts
     top_posts = Post.most_viewed(Post)
 
@@ -47,6 +54,7 @@ def dashboard(request):
                     {'user': user,
                     'profile': profile,
                     'most_viewed':top_posts,
+                    'posts_interest':posts_interest,
                     'recently_added': recently_added,
                     'section':'home'})
 
@@ -110,6 +118,42 @@ def feeds(request):
     return render(request,
                   'editors/feed.html',
                   {'title': 'feeds',
+                   'posts': posts})
+
+#Feeds Interests.
+@login_required
+def interest(request):
+     # Display all actions by default
+    posts_interest = Post.objects.exclude(author=request.user)
+    following_ids = request.user.following.values_list('id',flat=True)
+    if following_ids:
+        # If user is following others, retrieve only their actions
+        posts_interest = posts_interest.filter(author__in=following_ids)
+        posts_interest = posts_interest.select_related('author', 'author__profile')
+    paginator = Paginator(posts_interest, 5)
+    page = request.GET.get('page')
+    post_only = request.GET.get('post_only')
+    try:
+        posts = paginator.page(page)
+    except PageNotAnInteger:
+        # If page is not an integer deliver the first page
+        posts = paginator.page(1)
+    except EmptyPage:
+        if post_only:
+            # If AJAX request and page out of range
+            # return an empty page
+            return HttpResponse('')
+        # If page out of range return last page of results
+        posts = paginator.page(paginator.num_pages)
+    if post_only:
+        return render(request,
+        'editors/list-feeds.html',
+        {'section': 'feeds',
+         'posts': posts})
+
+    return render(request,
+                  'editors/interest.html',
+                  {'title': 'interests',
                    'posts': posts})
 
 #Actions.
