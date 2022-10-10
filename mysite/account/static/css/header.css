@@ -138,7 +138,7 @@ header #start{
   width: 16px;
   height: 16px;
   background-color: white;
-  color: var(--alt-accent-color);
+  color: var(--accent-color);
   font-weight: bold;
   text-align: center;
   padding-top: 5%;
