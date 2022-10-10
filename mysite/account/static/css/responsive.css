@@ -1040,6 +1040,16 @@
         top: 15px;
         z-index: 10;
     }
+    .profile-section{
+        position: absolute;
+        right: 52px;
+        top: 14px;
+        margin: 0px 10px;
+       /*border: 1px solid rgb(8, 8, 8);*/
+      }
+      .profile-section>.profile-image-wrapper{
+        display: none;
+      }
     /* Feeds */
     .get-more{
         /* border: 1px solid blue;*/
@@ -1720,37 +1730,35 @@
     .mobile-footer>a.active>span#active{
         background-color: var(--accent-color);
     }
-    .create-option{
+    .mobile-footer>.profile-section{
+        position: unset;
+        margin: 0px;
+        padding: 0%;
+       /* border: 1px solid rgb(8, 8, 8);*/
+    }
+    .mobile-footer>.profile-section>.profile-image-wrapper{
         display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 50px;
-        height: 50px;
-        /*font-size: 1.2rem;*/
-        background-color: var(--accent-color);
-        box-shadow: 0rem 0rem 0.1rem 0.1rem #2a2b2a11;
-        padding: 5px 15px;
-        text-decoration: none;
-        position: fixed;
-        bottom: 75px;
-        right: 10px;
-        color: white;
-        font-weight: 500;
-        -webkit-border-radius: 50px;
-        -moz-border-radius: 50px;
-        -ms-border-radius: 50px;
-        -o-border-radius: 50px;
-        border-radius: 50px;
-    }
-    .create-option>.text{
-        display: none;
-    }
-    .create-option>.icli{
-        display: inline-block;
-        font-size: 30px;
         margin-top: 0px;
-        font-weight: 600;
+        margin-bottom: 5px;
+        width: 30px;
+        height: 30px;
     }
+    .mobile-footer>.profile-section>.profile-dropdown{
+        z-index: inherit;
+        display: block;
+        position: absolute;
+        background-color: white;
+       /*background-color: rgb(228, 243, 214);*/
+        border: var(--border);
+        padding: 0%;
+        padding-top: 8px;
+        margin: 0%;
+        width: 220px;
+        bottom: 50px;
+        top: unset;
+        right: 2px;
+        box-shadow: var(--box-shadow);
+      }
 
 }
 @media screen and (max-width: 380px){

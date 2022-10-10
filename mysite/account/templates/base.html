@@ -1,4 +1,5 @@
 {% load static %}
+{% load thumbnail %}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -129,15 +130,73 @@
         <a href="" title="Search" class="mobile-footer-link">
             <span class="iconly-Message icli"></span>
         </a>
-        <a href="" title="Products" class="mobile-footer-link">
-            <span class="iconly-Bag-2 icli"></span>
-        </a>
-        <a href="" title="Create" class="mobile-footer-link">
-            <span class="iconly-Edit icli"></span>
-        </a>
-        <!--<a href="" title="Create" class="mobile-footer-link active">
-            <span class="iconly-Profile icli"></span>
-        </a>-->
+        <div class="profile-section">
+            <div id="footer-btn" class="profile-image-wrapper">
+               <!-- <span class="active-status">
+                  <span class="dot"></span>
+                </span>-->
+                {% if user.profile.photo %}
+                {% thumbnail user.profile.photo "80x80" crop="100%" as im %}
+                        <img src="{{ im.url }}" alt="{{ user.username }}" class="item-img" />
+                {% else %}
+                    <img src="https://eu.ui-avatars.com/api/?background=08b86f&name={{user.first_name}}+{{user.last_name}}&size=100&color=fff" alt="{{ user.username }}" class="item-img" />
+                {% endif %}
+            </div>
+            <div id="profile-footer" class="profile-dropdown">
+                <div class="go-to-profile">
+                  <div class="profile-image-wrapper">
+                    {% if user.profile.photo %}
+                    {% thumbnail user.profile.photo "80x80" crop="100%" as im %}
+                            <img src="{{ im.url }}" alt="{{ user.username }}" class="item-img" />
+                    {% else %}
+                        <img src="https://eu.ui-avatars.com/api/?background=08b86f&name={{user.first_name}}+{{user.last_name}}&size=100&color=fff" alt="{{ user.username }}" class="item-img" />
+                    {% endif %}
+                  </div>
+                  <div class="name-container">
+                    <h4 class="name">{{user.get_full_name}}</h4>
+                    <a href=" {% url 'profile' username=user.username %} " class="profile-link">View Profile
+                      <span class="iconly-Arrow-Right icbo"></span>
+                    </a>
+                  </div>
+                </div>
+                <hr size="1" />
+                <ul class="linked-list top-links">
+                  <li class="dropdown-li">
+                    <a href="" class="dropdown-link">Home</a>
+                  </li>
+                  <li class="dropdown-li">
+                    <a href="{% url 'editors:user_post_list' %}" class="dropdown-link">Your Stats</a>
+                  </li>
+                  <li class="dropdown-li">
+                    <a href=" {% url 'profile' username=user.username %} " class="dropdown-link">Your Profile</a>
+                  </li>
+                  <li class="dropdown-li">
+                    <a href=" {% url 'editors:user_post_list' %} " class="dropdown-link">Your Articles</a>
+                  </li>
+                </ul>
+                <hr size="1" />
+                <ul class="linked-list middle-links">
+                  <li class="dropdown-li">
+                    <a href="" class="dropdown-link">Explore</a>
+                  </li>
+                  <li class="dropdown-li">
+                    <a href="" class="dropdown-link">What's New?</a>
+                  </li>
+                  <li class="dropdown-li">
+                    <a href="" class="dropdown-link">Send Us Feedback</a>
+                  </li>
+                  <li class="dropdown-li">
+                    <a href="" class="dropdown-link">Settings</a>
+                  </li>
+                </ul>
+                <hr size="1" />
+                <ul class="linked-list log-out">
+                  <li class="dropdown-li">
+                    <a href="{% url 'logout' %}" class="dropdown-link log-out">Log Out</a>
+                  </li>
+                </ul>
+            </div>
+        </div>
     </div>
     <script src=" {% static 'js/dropdown.js' %}"></script>
     <script src="//cdn.jsdelivr.net/npm/js-cookie@3.0.1/dist/js.cookie.min.js"></script>
