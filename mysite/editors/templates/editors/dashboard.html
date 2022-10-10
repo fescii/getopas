@@ -62,7 +62,7 @@
           </div>
       </div>
       {% endfor %}
-      <a href="" class="get-more">Explore more trending articles </a>
+      <a href="{% url 'editors:trending' %}" class="get-more">Explore more trending articles </a>
   </div>
   {% get_most_commented_posts as most_commented_posts %}
   <div class="article-feeds feed-contents">
@@ -120,7 +120,7 @@
           </div>
       </div>
     {% endfor %}
-      <a href="" class="get-more">Get more articles like this</a>
+      <a href="{% url 'editors:trending' %}" class="get-more">Get more articles like this</a>
   </div>
   <div class="article-feeds feed-contents">
       <div class="feed-title">
@@ -177,7 +177,7 @@
             </div>
         </div>
     {% endfor %}
-      <a href="" class="get-more">Get recently added articles</a>
+      <a href="{% url 'editors:recent' %}" class="get-more">Get recently added articles</a>
   </div>
   <div class="article-feeds feed-contents">
       <div class="feed-title">
@@ -232,8 +232,10 @@
               </div>
           </div>
       </div>
+      {% empty %}
+        <p>Follow writters to get personalised content.</p>
       {% endfor %}
-      <a href="" class="get-more">Get articles based on your intrest</a>
+      <a href="{% url 'editors:interest' %}" class="get-more">Get articles based on your intrest</a>
   </div>
   <div class="sidebar-content">
     <div class="stats">
