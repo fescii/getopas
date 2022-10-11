@@ -3,6 +3,7 @@
     box-sizing: border-box;
 }
 html{
+    font-size: 18px;
     line-height: 1.15;
    /* background-color: var(--body-background-color);*/
 }
@@ -12,7 +13,7 @@ html.sr .load-hidden {
 body{
     margin: 0%;
     font-family: 'Product Sans', sans-serif;
-    font-size: 16px;
+    font-size: 18px;
     /*background-color: var(--body-background-color);*/
 
 }

@@ -48,7 +48,7 @@
       headers: {'X-CSRFToken': csrftoken},
       mode: 'same-origin'
   }
-  saveButtons = document.querySelectorAll('a.save')
+  saveButtons = document.querySelectorAll('a#save')
   saveButtons.forEach(saveButton =>{
       saveButton.addEventListener('click', function(e){
           e.preventDefault();
