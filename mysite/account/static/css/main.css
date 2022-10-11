@@ -812,7 +812,7 @@ main.feeds>.feed-contents>.article-wrapper>.summery-content>.article-footer{
 .feed-contents>.article-wrapper>.summery-content>.article-footer>.article-actions>a
 {
     text-decoration: none;
-    cursor: pointer;
+    cursor: default;
     color: var(--gray-color);
    /* border: var(--border);*/
     font-size: 16px;

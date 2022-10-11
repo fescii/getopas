@@ -25,7 +25,7 @@
               </div>
               <a href="{% url 'profile' username=post.author%}" class="author">{{post.author.first_name}} {{post.author.last_name}}</a>
               <span class="read-time posted"><span class="dot">&#183;</span> {{post.body|read_time}} </span>
-              <span class="posted right"><i class="iconly-Time-Circle icli"></i> <span class="date">{{post.created|date:"M"}} {{post.created.day}}, {{post.created|date:"Y"}} </span></span>
+              <span class="posted right"><i class="iconly-Time-Circle icli"></i> <span class="date">{{post.created|date:"M"}} {{post.created.day}}, {{ post.created|date:"Y"}} </span></span>
           </div>
           <div class="summery-content">
               <h2 class="article-title">
@@ -83,7 +83,7 @@
               </div>
               <a href="{% url 'profile' username=post.author%}" class="author">{{post.author.first_name}} {{post.author.last_name}}</a>
               <span class="read-time posted"><span class="dot">&#183;</span> {{post.body|read_time}} </span>
-              <span class="posted right"><i class="iconly-Time-Circle icli"></i> <span class="date">{{post.created|date:"M"}} {{post.created.day}}, {{post.created|date:"Y"}} </span></span>
+              <span class="posted right"><i class="iconly-Time-Circle icli"></i> <span class="date">{{post.created|date:"M"}} {{post.created.day}}, {{ post.created|date:"Y"}} </span></span>
           </div>
           <div class="summery-content">
               <h2 class="article-title">
@@ -140,7 +140,7 @@
                 </div>
                 <a href="{% url 'profile' username=post.author%}" class="author">{{post.author.first_name}} {{post.author.last_name}}</a>
                 <span class="read-time posted"><span class="dot">&#183;</span> {{post.body|read_time}} </span>
-                <span class="posted right"><i class="iconly-Time-Circle icli"></i> <span class="date">{{post.created|date:"M"}} {{post.created.day}}, {{post.created|date:"Y"}} </span></span>
+                <span class="posted right"><i class="iconly-Time-Circle icli"></i> <span class="date">{{post.created|date:"M"}} {{post.created.day}}, {{ post.created|date:"Y"}} </span></span>
             </div>
             <div class="summery-content">
                 <h2 class="article-title">
@@ -196,7 +196,7 @@
               </div>
               <a href="{% url 'profile' username=post.author%}" class="author">{{post.author.first_name}} {{post.author.last_name}}</a>
               <span class="read-time posted"><span class="dot">&#183;</span> {{post.body|read_time}} </span>
-              <span class="posted right"><i class="iconly-Time-Circle icli"></i> <span class="date">{{post.created|date:"M"}} {{post.created.day}}, {{post.created|date:"Y"}} </span></span>
+              <span class="posted right"><i class="iconly-Time-Circle icli"></i> <span class="date">{{post.created|date:"M"}} {{post.created.day}}, {{ post.created|date:"Y"}} </span></span>
           </div>
           <div class="summery-content">
               <h2 class="article-title">

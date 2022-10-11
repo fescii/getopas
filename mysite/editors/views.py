@@ -56,6 +56,7 @@ def dashboard(request):
                     'most_viewed':top_posts,
                     'posts_interest':posts_interest,
                     'recently_added': recently_added,
+                    'title':'home',
                     'section':'home'})
 
 #Dashboard
@@ -87,8 +88,9 @@ def explore(request,topic=None):
                     {'user': user,
                     'profile': profile,
                     'topic': topic,
-                    'topic_posts': posts,
-                    'section': 'explore'})
+                    'section': 'explore',
+                    'title': 'explore',
+                    'topic_posts': posts})
 
 #Feeds Infinite Scroll.
 @login_required

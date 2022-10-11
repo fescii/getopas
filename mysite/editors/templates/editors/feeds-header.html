@@ -1,6 +1,6 @@
 <div class="feeds-header">
     <div class="header-content">
-        <h2 class="site-title">Explore</h2>
+        <h2 class="site-title">{{title|capfirst}}</h2>
         <div class="header-links">
           <a href="{% url 'editors:feeds' %}" class="header-link {% if title == 'feeds' %}active{% endif %}">Feeds</a>
           <a href="{% url 'editors:interest' %}" class="header-link {% if title == 'interests' %}active{% endif %}">Interest</a>
