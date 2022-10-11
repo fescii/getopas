@@ -987,6 +987,7 @@ main.search>.sidebar-content{
 .sidebar-content>.topics{
     display: flex;
     padding: 0%;
+    margin-bottom: 20px;
     align-items: center;
     gap: 8px;
    /* border: var(--border);*/

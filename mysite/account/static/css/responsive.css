@@ -1151,7 +1151,7 @@
         align-items: flex-start;
         flex-flow: column;
         height: max-content;
-        gap: 17px;
+        gap: 30px;
     }
     main.feeds>.feeds-header>.header-content>.site-title{
        /*border: 1px solid rgb(218, 20, 20);*/
@@ -1171,7 +1171,7 @@
         box-shadow: var(--box-shadow);
         border: var(--border);
         z-index: 4;
-        top: 93px;
+        top: 107px;
         right: 5px;
         min-width: 230px;
         padding: 10px 10px;
@@ -1393,9 +1393,9 @@
         margin-bottom: 20px;
         /*border: 1px solid rgb(0, 255, 157);*/
     }
-    .sidebar-content>.topics{
+    /*.sidebar-content>.topics{
         display: none;
-    }
+    }*/
     main.read>.sidebar-content{
         margin-bottom: 50px;
         display: block;
