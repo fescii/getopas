@@ -34,8 +34,7 @@ SITE_ID = 1
 
 INSTALLED_APPS = [
     #Libs
-    'tinymce',
-    #'taggit_templatetags',
+    'tinymce'
     #Apps
     'django.contrib.admin',
     'django.contrib.contenttypes',
