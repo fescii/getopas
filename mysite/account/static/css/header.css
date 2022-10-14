@@ -484,7 +484,7 @@ main.search>.search-header{
 }
 .search-header .header-content>.header-links>.active,
 .feeds-header .header-content>.header-links>.active{
-  border-bottom:2px solid var(--accent-color);
+  border-bottom:3px solid var(--accent-color);
   margin-bottom: 0px;
   color: var(--hover-link-color);
 }
