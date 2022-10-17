@@ -72,7 +72,7 @@
                             </a>
                         </li>
                         <li class="content-link">
-                            <a class="link {% if section == 'explore' %}data-active{% endif %}" href="#">
+                            <a class="link {% if section == 'explore' %}data-active{% endif %}" href="{% url 'editors:explore_topics'%}">
                                 <span id="select"></span>
                                 <span class="iconly-Discovery icli"></span>
                                 <span class="link-text">Discover</span>
@@ -118,6 +118,7 @@
         {% block content %}
         {% endblock %}
     </main>
+
     <div class="mobile-footer">
         <a href="{% url 'editors:home' %}" title="Home" class="mobile-footer-link {% if section == 'home' %}active{% endif %}">
             <span class="iconly-Home icli"></span>

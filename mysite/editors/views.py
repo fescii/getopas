@@ -122,6 +122,18 @@ def feeds(request):
                   {'title': 'feeds',
                    'posts': posts})
 
+#Feeds Infinite Scroll.
+@login_required
+def explore_topics(request):
+    # Most common tags
+    common_tags = Post.tags.most_common()[:9]
+
+    return render(request,
+                  'editors/explore-topics.html',
+                  {'title': 'topics',
+                   'section': 'explore',
+                   'common_tags': common_tags})
+
 #Feeds Interests.
 @login_required
 def interest(request):

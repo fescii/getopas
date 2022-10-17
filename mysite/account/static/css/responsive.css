@@ -440,6 +440,22 @@
         flex-flow: column;
         gap: 5px;
     }
+    main.feeds>.discover-topics {
+        /*border: 1px solid rgb(0, 255, 157);*/
+        grid-template-columns: 1fr 1fr;
+        column-gap: 30px;
+    }
+    main.feeds>.discover-topics>.feed-title {
+        grid-column: 1/3;
+        grid-row: 1/2;
+    }
+    main.feeds>.discover-topics>.topic-wrapper>.topic-title{
+        /*border: 1px solid rgba(18, 18, 18, 0.198);*/
+        height: 120px;
+        text-align: center;
+        padding-top: 50px;
+        font-size: 1.7rem;
+    }
 }
 
 @media screen and (max-width: 750px) {
@@ -742,6 +758,22 @@
         padding: 5px 0%;
         font-size: 1.5rem;
         color: var(--accent-color);
+    }
+    main.feeds>.discover-topics {
+        /*border: 1px solid rgb(0, 255, 157);*/
+        grid-template-columns: 1fr 1fr;
+        column-gap: 30px;
+    }
+    main.feeds>.discover-topics>.feed-title {
+        grid-column: 1/3;
+        grid-row: 1/2;
+    }
+    main.feeds>.discover-topics>.topic-wrapper>.topic-title{
+        /*border: 1px solid rgba(18, 18, 18, 0.198);*/
+        height: 120px;
+        text-align: center;
+        padding-top: 40px;
+        font-size: 1.5rem;
     }
 }
 
@@ -1951,9 +1983,12 @@
     }
 
     .mobile-footer>a .icli {
-        font-size: 24px;
+        font-size: 26px;
         display: inline-block;
         margin-bottom: 5px;
+    }
+    .mobile-footer>a.active .icli{
+        font-weight: bold;
     }
 
     .mobile-footer>a>span#active {
@@ -1988,10 +2023,16 @@
 
     .mobile-footer>.profile-section>.profile-image-wrapper {
         display: flex;
+        border: 2px solid var(--accent-color);
+        padding: 5%;
         margin-top: 0px;
         margin-bottom: 5px;
-        width: 30px;
-        height: 30px;
+        width: 32px;
+        height: 32px;
+    }
+    .mobile-footer>.profile-section>.profile-image-wrapper>img{
+        width: 100%;
+        height: 100%;
     }
 
     .mobile-footer>.profile-section>.profile-icon {
@@ -2023,6 +2064,9 @@
     .profile-section>.icbo {
         cursor: default;
     }
+    #text-count{
+        padding-top: 3%;
+    }
 
     .profile-dropdown hr {
         margin: 0%;
@@ -2035,7 +2079,7 @@
     }
 
     .profile-dropdown>.go-to-profile>.name-container .profile-link {
-        margin-left: 3px;
+        margin-left: 0px;
     }
 
     .mobile-footer>.profile-section>.profile-dropdown>.go-to-profile>.name-container .name {
@@ -2049,6 +2093,66 @@
     .mobile-footer>.profile-section>.profile-dropdown .linked-list {
         /*border: 1px solid  #808080;*/
         margin: 15px 0px 12px 10px;
+    }
+    .mobile-footer>.profile-section>.profile-dropdown .linked-list >li{
+        margin-bottom: 13px;
+    }
+    .create-option{
+        cursor: default;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 50px;
+        height: 50px;
+        /*font-size: 1.2rem;*/
+        background-color: var(--accent-color);
+        box-shadow: 0rem 0rem 0.1rem 0.1rem #2a2b2a11;
+        padding: 5px 15px;
+        text-decoration: none;
+        position: fixed;
+        bottom: 75px;
+        right: 10px;
+        color: white;
+        font-weight: 500;
+        -webkit-border-radius: 50px;
+        -moz-border-radius: 50px;
+        -ms-border-radius: 50px;
+        -o-border-radius: 50px;
+        border-radius: 50px;
+    }
+    .create-option>.text{
+        display: none;
+    }
+    .create-option>.icli{
+        display: inline-block;
+        font-size: 30px;
+        margin-top: 0px;
+        font-weight: 600;
+    }
+    main.feeds>.discover-topics {
+        /* border: 1px solid rgb(0, 255, 157);*/
+         margin: 0%;
+         display: flex;
+         flex-flow: column;
+         gap: 20px;
+     }
+     main.feeds>.discover-topics>.feed-title {
+         grid-column: 1/2;
+         grid-row: 1/2;
+     }
+     main.feeds>.discover-topics>.topic-wrapper{
+         grid-column: 1/2;
+         margin: 0% 15px;
+     }
+     main.feeds>.discover-topics>.topic-wrapper>.topic-title{
+         /*border: 1px solid rgba(18, 18, 18, 0.198);*/
+         height: 150px;
+         text-align: center;
+         padding-top: 50px;
+         font-size: 1.5rem;
+     }
+    main.feeds>.discover-topics>.topic-wrapper>.topic-footer>a{
+        cursor: default;
     }
 
 }

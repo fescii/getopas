@@ -42,7 +42,7 @@
               <div class="article-footer">
                   <div class="article-tags">
                     {% for tag in post.tags.all|truncate_tags %}
-                      <a href="{% url 'editors:explore' topic=tag.slug %}" class="tag">{{tag|capfirst}}</a>
+                      <a href="{% url 'editors:explore' topic=tag.slug %}" class="tag">{{tag|split:" "}}</a>
                       {% endfor %}
                   </div>
                   <div class="article-actions">
@@ -100,7 +100,7 @@
               <div class="article-footer">
                   <div class="article-tags">
                     {% for tag in post.tags.all|truncate_tags %}
-                    <a href="{% url 'editors:explore' topic=tag.slug %}" class="tag">{{tag|capfirst}}</a>
+                    <a href="{% url 'editors:explore' topic=tag.slug %}" class="tag">{{tag|split:" "}}</a>
                     {% endfor %}
                   </div>
                 <div class="article-actions">
@@ -109,11 +109,9 @@
                     </a>
                     <a title="Share" href="">
                           <span>Share</span>
-                          
                     </a>
                     <a title="Share" href="">
                           <span>Report</span>
-                          
                     </a>
                 </div>
               </div>
@@ -157,7 +155,7 @@
                 <div class="article-footer">
                     <div class="article-tags">
                         {% for tag in post.tags.all|truncate_tags %}
-                      <a href="{% url 'editors:explore' topic=tag.slug %}" class="tag">{{tag|capfirst}}</a>
+                      <a href="{% url 'editors:explore' topic=tag.slug %}" class="tag">{{tag|split:" "}}</a>
                       {% endfor %}
                     </div>
                     <div class="article-actions">
@@ -213,7 +211,7 @@
               <div class="article-footer">
                   <div class="article-tags">
                     {% for tag in post.tags.all|truncate_tags %}
-                      <a href="{% url 'editors:explore' topic=tag.slug %}" class="tag">{{tag|capfirst}}</a>
+                      <a href="{% url 'editors:explore' topic=tag.slug %}" class="tag">{{tag|split:" "}}</a>
                       {% endfor %}
                   </div>
                   <div class="article-actions">
@@ -262,7 +260,9 @@
         </ul>
     </div>
 </div>
+{% include "editors/create-container.html" %}
 {% endblock %}
+
 {% block domready %}
     const url = '{% url "editors:save" %}';
     let options = {

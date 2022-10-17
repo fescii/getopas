@@ -1,4 +1,3 @@
-from re import template
 from django.urls import path, include
 from . import views
 from django.contrib.auth import views as auth_views
@@ -15,6 +14,7 @@ urlpatterns = [
     path('my-articles/', views.user_post_list, name='user_post_list'),
     path('recent-articles/', views.new_articles, name='new_articles'),
     path('explore/<str:topic>', views.explore, name='explore'),
+    path('explore', views.explore_topics, name='explore_topics'),
     path('feeds', views.feeds, name='feeds'),
     path('interest', views.interest, name='interest'),
     path('trending', views.trending, name='trending'),

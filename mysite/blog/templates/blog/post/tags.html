@@ -1,3 +1,4 @@
+{% load blog_tags %}
 {% for tag in common_tags %}
-    <li><a href="{% url 'editors:explore' topic=tag.slug %}">{{tag|capfirst}}</a></li>
+    <li><a href="{% url 'editors:explore' topic=tag.slug %}">{{tag|split:" "}}</a></li>
 {% endfor %}

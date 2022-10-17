@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% load static %}
+{% load blog_tags %}
+{% load thumbnail %}
+
+{% block title %}Opas | Explore{% endblock %}
+{% block content %}
+{% include "editors/feeds-header.html" %}
+<div class="discover-topics feed-contents">
+  <div class="feed-title">
+    <div class="section-title">Explore</div>
+    <i class="iconly-Arrow-Right-Circle icli"></i>
+    <hr size="1" />
+  </div>
+  {% for tag in common_tags %}
+    <div class="topic-wrapper">
+        <div class="topic-title">
+            {{tag|split:"-"}}
+        </div>
+        <div class="topic-footer">
+            <a href="{% url 'editors:explore' topic=tag.slug %}" class="topic-link">Explore</a>
+            {% with tag|post_no as num %}
+                <div class="count">{{num}} Article{{num|pluralize}}</div>
+            {% endwith %}
+        </div>
+    </div>
+  {% endfor %}
+</div>
+{% endblock content%}

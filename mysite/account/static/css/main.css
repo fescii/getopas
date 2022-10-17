@@ -708,7 +708,7 @@ main.feeds>.feed-contents>.article-wrapper>.article-info .posted>.dot{
 main.feeds>.feed-contents>.article-wrapper>.article-info .posted>.date{
     display: inline-block;
    /* border: 1px solid gray;*/
-    font-size: 0.95rem;
+    font-size: 0.87rem;
     padding-top: 0px;
     margin: 0px;
 }
@@ -2056,4 +2056,117 @@ main.read>.comments-wrapper>.comments>.user-comment>.content>.likes>.likes-icon-
     font-size: 19px;
     display: inline-block;
     margin-top: 3px;
+}
+
+/*Discover*/
+main.feeds>.discover-topics {
+    /*border: 1px solid rgb(0, 255, 157);*/
+    grid-column: 2/4;
+    background-color: var(--background-color);
+    /* box-shadow: var(--box-shadow);*/
+    /*border-bottom: var(--border);*/
+    border-top: none;
+    margin-bottom: 60px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: max-content;
+    padding: 10px 10px 10px 20px;
+    row-gap: 30px;
+    column-gap: 30px;
+}
+
+main.feeds>.discover-topics>.feed-title {
+    /*border: 1px solid rgba(18, 18, 18, 0.198);*/
+    background-color: var(--background-color);
+    font-size: 1.5rem;
+    height: max-content;
+    grid-column: 1/4;
+    grid-row: 1/2;
+    margin: 0%;
+    padding: 0px 0px 10px 0px;
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    gap: 2px;
+}
+
+main.feeds>.discover-topics>.topic-wrapper {
+    /*border: 1px solid rgba(18, 18, 18, 0.198);*/
+    box-shadow: var(--box-shadow);
+    border: var(--border);
+    display: flex;
+    flex-flow: column;
+    transition: transform 1s ease;
+    -webkit-transition: transform 1s ease;
+    -moz-transition: transform 1s ease;
+    -ms-transition: transform 1s ease;
+    -o-transition: transform 1s ease;
+}
+main.feeds>.discover-topics>.topic-wrapper:hover{
+    transform: scale(1.07);
+    box-shadow: #aba7a73a 0px 2px 8px;
+    -webkit-transform: scale(1.07);
+    -moz-transform: scale(1.07);
+    -ms-transform: scale(1.07);
+    -o-transform: scale(1.07);
+}
+main.feeds>.discover-topics>.topic-wrapper>.topic-title{
+    /*border: 1px solid rgba(18, 18, 18, 0.198);*/
+    height: 150px;
+    text-align: center;
+    padding-top: 50px;
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: white;
+    text-shadow: #000000a9 0px 2px 8px;
+}
+main.feeds>.discover-topics>.topic-wrapper:nth-of-type(2)>.topic-title{
+    background: linear-gradient(90deg, #1CB5E0 0%, #000851 100%);
+}
+main.feeds>.discover-topics>.topic-wrapper:nth-of-type(3)>.topic-title{
+    background: linear-gradient(90deg, #00C9FF 0%, #92FE9D 100%);
+}
+main.feeds>.discover-topics>.topic-wrapper:nth-of-type(4)>.topic-title{
+    background: linear-gradient(90deg, #FC466B 0%, #3F5EFB 100%);
+}
+main.feeds>.discover-topics>.topic-wrapper:nth-of-type(5)>.topic-title{
+    background: linear-gradient(90deg, #3F2B96 0%, #A8C0FF 100%);
+}
+main.feeds>.discover-topics>.topic-wrapper:nth-of-type(6)>.topic-title{
+    background: linear-gradient(90deg, #FDBB2D 0%, #22C1C3 100%);
+}
+main.feeds>.discover-topics>.topic-wrapper:nth-of-type(7)>.topic-title{
+    background: linear-gradient(90deg, #fcff9e 0%, #c67700 100%);
+}
+main.feeds>.discover-topics>.topic-wrapper:nth-of-type(8)>.topic-title{
+    background: linear-gradient(90deg, #00d2ff 0%, #3a47d5 100%);
+}
+main.feeds>.discover-topics>.topic-wrapper:nth-of-type(9)>.topic-title{
+    background: linear-gradient(90deg, #efd5ff 0%, #515ada 100%);
+}
+main.feeds>.discover-topics>.topic-wrapper:nth-of-type(10)>.topic-title{
+    background: linear-gradient(90deg, #9ebd13 0%, #008552 100%);
+}
+
+main.feeds>.discover-topics>.topic-wrapper>.topic-footer{
+    /*border: 1px solid rgba(18, 18, 18, 0.198);*/
+    padding: 10px 10px 10px 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: var(--background-color);
+}
+main.feeds>.discover-topics>.topic-wrapper>.topic-footer>a{
+    text-decoration: none;
+    color: white;
+    /*border: var(--border);*/
+    background-color: var(--alt-accent-color);
+    padding: 4px 15px;
+    border-radius: 50px;
+}
+main.feeds>.discover-topics>.topic-wrapper:nth-of-type(odd)>.topic-footer>a{
+    background-color: var(--accent-color);
+}
+main.feeds>.discover-topics>.topic-wrapper>.topic-footer>.count{
+    color: var(--gray-color);
 }

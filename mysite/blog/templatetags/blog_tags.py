@@ -1,10 +1,11 @@
 import readtime
+from django.shortcuts import render,get_object_or_404
 from django import template
 from ..models import Post,Bookmark
 from django.db.models import Count
 from django.template.defaultfilters import slugify
 from unidecode import unidecode
-
+from taggit.models import Tag
 register = template.Library()
 
 #Get Total Published Posts
@@ -60,6 +61,15 @@ def slug_tag(tag):
 
 register.filter('slug_tag',slug_tag)
 
+#Total Posts For Tags
+def post_no(topic=None):
+    if topic:
+        tag = get_object_or_404(Tag, slug=topic)
+        posts = Post.published.filter(tags__in=[tag]).count()
+    return posts
+
+register.filter('post_no',post_no)
+
 #Fetching 4 most viewed  Blog
 @register.inclusion_tag('blog/post/tags.html')
 def show_most_common_tags(count=15):
@@ -90,12 +100,12 @@ register.filter('get_comments',get_comments)
 def split(string, sep):
     #Return the string split by sep.
     try:
-        splitted = string.split(sep)
+        splitted = str(string).split(sep)
         word = " "
         for text in splitted:
              word = word+" "+text.capitalize()
         #word = f"{splitted[0].capitalize()} {splitted[1].capitalize()}"
         return word
     except:
-        return string.capitalize()
+        return str(string).capitalize()
 register.filter('split',split)

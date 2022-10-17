@@ -45,7 +45,7 @@
                 <div class="article-footer">
                     <div class="article-tags">
                         {% for tag in save.post.tags.names|truncate_tags %}
-                        <a href="{% url 'editors:explore' topic=tag|slug_tag %}" class="tag">{{tag|capfirst}}</a>
+                        <a href="{% url 'editors:explore' topic=tag|slug_tag %}" class="tag">{{tag|split:" "}}</a>
                         {% endfor %}
                     </div>
                     <div class="article-actions">
