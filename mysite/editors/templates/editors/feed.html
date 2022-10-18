@@ -50,7 +50,7 @@
       headers: {'X-CSRFToken': csrftoken},
       mode: 'same-origin'
   }
-  saveButtons = document.querySelectorAll('a#save')
+  saveButtons = document.querySelectorAll('a#save-1')
   saveButtons.forEach(saveButton =>{
       saveButton.addEventListener('click', function(e){
           e.preventDefault();
@@ -64,13 +64,8 @@
           // send HTTP request
           fetch(url, options).then(response => response.json()).then(data => {
               if (data['status'] === 'ok'){
-                  let previousAction = saveButton.dataset.action;
-
-                  // toggle button text and data-action
-                  let action = previousAction === 'Save' ? 'Remove' : 'Save';
-                  saveButton.dataset.action = action;
-                  saveButton.classList.add("Remove")
-                  saveButton.innerHTML = `<span>${action}</span>`;
+                  // toggle button text
+                  saveButton.innerHTML = `<span>${data['action']}</span>`;
               }
           });
       });
@@ -99,7 +94,7 @@
                         headers: {'X-CSRFToken': csrftoken},
                         mode: 'same-origin'
                     }
-                    Buttons= document.querySelectorAll('a#save')
+                    Buttons= document.querySelectorAll(`a#save-${page}`)
                     Buttons.forEach(Button =>{
                             Button.addEventListener('click', function(e){
                             e.preventDefault();
@@ -113,13 +108,8 @@
                             // send HTTP request
                             fetch(url, options).then(response => response.json()).then(data => {
                                 if (data['status'] === 'ok'){
-                                    let previousAction = Button.dataset.action;
-
                                     // toggle button text and data-action
-                                    let action = previousAction === 'Save' ? 'Remove' : 'Save';
-                                    Button.dataset.action = action;
-                                    Button.classList.add("Remove")
-                                    Button.innerHTML = `<span>${action}</span>`;
+                                    Button.innerHTML = `<span>${data['action']}</span>`;
                                 }
                             });
                         });

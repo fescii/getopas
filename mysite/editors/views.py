@@ -166,7 +166,7 @@ def interest(request):
          'posts': posts})
 
     return render(request,
-                  'editors/interest.html',
+                  'editors/feed.html',
                   {'title': 'interests',
                    'posts': posts})
 
@@ -281,25 +281,16 @@ def save_post(request):
     if post_id and action:
         try:
             post = Post.objects.get(id=post_id)
-            if action == 'Save':
-                try:
-                    saved_post = Bookmark.objects.get(post=post,user=request.user)
-                    saved_post.delete()
-                    create_action(request.user, 'remove from saved', post)
-                except Bookmark.DoesNotExist:
-                    bookmark = Bookmark.objects.create(post=post,user=request.user)
-                    bookmark.save()
-                    create_action(request.user, 'saved article', post)
-            else:
-                try:
-                    saved_post = Bookmark.objects.get(post=post_id,user=request.user)
-                    saved_post.delete()
-                    create_action(request.user, 'remove from saved', post)
-                except Bookmark.DoesNotExist:
-                    bookmark = Bookmark.objects.create(post=post,user=request.user)
-                    bookmark.save()
-                    create_action(request.user, 'saved article', post)
-            return JsonResponse({'status': 'ok'})
+            try:
+                saved_post = Bookmark.objects.get(post=post,user=request.user)
+                saved_post.delete()
+                create_action(request.user, 'remove from saved', post)
+                return JsonResponse({'status': 'ok','action': 'Save'})
+            except Bookmark.DoesNotExist:
+                bookmark = Bookmark.objects.create(post=post,user=request.user)
+                bookmark.save()
+                create_action(request.user, 'saved article', post)
+                return JsonResponse({'status': 'ok','action': 'Remove'})
         except Post.DoesNotExist:
             pass
     return JsonResponse({'status': 'error'})

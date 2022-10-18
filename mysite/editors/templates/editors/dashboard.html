@@ -285,13 +285,8 @@
         // send HTTP request
         fetch(url, options).then(response => response.json()).then(data => {
           if (data['status'] == 1){
-            let previousAction = saveButton.dataset.action;
-
             // toggle button text and data-action
-            let action = previousAction === 'Save' ? 'Remove' : 'Save';
-            saveButton.dataset.action = action;
-            saveButton.classList.add("Remove")
-            saveButton.innerHTML = `<span>${action}</span>`;
+            saveButton.innerHTML = `<span>${data['action']}</span>`;
           }
         });
       });

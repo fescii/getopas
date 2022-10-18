@@ -40,16 +40,16 @@
                 {% endfor %}
             </div>
             <div class="article-actions">
-                <a id="save" class="{% check_saved post.id request.user%}" href="" data-id="{{ post.id }}" data-action="{% check_saved post.id request.user%}">
+                {% with page=posts %}
+                <a id="save-{{page.number}}" class="{% check_saved post.id request.user%}" href="" data-id="{{ post.id }}" data-action="{% check_saved post.id request.user%}">
                     <span>{% check_saved post.id request.user%}</span>
                 </a>
+                {% endwith %}
                 <a title="Share" href="">
                     <span>Share</span>
-                    
                 </a>
                 <a title="Share" href="">
                     <span>Report</span>
-                    
                 </a>
             </div>
         </div>
