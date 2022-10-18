@@ -283,15 +283,22 @@ def save_post(request):
             post = Post.objects.get(id=post_id)
             if action == 'Save':
                 try:
-                    Bookmark.objects.get(post=post,user=request.user)
+                    saved_post = Bookmark.objects.get(post=post,user=request.user)
+                    saved_post.delete()
+                    create_action(request.user, 'remove from saved', post)
                 except Bookmark.DoesNotExist:
                     bookmark = Bookmark.objects.create(post=post,user=request.user)
                     bookmark.save()
                     create_action(request.user, 'saved article', post)
             else:
-                saved_post = Bookmark.objects.get(post=post_id,user=request.user)
-                saved_post.delete()
-                create_action(request.user, 'remove from saved', post)
+                try:
+                    saved_post = Bookmark.objects.get(post=post_id,user=request.user)
+                    saved_post.delete()
+                    create_action(request.user, 'remove from saved', post)
+                except Bookmark.DoesNotExist:
+                    bookmark = Bookmark.objects.create(post=post,user=request.user)
+                    bookmark.save()
+                    create_action(request.user, 'saved article', post)
             return JsonResponse({'status': 'ok'})
         except Post.DoesNotExist:
             pass

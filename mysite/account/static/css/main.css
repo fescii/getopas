@@ -2091,9 +2091,9 @@ main.feeds>.discover-topics>.feed-title {
 }
 
 main.feeds>.discover-topics>.topic-wrapper {
-    /*border: 1px solid rgba(18, 18, 18, 0.198);*/
     box-shadow: var(--box-shadow);
-    border: var(--border);
+    /*border: var(--border);*/
+    background-color: transparent;
     display: flex;
     flex-flow: column;
     transition: transform 1s ease;
@@ -2104,7 +2104,6 @@ main.feeds>.discover-topics>.topic-wrapper {
 }
 main.feeds>.discover-topics>.topic-wrapper:hover{
     transform: scale(1.07);
-    box-shadow: #aba7a73a 0px 2px 8px;
     -webkit-transform: scale(1.07);
     -moz-transform: scale(1.07);
     -ms-transform: scale(1.07);
@@ -2112,6 +2111,8 @@ main.feeds>.discover-topics>.topic-wrapper:hover{
 }
 main.feeds>.discover-topics>.topic-wrapper>.topic-title{
     /*border: 1px solid rgba(18, 18, 18, 0.198);*/
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
     height: 150px;
     text-align: center;
     padding-top: 50px;
@@ -2150,6 +2151,9 @@ main.feeds>.discover-topics>.topic-wrapper:nth-of-type(10)>.topic-title{
 
 main.feeds>.discover-topics>.topic-wrapper>.topic-footer{
     /*border: 1px solid rgba(18, 18, 18, 0.198);*/
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    border: var(--border);
     padding: 10px 10px 10px 10px;
     display: flex;
     align-items: center;
