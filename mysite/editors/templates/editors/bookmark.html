@@ -49,16 +49,15 @@
                         {% endfor %}
                     </div>
                     <div class="article-actions">
-                        <a class="save {% check_saved save.post.id request.user%}" href="" data-id="{{ save.post.id }}" data-action="{% check_saved save.post.id request.user%}">
-                            <span>{% check_saved save.post.id request.user%}</span>
+                        {%  check_saved save.post.id request.user as saved %}
+                        <a id="{{saved}}" class="save" href="" data-id="{{ save.post.id}}" data-action="{{saved}}">
+                            <span>{{saved}}</span>
                         </a>
                         <a title="Share" href="">
                             <span>Share</span>
-                            
                         </a>
                         <a title="Share" href="">
                             <span>Report</span>
-                            
                         </a>
                     </div>
                 </div>
@@ -68,7 +67,7 @@
         <p>You have not saved any articles yet.</p>
         {% endfor %}
   {% include "pagination.html" with page=saved_posts %}
-  
+
 </div>
 <div class="sidebar-content">
   <div class="stats">
@@ -120,13 +119,16 @@
         // send HTTP request
         fetch(url, options).then(response => response.json()).then(data => {
           if (data['status'] === 'ok'){
-            let previousAction = saveButton.dataset.action;
-
             // toggle button text and data-action
-            let action = previousAction === 'Save' ? 'Remove' : 'Save';
-            saveButton.dataset.action = action;
-            saveButton.classList.add("Remove")
-            saveButton.innerHTML = `<span>${action}</span>`;
+            saveButton.innerHTML = `<span>${data['action']}</span>`;
+            if (data['action'] === 'Remove'){
+              saveButton.style.backgroundColor = "rgb(255, 136, 0)";
+              saveButton.style.color = "#fff";
+            }
+            else{
+              saveButton.style.backgroundColor = "rgba(57, 56, 56, 0.087)";
+              saveButton.style.color = "#808080";
+            }
           }
         });
       });

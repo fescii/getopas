@@ -1687,7 +1687,7 @@
         margin: 0%;
         align-self: baseline;
         padding: 0px;
-        margin-top: 3px;
+        margin-top: 0px;
     }
 
     main.feeds>.feed-contents>.article-wrapper>.summery-content {
@@ -2102,12 +2102,12 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        width: 50px;
-        height: 50px;
+        width: 45px;
+        height: 45px;
         /*font-size: 1.2rem;*/
         background-color: var(--accent-color);
         box-shadow: 0rem 0rem 0.1rem 0.1rem #2a2b2a11;
-        padding: 5px 15px;
+        padding: 5px 12px;
         text-decoration: none;
         position: fixed;
         bottom: 75px;
@@ -2125,7 +2125,7 @@
     }
     .create-option>.icli{
         display: inline-block;
-        font-size: 30px;
+        font-size: 28px;
         margin-top: 0px;
         font-weight: 600;
     }

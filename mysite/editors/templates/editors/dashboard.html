@@ -46,16 +46,15 @@
                       {% endfor %}
                   </div>
                   <div class="article-actions">
-                      <a class="save {% check_saved post.id request.user%}" href="" data-id="{{ post.id }}" data-action="{% check_saved post.id request.user%}" >
-                        <span>{% check_saved post.id request.user%}</span>
-                      </a>
+                    {%  check_saved post.id request.user as saved %}
+                        <a id="{{saved}}" class="save" href="" data-id="{{ post.id }}" data-action="{{saved}}">
+                            <span>{{saved}}</span>
+                        </a>
                       <a title="Share" href="">
                           <span>Share</span>
-                          
                       </a>
                       <a title="Share" href="">
                           <span>Report</span>
-                          
                       </a>
                   </div>
               </div>
@@ -104,9 +103,10 @@
                     {% endfor %}
                   </div>
                 <div class="article-actions">
-                    <a class="save {% check_saved post.id request.user%}" href="" data-id="{{ post.id }}" data-action="{% check_saved post.id request.user%}" >
-                        <span>{% check_saved post.id request.user%}</span>
-                    </a>
+                    {%  check_saved post.id request.user as saved %}
+                        <a id="{{saved}}" class="save" href="" data-id="{{ post.id }}" data-action="{{saved}}">
+                            <span>{{saved}}</span>
+                        </a>
                     <a title="Share" href="">
                           <span>Share</span>
                     </a>
@@ -159,16 +159,15 @@
                       {% endfor %}
                     </div>
                     <div class="article-actions">
-                        <a class="save {% check_saved post.id request.user%}" href="" data-id="{{ post.id }}" data-action="{% check_saved post.id request.user%}" >
-                            <span>{% check_saved post.id request.user%}</span>
-                        </a>
+                        {%  check_saved post.id request.user as saved %}
+                            <a id="{{saved}}" class="save" href="" data-id="{{ post.id }}" data-action="{{saved}}">
+                                <span>{{saved}}</span>
+                            </a>
                         <a title="Share" href="">
                             <span>Share</span>
-                            
                         </a>
                         <a title="Share" href="">
                             <span>Report</span>
-                            
                         </a>
                     </div>
                 </div>
@@ -215,9 +214,10 @@
                       {% endfor %}
                   </div>
                   <div class="article-actions">
-                      <a class="save {% check_saved post.id request.user%}" href="" data-id="{{ post.id }}" data-action="{% check_saved post.id request.user%}" >
-                        <span>{% check_saved post.id request.user%}</span>
-                      </a>
+                    {%  check_saved post.id request.user as saved %}
+                        <a id="{{saved}}" class="save" href="" data-id="{{ post.id }}" data-action="{{saved}}">
+                            <span>{{saved}}</span>
+                        </a>
                       <a title="Share" href="">
                           <span>Share</span>
                       </a>
@@ -271,24 +271,30 @@
         mode: 'same-origin'
     }
 
-      saveButtons = document.querySelectorAll('a.save')
-      saveButtons.forEach(saveButton =>{
-      saveButton.addEventListener('click', function(e){
-        e.preventDefault();
-
-        // add request body
-        let formData = new FormData();
-        formData.append('id', saveButton.dataset.id);
-        formData.append('action', saveButton.dataset.action);
-        options['body'] = formData;
-
-        // send HTTP request
-        fetch(url, options).then(response => response.json()).then(data => {
-          if (data['status'] == 1){
-            // toggle button text and data-action
-            saveButton.innerHTML = `<span>${data['action']}</span>`;
-          }
+    saveButtons = document.querySelectorAll('a.save')
+    saveButtons.forEach(saveButton =>{
+        saveButton.addEventListener('click', function(e){
+            e.preventDefault();
+            // add request body
+            let formData = new FormData();
+            formData.append('id', saveButton.dataset.id);
+            formData.append('action', saveButton.dataset.action);
+            options['body'] = formData;
+            // send HTTP request
+            fetch(url, options).then(response => response.json()).then(data => {
+                if (data['status'] === 'ok'){
+                    // toggle button text
+                    saveButton.innerHTML = `<span>${data['action']}</span>`;
+                    if (data['action'] === 'Remove'){
+                        saveButton.style.backgroundColor = "rgb(255, 136, 0)";
+                        saveButton.style.color = "#fff";
+                    }
+                    else{
+                        saveButton.style.backgroundColor = "rgba(57, 56, 56, 0.087)";
+                        saveButton.style.color = "#808080";
+                    }
+                }
+            });
         });
-      });
     });
 {% endblock %}

@@ -41,9 +41,10 @@
             </div>
             <div class="article-actions">
                 {% with page=posts %}
-                <a id="save-{{page.number}}" class="{% check_saved post.id request.user%}" href="" data-id="{{ post.id }}" data-action="{% check_saved post.id request.user%}">
-                    <span>{% check_saved post.id request.user%}</span>
-                </a>
+                {%  check_saved post.id request.user as saved %}
+                        <a id="save-{{page.number}}" class="{{saved}}" href="" data-id="{{ post.id }}" data-action="{{saved}}">
+                            <span>{{saved}}</span>
+                        </a>
                 {% endwith %}
                 <a title="Share" href="">
                     <span>Share</span>

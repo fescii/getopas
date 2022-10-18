@@ -17,6 +17,7 @@ body{
     /*background-color: var(--body-background-color);*/
 
 }
+/*
 @media (prefers-color-scheme: dark) {
     :root{
         --body-background-color: rgb(40, 40, 41);
@@ -53,8 +54,7 @@ body{
         --shadow-text: -0.05rem 0.05rem 0.009rem rgba(184, 181, 181, 0);
     }
   }
-
-  @media (prefers-color-scheme: light) {
+*/
     :root{
         --accent-color: #08b86f;
         --alt-accent-color: rgb(255, 136, 0);
@@ -68,7 +68,7 @@ body{
         --summery-color: #404040;
 
         --background-color:#fff;
-        --body-background-color: #edf1f2;
+        --body-background-color: #f1f6f7;
         --box-shadow: 0rem 2rem 1.5rem #748f740e;
         --border: 1px solid #83858442;
 
@@ -78,4 +78,3 @@ body{
 
         --shadow-text: -0.05rem 0.05rem 0.009rem rgb(184, 181, 181);
     }
-  }

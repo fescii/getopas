@@ -66,6 +66,14 @@
               if (data['status'] === 'ok'){
                   // toggle button text
                   saveButton.innerHTML = `<span>${data['action']}</span>`;
+                  if (data['action'] === 'Remove'){
+                    saveButton.style.backgroundColor = "rgb(255, 136, 0)";
+                    saveButton.style.color = "#fff";
+                  }
+                  else{
+                    saveButton.style.backgroundColor = "rgba(57, 56, 56, 0.087)";
+                    saveButton.style.color = "#808080";
+                  }
               }
           });
       });
@@ -110,6 +118,14 @@
                                 if (data['status'] === 'ok'){
                                     // toggle button text and data-action
                                     Button.innerHTML = `<span>${data['action']}</span>`;
+                                    if (data['action'] === 'Remove'){
+                                      Button.style.backgroundColor = "rgb(255, 136, 0)";
+                                      Button.style.color = "#fff";
+                                    }
+                                    else{
+                                      Button.style.backgroundColor = "rgba(57, 56, 56, 0.087)";
+                                      Button.style.color = "#808080";
+                                    }
                                 }
                             });
                         });
