@@ -3,6 +3,7 @@
 {% load thumbnail %}
 
 {% for post in posts %}
+{% with page=posts %}
 <div class="article-wrapper">
     <div class="article-info">
         <div class="profile-wrapper">
@@ -33,10 +34,10 @@
                 {{post.body|striptags|safe|truncatechars:300 }}
             </p>
         </div>
-        <div class="popup">
+        <div class="popup" id="popup-{{page.number}}">
             <div class="header">
               <span>Share this via</span>
-              <div class="close"><i class="uil uil-times"></i></div>
+              <div id="close-{{page.number}}" class="close"><i class="uil uil-times"></i></div>
             </div>
             <div class="content">
               <div class="icons">
@@ -50,7 +51,7 @@
               <p>Or copy link</p>
               <div class="field">
                 <i class="url-icon uil uil-link"></i>
-                <input type="text" readonly value="{{post.get_absolute_url}}">
+                <input type="text" readonly value="https://www.getopas.com{{post.get_absolute_url}}">
                 <button>Copy</button>
               </div>
             </div>
@@ -62,13 +63,11 @@
                 {% endfor %}
             </div>
             <div class="article-actions">
-                {% with page=posts %}
                 {%  check_saved post.id request.user as saved %}
                         <a id="save-{{page.number}}" class="{{saved}}" href="" data-id="{{ post.id }}" data-action="{{saved}}">
                             <span>{{saved}}</span>
                         </a>
-                {% endwith %}
-                <a title="Share" href="">
+                <a  class="view-modal"  id="view-modal-{{page.number}}" title="Share" href="">
                     <span>Share</span>
                 </a>
                 <a title="Share" href="">
@@ -78,6 +77,7 @@
         </div>
     </div>
 </div>
+{% endwith %}
 {% empty %}
     <p>There no feeds display!</p>
 {% endfor %}

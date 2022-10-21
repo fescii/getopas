@@ -44,6 +44,38 @@
 </div>
 {% endblock content%}
 {% block domready %}
+//Share-Modal
+const viewBtns = document.querySelectorAll("a#view-modal-1"),
+    popup = document.querySelectorAll("#popup-1");
+
+viewBtns.forEach((viewBtn,index)=>{
+    const close = popup[index].querySelector("#close-1");
+
+    viewBtn.addEventListener("click",(e)=>{
+        e.preventDefault();
+        popup[index].style.setProperty('display', 'block')
+    })
+
+    close.addEventListener("click",()=>{
+        popup[index].style.setProperty('display', 'none')
+    })
+    const field = popup[index].querySelector(".field"),
+    input = field.querySelector("input"),
+    copy = field.querySelector("button");
+    copy.onclick = () => {
+        input.select(); //select input value
+        if (document.execCommand("copy")) { //if the selected text copy
+            field.classList.add("active");
+            copy.innerText = "Copied";
+            setTimeout(() => {
+                window.getSelection().removeAllRanges(); //remove selection from document
+                field.classList.remove("active");
+                copy.innerText = "Copy";
+            }, 3000);
+        }
+    }
+
+})
   const url = '{% url "editors:save" %}';
   let options = {
       method: 'POST',
@@ -78,10 +110,10 @@
           });
       });
   });
-    let page = 1;
-    let emptyPage = false;
-    let blockRequest = false;
-    window.addEventListener('scroll', function(e) {
+let page = 1;
+let emptyPage = false;
+let blockRequest = false;
+window.addEventListener('scroll', function(e) {
         let margin = document.body.clientHeight - window.innerHeight - 200;
         if(window.pageYOffset > margin && !emptyPage && !blockRequest) {
             blockRequest = true;
@@ -93,8 +125,8 @@
                     emptyPage = true;
                 }
                 else {
-                    var imageList = document.getElementById('post-list');
-                    imageList.insertAdjacentHTML('beforeEnd', html);
+                    var postList = document.getElementById('post-list');
+                    postList.insertAdjacentHTML('beforeEnd', html);
                     blockRequest = false;
                     const url = '{% url "editors:save" %}';
                     let options = {
@@ -102,6 +134,39 @@
                         headers: {'X-CSRFToken': csrftoken},
                         mode: 'same-origin'
                     }
+                    //Share-Modal
+                    const viewBtns = document.querySelectorAll(`#view-modal-${page}`),
+                        popup = document.querySelectorAll(`#popup-${page}`);
+
+                    viewBtns.forEach((viewBtn,index)=>{
+                        const close = popup[index].querySelector(".close"),
+                        field = popup[index].querySelector(".field"),
+                        input = field.querySelector("input"),
+                        copy = field.querySelector("button");
+
+                        viewBtn.addEventListener("click",(e)=>{
+                            e.preventDefault();
+                            popup[index].style.setProperty('display', 'block')
+                        })
+
+                        close.addEventListener("click",()=>{
+                            popup[index].style.setProperty('display', 'none')
+                        })
+
+                        copy.onclick = () => {
+                            input.select(); //select input value
+                            if (document.execCommand("copy")) { //if the selected text copy
+                                field.classList.add("active");
+                                copy.innerText = "Copied";
+                                setTimeout(() => {
+                                    window.getSelection().removeAllRanges(); //remove selection from document
+                                    field.classList.remove("active");
+                                    copy.innerText = "Copy";
+                                }, 3000);
+                            }
+                        }
+
+                    })
                     Buttons= document.querySelectorAll(`a#save-${page}`)
                     Buttons.forEach(Button =>{
                             Button.addEventListener('click', function(e){
