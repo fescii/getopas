@@ -466,7 +466,7 @@ main.search>.search-header{
   align-items: flex-end;
   gap: 20px;
   flex-flow: row;
-  overflow-x: scroll;
+  overflow-x: hidden;
   overflow-y: hidden;
   white-space: nowrap;
 }

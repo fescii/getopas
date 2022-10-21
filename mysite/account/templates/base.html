@@ -65,17 +65,24 @@
                             </a>
                         </li>
                         <li class="content-link">
-                            <a class="link {% if section == 'products' %}data-active{% endif %}" href="{% url 'editors:user_product_list' %}">
-                                <span id="select"></span>
-                                <span class="iconly-Bag-2 icli"></span>
-                                <span class="link-text">Products</span>
-                            </a>
-                        </li>
-                        <li class="content-link">
                             <a class="link {% if section == 'explore' %}data-active{% endif %}" href="{% url 'editors:explore_topics'%}">
                                 <span id="select"></span>
                                 <span class="iconly-Discovery icli"></span>
                                 <span class="link-text">Discover</span>
+                            </a>
+                        </li>
+                        <li class="content-link">
+                            <a class="link {% if section == 'research' %}data-active{% endif %}" href="{% url 'editors:user_product_list' %}">
+                                <span id="select"></span>
+                                <span class="iconly-Document icli"></span>
+                                <span class="link-text">Research</span>
+                            </a>
+                        </li>
+                        <li class="content-link">
+                            <a class="link {% if section == 'newsletter' %}data-active{% endif %}" href="{% url 'editors:user_issue_list' %}">
+                                <span id="select"></span>
+                                <span class="iconly-Message icli"></span>
+                                <span class="link-text">Newsletters</span>
                             </a>
                         </li>
                     </ul>
