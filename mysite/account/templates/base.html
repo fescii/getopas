@@ -8,6 +8,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}{% endblock %}</title>
+    <link href="{% static "favicon.ico" %}" rel="shortcut icon">
     <link href="{% static "css/global.css" %}" rel="stylesheet">
     <link href="{% static "css/footer.css" %}" rel="stylesheet">
     <link href="{% static "css/main.css" %}" rel="stylesheet">
@@ -97,6 +98,13 @@
                                 <span id="select"></span>
                                 <span class="iconly-Profile icli"></span>
                                 <span class="link-text">Profile</span>
+                            </a>
+                        </li>
+                        <li class="content-link">
+                            <a class="link {% if section == 'people' %}data-active{% endif %}" href="">
+                                <span id="select"></span>
+                                <span class="iconly-User2 icli"></span>
+                                <span class="link-text">People</span>
                             </a>
                         </li>
                         <li class="content-link">

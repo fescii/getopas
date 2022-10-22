@@ -733,8 +733,8 @@ main.search>.dashboard-sidebar{
 .content-link>.link>.icli{
    font-size: 20px;
    display: inline-block;
-   margin-top: 4px;
-   margin-left: 10px;
+   margin-top: 0px;
+   margin-left: 8px;
    margin-right: 5px;
 }
 .content-link>.link>.link-text{
