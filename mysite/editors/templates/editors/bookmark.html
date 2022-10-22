@@ -12,62 +12,87 @@
     <i class="iconly-Arrow-Right-Circle icli"></i>
   </div>
   {% for save in saved_posts %}
-        <div class="article-wrapper">
-            <div class="article-info">
-                <div class="profile-wrapper">
-                    {% if save.post.author.profile.photo %}
-                    <img src="{% thumbnail save.post.author.profile.photo 300x0 %}"/>
-                    {% else %}
-                    <img src="https://eu.ui-avatars.com/api/?background=08b86f&name={{save.post.author.first_name}}+{{save.post.author.last_name}}&size=250&color=fff"/>
-                    {% endif %}
-                </div>
-                <a href="{% url 'profile' username=save.post.author%}" class="author" >{{save.post.author.first_name}} {{save.post.author.last_name}}</a>
-                <span class="read-time posted" >
-                    <span class="dot">&#183;</span>
-                    {{save.post.body|read_time}}
-                </span>
-                <span class="posted right"><i class="iconly-Time-Circle icli"></i>
-                    <span class="date">{{save.post.created|date:"M"}} {{save.post.created.day}},{{save.post.created|date:"Y"}}</span>
-                </span>
-            </div>
-            <div class="summery-content">
-                <h2 class="article-title">
-                    <a href="{{post.get_absolute_url}}" title="Article Title" class="article-title-link"> {{save.post.title}}</a>
-                </h2>
-                <div class="article-summery">
-                    <div id="mobile-image">
-                        <img id="" src="{% thumbnail save.post.cover 300x0 %}" alt="Post-Image" />
-                    </div>
-                    <p class="summery-text">
-                        {{save.post.body|striptags|safe|truncatechars:300 }}
-                    </p>
-                </div>
-                <div class="article-footer">
-                    <div class="article-tags">
-                        {% for tag in save.post.tags.names|truncate_tags %}
-                        <a href="{% url 'editors:explore' topic=tag|slug_tag %}" class="tag">{{tag|split:" "}}</a>
-                        {% endfor %}
-                    </div>
-                    <div class="article-actions">
-                        {%  check_saved save.post.id request.user as saved %}
-                        <a id="{{saved}}" class="save" href="" data-id="{{ save.post.id}}" data-action="{{saved}}">
-                            <span>{{saved}}</span>
-                        </a>
-                        <a title="Share" href="">
-                            <span>Share</span>
-                        </a>
-                        <a title="Share" href="">
-                            <span>Report</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
+  <div class="article-wrapper">
+    <div class="article-info">
+      <div class="profile-wrapper">
+        {% if save.post.author.profile.photo %}
+          <img src="{% thumbnail save.post.author.profile.photo 300x0 %}"/>
+        {% else %}
+          <img src="https://eu.ui-avatars.com/api/?background=08b86f&name={{save.post.author.first_name}}+{{save.post.author.last_name}}&size=250&color=fff"/>
+        {% endif %}
+      </div>
+      <a href="{% url 'profile' username=save.post.author%}" class="author" >
+        {{save.post.author.first_name}} {{save.post.author.last_name}}
+      </a>
+      <span class="read-time posted" >
+        <span class="dot">&#183;</span>
+          {{save.post.body|read_time}}
+      </span>
+      <span class="posted right"><i class="iconly-Time-Circle icli"></i>
+        <span class="date">
+          {{save.post.created|date:"M"}} {{save.post.created.day}}, {{save.post.created|date:"Y"}}
+        </span>
+      </span>
+    </div>
+    <div class="summery-content">
+      <h2 class="article-title">
+        <a href="{{post.get_absolute_url}}" title="Article Title" class="article-title-link"> {{save.post.title}}</a>
+      </h2>
+      <div class="article-summery">
+        <div id="mobile-image">
+          <img id="" src="{% thumbnail save.post.cover 300x0 %}" alt="Post-Image" />
         </div>
-        {% empty %}
-        <p>You have not saved any articles yet.</p>
-        {% endfor %}
+        <p class="summery-text">
+          {{save.post.body|striptags|safe|truncatechars:300 }}
+        </p>
+      </div>
+      <div class="popup" id="popup">
+        <div class="header">
+          <span>Share this via</span>
+          <div id="close" class="close-element"><i class="uil uil-times"></i></div>
+        </div>
+        <div class="content">
+          <div class="icons">
+            <a href="https://www.facebook.com/sharer.php?u=https://www.getopas.com{{save.post.get_absolute_url}}?t='{{post.body|striptags|safe|truncatechars:280}}'" target="_blank"><i class="fab fa-facebook-f"></i></a>
+            <a href="https://twitter.com/share?url=https://www.getopas.com{{save.post.get_absolute_url}}&amp;text={{post.body|striptags|safe|truncatechars:280}}" target="_blank"><i class="fab fa-twitter"></i></a>
+            <a href="https://www.linkedin.com/shareArticle?url=https://www.getopas.com{{save.post.get_absolute_url}}&amp;title={{post.body|striptags|safe|truncatechars:280}}" target="_blank"><i class="fab fa-linkedin"></i></a>
+            <a href="https://api.whatsapp.com/send?text=https://www.getopas.com{{save.post.get_absolute_url}}"
+            data-action="share/whatsapp/share" target="_blank"><i class="fab fa-whatsapp"></i></a>
+            <a href="https://t.me/share/url?url=https://www.getopas.com{{save.post.get_absolute_url}}&text={{post.body|striptags|safe|truncatechars:280}}" target="_blank"><i class="fab fa-telegram-plane"></i></a>
+          </div>
+          <p>Or copy link</p>
+          <div class="field">
+            <i class="url-icon uil uil-link"></i>
+            <input type="text" readonly value="https://www.getopas.com{{save.post.get_absolute_url}}">
+            <button>Copy</button>
+          </div>
+        </div>
+      </div>
+      <div class="article-footer">
+        <div class="article-tags">
+          {% for tag in save.post.tags.names|truncate_tags %}
+            <a href="{% url 'editors:explore' topic=tag|slug_tag %}" class="tag">{{tag|split:" "}}</a>
+          {% endfor %}
+        </div>
+        <div class="article-actions">
+          {%  check_saved save.post.id request.user as saved %}
+          <a id="{{saved}}" class="save" href="" data-id="{{ save.post.id}}" data-action="{{saved}}">
+            <span>{{saved}}</span>
+          </a>
+          <a class="view-modal"  id="view-modal" title="Share" href="">
+            <span>Share</span>
+          </a>
+          <a title="Report" href="">
+            <span>Report</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% empty %}
+    <p>You have not saved any articles yet.</p>
+    {% endfor %}
   {% include "pagination.html" with page=saved_posts %}
-
 </div>
 <div class="sidebar-content">
   <div class="stats">
@@ -98,39 +123,76 @@
 </div>
 {% endblock content%}
 {% block domready %}
-    const url = '{% url "editors:save" %}';
-    let options = {
-        method: 'POST',
-        headers: {'X-CSRFToken': csrftoken},
-        mode: 'same-origin'
-    }
 
-      saveButtons = document.querySelectorAll('a.save')
-      saveButtons.forEach(saveButton =>{
-      saveButton.addEventListener('click', function(e){
+//Share-Modal
+const viewBtns = document.querySelectorAll("a#view-modal"),
+popup = document.querySelectorAll("#popup");
+
+if(viewBtns != null && popup != null){
+  viewBtns.forEach((viewBtn,index)=>{
+    const close = popup[index].querySelector("#close"),
+    field = popup[index].querySelector(".field"),
+    input = field.querySelector("input"),
+    copy = field.querySelector("button");
+
+    viewBtn.addEventListener("click",(e)=>{
         e.preventDefault();
+        popup[index].style.setProperty('display', 'block')
+    })
 
-        // add request body
-        let formData = new FormData();
-        formData.append('id', saveButton.dataset.id);
-        formData.append('action', saveButton.dataset.action);
-        options['body'] = formData;
+    close.addEventListener("click",()=>{
+        popup[index].style.setProperty('display', 'none')
+    })
 
-        // send HTTP request
-        fetch(url, options).then(response => response.json()).then(data => {
-          if (data['status'] === 'ok'){
-            // toggle button text and data-action
-            saveButton.innerHTML = `<span>${data['action']}</span>`;
-            if (data['action'] === 'Remove'){
-              saveButton.style.backgroundColor = "rgb(255, 136, 0)";
-              saveButton.style.color = "#fff";
-            }
-            else{
-              saveButton.style.backgroundColor = "rgba(57, 56, 56, 0.087)";
-              saveButton.style.color = "#808080";
-            }
-          }
-        });
-      });
+    copy.onclick = () => {
+      input.select(); //select input value
+      if (document.execCommand("copy")) {
+        //if the selected text copy
+        field.classList.add("active");
+        copy.innerText = "Copied";
+        setTimeout(() => {
+          window.getSelection().removeAllRanges(); //remove selection from document
+          field.classList.remove("active");
+          copy.innerText = "Copy";
+        }, 3000);
+      }
+    }
+  })
+}
+
+const url = '{% url "editors:save" %}';
+let options = {
+  method: 'POST',
+  headers: {'X-CSRFToken': csrftoken},
+  mode: 'same-origin'
+}
+
+saveButtons = document.querySelectorAll('a.save')
+saveButtons.forEach(saveButton =>{
+  saveButton.addEventListener('click', function(e){
+    e.preventDefault();
+
+    // add request body
+    let formData = new FormData();
+    formData.append('id', saveButton.dataset.id);
+    formData.append('action', saveButton.dataset.action);
+    options['body'] = formData;
+
+    // send HTTP request
+    fetch(url, options).then(response => response.json()).then(data => {
+      if (data['status'] === 'ok'){
+        // toggle button text and data-action
+        saveButton.innerHTML = `<span>${data['action']}</span>`;
+        if (data['action'] === 'Remove'){
+          saveButton.style.backgroundColor = "rgb(255, 136, 0)";
+          saveButton.style.color = "#fff";
+        }
+        else{
+          saveButton.style.backgroundColor = "rgba(57, 56, 56, 0.087)";
+          saveButton.style.color = "#808080";
+        }
+      }
     });
+  });
+});
 {% endblock %}

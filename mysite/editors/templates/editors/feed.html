@@ -48,20 +48,22 @@
 const viewBtns = document.querySelectorAll("a#view-modal-1"),
     popup = document.querySelectorAll("#popup-1");
 
-viewBtns.forEach((viewBtn,index)=>{
-    const close = popup[index].querySelector("#close-1");
+if(viewBtns != null && popup != null){
+  viewBtns.forEach((viewBtn,index)=>{
+    const close = popup[index].querySelector("#close-1"),
+    field = popup[index].querySelector(".field"),
+    input = field.querySelector("input"),
+    copy = field.querySelector("button");
 
     viewBtn.addEventListener("click",(e)=>{
         e.preventDefault();
         popup[index].style.setProperty('display', 'block')
     })
-
+  
     close.addEventListener("click",()=>{
         popup[index].style.setProperty('display', 'none')
     })
-    const field = popup[index].querySelector(".field"),
-    input = field.querySelector("input"),
-    copy = field.querySelector("button");
+  
     copy.onclick = () => {
         input.select(); //select input value
         if (document.execCommand("copy")) { //if the selected text copy
@@ -74,8 +76,9 @@ viewBtns.forEach((viewBtn,index)=>{
             }, 3000);
         }
     }
+  })
+}
 
-})
   const url = '{% url "editors:save" %}';
   let options = {
       method: 'POST',
@@ -135,38 +138,40 @@ window.addEventListener('scroll', function(e) {
                         mode: 'same-origin'
                     }
                     //Share-Modal
-                    const viewBtns = document.querySelectorAll(`#view-modal-${page}`),
-                        popup = document.querySelectorAll(`#popup-${page}`);
-
-                    viewBtns.forEach((viewBtn,index)=>{
-                        const close = popup[index].querySelector(".close"),
-                        field = popup[index].querySelector(".field"),
+                    const showBtns = document.querySelectorAll(`a#view-modal-${page}`),
+                      popups = document.querySelectorAll(`#popup-${page}`);
+                    if(showBtns != null && popups != null){
+                      showBtns.forEach((viewBtn,index)=>{
+                        const close = popups[index].querySelector(`#close-${page}`),
+                        field = popups[index].querySelector(".field"),
                         input = field.querySelector("input"),
                         copy = field.querySelector("button");
 
                         viewBtn.addEventListener("click",(e)=>{
                             e.preventDefault();
-                            popup[index].style.setProperty('display', 'block')
+                            popups[index].style.setProperty('display', 'block')
                         })
 
                         close.addEventListener("click",()=>{
-                            popup[index].style.setProperty('display', 'none')
+                            popups[index].style.setProperty('display', 'none')
                         })
 
-                        copy.onclick = () => {
-                            input.select(); //select input value
-                            if (document.execCommand("copy")) { //if the selected text copy
-                                field.classList.add("active");
-                                copy.innerText = "Copied";
-                                setTimeout(() => {
-                                    window.getSelection().removeAllRanges(); //remove selection from document
-                                    field.classList.remove("active");
-                                    copy.innerText = "Copy";
-                                }, 3000);
-                            }
-                        }
+                          copy.onclick = () => {
+                              input.select(); //select input value
+                              if (document.execCommand("copy")) { //if the selected text copy
+                                  field.classList.add("active");
+                                  copy.innerText = "Copied";
+                                  setTimeout(() => {
+                                      window.getSelection().removeAllRanges(); //remove selection from document
+                                      field.classList.remove("active");
+                                      copy.innerText = "Copy";
+                                  }, 3000);
+                              }
+                          }
 
-                    })
+                      })
+                    }
+
                     Buttons= document.querySelectorAll(`a#save-${page}`)
                     Buttons.forEach(Button =>{
                             Button.addEventListener('click', function(e){

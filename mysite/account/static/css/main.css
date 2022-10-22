@@ -637,7 +637,7 @@ main.feeds>.feed-contents>.feed-title>.icli{
 }
 main.feeds>.feed-contents>.article-wrapper{
    /* border: 1px solid rgb(0, 255, 157);*/
-    position: relative;
+   position: relative;
     display: flex;
     flex-flow: column;
     gap: 5px;
@@ -810,7 +810,8 @@ main.feeds>.feed-contents>.article-wrapper>.summery-content>.article-footer{
     align-self: flex-end;
     margin-right: 20px;
 }
-.feed-contents>.article-wrapper>.summery-content>.article-footer>.article-actions>a
+.feed-contents>.article-wrapper>.summery-content>.article-footer>.article-actions>a,
+.feed-contents>.article-wrapper>.summery-content>.article-footer>.article-actions>div
 {
     text-decoration: none;
     cursor: default;
@@ -831,6 +832,7 @@ main.feeds>.feed-contents>.article-wrapper>.summery-content>.article-footer{
     border-radius: 50px;
 
 }
+
 
 .feed-contents>.article-wrapper>.summery-content>.article-footer>.article-actions>a.Remove,
 .feed-contents>.article-wrapper>.summery-content>.article-footer>.article-actions>a#Remove{
@@ -2214,7 +2216,7 @@ main.feeds>.discover-topics>.topic-wrapper>.topic-footer>.count{
     color: var(--article-title-color);
 }
 
-.popup>.header .close,
+.popup>.header .close-element,
 .icons a {
     display: flex;
     align-items: center;
@@ -2223,7 +2225,7 @@ main.feeds>.discover-topics>.topic-wrapper>.topic-footer>.count{
     transition: all 0.3s ease-in-out;
 }
 
-.popup>.header .close {
+.popup>.header .close-element {
     color: #fff;
     font-size: 20px;
     background: var(--alt-accent-color);
@@ -2232,7 +2234,7 @@ main.feeds>.discover-topics>.topic-wrapper>.topic-footer>.count{
     cursor: pointer;
 }
 
-.popup>.header .close:hover {
+.popup>.header .close-element:hover {
     background: red;
 }
 
