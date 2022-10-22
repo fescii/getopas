@@ -1779,9 +1779,11 @@
     }
 
     .feed-contents>.article-wrapper>.summery-content>.article-footer>.article-actions>div {
-        cursor: unset;
+        cursor: default;
     }
-
+    .feed-contents>.article-wrapper>.summery-content>.article-footer>.article-actions>a{
+        cursor: default;
+    }
     /* Sidebar Content */
     main.feeds>.sidebar-content {
         order: -1;

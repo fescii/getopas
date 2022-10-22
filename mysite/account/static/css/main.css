@@ -159,6 +159,7 @@ main.feeds{
 .article-title>a{
     text-decoration: none;
     color: var(--article-title-color);
+    font-size: 1.35rem;
 }
 
 .get-more{
@@ -810,11 +811,9 @@ main.feeds>.feed-contents>.article-wrapper>.summery-content>.article-footer{
     align-self: flex-end;
     margin-right: 20px;
 }
-.feed-contents>.article-wrapper>.summery-content>.article-footer>.article-actions>a,
-.feed-contents>.article-wrapper>.summery-content>.article-footer>.article-actions>div
+.feed-contents>.article-wrapper>.summery-content>.article-footer>.article-actions>a
 {
     text-decoration: none;
-    cursor: default;
     color: var(--gray-color);
    /* border: var(--border);*/
     font-size: 16px;
@@ -822,7 +821,7 @@ main.feeds>.feed-contents>.article-wrapper>.summery-content>.article-footer{
     align-items: center;
     justify-content: center;
     gap: 5px;
-    padding: 4px 13px 4px 13px;
+    padding: 5px 13px 5px 13px;
     background-color: rgba(57, 56, 56, 0.087);
    /* background-color: var(--alt-accent-color);*/
     -webkit-border-radius: 50px;
