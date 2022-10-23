@@ -47,7 +47,7 @@ def list_users(request):
     # If page is out of range deliver last page of results
         users = paginator.page(paginator.num_pages)
     return render(request,
-                  'editors/admin/users.html',
+                  'account/admin/users.html',
                   {'users': users,
                    'user': user,
                    'profile': profile,
@@ -97,7 +97,7 @@ def moderate_user(request, user_id):
     else:
         form = ModerateUserForm(request.GET)
         return render(request,
-                          'editors/admin/edit-user.html',
+                          'account/admin/edit-user.html',
                           {'form': form,
                            'role': role,
                            'u': u,

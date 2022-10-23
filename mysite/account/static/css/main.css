@@ -1,6 +1,6 @@
 .messages{
     position: fixed;
-    top: 12%;
+    bottom: 60px;
     left: 15px;
     list-style-type: none;
     padding: 0%;
