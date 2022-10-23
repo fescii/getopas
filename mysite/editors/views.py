@@ -72,7 +72,7 @@ def explore(request,topic=None):
         tag = get_object_or_404(Tag, slug=topic)
         topic_posts = object_list.filter(tags__in=[tag])
 
-    paginator = Paginator(topic_posts, 5) # 5 posts in each page
+    paginator = Paginator(topic_posts, 8) # 5 posts in each page
     page = request.GET.get('page')
     try:
         posts = paginator.page(page)
@@ -126,7 +126,7 @@ def feeds(request):
 @login_required
 def explore_topics(request):
     # Most common tags
-    common_tags = Post.tags.most_common()[:9]
+    common_tags = Post.tags.most_common()[:15]
 
     return render(request,
                   'editors/explore-topics.html',
