@@ -101,13 +101,6 @@
                             </a>
                         </li>
                         <li class="content-link">
-                            <a class="link {% if section == 'people' %}data-active{% endif %}" href="">
-                                <span id="select"></span>
-                                <span class="iconly-User2 icli"></span>
-                                <span class="link-text">People</span>
-                            </a>
-                        </li>
-                        <li class="content-link">
                             <a class="link {% if section == 'my-list' %}data-active{% endif %}" href="{% url 'editors:my_list' %}">
                                 <span id="select"></span>
                                 <span class="iconly-Bookmark icli"></span>
@@ -115,9 +108,16 @@
                             </a>
                         </li>
                         <li class="content-link">
+                            <a class="link {% if section == 'people' %}data-active{% endif %}" href="">
+                                <span id="select"></span>
+                                <span class="iconly-User2 icli"></span>
+                                <span class="link-text">People</span>
+                            </a>
+                        </li>
+                        <li class="content-link">
                             <a class="link {% if section == 'themes' %}data-active{% endif %}" href="#">
                                 <span id="select"></span>
-                                <span class="iconly-Info-Circle icli"></span>
+                                <span class="iconly-Show icli"></span>
                                 <span class="link-text">Themes</span>
                             </a>
                         </li>
