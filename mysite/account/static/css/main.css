@@ -1,7 +1,7 @@
 .messages{
     position: fixed;
-    bottom: 60px;
-    left: 15px;
+    bottom: 55px;
+    left: 20px;
     list-style-type: none;
     padding: 0%;
     margin: 0%;
@@ -716,7 +716,7 @@ main.feeds>.feed-contents>.article-wrapper>.article-info .posted>.date{
 }
 main.feeds>.feed-contents>.article-wrapper>.article-info .posted>.icli{
     /*border: 1px solid gray;*/
-    font-size: 18px;
+    font-size: 16px;
     display: inline-block;
     padding-top: 2px;
 }
