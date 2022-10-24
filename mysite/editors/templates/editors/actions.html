@@ -1,41 +1,59 @@
 {% load thumbnail %}
+{% load blog_tags %}
 <h2>What's happening</h2>
 <div id="action-list">
 {% for action in actions %}
-    {% with user=action.user profile=action.user.profile %}
-    <div class="action">
-    <div class="posts">
-        {% if profile.photo %}
-        {% thumbnail user.profile.photo "80x80" crop="100%" as im %}
-            <a href="{{ user.get_absolute_url }}">
-                <img src="{{ im.url }}" alt="{{ user.get_full_name }}" class="item-img" />
-            </a>
-        {% else %}
-        <a href="{{ user.get_absolute_url }}">
-            <img src="https://eu.ui-avatars.com/api/?background=08b86f&name={{user.first_name}}+{{user.last_name}}&size=100&color=fff" alt="{{ user.get_full_name }}" class="item-img" />
-        </a>
-        {% endif %}
-        {% if action.target %}
-            {% with target=action.target %}
-                    <a href="{{ target.get_absolute_url }}">
-                    </a>
-            {% endwith %}
-        {% endif %}
-    </div>
-    <div class="info">
-        <p>
-        <span class="date">{{ action.created|timesince }} ago</span>
-        <br />
-        <a href="{{ user.get_absolute_url }}"> {{ user.first_name }} </a>
-        {{ action.verb }}
-        {% if action.target %}
-            {% with target=action.target %}
-                <a href="{{ target.get_absolute_url }}">{{ target }}</a>
-            {% endwith %}
-        {% endif %}
-        </p>
-    </div>
-    </div>
-    {% endwith %}
+    {% if action.target %}
+        {% with target=action.target %}
+            <div class="action">
+                {% with user=action.user profile=action.user.profile %}
+                    <div class="profile-image">
+                        {% if profile.photo %}
+                        {% thumbnail user.profile.photo "80x80" crop="100%" as im %}
+                            <a href="{{ user.get_absolute_url }}">
+                                <img src="{{ im.url }}" alt="{{ user.get_full_name }}" class="item-img" />
+                            </a>
+                        {% else %}
+                        <a href="{{ user.get_absolute_url }}">
+                            <img src="https://eu.ui-avatars.com/api/?background=08b86f&name={{user.first_name}}+{{user.last_name}}&size=100&color=fff" alt="{{ user.get_full_name }}" class="item-img" />
+                        </a>
+                        {% endif %}
+                    </div>
+                {% endwith %}
+                <div class="info">
+                    <a href="{{ user.get_absolute_url }}"> {{ user.get_full_name }} </a>
+                    {{ action.verb }}
+                    <a href="{{ target.get_absolute_url }}">{{ target }}</a>
+                </div>
+                <div class="more-info">
+                    <span class="date">{{ action.created|time_lapse }} ago</span>
+                    <span class="iconly-More-Circle icli">More</span>
+                    <div class="more-options">
+                        <a href="{{ user.get_absolute_url }}" class="delete options-item">
+                            <span class="iconly-Delete icli"></span>
+                            <div class="option-details">
+                                <span class="detail-title">Delete</span>
+                                <span class="detail-text">Delete this notification</span>
+                            </div>
+                        </a>
+                        <a href="{{ user.get_absolute_url }}" class="delete options-item">
+                            <span class="iconly-Close-Square icli"></span>
+                            <div class="option-details">
+                                <span class="detail-title">Unfollow</span>
+                                <span class="detail-text">Stop seeing John's updates</span>
+                            </div>
+                        </a>
+                        <a href="{{ user.get_absolute_url }}" class="marked options-item">
+                            <span class="iconly-Tick-Square icli"></span>
+                            <div class="option-details">
+                                <span class="detail-title">Mark</span>
+                                <span class="detail-text">Mark as read</span>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        {% endwith %}
+    {% endif %}
 {% endfor %}
 </div>

@@ -6,6 +6,8 @@ from django.db.models import Count
 from django.template.defaultfilters import slugify
 from unidecode import unidecode
 from taggit.models import Tag
+from datetime import datetime
+from datetime import timedelta
 register = template.Library()
 
 #Get Total Published Posts
@@ -109,3 +111,44 @@ def split(string, sep):
     except:
         return str(string).capitalize()
 register.filter('split',split)
+
+#Return tine-since-the-article-was-posted
+def time_lapse(posted_time):
+    time_now = datetime.now()
+    posted_time = posted_time
+    delta = time_now - posted_time
+    seconds = delta.total_seconds()
+    if(seconds < 60):
+        return f'{round(seconds)} seconds'
+    elif(seconds > 60 and seconds < 3600):
+        mins = round(seconds/60)
+        if(mins>1):
+            return f'{mins} minutes'
+        else:
+            return f'{mins} minute'
+    elif(seconds > 3600 and seconds < 86400):
+        hours = round(seconds/3600)
+        if(hours>1):
+            return f'{hours} hours'
+        else:
+            return f'{hours} hour'
+    elif(seconds > 86400 and seconds < 604800):
+        day = posted_time.strftime('%A')
+        day_time = posted_time.strftime('%H:%M')
+        return f'{day} at {day_time}'
+    elif(seconds > 604800 and seconds < 2628002):
+        days = round(seconds/604800)
+        return f'{days} days'
+    elif(seconds > 2628002 and seconds < 31536000):
+        months = round(seconds/2628002)
+        if(months>1):
+            return f'{months} months'
+        else:
+            return f'{months} month'
+    elif(seconds > 31536000):
+        years = round(seconds/31536000)
+        if(years>1):
+            return f'{years} years'
+        else:
+            return f'{years} year'
+register.filter('time_lapse',time_lapse)
