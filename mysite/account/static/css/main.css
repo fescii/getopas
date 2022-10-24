@@ -614,6 +614,7 @@ main.search>.feed-contents{
 main.feeds>.feed-contents>.feed-title{
    /* border: 1px solid rgba(18, 18, 18, 0.198);*/
     margin: 0%;
+    margin-left: 5px;
     padding:0px 0px 10px 0px ;
     display: flex;
     align-items: center;
@@ -651,7 +652,7 @@ main.feeds>.feed-contents>.article-wrapper{
     display: flex;
     flex-flow: column;
     gap: 5px;
-    margin: 15px 8px 0% 8px;
+    margin: 15px 8px 0% 0%;
     padding: 0px 0px 20px 0%;
     border-bottom: 1px solid rgba(18, 18, 18, 0.198);
 }

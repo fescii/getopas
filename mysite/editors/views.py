@@ -56,8 +56,8 @@ def dashboard(request):
                     'most_viewed':top_posts,
                     'posts_interest':posts_interest,
                     'recently_added': recently_added,
-                    'title':'opas',
-                    'section':'home'})
+                    'title':'home',
+                    'section':'opas'})
 
 #Dashboard
 @login_required

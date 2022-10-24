@@ -697,6 +697,7 @@ main.search>.dashboard-sidebar{
 }
 .linked-list>.content-link .link{
    display: flex;
+   line-height: 1.2;
    align-items: center;
    position: relative;
    padding:3px 0%;
