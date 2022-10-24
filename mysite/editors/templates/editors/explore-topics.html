@@ -89,7 +89,7 @@
       </div>
   </div>
   {% endfor %}
-  <a href="{% url 'editors:trending' %}" class="get-more">Explore more trending articles </a>
+  <a href="{% url 'editors:explore' topic=tag.slug %}" class="get-more">Explore more on this topic </a>
 </div>
 {% endfor %}
 <div class="sidebar-content">
