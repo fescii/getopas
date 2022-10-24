@@ -620,6 +620,15 @@ main.feeds>.feed-contents>.feed-title{
     justify-content: start;
     gap: 2px;
 }
+main.explore>.feed-contents>.feed-title{
+    justify-content: space-between;
+}
+main.explore>.feed-contents>.feed-title>.count{
+    color: var(--alt-accent-color);
+    margin-top: 5px;
+    font-size: 0.95rem;
+    margin-right: 10px;
+}
 main.feeds>.feed-contents>.feed-title>.section-title{
     /*border: 1px solid gray;*/
     margin: 0%;

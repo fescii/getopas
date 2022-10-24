@@ -126,14 +126,29 @@ def feeds(request):
 #Feeds Infinite Scroll.
 @login_required
 def explore_topics(request):
+    #Getting Total articles
+    object_list = Post.published.all()
+
     # Most common tags
-    common_tags = Post.tags.most_common()[:15]
+    most_common_tags = Post.tags.most_common()[:4]
+    common_tags = [int(tag.id) for tag in most_common_tags]
+
+    #Posts-in-most-common-tags
+    posts_in_tag_one = object_list.filter(tags__in=common_tags[0:1])[:5]
+    posts_in_tag_two = object_list.filter(tags__in=common_tags[1:2])[:5]
+    posts_in_tag_three = object_list.filter(tags__in=common_tags[2:3])[:5]
+    posts_in_tag_four = object_list.filter(tags__in=common_tags[3:4])[:5]
+
 
     return render(request,
                   'editors/explore-topics.html',
                   {'title': 'topics',
                    'section': 'explore',
-                   'common_tags': common_tags})
+                   'tag_one_posts': posts_in_tag_one,
+                   'tag_two_posts': posts_in_tag_two,
+                   'tag_three_posts': posts_in_tag_three,
+                   'tag_four_posts': posts_in_tag_four,
+                   'common_tags': most_common_tags})
 
 #Feeds Interests.
 @login_required
