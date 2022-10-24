@@ -56,7 +56,7 @@ def dashboard(request):
                     'most_viewed':top_posts,
                     'posts_interest':posts_interest,
                     'recently_added': recently_added,
-                    'title':'home',
+                    'title':'opas',
                     'section':'home'})
 
 #Dashboard
@@ -114,12 +114,13 @@ def feeds(request):
     if post_only:
         return render(request,
         'editors/list-feeds.html',
-        {'section': 'feeds',
+        {'section': 'articles',
          'posts': posts})
 
     return render(request,
                   'editors/feed.html',
                   {'title': 'feeds',
+                   'section': 'articles',
                    'posts': posts})
 
 #Feeds Infinite Scroll.
@@ -162,12 +163,13 @@ def interest(request):
     if post_only:
         return render(request,
         'editors/list-feeds.html',
-        {'section': 'feeds',
+        {'section': 'articles',
          'posts': posts})
 
     return render(request,
                   'editors/feed.html',
                   {'title': 'interests',
+                   'section': 'articles',
                    'posts': posts})
 
 #Feeds Infinite Scroll.
@@ -192,12 +194,13 @@ def trending(request):
     if post_only:
         return render(request,
         'editors/list-feeds.html',
-        {'section': 'feeds',
+        {'section': 'articles',
          'posts': posts})
 
     return render(request,
                   'editors/feed.html',
                   {'title': 'trending',
+                   'section': 'articles',
                    'posts': posts})
 
 #Feeds Infinite Scroll.
@@ -222,12 +225,13 @@ def recent(request):
     if post_only:
         return render(request,
         'editors/list-feeds.html',
-        {'section': 'feeds',
+        {'section': 'articles',
          'posts': posts})
 
     return render(request,
                   'editors/feed.html',
                   {'title': 'recent',
+                   'section': 'articles',
                    'posts': posts})
 
 
