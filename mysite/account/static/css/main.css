@@ -12,7 +12,7 @@
     position: relative;
     padding: 5px 15px;
     margin: 5px;
-    font-size: 1rem;
+    font-size: 1.15rem;
     background-color: var(--accent-color);
     box-shadow: var(--box-shadow);
 }
@@ -716,9 +716,9 @@ main.feeds>.feed-contents>.article-wrapper>.article-info .posted>.date{
 }
 main.feeds>.feed-contents>.article-wrapper>.article-info .posted>.icli{
     /*border: 1px solid gray;*/
-    font-size: 16px;
+    font-size: 0.9rem;
     display: inline-block;
-    padding-top: 2px;
+    padding-top: 3px;
 }
 /* Summery Content Info*/
 main.feeds>.feed-contents>.article-wrapper>.summery-content{
