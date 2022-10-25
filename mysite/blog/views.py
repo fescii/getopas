@@ -71,7 +71,7 @@ def post_detail(request, year, month, day, slug):
                 new_comment.author = user
                 #Save the comment to the database
                 new_comment.save()
-                create_action(request.user, 'commented on', post)
+                create_action(request.user, 'commented on','comment', post)
             else:
                 comment_form = BlogCommentForm()
         else:

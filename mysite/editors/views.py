@@ -260,7 +260,7 @@ def actions(request):
         # If user is following others, retrieve only their actions
         actions = actions.filter(user_id__in=following_ids)
         actions = actions.select_related('user', 'user__profile')\
-            .prefetch_related('target')[:10]
+            .prefetch_related('target')
     return render(request,
                   'editors/actions.html',
                   {'section': 'notifications',
@@ -304,12 +304,12 @@ def save_post(request):
             try:
                 saved_post = Bookmark.objects.get(post=post,user=request.user)
                 saved_post.delete()
-                create_action(request.user, 'remove from saved', post)
+                create_action(request.user, 'remove from saved','remove', post)
                 return JsonResponse({'status': 'ok','action': 'Save'})
             except Bookmark.DoesNotExist:
                 bookmark = Bookmark.objects.create(post=post,user=request.user)
                 bookmark.save()
-                create_action(request.user, 'saved article', post)
+                create_action(request.user, 'saved article','save', post)
                 return JsonResponse({'status': 'ok','action': 'Remove'})
         except Post.DoesNotExist:
             pass
@@ -330,7 +330,7 @@ def create_post(request):
             post.author = request.user
             post.save()
             post_form.save_m2m()
-            create_action(request.user, 'created', post)
+            create_action(request.user, 'added article','create', post)
             messages.success(request, 'Blog Post Created Successfully')
             return HttpResponseRedirect(reverse('editors:user_post_list'))
         else:

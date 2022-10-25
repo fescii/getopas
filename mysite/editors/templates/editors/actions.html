@@ -13,59 +13,71 @@
         {% if action.target %}
             {% with target=action.target %}
                 <div class="action {% if action.status == 'unread' %}unread{% endif %}">
-                    {% with user=action.user profile=action.user.profile %}
+                    {% with auser=action.user profile=action.user.profile %}
                         <div class="profile-image">
                             {% if profile.photo %}
-                            {% thumbnail user.profile.photo "80x80" crop="100%" as im %}
-                                <a href="{{ user.get_absolute_url }}">
-                                    <img src="{{ im.url }}" alt="{{ user.get_full_name }}" class="item-img" />
+                                {% thumbnail auser.profile.photo "80x80" crop="100%" as im %}
+                                <a href="{{ auser.get_absolute_url }}">
+                                    <img src="{{ im.url }}" alt="{{ auser.get_full_name }}" class="item-img" />
                                 </a>
                             {% else %}
-                            <a href="{{ user.get_absolute_url }}">
-                                <img src="https://eu.ui-avatars.com/api/?background=08b86f&name={{user.first_name}}+{{user.last_name}}&size=100&color=fff" alt="{{ user.get_full_name }}" class="item-img" />
+                            <a href="{{ auser.get_absolute_url }}">
+                                <img src="https://eu.ui-avatars.com/api/?background=08b86f&name={{auser.first_name}}+{{auser.last_name}}&size=100&color=fff" alt="{{ user.get_full_name }}" class="item-img" />
                             </a>
                             {% endif %}
-                            <span class="iconly-Paper-Plus icli"></span>
+                            {% if action.type == 'create'%}
+                                <span class="iconly-Paper-Plus icli"></span>
+                            {% elif action.type == 'save'%}
+                                <span class="iconly-Paper-Plus icli"></span>
+                            {% elif action.type == 'remove'%}
+                                <span class="iconly-Paper-Negative icli"></span>
+                            {% elif action.type == 'follow'%}
+                                <span class="iconly-Add-User icli"></span>
+                            {% elif action.type == 'comment'%}
+                                <span class="iconly-Chat icli"></span>
+                            {% else %}
+                                <span class="iconly-Notification icli"></span>
+                            {% endif %}
+                        </div>
+                        <div class="info">
+                            <a href="{{ auser.get_absolute_url }}" class="name"> {{ auser.get_full_name }} </a>
+                            {{ action.verb }}
+                            <a href="{{ target.get_absolute_url }}" class="info-to">{{ target }}</a>
+                        </div>
+                        <div class="date">
+                            {{ action.created|time_lapse }}
+                        </div>
+                        <div class="more-info">
+                            <div class="three-dots">
+                                <span class="dot"></span>
+                                <span class="dot"></span>
+                                <span class="dot"></span>
+                            </div>
+                            <div class="more-options">
+                                <a href="{{ user.get_absolute_url }}" class="delete options-item">
+                                    <span class="iconly-Delete icli"></span>
+                                    <div class="option-details">
+                                        <span class="detail-title">Delete</span>
+                                        <span class="detail-text">Delete this notification</span>
+                                    </div>
+                                </a>
+                                <a href="{{ user.get_absolute_url }}" class="delete options-item">
+                                    <span class="iconly-Close-Square icli"></span>
+                                    <div class="option-details">
+                                        <span class="detail-title">Unfollow</span>
+                                        <span class="detail-text">Stop seeing John's updates</span>
+                                    </div>
+                                </a>
+                                <a href="{{ user.get_absolute_url }}" class="marked options-item">
+                                    <span class="iconly-Tick-Square icli"></span>
+                                    <div class="option-details">
+                                        <span class="detail-title">Mark</span>
+                                        <span class="detail-text">Mark as read</span>
+                                    </div>
+                                </a>
+                            </div>
                         </div>
                     {% endwith %}
-                    <div class="info">
-                        <a href="{{ user.get_absolute_url }}" class="name"> {{ user.get_full_name }} </a>
-                        {{ action.verb }}
-                        <a href="{{ target.get_absolute_url }}" class="info-to">{{ target }}</a>
-                    </div>
-                    <div class="date">
-                        {{ action.created|time_lapse }} ago
-                    </div>
-                    <div class="more-info">
-                        <div class="three-dots">
-                            <span class="dot"></span>
-                            <span class="dot"></span>
-                            <span class="dot"></span>
-                        </div>
-                        <div class="more-options">
-                            <a href="{{ user.get_absolute_url }}" class="delete options-item">
-                                <span class="iconly-Delete icli"></span>
-                                <div class="option-details">
-                                    <span class="detail-title">Delete</span>
-                                    <span class="detail-text">Delete this notification</span>
-                                </div>
-                            </a>
-                            <a href="{{ user.get_absolute_url }}" class="delete options-item">
-                                <span class="iconly-Close-Square icli"></span>
-                                <div class="option-details">
-                                    <span class="detail-title">Unfollow</span>
-                                    <span class="detail-text">Stop seeing John's updates</span>
-                                </div>
-                            </a>
-                            <a href="{{ user.get_absolute_url }}" class="marked options-item">
-                                <span class="iconly-Tick-Square icli"></span>
-                                <div class="option-details">
-                                    <span class="detail-title">Mark</span>
-                                    <span class="detail-text">Mark as read</span>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
                 </div>
             {% endwith %}
         {% endif %}

@@ -234,10 +234,10 @@ def user_follow(request):
             user = User.objects.get(id=user_id)
             if action == 'Unfollow':
                 Contact.objects.filter(user_from=request.user,user_to=user).delete()
-                create_action(request.user, 'unfollowed', user)
+                create_action(request.user, 'unfollowed','follow', user)
             else:
                 Contact.objects.get_or_create(user_from=request.user,user_to=user)
-                create_action(request.user, 'is following', user)
+                create_action(request.user, 'is following','follow', user)
             return JsonResponse({'status':'ok'})
         except User.DoesNotExist:
             return JsonResponse({'status':'error'})

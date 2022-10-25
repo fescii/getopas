@@ -4,7 +4,7 @@ from django.contrib.contenttypes.models import ContentType
 from .models import Action
 
 
-def create_action(user, verb, target=None):
+def create_action(user, verb,type, target=None):
     # check for any similar action made in the last minute
     now = timezone.now()
     last_minute = now - datetime.timedelta(seconds=60)
@@ -19,6 +19,7 @@ def create_action(user, verb, target=None):
         # no existing actions found
         action = Action(user=user,
                         verb=verb,
+                        type=type,
                         target=target)
         action.save()
         return True

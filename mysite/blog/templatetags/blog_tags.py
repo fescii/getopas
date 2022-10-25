@@ -119,36 +119,36 @@ def time_lapse(posted_time):
     delta = time_now - posted_time
     seconds = delta.total_seconds()
     if(seconds < 60):
-        return f'{round(seconds)} seconds'
+        return f'{round(seconds)} seconds ago'
     elif(seconds > 60 and seconds < 3600):
         mins = round(seconds/60)
         if(mins>1):
-            return f'{mins} minutes'
+            return f'{mins} minutes ago'
         else:
-            return f'{mins} minute'
+            return f'{mins} minute ago'
     elif(seconds > 3600 and seconds < 86400):
         hours = round(seconds/3600)
         if(hours>1):
-            return f'{hours} hours'
+            return f'{hours} hours ago'
         else:
-            return f'{hours} hour'
+            return f'{hours} hour ago'
     elif(seconds > 86400 and seconds < 604800):
         day = posted_time.strftime('%A')
         day_time = posted_time.strftime('%H:%M')
         return f'{day} at {day_time}'
     elif(seconds > 604800 and seconds < 2628002):
-        days = round(seconds/604800)
-        return f'{days} days'
+        days = delta.days
+        return f'{days} days ago'
     elif(seconds > 2628002 and seconds < 31536000):
         months = round(seconds/2628002)
         if(months>1):
-            return f'{months} months'
+            return f'{months} months ago'
         else:
-            return f'{months} month'
+            return f'{months} month ago'
     elif(seconds > 31536000):
         years = round(seconds/31536000)
         if(years>1):
-            return f'{years} years'
+            return f'{years} years ago'
         else:
-            return f'{years} year'
+            return f'{years} year ago'
 register.filter('time_lapse',time_lapse)

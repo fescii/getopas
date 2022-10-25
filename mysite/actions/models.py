@@ -10,6 +10,7 @@ class Action(models.Model):
     status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='unread')
     user = models.ForeignKey('auth.User',related_name='actions',on_delete=models.CASCADE)
     verb = models.CharField(max_length=255)
+    type = models.CharField(max_length=255)
     created = models.DateTimeField(auto_now_add=True)
     target_ct = models.ForeignKey(ContentType,
                                   blank=True,

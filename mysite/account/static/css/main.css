@@ -2385,8 +2385,9 @@ main.feeds>.notifications{
     gap: 5px;
 }
 main.feeds>.notifications>.action{
-   /* border:  1px solid yellowgreen;*/
-    /*box-shadow: 0rem 2rem 1.5rem #748f740e;*/
+    /*border:  1px solid yellowgreen;
+    *//*box-shadow: 0rem 2rem 1.5rem #748f740e;
+    */border-radius: 5px;
     padding: 8px 5px 8px 5px;
     display: grid;
     align-items: center;
@@ -2415,7 +2416,6 @@ main.feeds>.notifications>.action>.profile-image>span{
     display: inline-block;
     padding: 0.28rem 0px 0.2rem 0.22rem;
     font-weight: bold;
-    z-index: 1;
     bottom: -3px;
     right: -2px;
     font-size: 16px;
@@ -2510,13 +2510,13 @@ main.feeds>.notifications>.action>.more-info>.more-options{
     position: absolute;
     right: 0%;
     top: 40px;
+    z-index: 1;
     width: max-content;
     flex-flow: column;
     gap: 5px;
     border: var(--border);
     box-shadow: var(--box-shadow);
     background-color: var(--background-color);
-    z-index: 1;
     border-top-left-radius: 10px;
     border-bottom-right-radius: 10px;
     border-bottom-left-radius: 10px;
@@ -2552,8 +2552,8 @@ main.feeds>.notifications>.action>.more-info>.more-options>.options-item>.option
 }
 main.feeds>.notifications>.action>.more-info>.more-options>.options-item>.icli{
     color:  var(--gray-color);
-    font-size: 26px;
-    padding-top: 5px;
+    font-size: 30px;
+    padding-top: 0px;
 }
 main.feeds>.notifications>.action>.more-info>.more-options>.options-item>.option-details>.detail-title{
     font-size: 1rem;
