@@ -1,59 +1,132 @@
-{% load thumbnail %}
+{% extends "base.html" %}
+{% load static %}
 {% load blog_tags %}
-<h2>What's happening</h2>
-<div id="action-list">
-{% for action in actions %}
-    {% if action.target %}
-        {% with target=action.target %}
-            <div class="action">
-                {% with user=action.user profile=action.user.profile %}
-                    <div class="profile-image">
-                        {% if profile.photo %}
-                        {% thumbnail user.profile.photo "80x80" crop="100%" as im %}
+{% load thumbnail %}
+{% block content %}
+{% include "editors/feeds-header.html" %}
+<div  class="notifications feed-contents">
+    <div class="feed-title">
+        <div class="section-title">{{title|capfirst}}</div>
+        <i class="iconly-Arrow-Right-Circle icli"></i>
+      </div>
+    {% for action in actions %}
+        {% if action.target %}
+            {% with target=action.target %}
+                <div class="action {% if action.status == 'unread' %}unread{% endif %}">
+                    {% with user=action.user profile=action.user.profile %}
+                        <div class="profile-image">
+                            {% if profile.photo %}
+                            {% thumbnail user.profile.photo "80x80" crop="100%" as im %}
+                                <a href="{{ user.get_absolute_url }}">
+                                    <img src="{{ im.url }}" alt="{{ user.get_full_name }}" class="item-img" />
+                                </a>
+                            {% else %}
                             <a href="{{ user.get_absolute_url }}">
-                                <img src="{{ im.url }}" alt="{{ user.get_full_name }}" class="item-img" />
+                                <img src="https://eu.ui-avatars.com/api/?background=08b86f&name={{user.first_name}}+{{user.last_name}}&size=100&color=fff" alt="{{ user.get_full_name }}" class="item-img" />
                             </a>
-                        {% else %}
-                        <a href="{{ user.get_absolute_url }}">
-                            <img src="https://eu.ui-avatars.com/api/?background=08b86f&name={{user.first_name}}+{{user.last_name}}&size=100&color=fff" alt="{{ user.get_full_name }}" class="item-img" />
-                        </a>
-                        {% endif %}
+                            {% endif %}
+                            <span class="iconly-Paper-Plus icli"></span>
+                        </div>
+                    {% endwith %}
+                    <div class="info">
+                        <a href="{{ user.get_absolute_url }}" class="name"> {{ user.get_full_name }} </a>
+                        {{ action.verb }}
+                        <a href="{{ target.get_absolute_url }}" class="info-to">{{ target }}</a>
                     </div>
-                {% endwith %}
-                <div class="info">
-                    <a href="{{ user.get_absolute_url }}"> {{ user.get_full_name }} </a>
-                    {{ action.verb }}
-                    <a href="{{ target.get_absolute_url }}">{{ target }}</a>
-                </div>
-                <div class="more-info">
-                    <span class="date">{{ action.created|time_lapse }} ago</span>
-                    <span class="iconly-More-Circle icli">More</span>
-                    <div class="more-options">
-                        <a href="{{ user.get_absolute_url }}" class="delete options-item">
-                            <span class="iconly-Delete icli"></span>
-                            <div class="option-details">
-                                <span class="detail-title">Delete</span>
-                                <span class="detail-text">Delete this notification</span>
-                            </div>
-                        </a>
-                        <a href="{{ user.get_absolute_url }}" class="delete options-item">
-                            <span class="iconly-Close-Square icli"></span>
-                            <div class="option-details">
-                                <span class="detail-title">Unfollow</span>
-                                <span class="detail-text">Stop seeing John's updates</span>
-                            </div>
-                        </a>
-                        <a href="{{ user.get_absolute_url }}" class="marked options-item">
-                            <span class="iconly-Tick-Square icli"></span>
-                            <div class="option-details">
-                                <span class="detail-title">Mark</span>
-                                <span class="detail-text">Mark as read</span>
-                            </div>
-                        </a>
+                    <div class="date">
+                        {{ action.created|time_lapse }} ago
+                    </div>
+                    <div class="more-info">
+                        <div class="three-dots">
+                            <span class="dot"></span>
+                            <span class="dot"></span>
+                            <span class="dot"></span>
+                        </div>
+                        <div class="more-options">
+                            <a href="{{ user.get_absolute_url }}" class="delete options-item">
+                                <span class="iconly-Delete icli"></span>
+                                <div class="option-details">
+                                    <span class="detail-title">Delete</span>
+                                    <span class="detail-text">Delete this notification</span>
+                                </div>
+                            </a>
+                            <a href="{{ user.get_absolute_url }}" class="delete options-item">
+                                <span class="iconly-Close-Square icli"></span>
+                                <div class="option-details">
+                                    <span class="detail-title">Unfollow</span>
+                                    <span class="detail-text">Stop seeing John's updates</span>
+                                </div>
+                            </a>
+                            <a href="{{ user.get_absolute_url }}" class="marked options-item">
+                                <span class="iconly-Tick-Square icli"></span>
+                                <div class="option-details">
+                                    <span class="detail-title">Mark</span>
+                                    <span class="detail-text">Mark as read</span>
+                                </div>
+                            </a>
+                        </div>
                     </div>
                 </div>
-            </div>
-        {% endwith %}
-    {% endif %}
-{% endfor %}
+            {% endwith %}
+        {% endif %}
+    {% endfor %}
 </div>
+{% for action in actions %}
+
+{% endfor %}
+<div class="sidebar-content">
+    <div class="stats">
+      <h3 class="stats-title">My Stats</h3>
+      <div class="stats-today">
+        <h4 class="today">Impressions</h4>
+        <p class="today-stats">
+          <span class="iconly-Show icbo"></span>{{ request.user|get_views }} View{{ request.user|get_views| pluralize }}
+        </p>
+      </div>
+      <div class="stats-month">
+        <h4 class="month">Engagements</h4>
+        <p class="month-stats">
+          <span class="iconly-User2 icbo"></span>{{ request.user|get_comments }} Comment{{ request.user|get_comments | pluralize }}
+        </p>
+      </div>
+      <a href=" {% url 'editors:user_post_list' %}" class="go-to-articles"
+        >See your articles performance
+        <span class="iconly-Arrow-Right icli"></span>
+      </a>
+    </div>
+    <div class="topics">
+      <h2 class="sidebar-title">Discover Topics</h2>
+      <ul class="topic-list">
+        {% show_most_common_tags %}
+      </ul>
+    </div>
+</div>
+{% endblock content%}
+{% block domready %}
+    // Notification-actions
+    actionBtns = document.querySelectorAll('.three-dots')
+    actionModals = document.querySelectorAll('.more-options')
+    if (actionBtns != null && actionModals != null) {
+        actionBtns.forEach((actionBtn,index)=>{
+            actionBtn.addEventListener('click', (e) => {
+                modal = actionModals[index]
+                if (modal.style.display === 'flex') {
+                    modal.style.setProperty('display', 'none')
+                    actionBtn.style.backgroundColor = 'transparent'
+                }
+                else {
+                    try{
+                        actionModals.forEach((actionModal,index)=>{
+                            actionBtns[index].style.backgroundColor = 'transparent'
+                            actionModal.style.display = 'none'
+                        })
+                    }
+                    finally{
+                        modal.style.setProperty('display', 'flex')
+                        actionBtn.style.backgroundColor = 'rgba(174, 173, 173, 0.149)'
+                    }
+                }
+            })
+        })
+    }
+{% endblock domready%}

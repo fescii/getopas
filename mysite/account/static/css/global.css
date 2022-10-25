@@ -69,7 +69,8 @@ body{
 
         --background-color:#fff;
         --body-background-color: #f1f6f7;
-        --box-shadow: 0rem 2rem 1.5rem #748f740e;
+        --box-shadow: 0 12px 48px rgba(109,117,141,0.2);
+       /* --box-shadow: 0rem 2rem 1.5rem #748f740e;*/
         --border: 1px solid #83858442;
 
         --border-color: #05e98a70;

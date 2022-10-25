@@ -263,7 +263,8 @@ def actions(request):
             .prefetch_related('target')[:10]
     return render(request,
                   'editors/actions.html',
-                  {'section': 'notification',
+                  {'section': 'notifications',
+                   'title': 'notifications',
                    'actions': actions})
 
 #Saved-Posts
