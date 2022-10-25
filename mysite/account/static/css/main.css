@@ -2382,7 +2382,7 @@ main.feeds>.notifications{
     background-color: white;
     display: flex;
     flex-flow: column;
-    gap: 5px;
+    gap: 10px;
 }
 main.feeds>.notifications>.action{
     /*border:  1px solid yellowgreen;
