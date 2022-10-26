@@ -261,6 +261,16 @@ def actions(request):
         actions = actions.filter(user_id__in=following_ids)
         actions = actions.select_related('user', 'user__profile')\
             .prefetch_related('target')
+
+    paginator = Paginator(actions, 12)
+    page = request.GET.get('page')
+    try:
+        actions = paginator.page(page)
+    except PageNotAnInteger:
+        # If page is not an integer deliver the first page
+        actions = paginator.page(1)
+    except EmptyPage:
+        actions = paginator.page(paginator.num_pages)
     return render(request,
                   'editors/actions.html',
                   {'section': 'notifications',
