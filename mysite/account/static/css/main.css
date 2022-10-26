@@ -978,7 +978,7 @@ main.search>.sidebar-content{
     text-shadow: 0.3rem 0.5rem 1rem #94eb09;
 }
 .stats>.go-to-articles{
-    margin-top: 30px;
+    margin-top: 20px;
     grid-column: 1/4;
    /* border: 1px solid rgb(82, 207, 24);*/
     text-decoration: none;
