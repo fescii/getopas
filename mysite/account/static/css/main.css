@@ -2393,6 +2393,7 @@ main.feeds>.notifications>.action{
     align-items: center;
     grid-template-columns: 55px 1fr 100px;
     grid-template-rows: max-content;
+    cursor: pointer;
 }
 main.feeds>.notifications>.unread{
     background-color: rgba(226, 227, 227, 0.309);

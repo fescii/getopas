@@ -302,7 +302,7 @@ def my_list(request):
                     'title': 'My List',
                     'section': 'my-list'})
 
-#   Add-Post-To-My-list
+#Add-Post-To-My-list
 @login_required
 @require_POST
 def save_post(request):
@@ -325,6 +325,25 @@ def save_post(request):
             pass
     return JsonResponse({'status': 'error'})
 
+#   Add-Post-To-My-list
+@login_required
+@require_POST
+def notification_action(request):
+    action_id = request.POST.get('id')
+    action = request.POST.get('action')
+    if action_id and action:
+        if(action == 'delete'):
+            try:
+                action = Action.objects.get(id=action_id)
+                action.delete()
+                return JsonResponse({'status': 'deleted','action': 'deleted'})
+            except Action.DoesNotExist:
+                pass
+        elif(action == 'read'):
+            pass
+        elif(action == 'unread'):
+            pass
+    return JsonResponse({'status': 'error'})
 
 @login_required
 def create_post(request):

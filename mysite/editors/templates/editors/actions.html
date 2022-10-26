@@ -12,7 +12,7 @@
     {% for action in actions %}
         {% if action.target %}
             {% with target=action.target %}
-                <div class="action {% if action.status == 'unread' %}unread{% endif %}">
+                <div id="action-{{ action.id }}" class="action {% if action.status == 'unread' %}unread{% endif %}">
                     {% with auser=action.user profile=action.user.profile %}
                         <div class="profile-image">
                             {% if profile.photo %}
@@ -54,21 +54,21 @@
                                 <span class="dot"></span>
                             </div>
                             <div class="more-options">
-                                <a href="{{ user.get_absolute_url }}" class="delete options-item">
+                                <a href="" class="delete options-item" data-id="{{ action.id }}" data-action="delete">
                                     <span class="iconly-Delete icli"></span>
                                     <div class="option-details">
                                         <span class="detail-title">Delete</span>
                                         <span class="detail-text">Delete this notification</span>
                                     </div>
                                 </a>
-                                <a href="{{ user.get_absolute_url }}" class="delete options-item">
+                                <a href="" class="delete options-item">
                                     <span class="iconly-Close-Square icli"></span>
                                     <div class="option-details">
                                         <span class="detail-title">Unfollow</span>
                                         <span class="detail-text">Stop seeing John's updates</span>
                                     </div>
                                 </a>
-                                <a href="{{ user.get_absolute_url }}" class="marked options-item">
+                                <a href="" class="marked options-item">
                                     <span class="iconly-Tick-Square icli"></span>
                                     <div class="option-details">
                                         <span class="detail-title">Mark</span>
@@ -113,8 +113,16 @@
 </div>
 {% endblock content%}
 {% block domready %}
+    const url = '{% url "editors:notification_action" %}';
+    let options = {
+    method: 'POST',
+    headers: {'X-CSRFToken': csrftoken},
+    mode: 'same-origin'
+    }
+
     // Notification-actions
     actionBtns = document.querySelectorAll('.three-dots')
+    deleteBtns = document.querySelectorAll('a.delete')
     actionModals = document.querySelectorAll('.more-options')
     if (actionBtns != null && actionModals != null) {
         actionBtns.forEach((actionBtn,index)=>{
@@ -136,6 +144,31 @@
                         actionBtn.style.backgroundColor = 'rgba(174, 173, 173, 0.149)'
                     }
                 }
+            })
+        })
+    }
+
+    //Delete-action
+    if (deleteBtns != null) {
+        deleteBtns.forEach((actionBtn,index)=>{
+            actionBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                notification = document.querySelector(`#action-${actionBtn.dataset.id}`)
+
+                // add request body
+                let formData = new FormData();
+                formData.append('id', actionBtn.dataset.id);
+                formData.append('action', actionBtn.dataset.action);
+                options['body'] = formData;
+
+                // send HTTP request
+                fetch(url, options)
+                .then(response => response.json())
+                .then(data => {
+                    if (data['status'] === 'deleted'){
+                        notification.remove()
+                    }
+                })
             })
         })
     }
