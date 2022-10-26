@@ -133,18 +133,18 @@ header #start{
 #text-count{
   display: inline-block;
   /*border: var(--border);*/
-  border: 1px solid #1dbd7a7c;
+   border: 1px solid #1dbd7a7c;
  /* background-color: var(--alt-accent-color);*/
-  width: 16px;
+  width: 19px;
   height: 16px;
   background-color: white;
-  color: var(--accent-color);
+  color: var(--alt-accent-color);
   font-weight: bold;
   text-align: center;
   padding-top: 5%;
   position: absolute;
   font-size: 0.7rem;
-  top: 0px;
+  top: 2px;
   right: -1px;
   -webkit-border-radius: 50px;
   -moz-border-radius: 50px;

@@ -1,7 +1,15 @@
 {% load thumbnail %}
+{% load blog_tags %}
 <div class="profile-section">
     <span class="iconly-Notification icbo">
-        <span id="text-count">5</span>
+      {%  total_unread as unread %}
+      {% if unread == 9 %}
+      <span id="text-count">{{unread}}+</span>
+      {% elif unread == 0%}
+      <span id="text-count">0</span>
+      {% else %}
+      <span id="text-count">{{unread}}</span
+      {% endif %}
     </span>
     <div id="dropdown-btn" class="profile-image-wrapper">
         <span class="active-status">

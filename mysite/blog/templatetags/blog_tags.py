@@ -18,6 +18,20 @@ register = template.Library()
 def total_posts():
     return Post.published.count()
 
+#Get Total Unread Notification
+@register.simple_tag
+def total_unread():
+    try:
+        total = Action.objects.filter(status='Unread').count()
+        if total>9:
+            return 9
+        elif total>0 and total<10:
+            return total
+        elif total<1:
+            return 0
+    except:
+        pass
+
 #Get five latest posts
 @register.simple_tag
 def show_latest_posts(count=5):

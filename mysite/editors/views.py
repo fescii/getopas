@@ -263,7 +263,7 @@ def actions(request):
         actions = actions.select_related('user', 'user__profile')\
             .prefetch_related('target')
 
-    paginator = Paginator(actions, 12)
+    paginator = Paginator(actions, 10)
     page = request.GET.get('page')
     try:
         actions = paginator.page(page)
