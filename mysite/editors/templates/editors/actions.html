@@ -82,8 +82,8 @@
             {% endwith %}
         {% endif %}
     {% endfor %}
+    {% include "pagination.html" with page=actions %}
 </div>
-{% include "pagination.html" with page=actions %}
 <div class="sidebar-content">
     <div class="stats">
       <h3 class="stats-title">My Stats</h3>

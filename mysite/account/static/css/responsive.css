@@ -2162,6 +2162,7 @@
         font-size: 0.9rem;
     }
     /*Notification*/
+    .pagination > .step-links > a,
     main.feeds>.notifications>.action>.more-info>.more-options>.options-item,
     main.feeds>.notifications>.action>.profile-image>a,
     main.feeds>.notifications>.action>.info>a,
