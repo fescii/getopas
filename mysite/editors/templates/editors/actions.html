@@ -54,25 +54,31 @@
                                 <span class="dot"></span>
                             </div>
                             <div class="more-options">
-                                <a href="" class="delete options-item" data-id="{{ action.id }}" data-action="delete">
+                                <a href="" class="delete options-item" data-user="{{ auser.id }}" data-id="{{ action.id }}" data-action="delete">
                                     <span class="iconly-Delete icli"></span>
                                     <div class="option-details">
                                         <span class="detail-title">Delete</span>
                                         <span class="detail-text">Delete this notification</span>
                                     </div>
                                 </a>
-                                <a href="" class="delete options-item">
+                                {%  check_follow auser.id request.user as follow %}
+                                <a href="" class="follow options-item" data-user="{{ auser.id }}" data-id="{{ action.id }}" data-action="{{follow|capfirst}}">
                                     <span class="iconly-Close-Square icli"></span>
                                     <div class="option-details">
-                                        <span class="detail-title">Unfollow</span>
-                                        <span class="detail-text">Stop seeing John's updates</span>
+                                        <span class="detail-title">{{follow|capfirst}}</span>
+                                        {% if follow == "follow" %}
+                                        <span class="detail-text">Start seeing {{auser.first_name|lower}}'s updates again</span>
+                                        {% else %}
+                                        <span class="detail-text">Stop seeing {{auser.first_name|lower}}'s updates</span>
+                                        {% endif %}
                                     </div>
                                 </a>
-                                <a href="" class="marked options-item">
+                                {%  check_read action.id  as read %}
+                                <a href="" class="marked options-item" data-user="{{ auser.id }}" data-id="{{ action.id }}" data-action="{{read}}">
                                     <span class="iconly-Tick-Square icli"></span>
                                     <div class="option-details">
                                         <span class="detail-title">Mark</span>
-                                        <span class="detail-text">Mark as read</span>
+                                        <span class="detail-text">Mark as {{read}}</span>
                                     </div>
                                 </a>
                             </div>
@@ -123,7 +129,10 @@
     // Notification-actions
     actionBtns = document.querySelectorAll('.three-dots')
     deleteBtns = document.querySelectorAll('a.delete')
+    followBtns = document.querySelectorAll('a.follow')
+    markBtns = document.querySelectorAll('a.marked')
     actionModals = document.querySelectorAll('.more-options')
+
     if (actionBtns != null && actionModals != null) {
         actionBtns.forEach((actionBtn,index)=>{
             actionBtn.addEventListener('click', (e) => {
@@ -159,6 +168,7 @@
                 let formData = new FormData();
                 formData.append('id', actionBtn.dataset.id);
                 formData.append('action', actionBtn.dataset.action);
+                formData.append('user', actionBtn.dataset.user);
                 options['body'] = formData;
 
                 // send HTTP request
@@ -167,6 +177,74 @@
                 .then(data => {
                     if (data['status'] === 'deleted'){
                         notification.remove()
+                    }
+                })
+            })
+        })
+    }
+
+    //Follow-action
+    if (followBtns != null) {
+        followBtns.forEach((followBtn,index)=>{
+            followBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                follow = followBtn.querySelector('.detail-title')
+                follow_text = followBtn.querySelector('.detail-text')
+
+                // add request body
+                let formData = new FormData();
+                formData.append('id', followBtn.dataset.id);
+                formData.append('action', followBtn.dataset.action);
+                formData.append('user', followBtn.dataset.user);
+                options['body'] = formData;
+
+                // send HTTP request
+                fetch(url, options)
+                .then(response => response.json())
+                .then(data => {
+                    if (data['status'] === 'unfollowed'){
+                        followBtn.dataset.action = data['action']
+                        follow.textContent = `${data['action']}`
+                        follow_text.textContent = `Start seeing ${data['user']}'s updates again`
+                    }
+                    else if(data['status'] === 'followed'){
+                        followBtn.dataset.action = data['action']
+                        follow.textContent = `${data['action']}`
+                        follow_text.textContent = `Stop seeing ${data['user']}'s updates`
+                    }
+                })
+            })
+        })
+    }
+
+    //Mark-action
+    if (markBtns != null) {
+        markBtns.forEach((markBtn,index)=>{
+            markBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                notification = document.querySelector(`#action-${markBtn.dataset.id}`)
+                mark_text = markBtn.querySelector('.detail-text')
+
+                // add request body
+                let formData = new FormData();
+                formData.append('id', markBtn.dataset.id);
+                formData.append('action', markBtn.dataset.action);
+                formData.append('user', markBtn.dataset.user);
+                options['body'] = formData;
+
+                // send HTTP request
+                fetch(url, options)
+                .then(response => response.json())
+                .then(data => {
+                    if (data['status'] === 'unread'){
+                        markBtn.dataset.action = data['action']
+                        notification.style.backgroundColor = 'white';
+                        mark_text.textContent = 'Mark as unread'
+                    }
+                    else if(data['status'] === 'read'){
+                        markBtn.dataset.action = data['action']
+                        notification.style.backgroundColor = 'rgba(226, 227, 227, 0.64)';
+                        mark_text.textContent = 'Mark as read'
                     }
                 })
             })

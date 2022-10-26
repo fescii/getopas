@@ -26,6 +26,7 @@ from django.views.decorators.http import require_POST
 from taggit.models import Tag
 from actions.utils import create_action
 from actions.models import Action
+from account.models import Contact
 
 
 # Create your views here.
@@ -331,18 +332,48 @@ def save_post(request):
 def notification_action(request):
     action_id = request.POST.get('id')
     action = request.POST.get('action')
+    user_id = request.POST.get('user')
     if action_id and action:
         if(action == 'delete'):
             try:
                 action = Action.objects.get(id=action_id)
                 action.delete()
+                #messages.success(request, 'Notification deleted successfully')
                 return JsonResponse({'status': 'deleted','action': 'deleted'})
             except Action.DoesNotExist:
                 pass
+        elif(action == 'Unfollow'):
+            try:
+                user = User.objects.get(id=user_id)
+                name = str(user.first_name).lower()
+                Contact.objects.filter(user_from=request.user,user_to=user).delete()
+                create_action(request.user, 'unfollowed','follow', user)
+                return JsonResponse({'status': 'unfollowed','user': f'{name}','action': 'Follow'})
+            except User.DoesNotExist:
+                return JsonResponse({'status':'error'})
+        elif(action == 'Follow'):
+            try:
+                user = User.objects.get(id=user_id)
+                name = str(user.first_name).lower()
+                Contact.objects.get_or_create(user_from=request.user,user_to=user)
+                create_action(request.user, 'is following','follow', user)
+                return JsonResponse({'status': 'followed','user':f'{name}' ,'action': 'Unfollow'})
+            except User.DoesNotExist:
+                return JsonResponse({'status':'error'})
         elif(action == 'read'):
-            pass
+            action = Action.objects.get(id=action_id)
+            try:
+                Action.update_status(action,status='read')
+                return JsonResponse({'status': 'unread','action': 'unread'})
+            except:
+                pass
         elif(action == 'unread'):
-            pass
+            action = Action.objects.get(id=action_id)
+            try:
+                Action.update_status(action,status='unread')
+                return JsonResponse({'status': 'read','action': 'read'})
+            except:
+                pass
     return JsonResponse({'status': 'error'})
 
 @login_required

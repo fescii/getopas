@@ -1,3 +1,4 @@
+from actions.models import Action
 import readtime
 from django.shortcuts import render,get_object_or_404
 from django import template
@@ -6,6 +7,8 @@ from django.db.models import Count
 from django.template.defaultfilters import slugify
 from unidecode import unidecode
 from taggit.models import Tag
+from django.contrib.auth.models import User
+from account.models import Contact
 from datetime import datetime
 from datetime import timedelta
 register = template.Library()
@@ -39,7 +42,7 @@ def read_time(html):
 register.filter('read_time',read_time)
 
 
-#Get Most commented posts
+#Check-if-post-is-saved
 @register.simple_tag
 def check_saved(id,user):
     try:
@@ -51,6 +54,25 @@ def check_saved(id,user):
     except Bookmark.DoesNotExist:
         return 'Save'
 #register.filter('check_saved',check_saved)
+
+#Check-if-user-is-followed
+@register.simple_tag
+def check_follow(user_id,user):
+    a_user = User.objects.get(id=user_id)
+    if Contact.objects.filter(user_from=user,user_to=a_user):
+        return 'unfollow'
+    else:
+        return 'follow'
+
+#Check-if-notification-is-read
+@register.simple_tag
+def check_read(id):
+    action = Action.objects.get(id=id)
+    if action.status == 'unread':
+        return 'read'
+    else:
+        return 'unread'
+
 #Truncate Tags
 def truncate_tags(tags):
     return tags[:3]
