@@ -20,17 +20,17 @@ def total_posts():
 
 #Get Total Unread Notification
 @register.simple_tag
-def total_unread():
-    try:
-        total = Action.objects.filter(status='Unread').count()
-        if total>9:
-            return 9
-        elif total>0 and total<10:
-            return total
-        elif total<1:
-            return 0
-    except:
-        pass
+def total_unread(user_id):
+    user = User.objects.get(id=user_id)
+    actions = Action.objects.exclude(user=user).filter(status='unread')
+    following_ids = user.following.values_list('id',flat=True)
+    total = 0
+    if following_ids:
+        # If user is following others, retrieve only their actions
+        actions = actions.filter(user_id__in=following_ids)
+        total = actions.select_related('user', 'user__profile')\
+                .prefetch_related('target').count()
+    return total
 
 #Get five latest posts
 @register.simple_tag
