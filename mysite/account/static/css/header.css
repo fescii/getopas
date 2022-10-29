@@ -383,12 +383,14 @@ main.search>.search-wrapper{
   color:var(--gray-color);
   font-size: 18px;
   left: 10px;
-  top: 30%;
+  top: 31%;
 }
 .search-wrapper>form>p>input[type="text"]{
   border: var(--border);
   color:var(--gray-color);
   padding-left: 35px;
+  padding-bottom: 0px;
+  font-size: 1rem;
   height: 40px;
   width: 100%;
   outline: none;
