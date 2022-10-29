@@ -15,7 +15,11 @@
         </form>
         <div class="search-header">
         <div class="header-content">
-            <h2 class="site-title">Results for {% if query %}<span class="query">{{query}}{% endif %}</span></h2>
+            <h2 class="site-title">
+                {% if query %}Results for <span class="query">{{query}}</span>
+                {% else %}
+                    Search a query
+                {% endif %}</h2>
             <div class="header-links">
                 <a href="{% url 'search:item_search' %}" title="Articles" class="header-link {% if title == 'articles' %}active{% endif %}">Articles</a>
                 <a href="" title="Topics" class="header-link {% if title == 'topics' %}active{% endif %}">Topics</a>
