@@ -255,6 +255,7 @@ def recent(request):
 @login_required
 def actions(request):
     # Display all actions by default
+    action_only = request.GET.get('action_only')
     actions = Action.objects.exclude(user=request.user)
     following_ids = request.user.following.values_list('id',flat=True)
     if following_ids:
@@ -271,7 +272,15 @@ def actions(request):
         # If page is not an integer deliver the first page
         actions = paginator.page(1)
     except EmptyPage:
+        if action_only:
+            # If AJAX request and page out of range
+            # return an empty page
+            return HttpResponse('')
+        # If page out of range return last page of results
         actions = paginator.page(paginator.num_pages)
+    if action_only:
+        return render(request,'editors/list-actions.html',
+                      {'section': 'notifications','actions': actions})
     return render(request,
                   'editors/actions.html',
                   {'section': 'notifications',
@@ -434,7 +443,7 @@ def user_post_list(request):
                    'posts': posts,
                    'user':user,
                    'profile':profile,
-                   'section': 'article-list'})
+                   'section': 'my-articles'})
 @login_required
 def edit_blog_post(request, pk):
     #post = get_object_or_404(Post, id=pk)

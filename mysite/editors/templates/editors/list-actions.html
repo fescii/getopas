@@ -1,0 +1,84 @@
+{% load static %}
+{% load blog_tags %}
+{% load thumbnail %}
+{% for action in actions %}
+    {% with page=actions %}
+        {% if action.target %}
+            {% with target=action.target %}
+                <div id="action-{{ action.id }}" class="action {% if action.status == 'unread' %}unread{% endif %}">
+                    {% with auser=action.user profile=action.user.profile %}
+                        <div class="profile-image">
+                            {% if profile.photo %}
+                                {% thumbnail auser.profile.photo "80x80" crop="100%" as im %}
+                                <a href="{{ auser.get_absolute_url }}">
+                                    <img src="{{ im.url }}" alt="{{ auser.get_full_name }}" class="item-img" />
+                                </a>
+                            {% else %}
+                            <a href="{{ auser.get_absolute_url }}">
+                                <img src="https://eu.ui-avatars.com/api/?background=08b86f&name={{auser.first_name}}+{{auser.last_name}}&size=100&color=fff" alt="{{ user.get_full_name }}" class="item-img" />
+                            </a>
+                            {% endif %}
+                            {% if action.type == 'create'%}
+                                <span class="iconly-Paper-Plus icli"></span>
+                            {% elif action.type == 'save'%}
+                                <span class="iconly-Paper-Plus icli"></span>
+                            {% elif action.type == 'remove'%}
+                                <span class="iconly-Paper-Negative icli"></span>
+                            {% elif action.type == 'follow'%}
+                                <span class="iconly-Add-User icli"></span>
+                            {% elif action.type == 'comment'%}
+                                <span class="iconly-Chat icli"></span>
+                            {% else %}
+                                <span class="iconly-Notification icli"></span>
+                            {% endif %}
+                        </div>
+                        <div class="info">
+                            <a href="{{ auser.get_absolute_url }}" class="name"> {{ auser.get_full_name }} </a>
+                            {{ action.verb }}
+                            <a href="{{ target.get_absolute_url }}" class="info-to">{{ target }}</a>
+                        </div>
+                        <div class="date">
+                            {{ action.created|time_lapse }}
+                        </div>
+                        <div class="more-info">
+                            <div class="three-dots-{{page.number}} three-dots" data-number="{{ action.id }}">
+                                <span class="dot"></span>
+                                <span class="dot"></span>
+                                <span class="dot"></span>
+                            </div>
+                            <div id="modal-{{ action.id }}" class="more-options-{{page.number}} more-options">
+                                <a href="" class="delete-{{page.number}} options-item" data-user="{{ auser.id }}" data-id="{{ action.id }}" data-action="delete">
+                                    <span class="iconly-Delete icli"></span>
+                                    <div class="option-details">
+                                        <span class="detail-title">Delete</span>
+                                        <span class="detail-text">Delete this notification</span>
+                                    </div>
+                                </a>
+                                {%  check_follow auser.id request.user as follow %}
+                                <a href="" class="follow-{{page.number}} options-item" data-user="{{ auser.id }}" data-id="{{ action.id }}" data-action="{{follow|capfirst}}">
+                                    <span class="iconly-Close-Square icli"></span>
+                                    <div class="option-details">
+                                        <span class="detail-title">{{follow|capfirst}}</span>
+                                        {% if follow == "follow" %}
+                                        <span class="detail-text">Start seeing {{auser.first_name|lower}}'s updates again</span>
+                                        {% else %}
+                                        <span class="detail-text">Stop seeing {{auser.first_name|lower}}'s updates</span>
+                                        {% endif %}
+                                    </div>
+                                </a>
+                                {%  check_read action.id  as read %}
+                                <a href="" class="marked-{{page.number}} options-item" data-user="{{ auser.id }}" data-id="{{ action.id }}" data-action="{{read}}">
+                                    <span class="iconly-Tick-Square icli"></span>
+                                    <div class="option-details">
+                                        <span class="detail-title">Mark</span>
+                                        <span class="detail-text">Mark as {{read}}</span>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    {% endwith %}
+                </div>
+            {% endwith %}
+        {% endif %}
+    {% endwith %}
+{% endfor %}

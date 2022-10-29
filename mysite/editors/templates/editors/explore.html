@@ -3,7 +3,7 @@
 {% load blog_tags %}
 {% load thumbnail %}
 
-{% block title %}Opas-{{topic}}{% endblock %}
+{% block title %}Opas | {{topic|split:"-"}}{% endblock %}
 {% block content %}
 {% include "editors/feeds-header.html" %}
 <div class="article-feeds feed-contents">

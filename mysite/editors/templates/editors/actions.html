@@ -4,91 +4,12 @@
 {% load thumbnail %}
 {% block content %}
 {% include "editors/feeds-header.html" %}
-<div  class="notifications feed-contents">
+<div id="notifications-list" class="notifications feed-contents">
     <div class="feed-title">
         <div class="section-title">{{title|capfirst}}</div>
         <i class="iconly-Arrow-Right-Circle icli"></i>
-      </div>
-    {% for action in actions %}
-        {% if action.target %}
-            {% with target=action.target %}
-                <div id="action-{{ action.id }}" class="action {% if action.status == 'unread' %}unread{% endif %}">
-                    {% with auser=action.user profile=action.user.profile %}
-                        <div class="profile-image">
-                            {% if profile.photo %}
-                                {% thumbnail auser.profile.photo "80x80" crop="100%" as im %}
-                                <a href="{{ auser.get_absolute_url }}">
-                                    <img src="{{ im.url }}" alt="{{ auser.get_full_name }}" class="item-img" />
-                                </a>
-                            {% else %}
-                            <a href="{{ auser.get_absolute_url }}">
-                                <img src="https://eu.ui-avatars.com/api/?background=08b86f&name={{auser.first_name}}+{{auser.last_name}}&size=100&color=fff" alt="{{ user.get_full_name }}" class="item-img" />
-                            </a>
-                            {% endif %}
-                            {% if action.type == 'create'%}
-                                <span class="iconly-Paper-Plus icli"></span>
-                            {% elif action.type == 'save'%}
-                                <span class="iconly-Paper-Plus icli"></span>
-                            {% elif action.type == 'remove'%}
-                                <span class="iconly-Paper-Negative icli"></span>
-                            {% elif action.type == 'follow'%}
-                                <span class="iconly-Add-User icli"></span>
-                            {% elif action.type == 'comment'%}
-                                <span class="iconly-Chat icli"></span>
-                            {% else %}
-                                <span class="iconly-Notification icli"></span>
-                            {% endif %}
-                        </div>
-                        <div class="info">
-                            <a href="{{ auser.get_absolute_url }}" class="name"> {{ auser.get_full_name }} </a>
-                            {{ action.verb }}
-                            <a href="{{ target.get_absolute_url }}" class="info-to">{{ target }}</a>
-                        </div>
-                        <div class="date">
-                            {{ action.created|time_lapse }}
-                        </div>
-                        <div class="more-info">
-                            <div class="three-dots">
-                                <span class="dot"></span>
-                                <span class="dot"></span>
-                                <span class="dot"></span>
-                            </div>
-                            <div class="more-options">
-                                <a href="" class="delete options-item" data-user="{{ auser.id }}" data-id="{{ action.id }}" data-action="delete">
-                                    <span class="iconly-Delete icli"></span>
-                                    <div class="option-details">
-                                        <span class="detail-title">Delete</span>
-                                        <span class="detail-text">Delete this notification</span>
-                                    </div>
-                                </a>
-                                {%  check_follow auser.id request.user as follow %}
-                                <a href="" class="follow options-item" data-user="{{ auser.id }}" data-id="{{ action.id }}" data-action="{{follow|capfirst}}">
-                                    <span class="iconly-Close-Square icli"></span>
-                                    <div class="option-details">
-                                        <span class="detail-title">{{follow|capfirst}}</span>
-                                        {% if follow == "follow" %}
-                                        <span class="detail-text">Start seeing {{auser.first_name|lower}}'s updates again</span>
-                                        {% else %}
-                                        <span class="detail-text">Stop seeing {{auser.first_name|lower}}'s updates</span>
-                                        {% endif %}
-                                    </div>
-                                </a>
-                                {%  check_read action.id  as read %}
-                                <a href="" class="marked options-item" data-user="{{ auser.id }}" data-id="{{ action.id }}" data-action="{{read}}">
-                                    <span class="iconly-Tick-Square icli"></span>
-                                    <div class="option-details">
-                                        <span class="detail-title">Mark</span>
-                                        <span class="detail-text">Mark as {{read}}</span>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-                    {% endwith %}
-                </div>
-            {% endwith %}
-        {% endif %}
-    {% endfor %}
-    {% include "pagination.html" with page=actions %}
+    </div>
+    {% include "editors/list-actions.html" %}
 </div>
 <div class="sidebar-content">
     <div class="stats">
@@ -127,11 +48,11 @@
     }
 
     // Notification-actions
-    actionBtns = document.querySelectorAll('.three-dots')
-    deleteBtns = document.querySelectorAll('a.delete')
-    followBtns = document.querySelectorAll('a.follow')
-    markBtns = document.querySelectorAll('a.marked')
-    actionModals = document.querySelectorAll('.more-options')
+    actionBtns = document.querySelectorAll('.three-dots-1')
+    deleteBtns = document.querySelectorAll('a.delete-1')
+    followBtns = document.querySelectorAll('a.follow-1')
+    markBtns = document.querySelectorAll('a.marked-1')
+    actionModals = document.querySelectorAll('.more-options-1')
 
     if (actionBtns != null && actionModals != null) {
         actionBtns.forEach((actionBtn,index)=>{
@@ -250,4 +171,160 @@
             })
         })
     }
+let page = 1;
+let emptyPage = false;
+let blockRequest = false;
+window.addEventListener('scroll', function(e) {
+        let margin = document.body.clientHeight - window.innerHeight - 200;
+        if(window.pageYOffset > margin && !emptyPage && !blockRequest) {
+            blockRequest = true;
+            page += 1;
+            fetch('?action_only=1&page=' + page)
+            .then(response => response.text())
+            .then(html => {
+                if (html === '') {
+                    emptyPage = true;
+                }
+                else {
+                    let notificatiosList = document.getElementById('notifications-list');
+                    notificatiosList.insertAdjacentHTML('beforeEnd', html);
+                    blockRequest = false;
+                    const url = '{% url "editors:notification_action" %}';
+                    let options = {
+                        method: 'POST',
+                        headers: {'X-CSRFToken': csrftoken},
+                        mode: 'same-origin'
+                    }
+                    // Notification-actions
+                    actionBtnsInner = document.querySelectorAll(`.three-dots-${page}`)
+                    deleteBtnsInner = document.querySelectorAll(`a.delete-${page}`)
+                    followBtnsInner = document.querySelectorAll(`a.follow-${page}`)
+                    markBtnsInner = document.querySelectorAll(`a.marked-${page}`)
+                    actionModalsInner = document.querySelectorAll(`.more-options-${page}`)
+
+                    if (actionBtnsInner != null && actionModals != null) {
+                        actionBtnsInner.forEach((actionBtn,index)=>{
+                            actionBtn.addEventListener('click', (e) => {
+                                modal = document.querySelector(`#modal-${actionBtn.dataset.number}`)
+                                if (modal.style.display === 'flex') {
+                                    modal.style.setProperty('display', 'none')
+                                    actionBtn.style.backgroundColor = 'transparent'
+                                }
+                                else {
+                                    try{
+                                        actionModalsInner.forEach((actionModal,index)=>{
+                                            actionBtns[index].style.backgroundColor = 'transparent'
+                                            actionModal.style.display = 'none'
+                                        })
+                                    }
+                                    finally{
+                                        modal.style.setProperty('display', 'flex')
+                                        actionBtn.style.backgroundColor = 'rgba(174, 173, 173, 0.149)'
+                                    }
+                                }
+                            })
+                        })
+                    }
+
+                    //Delete-action
+                    if (deleteBtnsInner != null) {
+                        deleteBtnsInner.forEach((actionBtn,index)=>{
+                            actionBtn.addEventListener('click', (e) => {
+                                e.preventDefault();
+                                notification = document.querySelector(`#action-${actionBtn.dataset.id}`)
+
+                                // add request body
+                                let formData = new FormData();
+                                formData.append('id', actionBtn.dataset.id);
+                                formData.append('action', actionBtn.dataset.action);
+                                formData.append('user', actionBtn.dataset.user);
+                                options['body'] = formData;
+
+                                // send HTTP request
+                                fetch(url, options)
+                                .then(response => response.json())
+                                .then(data => {
+                                    if (data['status'] === 'deleted'){
+                                        notification.remove()
+                                    }
+                                })
+                            })
+                        })
+                    }
+
+                    //Follow-action
+                    if (followBtnsInner != null) {
+                        followBtnsInner.forEach((followBtn,index)=>{
+                            followBtn.addEventListener('click', (e) => {
+                                e.preventDefault();
+                                follow = followBtn.querySelector('.detail-title')
+                                follow_text = followBtn.querySelector('.detail-text')
+
+                                // add request body
+                                let formData = new FormData();
+                                formData.append('id', followBtn.dataset.id);
+                                formData.append('action', followBtn.dataset.action);
+                                formData.append('user', followBtn.dataset.user);
+                                options['body'] = formData;
+
+                                // send HTTP request
+                                fetch(url, options)
+                                .then(response => response.json())
+                                .then(data => {
+                                    if (data['status'] === 'unfollowed'){
+                                        followBtn.dataset.action = data['action']
+                                        follow.textContent = `${data['action']}`
+                                        follow_text.textContent = `Start seeing ${data['user']}'s updates again`
+                                    }
+                                    else if(data['status'] === 'followed'){
+                                        followBtn.dataset.action = data['action']
+                                        follow.textContent = `${data['action']}`
+                                        follow_text.textContent = `Stop seeing ${data['user']}'s updates`
+                                    }
+                                })
+                            })
+                        })
+                    }
+
+                    //Mark-action
+                    if (markBtnsInner != null) {
+                        markBtnsInner.forEach((markBtn,index)=>{
+                            markBtn.addEventListener('click', (e) => {
+                                e.preventDefault();
+                                notification = document.querySelector(`#action-${markBtn.dataset.id}`)
+                                mark_text = markBtn.querySelector('.detail-text')
+
+                                // add request body
+                                let formData = new FormData();
+                                formData.append('id', markBtn.dataset.id);
+                                formData.append('action', markBtn.dataset.action);
+                                formData.append('user', markBtn.dataset.user);
+                                options['body'] = formData;
+
+                                // send HTTP request
+                                fetch(url, options)
+                                .then(response => response.json())
+                                .then(data => {
+                                    if (data['status'] === 'unread'){
+                                        markBtn.dataset.action = data['action']
+                                        notification.style.backgroundColor = 'white';
+                                        mark_text.textContent = 'Mark as unread'
+                                    }
+                                    else if(data['status'] === 'read'){
+                                        markBtn.dataset.action = data['action']
+                                        notification.style.backgroundColor = 'rgba(226, 227, 227, 0.64)';
+                                        mark_text.textContent = 'Mark as read'
+                                    }
+                                })
+                            })
+                        })
+                    }
+                }
+            })
+
+        }
+    });
+    // Launch scroll event
+    const scrollEvent = new Event('scroll');
+    window.dispatchEvent(scrollEvent);
 {% endblock domready%}

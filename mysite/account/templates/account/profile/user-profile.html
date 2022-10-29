@@ -2,7 +2,7 @@
 {% load static %}
 {% load contact_tags %}
 {% load thumbnail %}
-{% block title %}{{r_user.username}} - Profile{% endblock %}
+{% block title %}{{r_user.first_name|capfirst}}'s Profile{% endblock %}
 {% block content %}
 
     <div class="site-title">

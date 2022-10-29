@@ -1,40 +1,49 @@
 {% extends "base.html" %}
 {% load static %}
+{% load blog_tags %}
+{% load thumbnail %}
 {% block title %}Opus | My Articles{% endblock %}
 {% block content %}
-    <h2>My Articles</h2>
-    <a href="{% url 'editors:create_post' %}" class='add-new'>Create</a>
-{% for post in posts %}
-    <div class="post-summery">
-        <h2>
-            <a href="{{ post.get_absolute_url }}"> {{ post.title }} </a>
-        </h2>
-        <div class="image-wrapper">
-            <img src="/media/{{post.cover}}" alt="Cover Image" title="{{post.cover}}"/>
+{% include "editors/feeds-header.html" %}
+    <div class="my-article-list feed-contents">
+        <div class="feed-title">
+            <div class="section-title">My Articles</div>
+            <i class="iconly-Arrow-Right-Circle icli"></i>
         </div>
-        <div class="date">
-            Published on: <span class="published-date">{{ post.publish.date }} {{ post.publish.time }}</span>
-        </div>
-        <div class='article-summery'>
-            {{ post.body|striptags|truncatechars:200}}
-        </div>
-        <div class='article-stats'>
-            <span class='stats-title'>Reach</span>
-            <span class='views'><span class="iconly-Show icli"></span> {{ post.blog_views }}</span>
-            <span class='comments'><span class="iconly-User2 icli"></span> {{ post.comments.count }}</span>
-        </div>
-        <div class="action-links">
-            <a href="/edit-article/{{post.id}}">Edit</a>
-            <a href="/edit-article/cover/{{post.id}}">Cover</a>
-            <a href="/edit-article/tags/{{post.id}}">Tags</a>
-            <a href="/delete-article/{{post.id}}">Delete</a>
+        <div class="article-list">
+            {% for post in posts %}
+                <div class="post-summery">
+                    <h2>
+                        <a href="{{ post.get_absolute_url }}"> {{ post.title }} </a>
+                    </h2>
+                    <div class="image-wrapper">
+                        <img src="{% thumbnail post.cover 300x0 %}" alt="Cover Image" title="{{post.title}}"/>
+                    </div>
+                    <div class="date">
+                        Published on: <span class="published-date">{{ post.publish.date }} {{ post.publish.time }}</span>
+                    </div>
+                    <div class='article-summery'>
+                        {{ post.body|striptags|safe|truncatechars:160 }}
+                    </div>
+                    <div class='article-stats'>
+                        <span class='stats-title'>Reach</span>
+                        <span class='views'><span class="iconly-Show icli"></span> {{ post.blog_views }}</span>
+                        <span class='comments'><span class="iconly-User2 icli"></span> {{ post.comments.count }}</span>
+                    </div>
+                    <div class="action-links">
+                        <a href="/edit-article/{{post.id}}">Edit</a>
+                        <a href="/edit-article/cover/{{post.id}}">Cover</a>
+                        <a href="/edit-article/tags/{{post.id}}">Tags</a>
+                        <a href="/delete-article/{{post.id}}">Delete</a>
+                    </div>
+                </div>
+                {% if empty %}
+                    <p> You've not Published any Articles Yet!</p>
+                {% endif %}
+            {% endfor %}
+            {% include "pagination.html" with page=posts %} {% endblock %}
         </div>
     </div>
-{% if empty %}
-<p> You've not Published any Articles Yet!</p>
-{% endif %}
-{% endfor %}
-{% include "pagination.html" with page=posts %} {% endblock %}
 {% block footer %}
     <script src=" {% static 'js/base.js' %}"></script>
 {% endblock footer%}
