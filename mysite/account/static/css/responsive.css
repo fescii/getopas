@@ -1369,7 +1369,9 @@
     }
 
     main.search>.search-wrapper {
-        padding-top: 18px;
+        margin-top: 0%;
+        padding-top: 25px;
+        padding-left: 10px;
         top: 0px;
     }
 
@@ -1864,6 +1866,9 @@
         padding-top: 20px;
         /*background-color: var(--alt-accent-color);*/
     }
+    main.search>.sidebar-content{
+        display: none;
+    }
 
     /*Feed-full*/
     main.read>.article-wrapper {
@@ -2060,7 +2065,7 @@
         display: inline-block;
         margin-bottom: 5px;
     }
-    .mobile-footer>a.active .icli{
+    .mobile-footer>a.active .iconly-Home{
         font-weight: bold;
     }
 

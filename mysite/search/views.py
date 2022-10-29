@@ -7,43 +7,58 @@ from django.contrib.postgres.search import SearchVector, SearchQuery, SearchRank
 
 # Create your views here.
 #Search View
-def query_search(request):
+def query_search(request,option='one'):
     form = SearchForm()
-    option = None
-    query = None
+    option = option
+    search = None
     results = []
-    if 'query' in request.GET:
+    if 'search' in request.GET:
             form = SearchForm(request.GET)
             if form.is_valid():
-                query = form.cleaned_data['query']
-                option = form.cleaned_data['option']
+                search = form.cleaned_data['search']
 
                 if option == 'one':
                     search_vector = SearchVector('title',weight='A') + \
                         SearchVector('body', weight='B')
-                    search_query = SearchQuery(query)
+                    search_query = SearchQuery(search)
                     results = Post.published.annotate(
                         search = search_vector,
                         rank=SearchRank(search_vector, search_query)
                         ).filter(rank__gte=0.3).order_by('-rank')
+                    return render(request,'search/search/search.html',
+                                  {'form': form,'query':search,
+                                   'section': 'search',
+                                   'results': results,
+                                   'title': 'articles'})
                 elif option == 'two':
                     search_vector = SearchVector('title',weight='A') + \
                     SearchVector('description', weight='B')
-                    search_query = SearchQuery(query)
+                    search_query = SearchQuery(search)
                     results = Issue.published.annotate(
                     search = search_vector,
                     rank=SearchRank(search_vector, search_query)
                     ).filter(rank__gte=0.3).order_by('-rank')
+                    return render(request,'search/search/search.html',
+                                  {'form': form,'query':search,
+                                   'section': 'search',
+                                   'results': results,
+                                   'title': 'newsletters'})
                 elif option == 'three':
                     search_vector = SearchVector('name',weight='A') + \
                         SearchVector('about', weight='B')
-                    search_query = SearchQuery(query)
+                    search_query = SearchQuery(search)
                     results = Product.published.annotate(
                     search = search_vector, rank=SearchRank(search_vector, search_query)
                         ).filter(rank__gte=0.3).order_by('-rank')
+                    return render(request,'search/search/search.html',
+                                  {'form': form,'query':search,
+                                   'section': 'search',
+                                   'results': results,
+                                   'title': 'products'})
     return render(request,
                     'search/search/search.html',
                     {'form': form,
-                    'query':query,
+                    'query':search,
+                    'section': 'search',
                     'results': results,
                     'option':option})

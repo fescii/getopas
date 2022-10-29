@@ -1,13 +1,119 @@
-{% extends "search/base.html" %}
+{% extends "base.html" %}
+{% load static %}
 {% load blog_tags %}
+{% load thumbnail %}
 {% block title %}Search{% endblock %}
 {% block content %}
-<h1>Search for Articles, Newslatters or Device information</h1>
-    <form method="get">
-    {{ form.as_p }}
-    <input type="submit" value="Search">
-    </form>
-{% if option == 'one' %}
+    <div class="search-wrapper">
+        <form method="get">
+            <p>
+                {% for field in form %}
+                    {{field}}
+                {% endfor %}
+            </p>
+            <i class="iconly-Search icli"></i>
+        </form>
+        <div class="search-header">
+        <div class="header-content">
+            <h2 class="site-title">Results for {% if query %}<span class="query">{{query}}{% endif %}</span></h2>
+            <div class="header-links">
+                <a href="{% url 'search:item_search' %}" title="Articles" class="header-link {% if title == 'articles' %}active{% endif %}">Articles</a>
+                <a href="" title="Topics" class="header-link {% if title == 'topics' %}active{% endif %}">Topics</a>
+                <a href="" title="Newsletters" class="header-link {% if title == 'newslatters' %}active{% endif %}">Newsletters</a>
+                <a href="" title="Products" class="header-link {% if title == 'products' %}active{% endif %}">Products</a>
+            </div>
+        </div>
+        </div>
+    </div>
+    {% if title == 'articles' %}
+    {% if query %}
+    <div class="article-feeds feed-contents">
+        <div class="feed-title">
+            <div class="section-title">{% with results.count as total_results %}
+                Found {{ total_results }} result{{ total_results|pluralize }}
+                {% endwith %}</div>
+            <i class="iconly-Arrow-Right-Circle icli"></i>
+        </div>
+        {% for post in results %}
+            <div class="article-wrapper">
+                <div class="article-info">
+                    <div class="profile-wrapper">
+                        {% if post.author.profile.photo %}
+                            <img src="{% thumbnail post.author.profile.photo 300x0 %}" alt="Profile">
+                        {% else %}
+                            <img src="https://eu.ui-avatars.com/api/?background=08b86f&name={{post.author.first_name}}+{{post.author.last_name}}&size=250&color=fff" alt="Profile">
+                        {% endif %}
+                    </div>
+                    <a href="{% url 'profile' username=post.author%}" class="author">{{post.author.first_name}} {{post.author.last_name}}</a>
+                    <span class="read-time posted"><span class="dot">&#183;</span>
+                        {{post.body|read_time}}
+                    </span>
+                    <span class="posted right"><i class="iconly-Time-Circle icli"></i>
+                        <span class="date">
+                            {{post.created|date:"M"}} {{post.created.day}}, {{ post.created|date:"Y"}}
+                        </span>
+                    </span>
+                </div>
+                <div class="summery-content">
+                    <h2 class="article-title">
+                        <a href="{{post.get_absolute_url}}" title="Article Title" class="article-title-link"> {{post.title}} </a>
+                    </h2>
+                    <div class="article-summery">
+                        <div id="mobile-image">
+                            <img id="" src="{% thumbnail post.cover 300x0 %}" alt="Post-Image">
+                        </div>
+                        <p class="summery-text">
+                            {{post.body|striptags|safe|truncatechars:400 }}
+                        </p>
+                    </div>
+                    <div class="popup" id="popup">
+                        <div class="header">
+                          <span>Share this via</span>
+                          <div id="close" class="close-element"><i class="uil uil-times"></i></div>
+                        </div>
+                        <div class="content">
+                            <div class="icons">
+                                <a href="https://www.facebook.com/sharer.php?u=https://www.getopas.com{{post.get_absolute_url}}?t='{{post.body|striptags|safe|truncatechars:180}}'" rel="noopener" target="_blank" ><i class="fab fa-facebook-f"></i></a>
+                                <a href="https://twitter.com/share?url=https://www.getopas.com{{post.get_absolute_url}}&amp;text={{post.body|striptags|safe|truncatechars:180}}" rel="noopener" target="_blank" ><i class="fab fa-twitter"></i></a>
+                                <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://www.getopas.com{{post.get_absolute_url}}&title={{post.title}}&summery={{post.body|striptags|safe|truncatechars:180}}" rel="noopener" target="_blank"><i class="fab fa-linkedin"></i></a>
+                                <a href="https://api.whatsapp.com/send?text=https://www.getopas.com{{post.get_absolute_url}}" data-action="share/whatsapp/share" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                                <a href="https://t.me/share/url?url=https://www.getopas.com{{post.get_absolute_url}}&text={{post.body|striptags|safe|truncatechars:180}}" rel="noopener" target="_blank"><i class="fab fa-telegram-plane"></i></a>
+                            </div>
+                          <p>Or copy link</p>
+                          <div class="field">
+                            <i class="url-icon uil uil-link"></i>
+                            <input type="text" readonly value="https://www.getopas.com{{post.get_absolute_url}}">
+                            <button>Copy</button>
+                          </div>
+                        </div>
+                    </div>
+                    <div class="article-footer">
+                        <div class="article-tags">
+                        {% for tag in post.tags.all|truncate_tags %}
+                            <a href="{% url 'editors:explore' topic=tag.slug %}" class="tag">{{tag|split:" "}}</a>
+                        {% endfor %}
+                        </div>
+                        <div class="article-actions">
+                            {% check_saved post.id request.user as saved %}
+                            <a id="{{saved}}" class="save" href="" data-id="{{ post.id }}" data-action="{{saved}}">
+                                <span>{{saved}}</span>
+                            </a>
+                            <a class="view-modal"  id="view-modal" title="Share" href="">
+                                <span>Share</span>
+                            </a>
+                            <a title="Report" href="">
+                                <span>Report</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+        {% endif %}
+    {% endif %}
+    </div>
+  <!--  <h1>Search for Articles, Newslatters or Device information</h1>
+    {% if option == 'one' %}
     {% if query %}
     <h1>Articles containing "{{ query }}"</h1>
     <h3>
@@ -26,7 +132,7 @@
     {% else %}
     {% endif %}
 
-{% elif option == 'two' %}
+    {% elif option == 'two' %}
     {% if query %}
     <h1>Newslatters containing "{{ query }}"</h1>
     <h3>
@@ -45,7 +151,7 @@
     {% else %}
     {% endif %}
 
-{% elif option == 'three' %}
+    {% elif option == 'three' %}
     {% if query %}
         <h1>Device Products containing "{{ query }}"</h1>
         <h3>
@@ -63,5 +169,32 @@
         <p><a href="{% url "search:item_search" %}">Search again</a></p>
         {% else %}
     {% endif %}
-{% endif %}
+    {% endif %}-->
+    <div class="sidebar-content">
+        <div class="stats">
+          <h3 class="stats-title">My Stats</h3>
+          <div class="stats-today">
+            <h4 class="today">Impressions</h4>
+            <p class="today-stats">
+              <span class="iconly-Show icbo"></span>{{ request.user|get_views }} View{{ request.user|get_views| pluralize }}
+            </p>
+          </div>
+          <div class="stats-month">
+            <h4 class="month">Engagements</h4>
+            <p class="month-stats">
+              <span class="iconly-User2 icbo"></span>{{ request.user|get_comments }} Comment{{ request.user|get_comments | pluralize }}
+            </p>
+          </div>
+          <a href=" {% url 'editors:user_post_list' %}" class="go-to-articles"
+            >See your articles performance
+            <span class="iconly-Arrow-Right icli"></span>
+          </a>
+        </div>
+        <div class="topics">
+          <h2 class="sidebar-title">Discover Topics</h2>
+          <ul class="topic-list">
+            {% show_most_common_tags %}
+          </ul>
+        </div>
+      </div>
 {% endblock %}

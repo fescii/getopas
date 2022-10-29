@@ -593,7 +593,8 @@ main.feeds{
 }
 main.search{
    /* border: 1px solid rgb(0, 255, 157);*/
-    grid-template-columns: 120px 3fr 1fr;
+    grid-template-columns: 120px 3fr 1.5fr;
+    position: relative;
 }
 
 main.feeds>.feed-contents{

@@ -385,7 +385,7 @@ main.search>.search-wrapper{
   left: 10px;
   top: 30%;
 }
-.search-wrapper>form>p>input[type="search"]{
+.search-wrapper>form>p>input[type="text"]{
   border: var(--border);
   color:var(--gray-color);
   padding-left: 35px;
@@ -622,6 +622,7 @@ main.search>.dashboard-sidebar{
     grid-row: 1/3;
     z-index: 2;
     margin: 0%;
+    margin-top: 80px;
     padding: 0%;
     height: max-content;
    /* border-left: var(--border);*/
