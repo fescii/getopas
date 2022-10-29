@@ -34,7 +34,14 @@
                         <a href="/edit-article/{{post.id}}">Edit</a>
                         <a href="/edit-article/cover/{{post.id}}">Cover</a>
                         <a href="/edit-article/tags/{{post.id}}">Tags</a>
-                        <a href="/delete-article/{{post.id}}">Delete</a>
+                        <a class="delete-article" href="/delete-article/{{post.id}}">Delete</a>
+                        <div class="delete-article-options">
+                            <div class="delete-text">
+                                Are you sure you want to delete <span>{{post.title}}</span>?
+                            </div>
+                            <a href="">Cancel</a>
+                            <a href="/delete-article/{{post.id}}">Confirm</a>
+                        </div>
                     </div>
                 </div>
                 {% if empty %}

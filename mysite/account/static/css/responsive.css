@@ -14,6 +14,9 @@
         flex-flow: column;
         gap: 5px;
     }
+    .article-list>.post-summery>.action-links>.delete-article-options{
+        width: 40%;
+    }
 }
 
 @media screen and (max-width: 1090px) {
@@ -107,6 +110,9 @@
         display: flex;
         flex-flow: column;
         gap: 25px;
+    }
+    .article-list>.post-summery>.action-links>.delete-article-options{
+        width: 60%;
     }
 }
 
@@ -234,6 +240,10 @@
         right: 30px;
         top: unset;
         bottom: 75px;
+    }
+    .article-list>.post-summery>.action-links>.delete-article-options{
+        width: 80%;
+        right: 10px;
     }
 }
 
