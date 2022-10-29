@@ -43,13 +43,13 @@
             <a href="" class="dropdown-link">Dashboard</a>
           </li>
           <li class="dropdown-li">
-            <a href="{% url 'editors:user_post_list' %}" class="dropdown-link">Your Stats</a>
-          </li>
-          <li class="dropdown-li">
             <a href=" {% url 'profile' username=user.username %} " class="dropdown-link">Your Profile</a>
           </li>
           <li class="dropdown-li">
-            <a href=" {% url 'editors:user_post_list' %} " class="dropdown-link">Your Articles</a>
+            <a href=" {% url 'editors:user_post_list' %} " class="dropdown-link">Your Publications</a>
+          </li>
+          <li class="dropdown-li">
+            <a href="{% url 'editors:my_list' %}" class="dropdown-link">Saved Publications</a>
           </li>
         </ul>
         <hr size="1" />

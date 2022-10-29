@@ -76,13 +76,6 @@
                             </a>
                         </li>
                         <li class="content-link">
-                            <a class="link {% if section == 'research' %}data-active{% endif %}" href="{% url 'editors:user_product_list' %}">
-                                <span id="select"></span>
-                                <span class="iconly-Document icli"></span>
-                                <span class="link-text">Research</span>
-                            </a>
-                        </li>
-                        <li class="content-link">
                             <a class="link {% if section == 'newsletter' %}data-active{% endif %}" href="{% url 'editors:user_issue_list' %}">
                                 <span id="select"></span>
                                 <span class="iconly-Message icli"></span>
@@ -188,29 +181,29 @@
                     <a href="" class="dropdown-link">Dashboard</a>
                   </li>
                   <li class="dropdown-li">
-                    <a href="{% url 'editors:my_list' %}" class="dropdown-link">Saved Articles</a>
-                  </li>
-                  <li class="dropdown-li">
                     <a href=" {% url 'profile' username=user.username %} " class="dropdown-link">Your Profile</a>
                   </li>
                   <li class="dropdown-li">
-                    <a href=" {% url 'editors:user_post_list' %} " class="dropdown-link">Your Articles</a>
+                    <a href=" {% url 'editors:user_post_list' %} " class="dropdown-link">Your Publications</a>
+                  </li>
+                  <li class="dropdown-li">
+                    <a href="{% url 'editors:my_list' %}" class="dropdown-link">Saved Publications</a>
                   </li>
                 </ul>
                 <hr size="1" />
                 <ul class="linked-list middle-links">
-                  <li class="dropdown-li">
-                    <a href="" class="dropdown-link">Explore</a>
-                  </li>
-                  <li class="dropdown-li">
-                    <a href="" class="dropdown-link">What's New?</a>
-                  </li>
-                  <li class="dropdown-li">
-                    <a href="" class="dropdown-link">Send Us Feedback</a>
-                  </li>
-                  <li class="dropdown-li">
-                    <a href="" class="dropdown-link">About Us</a>
-                  </li>
+                    <li class="dropdown-li">
+                        <a href="" class="dropdown-link">Docs</a>
+                    </li>
+                    <li class="dropdown-li">
+                        <a href="" class="dropdown-link">Privacy</a>
+                    </li>
+                    <li class="dropdown-li">
+                        <a href="" class="dropdown-link">What's New?</a>
+                    </li>
+                    <li class="dropdown-li">
+                        <a href="" class="dropdown-link">Send Us Feedback</a>
+                    </li>
                 </ul>
                 <hr size="1" />
                 <ul class="linked-list log-out">

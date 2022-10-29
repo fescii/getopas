@@ -2175,8 +2175,6 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        width: 45px;
-        height: 45px;
         /*font-size: 1.2rem;*/
         background-color: var(--accent-color);
         box-shadow: 0rem 0rem 0.1rem 0.1rem #2a2b2a11;
@@ -2194,13 +2192,16 @@
         border-radius: 50px;
     }
     .create-option>.text{
-        display: none;
+       /* display: none;*/
+       position: relative;
+       font-size: 18px;
     }
     .create-option>.icli{
+        display: none;
         display: inline-block;
-        font-size: 28px;
-        margin-top: 0px;
-        font-weight: 600;
+        font-size: 23px;
+        margin-right: 5px;
+        font-weight: 400;
     }
     main.feeds>.discover-topics {
         /* border: 1px solid rgb(0, 255, 157);*/

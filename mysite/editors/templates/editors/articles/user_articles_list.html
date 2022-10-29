@@ -2,9 +2,9 @@
 {% load static %}
 {% load blog_tags %}
 {% load thumbnail %}
-{% block title %}Opus | My Articles{% endblock %}
+{% block title %}My Publications{% endblock %}
 {% block content %}
-{% include "editors/feeds-header.html" %}
+    {% include "editors/feeds-header.html" %}
     <div class="my-article-list feed-contents">
         <div class="feed-title">
             <div class="section-title">My Articles</div>
@@ -26,31 +26,72 @@
                         {{ post.body|striptags|safe|truncatechars:160 }}
                     </div>
                     <div class='article-stats'>
-                        <span class='stats-title'>Reach</span>
-                        <span class='views'><span class="iconly-Show icli"></span> {{ post.blog_views }}</span>
-                        <span class='comments'><span class="iconly-User2 icli"></span> {{ post.comments.count }}</span>
+                        {% if post.status == "draft" %}
+                            <span class='stats-title'>Drafted</span>
+                        {% else %}
+                            <span class='stats-title'>Stats</span>
+                            <span class='views'><span class="iconly-Show icli"></span> {{ post.blog_views }}</span>
+                            <span class='comments'><span class="iconly-User2 icli"></span> {{ post.comments.count }}</span>
+                        {% endif %}
                     </div>
                     <div class="action-links">
                         <a href="/edit-article/{{post.id}}">Edit</a>
                         <a href="/edit-article/cover/{{post.id}}">Cover</a>
                         <a href="/edit-article/tags/{{post.id}}">Tags</a>
-                        <a class="delete-article" href="/delete-article/{{post.id}}">Delete</a>
+                        <a class="delete-article" href="">Delete</a>
                         <div class="delete-article-options">
                             <div class="delete-text">
                                 Are you sure you want to delete <span>{{post.title}}</span>?
                             </div>
-                            <a href="">Cancel</a>
+                            <a class="delete-article-cancel" href="">Cancel</a>
                             <a href="/delete-article/{{post.id}}">Confirm</a>
                         </div>
                     </div>
                 </div>
-                {% if empty %}
-                    <p> You've not Published any Articles Yet!</p>
-                {% endif %}
+            {% if empty %}
+                <p> You've not Published any Articles Yet!</p>
+            {% endif %}
             {% endfor %}
-            {% include "pagination.html" with page=posts %} {% endblock %}
+            {% include "pagination.html" with page=posts %}
         </div>
     </div>
-{% block footer %}
-    <script src=" {% static 'js/base.js' %}"></script>
-{% endblock footer%}
+    {% include "editors/create-container.html" %}
+{% endblock content %}
+{% block domready %}
+        // Delete-modals
+        deleteBtns = document.querySelectorAll('a.delete-article')
+        deleteModals = document.querySelectorAll('.delete-article-options')
+        cancelBtns = document.querySelectorAll('a.delete-article-cancel')
+
+        if (deleteBtns != null && deleteModals != null) {
+            deleteBtns.forEach((deleteBtn,index)=>{
+                deleteBtn.addEventListener('click', (e) => {
+                    e.preventDefault()
+                    modal = deleteModals[index]
+                    if (modal.style.display === 'grid') {
+                        modal.style.setProperty('display', 'none')
+                        actionBtn.style.backgroundColor = 'transparent'
+                    }
+                    else {
+                        try{
+                            deleteModals.forEach((deleteModal)=>{
+                                deleteModal.style.display = 'none'
+                            })
+                        }
+                        finally{
+                            modal.style.setProperty('display', 'grid')
+                        }
+                    }
+                })
+            })
+        }
+        if (cancelBtns != null && deleteModals != null) {
+            cancelBtns.forEach((cancelBtn,index)=>{
+                cancelBtn.addEventListener('click',(e)=>{
+                    e.preventDefault()
+                    modal = deleteModals[index]
+                    modal.style.setProperty('display', 'none')
+                })
+            })
+        }
+{% endblock domready %}

@@ -400,10 +400,10 @@ def create_post(request):
             post.save()
             post_form.save_m2m()
             create_action(request.user, 'added article','create', post)
-            messages.success(request, 'Blog Post Created Successfully')
+            messages.success(request, 'Article was created successfully')
             return HttpResponseRedirect(reverse('editors:user_post_list'))
         else:
-            messages.error(request, 'Error! Blog post was not created')
+            messages.error(request, 'Error! Article was not created')
             post_form = CreateBlogPostForm(data=request.GET)
         return render(request,
                       'editors/articles/create.html',
@@ -425,9 +425,9 @@ def create_post(request):
 def user_post_list(request):
     user = request.user
     profile = user.profile
-    object_list = Post.published.all().filter(author=request.user)
+    object_list = Post.objects.all().filter(author=request.user)
 
-    paginator = Paginator(object_list, 5) # 5 posts in each page
+    paginator = Paginator(object_list, 10) # 5 posts in each page
     page = request.GET.get('page')
     try:
         posts = paginator.page(page)

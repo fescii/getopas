@@ -29,7 +29,7 @@ main.feeds>.my-article-list{
     flex-flow: column;
     align-items: center;
     gap: 30px;
-    padding-bottom: 60px;
+    padding-bottom: 0px;
 
 }
 
@@ -137,13 +137,13 @@ main.feeds>.my-article-list{
 
 .article-list>.post-summery>.article-stats>.views>.icli,
 .article-list>.post-summery>.article-stats>.comments>.icli {
-    font-size: 16px;
+    font-size: 18px;
     font-weight: bold;
     color: var(--alt-accent-color);
     /*border: 1px solid rgb(48, 48, 45);*/
     display: inline-block;
     margin-right: 5px;
-    padding-top: 2px;
+    padding-top: 0px;
 }
 
 .article-list>.post-summery>.action-links {
@@ -184,7 +184,7 @@ main.feeds>.my-article-list{
     border-radius: 10px;
     border: var(--border);
     padding: 0%;
-    display: grid;
+    display: none;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: max-content;
     row-gap: 0px;
