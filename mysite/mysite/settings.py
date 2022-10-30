@@ -46,7 +46,6 @@ INSTALLED_APPS = [
     'account.apps.AccountConfig',
     'magazine.apps.MagazineConfig',
     'editors.apps.EditorsConfig',
-    'devices.apps.DevicesConfig',
     'search.apps.SearchConfig',
     'actions.apps.ActionsConfig',
     'django.contrib.auth',

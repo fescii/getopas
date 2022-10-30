@@ -1,3 +1,4 @@
+from platform import platform
 from django.db import models
 from django.contrib.auth.models import User
 from django.utils import timezone
@@ -18,30 +19,35 @@ class Issue(models.Model):
     STATUS_CHOICES = (
         ('draft', 'Draft'),
         ('published', 'Published'),)
-    no = models.IntegerField(editable=True)
-    title = models.CharField(max_length=250)
-    slug = models.SlugField(max_length=250, unique_for_date='publish')
-    author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='magazine_posts')
-    description = models.TextField(editable=True)
+    author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='issues')
     publish = models.DateTimeField(default=timezone.now)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
     status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='draft', editable=True)
+    slug = models.SlugField(max_length=250, unique_for_date='publish')
+    title = models.CharField(max_length=250)
+    owner = models.CharField(max_length=250)
+    release = models.CharField(max_length=250)
+    description = models.TextField(editable=True)
+    platform = models.CharField(max_length=250)
     cover = models.ImageField(upload_to='issues/%Y/%m/%d',
                               blank=True)
     issue_views = models.IntegerField(default=0)
+    link = models.CharField(max_length=1000)
     tags = TaggableManager()
 
     #Updating an Issue
-    def update_issue(self, no, title, description, status, *args, **kwargs):
-        self.no = no
+    def update_issue(self,title,owner,release, description,platform, status,link, *args, **kwargs):
         self.title = title
+        self.owner = owner
+        self.release = release
         self.description = description
+        self.platform = platform
         self.status = status
-        super(Issue, self).save(update_fields=['no',
-                                               'title',
-                                              'description',
-                                              'status'], *args, **kwargs)
+        self.link = link
+        super(Issue, self).save(update_fields=['title','owner','release',
+                                              'description','platform',
+                                              'status','link',], *args, **kwargs)
     #Update Views
     def update_views(self, *args, **kwargs):
         self.issue_views =self.issue_views+1
@@ -74,12 +80,15 @@ class Issue(models.Model):
 
 
 #Section Model
-class Section(models.Model):
-    issue = models.ForeignKey(Issue, on_delete=models.CASCADE, related_name='sections')
-    name = models.CharField(max_length=250)
-    page = models.IntegerField()
-    body = models.TextField()
-    added = models.BooleanField(default=False)
+class Issue_likes(models.Model):
+    issue = models.ForeignKey(Issue, on_delete=models.CASCADE, related_name='issue_likes')
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='issue_users_likes')
+    created = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ('created',)
+    def __str__(self):
+        return f'{self.user} likes {self.issue}'
 
 #Feedback Model
 class Feedback(models.Model):

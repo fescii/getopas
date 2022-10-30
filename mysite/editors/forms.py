@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.models import User
 from blog.models import Post
-from magazine.models import Issue, Section
+from magazine.models import Issue
 
 
 
@@ -29,12 +29,12 @@ class BlogEditCoverForm(forms.ModelForm):
 class CreateMagazineForm(forms.ModelForm):
     class Meta:
         model = Issue
-        fields = ('no','title','description','tags','status')
+        fields = ('title','owner','release','description','platform','tags','status','link')
 
 class MagazineEditForm(forms.ModelForm):
     class Meta:
         model = Issue
-        fields = ('no','title','description','status')
+        fields = ('title','owner','release','description','platform','status','link')
 
 class MagazineEditCoverForm(forms.ModelForm):
     class Meta:
@@ -46,13 +46,4 @@ class MagazineEditTagsForm(forms.ModelForm):
         model = Issue
         fields = ('tags',)
 
-class CreateSectionForm(forms.ModelForm):
-    class Meta:
-        model = Section
-        fields =('name','page','body')
-
-class SectionEditForm(forms.ModelForm):
-    class Meta:
-        model = Section
-        fields =('name','page','body')
 
