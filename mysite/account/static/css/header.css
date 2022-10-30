@@ -381,6 +381,7 @@ main.search>.search-wrapper{
 .search-wrapper>form>p{
  /* border: 1px solid rebeccapurple;*/
   margin: 0%;
+
   padding: 0%;
   width: 100%;
 }
@@ -388,12 +389,13 @@ main.search>.search-wrapper{
   position: absolute;
   color:var(--gray-color);
   font-size: 18px;
-  left: 10px;
+  left: 18px;
   top: 31%;
 }
 .search-wrapper>form>p>input[type="text"]{
   border: var(--border);
   color:var(--gray-color);
+  margin-left: 10px;
   padding-left: 35px;
   padding-bottom: 0px;
   font-size: 1rem;
@@ -450,7 +452,13 @@ main.search>.search-header{
    justify-content: baseline;
 
 }
-.search-header .header-content>.site-title,
+.search-header .header-content>.site-title{
+  margin: 0%;
+  margin-left: 20px;
+  padding: 5px 0%;
+  font-size: 20px;
+  color: var(--accent-color);
+}
 .feeds-header .header-content>.site-title{
    margin: 0%;
    margin-left: 10px;
@@ -460,13 +468,12 @@ main.search>.search-header{
 }
 .search-header .header-content>.site-title{
    margin: 0%;
-   margin:5px 0px 15px 0px;
+   margin:5px 0px 15px 15px;
    padding: 5px 0%;
    color: var(--accent-color);
   /* border: 1px solid rgb(9, 21, 184);*/
    font-size: 1.5rem;
 }
-.search-header .header-content>.header-links,
 .feeds-header .header-content>.header-links{
   /*border: 1px solid rgb(9, 21, 184);*/
   padding: 0%;

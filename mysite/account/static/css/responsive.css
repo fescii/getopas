@@ -1372,7 +1372,8 @@
     main.search>.search-wrapper {
         margin-top: 0%;
         padding-top: 26px;
-        padding-left: 10px;
+        padding-left: 0px;
+        box-shadow: 0.1rem 0.5rem 3rem #2a2b2a11;
         top: 0px;
     }
 
