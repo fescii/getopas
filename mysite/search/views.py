@@ -1,7 +1,6 @@
 from django.shortcuts import render
 from blog.models import Post
 from magazine.models import Issue
-from devices.models import Product
 from .forms import SearchForm
 from django.contrib.postgres.search import SearchVector, SearchQuery, SearchRank
 
@@ -43,18 +42,6 @@ def query_search(request,option='one'):
                                    'section': 'search',
                                    'results': results,
                                    'title': 'newsletters'})
-                elif option == 'three':
-                    search_vector = SearchVector('name',weight='A') + \
-                        SearchVector('about', weight='B')
-                    search_query = SearchQuery(search)
-                    results = Product.published.annotate(
-                    search = search_vector, rank=SearchRank(search_vector, search_query)
-                        ).filter(rank__gte=0.3).order_by('-rank')
-                    return render(request,'search/search/search.html',
-                                  {'form': form,'query':search,
-                                   'section': 'search',
-                                   'results': results,
-                                   'title': 'products'})
     return render(request,
                     'search/search/search.html',
                     {'form': form,
