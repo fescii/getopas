@@ -16,7 +16,7 @@
         <div class="search-header">
         <div class="header-content">
             <h2 class="site-title">
-                {% if query %}Results for <span class="query">{{query}}</span>
+                {% if query %}Results for <span class="query">{{query|capfirst}}</span>
                 {% else %}
                     Search a query
                 {% endif %}</h2>
@@ -175,30 +175,11 @@
     {% endif %}
     {% endif %}-->
     <div class="sidebar-content">
-        <div class="stats">
-          <h3 class="stats-title">My Stats</h3>
-          <div class="stats-today">
-            <h4 class="today">Impressions</h4>
-            <p class="today-stats">
-              <span class="iconly-Show icbo"></span>{{ request.user|get_views }} View{{ request.user|get_views| pluralize }}
-            </p>
-          </div>
-          <div class="stats-month">
-            <h4 class="month">Engagements</h4>
-            <p class="month-stats">
-              <span class="iconly-User2 icbo"></span>{{ request.user|get_comments }} Comment{{ request.user|get_comments | pluralize }}
-            </p>
-          </div>
-          <a href=" {% url 'editors:user_post_list' %}" class="go-to-articles"
-            >See your articles performance
-            <span class="iconly-Arrow-Right icli"></span>
-          </a>
-        </div>
         <div class="topics">
           <h2 class="sidebar-title">Discover Topics</h2>
           <ul class="topic-list">
             {% show_most_common_tags %}
           </ul>
         </div>
-      </div>
+    </div>
 {% endblock %}
