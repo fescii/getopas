@@ -40,6 +40,11 @@
       </h2>
       <div class="article-summery">
         <div id="mobile-image">
+          {% if save.post.cover %}
+            <img id="" src="{% thumbnail post.cover 300x0 %}" alt="Post-Image">
+          {% else %}
+            <img src="https://eu.ui-avatars.com/api/?background=ff8800&name={{save.post.title}}&size=250&color=fff">
+          {% endif %}
           <img id="" src="{% thumbnail save.post.cover 300x0 %}" alt="Post-Image" />
         </div>
         <p class="summery-text">
