@@ -183,3 +183,75 @@
         </div>
     </div>
 {% endblock %}
+{% block domready %}
+//Share-Modal
+const viewBtns = document.querySelectorAll("a#view-modal"),
+popup = document.querySelectorAll("#popup");
+
+if(viewBtns != null && popup != null){
+  viewBtns.forEach((viewBtn,index)=>{
+    const close = popup[index].querySelector("#close"),
+    field = popup[index].querySelector(".field"),
+    input = field.querySelector("input"),
+    copy = field.querySelector("button");
+
+    viewBtn.addEventListener("click",(e)=>{
+        e.preventDefault();
+        popup[index].style.setProperty('display', 'block')
+    })
+
+    close.addEventListener("click",()=>{
+        popup[index].style.setProperty('display', 'none')
+    })
+
+    copy.onclick = () => {
+      input.select(); //select input value
+      if (document.execCommand("copy")) { //if the selected text copy
+        field.classList.add("active");
+        copy.innerText = "Copied";
+        setTimeout(() => {
+          window.getSelection().removeAllRanges(); //remove selection from document
+          field.classList.remove("active");
+          copy.innerText = "Copy";
+        }, 3000);
+      }
+    }
+  })
+}
+
+const url = '{% url "editors:save" %}';
+let options = {
+    method: 'POST',
+    headers: {'X-CSRFToken': csrftoken},
+    mode: 'same-origin'
+}
+
+saveButtons = document.querySelectorAll('a.save')
+saveButtons.forEach(saveButton =>{
+    saveButton.addEventListener('click', function(e){
+        e.preventDefault();
+
+        // add request body
+        let formData = new FormData();
+        formData.append('id', saveButton.dataset.id);
+        formData.append('action', saveButton.dataset.action);
+        options['body'] = formData;
+
+        // send HTTP request
+        fetch(url, options).then(response => response.json()).then(data => {
+            if (data['status'] === 'ok'){
+                // toggle button text
+                saveButton.innerHTML = `<span>${data['action']}</span>`;
+                if (data['action'] === 'Remove'){
+                    saveButton.style.backgroundColor = "rgb(255, 136, 0)";
+                    saveButton.style.color = "#fff";
+                }
+                else{
+                    saveButton.style.backgroundColor = "rgba(57, 56, 56, 0.087)";
+                    saveButton.style.color = "#808080";
+                }
+            }
+        });
+    });
+});
+{% endblock %}
