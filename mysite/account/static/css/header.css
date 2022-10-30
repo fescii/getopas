@@ -115,13 +115,19 @@ header #start{
   gap: 30px;
  /*border: 1px solid rgb(8, 8, 8);*/
 }
-.profile-section>.icbo{
+.profile-section>a{
+  display: inline-block;
+  position: relative;
+  text-decoration: none;
+  width: max-content;
+  height: max-content;
+}
+.profile-section>a>.icbo{
   text-align: center;
   position: relative;
   display: inline-block;
   color: var(--accent-color);
   /*background-color:var(--accent-color);*/
-  cursor: pointer;
   /*border: 1px solid yellow;*/
   margin-top: 4px;
   padding: 0px;

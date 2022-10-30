@@ -1,14 +1,16 @@
 {% load thumbnail %}
 {% load blog_tags %}
 <div class="profile-section">
-    <span class="iconly-Notification icbo">
-      {%  total_unread user_id=request.user.id  as unread %}
-      {% if unread > 9 %}
-      <span id="text-count">9+</span>
-      {% elif unread > 0 and unread < 10%}
-      <span id="text-count">{{unread}}</span>
-      {% endif %}
-    </span>
+    <a href="{% url 'editors:actions' %}">
+      <span class="iconly-Notification icbo">
+        {%  total_unread user_id=request.user.id  as unread %}
+        {% if unread > 9 %}
+        <span id="text-count">9+</span>
+        {% elif unread > 0 and unread < 10%}
+        <span id="text-count">{{unread}}</span>
+        {% endif %}
+      </span>
+    </a>
     <div id="dropdown-btn" class="profile-image-wrapper">
         <span class="active-status">
           <span class="dot"></span>

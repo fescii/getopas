@@ -1601,7 +1601,7 @@
 
     main.newsletters>.newsletters-feeds>.newsletter-wrapper:nth-of-type(6),
     main.newsletters>.newsletters-feeds>.newsletter-wrapper:nth-of-type(7) {
-        /*border-bottom: var(--border);*/
+        border-bottom: var(--border);
         /*border: 1px solid rgb(0, 255, 157);*/
         margin-bottom: 0px;
         padding-bottom: 20px;
@@ -1662,6 +1662,10 @@
         align-items: flex-start;
         margin: 0%;
         padding: 15px 15px 0px 5px;
+    }
+    .newsletter-wrapper>.footer>.footer-info>.icli{
+        display: inline-block;
+        margin-top: -1px;
     }
 
     .newsletter-wrapper>.footer>.subscribe {
@@ -2039,6 +2043,7 @@
 
     .mobile-footer {
         box-sizing: border-box;
+        z-index: 5;
         background-color: var(--background-color);
         box-shadow: 0rem 0rem 0.1rem 0.1rem #2a2b2a11;
         padding: 0% 25px;
@@ -2059,7 +2064,7 @@
     }
 
     .mobile-footer>a.active {
-        color: var(--accent-color);
+        color: var(--alt-accent-color);
     }
 
     .mobile-footer>a .icli {
@@ -2067,6 +2072,7 @@
         display: inline-block;
         margin-bottom: 5px;
     }
+    .mobile-footer>a.active .iconly-Message,
     .mobile-footer>a.active .iconly-Home{
         font-weight: bold;
     }
@@ -2103,7 +2109,7 @@
 
     .mobile-footer>.profile-section>.profile-image-wrapper {
         display: flex;
-        border: 2px solid var(--accent-color);
+        border: 2px solid var(--alt-accent-color);
         padding: 5%;
         margin-top: 0px;
         margin-bottom: 5px;

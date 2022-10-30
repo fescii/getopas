@@ -16,7 +16,11 @@
         <div class="newsletter-wrapper">
             <div class="newsletter-head">
                 <div class="cover-image">
-                    <img src="{% thumbnail issue.cover 300x0 %}" alt="Newsletter cover" srcset="">
+                    {% if issue.cover %}
+                        <img src="{% thumbnail issue.cover 300x0 %}" alt="Newsletter cover">
+                    {% else %}
+                        <img src="https://eu.ui-avatars.com/api/?background=08b86f&name={{issue.title}}+{{issue.owner}}&size=300&color=fff" alt="Profile">
+                    {% endif %}
                 </div>
                 <div class="info">
                     <div class="title">{{issue.title}}</div>
@@ -40,7 +44,7 @@
                         <a href="" class="topic">{{tag|split:" "}}</a>
                     {% endfor %}
                 </div>
-                <a href="{{issue.link}}" class="subscribe">Subscribe</a>
+                <a href="{{issue.link}}" target="_blank" class="subscribe">Subscribe</a>
             </div>
         </div>
     {% endfor %}

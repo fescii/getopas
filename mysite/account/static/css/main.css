@@ -84,7 +84,7 @@ main {
 main.feeds{
     /*border: 1px solid gray;*/
     margin-top: 50px;
-    margin: 0px 2% 0px 4%;
+    margin: 0px 3.5% 0px 4%;
     display: flex;
     flex-direction: column;
     gap: 0px;
@@ -1490,7 +1490,7 @@ main.newsletters>.newsletters-feeds>.newsletter-wrapper:nth-of-type(7){
 .newsletter-wrapper>.description{
     /*border: 1px solid var(--border-color);*/
     padding: 5px;
-    line-height: 1.3rem;
+    line-height: 1.6rem;
     font-size:16px;
     color: var(--summery-color);
 }
@@ -1520,7 +1520,8 @@ main.newsletters>.newsletters-feeds>.newsletter-wrapper:nth-of-type(7){
 .newsletter-wrapper>.footer>.footer-info>.icli{
     display: inline-block;
     font-size: 22px;
-    margin-top: 2px;
+    margin-top: 4px;
+    margin-right: 3px;
     color: var(--alt-accent-color);
 }
 .newsletter-wrapper>.footer>.footer-info>.likes{
