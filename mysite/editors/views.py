@@ -80,7 +80,7 @@ def newsletters(request):
                     'most_liked':top_issues,
                     'issues_interest':issues_interest,
                     'recently_added': recently_added,
-                    'title':'home',
+                    'title':'newsletters',
                     'section':'newsletters'})
 
 #Dashboard
