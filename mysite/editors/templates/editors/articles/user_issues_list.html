@@ -3,7 +3,7 @@
 {% block title %}Opus - My Newsletters{% endblock %}
 {% block content %}
 <h2>My Newsletters</h2>
-<a href="{% url 'new_newsletter' %}" class='add-new'>Create</a>
+<a href="{% url 'editors:new_newsletter' %}" class='add-new'>Create</a>
 {% for issue in issues %}
 <div class="issue-summery">
     <h2>

@@ -8,6 +8,7 @@ urlpatterns = [
 
     #Dashboard path
     path('home', views.dashboard, name='home'),
+    path('newsletters', views.newsletters, name='newsletters'),
 
     #Articles
     path('add-article/', views.create_post, name='create_post'),

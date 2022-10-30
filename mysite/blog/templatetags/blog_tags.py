@@ -93,6 +93,12 @@ def truncate_tags(tags):
 
 register.filter('truncate_tags',truncate_tags)
 
+#Return-First Tag
+def first_tag(tags):
+    return tags[:1]
+
+register.filter('first_tag',first_tag)
+
 #Slugify Tags
 def slug_tag(tag):
    return slugify(unidecode(tag))

@@ -34,7 +34,7 @@ def dashboard(request):
     profile = user.profile
 
     # Display all actions by default
-    posts_interest = Post.objects.exclude(author=request.user)
+    posts_interest = Post.published.exclude(author=request.user)
     following_ids = request.user.following.values_list('id',flat=True)
     if following_ids:
         # If user is following others, retrieve only their actions
@@ -55,6 +55,33 @@ def dashboard(request):
                     'recently_added': recently_added,
                     'title':'home',
                     'section':'opas'})
+
+
+
+#Dashboard-Newsletters
+@login_required
+def newsletters(request):
+    user = request.user
+    profile = user.profile
+
+    # Display issues-with-most-common-tags
+    common_tags = Issue.tags.most_common()[:5]
+    issues_interest = Issue.published.filter(tags__in=common_tags).distinct()[:6]
+    #Top Posts
+    top_issues = Issue.most_liked(Issue,6)
+
+    #Recent Added-Posts
+    recently_added = Issue.recently_added(Issue, 6)
+
+    return render(request,
+                 'editors/newsletters.html',
+                    {'user': user,
+                    'profile': profile,
+                    'most_liked':top_issues,
+                    'issues_interest':issues_interest,
+                    'recently_added': recently_added,
+                    'title':'home',
+                    'section':'newsletters'})
 
 #Dashboard
 @login_required
@@ -308,7 +335,7 @@ def my_list(request):
                     'title': 'My List',
                     'section': 'my-list'})
 
-#Add-Post-To-My-list
+# Add-Post-To-My-list
 @login_required
 @require_POST
 def save_post(request):
@@ -331,7 +358,7 @@ def save_post(request):
             pass
     return JsonResponse({'status': 'error'})
 
-#   Add-Post-To-My-list
+# Add-Post-To-My-list
 @login_required
 @require_POST
 def notification_action(request):
@@ -561,7 +588,7 @@ def delete_post(request, pk):
 
 #Create Magazine View
 #@login_required
-@user_passes_test(is_author)
+@login_required
 def create_magazine(request):
     magazine_form = None
     #magazine_form = None
@@ -594,7 +621,7 @@ def create_magazine(request):
 
 #Newsletter created by The Current User.
 #@login_required
-@user_passes_test(is_author)
+@login_required
 def user_issue_list(request):
     user = request.user
     profile = user.profile
@@ -619,7 +646,7 @@ def user_issue_list(request):
                    'section': 'issue-list'})
 
 #Edit Magazine Newsletter
-@user_passes_test(is_author)
+@login_required
 def edit_newsletter(request, pk):
     #post = get_object_or_404(Post, id=pk)
     issue = Issue.objects.get(id=pk)
@@ -655,7 +682,7 @@ def edit_newsletter(request, pk):
 
 #Edit Magazine Newsletter Tags
 #@login_required
-@user_passes_test(is_author)
+@login_required
 def edit_newsletter_tags(request, pk):
     #post = get_object_or_404(Post, id=pk)
     user = request.user
@@ -692,7 +719,7 @@ def edit_newsletter_tags(request, pk):
                          'section': 'issue-list'})
 
 #Edit Issue Cover Photo
-@user_passes_test(is_author)
+@login_required
 def edit_newsletter_cover(request, pk):
     #post = get_object_or_404(Post, id=pk)
     user = request.user
@@ -731,7 +758,7 @@ def edit_newsletter_cover(request, pk):
 
 #Deleting an Issue
 #@login_required
-@user_passes_test(is_author)
+@login_required
 def delete_issue(request, pk):
     post = get_object_or_404(Issue, id=pk)
     post.delete()

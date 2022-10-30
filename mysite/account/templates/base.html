@@ -76,7 +76,7 @@
                             </a>
                         </li>
                         <li class="content-link">
-                            <a class="link {% if section == 'newsletter' %}data-active{% endif %}" href="{% url 'editors:user_issue_list' %}">
+                            <a class="link {% if section == 'newsletters' %}data-active{% endif %}" href="{% url 'editors:newsletters' %}">
                                 <span id="select"></span>
                                 <span class="iconly-Message icli"></span>
                                 <span class="link-text">Newsletters</span>
@@ -137,7 +137,7 @@
         <a href="{% url 'search:item_search' %}" title="Search" class="mobile-footer-link {% if section == 'search' %}active{% endif %}">
             <span class="iconly-Search icli"></span>
         </a>
-        <a href="" title="Search" class="mobile-footer-link {% if section == 'newsletter' %}active{% endif %}">
+        <a href="{% url 'editors:newsletters' %}" title="Newslatters" class="mobile-footer-link {% if section == 'newsletters' %}active{% endif %}">
             <span class="iconly-Message icli"></span>
         </a>
         <div class="profile-section">

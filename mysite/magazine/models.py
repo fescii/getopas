@@ -6,6 +6,7 @@ from taggit.managers  import TaggableManager
 from django.urls import reverse
 from django.contrib.contenttypes.fields import GenericRelation
 from django.utils.text import slugify
+from django.db.models import Count
 
 # Create your models here.
 #Creating Our own Manager
@@ -70,13 +71,22 @@ class Issue(models.Model):
     published = PublishedManager() # Our custom manager.
     def get_absolute_url(self):
         return reverse('magazine:issue_detail',
-                       args=[self.publish.year,
-                             self.no, self.slug])
+                       args=[self.id, self.slug])
     #Overriding The Save Method
     def save(self, *args, **kwargs):
         if not self.slug:
             self.slug = slugify(self.title)
             super().save(*args, **kwargs)
+
+    #Recently added Posts
+    def recently_added(self, count):
+        issues = Issue.published.order_by('-publish')[:count]
+        return issues
+
+    #Most Viewed Posts
+    def most_liked(self, count):
+        issues = Issue.published.annotate(total_comments = Count('issue_likes')).order_by('-total_comments')[:count]
+        return issues
 
 
 #Section Model
