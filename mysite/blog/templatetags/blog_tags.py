@@ -1,4 +1,5 @@
 from actions.models import Action
+from magazine.models import Issue_likes
 import readtime
 from django.shortcuts import render,get_object_or_404
 from django import template
@@ -67,6 +68,18 @@ def check_saved(id,user):
             return 'Save'
     except Bookmark.DoesNotExist:
         return 'Save'
+
+#Check-if-post-is-saved
+@register.simple_tag
+def check_liked(id,user):
+    try:
+        saved_issue = Issue_likes.objects.get(issue=id,user=user)
+        if saved_issue:
+            return 'unlike'
+        else:
+            return 'like'
+    except Issue_likes.DoesNotExist:
+        return 'like'
 #register.filter('check_saved',check_saved)
 
 #Check-if-user-is-followed

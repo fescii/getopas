@@ -1,0 +1,116 @@
+{% extends "base.html" %}
+{% load static %}
+{% load blog_tags %}
+{% load contact_tags %}
+{% load thumbnail %}
+{% block title %}{{topic|split:" "}} Newslatters{% endblock %}
+
+{% block content %}
+{% include "editors/newsletters-header.html" %}
+<div class="newsletters-feeds feed-contents">
+    <div class="feed-title">
+        <div class="section-title">{{topic|split:" "}}</div>
+        <i class="iconly-Arrow-Right-Circle icli"></i>
+    </div>
+    {% for issue in topic_issues %}
+        <div class="newsletter-wrapper">
+            <div class="newsletter-head">
+                <div class="cover-image">
+                    {% if issue.cover %}
+                        <img src="{% thumbnail issue.cover 300x0 %}" alt="Newsletter cover">
+                    {% else %}
+                        <img src="https://eu.ui-avatars.com/api/?background=08b86f&name={{issue.title}}+{{issue.owner}}&size=300&color=fff" alt="Profile">
+                    {% endif %}
+                </div>
+                <div class="info">
+                    <div class="title">{{issue.title}}</div>
+                    <div class="author"> <span class="by">By</span>{{issue.owner}}</div>
+                    <div class="release">
+                        <span class="published">Published :</span>
+                        <span class="text">{{issue.release}}</span>
+                    </div>
+                </div>
+            </div>
+            <div class="description">
+                {{issue.description|striptags|safe|truncatechars:300 }}
+            </div>
+            <div class="footer">
+                {% check_liked issue.id request.user as liked %}
+                <div class="footer-info">
+                    <a href="" id="like-newsletter" data-id="{{ issue.id }}" data-action="{{liked}}">
+                        <span class="iconly-Heart {% if liked == 'like' %}icli{% else %}icbo{% endif %}"></span>
+                    </a>
+                    {% with issue.issue_likes.count as likes %}
+                        <div class="likes"><span id="count">{{likes}}</span> <span id="count-text">Like{{likes|pluralize}}</span></div>
+                    {% endwith %}
+                    {% for tag in issue.tags.all|first_tag %}
+                        <a href="{% url 'editors:explore_newsletter_topic' topic=tag.slug %}" class="topic">{{tag|split:" "}}</a>
+                    {% endfor %}
+                </div>
+                <a href="{{issue.link}}" target="_blank" class="subscribe">Subscribe</a>
+            </div>
+        </div>
+    {% endfor %}
+    {% include "pagination.html" with page=topic_issues %}
+</div>
+
+{% endblock %}
+{% block domready %}
+//Share-Modal
+
+const url = '{% url "editors:like_newsletter" %}';
+let options = {
+    method: 'POST',
+    headers: {'X-CSRFToken': csrftoken},
+    mode: 'same-origin'
+}
+
+likeButtons = document.querySelectorAll('a#like-newsletter')
+if(likeButtons != null){
+    likeButtons.forEach(likeBtn =>{
+        likeBtn.addEventListener('click', function(e){
+            e.preventDefault();
+
+            // add request body
+            let formData = new FormData();
+            formData.append('id', likeBtn.dataset.id);
+            formData.append('action', likeBtn.dataset.action);
+            options['body'] = formData;
+
+            // send HTTP request
+            fetch(url, options).then(response => response.json()).then(data => {
+                if (data['status'] === 'ok'){
+                    // toggle button text
+                    let parent = likeBtn.parentElement
+                    let count = parent.querySelector("span#count")
+                    let countText = parent.querySelector("span#count-text")
+                    let totalFollowers = parseInt(count.textContent)
+                    likeBtn.dataset.action = data['action']
+                    if (data['action'] === 'unlike'){
+                        likeBtn.innerHTML = `<span class="iconly-Heart icbo"></span>`;
+                        if( totalFollowers === 0){
+                            count.textContent = totalFollowers + 1;
+                            countText.textContent = "Like";
+                        }
+                        else{
+                            count.textContent = totalFollowers + 1;
+                            countText.textContent = "Likes";
+                        }
+                    }
+                    else{
+                        likeBtn.innerHTML = `<span class="iconly-Heart icli"></span>`;
+                        if( totalFollowers === 2){
+                            count.textContent = totalFollowers - 1;
+                            countText.textContent = "Like";
+                        }
+                        else{
+                            count.textContent = totalFollowers - 1;
+                            countText.textContent = "Likes";
+                        }
+                    }
+                }
+            });
+        });
+    });
+}
+{% endblock %}

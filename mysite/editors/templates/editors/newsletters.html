@@ -35,13 +35,16 @@
                 {{issue.description|striptags|safe|truncatechars:300 }}
             </div>
             <div class="footer">
+                {% check_liked issue.id request.user as liked %}
                 <div class="footer-info">
-                    <span class="iconly-Heart icli"></span>
+                    <a href="" id="like-newsletter" data-id="{{ issue.id }}" data-action="{{liked}}">
+                        <span class="iconly-Heart {% if liked == 'like' %}icli{% else %}icbo{% endif %}"></span>
+                    </a>
                     {% with issue.issue_likes.count as likes %}
-                        <div class="likes">{{likes}} Like{{likes|pluralize}}</div>
+                        <div class="likes"><span id="count">{{likes}}</span> <span id="count-text">Like{{likes|pluralize}}</span></div>
                     {% endwith %}
                     {% for tag in issue.tags.all|first_tag %}
-                        <a href="" class="topic">{{tag|split:" "}}</a>
+                        <a href="{% url 'editors:explore_newsletter_topic' topic=tag.slug %}"" class="topic">{{tag|split:" "}}</a>
                     {% endfor %}
                 </div>
                 <a href="{{issue.link}}" target="_blank" class="subscribe">Subscribe</a>
@@ -78,13 +81,16 @@
                 {{issue.description|striptags|safe|truncatechars:300 }}
             </div>
             <div class="footer">
+                {% check_liked issue.id request.user as liked %}
                 <div class="footer-info">
-                    <span class="iconly-Heart icli"></span>
+                    <a href="" id="like-newsletter" data-id="{{ issue.id }}" data-action="{{liked}}">
+                        <span class="iconly-Heart {% if liked == 'like' %}icli{% else %}icbo{% endif %}"></span>
+                    </a>
                     {% with issue.issue_likes.count as likes %}
-                        <div class="likes">{{likes}} Like{{likes|pluralize}}</div>
+                        <div class="likes"><span id="count">{{likes}}</span> <span id="count-text">Like{{likes|pluralize}}</span></div>
                     {% endwith %}
                     {% for tag in issue.tags.all|first_tag %}
-                        <a href="" class="topic">{{tag|split:" "}}</a>
+                        <a href="{% url 'editors:explore_newsletter_topic' topic=tag.slug %}"" class="topic">{{tag|split:" "}}</a>
                     {% endfor %}
                 </div>
                 <a href="{{issue.link}}" class="subscribe">Subscribe</a>
@@ -121,13 +127,16 @@
                 {{issue.description|striptags|safe|truncatechars:300 }}
             </div>
             <div class="footer">
+                {% check_liked issue.id request.user as liked %}
                 <div class="footer-info">
-                    <span class="iconly-Heart icli"></span>
+                    <a href="" id="like-newsletter" data-id="{{ issue.id }}" data-action="{{liked}}">
+                        <span class="iconly-Heart {% if liked == 'like' %}icli{% else %}icbo{% endif %}"></span>
+                    </a>
                     {% with issue.issue_likes.count as likes %}
-                        <div class="likes">{{likes}} Like{{likes|pluralize}}</div>
+                        <div class="likes"><span id="count">{{likes}}</span> <span id="count-text">Like{{likes|pluralize}}</span></div>
                     {% endwith %}
                     {% for tag in issue.tags.all|first_tag %}
-                        <a href="" class="topic">{{tag|split:" "}}</a>
+                        <a href="{% url 'editors:explore_newsletter_topic' topic=tag.slug %}"" class="topic">{{tag|split:" "}}</a>
                     {% endfor %}
                 </div>
                 <a href="{{issue.link}}" class="subscribe">Subscribe</a>
@@ -137,4 +146,63 @@
     <div class="more"><a href="" class="get-more">Explore recent newsletters</a></div>
 </div>
 {% include "editors/create-container.html" %}
+{% endblock %}
+{% block domready %}
+//Share-Modal
+
+const url = '{% url "editors:like_newsletter" %}';
+let options = {
+    method: 'POST',
+    headers: {'X-CSRFToken': csrftoken},
+    mode: 'same-origin'
+}
+
+likeButtons = document.querySelectorAll('a#like-newsletter')
+if(likeButtons != null){
+    likeButtons.forEach(likeBtn =>{
+        likeBtn.addEventListener('click', function(e){
+            e.preventDefault();
+
+            // add request body
+            let formData = new FormData();
+            formData.append('id', likeBtn.dataset.id);
+            formData.append('action', likeBtn.dataset.action);
+            options['body'] = formData;
+
+            // send HTTP request
+            fetch(url, options).then(response => response.json()).then(data => {
+                if (data['status'] === 'ok'){
+                    // toggle button text
+                    let parent = likeBtn.parentElement
+                    let count = parent.querySelector("span#count")
+                    let countText = parent.querySelector("span#count-text")
+                    let totalFollowers = parseInt(count.textContent)
+                    likeBtn.dataset.action = data['action']
+                    if (data['action'] === 'unlike'){
+                        likeBtn.innerHTML = `<span class="iconly-Heart icbo"></span>`;
+                        if( totalFollowers === 0){
+                            count.textContent = totalFollowers + 1;
+                            countText.textContent = "Like";
+                        }
+                        else{
+                            count.textContent = totalFollowers + 1;
+                            countText.textContent = "Likes";
+                        }
+                    }
+                    else{
+                        likeBtn.innerHTML = `<span class="iconly-Heart icli"></span>`;
+                        if( totalFollowers === 2){
+                            count.textContent = totalFollowers - 1;
+                            countText.textContent = "Like";
+                        }
+                        else{
+                            count.textContent = totalFollowers - 1;
+                            countText.textContent = "Likes";
+                        }
+                    }
+                }
+            });
+        });
+    });
+}
 {% endblock %}

@@ -1,7 +1,7 @@
 from django.shortcuts import render,get_object_or_404
 from django.contrib.auth import authenticate, login
 
-from magazine.models import Issue
+from magazine.models import Issue, Issue_likes
 from .forms import  CreateBlogPostForm,\
         BlogEditForm, CreateMagazineForm, MagazineEditForm,\
              MagazineEditTagsForm,\
@@ -83,7 +83,63 @@ def newsletters(request):
                     'title':'newsletters',
                     'section':'newsletters'})
 
-#Dashboard
+# Like Newsletters
+@login_required
+@require_POST
+def like_newsletter(request):
+    issue_id = request.POST.get('id')
+    action = request.POST.get('action')
+    if issue_id and action:
+        try:
+            issue = Issue.objects.get(id=issue_id)
+            try:
+                liked_issue = Issue_likes.objects.get(issue=issue,user=request.user)
+                liked_issue.delete()
+                return JsonResponse({'status': 'ok','action': 'like'})
+            except Issue_likes.DoesNotExist:
+                issue_like = Issue_likes.objects.create(issue=issue,user=request.user)
+                issue_like.save()
+                #create_action(request.user, 'likes newsletter','like', issue)
+                return JsonResponse({'status': 'ok','action': 'unlike'})
+        except Issue.DoesNotExist:
+            pass
+    return JsonResponse({'status': 'error'})
+
+#Explore
+@login_required
+def explore_newsletter_topic(request,topic=None):
+    user = request.user
+    profile = user.profile
+
+    #Getting Total articles views and comments of the current user
+    object_list = Issue.published.all()
+    tag = None
+    if topic:
+        tag = get_object_or_404(Tag, slug=topic)
+        topic_issues = object_list.filter(tags__in=[tag])
+
+    paginator = Paginator(topic_issues, 15) # 5 posts in each page
+    page = request.GET.get('page')
+    try:
+        topic_issues = paginator.page(page)
+    except PageNotAnInteger:
+    # If page is not an integer deliver the first page
+        topic_issues = paginator.page(1)
+    except EmptyPage:
+    # If page is out of range deliver last page of results
+        topic_issues = paginator.page(paginator.num_pages)
+
+    return render(request,
+                 'editors/explore-newsletter.html',
+                    {'user': user,
+                    'profile': profile,
+                    'topic': topic,
+                    'section':'newsletters',
+                    'top': 'explore',
+                    'title': 'newsletters',
+                    'topic_issues': topic_issues})
+
+#Explore
 @login_required
 def explore(request,topic=None):
     user = request.user

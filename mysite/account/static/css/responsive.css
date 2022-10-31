@@ -1668,9 +1668,15 @@
         margin: 0%;
         padding: 15px 15px 0px 5px;
     }
-    .newsletter-wrapper>.footer>.footer-info>.icli{
+    .newsletter-wrapper>.footer>.footer-info>a{
+       /* border: 1px solid var(--border-color);*/
+        padding: 0%;
+        align-items: flex-start;
+        padding-bottom: 4px;
+    }
+    .newsletter-wrapper>.footer>.footer-info>a>.span{
         display: inline-block;
-        margin-top: -1px;
+        margin-top: 0px;
     }
 
     .newsletter-wrapper>.footer>.subscribe {

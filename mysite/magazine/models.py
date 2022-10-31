@@ -100,6 +100,7 @@ class Issue_likes(models.Model):
     def __str__(self):
         return f'{self.user} likes {self.issue}'
 
+
 #Feedback Model
 class Feedback(models.Model):
     issue = models.ForeignKey(Issue, on_delete=models.CASCADE, related_name='feedbacks')
