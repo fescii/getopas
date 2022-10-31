@@ -117,7 +117,6 @@ def explore_newsletter_topic(request,topic=None):
     if topic:
         tag = get_object_or_404(Tag, slug=topic)
         topic_issues = object_list.filter(tags__in=[tag])
-
     paginator = Paginator(topic_issues, 15) # 5 posts in each page
     page = request.GET.get('page')
     try:
@@ -135,8 +134,7 @@ def explore_newsletter_topic(request,topic=None):
                     'profile': profile,
                     'topic': topic,
                     'section':'newsletters',
-                    'top': 'explore',
-                    'title': 'newsletters',
+                    'title': 'explore',
                     'topic_issues': topic_issues})
 
 #Explore

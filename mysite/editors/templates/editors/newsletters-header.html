@@ -3,15 +3,13 @@
     <div class="header-content">
         <h2 class="site-title">Newsletters</h2>
         <div class="header-links">
-          <a href="{% url 'editors:newsletters' %}" title="Trending" class="header-link {% if title == 'newsletters' %}active{% endif %}">
-            {% if top == 'explore' %}
-              Explore
-            {% else %}
-              Feeds
-            {% endif %}
-          </a>
+          <a href="{% url 'editors:newsletters' %}" title="Trending" class="header-link {% if title == 'newsletters' %}active{% endif %}">Feeds</a>
           <a href="{% url 'editors:feeds' %}" class="header-link {% if title == 'popular' %}active{% endif %}">Popular</a>
+          {% if title == 'explore' %}
+            <a href="{% url 'editors:explore_newsletter_topic' topic=topic|slugify %}" class="header-link active">Explore</a>
+          {% else %}
           <a href="{% url 'editors:interest' %}" class="header-link {% if title == 'interests' %}active{% endif %}">Interest</a>
+          {% endif %}
           <a href="{% url 'editors:recent' %}" title="Recent" class="header-link {% if title == 'recent' %}active{% endif %}">Recent</a>
         </div>
     </div>
