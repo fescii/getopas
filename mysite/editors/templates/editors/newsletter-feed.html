@@ -1,0 +1,158 @@
+{% extends "base.html" %}
+{% load static %}
+{% load blog_tags %}
+{% load contact_tags %}
+{% load thumbnail %}
+{% block title %}{{topic|split:" "}} Newslatters{% endblock %}
+
+{% block content %}
+{% include "editors/newsletters-header.html" %}
+<div id="issue-list" class="newsletters-feeds feed-contents">
+    <div class="feed-title">
+        <div class="section-title">{{title|capfirst}}</div>
+        <i class="iconly-Arrow-Right-Circle icli"></i>
+    </div>
+    {% include "editors/list-newsletters.html" %}
+</div>
+
+{% endblock %}
+{% block domready %}
+//Share-Modal
+
+const url = '{% url "editors:like_newsletter" %}';
+let options = {
+    method: 'POST',
+    headers: {'X-CSRFToken': csrftoken},
+    mode: 'same-origin'
+}
+
+likeButtons = document.querySelectorAll('a#like-newsletter-1')
+if(likeButtons != null){
+    likeButtons.forEach(likeBtn =>{
+        likeBtn.addEventListener('click', function(e){
+            e.preventDefault();
+
+            // add request body
+            let formData = new FormData();
+            formData.append('id', likeBtn.dataset.id);
+            formData.append('action', likeBtn.dataset.action);
+            options['body'] = formData;
+
+            // send HTTP request
+            fetch(url, options).then(response => response.json()).then(data => {
+                if (data['status'] === 'ok'){
+                    // toggle button text
+                    let parent = likeBtn.parentElement
+                    let count = parent.querySelector("span#count")
+                    let countText = parent.querySelector("span#count-text")
+                    let totalFollowers = parseInt(count.textContent)
+                    likeBtn.dataset.action = data['action']
+                    if (data['action'] === 'unlike'){
+                        likeBtn.innerHTML = `<span class="iconly-Heart icbo"></span>`;
+                        if( totalFollowers === 0){
+                            count.textContent = totalFollowers + 1;
+                            countText.textContent = "Like";
+                        }
+                        else{
+                            count.textContent = totalFollowers + 1;
+                            countText.textContent = "Likes";
+                        }
+                    }
+                    else{
+                        likeBtn.innerHTML = `<span class="iconly-Heart icli"></span>`;
+                        if( totalFollowers === 2){
+                            count.textContent = totalFollowers - 1;
+                            countText.textContent = "Like";
+                        }
+                        else{
+                            count.textContent = totalFollowers - 1;
+                            countText.textContent = "Likes";
+                        }
+                    }
+                }
+            });
+        });
+    });
+}
+let page = 1;
+let emptyPage = false;
+let blockRequest = false;
+window.addEventListener('scroll', function(e) {
+        let margin = document.body.clientHeight - window.innerHeight - 200;
+        if(window.pageYOffset > margin && !emptyPage && !blockRequest) {
+            blockRequest = true;
+            page += 1;
+            fetch('?issue_only=1&page=' + page)
+            .then(response => response.text())
+            .then(html => {
+                if (html === '') {
+                    emptyPage = true;
+                }
+                else {
+                    let issueList = document.getElementById('issue-list');
+                    issueList.insertAdjacentHTML('beforeEnd', html);
+                    blockRequest = false;
+                    const url = '{% url "editors:like_newsletter" %}';
+                    let options = {
+                        method: 'POST',
+                        headers: {'X-CSRFToken': csrftoken},
+                        mode: 'same-origin'
+                    }
+                    //Like/Dislike
+                    likeButtonsInner = document.querySelectorAll(`a#like-newsletter-${page}`)
+                    if(likeButtonsInner != null){
+                        likeButtonsInner.forEach(likeBtn =>{
+                            likeBtn.addEventListener('click', function(e){
+                                e.preventDefault();
+
+                                // add request body
+                                let formData = new FormData();
+                                formData.append('id', likeBtn.dataset.id);
+                                formData.append('action', likeBtn.dataset.action);
+                                options['body'] = formData;
+
+                                // send HTTP request
+                                fetch(url, options).then(response => response.json()).then(data => {
+                                    if (data['status'] === 'ok'){
+                                        // toggle button text
+                                        let parent = likeBtn.parentElement
+                                        let count = parent.querySelector("span#count")
+                                        let countText = parent.querySelector("span#count-text")
+                                        let totalFollowers = parseInt(count.textContent)
+                                        likeBtn.dataset.action = data['action']
+                                        if (data['action'] === 'unlike'){
+                                            likeBtn.innerHTML = `<span class="iconly-Heart icbo"></span>`;
+                                            if( totalFollowers === 0){
+                                                count.textContent = totalFollowers + 1;
+                                                countText.textContent = "Like";
+                                            }
+                                            else{
+                                                count.textContent = totalFollowers + 1;
+                                                countText.textContent = "Likes";
+                                            }
+                                        }
+                                        else{
+                                            likeBtn.innerHTML = `<span class="iconly-Heart icli"></span>`;
+                                            if( totalFollowers === 2){
+                                                count.textContent = totalFollowers - 1;
+                                                countText.textContent = "Like";
+                                            }
+                                            else{
+                                                count.textContent = totalFollowers - 1;
+                                                countText.textContent = "Likes";
+                                            }
+                                        }
+                                    }
+                                });
+                            });
+                        });
+                    }
+                }
+            })
+
+        }
+    });
+    // Launch scroll event
+    const scrollEvent = new Event('scroll');
+    window.dispatchEvent(scrollEvent);
+{% endblock %}

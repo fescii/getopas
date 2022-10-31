@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Issue, Feedback
+from .models import Issue, Feedback,Issue_likes
 
 # Register your models here.
 @admin.register(Issue)
@@ -17,3 +17,9 @@ class IssueAdmin(admin.ModelAdmin):
 class FeedbackAdmin(admin.ModelAdmin):
     list_display = ('issue', 'created','active')
     list_filter = ('active', 'created', 'updated')
+
+#Registering like model
+@admin.register(Issue_likes)
+class Issue_likesAdmin(admin.ModelAdmin):
+    list_display = ('issue', 'created','user')
+    list_filter = ('issue', 'created', 'user')

@@ -23,6 +23,7 @@ from taggit.models import Tag
 from actions.utils import create_action
 from actions.models import Action
 from account.models import Contact
+from django.db.models import Count
 
 
 # Create your views here.
@@ -137,6 +138,36 @@ def explore_newsletter_topic(request,topic=None):
                     'title': 'explore',
                     'topic_issues': topic_issues})
 
+#Feeds Infinite Scroll.
+@login_required
+def popular_newsletters(request):
+    issues = Issue.published.annotate(total_comments = Count('issue_likes')).order_by('-total_comments')
+    paginator = Paginator(issues, 5)
+    page = request.GET.get('page')
+    issue_only = request.GET.get('issue_only')
+    try:
+        issues = paginator.page(page)
+    except PageNotAnInteger:
+        # If page is not an integer deliver the first page
+        issues = paginator.page(1)
+    except EmptyPage:
+        if issue_only:
+            # If AJAX request and page out of range
+            # return an empty page
+            return HttpResponse('')
+        # If page out of range return last page of results
+        issues = paginator.page(paginator.num_pages)
+    if issue_only:
+        return render(request,
+        'editors/list-newsletters.html',
+        {'section': 'newsletters',
+         'issues': issues})
+
+    return render(request,
+                  'editors/newsletter-feed.html',
+                  {'title': 'popular',
+                   'section': 'newsletters',
+                   'issues': issues})
 #Explore
 @login_required
 def explore(request,topic=None):

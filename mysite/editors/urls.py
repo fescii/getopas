@@ -33,6 +33,7 @@ urlpatterns = [
     path('my-newsletters/', views.user_issue_list, name='user_issue_list'),
     path('like-newsletter/', views.like_newsletter, name='like_newsletter'),
     path('newsletters/explore/<str:topic>', views.explore_newsletter_topic, name='explore_newsletter_topic'),
+    path('newsletters/popular', views.popular_newsletters, name='popular_newsletters'),
     path('edit-newsletter/<int:pk>/', views.edit_newsletter, name='edit_newsletter'),
     path('edit-newsletter/cover/<int:pk>/', views.edit_newsletter_cover, name='edit_newsletter_cover'),
     path('edit-newsletter/tags/<int:pk>/', views.edit_newsletter_tags, name='edit_newsletter_tags'),

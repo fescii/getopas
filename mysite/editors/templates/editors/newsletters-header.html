@@ -4,7 +4,7 @@
         <h2 class="site-title">Newsletters</h2>
         <div class="header-links">
           <a href="{% url 'editors:newsletters' %}" title="Trending" class="header-link {% if title == 'newsletters' %}active{% endif %}">Feeds</a>
-          <a href="{% url 'editors:feeds' %}" class="header-link {% if title == 'popular' %}active{% endif %}">Popular</a>
+          <a href="{% url 'editors:popular_newsletters' %}" class="header-link {% if title == 'popular' %}active{% endif %}">Popular</a>
           {% if title == 'explore' %}
             <a href="{% url 'editors:explore_newsletter_topic' topic=topic|slugify %}" class="header-link active">Explore</a>
           {% else %}
