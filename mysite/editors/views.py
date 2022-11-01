@@ -142,7 +142,7 @@ def explore_newsletter_topic(request,topic=None):
 @login_required
 def popular_newsletters(request):
     issues = Issue.published.annotate(total_comments = Count('issue_likes')).order_by('-total_comments')
-    paginator = Paginator(issues, 5)
+    paginator = Paginator(issues, 6)
     page = request.GET.get('page')
     issue_only = request.GET.get('issue_only')
     try:
@@ -166,6 +166,38 @@ def popular_newsletters(request):
     return render(request,
                   'editors/newsletter-feed.html',
                   {'title': 'popular',
+                   'section': 'newsletters',
+                   'issues': issues})
+#Feeds Infinite Scroll.
+@login_required
+def interest_newsletters(request):
+    # Display issues-with-most-common-tags
+    common_tags = Issue.tags.most_common()[:15]
+    issues = Issue.published.filter(tags__in=common_tags).distinct()
+    paginator = Paginator(issues, 6)
+    page = request.GET.get('page')
+    issue_only = request.GET.get('issue_only')
+    try:
+        issues = paginator.page(page)
+    except PageNotAnInteger:
+        # If page is not an integer deliver the first page
+        issues = paginator.page(1)
+    except EmptyPage:
+        if issue_only:
+            # If AJAX request and page out of range
+            # return an empty page
+            return HttpResponse('')
+        # If page out of range return last page of results
+        issues = paginator.page(paginator.num_pages)
+    if issue_only:
+        return render(request,
+        'editors/list-newsletters.html',
+        {'section': 'newsletters',
+         'issues': issues})
+
+    return render(request,
+                  'editors/newsletter-feed.html',
+                  {'title': 'for you',
                    'section': 'newsletters',
                    'issues': issues})
 #Explore

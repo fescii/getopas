@@ -8,7 +8,7 @@
           {% if title == 'explore' %}
             <a href="{% url 'editors:explore_newsletter_topic' topic=topic|slugify %}" class="header-link active">Explore</a>
           {% else %}
-          <a href="{% url 'editors:interest' %}" class="header-link {% if title == 'interests' %}active{% endif %}">Interest</a>
+          <a href="{% url 'editors:interest_newsletters' %}" class="header-link {% if title == 'for you' %}active{% endif %}">For you</a>
           {% endif %}
           <a href="{% url 'editors:recent' %}" title="Recent" class="header-link {% if title == 'recent' %}active{% endif %}">Recent</a>
         </div>
