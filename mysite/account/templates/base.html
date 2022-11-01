@@ -62,11 +62,13 @@
                             </a>
                         </li>
                         <li class="content-link">
+                            {% with 'article' as article %}
                             <a class="link {% if section == 'search' %}data-active{% endif %}" href="{% url 'search:item_search' %}">
                                 <span id="select"></span>
                                 <span class="iconly-Search icli"></span>
                                 <span class="link-text">Search</span>
                             </a>
+                            {% endwith %}
                         </li>
                         <li class="content-link">
                             <a class="link {% if section == 'explore' %}data-active{% endif %}" href="{% url 'editors:explore_topics'%}">

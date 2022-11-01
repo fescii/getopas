@@ -21,10 +21,17 @@
                     Search a query
                 {% endif %}</h2>
             <div class="header-links">
-                <a href="{% url 'search:item_search' %}" title="Articles" class="header-link {% if title == 'articles' %}active{% endif %}">Articles</a>
-                <a href="" title="Newsletters" class="header-link {% if title == 'newslatters' %}active{% endif %}">Newsletters</a>
-                <a href="" title="Products" class="header-link {% if title == 'people' %}active{% endif %}">People</a>
-                <a href="" title="Topics" class="header-link {% if title == 'topics' %}active{% endif %}">Topics</a>
+                {% if query %}
+                    <a href="{{query}}" title="Articles" class="header-link {% if title == 'articles' %}active{% endif %}">Articles</a>
+                    <a href="newsletters/{{query}}" title="Newsletters" class="header-link {% if title == 'newsletters' %}active{% endif %}">Newsletters</a>
+                    <a href="" title="Products" class="header-link {% if title == 'people' %}active{% endif %}">People</a>
+                    <a href="" title="Topics" class="header-link {% if title == 'topics' %}active{% endif %}">Topics</a>
+                {% else %}
+                    <a href="" title="Articles" class="header-link {% if title == 'articles' %}active{% endif %}">Articles</a>
+                    <a href="" title="Newsletters" class="header-link {% if title == 'newsletters' %}active{% endif %}">Newsletters</a>
+                    <a href="" title="Products" class="header-link {% if title == 'people' %}active{% endif %}">People</a>
+                    <a href="" title="Topics" class="header-link {% if title == 'topics' %}active{% endif %}">Topics</a>
+                {% endif %}
             </div>
         </div>
         </div>
@@ -117,9 +124,58 @@
                 </div>
             </div>
         {% endfor %}
-        {% endif %}
-    {% endif %}
     </div>
+    {% endif %}
+    {% endif %}
+    {% if title == 'newsletters' %}
+    <div class="newsletters-feeds feed-contents">
+        <div class="feed-title">
+            <div class="section-title">{% with results.count as total_results %}
+                Found {{ total_results }} result{{ total_results|pluralize }}
+                {% endwith %}</div>
+            <i class="iconly-Arrow-Right-Circle icli"></i>
+        </div>
+        {% for issue in results %}
+            <div class="newsletter-wrapper">
+                <div class="newsletter-head">
+                    <div class="cover-image">
+                        {% if issue.cover %}
+                            <img src="{% thumbnail issue.cover 300x0 %}" alt="Newsletter cover">
+                        {% else %}
+                            <img src="https://eu.ui-avatars.com/api/?background=08b86f&name={{issue.title}}+{{issue.owner}}&size=300&color=fff" alt="Profile">
+                        {% endif %}
+                    </div>
+                    <div class="info">
+                        <div class="title">{{issue.title}}</div>
+                        <div class="author"> <span class="by">By</span>{{issue.owner}}</div>
+                        <div class="release">
+                            <span class="published">Published :</span>
+                            <span class="text">{{issue.release}}</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="description">
+                    {{issue.description|striptags|safe|truncatechars:300 }}
+                </div>
+                <div class="footer">
+                    {% check_liked issue.id request.user as liked %}
+                    <div class="footer-info">
+                        <a href="" id="like-newsletter" data-id="{{ issue.id }}" data-action="{{liked}}">
+                            <span class="iconly-Heart {% if liked == 'like' %}icli{% else %}icbo{% endif %}"></span>
+                        </a>
+                        {% with issue.issue_likes.count as likes %}
+                            <div class="likes"><span id="count">{{likes}}</span> <span id="count-text">Like{{likes|pluralize}}</span></div>
+                        {% endwith %}
+                        {% for tag in issue.tags.all|first_tag %}
+                            <a href="{% url 'editors:explore_newsletter_topic' topic=tag.slug %}"" class="topic">{{tag|split:" "}}</a>
+                        {% endfor %}
+                    </div>
+                    <a href="{{issue.link}}" target="_blank" class="subscribe">Subscribe</a>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+    {% endif %}
   <!--  <h1>Search for Articles, Newslatters or Device information</h1>
     {% if option == 'one' %}
     {% if query %}
