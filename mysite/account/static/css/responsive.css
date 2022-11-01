@@ -1701,6 +1701,18 @@
     main.read>.sidebar-content>.topics {
         display: flex;
     }
+    main.feeds>.sidebar-content>.topics,
+    main.articles>.sidebar-content>.topics,
+    main.my-list>.sidebar-content>.topics {
+        display: none;
+    }
+    main.articles>.sidebar-content{
+        display:none;
+    }
+    .stats>.stats-today>.today-stats>.icbo,
+    .stats>.stats-month>.month-stats>.icbo{
+        margin-top: 0px;
+    }
 
     main.search>.sidebar-content>.topics {
         display: flex;

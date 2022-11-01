@@ -482,7 +482,7 @@ def my_list(request):
     return render(request,
                  'editors/bookmark.html',
                     {'saved_posts': posts,
-                    'title': 'My List',
+                    'title': 'bookmarks',
                     'section': 'my-list'})
 
 # Add-Post-To-My-list

@@ -3,7 +3,7 @@
 {% load blog_tags %}
 {% load thumbnail %}
 
-{% block title %}{{title}}{% endblock %}
+{% block title %}{{title|capfirst}}{% endblock %}
 {% block content %}
 {% include "editors/feeds-header.html" %}
 <div class="article-feeds feed-contents">
@@ -93,7 +93,7 @@
     </div>
   </div>
   {% empty %}
-    <p>You have not saved any articles yet.</p>
+    <p>You have not s192.168.70.202aved any articles yet.</p>
     {% endfor %}
   {% include "pagination.html" with page=saved_posts %}
 </div>
