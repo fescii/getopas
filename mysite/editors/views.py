@@ -200,6 +200,39 @@ def interest_newsletters(request):
                   {'title': 'for you',
                    'section': 'newsletters',
                    'issues': issues})
+#Feeds Infinite Scroll.
+@login_required
+def recent_newsletters(request):
+    # Display recent-recent-newsletters
+    issues = Issue.published.order_by('-publish')
+    paginator = Paginator(issues, 6)
+    page = request.GET.get('page')
+    issue_only = request.GET.get('issue_only')
+    try:
+        issues = paginator.page(page)
+    except PageNotAnInteger:
+        # If page is not an integer deliver the first page
+        issues = paginator.page(1)
+    except EmptyPage:
+        if issue_only:
+            # If AJAX request and page out of range
+            # return an empty page
+            return HttpResponse('')
+        # If page out of range return last page of results
+        issues = paginator.page(paginator.num_pages)
+    if issue_only:
+        return render(request,
+        'editors/list-newsletters.html',
+        {'section': 'newsletters',
+         'issues': issues})
+
+    return render(request,
+                  'editors/newsletter-feed.html',
+                  {'title': 'recent',
+                   'section': 'newsletters',
+                   'issues': issues})
+
+
 #Explore
 @login_required
 def explore(request,topic=None):

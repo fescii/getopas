@@ -10,7 +10,7 @@
           {% else %}
           <a href="{% url 'editors:interest_newsletters' %}" class="header-link {% if title == 'for you' %}active{% endif %}">For you</a>
           {% endif %}
-          <a href="{% url 'editors:recent' %}" title="Recent" class="header-link {% if title == 'recent' %}active{% endif %}">Recent</a>
+          <a href="{% url 'editors:recent_newsletters' %}" title="Recent" class="header-link {% if title == 'recent' %}active{% endif %}">Recent</a>
         </div>
     </div>
     {% include "account/user/header.html" %}
