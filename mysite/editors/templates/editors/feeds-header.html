@@ -9,6 +9,8 @@
             <a href="{% url 'editors:my_list' %}" class="header-link active">{{title|capfirst}}</a>
           {% elif title == 'topics' %}
             <a href="{% url 'editors:explore_topics' %}" class="header-link active">{{title|capfirst}}</a>
+          {% elif title == 'explore' %}
+            <a href="{% url 'editors:explore_topics' %}" class="header-link active">Topics</a>
           {% else %}
             <a href="{% url 'editors:feeds' %}" class="header-link {% if title == 'feeds' %}active{% endif %}">Feeds</a>
           {% endif %}

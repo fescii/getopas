@@ -22,7 +22,7 @@
                 {% endif %}</h2>
             <div class="header-links">
                 {% if query %}
-                    <a href="{{query}}" title="Articles" class="header-link {% if title == 'articles' %}active{% endif %}">Articles</a>
+                    <a href="{% url 'search:item_search' %}" title="Articles" class="header-link {% if title == 'articles' %}active{% endif %}">Articles</a>
                     <a href="newsletters/{{query}}" title="Newsletters" class="header-link {% if title == 'newsletters' %}active{% endif %}">Newsletters</a>
                     <a href="" title="Products" class="header-link {% if title == 'people' %}active{% endif %}">People</a>
                     <a href="" title="Topics" class="header-link {% if title == 'topics' %}active{% endif %}">Topics</a>
