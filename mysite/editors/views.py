@@ -357,7 +357,7 @@ def interest(request):
 
     return render(request,
                   'editors/feed.html',
-                  {'title': 'interests',
+                  {'title': 'for you',
                    'section': 'articles',
                    'posts': posts})
 

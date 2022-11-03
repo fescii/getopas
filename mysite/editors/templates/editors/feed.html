@@ -2,7 +2,7 @@
 {% load static %}
 {% load blog_tags %}
 {% load thumbnail %}
-{% block title %}{{title|capfirst}}{% endblock %}
+{% block title %}{{title|split:" "}}{% endblock %}
 {% block content %}
 {% include "editors/feeds-header.html" %}
 
