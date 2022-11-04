@@ -1427,6 +1427,7 @@ main.newsletters>.newsletters-feeds>.get-more{
     /*width: max-content;*/
     justify-self: center;
 }
+main.search>.newsletters-feeds>.newsletter-wrapper,
 main.newsletters>.newsletters-feeds>.newsletter-wrapper{
    /* box-shadow: var(--box-shadow);*/
     border-bottom: var(--border);
@@ -1436,6 +1437,12 @@ main.newsletters>.newsletters-feeds>.newsletter-wrapper{
     display: flex;
     flex-flow: column;
     gap: 0px;
+}
+main.search>.newsletters-feeds{
+    display: none;
+}
+main.search>.newsletters-feeds>.newsletter-wrapper{
+    margin-bottom: 20px;
 }
 
 main.newsletters>.newsletters-feeds>.newsletter-wrapper:nth-of-type(6),
@@ -1448,13 +1455,14 @@ main.newsletters>.newsletters-feeds>.newsletter-wrapper:nth-of-type(7){
 .newsletter-wrapper>.newsletter-head{
     /*border: 1px solid var(--border-color);*/
     display: grid;
-    grid-template-columns: 1fr 3fr;
+    grid-template-columns: 100px 3fr;
     justify-content: center;
     column-gap: 8px;
     /*justify-items: center;*/
 }
 .newsletter-wrapper>.newsletter-head>.cover-image{
    /*justify-self: end;*/
+   grid-column: 1/2;
     height: 100px;
     width: 100%;
     padding: 10px 0px;
