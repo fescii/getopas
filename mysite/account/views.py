@@ -14,6 +14,7 @@ from django.shortcuts import render,get_object_or_404
 from django.contrib.auth.models import User
 from .models import Profile
 from actions.utils import create_action
+from blog.models import Post
 
 
 # Create your views here.
@@ -126,7 +127,7 @@ def register(request):
             #Saving The User Object
             new_user.save()
             Profile.objects.create(user=new_user)
-            create_action(new_user, 'has created an account')
+            #create_action(new_user, 'has created an account')
             return render(request,
                           'editors/register_done.html',
                           {'new_user': new_user})
@@ -168,7 +169,7 @@ def edit(request,username):
                       'account/edit.html',
                       {'user_form': user_form,
                        'profile_form': profile_form,
-                       'user': user,
+                       'user': user,'tab': 'profile',
                        'profile': profile,
                        'section': 'profile'})
     else:
@@ -179,7 +180,7 @@ def edit(request,username):
                       {'user_form': user_form,
                        'profile_form': profile_form,
                        'user': user,
-                       'profile': profile,
+                       'profile': profile,'tab': 'profile',
                        'section': 'profile'})
 
 #User Profile Page
@@ -204,7 +205,7 @@ def user_profile(request, username):
                       'account/profile/user-profile.html',
                       {'profile_photo_form': profile_photo_form,
                        'r_user': r_user,
-                       'profile': profile,
+                       'profile': profile,'tab': 'profile',
                        'section': 'profile'})
 
     else:
@@ -212,16 +213,104 @@ def user_profile(request, username):
         return render(request,
                     'account/profile/user-profile.html',
                     {'r_user': r_user,
-                    'profile': profile,
+                    'profile': profile,'tab': 'profile',
                     'section': 'profile',
                     'profile_photo_form': profile_photo_form})
 
 @login_required
 def user_list(request):
-    users = User.objects.filter(is_active=True)
+    # Display all users by default
+    following_ids = request.user.following.values_list('id',flat=True)
+    people_only = request.GET.get('people_only')
+    users = User.objects.filter(is_active=True).exclude(username=request.user.username)
+    users = users.exclude(id__in=following_ids)
+
+    paginator = Paginator(users, 8)
+    page = request.GET.get('page')
+    try:
+        users = paginator.page(page)
+    except PageNotAnInteger:
+        # If page is not an integer deliver the first page
+        users = paginator.page(1)
+    except EmptyPage:
+        if people_only:
+            # If AJAX request and page out of range
+            # return an empty page
+            return HttpResponse('')
+        # If page out of range return last page of results
+        users = paginator.page(paginator.num_pages)
+    if people_only:
+        return render(request,'account/user/list-users.html',
+                      {'section': 'peoples','users': users})
     return render(request,
                   'account/user/list.html',
-                  {'section': 'people',
+                  {'section': 'peoples',
+                   'title': 'discover',
+                   'users': users})
+
+@login_required
+def top_users(request):
+    # Display all users by default
+    following_ids = request.user.following.values_list('id',flat=True)
+    people_only = request.GET.get('people_only')
+    top_ids = Post.published.order_by('-blog_views').values_list('author',flat=True)
+    users = User.objects.filter(is_active=True).exclude(username=request.user.username)
+    users = users.filter(id__in=top_ids)
+    users = users.exclude(id__in=following_ids)
+    
+    paginator = Paginator(users, 8)
+    page = request.GET.get('page')
+    try:
+        users = paginator.page(page)
+    except PageNotAnInteger:
+        # If page is not an integer deliver the first page
+        users = paginator.page(1)
+    except EmptyPage:
+        if people_only:
+            # If AJAX request and page out of range
+            # return an empty page
+            return HttpResponse('')
+        # If page out of range return last page of results
+        users = paginator.page(paginator.num_pages)
+    if people_only:
+        return render(request,'account/user/list-users.html',
+                      {'section': 'peoples','users': users})
+    return render(request,
+                  'account/user/list.html',
+                  {'section': 'peoples',
+                   'title': 'top',
+                   'users': users})
+
+@login_required
+def new_users(request):
+    # Display all users by default
+    following_ids = request.user.following.values_list('id',flat=True)
+    people_only = request.GET.get('people_only')
+    users = User.objects.filter(is_active=True).exclude(username=request.user.username)
+    users = users.exclude(id__in=following_ids)
+    users = users.order_by('-date_joined')
+
+    paginator = Paginator(users, 8)
+    page = request.GET.get('page')
+    try:
+        users = paginator.page(page)
+    except PageNotAnInteger:
+        # If page is not an integer deliver the first page
+        users = paginator.page(1)
+    except EmptyPage:
+        if people_only:
+            # If AJAX request and page out of range
+            # return an empty page
+            return HttpResponse('')
+        # If page out of range return last page of results
+        users = paginator.page(paginator.num_pages)
+    if people_only:
+        return render(request,'account/user/list-users.html',
+                      {'section': 'peoples','users': users})
+    return render(request,
+                  'account/user/list.html',
+                  {'section': 'peoples',
+                   'title': 'new',
                    'users': users})
 
 @require_POST
@@ -233,15 +322,83 @@ def user_follow(request):
         try:
             user = User.objects.get(id=user_id)
             if action == 'Unfollow':
-                Contact.objects.filter(user_from=request.user,user_to=user).delete()
-                create_action(request.user, 'unfollowed','follow', user)
-            else:
+                contact = Contact.objects.filter(user_from=request.user,user_to=user)
+                contact.delete()
+                #create_action(request.user, 'unfollowed','follow', user)
+                return JsonResponse({'status':'ok'})
+            elif action == 'Follow':
                 Contact.objects.get_or_create(user_from=request.user,user_to=user)
-                create_action(request.user, 'is following','follow', user)
-            return JsonResponse({'status':'ok'})
+                create_action(request.user, 'is now following','follow', user)
+                return JsonResponse({'status':'ok'})
+            else:
+                pass
         except User.DoesNotExist:
             return JsonResponse({'status':'error'})
     return JsonResponse({'status':'error'})
+
+@login_required
+def following(request,username):
+    # Display all users by default
+    r_user = get_object_or_404(User,username=username,is_active=True)
+    following_ids = r_user.following.values_list('id',flat=True)
+    users = User.objects.filter(id__in=following_ids)
+    people_only = request.GET.get('people_only')
+
+    paginator = Paginator(users, 8)
+    page = request.GET.get('page')
+    try:
+        users = paginator.page(page)
+    except PageNotAnInteger:
+        # If page is not an integer deliver the first page
+        users = paginator.page(1)
+    except EmptyPage:
+        if people_only:
+            # If AJAX request and page out of range
+            # return an empty page
+            return HttpResponse('')
+        # If page out of range return last page of results
+        users = paginator.page(paginator.num_pages)
+    if people_only:
+        return render(request,'account/user/list-users.html',
+                      {'section': 'peoples','users': users})
+    return render(request,
+                  'account/user/list.html',
+                  {'section': 'peoples',
+                   'title': 'following',
+                   'r_user': r_user,
+                   'users': users})
+
+@login_required
+def followers(request,username):
+    # Display all users by default
+    r_user = get_object_or_404(User,username=username,is_active=True)
+    following_ids = r_user.followers.values_list('id',flat=True)
+    users = User.objects.filter(id__in=following_ids)
+    people_only = request.GET.get('people_only')
+
+    paginator = Paginator(users, 8)
+    page = request.GET.get('page')
+    try:
+        users = paginator.page(page)
+    except PageNotAnInteger:
+        # If page is not an integer deliver the first page
+        users = paginator.page(1)
+    except EmptyPage:
+        if people_only:
+            # If AJAX request and page out of range
+            # return an empty page
+            return HttpResponse('')
+        # If page out of range return last page of results
+        users = paginator.page(paginator.num_pages)
+    if people_only:
+        return render(request,'account/user/list-users.html',
+                      {'section': 'peoples','users': users})
+    return render(request,
+                  'account/user/list.html',
+                  {'section': 'peoples',
+                   'title': 'followers',
+                   'r_user': r_user,
+                   'users': users})
 
 def header_content(request):
     user = request.user

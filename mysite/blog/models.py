@@ -20,7 +20,7 @@ class Post(models.Model):
     title = models.CharField(max_length=250)
     slug = models.SlugField(max_length=250, blank=True)
     #author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='blog_posts')
-    author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='post_author')
     body = models.TextField()
     publish = models.DateTimeField(default=timezone.now)
     created = models.DateTimeField(auto_now_add=True)
@@ -66,6 +66,12 @@ class Post(models.Model):
     def recently_added(self, count):
         posts = Post.published.order_by('-publish')[:count]
         return posts
+    def get_views(user):
+        user_articles = Post.published.filter(author=user)
+        count = 0
+        for article in user_articles:
+            count = count + article.blog_views
+        return count
 
 
     class Meta:

@@ -43,9 +43,11 @@ footerBtn = document.querySelector('#footer-btn')
 footerModal = document.querySelector('#profile-footer')
 if (footerBtn != null && footerModal != null) {
     footerBtn.addEventListener('click', (e) => {
+        footerTxt = footerBtn.querySelector('.link-text')
         if (footerModal.style.display === 'block') {
             footerModal.style.setProperty('display', 'none')
             e.target.style.setProperty('color', '#808080')
+            footerTxt.style.setProperty('color', '#808080')
         }
         else {
             try{
@@ -56,7 +58,8 @@ if (footerBtn != null && footerModal != null) {
             }
             finally{
                 footerModal.style.setProperty('display', 'block')
-                e.target.style.setProperty('color', '#08b86f')
+                e.target.style.setProperty('color', 'rgb(255, 136, 0)')
+                footerTxt.style.setProperty('color', 'rgb(255, 136, 0)')
             }
         }
     })

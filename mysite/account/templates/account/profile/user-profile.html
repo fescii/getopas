@@ -7,12 +7,19 @@
 
     <div class="site-title">
         <div class="section-title">Profile</div>
+            {% with total_following=r_user.following.count %}
+                <a href="{% url 'following' username=r_user.username %}" class="count">
+                    <span>Following</span>
+                    <span class="iconly-User2 icbo"></span>
+                    <span class="total-following">{{ total_following }}</span>
+                </a>
+            {% endwith %}
             {% with total_followers=r_user.followers.count %}
-                <span class="count">
+                <a href="{% url 'followers' username=r_user.username %}" id="count" class="count">
                     <span class="iconly-User2 icbo"></span>
                     <span class="total">{{ total_followers }}</span>
                     <span>Follower{{ total_followers|pluralize }}</span>
-                </span>
+                </a>
             {% endwith %}
         {% if user == r_user %}
             <a href="{% url 'edit' username=r_user.username%}" class="edit">
@@ -134,7 +141,7 @@
                 if (data['status'] === 'ok'){
                     //let previousAction = followButton.dataset.action;
                     let action = followButton.dataset.action
-                    let followerCount = document.querySelector('span.count .total');
+                    let followerCount = document.querySelector('a#count .total');
                     let totalFollowers = parseInt(followerCount.innerHTML);
 
                     if( action === 'Follow'){

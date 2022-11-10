@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.contrib.auth.models import User
 from blog.models import Post
 from magazine.models import Issue
 from .forms import SearchForm
@@ -21,28 +22,33 @@ def query_search(request,option = 'one'):
             results = Post.published.annotate(
                     search = search_vector,
                             rank=SearchRank(search_vector, search_query)
-                            ).filter(rank__gte=0.3).order_by('-rank')
+                            ).filter(rank__gte=0.05).order_by('-rank')
             #Newsletters
             search_vector_issue = SearchVector('title',weight='A') + SearchVector('description', weight='B')
             issues = Issue.published.annotate(search = search_vector_issue,
                                               rank=SearchRank(search_vector_issue, search_query))\
-                                                  .filter(rank__gte=0.3).order_by('-rank')
+                                                  .filter(rank__gte=0.05).order_by('-rank')
+            #People
+            search_vector_people = SearchVector('first_name',weight='A') + SearchVector('last_name', weight='B')
+            people =  User.objects.annotate(search = search_vector_people,
+                                              rank=SearchRank(search_vector_people, search_query))\
+                                                  .filter(rank__gte=0.05).order_by('-rank')
+
             return render(request,'search/search/search.html',
                                     {'form': form,'query':search,
                                     'section': 'search',
                                     'results': results,
-                                    'issues': issues,
+                                    'issues': issues,'tab': 'search',
+                                    'people': people,
                                     'title': 'articles'})
     return render(request,
                     'search/search/search.html',
                     {'form': form,
-                    'query':search,
+                    'query':search,'tab': 'search',
                     'section': 'search',
                     'results': results,
                     'option':option})
 
-#Search View
-def issue_search(request,search):
     form = SearchForm()
     search = str(search)
     results = []

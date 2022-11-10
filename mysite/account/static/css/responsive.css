@@ -505,6 +505,10 @@
     header>.header-links {
         display: none;
     }
+    main.peoples>.sidebar-content{
+        display: none;
+
+    }
 
     main {
         margin: 75px 0px;
@@ -617,8 +621,9 @@
     }
 
     .profile-image>input[type="submit"] {
-        width: 150px;
-        padding: 5px;
+        width: 120px;
+        padding: 10px;
+        box-shadow: var(--box-shadow);
     }
 
     main.profile>.profile-info>.contact-info>.info-container {
@@ -845,6 +850,12 @@
         margin: 0%;
         margin-left: 20px;
 
+    }
+    main.feeds>.people {
+        /*border: var(--border);*/
+        display: flex;
+        flex-flow: column;
+        gap: 20px;
     }
 
     /*main.feeds>.feeds-header{
@@ -1288,6 +1299,7 @@
         width: 100%;
         margin: 0%;
         display: flex;
+        justify-content: end;
         position: sticky;
         z-index: 5;
         top: 0px;
@@ -1329,6 +1341,11 @@
     main.profile>.profile-info {
         background-color: var(--background-color);
     }
+    main.profile>.site-title>.section-title{
+        position: fixed;
+        top: 25px;
+        left: 15px;
+    }
 
     main.search>.search-wrapper {
         margin-top: 0%;
@@ -1337,6 +1354,7 @@
         box-shadow: 0.1rem 0.5rem 3rem #2a2b2a11;
         top: 0px;
         border: none;
+        padding-bottom:10px;
     }
     .search-header{
         border: none;
@@ -1529,7 +1547,7 @@
         /* border: 1px solid rgb(0, 255, 157);*/
         margin: 0px;
         padding: 0%;
-        margin-bottom: 0px;
+        margin-bottom: 10px;
         background-color: transparent;
     }
 
@@ -1699,7 +1717,7 @@
     }
 
     main.feeds>.feed-contents>.article-wrapper>.article-info {
-        /* border: 1px solid gray;*/
+        /*border: 1px solid rgb(239, 14, 14);*/
         padding-left: 7px;
     }
 
@@ -1711,29 +1729,28 @@
         padding-bottom: 20px;
     }
 
-    main.feeds>.feed-contents>.article-wrapper>.article-info .posted>.icli {
-        /*border: 1px solid gray;*/
-        font-size: 17px;
-        display: inline;
-        padding: 0px;
-        margin-top: 5px;
-    }
 
     main.feeds>.feed-contents>.article-wrapper>.article-info .right {
         display: grid;
         grid-template-columns: max-content 1fr;
         min-height: max-content;
+        align-items:start;
         padding: 0%;
-        /*border: 1px solid gray;*/
+       /* border: 1px solid gray;*/
         position: absolute;
         right: 5px;
-        font-size: 0.9rem;
+    }
+    main.feeds>.feed-contents>.article-wrapper>.article-info .posted>.icli {
+        /*border: 1px solid gray;*/
+        font-size: 1rem;
+        display: inline-block;
+        align-self:start;
     }
 
     main.feeds>.feed-contents>.article-wrapper>.article-info .posted>.date {
         display: inline-block;
         /*border: 1px solid gray;*/
-        font-size: 0.95rem;
+        font-size: 0.8rem;
         padding-top: 0px;
         margin: 0px;
     }
@@ -1743,9 +1760,9 @@
         display: inline-block;
         padding: 0px;
         margin: 0%;
-        align-self: baseline;
+        align-self: start;
         padding: 0px;
-        margin-top: 5px;
+        margin-top: 2px;
     }
 
     main.feeds>.feed-contents>.article-wrapper>.summery-content {
@@ -2008,14 +2025,14 @@
     }
 
     main.feeds>.feed-contents>.feed-title>.section-title {
-        width: 50%;
+        width: max-content;
         text-align: start;
         font-size: 1.5rem;
     }
 
     main.feeds>.feed-contents>.feed-title>.icli {
         text-align: end;
-        width: 50%;
+        width: max-content;
         margin-right: 10px;
         font-weight: bold;
         font-size: 27px;
@@ -2023,6 +2040,11 @@
 
     .sidebar-content>.topics>.topic-list li>a {
         cursor: default;
+    }
+    main.feeds>.people>.person{
+        border: var(--border);
+        margin: 0% 12px;
+
     }
 
     .mobile-footer {
@@ -2034,7 +2056,7 @@
         position: fixed;
         bottom: 0%;
         width: 100%;
-        height: 50px;
+        height: 58px;
         display: flex;
         align-items: center;
         justify-content: space-between;
@@ -2044,17 +2066,31 @@
         text-decoration: none;
         position: relative;
         cursor: default;
+        height: max-content;
+        padding-top: 5px;
         color: var(--gray-color);
+        /*border: 1px solid rgb(8, 8, 8);*/
+        display: flex;
+        flex-flow: column;
+        align-items: center;
+        gap: 0%;
     }
 
     .mobile-footer>a.active {
         color: var(--alt-accent-color);
     }
+    .mobile-footer>a>.link-text{
+        /*border: 1px solid rgb(8, 8, 8);*/
+        padding: 0px;
+        height: 0%;
+        font-size: 0.9rem;
+    }
 
     .mobile-footer>a .icli {
-        font-size: 26px;
+        /*border: 1px solid rgb(8, 8, 8);*/
+        font-size: 25px;
         display: inline-block;
-        margin-bottom: 5px;
+        margin: 0px;
     }
     .mobile-footer>a.active .iconly-Message,
     .mobile-footer>a.active .iconly-Home{
@@ -2082,11 +2118,15 @@
 
     .mobile-footer>.profile-section {
         position: unset;
-        margin: 0px;
+        margin: 0%;
         padding: 0%;
-        /* border: 1px solid rgb(8, 8, 8);*/
+        /*border: 1px solid rgb(8, 8, 8);*/
     }
 
+    .mobile-footer>.profile-section>.profile-icon>.link-text{
+        color: var(--gray-color);
+        font-size: 0.9rem;
+    }
     .mobile-footer>.profile-section>.profile-image-wrapper {
         cursor: default;
     }
@@ -2094,11 +2134,10 @@
     .mobile-footer>.profile-section>.profile-image-wrapper {
         display: flex;
         border: 2px solid var(--alt-accent-color);
-        padding: 5%;
-        margin-top: 0px;
-        margin-bottom: 5px;
-        width: 32px;
-        height: 32px;
+        padding: 1px;
+        margin: 0%;
+        width: 30px;
+        height: 30px;
     }
     .mobile-footer>.profile-section>.profile-image-wrapper>img{
         width: 100%;
@@ -2107,11 +2146,21 @@
 
     .mobile-footer>.profile-section>.profile-icon {
         border: none;
+        display: flex;
+        flex-flow: column;
+        align-items: center;
+        gap: 0%;
     }
 
     .mobile-footer>.profile-section>.profile-icon>.icli {
-        font-size: 24px;
+        font-size: 25px;
         color: var(--gray-color);
+        /*border: var(--border);*/
+        margin-top: 8px;
+    }
+    .mobile-footer>.profile-section>.active>.icli,
+    .mobile-footer>.profile-section>.active>.link-text{
+        color: var(--alt-accent-color);
     }
 
     .mobile-footer>.profile-section>.profile-dropdown {
@@ -2125,7 +2174,7 @@
         padding-top: 12px;
         margin: 0%;
         width: 250px;
-        bottom: 53px;
+        bottom: 59px;
         top: unset;
         right: 5px;
         box-shadow: var(--box-shadow);
@@ -2173,7 +2222,7 @@
         align-items: center;
         justify-content: center;
         /*font-size: 1.2rem;*/
-        background-color: var(--accent-color);
+        background-color: var(--alt-accent-color);
         box-shadow: 0rem 0rem 0.1rem 0.1rem #2a2b2a11;
         padding: 5px 12px;
         text-decoration: none;
@@ -2234,6 +2283,7 @@
     /*Notification*/
     a,
     .pagination > .step-links > a,
+    main.profile > .site-title > .count,
     main.feeds>.notifications>.action,
     main.feeds>.notifications>.action>.more-info>.more-options>.options-item,
     main.feeds>.notifications>.action>.profile-image>a,

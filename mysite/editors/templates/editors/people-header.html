@@ -1,0 +1,17 @@
+{% load blog_tags %}
+<div class="feeds-header">
+    <div class="header-content">
+        <h2 class="site-title">People</h2>
+        <div class="header-links">
+            <a href="{% url 'user_list' %}" title="Discover" class="header-link {% if title == 'discover' %}active{% endif %}">Discover</a>
+            <a href="{% url 'top_users' %}" title="Trending Users" class="header-link {% if title == 'top' %}active{% endif %} ">Top users</a>
+            <a href="{% url 'new_users' %}" title="New users" class="header-link {% if title == 'new' %}active{% endif %} ">New</a>
+            {% if title == "following" %}
+                <a href="" title="Following" class="header-link active">Following</a>
+            {% elif title == "followers" %}
+                <a href="" title="Followers" class="header-link active">Followers</a>
+            {% endif %}
+        </div>
+    </div>
+    {% include "account/user/header.html" %}
+</div>

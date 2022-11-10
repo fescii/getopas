@@ -3,7 +3,7 @@ from django.urls import path, include
 from . import views
 from django.contrib.auth import views as auth_views
 
-#app_name = 'editor'
+#app_name = 'account'
 urlpatterns = [
     #path('', include('django.contrib.auth.urls')),
     path('login/', auth_views.LoginView.as_view(), name='login'),
@@ -38,7 +38,11 @@ urlpatterns = [
     #Edit user info path
     path('@<str:username>/edit', views.edit, name='edit'),
     path('@<str:username>', views.user_profile, name='profile'),
-    path('users/', views.user_list, name='user_list'),
+    path('@<str:username>/following/', views.following, name='following'),
+    path('@<str:username>/followers/', views.followers, name='followers'),
+    path('people/', views.user_list, name='user_list'),
+    path('top-users/', views.top_users, name='top_users'),
+    path('new-users/', views.new_users, name='new_users'),
     path('user/follow', views.user_follow, name='user_follow'),
     path('manage-users/', views.list_users, name='list_users'),
     path('users/edit-user-<str:user_id>', views.moderate_user, name='moderate_user'),

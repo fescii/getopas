@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 {% load static %}
 {% load blog_tags %}
+{% load contact_tags %}
 {% load thumbnail %}
 {% block title %}Search{% endblock %}
 {% block content %}
@@ -14,18 +15,18 @@
                 </p>
                 <i class="iconly-Search icli"></i>
             </form>
-                <div class="search-header">
-                    <div class="header-content">
-                        <h2 class="site-title">
-                            Results for <span class="query">{{query|capfirst}}</span>
-                        </h2>
-                        <div class="header-links">
-                            <a id="article-tab" href="" title="Articles" class="header-link {% if title == 'articles' %}active{% endif %}">Articles</a>
-                            <a id="issue-tab" href="" title="Newsletters" class="header-link {% if title == 'newsletters' %}active{% endif %}">Newsletters</a>
-                            <a id="people-tab" href="" title="Products" class="header-link {% if title == 'people' %}active{% endif %}">People</a>
-                        </div>
+            <div class="search-header">
+                <div class="header-content">
+                    <h2 class="site-title">
+                        Results for <span class="query">{{query|capfirst}}</span>
+                    </h2>
+                    <div class="header-links">
+                        <a id="article-tab" href="" title="Articles" class="header-link {% if title == 'articles' %}active{% endif %}">Articles</a>
+                        <a id="issue-tab" href="" title="Newsletters" class="header-link {% if title == 'newsletters' %}active{% endif %}">Newsletters</a>
+                        <a id="people-tab" href="" title="Products" class="header-link {% if title == 'people' %}active{% endif %}">People</a>
                     </div>
                 </div>
+            </div>
         </div>
 
         <div id="article-search" class="article-feeds feed-contents">
@@ -117,9 +118,11 @@
         </div>
         <div id="issue-search" class="newsletters-feeds feed-contents">
             <div class="feed-title">
-                <div class="section-title">{% with issues.count as total_results %}
-                    Found {{ total_results }} result{{ total_results|pluralize }}
-                    {% endwith %}</div>
+                <div class="section-title">
+                    {% with issues.count as total_results %}
+                        Found {{ total_results }} result{{ total_results|pluralize }}
+                    {% endwith %}
+                </div>
                 <i class="iconly-Arrow-Right-Circle icli"></i>
             </div>
             {% for issue in issues %}
@@ -162,6 +165,59 @@
                 </div>
             {% endfor %}
         </div>
+        <div id="people-search" class="people feed-contents">
+            <div class="feed-title">
+                <div class="section-title">
+                    {% with people.count as total_results %}
+                    {% if total_results == 1 %}
+                        Found {{ total_results }} Person
+                    {% elif total_results > 1 %}
+                        Found {{ total_results }} People
+                    {% else %}
+                        People
+                    {% endif %}
+                    {% endwith %}
+                </div>
+                <i class="iconly-Arrow-Right-Circle icli"></i>
+            </div>
+            {% for auser in people %}
+                <div class="person">
+                    <div class="person-info">
+                        <div class="profile-image-wrapper">
+                            {% if auser.profile.photo %}
+                                <img src="{% thumbnail auser.profile.photo 80x0 %}"/>
+                            {% else %}
+                                <img src="https://eu.ui-avatars.com/api/?background=08b86f&name={{auser.first_name}}+{{auser.last_name}}&size=250&color=fff" alt="{{auser.username}}" />
+                            {% endif %}
+                        </div>
+
+                        <div class="user-info">
+                            <span class="name"> {{auser.get_full_name}} </span>
+                            <span class="dot">&#183;</span>
+                            <a href="{% url 'profile' username=auser%}" class="username">@{{auser.username}}</a>
+                        </div>
+                        <div class="occupation"> {{auser.profile.occupation}}</div>
+                    </div>
+                    <div class="more-user-info">
+                        {% with total_followers=auser.followers.count %}
+                            <div class="followers-dots">
+                                <span id="num">{{total_followers}}</span>
+                                <span class="dot">&#183;</span>
+                                <span class="followers-text">Follower{{total_followers|pluralize}}</span>
+                            </div>
+                        {% endwith %}
+                        {% check_following request.user.id auser.id as follow %}
+                            {% if request.user == auser %}
+                                <span class="me">You</span>
+                            {% else %}
+                                <a href="" id="follow" class="{{follow|lower}}" data-id="{{ auser.id }}"  data-action="{{follow}}">{{follow}}</a>
+                            {% endif %}
+                    </div>
+                </div>
+            {% empty %}
+            <div class="person" style="color:#08b86f;border:none">No users found!</div>
+            {% endfor %}
+        </div>
     {% else %}
         <div class="search-wrapper">
             <form method="get">
@@ -201,6 +257,11 @@ if(issueTab != null && issueContents != null){
             articleTab.style.setProperty('border-bottom', 'none')
             articleTab.style.setProperty('color', '#808080')
             articleContents.style.setProperty('display', 'none')
+
+            //People
+            peopleTab.style.setProperty('border-bottom', 'none')
+            peopleTab.style.setProperty('color', '#808080')
+            peopleContents.style.setProperty('visibility', 'hidden')
         }
         finally{
             e.target.style.setProperty('border-bottom', '2px solid #1dbd7b')
@@ -209,14 +270,42 @@ if(issueTab != null && issueContents != null){
         }
     })
 }
+//People-tab
+if(peopleTab != null && peopleContents != null){
+    peopleTab.addEventListener("click",(e)=>{
+        e.preventDefault();
+        try{
+            //Issues
+            issueTab.style.setProperty('border-bottom', 'none')
+            issueTab.style.setProperty('color', '#808080')
+            issueContents.style.setProperty('display', 'none')
+
+            //articles
+            articleTab.style.setProperty('border-bottom', 'none')
+            articleTab.style.setProperty('color', '#808080')
+            articleContents.style.setProperty('display', 'none')
+        }
+        finally{
+            e.target.style.setProperty('border-bottom', '2px solid #1dbd7b')
+            e.target.style.setProperty('color', '#1dbd7b')
+            peopleContents.style.setProperty('visibility', 'visible')
+        }
+    })
+}
+
 //Article-tab
-if(articleTab != null && issueContents != null){
+if(articleTab != null && articleContents != null){
     articleTab.addEventListener("click",(e)=>{
         e.preventDefault();
         try{
             issueTab.style.setProperty('border-bottom', 'none')
             issueTab.style.setProperty('color', '#808080')
             issueContents.style.setProperty('display', 'none')
+
+            //People
+            peopleTab.style.setProperty('border-bottom', 'none')
+            peopleTab.style.setProperty('color', '#808080')
+            peopleContents.style.setProperty('visibility', 'hidden')
         }
         finally{
             e.target.style.setProperty('border-bottom', '2px solid #1dbd7b')
@@ -354,6 +443,67 @@ if(likeButtons != null){
             });
         });
     });
+}
+//Follow
+
+followButtons = document.querySelectorAll('a#follow')
+if(followButtons != null){
+    const url = '{% url "user_follow" %}';
+    let options = {
+        method: 'POST',
+        headers: {'X-CSRFToken': csrftoken},
+        mode: 'same-origin'
+    }
+    followButtons.forEach(followButton =>{
+        followButton.addEventListener('click', function(e){
+            e.preventDefault();
+
+            parent = followButton.parentElement
+            count = parent.querySelector('#num')
+            followersText = parent.querySelector('.followers-text')
+
+            // add request body
+            let formData = new FormData();
+            formData.append('id', followButton.dataset.id);
+            formData.append('action', followButton.dataset.action);
+            options['body'] = formData;
+
+            // send HTTP request
+            fetch(url, options)
+            .then(response => response.json())
+            .then(data => {
+                if (data['status'] === 'ok'){
+                    //let previousAction = followButton.dataset.action;
+                    let action = followButton.dataset.action
+                    let totalFollowers = parseInt(count.textContent);
+                    if( action === 'Follow'){
+                        followButton.dataset.action = 'Unfollow';
+                        followButton.textContent = 'Unfollow';
+                        followButton.style.backgroundColor = "rgb(255, 136, 0)";
+                        count.textContent = totalFollowers + 1;
+                        if( totalFollowers === 0){
+                            followersText.textContent = 'Follower';
+                        }
+                        else{
+                            followersText.textContent = 'Followers';
+                        }
+                    }
+                    else if( action === 'Unfollow'){
+                        followButton.dataset.action = 'Follow';
+                        followButton.textContent = 'Follow';
+                        followButton.style.backgroundColor = "#08b86f";
+                        count.textContent = totalFollowers - 1;
+                        if( totalFollowers === 2){
+                            followersText.textContent = 'Follower';
+                        }
+                        else{
+                            followersText.textContent = 'Followers';
+                        }
+                    }
+                }
+            })
+        });
+    })
 }
 
 {% endblock %}

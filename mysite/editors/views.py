@@ -54,7 +54,7 @@ def dashboard(request):
                     'most_viewed':top_posts,
                     'posts_interest':posts_interest,
                     'recently_added': recently_added,
-                    'title':'home',
+                    'title':'home','tab': 'opas',
                     'section':'opas'})
 
 
@@ -81,7 +81,7 @@ def newsletters(request):
                     'most_liked':top_issues,
                     'issues_interest':issues_interest,
                     'recently_added': recently_added,
-                    'title':'newsletters',
+                    'title':'newsletters','tab': 'newsletters',
                     'section':'newsletters'})
 
 # Like Newsletters
@@ -135,7 +135,7 @@ def explore_newsletter_topic(request,topic=None):
                     'profile': profile,
                     'topic': topic,
                     'section':'newsletters',
-                    'title': 'explore',
+                    'title': 'explore','tab': 'newsletters',
                     'topic_issues': topic_issues})
 
 #Feeds Infinite Scroll.
@@ -165,7 +165,7 @@ def popular_newsletters(request):
 
     return render(request,
                   'editors/newsletter-feed.html',
-                  {'title': 'popular',
+                  {'title': 'popular','tab': 'newsletters',
                    'section': 'newsletters',
                    'issues': issues})
 #Feeds Infinite Scroll.
@@ -197,7 +197,7 @@ def interest_newsletters(request):
 
     return render(request,
                   'editors/newsletter-feed.html',
-                  {'title': 'for you',
+                  {'title': 'for you','tab': 'newsletters',
                    'section': 'newsletters',
                    'issues': issues})
 #Feeds Infinite Scroll.
@@ -228,7 +228,7 @@ def recent_newsletters(request):
 
     return render(request,
                   'editors/newsletter-feed.html',
-                  {'title': 'recent',
+                  {'title': 'recent','tab': 'newsletters',
                    'section': 'newsletters',
                    'issues': issues})
 
@@ -263,7 +263,7 @@ def explore(request,topic=None):
                     'profile': profile,
                     'topic': topic,
                     'section': 'explore',
-                    'title': 'explore',
+                    'title': 'explore','tab': 'opas',
                     'topic_posts': posts})
 
 #Feeds Infinite Scroll.
@@ -293,7 +293,7 @@ def feeds(request):
 
     return render(request,
                   'editors/feed.html',
-                  {'title': 'feeds',
+                  {'title': 'feeds','tab': 'opas',
                    'section': 'articles',
                    'posts': posts})
 
@@ -316,7 +316,7 @@ def explore_topics(request):
 
     return render(request,
                   'editors/explore-topics.html',
-                  {'title': 'topics',
+                  {'title': 'topics','tab': 'opas',
                    'section': 'explore',
                    'tag_one_posts': posts_in_tag_one,
                    'tag_two_posts': posts_in_tag_two,
@@ -357,7 +357,7 @@ def interest(request):
 
     return render(request,
                   'editors/feed.html',
-                  {'title': 'for you',
+                  {'title': 'for you','tab': 'opas',
                    'section': 'articles',
                    'posts': posts})
 
@@ -388,7 +388,7 @@ def trending(request):
 
     return render(request,
                   'editors/feed.html',
-                  {'title': 'trending',
+                  {'title': 'trending','tab': 'opas',
                    'section': 'articles',
                    'posts': posts})
 
@@ -419,7 +419,7 @@ def recent(request):
 
     return render(request,
                   'editors/feed.html',
-                  {'title': 'recent',
+                  {'title': 'recent','tab': 'opas',
                    'section': 'articles',
                    'posts': posts})
 

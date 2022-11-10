@@ -104,7 +104,7 @@
                             </a>
                         </li>
                         <li class="content-link">
-                            <a class="link {% if section == 'people' %}data-active{% endif %}" href="">
+                            <a class="link {% if section == 'peoples' %}data-active{% endif %}" href="{% url 'user_list' %}">
                                 <span id="select"></span>
                                 <span class="iconly-User2 icli"></span>
                                 <span class="link-text">People</span>
@@ -133,21 +133,34 @@
     </main>
 
     <div class="mobile-footer">
-        <a href="{% url 'editors:home' %}" title="Home" class="mobile-footer-link {% if section == 'opas' %}active{% endif %}">
+        <a href="{% url 'editors:home' %}" title="Home" class="mobile-footer-link {% if tab == 'opas' %}active{% endif %}">
             <span class="iconly-Home icli"></span>
+            <span class="link-text">Home</span>
         </a>
-        <a href="{% url 'search:item_search' %}" title="Search" class="mobile-footer-link {% if section == 'search' %}active{% endif %}">
-            <span class="iconly-Search icli"></span>
-        </a>
-        <a href="{% url 'editors:newsletters' %}" title="Newslatters" class="mobile-footer-link {% if section == 'newsletters' %}active{% endif %}">
+        <a href="{% url 'editors:newsletters' %}" title="Newslatters" class="mobile-footer-link {% if tab == 'newsletters' %}active{% endif %}">
             <span class="iconly-Message icli"></span>
+            <span class="link-text">Newsletters</span>
         </a>
+        <a href="{% url 'search:item_search' %}" title="Search" class="mobile-footer-link {% if tab == 'search' %}active{% endif %}">
+            <span class="iconly-Search icli"></span>
+            <span class="link-text">Search</span>
+        </a>
+        <!--
+        <a href="{% url 'editors:create_post' %}" title="Search" class="mobile-footer-link {% if section == 'create' %}active{% endif %}">
+            <span class="iconly-Plus icli"></span>
+            <span class="link-text">Create</span>
+        </a>
+        -->
         <div class="profile-section">
-            {% if user.profile.photo %}
+            <div id="footer-btn" class="profile-icon profile-image-wrapper {% if tab == 'profile' %}active{% endif %}">
+                <span class="iconly-Profile icli"></span>
+                <span class="link-text">Profile</span>
+            </div>
+            <!--
             <div id="footer-btn" class="profile-image-wrapper">
-               <!-- <span class="active-status">
+                <span class="active-status">
                   <span class="dot"></span>
-                </span>-->
+                </span>
                 {% if user.profile.photo %}
                 {% thumbnail user.profile.photo "80x80" crop="100%" as im %}
                         <img src="{{ im.url }}" alt="{{ user.username }}" class="item-img" />
@@ -155,11 +168,8 @@
                     <img src="https://eu.ui-avatars.com/api/?background=08b86f&name={{user.first_name}}+{{user.last_name}}&size=100&color=fff" alt="{{ user.username }}" class="item-img" />
                 {% endif %}
             </div>
-            {% else %}
-            <div id="footer-btn" class="profile-icon profile-image-wrapper">
-                <span class="iconly-Profile icli"></span>
-            </div>
-            {% endif %}
+            -->
+          <!--  <span class="link-text">Profile</span>-->
             <div id="profile-footer" class="profile-dropdown">
                 <div class="go-to-profile">
                   <div class="profile-image-wrapper">
