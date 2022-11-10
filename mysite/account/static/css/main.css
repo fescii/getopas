@@ -2633,7 +2633,8 @@ main.feeds>.people>.person{
     padding: 5px;
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 0px;
+    margin-bottom: 15px;
     -webkit-border-radius: 5px;
     -moz-border-radius: 5px;
     -ms-border-radius: 5px;
@@ -2735,5 +2736,6 @@ main.feeds>.people>.person>.more-user-info>.me{
 
 /*Search-People*/
 main.search>#people-search{
-    visibility: hidden;
+    /*visibility: hidden;*/
+    display: none;
 }

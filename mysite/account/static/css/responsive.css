@@ -855,7 +855,8 @@
         /*border: var(--border);*/
         display: flex;
         flex-flow: column;
-        gap: 20px;
+        gap: 0px;
+        margin-bottom: 15px;
     }
 
     /*main.feeds>.feeds-header{
@@ -1354,7 +1355,7 @@
         box-shadow: 0.1rem 0.5rem 3rem #2a2b2a11;
         top: 0px;
         border: none;
-        padding-bottom:10px;
+        padding-bottom:0px;
     }
     .search-header{
         border: none;
@@ -2043,7 +2044,7 @@
     }
     main.feeds>.people>.person{
         border: var(--border);
-        margin: 0% 12px;
+        margin: 0%  12px 15px 12px;
 
     }
 

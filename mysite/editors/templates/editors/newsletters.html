@@ -51,7 +51,7 @@
             </div>
         </div>
     {% endfor %}
-    <div class="more"><a href="" class="get-more">Explore popular newsletters</a></div>
+    <div class="more"><a href="{% url 'editors:popular_newsletters' %}" class="get-more">Explore popular newsletters</a></div>
 </div>
 <div class="newsletters-feeds feed-contents">
     <div class="feed-title">
@@ -97,7 +97,7 @@
             </div>
         </div>
     {% endfor %}
-    <div class="more"><a href="" class="get-more">Explore more newsletters like this</a></div>
+    <div class="more"><a href="{% url 'editors:interest_newsletters' %}" class="get-more">Explore more newsletters like this</a></div>
 </div>
 <div class="newsletters-feeds feed-contents">
     <div class="feed-title">
@@ -143,13 +143,13 @@
             </div>
         </div>
     {% endfor %}
-    <div class="more"><a href="" class="get-more">Explore recent newsletters</a></div>
+    <div class="more"><a href="{% url 'editors:recent_newsletters' %}" class="get-more">Explore recent newsletters</a></div>
 </div>
 {% include "editors/create-container.html" %}
 {% endblock %}
 {% block domready %}
-//Share-Modal
 
+//Share-Modal
 const url = '{% url "editors:like_newsletter" %}';
 let options = {
     method: 'POST',

@@ -261,7 +261,7 @@ if(issueTab != null && issueContents != null){
             //People
             peopleTab.style.setProperty('border-bottom', 'none')
             peopleTab.style.setProperty('color', '#808080')
-            peopleContents.style.setProperty('visibility', 'hidden')
+            peopleContents.style.setProperty('display', 'none')
         }
         finally{
             e.target.style.setProperty('border-bottom', '2px solid #1dbd7b')
@@ -288,7 +288,7 @@ if(peopleTab != null && peopleContents != null){
         finally{
             e.target.style.setProperty('border-bottom', '2px solid #1dbd7b')
             e.target.style.setProperty('color', '#1dbd7b')
-            peopleContents.style.setProperty('visibility', 'visible')
+            peopleContents.style.setProperty('display', 'inherit')
         }
     })
 }
@@ -305,7 +305,7 @@ if(articleTab != null && articleContents != null){
             //People
             peopleTab.style.setProperty('border-bottom', 'none')
             peopleTab.style.setProperty('color', '#808080')
-            peopleContents.style.setProperty('visibility', 'hidden')
+            peopleContents.style.setProperty('display', 'none')
         }
         finally{
             e.target.style.setProperty('border-bottom', '2px solid #1dbd7b')
