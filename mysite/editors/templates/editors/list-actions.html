@@ -5,7 +5,8 @@
     {% with page=actions %}
         {% if action.target %}
             {% with target=action.target %}
-                <div id="action-{{ action.id }}" class="action {% if action.status == 'unread' %}unread{% endif %}">
+                {%  check_read action.id request.user.id as read %}
+                <div id="action-{{ action.id }}" class="action {% if read == 'unread' %}read{% else %}unread{% endif %}">
                     {% with auser=action.user profile=action.user.profile %}
                         <div class="profile-image">
                             {% if profile.photo %}
@@ -50,8 +51,8 @@
                                 <a href="" class="delete-{{page.number}} options-item" data-user="{{ auser.id }}" data-id="{{ action.id }}" data-action="delete">
                                     <span class="iconly-Delete icli"></span>
                                     <div class="option-details">
-                                        <span class="detail-title">Delete</span>
-                                        <span class="detail-text">Delete this notification</span>
+                                        <span class="detail-title">Remove</span>
+                                        <span class="detail-text">Remove this notification</span>
                                     </div>
                                 </a>
                                 {%  check_follow auser.id request.user as follow %}
@@ -66,7 +67,7 @@
                                         {% endif %}
                                     </div>
                                 </a>
-                                {%  check_read action.id  as read %}
+                                {%  check_read action.id request.user.id as read %}
                                 <a href="" class="marked-{{page.number}} options-item" data-user="{{ auser.id }}" data-id="{{ action.id }}" data-action="{{read}}">
                                     <span class="iconly-Tick-Square icli"></span>
                                     <div class="option-details">
@@ -81,4 +82,8 @@
             {% endwith %}
         {% endif %}
     {% endwith %}
+    {%empty%}
+    <div class="action" style="display:initial;color:var(--gray-color);margin-left:10px">
+        No updates yet!
+    </div>
 {% endfor %}

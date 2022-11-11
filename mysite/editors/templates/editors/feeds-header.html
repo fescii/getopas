@@ -5,6 +5,8 @@
         <div class="header-links">
           {% if title == 'home' %}
             <a href="{% url 'editors:home' %}" class="header-link active">Home</a>
+          {% elif title == 'notifications' %}
+            <a href="{% url 'editors:actions' %}" class="header-link active">Updates</a>
           {% elif title == 'bookmarks' %}
             <a href="{% url 'editors:my_list' %}" class="header-link active">{{title|capfirst}}</a>
           {% elif title == 'topics' %}

@@ -1,4 +1,4 @@
-from actions.models import Action
+from actions.models import Action,UserAction
 from magazine.models import Issue_likes
 import readtime
 from django.shortcuts import render,get_object_or_404
@@ -12,6 +12,7 @@ from django.contrib.auth.models import User
 from account.models import Contact
 from datetime import datetime
 from datetime import timedelta
+from django.core.exceptions import ObjectDoesNotExist
 register = template.Library()
 
 #Get Total Published Posts
@@ -23,8 +24,11 @@ def total_posts():
 @register.simple_tag
 def total_unread(user_id):
     user = User.objects.get(id=user_id)
-    actions = Action.objects.exclude(user=user).filter(status='unread')
+    actions = Action.objects.exclude(user=user)
     following_ids = user.following.values_list('id',flat=True)
+    user_action_ids = UserAction.objects.filter(user=user,status='read').values_list('action',flat=True)
+    if user_action_ids:
+        actions = actions.exclude(id__in=user_action_ids)
     total = 0
     if following_ids:
         # If user is following others, retrieve only their actions
@@ -93,12 +97,17 @@ def check_follow(user_id,user):
 
 #Check-if-notification-is-read
 @register.simple_tag
-def check_read(id):
+def check_read(id,user):
+    user = User.objects.get(id=user)
     action = Action.objects.get(id=id)
-    if action.status == 'unread':
+    try:
+        user_action = UserAction.objects.get(action=action,user=user)
+        if user_action.status == 'unread':
+            return 'read'
+        else:
+            return 'unread'
+    except UserAction.DoesNotExist:
         return 'read'
-    else:
-        return 'unread'
 
 #Truncate Tags
 def truncate_tags(tags):

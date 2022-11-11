@@ -20,10 +20,11 @@ from django.contrib import messages
 from django.http import JsonResponse
 from django.views.decorators.http import require_POST
 from taggit.models import Tag
-from actions.utils import create_action
-from actions.models import Action
+from actions.utils import create_action,create_user_action
+from actions.models import Action,UserAction
 from account.models import Contact
 from django.db.models import Count
+from django.core.exceptions import ObjectDoesNotExist
 
 
 # Create your views here.
@@ -56,8 +57,6 @@ def dashboard(request):
                     'recently_added': recently_added,
                     'title':'home','tab': 'opas',
                     'section':'opas'})
-
-
 
 #Dashboard-Newsletters
 @login_required
@@ -428,14 +427,20 @@ def recent(request):
 @login_required
 def actions(request):
     # Display all actions by default
+    t=None
     action_only = request.GET.get('action_only')
     actions = Action.objects.exclude(user=request.user)
     following_ids = request.user.following.values_list('id',flat=True)
+
     if following_ids:
         # If user is following others, retrieve only their actions
         actions = actions.filter(user_id__in=following_ids)
         actions = actions.select_related('user', 'user__profile')\
             .prefetch_related('target')
+    user_action_ids = UserAction.objects.filter(user=request.user,deleted=True)
+    user_action_ids = user_action_ids.values_list('action',flat=True)
+    if user_action_ids:
+        actions = actions.exclude(id__in=user_action_ids)
 
     paginator = Paginator(actions, 10)
     page = request.GET.get('page')
@@ -497,34 +502,38 @@ def save_post(request):
             try:
                 saved_post = Bookmark.objects.get(post=post,user=request.user)
                 saved_post.delete()
-                create_action(request.user, 'remove from saved','remove', post)
+                #create_action(request.user, 'remove from saved','remove', post)
                 return JsonResponse({'status': 'ok','action': 'Save'})
             except Bookmark.DoesNotExist:
                 bookmark = Bookmark.objects.create(post=post,user=request.user)
                 bookmark.save()
-                create_action(request.user, 'saved article','save', post)
+                create_action(request.user, 'bookmarked','save', post)
                 return JsonResponse({'status': 'ok','action': 'Remove'})
         except Post.DoesNotExist:
             pass
     return JsonResponse({'status': 'error'})
 
-# Add-Post-To-My-list
+# notification-actions
 @login_required
 @require_POST
 def notification_action(request):
     action_id = request.POST.get('id')
-    action = request.POST.get('action')
     user_id = request.POST.get('user')
-    if action_id and action:
-        if(action == 'delete'):
+    choice = request.POST.get('action')
+    action = Action.objects.get(id=action_id)
+    user = User.objects.get(id=user_id)
+    if user and action:
+        if(choice == 'delete'):
             try:
-                action = Action.objects.get(id=action_id)
-                action.delete()
-                #messages.success(request, 'Notification deleted successfully')
+                exist_action = UserAction.objects.get(user=request.user,action=action)
+                UserAction.update_deleted(exist_action,True)
                 return JsonResponse({'status': 'deleted','action': 'deleted'})
-            except Action.DoesNotExist:
-                pass
-        elif(action == 'Unfollow'):
+            except UserAction.DoesNotExist:
+                user_action = UserAction(action=action,user=request.user,status='unread',deleted=True)
+                user_action.save()
+                return JsonResponse({'status': 'deleted','action': 'deleted'})
+
+        elif(choice == 'Unfollow'):
             try:
                 user = User.objects.get(id=user_id)
                 name = str(user.first_name).lower()
@@ -533,7 +542,7 @@ def notification_action(request):
                 return JsonResponse({'status': 'unfollowed','user': f'{name}','action': 'Follow'})
             except User.DoesNotExist:
                 return JsonResponse({'status':'error'})
-        elif(action == 'Follow'):
+        elif(choice == 'Follow'):
             try:
                 user = User.objects.get(id=user_id)
                 name = str(user.first_name).lower()
@@ -542,20 +551,26 @@ def notification_action(request):
                 return JsonResponse({'status': 'followed','user':f'{name}' ,'action': 'Unfollow'})
             except User.DoesNotExist:
                 return JsonResponse({'status':'error'})
-        elif(action == 'read'):
-            action = Action.objects.get(id=action_id)
+        elif(choice == 'read'):
             try:
-                Action.update_status(action,status='read')
+                exist_action = UserAction.objects.get(user=request.user,action=action)
+                UserAction.update_status(exist_action,status='read')
                 return JsonResponse({'status': 'unread','action': 'unread'})
-            except:
-                pass
-        elif(action == 'unread'):
-            action = Action.objects.get(id=action_id)
+            except UserAction.DoesNotExist:
+                user_action = UserAction(action=action,user=request.user,status='read',deleted=False)
+                user_action.save()
+                return JsonResponse({'status': 'unread','action': 'unread'})
+
+        elif(choice == 'unread'):
             try:
-                Action.update_status(action,status='unread')
+                exist_action = UserAction.objects.get(user=request.user,action=action)
+                UserAction.update_status(exist_action,status='unread')
                 return JsonResponse({'status': 'read','action': 'read'})
-            except:
-                pass
+            except UserAction.DoesNotExist:
+                user_action = UserAction(action=action,user=request.user,status='unread',deleted=False)
+                user_action.save()
+                #create_user_action(action=action,user=request.user,status='unread',deleted=False)
+                return JsonResponse({'status': 'read','action': 'read'})
     return JsonResponse({'status': 'error'})
 
 @login_required
