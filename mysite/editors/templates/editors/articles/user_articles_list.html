@@ -17,7 +17,11 @@
                         <a href="{{ post.get_absolute_url }}"> {{ post.title }} </a>
                     </h2>
                     <div class="image-wrapper">
-                        <img src="{% thumbnail post.cover 300x0 %}" alt="Cover Image" title="{{post.title}}"/>
+                        {% if post.cover %}
+                            <img id="" src="{% thumbnail post.cover 300x0 %}" alt="Post-Image">
+                        {% else %}
+                            <img src="https://eu.ui-avatars.com/api/?background=ff8800&name={{post.title}}&size=250&color=fff" alt="Profile">
+                        {% endif %}
                     </div>
                     <div class="date">
                         Published on: <span class="published-date">{{ post.publish.date }} {{ post.publish.time }}</span>

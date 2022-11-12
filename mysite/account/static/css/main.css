@@ -2052,7 +2052,7 @@ main.read>.comments-wrapper>.comments>.user-comment>.content{
     /*box-shadow: 0.5rem 0.5rem 0.8rem #748f7412;*/
     display: flex;
     flex-flow: column;
-    gap: 10px;
+    gap: 0px;
     padding: 0%;
 }
 main.read>.comments-wrapper>.comments>.user-comment>.content>.content-head{
@@ -2092,8 +2092,8 @@ main.read>.comments-wrapper>.comments>.user-comment>.content>.content-head>.time
 main.read>.comments-wrapper>.comments>.user-comment>.content>.content-text{
     /*border: var(--border);
     */margin: 0%;
-    border: var(--border);
-    padding: 10px 5px;
+    /*border: var(--border);*/
+    padding: 0px 0px;
     -webkit-border-radius: 5px;
     -moz-border-radius: 5px;
     -ms-border-radius: 5px;
