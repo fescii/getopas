@@ -5,7 +5,7 @@
         <div class="header-links">
             {%  total_unread request.user.id as unread %}
             <a href="{% url 'editors:actions' %}" class="header-link {% if title == 'notifications' %}active{% endif %}">Updates</a>
-            <a href="{% url 'editors:actions_unread' %}" class="header-link {% if title == 'unread' %}active{% endif %}">Unread<span style="font-size:0.8rem">({{unread}})</span></a>
+            <a href="{% url 'editors:actions_unread' %}" class="header-link {% if title == 'unread' %}active{% endif %}">Unread<span style="font-size:0.8rem;display:inline-block;margin-left:2px;">({{unread}})</span></a>
             <a href="{% url 'editors:actions_read' %}" class="header-link {% if title == 'read' %}active{% endif %}">Read</a>
             <a href="{% url 'editors:actions_removed' %}" class="header-link {% if title == 'removed' %}active{% endif %}">Removed</a>
         </div>
