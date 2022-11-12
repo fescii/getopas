@@ -5,7 +5,7 @@
 {% block title %}{{ post.title }}{% endblock %}
 {% block content %}
     <div class="article-wrapper">
-        <h2 id="site-title">{{title|split:"-"}}</h2>
+      <!--  <h2 id="site-title">{{title|split:"-"}}</h2>-->
         <div class="article-info">
             <div class="information">
                 <div class="profile-wrapper">
@@ -125,12 +125,10 @@
                             </div>
                         </div>
                         <div class="content-text">
-                            <p>
-                                {{ comment.body | linebreaks}}
-                            </p>
+                            {{ comment.body | linebreaks}}
                         </div>
                         <div class="likes">
-                            <span class="like">Like</span>
+                            <a href="" class="like">Like</a>
                             <div class="likes-icon-count">
                                 <span class="iconly-Heart icli"></span>
                                 <span class="count">46</span>

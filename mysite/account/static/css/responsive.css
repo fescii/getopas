@@ -1566,7 +1566,7 @@
         transform: translateY(-6px) rotate(-45deg);
     }
     main.read>.hamburger{
-       /* display: none;*/
+        display: none;
     }
     main.feeds>.sidebar-content {
         margin: 0%;
@@ -1983,7 +1983,7 @@
     main.read>.comments-wrapper>.comments-head,
     main.read>.article-wrapper>.article-info {
         position: sticky;
-        padding-top: 65px;
+        padding-top: 15px;
     }
 
     main.read>.comments-wrapper>.comments {
@@ -1992,12 +1992,7 @@
     }
 
     main.read>.comments-wrapper>.comments>.user-comment>.content {
-        padding: 10px 15px;
-        -webkit-border-radius: 15px;
-        -moz-border-radius: 15px;
-        -ms-border-radius: 15px;
-        -o-border-radius: 15px;
-        border-radius: 15px;
+        padding: 0px;
     }
     /*
     main.read>.comments-wrapper>.comments>.user-comment>.content>.content-head>.author {
@@ -2007,7 +2002,7 @@
     main.read>.comments-wrapper>.comments>.user-comment>.profile {
         width: 35px;
         height: 35px;
-        margin-top: 5px;
+        /*margin-top: 5px;*/
     }
 
     main.read>.comments-wrapper>.create-comment {
@@ -2315,13 +2310,14 @@
     /*Notification*/
     a,
     .pagination > .step-links > a,
+    main.read > .comments-wrapper > .comments > .user-comment > .content > .likes > .like,
     main.profile > .site-title > .count,
     main.feeds>.notifications>.action,
     main.feeds>.notifications>.action>.more-info>.more-options>.options-item,
     main.feeds>.notifications>.action>.profile-image>a,
     main.feeds>.notifications>.action>.info>a,
     main.feeds>.notifications>.action>.more-info>.three-dots{
-        cursor: default;
+        cursor: default !important;
     }
 
 }
