@@ -39,6 +39,8 @@ def total_unread(user_id):
     total = actions.exclude(id__in=user_read_ids).count()
     return total
 
+
+
 #Get five latest posts
 @register.simple_tag
 def show_latest_posts(count=5):
@@ -110,6 +112,20 @@ def check_read(id,user):
             return 'unread'
     except UserAction.DoesNotExist:
         return 'read'
+
+#Check-if-notification-is-removed
+@register.simple_tag
+def check_removed(id,user):
+    user = User.objects.get(id=user)
+    action = Action.objects.get(id=id)
+    try:
+        user_action = UserAction.objects.get(action=action,user=user)
+        if user_action.deleted == True:
+            return 'redo'
+        else:
+            return 'delete'
+    except UserAction.DoesNotExist:
+        return 'delete'
 
 #Truncate Tags
 def truncate_tags(tags):

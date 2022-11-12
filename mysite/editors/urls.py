@@ -19,13 +19,18 @@ urlpatterns = [
     path('for-you', views.interest, name='interest'),
     path('trending', views.trending, name='trending'),
     path('recent', views.recent, name='recent'),
-    path('notifications', views.actions, name='actions'),
     path('my-list', views.my_list, name='my_list'),
     path('edit-article/<int:pk>/', views.edit_blog_post, name='edit_blog_post'),
     path('edit-article/tags/<int:pk>/', views.edit_blog_post_tags, name='edit_blog_post_tags'),
     path('edit-article/cover/<int:pk>/', views.edit_blog_post_cover, name='edit_blog_post_cover'),
     path('delete-article/<int:pk>/', views.delete_post, name='delete_post'),
     path('save/', views.save_post, name='save'),
+
+    #Notifications
+    path('notifications', views.actions, name='actions'),
+    path('notifications/read', views.read_actions, name='actions_read'),
+    path('notifications/unread', views.unread_actions, name='actions_unread'),
+    path('notifications/removed', views.removed_actions, name='actions_removed'),
     path('notification-action/', views.notification_action, name='notification_action'),
 
     #Newsletters Paths

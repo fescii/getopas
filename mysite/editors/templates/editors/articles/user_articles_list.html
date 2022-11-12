@@ -48,9 +48,8 @@
                         </div>
                     </div>
                 </div>
-            {% if empty %}
-                <p> You've not Published any Articles Yet!</p>
-            {% endif %}
+            {% empty %}
+            <div class="post-summery" style="display:flex;align-items:center;color:var(--gray-color)">You've not Published any Articles Yet!</div>
             {% endfor %}
             {% include "pagination.html" with page=posts %}
         </div>

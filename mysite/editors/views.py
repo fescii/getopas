@@ -464,6 +464,133 @@ def actions(request):
                    'title': 'notifications',
                    'actions': actions})
 
+#Actions.
+@login_required
+def read_actions(request):
+    # Display all actions by default
+    action_only = request.GET.get('action_only')
+    actions = Action.objects.exclude(user=request.user)
+    following_ids = request.user.following.values_list('id',flat=True)
+
+    if following_ids:
+        # If user is following others, retrieve only their actions
+        actions = actions.filter(user_id__in=following_ids)
+        actions = actions.select_related('user', 'user__profile')\
+            .prefetch_related('target')
+    user_action_ids = UserAction.objects.filter(user=request.user,deleted=True)
+    user_action_ids = user_action_ids.values_list('action',flat=True)
+    user_unread_ids = UserAction.objects.filter(user=request.user,status='read').values_list('action',flat=True)
+    if user_action_ids:
+        actions = actions.exclude(id__in=user_action_ids)
+
+    actions = actions.filter(id__in=user_unread_ids)
+
+    paginator = Paginator(actions, 10)
+    page = request.GET.get('page')
+    try:
+        actions = paginator.page(page)
+    except PageNotAnInteger:
+        # If page is not an integer deliver the first page
+        actions = paginator.page(1)
+    except EmptyPage:
+        if action_only:
+            # If AJAX request and page out of range
+            # return an empty page
+            return HttpResponse('')
+        # If page out of range return last page of results
+        actions = paginator.page(paginator.num_pages)
+    if action_only:
+        return render(request,'editors/list-actions.html',
+                      {'section': 'notifications','actions': actions})
+    return render(request,
+                  'editors/actions.html',
+                  {'section': 'notifications',
+                   'title': 'read',
+                   'actions': actions})
+
+#Actions.
+@login_required
+def removed_actions(request):
+    # Display all actions by default
+    action_only = request.GET.get('action_only')
+    actions = Action.objects.exclude(user=request.user)
+    following_ids = request.user.following.values_list('id',flat=True)
+
+    if following_ids:
+        # If user is following others, retrieve only their actions
+        actions = actions.filter(user_id__in=following_ids)
+        actions = actions.select_related('user', 'user__profile')\
+            .prefetch_related('target')
+    user_action_ids = UserAction.objects.filter(user=request.user,deleted=True)
+    user_action_ids = user_action_ids.values_list('action',flat=True)
+    if user_action_ids:
+        actions = actions.filter(id__in=user_action_ids)
+
+    paginator = Paginator(actions, 10)
+    page = request.GET.get('page')
+    try:
+        actions = paginator.page(page)
+    except PageNotAnInteger:
+        # If page is not an integer deliver the first page
+        actions = paginator.page(1)
+    except EmptyPage:
+        if action_only:
+            # If AJAX request and page out of range
+            # return an empty page
+            return HttpResponse('')
+        # If page out of range return last page of results
+        actions = paginator.page(paginator.num_pages)
+    if action_only:
+        return render(request,'editors/list-actions.html',
+                      {'section': 'notifications','actions': actions})
+    return render(request,
+                  'editors/actions.html',
+                  {'section': 'notifications',
+                   'title': 'removed',
+                   'actions': actions})
+
+#Actions.
+@login_required
+def unread_actions(request):
+    # Display all actions by default
+    action_only = request.GET.get('action_only')
+    actions = Action.objects.exclude(user=request.user)
+    following_ids = request.user.following.values_list('id',flat=True)
+
+    user_action_ids = UserAction.objects.filter(user=request.user,deleted=True)
+    user_action_ids = user_action_ids.values_list('action',flat=True)
+    user_read_ids = UserAction.objects.filter(user=request.user,status='read').values_list('action',flat=True)
+    if following_ids:
+        # If user is following others, retrieve only their actions
+        actions = actions.filter(user_id__in=following_ids)
+        actions = actions.select_related('user', 'user__profile')\
+                .prefetch_related('target')
+    actions = actions.exclude(id__in=user_action_ids)
+    actions = actions.exclude(id__in=user_read_ids)
+
+    paginator = Paginator(actions, 10)
+    page = request.GET.get('page')
+    try:
+        actions = paginator.page(page)
+    except PageNotAnInteger:
+        # If page is not an integer deliver the first page
+        actions = paginator.page(1)
+    except EmptyPage:
+        if action_only:
+            # If AJAX request and page out of range
+            # return an empty page
+            return HttpResponse('')
+        # If page out of range return last page of results
+        actions = paginator.page(paginator.num_pages)
+    if action_only:
+        return render(request,'editors/list-actions.html',
+                      {'section': 'notifications','actions': actions})
+    return render(request,
+                  'editors/actions.html',
+                  {'section': 'notifications',
+                   'title': 'unread',
+                   'actions': actions})
+
 #Saved-Posts
 @login_required
 def my_list(request):
@@ -531,6 +658,14 @@ def notification_action(request):
                 user_action = UserAction(action=action,user=request.user,status='unread',deleted=True)
                 user_action.save()
                 return JsonResponse({'status': 'deleted','action': 'deleted'})
+        if(choice == 'redo'):
+            try:
+                exist_action = UserAction.objects.get(user=request.user,action=action)
+                UserAction.update_deleted(exist_action,False)
+                return JsonResponse({'status': 'deleted','action': 'deleted'})
+            except UserAction.DoesNotExist:
+                pass
+                #return JsonResponse({'status': 'deleted','action': 'deleted'})
 
         elif(choice == 'Unfollow'):
             try:

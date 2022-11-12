@@ -48,11 +48,16 @@
                                 <span class="dot"></span>
                             </div>
                             <div id="modal-{{ action.id }}" class="more-options-{{page.number}} more-options">
-                                <a href="" class="delete-{{page.number}} options-item" data-user="{{ auser.id }}" data-id="{{ action.id }}" data-action="delete">
-                                    <span class="iconly-Delete icli"></span>
+                                {%  check_removed action.id request.user.id as removed %}
+                                <a href="" class="delete-{{page.number}} options-item" data-user="{{ auser.id }}" data-id="{{ action.id }}" data-action="{{removed}}">
+                                    <span class="iconly-{% if removed == 'redo' %}Arrow-Left{% else %}Delete{% endif %} icli"></span>
                                     <div class="option-details">
-                                        <span class="detail-title">Remove</span>
-                                        <span class="detail-text">Remove this notification</span>
+                                        <span class="detail-title">{{removed|capfirst}}</span>
+                                        {% if removed == "redo" %}
+                                            <span class="detail-text">Revert to Updates</span>
+                                        {% else %}
+                                            <span class="detail-text">Remove this notification</span>
+                                        {% endif %}
                                     </div>
                                 </a>
                                 {%  check_follow auser.id request.user as follow %}
