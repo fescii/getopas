@@ -427,7 +427,6 @@ def recent(request):
 @login_required
 def actions(request):
     # Display all actions by default
-    t=None
     action_only = request.GET.get('action_only')
     actions = Action.objects.exclude(user=request.user)
     following_ids = request.user.following.values_list('id',flat=True)
