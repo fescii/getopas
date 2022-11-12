@@ -422,7 +422,6 @@ def recent(request):
                    'section': 'articles',
                    'posts': posts})
 
-
 #Actions.
 @login_required
 def actions(request):
@@ -521,10 +520,8 @@ def removed_actions(request):
         actions = actions.filter(user_id__in=following_ids)
         actions = actions.select_related('user', 'user__profile')\
             .prefetch_related('target')
-    user_action_ids = UserAction.objects.filter(user=request.user,deleted=True)
-    user_action_ids = user_action_ids.values_list('action',flat=True)
-    if user_action_ids:
-        actions = actions.filter(id__in=user_action_ids)
+    user_action_ids = UserAction.objects.filter(user=request.user,deleted=True).values_list('action',flat=True)
+    actions = actions.filter(id__in=user_action_ids)
 
     paginator = Paginator(actions, 10)
     page = request.GET.get('page')
@@ -763,9 +760,10 @@ def user_post_list(request):
     return render(request, 'editors/articles/user_articles_list.html',
                   {'page': page,
                    'posts': posts,
-                   'user':user,
-                   'profile':profile,
+                   'title': 'publications',
                    'section': 'my-articles'})
+
+
 @login_required
 def edit_blog_post(request, pk):
     #post = get_object_or_404(Post, id=pk)

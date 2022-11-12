@@ -49,7 +49,7 @@
                     </div>
                 </div>
             {% empty %}
-            <div class="post-summery" style="display:flex;align-items:center;color:var(--gray-color)">You've not Published any Articles Yet!</div>
+            <div class="post-summery" style="display:flex;align-items:center;color:var(--gray-color);border:none;">You've not published any articles yet!</div>
             {% endfor %}
             {% include "pagination.html" with page=posts %}
         </div>
