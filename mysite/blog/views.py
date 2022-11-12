@@ -55,7 +55,7 @@ def post_detail(request, year, month, day, slug):
     if post:
         post.update_views()
     #List of active comments for this post
-    comments = post.comments.filter(active=True)
+    comments = post.comments.filter(active=True).order_by('-created')
 
     new_comment = None
     comment_form = None
@@ -88,6 +88,8 @@ def post_detail(request, year, month, day, slug):
                   'blog/post/detail.html',
                   {'post': post,
                    'comments':comments,
+                   'section':'read',
+                   'title':'article',
                    'new_comment': new_comment,
                    'comment_form': comment_form,
                    'similar_posts': similar_posts})

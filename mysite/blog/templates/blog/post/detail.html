@@ -1,57 +1,154 @@
-{% extends "blog/base.html" %}
+{% extends "base.html" %}
+{% load static %}
+{% load blog_tags %}
+{% load thumbnail %}
 {% block title %}{{ post.title }}{% endblock %}
 {% block content %}
-    <h1>{{ post.title }}</h1>
-    <p class="date">Published on {{ post.publish }} by {{ post.author }}</p>
-    {{ post.body|safe }}
-    <p>
-        <a href="{% url 'blog:post_share' post.id %}">
-            Share Post
-        </a>
-    </p>
-
-    <!--Similar Posts-->
-    <h2>Similar Posts</h2>
-    {% for post in similar_posts  %}
-        <p>
-            <a href="{{ post.get_absolute_url }}">{{ post.title }}</a>
-        </p>
-    {% empty %}
-        No similar Posts yet.
-    {% endfor %}
-
-    {% with comments.count as total_comments %}
-        <h2>
-            {{ total_comments }} comment {{ total_comments | pluralize }}
-        </h2>
-    {% endwith %}
-
-    {% for comment in comments %}
-        <div class='comment'>
-            <p class='info'>
-                Comment {{ forloop.counter }} by {{ comment.author }}
-                {{ comment.created }}
-            </p>
-            {{ comment.body | linebreaks}}
+    <div class="article-wrapper">
+        <h2 id="site-title">{{title|split:"-"}}</h2>
+        <div class="article-info">
+            <div class="information">
+                <div class="profile-wrapper">
+                    {% if post.author.profile.photo %}
+                        <img src="{% thumbnail post.author.profile.photo 300x0 %}"/>
+                    {% else %}
+                        <img src="https://eu.ui-avatars.com/api/?background=08b86f&name={{post.author.first_name}}+{{post.author.last_name}}&size=250&color=fff"/>
+                    {% endif %}
+                </div>
+                <div class="art-info">
+                    <a href="#" class="author">{{post.author.get_full_name}}</a>
+                    <div class="time-read">
+                        <span class="posted right">
+                            <span class="date"> {{post.created|date:"M"}} {{post.created.day}}, {{post.created|date:"Y"}}</span>
+                        </span>
+                        <span class="posted"><span class="dot">&#183;</span> {{post.body|read_time}} </span>
+                    </div>
+                </div>
+            </div>
+            <div class="article-actions">
+                {%  check_saved post.id request.user.id as saved %}
+                <a class="{{saved|lower}}" title="Save" href="">
+                    <span>{{saved}}</span>
+                    <i class="iconly-Bookmark {% if saved == 'Remove' %}icbo{% else %}icli{% endif %}"></i>
+                </a>
+                <a title="Share" href="">
+                    <span>Share</span>
+                    <i class="iconly-Send icli"> </i>
+                </a>
+                <a title="Share" href="">
+                    <span>Report</span>
+                    <i class="iconly-Info-Circle icli"> </i>
+                </a>
+            </div>
         </div>
-        {% empty %}
-            <p>There are no comments yet.</p>
-    {% endfor %}
-{% if user.is_authenticated %}
-
-
-    {% if new_comment %}
-        <h2>Your comment has been added.</h2>
-    {% else %}
-        <h2>Add a new comment</h2>
-        <form method="post">
-        {{ comment_form.as_p }}
-    {% csrf_token %}
-        <p><input type="submit" value="Add comment"></p>
-        </form>
-    {% endif %}
-{% else %}
-<a href="{% url 'login' %} ">Login To Comment</a>
-{% endif %}
-
+        <div class="content">
+            <h2 class="article-title">
+                <a href="" title="Article Title" class="article-title-link">{{post.title}}</a>
+            </h2>
+            <div id="cover-image">
+                {% if post.cover %}
+                    <img id="" src="{% thumbnail post.cover 800x0 %}" title="article cover" alt="">
+                {% else %}
+                    <img src="https://eu.ui-avatars.com/api/?background=08b86f&name={{post.title}}&size=250&color=fff"/>
+                {% endif %}
+            </div>
+            <div class="article-content">
+                {{post.body|safe}}
+            </div>
+            <div class="article-footer">
+                <div class="article-tags">
+                    {% for tag in post.tags.names|truncate_tags %}
+                        <a href="{% url 'editors:explore' topic=tag|slug_tag %}" class="tag">{{tag|split:" "}}</a>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="comments-wrapper">
+        <div class="comments-head">
+            <div class="title">
+                {% with comments.count as total_comments %}
+                    <h2>Comments</h2>
+                    <div>
+                        <span class="cover">({{ total_comments }})</span>
+                    </div>
+                {% endwith %}
+            </div>
+            <div class="comments-filter">
+                <a class="active" title="Save" href="">
+                    <span>All</span>
+                </a>
+                <a title="Share" href="">
+                    <span>Relevant</span>
+                </a>
+                <a title="Share" href="">
+                    <span>Recent</span>
+                </a>
+            </div>
+        </div>
+        <div class="create-comment">
+            <div class="user-information">
+                <div class="profile-wrapper">
+                    {% if user.profile.photo %}
+                        <img src="{% thumbnail user.profile.photo 50x0 %}"/>
+                    {% else %}
+                        <img src="https://eu.ui-avatars.com/api/?background=08b86f&name={{request.user.first_name}}+{{request.user.last_name}}&size=250&color=fff"/>
+                    {% endif %}
+                </div>
+               <!-- <textarea placeholder="What are your thoughts?" name="add-comment" id="add-comment" cols="1" rows="3"></textarea>-->
+               <form method="post">
+                    {% for field in comment_form %}
+                        {{field}}
+                    {% endfor %}
+                    {% csrf_token %}
+                    <button type="submit">Comment</button>
+                </form>
+            </div>
+        </div>
+        <div class="comments">
+            {% for comment in comments %}
+                <div class="user-comment">
+                    <div class="profile">
+                        {% if comment.author.profile.photo %}
+                            <img src="{% thumbnail comment.author.profile.photo 50x0 %}"/>
+                        {% else %}
+                            <img src="https://eu.ui-avatars.com/api/?background=08b86f&name={{comment.author.first_name}}+{{comment.author.last_name}}&size=250&color=fff"/>
+                        {% endif %}
+                    </div>
+                    <div class="content">
+                        <div class="content-head">
+                            <a href="{{ comment.author.get_absolute_url }}" class="author">{{comment.author.get_full_name}}</a>
+                            <div class="time-read">
+                                <span class="posted right">
+                                    <span class="date">{{comment.created|time_lapse}}</span>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="content-text">
+                            <p>
+                                {{ comment.body | linebreaks}}
+                            </p>
+                        </div>
+                        <div class="likes">
+                            <span class="like">Like</span>
+                            <div class="likes-icon-count">
+                                <span class="iconly-Heart icli"></span>
+                                <span class="count">46</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% empty %}
+                    <p>There are no comments yet.</p>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="sidebar-content">
+        <div class="topics">
+          <h2 class="sidebar-title">Discover Topics</h2>
+          <ul class="topic-list">
+            {% show_most_common_tags %}
+          </ul>
+        </div>
+    </div>
 {% endblock content%}
