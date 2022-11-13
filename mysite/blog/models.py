@@ -98,6 +98,11 @@ class BlogComment(models.Model):
     class Meta:
         ordering = ('created',)
 
+     #Update Active
+    def update_active(self,active,*args, **kwargs):
+        self.active = active
+        super(BlogComment, self).save(update_fields=['active',],*args, **kwargs)
+
     def __str__(self):
         return f'Comment By {self.name} on {self.post}'
 
@@ -114,7 +119,7 @@ class Like(models.Model):
     def save_like(self,comment, user,*args, **kwargs):
         self.comment = comment
         self.user = user
-        super(Bookmark, self).save(update_fields=['comment','user'],*args, **kwargs)
+        super(Like, self).save(update_fields=['comment','user'],*args, **kwargs)
 
     def __str__(self):
         return f'Like By {self.user} on {self.comment}'

@@ -647,7 +647,7 @@ def like_comment(request):
     if comment_id and action:
         if str(action) == 'Delete':
             comment = BlogComment.objects.get(id=comment_id)
-            comment.delete()
+            BlogComment.update_active(comment,False)
             return JsonResponse({'status': 'ok','action': 'Deleted'})
         else:
             comment = BlogComment.objects.get(id=comment_id)

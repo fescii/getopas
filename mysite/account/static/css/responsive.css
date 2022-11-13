@@ -2048,12 +2048,12 @@
         bottom: 70px;
         height: max-content;
         display: none;
-        -webkit-border-radius: 5px;
-        -moz-border-radius: 5px;
-        -ms-border-radius: 5px;
-        -o-border-radius: 5px;
-        border-radius: 0;
-    }
+        -webkit-border-radius: 10;
+        -moz-border-radius: 10;
+        -ms-border-radius: 10;
+        -o-border-radius: 10;
+        border-radius: 10;
+}
     main.read>.comments-wrapper>.create-comment>.user-information>form{
         display: grid;
         grid-template-columns: 1fr 1fr;
@@ -2091,6 +2091,19 @@
 
     main.read>.comments-wrapper>.comments>.user-comment>.likes>.like {
         cursor: default;
+    }
+    main.read>.comments-wrapper>.comments>.user-comment>.content>.content-head>.author>span{
+        color: var(--gray-color);
+        font-size: 0.9rem;
+        align-self: flex-end;
+        margin-left: 2px;
+        margin-bottom: 2px;
+    }
+    main.read>.comments-wrapper>.comments>.user-comment>.content>.content-head>.author>.icbo{
+        display: inline-block;
+        margin-left: 10px;
+        align-self: flex-end;
+        margin-bottom: 5px;
     }
 
     .topics {

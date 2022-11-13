@@ -10,9 +10,9 @@
 .messages>.success{
     color: rgba(255, 255, 255, 0.938);
     position: relative;
-    padding: 5px 15px;
+    padding: 3px 15px;
     margin: 5px;
-    font-size: 1.15rem;
+    font-size: 1rem;
     background-color: var(--accent-color);
     box-shadow: var(--box-shadow);
 }
@@ -25,7 +25,7 @@
     top: 0%;
     bottom: 0%;
     font-size: 20px;
-    padding: 0% 10px;
+    padding: 0% 8px;
     background-color: #e74f3b;
     color: white;
 }
@@ -1953,6 +1953,8 @@ main.read>.comments-wrapper>.comments-head>.title>div{
 }
 main.read>.comments-wrapper>.comments-head>.title>div>.cover{
     color: var(--gray-color);
+    font-size: 0.9rem;
+    margin-top: 5px;
 }
 
 main.read>.comments-wrapper>.create-comment{
@@ -2079,7 +2081,24 @@ main.read>.comments-wrapper>.comments>.user-comment>.content>.content-head{
 main.read>.comments-wrapper>.comments>.user-comment>.content>.content-head>.author{
     text-decoration: none;
     color: #000000;
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
 }
+main.read>.comments-wrapper>.comments>.user-comment>.content>.content-head>.author>span{
+    color: var(--gray-color);
+    font-size: 0.9rem;
+    align-self: flex-end;
+    margin-left: 2px;
+    margin-bottom: 3px;
+}
+main.read>.comments-wrapper>.comments>.user-comment>.content>.content-head>.author>.icbo{
+    display: inline-block;
+    margin-left: 10px;
+    align-self: flex-end;
+    margin-bottom: 5px;
+}
+
 main.read>.comments-wrapper>.comments>.user-comment>.content>.content-head>.author:hover{
     color: var(--accent-color);
 }

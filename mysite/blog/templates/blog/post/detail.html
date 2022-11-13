@@ -91,7 +91,7 @@
                 {% with comments.count as total_comments %}
                     <h2>Comments</h2>
                     <div>
-                        <span class="cover">({{ total_comments }})</span>
+                        <span class="cover">{{ total_comments }}</span>
                     </div>
                 {% endwith %}
             </div>
@@ -139,7 +139,13 @@
                     </div>
                     <div class="content">
                         <div class="content-head">
-                            <a href="{{ comment.author.get_absolute_url }}" class="author">{{comment.author.get_full_name}}</a>
+                            <a href="{{ comment.author.get_absolute_url }}" class="author">
+                                {{comment.author.get_full_name}}
+                                {% if comment.author  == post.author %}
+                                    <span class="iconly-Voice icbo"></span>
+                                    <span>author</span>
+                                {% endif %}
+                            </a>
                             <div class="time-read">
                                 <span class="posted right">
                                     <span class="date">{{comment.created|time_lapse}}</span>
@@ -278,7 +284,6 @@ if(commentBtn != null && commentModal != null){
 }
 //Like-Comment
 likeButtons = document.querySelectorAll('a#like-comment')
-comments = document.querySelectorAll('.user-comment')
 if(likeButtons != null){
     const url = '{% url "editors:like_comment" %}';
     let options = {
@@ -291,6 +296,8 @@ if(likeButtons != null){
             e.preventDefault();
 
             let parent = likeButton.parentElement;
+            let content = parent.parentElement;
+            let userComment = content.parentElement;
             let count = parent.querySelector('.count');
             let totalLikes = parseInt(count.textContent)
             // add request body
@@ -312,7 +319,8 @@ if(likeButtons != null){
                         count.textContent = totalLikes + 1;
                     }
                     else if (data['action'] === 'Deleted'){
-                        comments[index].remove()
+                        /*console.log(userComment)*/
+                        userComment.remove()
                     }
                     else{
                       likeButton.style.backgroundColor = "rgba(57, 56, 56, 0.087)";
