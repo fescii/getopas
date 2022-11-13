@@ -3,6 +3,10 @@
 {% load blog_tags %}
 {% load thumbnail %}
 {% block title %}{{ post.title }}{% endblock %}
+{% block description %}{{post.body|striptags|safe|truncatechars:300 }}{% endblock %}
+{% block metatitle %}{{post.title }}{% endblock %}
+{% block image %}https://www.getopas.com{% thumbnail post.cover 300x0 %}{% endblock %}
+{% block url %}https://www.getopas.com{{post.get_absolute_url}}{% endblock %}
 {% block content %}
     <div class="article-wrapper">
       <!--  <h2 id="site-title">{{title|split:"-"}}</h2>-->

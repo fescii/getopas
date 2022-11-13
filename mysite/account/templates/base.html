@@ -8,6 +8,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}{% endblock %}</title>
+
+    <meta name="description" content="{% block description %}{% endblock %}">
+    <meta property="og:title" content="{% block metatitle %}{% endblock %}">
+    <meta property="og:image" content="{% block image %}{% endblock %}">
+    <meta property="og:url" content="{% block url %}{% endblock %}">
+
     <link href="{% static "favicon.ico" %}" rel="shortcut icon">
     <link href="{% static "css/global.css" %}" rel="stylesheet">
     <link href="{% static "css/footer.css" %}" rel="stylesheet">

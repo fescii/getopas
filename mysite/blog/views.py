@@ -14,6 +14,7 @@ from taggit.models import Tag
 from django.db.models import Count
 from actions.utils import create_action
 from django.contrib import messages
+from django.contrib.auth.models import User
 
 # Create your views here.
 def post_list(request, tag_slug=None):
@@ -46,12 +47,11 @@ class PostListView(ListView):
     template_name = 'blog/post/list.html'
 
 
-def post_detail(request, year, month, day, slug):
+def post_detail(request, username, slug):
+    user = User.objects.get(username=username)
     post = get_object_or_404(Post, slug=slug, status='published',
-                             publish__year=year,
-                             publish__month=month,
-                             publish__day=day)
-    user = request.user
+                             author=user)
+
     #Update Views count on each visit
     if post:
         post.update_views()
@@ -69,7 +69,7 @@ def post_detail(request, year, month, day, slug):
                 new_comment = comment_form.save(commit=False)
                 #Assign the current post and user to comment
                 new_comment.post = post
-                new_comment.author = user
+                new_comment.author = request.user
                 #Save the comment to the database
                 new_comment.save()
                 create_action(request.user, 'commented on','comment', post)
