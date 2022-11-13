@@ -3,7 +3,7 @@ from magazine.models import Issue_likes
 import readtime
 from django.shortcuts import render,get_object_or_404
 from django import template
-from ..models import Post,Bookmark
+from ..models import Post,Bookmark,Like,BlogComment
 from django.db.models import Count
 from django.template.defaultfilters import slugify
 from unidecode import unidecode
@@ -76,6 +76,22 @@ def check_saved(id,user):
             return 'Save'
     except Bookmark.DoesNotExist:
         return 'Save'
+
+#Check-if-comment-is-liked
+@register.simple_tag
+def check_comment(comment,user):
+    target_comment = BlogComment.objects.get(id=comment)
+    if target_comment.author.id == user:
+        return 'Delete'
+    else:
+        try:
+            liked_comment = Like.objects.get(comment=comment,user=user)
+            if liked_comment:
+                return 'Unlike'
+            else:
+                return 'Like'
+        except Like.DoesNotExist:
+            return 'Like'
 
 #Check-if-post-is-saved
 @register.simple_tag

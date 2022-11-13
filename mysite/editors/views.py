@@ -14,7 +14,7 @@ from django.contrib.auth.decorators import login_required,user_passes_test
 from django.http import HttpResponseRedirect, HttpResponse
 from django.urls import reverse
 from account.models import Profile
-from blog.models import Post,Bookmark
+from blog.models import Post,Bookmark,Like,BlogComment
 from django.contrib.auth.models import User
 from django.contrib import messages
 from django.http import JsonResponse
@@ -634,6 +634,32 @@ def save_post(request):
                 return JsonResponse({'status': 'ok','action': 'Remove'})
         except Post.DoesNotExist:
             pass
+    return JsonResponse({'status': 'error'})
+
+# Add-Post-To-My-list
+@login_required
+@require_POST
+def like_comment(request):
+    comment_id = request.POST.get('id')
+    #post_id = request.POST.get('post')
+    action = request.POST.get('action')
+    #post = Post.objects.get(id=post_id)
+    if comment_id and action:
+        if str(action) == 'Delete':
+            comment = BlogComment.objects.get(id=comment_id)
+            comment.delete()
+            return JsonResponse({'status': 'ok','action': 'Deleted'})
+        else:
+            comment = BlogComment.objects.get(id=comment_id)
+            try:
+                liked_comment = Like.objects.get(comment=comment,user=request.user)
+                liked_comment.delete()
+                return JsonResponse({'status': 'ok','action': 'Like'})
+            except Like.DoesNotExist:
+                like_comment = Like.objects.create(comment=comment,user=request.user)
+                like_comment.save()
+                #create_action(request.user, 'liked a comment on','comment', post)
+                return JsonResponse({'status': 'ok','action': 'Unlike'})
     return JsonResponse({'status': 'error'})
 
 # notification-actions

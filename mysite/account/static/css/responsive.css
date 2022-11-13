@@ -1937,6 +1937,31 @@
         padding: 0%;
         display: grid;
         grid-template-columns: 1fr;
+        position:relative;
+        width: 100%;
+    }
+    main.read>.comments-wrapper>.add-comment{
+        text-decoration: none;
+        display: block;
+        z-index: 3;
+        position:fixed;
+        right: 10px;
+        bottom: 80px;
+        width: max-content;
+        padding: 8px 15px;
+        font-size: 1.0rem;
+        margin-right: 10px;
+        cursor: pointer;
+        border: none;
+        background-color: var(--accent-color);
+        box-shadow: var(--box-shadow);
+        color: white;
+        align-self:flex-end;
+        -webkit-border-radius: 50px;
+        -moz-border-radius: 50px;
+        -ms-border-radius: 50px;
+        -o-border-radius: 50px;
+        border-radius: 50px;
     }
 
     main.read>.comments-wrapper>.comments-head {
@@ -1956,7 +1981,8 @@
     }
 
     main.read>.comments-wrapper>.comments-head>.title>div>.cover {
-        color: var(--article-title-color);
+        color: var(--gray-color);
+        font-size: 1rem;
     }
 
     main.read>.comments-wrapper>.comments-head>.title>div>.num {
@@ -1983,7 +2009,7 @@
     main.read>.comments-wrapper>.comments-head,
     main.read>.article-wrapper>.article-info {
         position: sticky;
-        padding-top: 15px;
+        padding-top: 25px;
     }
 
     main.read>.comments-wrapper>.comments {
@@ -2006,25 +2032,56 @@
     }
 
     main.read>.comments-wrapper>.create-comment {
-        border: none;
-        border-top: var(--border);
+        border-radius: 5px;
+        border: var(--border);
+        box-shadow: var(--box-shadow);
         grid-row: 3/4;
         background-color: var(--background-color);
         display: flex;
         flex-flow: column;
         gap: 10px;
+        z-index: 5;
         padding-bottom: 20px;
         padding-right: 5px;
-        margin: 0px 20px 0px 0px;
-        width: 100%;
-        position: sticky;
-        bottom: 55px;
+        margin: 0px 10px 0px 10px;
+        position: fixed;
+        bottom: 70px;
         height: max-content;
-        -webkit-border-radius: 0;
-        -moz-border-radius: 0;
-        -ms-border-radius: 0;
-        -o-border-radius: 0;
+        display: none;
+        -webkit-border-radius: 5px;
+        -moz-border-radius: 5px;
+        -ms-border-radius: 5px;
+        -o-border-radius: 5px;
         border-radius: 0;
+    }
+    main.read>.comments-wrapper>.create-comment>.user-information>form{
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+    }
+    main.read>.comments-wrapper>.create-comment>.user-information>form>textarea{
+        grid-column: 1/3;
+    }
+    main.read>.comments-wrapper>.create-comment>.user-information>form>button{
+        width: max-content;
+        justify-self: end;
+    }
+    main.read>.comments-wrapper>.create-comment>.user-information>form>.add-comment{
+        display: inline-block;
+        text-decoration: none;
+        width: max-content;
+        padding: 8px 15px;
+        font-size: 1.0rem;
+        margin-right: 10px;
+        cursor: pointer;
+        border: none;
+        background-color: rgba(57, 56, 56, 0.087);
+        color: var(--gray-color);
+        align-self:baseline;
+        -webkit-border-radius: 50px;
+        -moz-border-radius: 50px;
+        -ms-border-radius: 50px;
+        -o-border-radius: 50px;
+        border-radius: 50px;
     }
 
     main.read>.comments-wrapper>.create-comment>.user-information>#add-comment {

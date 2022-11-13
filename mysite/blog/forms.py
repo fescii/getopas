@@ -13,7 +13,7 @@ class BlogCommentForm(forms.ModelForm):
     class Meta:
         model = BlogComment
         fields = ('body',)
-        widgets={'body': forms.Textarea(attrs={'cols': 50, 'rows': 2,'placeholder': 'Add a comment'})}
+        widgets={'body': forms.Textarea(attrs={'cols': 50, 'rows': 5,'placeholder': 'Add a comment'})}
 
 #Form to search for blog posts
 class SearchForm(forms.Form):

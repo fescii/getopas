@@ -102,9 +102,22 @@ class BlogComment(models.Model):
         return f'Comment By {self.name} on {self.post}'
 
 
-    def __str__(self):
-        return f'Saved By {self.name} on {self.post}'
+#Bookmark Model
+class Like(models.Model):
+    comment = models.ForeignKey(BlogComment, on_delete=models.CASCADE,related_name='likes')
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    added = models.DateTimeField(default=timezone.now)
 
+    class Meta:
+        ordering = ('added',)
+    # Save Article
+    def save_like(self,comment, user,*args, **kwargs):
+        self.comment = comment
+        self.user = user
+        super(Bookmark, self).save(update_fields=['comment','user'],*args, **kwargs)
+
+    def __str__(self):
+        return f'Like By {self.user} on {self.comment}'
 
 #Bookmark Model
 class Bookmark(models.Model):
@@ -122,3 +135,4 @@ class Bookmark(models.Model):
 
     def __str__(self):
         return f'Saved By {self.user} on {self.post}'
+

@@ -27,11 +27,11 @@
             </div>
             <div class="article-actions">
                 {%  check_saved post.id request.user.id as saved %}
-                <a class="{{saved|lower}}" title="Save" href="">
-                    <span>{{saved}}</span>
+                <a id="save" class="{{saved|lower}}" data-id="{{post.id}}" data-action="{{saved}}" href="">
+                    <span class="save">{{saved}}</span>
                     <i class="iconly-Bookmark {% if saved == 'Remove' %}icbo{% else %}icli{% endif %}"></i>
                 </a>
-                <a title="Share" href="">
+                <a id="view-modal" title="Share" href="">
                     <span>Share</span>
                     <i class="iconly-Send icli"> </i>
                 </a>
@@ -39,6 +39,27 @@
                     <span>Report</span>
                     <i class="iconly-Info-Circle icli"> </i>
                 </a>
+            </div>
+            <div class="popup" id="popup">
+                <div class="header">
+                  <span>Share this via</span>
+                  <div id="close" class="close-element"><i class="uil uil-times"></i></div>
+                </div>
+                <div class="content">
+                    <div class="icons">
+                        <a href="https://www.facebook.com/sharer.php?u=https://www.getopas.com{{post.get_absolute_url}}?t='{{post.body|striptags|safe|truncatechars:180}}'" rel="noopener" target="_blank" ><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://twitter.com/share?url=https://www.getopas.com{{post.get_absolute_url}}&amp;text={{post.body|striptags|safe|truncatechars:180}}" rel="noopener" target="_blank" ><i class="fab fa-twitter"></i></a>
+                        <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://www.getopas.com{{post.get_absolute_url}}&title={{post.title}}&summery={{post.body|striptags|safe|truncatechars:180}}" rel="noopener" target="_blank"><i class="fab fa-linkedin"></i></a>
+                        <a href="https://api.whatsapp.com/send?text=https://www.getopas.com{{post.get_absolute_url}}" data-action="share/whatsapp/share" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                        <a href="https://t.me/share/url?url=https://www.getopas.com{{post.get_absolute_url}}&text={{post.body|striptags|safe|truncatechars:180}}" rel="noopener" target="_blank"><i class="fab fa-telegram-plane"></i></a>
+                    </div>
+                  <p>Or copy link</p>
+                  <div class="field">
+                    <i class="url-icon uil uil-link"></i>
+                    <input type="text" readonly value="https://www.getopas.com{{post.get_absolute_url}}">
+                    <button>Copy</button>
+                  </div>
+                </div>
             </div>
         </div>
         <div class="content">
@@ -86,7 +107,7 @@
                 </a>
             </div>
         </div>
-        <div class="create-comment">
+        <div id="comment-modal" class="create-comment">
             <div class="user-information">
                 <div class="profile-wrapper">
                     {% if user.profile.photo %}
@@ -101,6 +122,7 @@
                         {{field}}
                     {% endfor %}
                     {% csrf_token %}
+                    <a href="" id="close-comment" class="add-comment">Cancel</a>
                     <button type="submit">Comment</button>
                 </form>
             </div>
@@ -128,10 +150,11 @@
                             {{ comment.body | linebreaks}}
                         </div>
                         <div class="likes">
-                            <a href="" class="like">Like</a>
+                            {% check_comment comment.id request.user.id as liked %}
+                            <a href="" id="like-comment" class="{{liked|lower}}" data-id="{{comment.id}}" data-post="{{post.id}}" data-action="{{liked|capfirst}}">{{liked|capfirst}}</a>
                             <div class="likes-icon-count">
                                 <span class="iconly-Heart icli"></span>
-                                <span class="count">46</span>
+                                <span class="count">{{comment.likes.count}}</span>
                             </div>
                         </div>
                     </div>
@@ -140,6 +163,7 @@
                     <p>There are no comments yet.</p>
             {% endfor %}
         </div>
+        <a href="" id="add-comment" class="add-comment">Comment</a>
     </div>
     <div class="sidebar-content">
         <div class="topics">
@@ -150,3 +174,154 @@
         </div>
     </div>
 {% endblock content%}
+{% block domready %}
+//Share-Modal
+const viewBtn = document.querySelector("a#view-modal"),
+    popup = document.querySelector("div#popup");
+
+if(viewBtn != null && popup != null){
+    const close = popup.querySelector("#close"),
+    field = popup.querySelector(".field"),
+    input = field.querySelector("input"),
+    copy = field.querySelector("button");
+
+    viewBtn.addEventListener("click",(e)=>{
+        e.preventDefault();
+        popup.style.setProperty('display', 'block')
+    })
+
+    close.addEventListener("click",()=>{
+        popup.style.setProperty('display', 'none')
+    })
+
+    copy.onclick = () => {
+      input.select(); //select input value
+      if (document.execCommand("copy")) { //if the selected text copy
+        field.classList.add("active");
+        copy.innerText = "Copied";
+        setTimeout(() => {
+          window.getSelection().removeAllRanges(); //remove selection from document
+          field.classList.remove("active");
+          copy.innerText = "Copy";
+        }, 3000);
+      }
+    }
+}
+
+
+//Save
+saveButton = document.querySelector('a#save')
+if(saveButton != null){
+    const url = '{% url "editors:save" %}';
+    let options = {
+        method: 'POST',
+        headers: {'X-CSRFToken': csrftoken},
+        mode: 'same-origin'
+    }
+    saveButton.addEventListener('click', function(e){
+        e.preventDefault();
+
+        icon = saveButton.querySelector('i.iconly-Bookmark')
+        span = saveButton.querySelector('span.save')
+        // add request body
+        let formData = new FormData();
+        formData.append('id', saveButton.dataset.id);
+        formData.append('action', saveButton.dataset.action);
+        options['body'] = formData;
+
+        // send HTTP request
+        fetch(url, options).then(response => response.json()).then(data => {
+            if (data['status'] === 'ok'){
+                // toggle button text
+                if (data['action'] === 'Remove'){
+                    span.textContent = data['action'];
+                    icon.classList.remove('icli')
+                    icon.classList.add('icbo')
+                    saveButton.style.color = "rgb(255, 136, 0)";
+                    /*saveButton.style.backgroundColor = "rgb(255, 136, 0)";
+                    saveButton.style.color = "#fff";*/
+                }
+                else{
+                    span.textContent = data['action'];
+                    icon.classList.remove('icbo')
+                    icon.classList.add('icli')
+                    /*saveButton.innerHTML = `<span>${data['action']}</span><i class="iconly-Bookmark icli"></i>`;
+                    saveButton.style.backgroundColor = "rgba(57, 56, 56, 0.087)";*/
+                    saveButton.style.color = "#808080";
+                }
+            }
+        });
+    });
+};
+//Comment
+const commentBtn = document.querySelector("a#add-comment"),
+commentModal = document.querySelector("div#comment-modal");
+if(commentBtn != null && commentModal != null){
+    commentBtn.addEventListener('click', function(e){
+        e.preventDefault();
+        if(commentModal.style.display == 'flex'){
+            commentModal.style.display = 'none'
+            /*commentBtn.style.backgroundColor = "#08b86f";
+            commentBtn.textContent = "Comment";*/
+        }
+        else{
+            commentModal.style.display = 'flex'
+            /*commentBtn.style.backgroundColor = "rgb(255, 136, 0)";
+            commentBtn.textContent = "Close";*/
+        }
+    })
+    const closetBtn = commentModal.querySelector("a#close-comment")
+        closetBtn.addEventListener('click', function(e){
+            e.preventDefault();
+            commentModal.style.display = 'none'
+        })
+}
+//Like-Comment
+likeButtons = document.querySelectorAll('a#like-comment')
+comments = document.querySelectorAll('.user-comment')
+if(likeButtons != null){
+    const url = '{% url "editors:like_comment" %}';
+    let options = {
+        method: 'POST',
+        headers: {'X-CSRFToken': csrftoken},
+        mode: 'same-origin'
+    }
+    likeButtons.forEach((likeButton,index) =>{
+        likeButton.addEventListener('click', function(e){
+            e.preventDefault();
+
+            let parent = likeButton.parentElement;
+            let count = parent.querySelector('.count');
+            let totalLikes = parseInt(count.textContent)
+            // add request body
+            let formData = new FormData();
+            formData.append('id', likeButton.dataset.id);
+            formData.append('action', likeButton.dataset.action);
+            formData.append('post', likeButton.dataset.post);
+            options['body'] = formData;
+
+            // send HTTP request
+            fetch(url, options).then(response => response.json()).then(data => {
+                if (data['status'] === 'ok'){
+                    likeButton.dataset.action = data['action']
+                    // toggle button text
+                    likeButton.textContent = data['action'];
+                    if (data['action'] === 'Unlike'){
+                        likeButton.style.backgroundColor = "rgb(255, 136, 0)";
+                        likeButton.style.color = "#fff";
+                        count.textContent = totalLikes + 1;
+                    }
+                    else if (data['action'] === 'Deleted'){
+                        comments[index].remove()
+                    }
+                    else{
+                      likeButton.style.backgroundColor = "rgba(57, 56, 56, 0.087)";
+                      likeButton.style.color = "#808080";
+                      count.textContent = totalLikes - 1;
+                    }
+                }
+            });
+        });
+    });
+}
+{% endblock %}

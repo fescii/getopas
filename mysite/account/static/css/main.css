@@ -1740,6 +1740,7 @@ main.read>.comments-wrapper>.comments-head,
 main.read>.article-wrapper>.article-info{
     border-bottom: var(--border);
     background-color: var(--background-color);
+    position: relative;
     z-index: 5;
     position: sticky;
     top: 0px;
@@ -1750,7 +1751,12 @@ main.read>.article-wrapper>.article-info{
     align-items: center;
     justify-content: space-between;
 }
-
+main.read>.article-wrapper>.article-info>#popup{
+    position: absolute;
+    top: 110px;
+    height: max-content;
+    background-color: var(--background-color);
+}
 main.read>.article-wrapper>.article-info>.information{
     /*border: var(--border);*/
     display: flex;
@@ -1825,12 +1831,14 @@ main.read>.article-wrapper>.article-info>.article-actions>a{
     gap: 5px;
 }
 
-main.read>.comments-wrapper>.comments-head>.comments-filter>a:hover{
-    color:  var(--alt-accent-color);
-}
+
+
 main.read>.comments-wrapper>.comments-head>.comments-filter>a.active{
     background-color: var(--alt-accent-color);
     color: white;
+}
+main.read>.article-wrapper>.article-info>.article-actions>a.remove{
+    color: var(--alt-accent-color);
 }
 main.read>.article-wrapper>.article-info>.article-actions>a>i{
     display: inline-block;
@@ -1840,9 +1848,7 @@ main.read>.article-wrapper>.article-info>.article-actions>a>i{
 main.read>.article-wrapper>.article-info>.article-actions>a>i.icbo{
     color: var(--alt-accent-color);
 }
-main.read>.article-wrapper>.article-info>.article-actions>a:hover{
-    color: var(--accent-color);
-}
+
 main.read>.article-wrapper>.content{
     display: flex;
     flex-flow: column;
@@ -1916,10 +1922,14 @@ main.read>.comments-wrapper{
     display: flex;
     flex-flow: column;
     gap: 30px;
+    position: relative;
+}
+main.read>.comments-wrapper>.add-comment{
+    display: none;
 }
 main.read>.comments-wrapper>.comments-head{
     /*border: var(--border);*/
-    z-index: 5;
+    z-index: 2;
 }
 main.read>.comments-wrapper>.comments-head>.title{
     display: flex;
@@ -1927,7 +1937,7 @@ main.read>.comments-wrapper>.comments-head>.title{
     gap: 5px;
 }
 main.read>.comments-wrapper>.comments-head>.title>h2{
-    color:var(--article-title-color);
+    color:var(--accent-color);
     font-size: 1.5rem;
     margin: 0%;
     padding: 0%;
@@ -1938,6 +1948,7 @@ main.read>.comments-wrapper>.comments-head>.title>div{
     align-items: center;
     flex-wrap: nowrap;
     margin-top: 0px;
+    color: var(--gray-color);
     /*border: 1px solid navy;*/
 }
 main.read>.comments-wrapper>.comments-head>.title>div>.cover{
@@ -1949,11 +1960,10 @@ main.read>.comments-wrapper>.create-comment{
     display: flex;
     flex-flow:column;
     gap: 10px;
-    padding-bottom: 20px;
-    padding-right: 15px;
-    padding-left: 5px;
-    padding-top: 5px;
     align-items: flex-start;
+    border: var(--border);
+    padding: 5px;
+    border-radius: 10px;
     -webkit-border-radius: 10px;
     -moz-border-radius: 10px;
     -ms-border-radius: 10px;
@@ -2016,6 +2026,9 @@ main.read>.comments-wrapper>.create-comment>.user-information>form>button{
     -o-border-radius: 50px;
     border-radius: 50px;
 }
+main.read>.comments-wrapper>.create-comment>.user-information>form>.add-comment{
+    display: none;
+}
 /*comment*/
 main.read>.comments-wrapper>.comments{
     /*border: var(--border);*/
@@ -2033,7 +2046,7 @@ main.read>.comments-wrapper>.comments>.user-comment{
 main.read>.comments-wrapper>.comments>.user-comment>.profile{
     width: 35px;
     height: 35px;
-    margin-top: 5px;
+    margin-top: 6px;
 }
 main.read>.comments-wrapper>.comments>.user-comment>.profile>img{
     width: 100%;
@@ -2065,7 +2078,7 @@ main.read>.comments-wrapper>.comments>.user-comment>.content>.content-head{
 }
 main.read>.comments-wrapper>.comments>.user-comment>.content>.content-head>.author{
     text-decoration: none;
-    color: var(--gray-color);
+    color: #000000;
 }
 main.read>.comments-wrapper>.comments>.user-comment>.content>.content-head>.author:hover{
     color: var(--accent-color);
@@ -2103,6 +2116,7 @@ main.read>.comments-wrapper>.comments>.user-comment>.content>.content-text{
 main.read>.comments-wrapper>.comments>.user-comment>.content>.content-text>*{
     margin: 0%;
     color: var(--article-title-color);
+    padding-left: 3px;
 }
 main.read>.comments-wrapper>.comments>.user-comment>.content>.likes{
     padding: 5px 15px 0px 0px;
@@ -2112,6 +2126,8 @@ main.read>.comments-wrapper>.comments>.user-comment>.content>.likes{
     align-items: center;
     justify-content: space-between;
 }
+main.read>.comments-wrapper>.comments>.user-comment>.content>.likes>.delete,
+main.read>.comments-wrapper>.comments>.user-comment>.content>.likes>.unlike,
 main.read>.comments-wrapper>.comments>.user-comment>.content>.likes>.like{
     text-decoration: none;
     font-size: 1.0rem;
@@ -2129,10 +2145,16 @@ main.read>.comments-wrapper>.comments>.user-comment>.content>.likes>.like{
     -webkit-border-radius: 50px;
     border-radius: 50px;
 }
-
-main.read>.comments-wrapper>.comments>.user-comment>.content>.likes>.like:hover{
-    color: var(--accent-color);
+/*
+main.read>.comments-wrapper>.comments>.user-comment>.content>.likes>.delete{
+    background-color: rgb(235, 39, 39);
+    color: white;
+}*/
+main.read>.comments-wrapper>.comments>.user-comment>.content>.likes>.unlike{
+    background-color: var(--alt-accent-color);
+    color: white;
 }
+
 main.read>.comments-wrapper>.comments>.user-comment>.content>.likes>.likes-icon-count{
     /*border: var(--border);*/
     color: var(--accent-color);

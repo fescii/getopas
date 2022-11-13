@@ -25,6 +25,7 @@ urlpatterns = [
     path('edit-article/cover/<int:pk>/', views.edit_blog_post_cover, name='edit_blog_post_cover'),
     path('delete-article/<int:pk>/', views.delete_post, name='delete_post'),
     path('save/', views.save_post, name='save'),
+    path('like/', views.like_comment, name='like_comment'),
 
     #Notifications
     path('notifications', views.actions, name='actions'),
