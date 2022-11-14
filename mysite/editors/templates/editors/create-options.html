@@ -1,0 +1,147 @@
+{% extends "base.html" %}
+{% load static %}
+{% load blog_tags %}
+{% load thumbnail %}
+{% block content %}
+{% include "editors/create-header.html" %}
+<div class="add-options feed-contents">
+    <!--<div class="feed-title">
+         <div class="section-title">Create a new post</div>
+         <i class="iconly-Arrow-Right-Circle icli"></i>
+     </div>-->
+     <div class="add-option">
+         <div class="create-option-icon">
+             <span class="iconlyBulk-Paper"><span class="path1"></span><span class="path2"></span><span class="path3"></span></span>
+         </div>
+         <div class="create-option-content">
+            <div class="create-option-title">Publish an article</div>
+             <div class="create-option-description">
+                 Post public posts or make them exclusive to your supporters or members.
+                 Creators who post exclusives regularly tend to earn more support.
+             </div>
+         </div>
+         <div class="create-option-footer">
+             <a href="" class="created">
+                 <span>{{total_posts}}</span>
+                <span class="created-text">Article{{total_posts|pluralize}}</span>
+             </a>
+             <a href="" class="create-new">
+                <span class="create-new-text">Create</span>
+             </a>
+         </div>
+     </div>
+     <div class="add-option">
+         <div class="create-option-icon">
+             <span class="iconlyBulk-Message"><span class="path1"></span><span class="path2"></span></span>
+         </div>
+         <div class="create-option-content">
+            <div class="create-option-title">Newsletters</div>
+             <div class="create-option-description">
+                 Post public posts or make them exclusive to your supporters or members.
+                 Creators who post exclusives regularly tend to earn more support.
+             </div>
+         </div>
+         <div class="create-option-footer">
+             <a href="" class="created">
+                 <span>{{total_issues}}</span>
+                <span class="created-text">Newsletter{{total_issues|pluralize}}</span>
+             </a>
+             <a href="" class="create-new">
+                <span class="create-new-text">Add</span>
+             </a>
+         </div>
+     </div>
+     <div class="add-option">
+         <div class="create-option-icon">
+             <span class="iconlyBulk-User2"><span class="path1"></span><span class="path2"></span><span class="path3"></span><span class="path4"></span></span>
+         </div>
+         <div class="create-option-content">
+            <div class="create-option-title">Create connections</div>
+             <div class="create-option-description">
+                 Post public posts or make them exclusive to your supporters or members.
+                 Creators who post exclusives regularly tend to earn more support.
+             </div>
+         </div>
+         <div class="create-option-footer">
+             <a href="" class="created">
+                 <span>{{followers}}</span>
+                <span class="created-text">Follower{{followers|pluralize}}</span>
+             </a>
+             <a href="" class="create-new">
+                <span class="create-new-text">Connect</span>
+             </a>
+         </div>
+     </div>
+     <div class="add-option">
+         <div class="create-option-icon">
+             <span class="iconlyBulk-Paper-Plus"><span class="path1"></span><span class="path2"></span><span class="path3"></span></span>
+         </div>
+         <div class="create-option-content">
+            <div class="create-option-title">Publish a research</div>
+             <div class="create-option-description">
+                 Post public posts or make them exclusive to your supporters or members.
+                 Creators who post exclusives regularly tend to earn more support.
+             </div>
+         </div>
+         <div class="create-option-footer">
+             <a href="" class="created">
+                 <span>0</span>
+                <span class="created-text">Published</span>
+             </a>
+             <a href="" class="create-new">
+                <span class="create-new-text">Publish</span>
+             </a>
+         </div>
+     </div>
+     <div class="read-the-docs">
+         <div class="docs-content">
+             <div class="docs-icon">
+                 <span class="iconlyBulk-Document"><span class="path1"></span><span class="path2"></span></span>
+                 <div class="docs-title">Read the docs</div>
+             </div>
+             <div class="docs-content-description">
+                 Post public posts or make them exclusive to your supporters or members.
+                 Creators who post exclusives regularly tend to earn more support.
+                 Post public posts or make them exclusive to your supporters or members.
+                 Creators who post exclusives regularly tend to earn more support.
+             </div>
+         </div>
+         <div class="docs-footer">
+             <a href="" class="docs-link">
+                <span class="docs-link-text">View documentation</span>
+                <span class="iconly-Arrow-Right icli"></span>
+             </a>
+         </div>
+     </div>
+ </div>
+
+ </div>
+
+<div class="sidebar-content">
+    <div class="stats">
+      <h3 class="stats-title">My Stats</h3>
+      <div class="stats-today">
+        <h4 class="today">Impressions</h4>
+        <p class="today-stats">
+          <span class="iconly-Show icbo"></span>{{ request.user|get_views }} View{{ request.user|get_views| pluralize }}
+        </p>
+      </div>
+      <div class="stats-month">
+        <h4 class="month">Engagements</h4>
+        <p class="month-stats">
+          <span class="iconly-User2 icbo"></span>{{ request.user|get_comments }} Comment{{ request.user|get_comments | pluralize }}
+        </p>
+      </div>
+      <a href=" {% url 'editors:user_post_list' %}" class="go-to-articles"
+        >See your articles performance
+        <span class="iconly-Arrow-Right icli"></span>
+      </a>
+    </div>
+    <div class="topics">
+      <h2 class="sidebar-title">Discover Topics</h2>
+      <ul class="topic-list">
+        {% show_most_common_tags %}
+      </ul>
+    </div>
+</div>
+{% endblock content%}

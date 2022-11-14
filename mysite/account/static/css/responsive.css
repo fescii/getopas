@@ -113,6 +113,30 @@
     .article-list>.post-summery>.action-links>.delete-article-options{
         width: 60%;
     }
+    main.create {
+        /* border: 1px solid rgb(0, 255, 157);*/
+        margin-top: 0px;
+        display: grid;
+        grid-template-columns: 120px 3fr 1.5fr;
+        column-gap: 30px;
+        row-gap: 0%;
+    }
+    main.create>.add-options{
+        /*border: var(--border);*/
+        display: flex;
+        flex-flow: column;
+        gap: 10px;
+    }
+    main.create>.add-options>.add-option{
+        border-bottom: var(--border);
+        padding-top: 0%;
+        padding-bottom: 30px;
+    }
+    main.create>.add-options>.read-the-docs,
+    main.create>.add-options>.add-option:nth-of-type(4),
+    main.create>.add-options>.add-option:nth-of-type(3){
+        border-top: none
+    }
 }
 
 @media screen and (max-width: 980px) and (min-width: 900px) {

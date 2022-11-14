@@ -9,6 +9,7 @@ urlpatterns = [
     #Dashboard path
     path('home', views.dashboard, name='home'),
     path('newsletters', views.newsletters, name='newsletters'),
+    path('create', views.create_options, name='create_options'),
 
     #Articles
     path('add-article/', views.create_post, name='create_post'),

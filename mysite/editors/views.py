@@ -57,6 +57,24 @@ def dashboard(request):
                     'recently_added': recently_added,
                     'title':'home','tab': 'opas',
                     'section':'opas'})
+#Create
+@login_required
+def create_options(request):
+    user = request.user
+
+    # Display all actions by default
+    total_posts = Post.published.filter(author=user).count()
+    total_issues = Issue.published.filter(author=user).count()
+    followers = user.followers.count()
+
+    return render(request,
+                 'editors/create-options.html',
+                    {'total_posts':total_posts,
+                    'total_issues':total_issues,
+                    'followers':followers,
+                    'title':'create',
+                    'name':'publications',
+                    'section':'create'})
 
 #Dashboard-Newsletters
 @login_required

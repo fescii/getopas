@@ -1,0 +1,12 @@
+{% load blog_tags %}
+<div class="feeds-header">
+    <div class="header-content">
+        <h2 class="site-title">{{name|split:"-"}}</h2>
+        <div class="header-links">
+            <a href="{% url 'editors:actions' %}" class="header-link {% if title == 'create' %}active{% endif %}">Create</a>
+            <a href="" class="header-link {% if title == 'unread' %}active{% endif %}">Published</a>
+            <a href="" class="header-link {% if title == 'read' %}active{% endif %}">Drafted</a>
+        </div>
+    </div>
+    {% include "account/user/header.html" %}
+</div>
