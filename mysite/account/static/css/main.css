@@ -2086,17 +2086,17 @@ main.read>.comments-wrapper>.comments>.user-comment>.content>.content-head>.auth
     align-items: center;
 }
 main.read>.comments-wrapper>.comments>.user-comment>.content>.content-head>.author>span{
-    color: var(--gray-color);
+    color: var(--accent-color);
     font-size: 0.9rem;
     align-self: flex-end;
     margin-left: 2px;
-    margin-bottom: 3px;
+    margin-bottom: 0px;
 }
 main.read>.comments-wrapper>.comments>.user-comment>.content>.content-head>.author>.icbo{
     display: inline-block;
     margin-left: 10px;
     align-self: flex-end;
-    margin-bottom: 5px;
+    margin-bottom: 3px;
 }
 
 main.read>.comments-wrapper>.comments>.user-comment>.content>.content-head>.author:hover{
