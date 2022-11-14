@@ -2105,6 +2105,20 @@
         align-self: flex-end;
         margin-bottom: 3px;
     }
+    main.read>.comments-wrapper>.comments>.user-comment>.content>.likes>.likes-icon-count{
+        /*border: var(--border);*/
+        color: var(--alt-accent-color);
+        font-size: 1.0rem;
+        display: flex;
+        align-items: center;
+        gap: 3px;
+    }
+    main.read>.comments-wrapper>.comments>.user-comment>.content>.likes>.likes-icon-count>.icli{
+        font-size: 20px;
+        /*font-weight: bold;*/
+        display: inline-block;
+        margin-top: 2px;
+    }
 
     .topics {
         margin-bottom: 10px;

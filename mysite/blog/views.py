@@ -47,10 +47,12 @@ class PostListView(ListView):
     template_name = 'blog/post/list.html'
 
 
-def post_detail(request, username, slug):
+def post_detail(request, username,month, day, slug):
     user = User.objects.get(username=username)
     post = get_object_or_404(Post, slug=slug, status='published',
-                             author=user)
+                             author=user,
+                             publish__month=month,
+                             publish__day=day)
 
     #Update Views count on each visit
     if post:

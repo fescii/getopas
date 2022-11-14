@@ -83,7 +83,7 @@ class Post(models.Model):
 
     def get_absolute_url(self):
         return reverse('blog:post_detail',
-        args=[self.author.username, self.slug])
+        args=[self.author.username,self.publish.month,self.publish.day, self.slug])
 
 #Comments Model
 class BlogComment(models.Model):
