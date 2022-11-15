@@ -1977,9 +1977,12 @@
         margin-right: 10px;
         cursor: pointer;
         border: none;
-        background-color: var(--accent-color);
-        box-shadow: var(--box-shadow);
         color: white;
+        background: #ad5389;
+        background: linear-gradient(0deg, rgba(20,167,62,1) 0%, rgba(102,247,113,1) 100%);
+        border: none;
+        /*box-shadow: 0 0.7em 1.5em -0.5em #14a73e98;*/
+        box-shadow: 0 12px 48px #14a73e22;
         align-self:flex-end;
         -webkit-border-radius: 50px;
         -moz-border-radius: 50px;
@@ -2356,10 +2359,12 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        /*font-size: 1.2rem;*/
-        background-color: var(--alt-accent-color);
-        box-shadow: 0rem 0rem 0.1rem 0.1rem #2a2b2a11;
-        padding: 5px 12px;
+        color: white;
+        background: #ad5389;
+        background: linear-gradient(0deg, rgb(255, 136, 0) 0%, rgb(244, 199, 149) 100%);
+        /*box-shadow: 0rem 0rem 0.1rem 0.1rem #2a2b2a11;*/
+        box-shadow: 0 12px 48px rgba(158, 104, 43, 0.165);
+        padding: 5px 15px;
         text-decoration: none;
         position: fixed;
         bottom: 75px;
@@ -2375,14 +2380,14 @@
     .create-option>.text{
        /* display: none;*/
        position: relative;
-       font-size: 18px;
+       font-size: 1.2rem;
     }
-    .create-option>.icli{
+    .create-option>.iconlyBulk-Edit{
         display: none;
         display: inline-block;
-        font-size: 23px;
+        font-size: 1.7rem;
         margin-right: 5px;
-        font-weight: 400;
+        color: white;
     }
     main.feeds>.discover-topics {
         /* border: 1px solid rgb(0, 255, 157);*/
