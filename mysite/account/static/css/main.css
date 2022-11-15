@@ -2144,6 +2144,14 @@ main.read>.comments-wrapper>.comments>.user-comment>.content>.likes{
     display: flex;
     align-items: center;
     justify-content: space-between;
+    position: relative;
+}
+main.read>.comments-wrapper>.comments>.user-comment>.content>.likes .delete-article-options{
+    display: none;
+    width: 60%;
+    right: unset;
+    left: 0px;
+    bottom: 0px;
 }
 main.read>.comments-wrapper>.comments>.user-comment>.content>.likes>.delete,
 main.read>.comments-wrapper>.comments>.user-comment>.content>.likes>.unlike,

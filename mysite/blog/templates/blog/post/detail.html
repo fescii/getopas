@@ -133,7 +133,7 @@
         </div>
         <div class="comments">
             {% for comment in comments %}
-                <div class="user-comment">
+                <div id="comment-{{comment.id}}" class="user-comment">
                     <div class="profile">
                         {% if comment.author.profile.photo %}
                             <img src="{% thumbnail comment.author.profile.photo 50x0 %}"/>
@@ -161,7 +161,16 @@
                         </div>
                         <div class="likes">
                             {% check_comment comment.id request.user.id as liked %}
-                            <a href="" id="like-comment" class="{{liked|lower}}" data-id="{{comment.id}}" data-post="{{post.id}}" data-action="{{liked|capfirst}}">{{liked|capfirst}}</a>
+                            <a href="" id="{% if liked == 'Delete' %}delete{% else %}like-comment{% endif %}" class="{{liked|lower}}" data-id="{{comment.id}}" data-post="{{post.id}}" data-action="{{liked|capfirst}}">{{liked|capfirst}}</a>
+                            {% if liked == "Delete" %}
+                                <div class="delete-article-options">
+                                    <div class="delete-text">
+                                        Are you sure you want to delete the comment, <span>{{comment.body|truncatechars:45}}</span>?
+                                    </div>
+                                    <a class="delete-article-cancel" href="">Cancel</a>
+                                    <a href="" id="delete-comment" data-id="{{comment.id}}" data-post="{{post.id}}" data-action="{{liked|capfirst}}">Confirm</a>
+                                </div>
+                            {% endif %}
                             <div class="likes-icon-count">
                                 <span class="iconly-Heart icli"></span>
                                 <span class="count">{{comment.likes.count}}</span>
@@ -335,5 +344,74 @@ if(likeButtons != null){
             });
         });
     });
+}
+//Delete-Comment
+deleteButtons = document.querySelectorAll('a#delete-comment')
+if(deleteButtons != null){
+    const url = '{% url "editors:like_comment" %}';
+    let options = {
+        method: 'POST',
+        headers: {'X-CSRFToken': csrftoken},
+        mode: 'same-origin'
+    }
+    deleteButtons.forEach((deleteButton,index) =>{
+        deleteButton.addEventListener('click', function(e){
+            e.preventDefault();
+
+            let userComment = document.querySelector(`#comment-${deleteButton.dataset.id}`);
+            // add request body
+            let formData = new FormData();
+            formData.append('id', deleteButton.dataset.id);
+            formData.append('action', deleteButton.dataset.action);
+            formData.append('post', deleteButton.dataset.post);
+            options['body'] = formData;
+
+            // send HTTP request
+            fetch(url, options).then(response => response.json()).then(data => {
+                if (data['status'] === 'ok'){
+                    if (data['action'] === 'Deleted'){
+                        /*console.log(userComment)*/
+                        userComment.remove()
+                    }
+                }
+            });
+        });
+    });
+}
+// Delete-modals
+deleteBtns = document.querySelectorAll('a#delete')
+deleteModals = document.querySelectorAll('.delete-article-options')
+cancelBtns = document.querySelectorAll('a.delete-article-cancel')
+
+if (deleteBtns != null && deleteModals != null) {
+    deleteBtns.forEach((deleteBtn,index)=>{
+        deleteBtn.addEventListener('click', (e) => {
+            e.preventDefault()
+            modal = deleteModals[index]
+            if (modal.style.display === 'grid') {
+                modal.style.setProperty('display', 'none')
+                actionBtn.style.backgroundColor = 'transparent'
+            }
+            else {
+                try{
+                    deleteModals.forEach((deleteModal)=>{
+                        deleteModal.style.display = 'none'
+                    })
+                }
+                finally{
+                    modal.style.setProperty('display', 'grid')
+                }
+            }
+        })
+    })
+}
+if (cancelBtns != null && deleteModals != null) {
+    cancelBtns.forEach((cancelBtn,index)=>{
+        cancelBtn.addEventListener('click',(e)=>{
+            e.preventDefault()
+            modal = deleteModals[index]
+            modal.style.setProperty('display', 'none')
+        })
+    })
 }
 {% endblock %}

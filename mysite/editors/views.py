@@ -57,24 +57,6 @@ def dashboard(request):
                     'recently_added': recently_added,
                     'title':'home','tab': 'opas',
                     'section':'opas'})
-#Create
-@login_required
-def create_options(request):
-    user = request.user
-
-    # Display all actions by default
-    total_posts = Post.published.filter(author=user).count()
-    total_issues = Issue.published.filter(author=user).count()
-    followers = user.followers.count()
-
-    return render(request,
-                 'editors/create-options.html',
-                    {'total_posts':total_posts,
-                    'total_issues':total_issues,
-                    'followers':followers,
-                    'title':'create',
-                    'name':'publications',
-                    'section':'create'})
 
 #Dashboard-Newsletters
 @login_required
@@ -748,6 +730,26 @@ def notification_action(request):
                 return JsonResponse({'status': 'read','action': 'read'})
     return JsonResponse({'status': 'error'})
 
+
+#Create
+@login_required
+def create_options(request):
+    user = request.user
+
+    # Display all actions by default
+    total_posts = Post.published.filter(author=user).count()
+    total_issues = Issue.published.filter(author=user).count()
+    followers = user.followers.count()
+
+    return render(request,
+                 'editors/create-options.html',
+                    {'total_posts':total_posts,
+                    'total_issues':total_issues,
+                    'followers':followers,
+                    'title':'create',
+                    'name':'publications',
+                    'section':'create'})
+
 @login_required
 def create_post(request):
     user = request.user
@@ -786,9 +788,7 @@ def create_post(request):
 #Blog Posts Created By The Current User.
 @login_required
 def user_post_list(request):
-    user = request.user
-    profile = user.profile
-    object_list = Post.objects.all().filter(author=request.user)
+    object_list = Post.published.filter(author=request.user)
 
     paginator = Paginator(object_list, 10) # 5 posts in each page
     page = request.GET.get('page')
@@ -804,7 +804,8 @@ def user_post_list(request):
     return render(request, 'editors/articles/user_articles_list.html',
                   {'page': page,
                    'posts': posts,
-                   'title': 'publications',
+                   'title': 'published',
+                   'name':'publications',
                    'section': 'my-articles'})
 
 

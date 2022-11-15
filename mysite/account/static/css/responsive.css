@@ -1256,6 +1256,9 @@
         display: inline-block;
         font-size: 26px;
     }
+    main.read>.comments-wrapper>.comments>.user-comment>.content>.likes .delete-article-options{
+        width: 80%;
+    }
 
 }
 
