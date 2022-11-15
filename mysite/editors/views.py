@@ -765,10 +765,10 @@ def create_post(request):
             post.save()
             post_form.save_m2m()
             create_action(request.user, 'added article','create', post)
-            messages.success(request, 'Article was created successfully')
+            messages.success(request, 'Article was created')
             return HttpResponseRedirect(reverse('editors:user_post_list'))
         else:
-            messages.error(request, 'Error! Article was not created')
+            messages.error(request, 'Error! Article not created')
             post_form = CreateBlogPostForm(data=request.GET)
         return render(request,
                       'editors/articles/create.html',
@@ -808,6 +808,29 @@ def user_post_list(request):
                    'name':'publications',
                    'section': 'my-articles'})
 
+#Blog Posts Created By The Current User.
+@login_required
+def user_drafted_list(request):
+    object_list = Post.objects.filter(author=request.user,status='draft')
+
+    paginator = Paginator(object_list, 10) # 5 posts in each page
+    page = request.GET.get('page')
+    try:
+        posts = paginator.page(page)
+    except PageNotAnInteger:
+    # If page is not an integer deliver the first page
+        posts = paginator.page(1)
+    except EmptyPage:
+    # If page is out of range deliver last page of results
+        posts = paginator.page(paginator.num_pages)
+
+    return render(request, 'editors/articles/user_articles_list.html',
+                  {'page': page,
+                   'posts': posts,
+                   'title': 'drafted',
+                   'name':'publications',
+                   'section': 'my-articles'})
+
 
 @login_required
 def edit_blog_post(request, pk):
@@ -824,11 +847,11 @@ def edit_blog_post(request, pk):
             status = cd['status']
             Post.update_post(post,title=title,body=body, status=status)
             #edit_form.save()
-            messages.success(request, 'Post updated successfully')
+            messages.success(request, 'Post updated')
             return HttpResponseRedirect(reverse('user_post_list'))
 
         else:
-            messages.error(request, 'Error updating the Post')
+            messages.error(request, 'Error! updating')
             edit_form = BlogEditForm(request.POST or None, instance=post,files=request.FILES)
 
         return render(request,
@@ -859,11 +882,11 @@ def edit_blog_post_tags(request, pk):
             tags = edit_form.save(commit=False)
             edit_form.save_m2m()
             tags.save()
-            messages.success(request, 'Tags updated successfully')
+            messages.success(request, 'Tags updated')
             return HttpResponseRedirect(reverse('editors:user_post_list'))
 
         else:
-            messages.error(request, 'Error updating the Tags')
+            messages.error(request, 'Error! updating')
             edit_form = BlogEditTagsForm(request.POST or None, instance=post)
 
         return render(request,
@@ -896,11 +919,11 @@ def edit_blog_post_cover(request, pk):
             cover = cd['cover']
             #edit_form.save()
             Post.update_cover(post,cover)
-            messages.success(request, 'Cover updated successfully')
+            messages.success(request, 'Cover updated')
             return HttpResponseRedirect(reverse('editors:user_post_list'))
 
         else:
-            messages.error(request, 'Error updating the Tags')
+            messages.error(request, 'Error updating!')
             edit_form = BlogEditCoverForm(request.POST or None, instance=post, files=request.FILES)
 
         return render(request,
@@ -925,7 +948,7 @@ def edit_blog_post_cover(request, pk):
 def delete_post(request, pk):
     post = get_object_or_404(Post, id=pk)
     post.delete()
-    messages.success(request, 'Article deleted successfully')
+    messages.success(request, 'Article deleted')
     return HttpResponseRedirect(reverse('editors:user_post_list'))
 
 #Create Magazine View
@@ -946,10 +969,10 @@ def create_magazine(request):
             #new_magazine.author = request.user
             #new_magazine.tags = cd['tags']
             #new_magazine.save()
-            messages.success(request, 'Magazine issue was created Successfully')
+            messages.success(request, 'Newsletter created')
             return HttpResponseRedirect(reverse('editors:user_issue_list'))
         else:
-            messages.error(request, 'Error! Magazine issue was not created')
+            messages.error(request, 'Error! Newsletter not created')
             magazine_form = CreateMagazineForm(data=request.POST)
         return render(request,
                       'editors/articles/create-magazine.html',
@@ -1002,11 +1025,11 @@ def edit_newsletter(request, pk):
             description = cd['description']
             status = cd['status']
             Issue.update_issue(issue,no,title,description,status)
-            messages.success(request, 'Issue updated successfully')
+            messages.success(request, 'Newsletter updated')
             return HttpResponseRedirect(reverse('user_issue_list'))
 
         else:
-            messages.error(request, 'Error updating the Issue')
+            messages.error(request, 'Error updating Newsletter!')
             edit_form = MagazineEditForm(request.POST or None, instance=issue,
                                          files=request.FILES)
 
@@ -1036,11 +1059,11 @@ def edit_newsletter_tags(request, pk):
             tags = edit_form.save(commit=False)
             edit_form.save_m2m()
             tags.save()
-            messages.success(request, 'Tags updated successfully')
+            messages.success(request, 'Tags updated')
             return HttpResponseRedirect(reverse('user_issue_list'))
 
         else:
-            messages.error(request, 'Error updating the Tags')
+            messages.error(request, 'Error updating tags')
             edit_form = MagazineEditTagsForm(request.POST or None, instance=issue)
 
         return render(request,
@@ -1074,11 +1097,11 @@ def edit_newsletter_cover(request, pk):
             cover = cd['cover']
             #edit_form.save()
             Issue.update_cover(issue,cover)
-            messages.success(request, 'Cover updated successfully')
+            messages.success(request, 'Cover updated')
             return HttpResponseRedirect(reverse('user_issue_list'))
 
         else:
-            messages.error(request, 'Error updating the cover')
+            messages.error(request, 'Error updating cover')
             edit_form = MagazineEditCoverForm(request.POST or None, instance=issue, files=request.FILES)
 
         return render(request,
@@ -1104,5 +1127,5 @@ def edit_newsletter_cover(request, pk):
 def delete_issue(request, pk):
     post = get_object_or_404(Issue, id=pk)
     post.delete()
-    messages.success(request, 'Issue deleted successfully')
+    messages.success(request, 'Newsletter deleted')
     return HttpResponseRedirect(reverse('user_issue_list'))

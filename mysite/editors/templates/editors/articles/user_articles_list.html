@@ -24,7 +24,7 @@
                         {% endif %}
                     </div>
                     <div class="date">
-                        Published on: <span class="published-date">{{ post.publish.date }} {{ post.publish.time }}</span>
+                        Created on: <span class="published-date">{{ post.publish.date }} {{ post.publish.time }}</span>
                     </div>
                     <div class='article-summery'>
                         {{ post.body|striptags|safe|truncatechars:160 }}
@@ -53,7 +53,7 @@
                     </div>
                 </div>
             {% empty %}
-            <div class="post-summery" style="display:flex;align-items:center;color:var(--gray-color);border:none;">You've not published any articles yet!</div>
+            <div class="post-summery" style="display:flex;align-items:center;color:var(--gray-color);border:none;">No publications yet!</div>
             {% endfor %}
             {% include "pagination.html" with page=posts %}
         </div>

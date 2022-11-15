@@ -3,9 +3,9 @@
     <div class="header-content">
         <h2 class="site-title">{{name|split:"-"}}</h2>
         <div class="header-links">
-            <a href="{% url 'editors:actions' %}" class="header-link {% if title == 'create' %}active{% endif %}">Create</a>
-            <a href="" class="header-link {% if title == 'published' %}active{% endif %}">Published</a>
-            <a href="" class="header-link {% if title == 'read' %}active{% endif %}">Drafted</a>
+            <a href="{% url 'editors:create_options' %}" class="header-link {% if title == 'create' %}active{% endif %}">Create</a>
+            <a href="{% url 'editors:user_post_list' %}" class="header-link {% if title == 'published' %}active{% endif %}">Published</a>
+            <a href="{% url 'editors:user_drafted_list' %}" class="header-link {% if title == 'drafted' %}active{% endif %}">Drafted</a>
         </div>
     </div>
     {% include "account/user/header.html" %}

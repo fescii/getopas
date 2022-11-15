@@ -1,50 +1,77 @@
 .messages{
     position: fixed;
-    bottom: 55px;
-    left: 20px;
+    bottom: 50px;
+    left: 10px;
     list-style-type: none;
     padding: 0%;
     margin: 0%;
     z-index: 20;
 }
 .messages>.success{
-    color: rgba(255, 255, 255, 0.938);
     position: relative;
+    border-radius: 50px;
     padding: 3px 15px;
+    padding-right: 50px;
     margin: 5px;
-    font-size: 1rem;
-    background-color: var(--accent-color);
-    box-shadow: var(--box-shadow);
+    font-size: 1.2rem;
+    color: white;
+    background: #ad5389;
+    background: linear-gradient(0deg, rgba(20,167,62,1) 0%, rgba(102,247,113,1) 100%);
+    border: none;
+    /*box-shadow: 0 0.7em 1.5em -0.5em #14a73e98;
+    */box-shadow: 0 12px 48px #14a73e22;
+    -webkit-border-radius: 50px;
+    -moz-border-radius: 50px;
+    -ms-border-radius: 50px;
+    -o-border-radius: 50px;
 }
 .messages>.success>span{
     position: absolute;
     cursor: pointer;
     display: inline-block;
     text-decoration: none;
-    right: -25px;
-    top: 0%;
+    right: 5px;
+    top: 5px;
     bottom: 0%;
-    font-size: 20px;
-    padding: 0% 8px;
+    font-size: 1rem;
+    text-align: center;
+    font-weight: bold;
+    width: 25px;
+    height: 25px;
+    padding-bottom: 2px;
     background-color: #e74f3b;
     color: white;
+    -webkit-border-radius: 50px;
+    -moz-border-radius: 50px;
+    -ms-border-radius: 50px;
+    -o-border-radius: 50px;
+    border-radius: 50px;
 }
 .messages>.error{
-    color: rgba(255, 255, 255, 0.938);
     position: relative;
     padding: 5px 15px;
     font-size: 1rem;
-    background-color:rgb(202, 136, 12);
+    color: white;
+    background: #ad5389;
+    background: linear-gradient(0deg, rgb(202, 136, 12) 0%, rgb(202, 136, 12) 100%);
+    border: none;
+    /*box-shadow: 0 0.7em 1.5em -0.5em #14a73e98;
+    */box-shadow: 0 12px 48px #14a73e22;
 }
 .messages>.error>span{
     position: absolute;
-    text-decoration: none;
-    right: -25px;
-    top: 0%;
-    bottom: 0%;
-    font-size: 20px;
-    padding: 0% 10px;
+    cursor: pointer;
     display: inline-block;
+    text-decoration: none;
+    right: 5px;
+    top: 5px;
+    bottom: 0%;
+    font-size: 1rem;
+    text-align: center;
+    font-weight: bold;
+    width: 25px;
+    height: 25px;
+    padding: 0px;
     background-color: #e74f3b;
     color: white;
 }

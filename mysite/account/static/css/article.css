@@ -42,6 +42,7 @@ main.feeds>.my-article-list{
     position: relative;
     row-gap: 0px;
     padding-bottom: 20px;
+    width: 100%;
 }
 .article-list>.post-summery>h2{
     font-size: 1.25rem;
@@ -59,9 +60,9 @@ main.feeds>.my-article-list{
    /* border: 1px solid #838584e0;*/
     grid-column: 2/3;
     grid-row: 2/3;
+    font-size: 1.2rem;
     margin: 0%;
-    color: #404040;
-    font-weight: bold;
+    color: var(--article-title-color);
     margin: 5px 0px;
 }
 
@@ -83,7 +84,7 @@ main.feeds>.my-article-list{
     /*border: 1px solid #838584e0;*/
     grid-row: 3/4;
     height: max-content;
-    color: #404040;
+    color: var(--article-title-color);
 }
 
 .article-list>.post-summery>.article-stats {

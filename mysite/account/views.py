@@ -90,7 +90,7 @@ def moderate_user(request, user_id):
             u.is_superuser = False
             u.is_staff = False
             u.save()
-        messages.success(request, 'Role updated successfully')
+        messages.success(request, 'Role updated')
         return HttpResponseRedirect(reverse('list_users'))
         """
             messages.error(request, 'Role Not Updated, Try Again!')
@@ -110,7 +110,7 @@ def moderate_user(request, user_id):
 def remove_user(request, user_id):
     user = User.objects.get(id=user_id)
     user.delete()
-    messages.success(request, 'User account was successfully deleted')
+    messages.success(request, 'User account deleted')
     return HttpResponseRedirect(reverse('list_users'))
 
 #Registration View
@@ -158,7 +158,7 @@ def edit(request,username):
         if user_form.is_valid() and profile_form.is_valid():
             user_form.save()
             profile_form.save()
-            messages.success(request, 'Profile updated successfully')
+            messages.success(request, 'Profile updated')
             return HttpResponseRedirect(reverse('profile',kwargs={'username': user.username}))
 
         else:
@@ -195,7 +195,7 @@ def user_profile(request, username):
             cd = profile_photo_form.cleaned_data
             photo = cd['photo']
             Profile.update_profile_picture(profile,  photo=photo)
-            messages.success(request, 'Profile photo updated successfully')
+            messages.success(request, 'Profile photo updated')
             return HttpResponseRedirect(reverse('profile',kwargs={'username': r_user.username}))
 
         else:

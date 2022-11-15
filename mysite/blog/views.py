@@ -75,7 +75,7 @@ def post_detail(request, username,month, day, slug):
                 #Save the comment to the database
                 new_comment.save()
                 create_action(request.user, 'commented on','comment', post)
-                messages.success(request, 'Comment was added successfully')
+                messages.success(request, 'Comment was added')
             else:
                 comment_form = BlogCommentForm()
                 messages.error(request, 'Error! Comment was not added')

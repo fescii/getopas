@@ -5,7 +5,7 @@
 <div class="main-content">
     <form method="post" enctype="multipart/form-data">
     {{post_form.media }}
-    {% for field in post_form.visible_fields %}
+    {% for field in post_form %}
       <div class="field">
         {{ field.label_tag }}
         {{ field }}
@@ -13,7 +13,7 @@
       </div>
       {% endfor %}
   {% csrf_token %}
-  <input type="submit" value="Create">
+  <button type="submit">Create</button>
   </form>
 </div>
 {% endblock %}

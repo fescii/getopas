@@ -25,7 +25,7 @@
                  <span>{{total_posts}}</span>
                 <span class="created-text">Article{{total_posts|pluralize}}</span>
              </a>
-             <a href="" class="create-new">
+             <a href="{% url 'editors:create_post' %}" class="create-new">
                 <span class="create-new-text">Create</span>
              </a>
          </div>

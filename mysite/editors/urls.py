@@ -12,8 +12,6 @@ urlpatterns = [
     path('create', views.create_options, name='create_options'),
 
     #Articles
-    path('add-article/', views.create_post, name='create_post'),
-    path('my-articles/', views.user_post_list, name='user_post_list'),
     path('explore/<str:topic>', views.explore, name='explore'),
     path('explore', views.explore_topics, name='explore_topics'),
     path('feeds', views.feeds, name='feeds'),
@@ -21,6 +19,11 @@ urlpatterns = [
     path('trending', views.trending, name='trending'),
     path('recent', views.recent, name='recent'),
     path('my-list', views.my_list, name='my_list'),
+
+    #Articles-actions
+    path('create/article', views.create_post, name='create_post'),
+    path('my-publications/', views.user_post_list, name='user_post_list'),
+    path('my-drafts/', views.user_drafted_list, name='user_drafted_list'),
     path('edit-article/<int:pk>/', views.edit_blog_post, name='edit_blog_post'),
     path('edit-article/tags/<int:pk>/', views.edit_blog_post_tags, name='edit_blog_post_tags'),
     path('edit-article/cover/<int:pk>/', views.edit_blog_post_cover, name='edit_blog_post_cover'),
