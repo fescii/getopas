@@ -264,8 +264,8 @@
 
     main.profile>.profile-info>form>input[type="submit"] {
         right: 30px;
-        top: unset;
-        bottom: 75px;
+        /*top: unset;*/
+        bottom: unset;
     }
     .article-list>.post-summery>.action-links>.delete-article-options{
         width: 80%;
@@ -2435,6 +2435,7 @@
     /*Notification*/
     a,
     .pagination > .step-links > a,
+    input[type="submit"],
     main.read > .comments-wrapper > .create-comment > .user-information > form > button,
     main.read > .comments-wrapper > .comments > .user-comment > .content > .likes > .like,
     main.profile > .site-title > .count,

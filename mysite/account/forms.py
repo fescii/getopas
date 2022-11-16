@@ -42,7 +42,7 @@ class ProfileEditForm(forms.ModelForm):
     class Meta:
         model = Profile
         fields = ('date_of_birth','occupation','website','twitter','linkedin','location','about')
-        widgets={'date_of_birth': forms.DateInput}
+        widgets={'date_of_birth': forms.DateInput()}
 
 class ProfilePhotoEditForm(forms.ModelForm):
     class Meta:
