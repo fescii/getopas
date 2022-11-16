@@ -2,6 +2,7 @@
 {% load static %}
 {% load blog_tags %}
 {% load thumbnail %}
+{% block title %}Create Options{% endblock title %}
 {% block content %}
 {% include "editors/create-header.html" %}
 <div class="add-options feed-contents">
@@ -21,7 +22,7 @@
              </div>
          </div>
          <div class="create-option-footer">
-             <a href="" class="created">
+             <a href="{% url 'editors:user_post_list' %}" class="created">
                  <span>{{total_posts}}</span>
                 <span class="created-text">Article{{total_posts|pluralize}}</span>
              </a>
@@ -63,7 +64,7 @@
              </div>
          </div>
          <div class="create-option-footer">
-             <a href="" class="created">
+             <a href="{% url 'followers' username=request.user.username %}" class="created">
                  <span>{{followers}}</span>
                 <span class="created-text">Follower{{followers|pluralize}}</span>
              </a>
