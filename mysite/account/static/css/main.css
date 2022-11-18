@@ -1992,7 +1992,7 @@ main.read>.comments-wrapper>.create-comment{
     flex-flow:column;
     gap: 10px;
     align-items: flex-start;
-    border: var(--border);
+    border: none;
     padding: 5px;
     border-radius: 10px;
     -webkit-border-radius: 10px;
@@ -3013,3 +3013,12 @@ main.create>.add-options>.read-the-docs>.docs-footer>a>.icli{
     margin-top: 5px;
     margin-left: 3px;
 }
+/*Hide-Tiny*/
+.tox .tox-statusbar a, .tox .tox-statusbar__path-item, .tox .tox-statusbar__wordcount {
+    color: rgba(34,47,62,.7);
+    text-decoration: none;
+    display: none;
+  }
+  .tox .tox-statusbar{
+    display: none !important;
+  }

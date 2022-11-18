@@ -2072,6 +2072,7 @@
 
     main.read>.comments-wrapper>.create-comment {
         border-radius: 5px;
+        width: 95%;
         border: var(--border);
         box-shadow: var(--box-shadow);
         grid-row: 3/4;
@@ -2093,16 +2094,23 @@
         -o-border-radius: 10;
         border-radius: 10;
 }
-    main.read>.comments-wrapper>.create-comment>.user-information>form{
-        display: grid;
-        grid-template-columns: 1fr 1fr;
+    main.read>.comments-wrapper>.create-comment>.user-information{
+        width: 100%;
     }
+    main.read>.comments-wrapper>.create-comment>.user-information>form{
+        display: flex;
+        flex-flow: column;
+    }
+    main.read>.comments-wrapper>.create-comment>.user-information>form>textarea .tox-tinymce,
     main.read>.comments-wrapper>.create-comment>.user-information>form>textarea{
-        grid-column: 1/3;
+        grid-column: 1/3 !important;
+        grid-row: 1/2;
     }
     main.read>.comments-wrapper>.create-comment>.user-information>form>button{
         width: max-content;
         justify-self: end;
+        position: absolute;
+        bottom:28px;
     }
     main.read>.comments-wrapper>.create-comment>.user-information>form>.add-comment{
         display: inline-block;

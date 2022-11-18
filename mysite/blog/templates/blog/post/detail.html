@@ -157,7 +157,7 @@
                             </div>
                         </div>
                         <div class="content-text">
-                            {{ comment.body | linebreaks}}
+                            {{ comment.body|safe}}
                         </div>
                         <div class="likes">
                             {% check_comment comment.id request.user.id as liked %}
@@ -165,7 +165,7 @@
                             {% if liked == "Delete" %}
                                 <div class="delete-article-options">
                                     <div class="delete-text">
-                                        Are you sure you want to delete the comment, <span>{{comment.body|truncatechars:45}}</span>?
+                                        Are you sure you want to delete the comment, <span>{{comment.body|safe|striptags|truncatechars:45}}</span>?
                                     </div>
                                     <a class="delete-article-cancel" href="">Cancel</a>
                                     <a href="" id="delete-comment" data-id="{{comment.id}}" data-post="{{post.id}}" data-action="{{liked|capfirst}}">Confirm</a>
@@ -194,225 +194,241 @@
     </div>
 {% endblock content%}
 {% block domready %}
-//Share-Modal
-const viewBtn = document.querySelector("a#view-modal"),
-    popup = document.querySelector("div#popup");
+    //Share-Modal
+    const viewBtn = document.querySelector("a#view-modal"),
+        popup = document.querySelector("div#popup");
 
-if(viewBtn != null && popup != null){
-    const close = popup.querySelector("#close"),
-    field = popup.querySelector(".field"),
-    input = field.querySelector("input"),
-    copy = field.querySelector("button");
+    if(viewBtn != null && popup != null){
+        const close = popup.querySelector("#close"),
+        field = popup.querySelector(".field"),
+        input = field.querySelector("input"),
+        copy = field.querySelector("button");
 
-    viewBtn.addEventListener("click",(e)=>{
-        e.preventDefault();
-        popup.style.setProperty('display', 'block')
-    })
-
-    close.addEventListener("click",()=>{
-        popup.style.setProperty('display', 'none')
-    })
-
-    copy.onclick = () => {
-      input.select(); //select input value
-      if (document.execCommand("copy")) { //if the selected text copy
-        field.classList.add("active");
-        copy.innerText = "Copied";
-        setTimeout(() => {
-          window.getSelection().removeAllRanges(); //remove selection from document
-          field.classList.remove("active");
-          copy.innerText = "Copy";
-        }, 3000);
-      }
-    }
-}
-
-
-//Save
-saveButton = document.querySelector('a#save')
-if(saveButton != null){
-    const url = '{% url "editors:save" %}';
-    let options = {
-        method: 'POST',
-        headers: {'X-CSRFToken': csrftoken},
-        mode: 'same-origin'
-    }
-    saveButton.addEventListener('click', function(e){
-        e.preventDefault();
-
-        icon = saveButton.querySelector('i.iconly-Bookmark')
-        span = saveButton.querySelector('span.save')
-        // add request body
-        let formData = new FormData();
-        formData.append('id', saveButton.dataset.id);
-        formData.append('action', saveButton.dataset.action);
-        options['body'] = formData;
-
-        // send HTTP request
-        fetch(url, options).then(response => response.json()).then(data => {
-            if (data['status'] === 'ok'){
-                // toggle button text
-                if (data['action'] === 'Remove'){
-                    span.textContent = data['action'];
-                    icon.classList.remove('icli')
-                    icon.classList.add('icbo')
-                    saveButton.style.color = "rgb(255, 136, 0)";
-                    /*saveButton.style.backgroundColor = "rgb(255, 136, 0)";
-                    saveButton.style.color = "#fff";*/
-                }
-                else{
-                    span.textContent = data['action'];
-                    icon.classList.remove('icbo')
-                    icon.classList.add('icli')
-                    /*saveButton.innerHTML = `<span>${data['action']}</span><i class="iconly-Bookmark icli"></i>`;
-                    saveButton.style.backgroundColor = "rgba(57, 56, 56, 0.087)";*/
-                    saveButton.style.color = "#808080";
-                }
-            }
-        });
-    });
-};
-//Comment
-const commentBtn = document.querySelector("a#add-comment"),
-commentModal = document.querySelector("div#comment-modal");
-if(commentBtn != null && commentModal != null){
-    commentBtn.addEventListener('click', function(e){
-        e.preventDefault();
-        if(commentModal.style.display == 'flex'){
-            commentModal.style.display = 'none'
-            /*commentBtn.style.backgroundColor = "#08b86f";
-            commentBtn.textContent = "Comment";*/
-        }
-        else{
-            commentModal.style.display = 'flex'
-            /*commentBtn.style.backgroundColor = "rgb(255, 136, 0)";
-            commentBtn.textContent = "Close";*/
-        }
-    })
-    const closetBtn = commentModal.querySelector("a#close-comment")
-        closetBtn.addEventListener('click', function(e){
+        viewBtn.addEventListener("click",(e)=>{
             e.preventDefault();
-            commentModal.style.display = 'none'
+            popup.style.setProperty('display', 'block')
         })
-}
-//Like-Comment
-likeButtons = document.querySelectorAll('a#like-comment')
-if(likeButtons != null){
-    const url = '{% url "editors:like_comment" %}';
-    let options = {
-        method: 'POST',
-        headers: {'X-CSRFToken': csrftoken},
-        mode: 'same-origin'
+
+        close.addEventListener("click",()=>{
+            popup.style.setProperty('display', 'none')
+        })
+
+        copy.onclick = () => {
+        input.select(); //select input value
+        if (document.execCommand("copy")) { //if the selected text copy
+            field.classList.add("active");
+            copy.innerText = "Copied";
+            setTimeout(() => {
+            window.getSelection().removeAllRanges(); //remove selection from document
+            field.classList.remove("active");
+            copy.innerText = "Copy";
+            }, 3000);
+        }
+        }
     }
-    likeButtons.forEach((likeButton,index) =>{
-        likeButton.addEventListener('click', function(e){
+
+
+    //Save
+    saveButton = document.querySelector('a#save')
+    if(saveButton != null){
+        const url = '{% url "editors:save" %}';
+        let options = {
+            method: 'POST',
+            headers: {'X-CSRFToken': csrftoken},
+            mode: 'same-origin'
+        }
+        saveButton.addEventListener('click', function(e){
             e.preventDefault();
 
-            let parent = likeButton.parentElement;
-            let content = parent.parentElement;
-            let userComment = content.parentElement;
-            let count = parent.querySelector('.count');
-            let totalLikes = parseInt(count.textContent)
+            icon = saveButton.querySelector('i.iconly-Bookmark')
+            span = saveButton.querySelector('span.save')
             // add request body
             let formData = new FormData();
-            formData.append('id', likeButton.dataset.id);
-            formData.append('action', likeButton.dataset.action);
-            formData.append('post', likeButton.dataset.post);
+            formData.append('id', saveButton.dataset.id);
+            formData.append('action', saveButton.dataset.action);
             options['body'] = formData;
 
             // send HTTP request
             fetch(url, options).then(response => response.json()).then(data => {
                 if (data['status'] === 'ok'){
-                    likeButton.dataset.action = data['action']
                     // toggle button text
-                    likeButton.textContent = data['action'];
-                    if (data['action'] === 'Unlike'){
-                        likeButton.style.backgroundColor = "rgb(255, 136, 0)";
-                        likeButton.style.color = "#fff";
-                        count.textContent = totalLikes + 1;
-                    }
-                    else if (data['action'] === 'Deleted'){
-                        /*console.log(userComment)*/
-                        userComment.remove()
+                    if (data['action'] === 'Remove'){
+                        span.textContent = data['action'];
+                        icon.classList.remove('icli')
+                        icon.classList.add('icbo')
+                        saveButton.style.color = "rgb(255, 136, 0)";
+                        /*saveButton.style.backgroundColor = "rgb(255, 136, 0)";
+                        saveButton.style.color = "#fff";*/
                     }
                     else{
-                      likeButton.style.backgroundColor = "rgba(57, 56, 56, 0.087)";
-                      likeButton.style.color = "#808080";
-                      count.textContent = totalLikes - 1;
+                        span.textContent = data['action'];
+                        icon.classList.remove('icbo')
+                        icon.classList.add('icli')
+                        /*saveButton.innerHTML = `<span>${data['action']}</span><i class="iconly-Bookmark icli"></i>`;
+                        saveButton.style.backgroundColor = "rgba(57, 56, 56, 0.087)";*/
+                        saveButton.style.color = "#808080";
                     }
                 }
             });
         });
-    });
-}
-//Delete-Comment
-deleteButtons = document.querySelectorAll('a#delete-comment')
-if(deleteButtons != null){
-    const url = '{% url "editors:like_comment" %}';
-    let options = {
-        method: 'POST',
-        headers: {'X-CSRFToken': csrftoken},
-        mode: 'same-origin'
-    }
-    deleteButtons.forEach((deleteButton,index) =>{
-        deleteButton.addEventListener('click', function(e){
+    };
+    //Comment
+    const commentBtn = document.querySelector("a#add-comment"),
+    commentModal = document.querySelector("div#comment-modal");
+    if(commentBtn != null && commentModal != null){
+        commentBtn.addEventListener('click', function(e){
             e.preventDefault();
+            if(commentModal.style.display == 'flex'){
+                commentModal.style.display = 'none'
+                /*commentBtn.style.backgroundColor = "#08b86f";
+                commentBtn.textContent = "Comment";*/
+            }
+            else{
+                commentModal.style.display = 'flex'
+                /*commentBtn.style.backgroundColor = "rgb(255, 136, 0)";
+                commentBtn.textContent = "Close";*/
+            }
+        })
+        const closetBtn = commentModal.querySelector("a#close-comment")
+            closetBtn.addEventListener('click', function(e){
+                e.preventDefault();
+                commentModal.style.display = 'none'
+            })
+    }
+    //Like-Comment
+    likeButtons = document.querySelectorAll('a#like-comment')
+    if(likeButtons != null){
+        const url = '{% url "editors:like_comment" %}';
+        let options = {
+            method: 'POST',
+            headers: {'X-CSRFToken': csrftoken},
+            mode: 'same-origin'
+        }
+        likeButtons.forEach((likeButton,index) =>{
+            likeButton.addEventListener('click', function(e){
+                e.preventDefault();
 
-            let userComment = document.querySelector(`#comment-${deleteButton.dataset.id}`);
-            // add request body
-            let formData = new FormData();
-            formData.append('id', deleteButton.dataset.id);
-            formData.append('action', deleteButton.dataset.action);
-            formData.append('post', deleteButton.dataset.post);
-            options['body'] = formData;
+                let parent = likeButton.parentElement;
+                let content = parent.parentElement;
+                let userComment = content.parentElement;
+                let count = parent.querySelector('.count');
+                let totalLikes = parseInt(count.textContent)
+                // add request body
+                let formData = new FormData();
+                formData.append('id', likeButton.dataset.id);
+                formData.append('action', likeButton.dataset.action);
+                formData.append('post', likeButton.dataset.post);
+                options['body'] = formData;
 
-            // send HTTP request
-            fetch(url, options).then(response => response.json()).then(data => {
-                if (data['status'] === 'ok'){
-                    if (data['action'] === 'Deleted'){
-                        /*console.log(userComment)*/
-                        userComment.remove()
+                // send HTTP request
+                fetch(url, options).then(response => response.json()).then(data => {
+                    if (data['status'] === 'ok'){
+                        likeButton.dataset.action = data['action']
+                        // toggle button text
+                        likeButton.textContent = data['action'];
+                        if (data['action'] === 'Unlike'){
+                            likeButton.style.backgroundColor = "rgb(255, 136, 0)";
+                            likeButton.style.color = "#fff";
+                            count.textContent = totalLikes + 1;
+                        }
+                        else if (data['action'] === 'Deleted'){
+                            /*console.log(userComment)*/
+                            userComment.remove()
+                        }
+                        else{
+                        likeButton.style.backgroundColor = "rgba(57, 56, 56, 0.087)";
+                        likeButton.style.color = "#808080";
+                        count.textContent = totalLikes - 1;
+                        }
                     }
-                }
+                });
             });
         });
-    });
-}
-// Delete-modals
-deleteBtns = document.querySelectorAll('a#delete')
-deleteModals = document.querySelectorAll('.delete-article-options')
-cancelBtns = document.querySelectorAll('a.delete-article-cancel')
+    }
+    //Delete-Comment
+    deleteButtons = document.querySelectorAll('a#delete-comment')
+    if(deleteButtons != null){
+        const url = '{% url "editors:like_comment" %}';
+        let options = {
+            method: 'POST',
+            headers: {'X-CSRFToken': csrftoken},
+            mode: 'same-origin'
+        }
+        deleteButtons.forEach((deleteButton,index) =>{
+            deleteButton.addEventListener('click', function(e){
+                e.preventDefault();
 
-if (deleteBtns != null && deleteModals != null) {
-    deleteBtns.forEach((deleteBtn,index)=>{
-        deleteBtn.addEventListener('click', (e) => {
-            e.preventDefault()
-            modal = deleteModals[index]
-            if (modal.style.display === 'grid') {
+                let userComment = document.querySelector(`#comment-${deleteButton.dataset.id}`);
+                // add request body
+                let formData = new FormData();
+                formData.append('id', deleteButton.dataset.id);
+                formData.append('action', deleteButton.dataset.action);
+                formData.append('post', deleteButton.dataset.post);
+                options['body'] = formData;
+
+                // send HTTP request
+                fetch(url, options).then(response => response.json()).then(data => {
+                    if (data['status'] === 'ok'){
+                        if (data['action'] === 'Deleted'){
+                            /*console.log(userComment)*/
+                            userComment.remove()
+                        }
+                    }
+                });
+            });
+        });
+    }
+    // Delete-modals
+    deleteBtns = document.querySelectorAll('a#delete')
+    deleteModals = document.querySelectorAll('.delete-article-options')
+    cancelBtns = document.querySelectorAll('a.delete-article-cancel')
+
+    if (deleteBtns != null && deleteModals != null) {
+        deleteBtns.forEach((deleteBtn,index)=>{
+            deleteBtn.addEventListener('click', (e) => {
+                e.preventDefault()
+                modal = deleteModals[index]
+                if (modal.style.display === 'grid') {
+                    modal.style.setProperty('display', 'none')
+                    actionBtn.style.backgroundColor = 'transparent'
+                }
+                else {
+                    try{
+                        deleteModals.forEach((deleteModal)=>{
+                            deleteModal.style.display = 'none'
+                        })
+                    }
+                    finally{
+                        modal.style.setProperty('display', 'grid')
+                    }
+                }
+            })
+        })
+    }
+    if (cancelBtns != null && deleteModals != null) {
+        cancelBtns.forEach((cancelBtn,index)=>{
+            cancelBtn.addEventListener('click',(e)=>{
+                e.preventDefault()
+                modal = deleteModals[index]
                 modal.style.setProperty('display', 'none')
-                actionBtn.style.backgroundColor = 'transparent'
-            }
-            else {
-                try{
-                    deleteModals.forEach((deleteModal)=>{
-                        deleteModal.style.display = 'none'
-                    })
-                }
-                finally{
-                    modal.style.setProperty('display', 'grid')
-                }
-            }
+            })
         })
-    })
-}
-if (cancelBtns != null && deleteModals != null) {
-    cancelBtns.forEach((cancelBtn,index)=>{
-        cancelBtn.addEventListener('click',(e)=>{
-            e.preventDefault()
-            modal = deleteModals[index]
-            modal.style.setProperty('display', 'none')
-        })
-    })
-}
+    }
 {% endblock %}
+{% block footer %}
+<script src="https://cdn.tiny.cloud/1/3z271x04q6sjy5pugh8cujqoybxxyh6d32yfjgcgcyal6ejg/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+  <script>
+    tinymce.init({
+        selector: '#id_body',
+        min_width:350,
+        height: 200, menubar: false,
+        skin: 'snow',
+        toolbar: 'insertfile undo redo | bold italic link',
+        content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:16px }',
+
+        force_br_newlines : false,
+        /*forced_root_block: true,*/
+      });
+  </script>
+{% endblock footer %}
 
