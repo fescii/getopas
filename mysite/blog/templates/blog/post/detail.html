@@ -416,36 +416,3 @@
         })
     }
 {% endblock %}
-{% block footer %}
-<script src="{% static 'tinymce/tinymce.min.js' %}"></script>
-<!--<script src="https://cdn.tiny.cloud/1/3z271x04q6sjy5pugh8cujqoybxxyh6d32yfjgcgcyal6ejg/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>-->
-  <script>
-    tinymce.init({
-        selector: '.none',
-        min_width:350,
-        height: 200, menubar: false,
-        plugins: [
-            'advlist', 'autolink', 'link', 'image', 'lists', 'charmap', 'preview', 'anchor', 'pagebreak',
-            'searchreplace', 'wordcount', 'visualblocks', 'code', 'fullscreen', 'insertdatetime', 'media',
-            'table', 'emoticons', 'template', 'help'
-        ],
-        toolbar: ' undo redo bold italic link',
-        content_style: 'body {font-size:16px }',
-        mobile: {
-            menubar: false,
-            plugins: [
-                'advlist', 'bold', 'italic', 'autolink', 'link', 'image', 'lists', 'charmap', 'preview', 'anchor', 'pagebreak',
-                'searchreplace', 'wordcount', 'visualblocks', 'code', 'fullscreen', 'insertdatetime', 'media',
-                'table', 'emoticons', 'template', 'help'
-            ],
-            toolbar: 'undo redo | bold italic link',
-        },
-      });
-      tinymce.on('change',function(e){
-        tinymce.triggerSave()
-      })
-    /*tinymce.trim(s: String): String;
-    tinymce.triggerSave();*/
-  </script>
-{% endblock footer %}
-
