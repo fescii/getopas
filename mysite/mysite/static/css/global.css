@@ -1,0 +1,81 @@
+
+*{
+    box-sizing: border-box;
+}
+html{
+    font-size: 16px;
+    line-height: 1.6;
+   /* background-color: var(--body-background-color);*/
+}
+html.sr .load-hidden {
+    visibility: hidden;
+}
+body{
+    margin: 0%;
+    font-family: 'Product Sans', sans-serif;
+    font-size: 16px;
+    background-color: var(--background-color);
+
+}
+/*
+@media (prefers-color-scheme: dark) {
+    :root{
+        --body-background-color: rgb(40, 40, 41);
+
+        --accent-color: rgb(255, 136, 0);
+        --section-title-color: rgb(250, 197, 136);
+        --article-title-color:rgb(250, 226, 204);
+
+        --bg-color: #000;
+        --text: rgba(121, 250, 250, 0.904);
+        --title-one-color:#fff;
+        --title-color: rgb(255, 136, 0);
+        --author-link-color: rgb(16, 143, 165);
+        --under-title-color: rgb(199, 197, 197);
+        --summery-color: rgb(226, 224, 224);
+
+        --button-text-color: rgb(199, 249, 255);
+        --border-color: rgba(9, 205, 240, 0.445);
+        --footer-link-color: #666;
+        --site-name-color: rgba(102,247,113,1);
+        --link-hover-color: teal;
+
+        --content-gradient: linear-gradient(350deg, #0f0f1a 1%, #0f0f1a 100%);
+        --side-content:#0a0a0f;
+        --border-bottom: rgba(0, 128, 128, 0.486);
+        --quick-info:rgba(121, 250, 250, 0.904);
+
+        --shading:rgb(15, 15, 15);
+
+        --background-color: #0f0f1a;
+        --ba-color:#0f0f1a;
+        --bg-color-one: #0e0e0e;
+
+        --shadow-text: -0.05rem 0.05rem 0.009rem rgba(184, 181, 181, 0);
+    }
+  }
+*/
+    :root{
+        --accent-color: #08b86f;
+        --alt-accent-color: rgb(255, 136, 0);
+        --section-title-color: rgb(46, 46, 46);
+        --article-title-color: #404040;
+        --under-title-color: #666;
+        --footer-link-color: #666;
+
+        --gray-color:#808080;
+        --hover-link-color: #1dbd7b;
+        --summery-color: #404040;
+
+        --background-color:white;
+        --body-background-color: #ffffff;
+        --box-shadow: 0 12px 48px rgba(109,117,141,0.2);
+       /* --box-shadow: 0rem 2rem 1.5rem #748f740e;*/
+        --border: 1px solid #83858442;
+
+        --border-color: #05e98a70;
+        --quick-info:  #091310;
+        --border-bottom: rgba(0, 128, 128, 0.486);
+
+        --shadow-text: -0.05rem 0.05rem 0.009rem rgb(184, 181, 181);
+    }

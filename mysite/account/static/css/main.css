@@ -2155,6 +2155,7 @@ main.read>.comments-wrapper>.comments>.user-comment>.content>.content-text{
     */margin: 0%;
     /*border: var(--border);*/
     padding: 0px 0px;
+    margin-top: 10px;
     -webkit-border-radius: 5px;
     -moz-border-radius: 5px;
     -ms-border-radius: 5px;
@@ -2166,6 +2167,13 @@ main.read>.comments-wrapper>.comments>.user-comment>.content>.content-text>*{
     color: var(--article-title-color);
     padding-left: 3px;
 }
+main.read>.comments-wrapper>.comments>.user-comment>.content>.content-text img{
+    margin-top: 5px;
+}
+main.read>.comments-wrapper>.comments>.user-comment>.content>.content-text a{
+    color: var(--accent-color);
+}
+
 main.read>.comments-wrapper>.comments>.user-comment>.content>.likes{
     padding: 5px 15px 0px 0px;
     margin-top: 0px;
@@ -3014,11 +3022,11 @@ main.create>.add-options>.read-the-docs>.docs-footer>a>.icli{
     margin-left: 3px;
 }
 /*Hide-Tiny*/
-.tox .tox-statusbar a, .tox .tox-statusbar__path-item, .tox .tox-statusbar__wordcount {
-    color: rgba(34,47,62,.7);
-    text-decoration: none;
-    display: none;
+.note-editor .note-toolbar, .note-popover .popover-content {
+    margin: 0;
+    padding: 0 0 5px 5px;
+    background: transparent !important;
   }
-  .tox .tox-statusbar{
-    display: none !important;
+.note-editor.note-airframe, .note-editor.note-frame {
+    border: none;
   }

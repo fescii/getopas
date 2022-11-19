@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-ww8d*)@2(pxgtxwt)jd+1ii-=-we2ot9nm4nn*0kaap0%(fd2@
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['192.168.238.202','localhost','192.168.6.105']
+ALLOWED_HOSTS = ['192.168.232.202','localhost','192.168.6.105']
 
 SITE_ID = 1
 # Application definition
@@ -35,6 +35,7 @@ SITE_ID = 1
 INSTALLED_APPS = [
     #Libs
     'tinymce',
+    'django_summernote',
     #'taggit_templatetags',
     #Apps
     'django.contrib.admin',
@@ -144,7 +145,9 @@ USE_TZ = False
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
+PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 STATIC_URL = 'static/'
+STATIC_ROOT = os.path.join(PROJECT_ROOT, 'static')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
@@ -163,7 +166,46 @@ LOGOUT_URL = 'logout'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 
+
 #TinyMc
 TINYMCE_JS_URL = os.path.join(STATIC_URL, 'tinymce/tinymce.min.js')
 
 ABSOLUTE_URL_OVERRIDES = {'auth.user': lambda u: reverse_lazy('profile',args=[u.username])}
+
+#Summernote
+SUMMERNOTE_THEME = 'bs4'
+SUMMERNOTE_CONFIG = {
+    # You can put custom Summernote settings
+    'summernote': {
+        # As an example, using Summernote Air-mode
+        'airMode': False,
+
+        # Change editor size
+        'width': '100%',
+        'height': '250px',
+
+        # Use proper language setting automatically (default)
+        'lang': None,
+
+        # Toolbar customization
+        # https://summernote.org/deep-dive/#custom-toolbar-popover
+        'toolbar': [
+            ['font', ['bold', 'underline', 'clear']],
+            ['para', ['ul', 'ol', 'paragraph']],
+            ['insert', ['link', 'picture',]],
+        ],
+
+        'codemirror': {
+            'mode': 'htmlmixed',
+            'lineNumbers': 'true',
+            # You have to include theme file in 'css' or 'css_for_inplace' before using it.
+            'theme': 'monokai',
+        },
+    },
+
+
+    # Lazy initialization
+    # If you want to initialize summernote at the bottom of page, set this as True
+    # and call `initSummernote()` on your page.
+    'lazy': True,
+}
