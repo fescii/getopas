@@ -111,27 +111,6 @@
                 </a>
             </div>
         </div>
-        <div id="comment-modal" class="create-comment">
-            <div class="user-information">
-                <div class="profile-wrapper">
-                    {% if user.profile.photo %}
-                        <img src="{% thumbnail user.profile.photo 50x0 %}"/>
-                    {% else %}
-                        <img src="https://eu.ui-avatars.com/api/?background=08b86f&name={{request.user.first_name}}+{{request.user.last_name}}&size=250&color=fff"/>
-                    {% endif %}
-                </div>
-               <!-- <textarea placeholder="What are your thoughts?" name="add-comment" id="add-comment" cols="1" rows="3"></textarea>-->
-               <form method="POST" enctype="multipart/form-data">
-                    {{ form.media }}
-                    {% for field in comment_form %}
-                        {{field}}
-                    {% endfor %}
-                    {% csrf_token %}
-                    <a href="" id="close-comment" class="add-comment">Cancel</a>
-                    <button type="submit">Comment</button>
-                </form>
-            </div>
-        </div>
         <div class="comments">
             {% for comment in comments %}
                 <div id="comment-{{comment.id}}" class="user-comment">
@@ -182,6 +161,27 @@
                 {% empty %}
                     <p>There are no comments yet.</p>
             {% endfor %}
+        </div>
+        <div id="comment-modal" class="create-comment">
+            <div class="user-information">
+                <div class="profile-wrapper">
+                    {% if user.profile.photo %}
+                        <img src="{% thumbnail user.profile.photo 50x0 %}"/>
+                    {% else %}
+                        <img src="https://eu.ui-avatars.com/api/?background=08b86f&name={{request.user.first_name}}+{{request.user.last_name}}&size=250&color=fff"/>
+                    {% endif %}
+                </div>
+               <!-- <textarea placeholder="What are your thoughts?" name="add-comment" id="add-comment" cols="1" rows="3"></textarea>-->
+               <form method="POST" enctype="multipart/form-data">
+                    {{ form.media }}
+                    {% for field in comment_form %}
+                        {{field}}
+                    {% endfor %}
+                    {% csrf_token %}
+                    <a href="" id="close-comment" class="add-comment">Cancel</a>
+                    <button type="submit">Comment</button>
+                </form>
+            </div>
         </div>
         <a href="" id="add-comment" class="add-comment">Comment</a>
     </div>

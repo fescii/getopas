@@ -2072,7 +2072,7 @@
 
     main.read>.comments-wrapper>.create-comment {
         border-radius: 5px;
-        width: 95%;
+        width: 100%;
         border: var(--border);
         box-shadow: var(--box-shadow);
         grid-row: 3/4;
@@ -2081,25 +2081,32 @@
         flex-flow: column;
         gap: 10px;
         z-index: 5;
-        padding-bottom: 20px;
-        padding-right: 5px;
-        margin: 0px 10px 0px 10px;
+        padding: 5px 0px 5px 0px;
+        margin: 0px;
         position: fixed;
-        bottom: 70px;
-        height: max-content;
+        right: 0%;
+        left: 0%;
+        bottom: 65px;
+        height: 380px;
         display: none;
-        -webkit-border-radius: 10;
-        -moz-border-radius: 10;
-        -ms-border-radius: 10;
-        -o-border-radius: 10;
-        border-radius: 10;
+        -webkit-border-radius: 0%;
+        -moz-border-radius: 0%;
+        -ms-border-radius: 0%;
+        -o-border-radius: 0%;
+        border-radius: 0%;
 }
     main.read>.comments-wrapper>.create-comment>.user-information{
         width: 100%;
     }
+    main.read > .comments-wrapper > .create-comment > .user-information > div.profile-wrapper{
+        display: none;
+    }
     main.read>.comments-wrapper>.create-comment>.user-information>form{
         display: flex;
+        width: 100%;
         flex-flow: column;
+        height: 350px;
+        position: unset;
     }
     main.read>.comments-wrapper>.create-comment>.user-information>form>textarea .tox-tinymce,
     main.read>.comments-wrapper>.create-comment>.user-information>form>textarea{
@@ -2108,22 +2115,21 @@
     }
     main.read>.comments-wrapper>.create-comment>.user-information>form>button{
         width: max-content;
-        justify-self: end;
         position: absolute;
-        bottom:28px;
+        bottom: 15px;
     }
     main.read>.comments-wrapper>.create-comment>.user-information>form>.add-comment{
-        display: inline-block;
         text-decoration: none;
         width: max-content;
         padding: 8px 15px;
         font-size: 1.0rem;
-        margin-right: 10px;
         cursor: pointer;
         border: none;
         background-color: rgba(57, 56, 56, 0.087);
         color: var(--gray-color);
-        align-self:baseline;
+        position: absolute;
+        bottom: 15px;
+        left: 5px;
         -webkit-border-radius: 50px;
         -moz-border-radius: 50px;
         -ms-border-radius: 50px;

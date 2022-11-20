@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-ww8d*)@2(pxgtxwt)jd+1ii-=-we2ot9nm4nn*0kaap0%(fd2@
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['192.168.232.202','localhost','192.168.6.105']
+ALLOWED_HOSTS = ['192.168.236.202','localhost','192.168.6.105']
 
 SITE_ID = 1
 # Application definition
@@ -182,7 +182,7 @@ SUMMERNOTE_CONFIG = {
 
         # Change editor size
         'width': '100%',
-        'height': '250px',
+        'height': '250',
 
         # Use proper language setting automatically (default)
         'lang': None,
