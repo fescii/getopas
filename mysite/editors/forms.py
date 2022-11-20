@@ -2,6 +2,7 @@ from django import forms
 from django.contrib.auth.models import User
 from blog.models import Post
 from magazine.models import Issue
+from django_summernote.widgets import SummernoteWidget, SummernoteInplaceWidget
 
 
 
@@ -10,6 +11,10 @@ class CreateBlogPostForm(forms.ModelForm):
     class Meta:
         model = Post
         fields = ('title','body','tags','status')
+        widgets = {
+            'body': SummernoteWidget()
+            #'bar': SummernoteInplaceWidget(),
+        }
 class BlogEditForm(forms.ModelForm):
     class Meta:
         model = Post

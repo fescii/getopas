@@ -2210,6 +2210,18 @@
         margin: 0%  12px 15px 12px;
 
     }
+    main.feeds > .notifications > .action > .profile-image > span {
+        position: absolute;
+        background-color: var(--accent-color);
+        padding: 1px;
+        width: 22px;
+        height: 22px;
+        display: inline-block;
+        padding: 0.19rem 0px 0.2rem 0.22rem;
+    }
+    main.feeds > .notifications > .action > .profile-image > span.iconly-Add-User {
+        padding: 0.18rem 0px 0.2rem 0.28rem;
+    }
 
     .mobile-footer {
         box-sizing: border-box;

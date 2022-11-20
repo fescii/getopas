@@ -190,9 +190,10 @@ def get_comments(user):
     user_articles = Post.published.filter(author=user)
     comments = 0
     for article in user_articles:
-        if article.comments:
-            com = article.comments.filter(active=True).count()
-            comments = comments + com
+        if article.comments.filter(active=True):
+            comments = comments + article.comments.filter(active=True).count()
+        else:
+            comments = 0
     return comments
 register.filter('get_comments',get_comments)
 

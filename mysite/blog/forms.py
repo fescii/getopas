@@ -15,7 +15,7 @@ class BlogCommentForm(forms.ModelForm):
         model = BlogComment
         fields = ('body',)
         widgets = {
-            'body': SummernoteWidget()
+            'body': SummernoteWidget(attrs={'placeholder': 'Add a comment'})
             #'bar': SummernoteInplaceWidget(),
         }
        # widgets={'body': forms.Textarea(attrs={'cols': 50, 'rows': 5,'placeholder': 'Add a comment','class': 'tinymce-comment'})}
