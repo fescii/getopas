@@ -35,7 +35,7 @@
                         {% else %}
                             <span class='stats-title'>Stats</span>
                             <span class='views'><span class="iconly-Show icli"></span> {{ post.blog_views }}</span>
-                            <span class='comments'><span class="iconly-User2 icli"></span> {{ post.comments.count }}</span>
+                            <span class='comments'><span class="iconly-User2 icli"></span>{{ post.id|get_article_comments }}</span>
                         {% endif %}
                     </div>
                     <div class="action-links">
