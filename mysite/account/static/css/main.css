@@ -188,6 +188,7 @@ main.feeds{
     text-decoration: none;
     color: var(--article-title-color);
     font-size: 1.35rem;
+    font-weight: 500;
 }
 
 .get-more{
@@ -1894,7 +1895,7 @@ main.read>.article-wrapper>.content>.article-content *{
 }
 main.read>.article-wrapper>.content>.article-content a{
     text-decoration: none;
-    color: var(--accent-color);
+    color: var(--link-color);
 }
 
 
@@ -2231,7 +2232,8 @@ main.read>.comments-wrapper>.comments>.user-comment>.content>.content-text img{
     margin-top: 5px;
 }
 main.read>.comments-wrapper>.comments>.user-comment>.content>.content-text a{
-    color: var(--accent-color);
+    color: var(--link-color);
+    text-decoration: none;
 }
 
 main.read>.comments-wrapper>.comments>.user-comment>.content>.likes{

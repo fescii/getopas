@@ -2,6 +2,7 @@ from django import forms
 from django.contrib.auth.models import User
 from django.forms import DateField
 from .models import Profile
+from django_summernote.widgets import SummernoteWidget, SummernoteInplaceWidget
 
 #User Registration Form
 class UserRegistrationForm(forms.ModelForm):
@@ -42,7 +43,10 @@ class ProfileEditForm(forms.ModelForm):
     class Meta:
         model = Profile
         fields = ('date_of_birth','occupation','website','twitter','linkedin','location','about')
-        widgets={'date_of_birth': forms.DateInput()}
+        widgets = {
+            'about': SummernoteWidget(attrs={'placeholder': 'Add about'})
+            #'bar': SummernoteInplaceWidget(),
+        }
 
 class ProfilePhotoEditForm(forms.ModelForm):
     class Meta:

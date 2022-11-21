@@ -76,13 +76,23 @@
                             </a>
                             {% endwith %}
                         </li>
-                        <li class="content-link">
-                            <a class="link {% if section == 'explore' %}data-active{% endif %}" href="{% url 'editors:explore_topics'%}">
-                                <span id="select"></span>
-                                <span class="iconly-Discovery icli"></span>
-                                <span class="link-text">Discover</span>
-                            </a>
-                        </li>
+                        {% if section == "read" %}
+                            <li class="content-link">
+                                <a class="link data-active" href="#">
+                                    <span id="select"></span>
+                                    <span class="iconly-Document icli"></span>
+                                    <span class="link-text">Detail</span>
+                                </a>
+                            </li>
+                        {% else %}
+                            <li class="content-link">
+                                <a class="link {% if section == 'explore' %}data-active{% endif %}" href="{% url 'editors:explore_topics'%}">
+                                    <span id="select"></span>
+                                    <span class="iconly-Discovery icli"></span>
+                                    <span class="link-text">Discover</span>
+                                </a>
+                            </li>
+                        {% endif %}
                         <li class="content-link">
                             <a class="link {% if section == 'newsletters' %}data-active{% endif %}" href="{% url 'editors:newsletters' %}">
                                 <span id="select"></span>
@@ -119,7 +129,7 @@
                         <li class="content-link">
                             <a class="link {% if section == 'themes' %}data-active{% endif %}" href="#">
                                 <span id="select"></span>
-                                <span class="iconly-Show icli"></span>
+                                <span class="iconly-Bag-2 icli"></span>
                                 <span class="link-text">Themes</span>
                             </a>
                         </li>

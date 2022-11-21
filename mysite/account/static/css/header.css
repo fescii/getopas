@@ -347,6 +347,8 @@ main.feeds>.feeds-header{
   top: 0px;
   height: 70px;
   z-index: 3;
+  backdrop-filter: blur(100px);
+  -webkit-backdrop-filter: blur(100px);
 }
 main.search>.search-wrapper{
   background-color:var(--background-color);
@@ -416,7 +418,7 @@ main.search>.search-header{
 .search-header,
 .feeds-header{
   border-bottom: var(--border);
-  background-color: var(--background-color);
+  /*background-color: var(--background-color);*/
   max-height: max-content;
   display: flex;
   flex-flow: row;
