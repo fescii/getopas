@@ -347,6 +347,7 @@ main.feeds>.feeds-header{
   top: 0px;
   height: 70px;
   z-index: 3;
+  background-color:var(--background-color);
  /* backdrop-filter: blur(100px);
   -webkit-backdrop-filter: blur(100px);*/
 }

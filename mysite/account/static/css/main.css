@@ -971,8 +971,8 @@ main.search>.sidebar-content .stats:hover{
 }
 .stats>.stats-today>.today{
     /*border: 1px solid rgb(82, 207, 24);*/
-    font-size: 1.05rem;
-    font-weight: bold;
+    font-size: 1.2rem;
+    font-weight: 500;
     margin: 0%;
     padding: 0%;
     color:  white;
@@ -1008,8 +1008,8 @@ main.search>.sidebar-content .stats:hover{
 .stats>.stats-month>.month{
    /* border: 1px solid rgb(82, 207, 24);*/
     margin: 0%;
-    font-size: 1.05rem;
-    font-weight: bold;
+    font-size: 1.2rem;
+    font-weight: 500;
     padding: 0%;
     color: white;
 }
@@ -2422,6 +2422,8 @@ main.feeds>.discover-topics>.topic-wrapper>.topic-footer>.count{
     margin-left: 10px;
     bottom: 30px;
     background-color: var(--background-color);
+    /*backdrop-filter: blur(100px);
+    -webkit-backdrop-filter: blur(100px);*/
     padding: 10px 10px 20px 10px;
     border-radius: 15px;
     border: var(--border);
