@@ -137,17 +137,19 @@ header.header #start{
   /*box-shadow: 0rem 2rem 2rem #2a2b2a50;*/
 }
 #text-count{
-  display: inline-block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   /*border: var(--border);*/
    border: 1px solid #1dbd7a7c;
  /* background-color: var(--alt-accent-color);*/
   width: 19px;
-  height: 16px;
+  height: 19px;
   background-color: white;
   color: var(--alt-accent-color);
   font-weight: bold;
   text-align: center;
-  padding-top: 5%;
+  /*padding-top: 5px;*/
   position: absolute;
   font-size: 0.7rem;
   top: 2px;

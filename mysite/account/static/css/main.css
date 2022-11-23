@@ -648,7 +648,7 @@ main.feeds>.feed-contents>.feed-title{
     padding:0px 0px 10px 0px ;
     display: flex;
     align-items: center;
-    justify-content: start;
+    justify-content: space-between;
     gap: 2px;
 }
 main.explore>.feed-contents>.feed-title{
@@ -673,7 +673,8 @@ main.feeds>.feed-contents>.feed-title>.icli{
     /*border: 1px solid gray;*/
     display: inline-block;
     font-size: 20px;
-    margin-top: 10px;
+    font-weight: bold;
+    margin-top: 5px;
     color: var(--alt-accent-color);
 }
 main.feeds>.feed-contents>.article-wrapper{
@@ -1040,7 +1041,7 @@ main.search>.sidebar-content .stats:hover{
 .stats>.go-to-articles>.icli{
    /*border: 1px solid rgb(82, 207, 24);*/
     display: inline-block;
-    margin-top: 5px;
+    margin-top: 2px;
     margin-left: 2px;
 }
 /* Sidebar topics*/
