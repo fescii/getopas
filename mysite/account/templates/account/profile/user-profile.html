@@ -125,38 +125,40 @@
     }
 
         followButton = document.querySelector('a.follow')
-        followButton.addEventListener('click', function(e){
-            e.preventDefault();
+        if(followButton != null){
+            followButton.addEventListener('click', function(e){
+                e.preventDefault();
 
-            // add request body
-            let formData = new FormData();
-            formData.append('id', followButton.dataset.id);
-            formData.append('action', followButton.dataset.action);
-            options['body'] = formData;
+                // add request body
+                let formData = new FormData();
+                formData.append('id', followButton.dataset.id);
+                formData.append('action', followButton.dataset.action);
+                options['body'] = formData;
 
-            // send HTTP request
-            fetch(url, options)
-            .then(response => response.json())
-            .then(data => {
-                if (data['status'] === 'ok'){
-                    //let previousAction = followButton.dataset.action;
-                    let action = followButton.dataset.action
-                    let followerCount = document.querySelector('a#count .total');
-                    let totalFollowers = parseInt(followerCount.innerHTML);
+                // send HTTP request
+                fetch(url, options)
+                .then(response => response.json())
+                .then(data => {
+                    if (data['status'] === 'ok'){
+                        //let previousAction = followButton.dataset.action;
+                        let action = followButton.dataset.action
+                        let followerCount = document.querySelector('a#count .total');
+                        let totalFollowers = parseInt(followerCount.innerHTML);
 
-                    if( action === 'Follow'){
-                        followButton.dataset.action = 'Unfollow';
-                        followButton.textContent = 'Unfollow';
-                        followerCount.innerHTML = totalFollowers + 1;
+                        if( action === 'Follow'){
+                            followButton.dataset.action = 'Unfollow';
+                            followButton.textContent = 'Unfollow';
+                            followerCount.innerHTML = totalFollowers + 1;
+                        }
+                        else if( action === 'Unfollow'){
+                            followButton.dataset.action = 'Follow';
+                            followButton.textContent = 'Follow';
+                            followerCount.innerHTML = totalFollowers - 1;
+                        }
                     }
-                    else if( action === 'Unfollow'){
-                        followButton.dataset.action = 'Follow';
-                        followButton.textContent = 'Follow';
-                        followerCount.innerHTML = totalFollowers - 1;
-                    }
-                }
-            })
-        });
+                })
+            });
+        }
 {% endblock %}
 {% block footer %}
 <script>

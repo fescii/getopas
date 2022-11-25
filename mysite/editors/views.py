@@ -13,7 +13,7 @@ from account.views import is_admin, is_editor, is_author
 from django.contrib.auth.decorators import login_required,user_passes_test
 from django.http import HttpResponseRedirect, HttpResponse
 from django.urls import reverse
-from account.models import Profile
+from account.models import Profile,Theme
 from blog.models import Post,Bookmark,Like,BlogComment
 from django.contrib.auth.models import User
 from django.contrib import messages
@@ -950,6 +950,41 @@ def delete_post(request, pk):
     post.delete()
     messages.success(request, 'Article deleted')
     return HttpResponseRedirect(reverse('editors:user_post_list'))
+
+#Themes
+@login_required
+def theme_list(request):
+    object_list = Theme.objects.all()
+
+    paginator = Paginator(object_list, 10) # 5 posts in each page
+    page = request.GET.get('page')
+    try:
+        themes = paginator.page(page)
+    except PageNotAnInteger:
+    # If page is not an integer deliver the first page
+        themes = paginator.page(1)
+    except EmptyPage:
+    # If page is out of range deliver last page of results
+        themes = paginator.page(paginator.num_pages)
+
+    return render(request, 'editors/themes/themes.html',
+                  {'page': page,
+                   'themes': themes,
+                   'title': 'explore',
+                   'section': 'themes'})
+
+# notification-actions
+@login_required
+@require_POST
+def use_theme(request):
+    theme_id = request.POST.get('id')
+    user_id = request.POST.get('user')
+    theme = Theme.objects.get(id=theme_id)
+    user = User.objects.get(id=user_id)
+    if user and theme:
+        return JsonResponse(theme.preferences)
+    return JsonResponse({'status': 'error'})
+
 
 #Create Magazine View
 #@login_required

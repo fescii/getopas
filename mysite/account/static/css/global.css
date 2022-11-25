@@ -61,13 +61,12 @@ body {
 :root {
     --accent-color: #08b86f;
     --alt-accent-color: rgb(255, 136, 0);
-    --section-title-color: rgb(46, 46, 46);
     --article-title-color: #404040;
-    --under-title-color: #666;
-    --footer-link-color: #666;
+    --section-title-color: #404040;
     --link-color: #007bff;
 
     --gray-color: #808080;
+    --sidebar-link-color: #808080;
     --hover-link-color: #1dbd7b;
     --summery-color: #404040;
     --unread-color: rgba(226, 227, 227, 0.64);
@@ -78,30 +77,18 @@ body {
     --box-shadow: 0 12px 48px rgba(109, 117, 141, 0.2);
     --nav-background: rgba(57, 56, 56, 0.087);
     --border: 1px solid #83858442;
-
-    --border-color: #05e98a70;
-    --quick-info: #091310;
-    --border-bottom: rgba(0, 128, 128, 0.486);
-
-    --shadow-text: -0.05rem 0.05rem 0.009rem rgb(184, 181, 181);
 }
 
 @media (prefers-color-scheme: dark) {
     :root {
-        --text: #e5e5e5;
-        --accent: #1688f0;
-        --bg-main: #000;
-        --bg-repo: #0f0f1a;
-        --bg-user: #0a0a0f;
         --accent-color: rgb(255, 136, 0);
         --alt-accent-color: #08b86f;
-        --section-title-color: rgb(46, 46, 46);
         --article-title-color: #f2f2f2;
-        --under-title-color: #666;
-        --footer-link-color: #666;
+        --section-title-color: #f2f2f2;
         --link-color: #007bff;
 
         --gray-color: #a6a6a6;
+        --sidebar-link-color: #a6a6a6;
         --hover-link-color: #1dbd7b;
         --summery-color: #e5e5e5;
         --unread-color: rgba(90, 91, 91, 0.64);
@@ -112,11 +99,5 @@ body {
         --box-shadow: 0 12px 48px rgba(109, 117, 141, 0.2);
         --nav-background: rgba(218, 215, 215, 0.087);
         --border: 1px solid #a2a3a342;
-
-        --border-color: #05e98a70;
-        --quick-info: #091310;
-        --border-bottom: rgba(0, 128, 128, 0.486);
-
-        --shadow-text: -0.05rem 0.05rem 0.009rem rgb(184, 181, 181);
     }
 }

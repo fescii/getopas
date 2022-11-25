@@ -38,6 +38,10 @@ urlpatterns = [
     path('notifications/removed', views.removed_actions, name='actions_removed'),
     path('notification-action/', views.notification_action, name='notification_action'),
 
+    #Themes
+    path('themes', views.theme_list, name='theme_list'),
+    path('use-theme', views.use_theme, name='use_theme'),
+
     #Newsletters Paths
     path('add-newsletter/', views.create_magazine, name='new_newsletter'),
     path('my-newsletters/', views.user_issue_list, name='user_issue_list'),

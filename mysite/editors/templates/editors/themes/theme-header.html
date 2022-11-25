@@ -1,0 +1,12 @@
+{% load blog_tags %}
+<div class="feeds-header">
+    <div class="header-content">
+        <h2 class="site-title">{{section|split:"-"}}</h2>
+        <div class="header-links">
+            <a href="{% url 'editors:theme_list' %}" class="header-link {% if title == 'explore' %}active{% endif %}">Explore</a>
+            <a href="" title="Top Themes" class="header-link {% if title == 'top' %}active{% endif %}">Top</a>
+            <a href="" title="New" class="header-link {% if title == 'new' %}active{% endif %}">New</a>
+        </div>
+    </div>
+    {% include "account/user/header.html" %}
+</div>

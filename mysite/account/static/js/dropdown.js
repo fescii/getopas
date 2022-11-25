@@ -122,3 +122,25 @@ if (closeButtons != null) {
     }
 }*/
 
+//Set-Theme
+function setTheme(data) {
+    let root = document.documentElement;
+
+    root.style.setProperty('--accent-color', data['accent']);
+    root.style.setProperty('--alt-accent-color', data['alt']);
+    root.style.setProperty('--article-title-color', data['article']);
+    root.style.setProperty('--section-title-color', data['section']);
+
+    root.style.setProperty('--link-color', data['link']);
+    root.style.setProperty('--gray-color', data['gray']);
+    root.style.setProperty('--sidebar-link-color', data['sidebar']);
+    root.style.setProperty('--hover-link-color', data['hover']);
+    root.style.setProperty('--summery-color', data['summery']);
+    root.style.setProperty('--unread-color', data['unread']);
+
+    root.style.setProperty('--background-color', data['background']);
+    root.style.setProperty('--body-background-color', data['body']);
+    root.style.setProperty('--box-shadow', data['shadow']);
+    root.style.setProperty('--nav-background', data['nav']);
+    root.style.setProperty('--border', data['border']);
+}

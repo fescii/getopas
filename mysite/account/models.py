@@ -1,4 +1,6 @@
 from django.db import models
+#from django.contrib.postgres.fields import JSONField
+from django.db.models import JSONField
 from django.conf import settings
 from django.contrib.auth import get_user_model
 
@@ -51,3 +53,15 @@ user_model.add_to_class('following',models.ManyToManyField('self',
                                                through=Contact,
                                                related_name='followers',
                                                symmetrical=False))
+
+
+#Preferences
+class Theme(models.Model):
+    name = models.CharField(max_length=200)
+    description = models.TextField()
+    creator = models.OneToOneField(settings.AUTH_USER_MODEL,
+                                on_delete=models.CASCADE, related_name='user_theme')
+    preferences = JSONField()
+
+    def __str__(self):
+        return self.name

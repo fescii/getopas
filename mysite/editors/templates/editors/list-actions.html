@@ -1,5 +1,6 @@
 {% load static %}
 {% load blog_tags %}
+{% load contact_tags %}
 {% load thumbnail %}
 {% for action in actions %}
     {% with page=actions %}
@@ -34,7 +35,7 @@
                             {% endif %}
                         </div>
                         <div class="info">
-                            <a href="{{ auser.get_absolute_url }}" class="name"> {{ auser.get_full_name }} </a>
+                            <a href="{{ auser.get_absolute_url }}" class="name"> {{ auser.get_full_name|lower|capfirst }} </a>
                             {{ action.verb }}
                             <a href="{{ target.get_absolute_url }}" class="info-to">{{ target }}</a>
                         </div>
@@ -52,7 +53,7 @@
                                 <a href="" class="delete-{{page.number}} options-item" data-user="{{ auser.id }}" data-id="{{ action.id }}" data-action="{{removed}}">
                                     <span class="iconly-{% if removed == 'redo' %}Arrow-Left{% else %}Delete{% endif %} icli"></span>
                                     <div class="option-details">
-                                        <span class="detail-title">{{removed|capfirst}}</span>
+                                        <span class="detail-title">{% if removed == 'redo' %}Redo{% else %}Remove{% endif %}</span>
                                         {% if removed == "redo" %}
                                             <span class="detail-text">Revert to Updates</span>
                                         {% else %}
@@ -66,9 +67,9 @@
                                     <div class="option-details">
                                         <span class="detail-title">{{follow|capfirst}}</span>
                                         {% if follow == "follow" %}
-                                        <span class="detail-text">Start seeing {{auser.first_name|lower}}'s updates again</span>
+                                        <span class="detail-text">Start seeing {{auser.first_name|lower|capfirst|add_apostrophe}} updates again</span>
                                         {% else %}
-                                        <span class="detail-text">Stop seeing {{auser.first_name|lower}}'s updates</span>
+                                        <span class="detail-text">Stop seeing {{auser.first_name|lower|capfirst|add_apostrophe}} updates</span>
                                         {% endif %}
                                     </div>
                                 </a>

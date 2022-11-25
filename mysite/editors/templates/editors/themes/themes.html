@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+{% load static %}
+{% load blog_tags %}
+{% load thumbnail %}
+{% block title %}Themes-{{title|capfirst}}{% endblock %}
+{% block content %}
+{% include "editors/themes/theme-header.html" %}
+<div id="theme-list" class="theme-options feed-contents">
+    {% for theme in themes %}
+        <div class="theme-option">
+            <div class="theme-letters">
+                <div class="theme-as">Aa</div>
+            </div>
+            <div class="theme-content">
+                <div class="theme-content-title">{{theme.name}}</div>
+                <div class="theme-content-description">{{theme.description}}</div>
+            </div>
+            <div class="theme-footer">
+                <a href="" class="author">
+                    <div class="author-image">
+                        {% if theme.creator.profile.photo %}
+                            <img src="{% thumbnail theme.creator.profile.photo 80x0 %}"/>
+                        {% else %}
+                            <img src="https://eu.ui-avatars.com/api/?background=08b86f&name={{theme.creator.first_name}}+{{theme.creator.last_name}}&size=250&color=fff"/>
+                        {% endif %}
+                    </div>
+                    <span class="author-name">@{{theme.creator.username}}</span>
+                </a>
+                <a href="" data-id="{{theme.id}}" class="theme-use" data-user="{{request.user.id}}">
+                    <span class="use-text">Use</span>
+                </a>
+            </div>
+        </div>
+    {% empty %}
+        <div class="theme-option">
+            No themes found!
+        </div>
+    {% endfor %}
+</div>
+{% endblock content %}
+{% block domready %}
+    const url = '{% url "editors:use_theme" %}';
+    let options = {
+    method: 'POST',
+    headers: {'X-CSRFToken': csrftoken},
+    mode: 'same-origin'
+    }
+
+    // Notification-actions
+    useBtns = document.querySelectorAll('a.theme-use')
+
+    //Follow-action
+    if (useBtns != null) {
+        useBtns.forEach((useBtn,index)=>{
+            useBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+
+                // add request body
+                let formData = new FormData();
+                formData.append('id', useBtn.dataset.id);
+                formData.append('user', useBtn.dataset.user);
+                options['body'] = formData;
+
+                // send HTTP request
+                fetch(url, options)
+                .then(response => response.json())
+                .then(data => {
+                    if(data['status'] == 'error'){
+                        alert('error')
+                    }
+                    else{
+                        setTheme(data)
+                        useBtn.texContent = 'Current'
+                    }
+                })
+            },{'once':true})
+        })
+    }
+{% endblock %}
