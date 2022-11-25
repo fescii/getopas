@@ -160,12 +160,12 @@
                 .then(data => {
                     if (data['status'] === 'unread'){
                         markBtn.dataset.action = data['action']
-                        notification.style.backgroundColor = 'white';
+                        notification.style.backgroundColor = 'transparent';
                         mark_text.textContent = 'Mark as unread'
                     }
                     else if(data['status'] === 'read'){
                         markBtn.dataset.action = data['action']
-                        notification.style.backgroundColor = 'rgba(226, 227, 227, 0.64)';
+                        notification.style.backgroundColor = 'var(--unread-color)';
                         mark_text.textContent = 'Mark as read'
                     }
                 })
@@ -309,12 +309,12 @@ window.addEventListener('scroll', function(e) {
                                 .then(data => {
                                     if (data['status'] === 'unread'){
                                         markBtn.dataset.action = data['action']
-                                        notification.style.backgroundColor = 'white';
+                                        notification.style.backgroundColor = 'transparent';
                                         mark_text.textContent = 'Mark as unread'
                                     }
                                     else if(data['status'] === 'read'){
                                         markBtn.dataset.action = data['action']
-                                        notification.style.backgroundColor = 'rgba(226, 227, 227, 0.64)';
+                                        notification.style.backgroundColor = 'var(--unread-color)';
                                         mark_text.textContent = 'Mark as read'
                                     }
                                 })

@@ -101,12 +101,12 @@ if(viewBtns != null && popup != null){
                   // toggle button text
                   saveButton.innerHTML = `<span>${data['action']}</span>`;
                   if (data['action'] === 'Remove'){
-                    saveButton.style.backgroundColor = "rgb(255, 136, 0)";
+                    saveButton.style.backgroundColor = "var(--alt-accent-color)";
                     saveButton.style.color = "#fff";
                   }
                   else{
-                    saveButton.style.backgroundColor = "rgba(57, 56, 56, 0.087)";
-                    saveButton.style.color = "#808080";
+                    saveButton.style.backgroundColor = "var(--background-btn)";
+                    saveButton.style.color = "var(--gray-color)";
                   }
               }
           });
@@ -188,12 +188,12 @@ window.addEventListener('scroll', function(e) {
                                     // toggle button text and data-action
                                     Button.innerHTML = `<span>${data['action']}</span>`;
                                     if (data['action'] === 'Remove'){
-                                      Button.style.backgroundColor = "rgb(255, 136, 0)";
+                                      Button.style.backgroundColor = "var(--alt-accent-color)";
                                       Button.style.color = "#fff";
                                     }
                                     else{
-                                      Button.style.backgroundColor = "rgba(57, 56, 56, 0.087)";
-                                      Button.style.color = "#808080";
+                                      Button.style.backgroundColor = "var(--background-btn)";
+                                      Button.style.color = "var(--gray-color)";
                                     }
                                 }
                             });

@@ -90,7 +90,7 @@ main.feeds>.my-article-list{
 .article-list>.post-summery>.article-stats {
     grid-column: 3/4;
     grid-row: 1/5;
-    background-color: white;
+    background-color: var(--background-color);
    /* border-left: 1px solid #83858421;*/
     margin: 0px 0px;
     padding: 10px 10px;
@@ -184,6 +184,7 @@ main.feeds>.my-article-list{
     bottom: 50px;
     width: 35%;
     border-radius: 10px;
+    border-top-right-radius: 0%;
     border: var(--border);
     padding: 0%;
     display: none;

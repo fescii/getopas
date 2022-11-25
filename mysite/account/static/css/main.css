@@ -193,7 +193,7 @@ main.feeds{
 
 .get-more{
    /* border: 1px solid blue;*/
-    color: var(--hover-link-color);
+    color: var(--accent-color);
     text-decoration: none;
     font-size: 18px;
     padding: 10px 0px 5px 0px;
@@ -577,8 +577,8 @@ main>.best {
   }
   .topics>.topic-list li>a{
     text-decoration: none;
-    color: var(--hover-link-color);
-    border: 1px solid var(--border-color);
+    color: var(--accent-color);
+    border: 1px solid var(--accent-color);
     cursor: pointer;
     padding: 5px 15px;
     text-align: center;
@@ -590,14 +590,14 @@ main>.best {
 }
 
 .topics>.topic-list .active-list>a{
-    background: linear-gradient(0deg, #1dbd7b 0%,#1dbd7b 100%);
+    background-color: var(--accent-color);
     color: #fff;
     font-weight: bold;
     border: none;
 }
 
 .topics>.topic-list li>a:hover{
-    background: linear-gradient(0deg, #1dbd7b 0%, #1dbd7b 100%);
+    background-color: var(--accent-color);
     color: #fff;
     border: none;
    /* font-weight: bold;*/
@@ -731,6 +731,7 @@ main.feeds>.feed-contents>.article-wrapper>.article-info a:hover{
 main.feeds>.feed-contents>.article-wrapper>.article-info .posted{
     font-size: 0.9rem;
     text-align: center;
+    padding-bottom: 2px;
 }
 main.feeds>.feed-contents>.article-wrapper>.article-info .right{
     display: flex;
@@ -863,7 +864,7 @@ main.feeds>.feed-contents>.article-wrapper>.summery-content>.article-footer{
     justify-content: center;
     gap: 5px;
     padding: 5px 13px 5px 13px;
-    background-color: rgba(57, 56, 56, 0.087);
+    background-color: var(--background-btn);
    /* background-color: var(--alt-accent-color);*/
     -webkit-border-radius: 50px;
     -moz-border-radius: 50px;
@@ -1405,7 +1406,7 @@ main.profile>.profile-info>.contact-info>.info-container{
 }
 .info-container>.info>.info-title{
     font-size: 1.2rem;
-    color: #404040;
+    color: var(--article-title-color);
 }
 .info-container>.info>.info-content{
     /*padding-left: 5px;*/
@@ -1519,7 +1520,7 @@ main.newsletters>.newsletters-feeds>.newsletter-wrapper:nth-of-type(7){
     font-size: 1.2rem;
 }
 .newsletter-wrapper>.newsletter-head>.info>.author{
-    color: var(--under-title-color);
+    color: var(--gray-color);
 }
 .newsletter-wrapper>.newsletter-head>.info>.author>.by{
     color: var(--article-title-color);
@@ -1539,7 +1540,7 @@ main.newsletters>.newsletters-feeds>.newsletter-wrapper:nth-of-type(7){
     margin-right: 3px;
 }
 .newsletter-wrapper>.newsletter-head>.info>.release>.text{
-    color: var(--under-title-color);
+    color: var(--gray-color);
     display: inline-block;
     margin-right: 3px;
 }
@@ -2424,13 +2425,13 @@ main.feeds>.discover-topics>.topic-wrapper>.topic-footer>.count{
     bottom: 30px;
     background-color: var(--background-color);
     /*backdrop-filter: blur(100px);
-    -webkit-backdrop-filter: blur(100px);*/
-    padding: 10px 10px 20px 10px;
+    -webkit-backdrop-filter: blur(100px);
+    */padding: 10px 10px 20px 10px;
     border-radius: 15px;
+    border-top-right-radius: 0%;
     border: var(--border);
     /*pointer-events: none;*/
     box-shadow: var(--box-shadow);
-
 }
 
 .popup :is(.header, .icons, .field) {
@@ -2462,7 +2463,7 @@ main.feeds>.discover-topics>.topic-wrapper>.topic-footer>.count{
 .popup>.header .close-element {
     color: #fff;
     font-size: 20px;
-    background: var(--alt-accent-color);
+    background: rgb(248, 69, 69);
     height: 30px;
     width: 30px;
     cursor: pointer;
@@ -2582,6 +2583,7 @@ main.feeds>.discover-topics>.topic-wrapper>.topic-footer>.count{
 
 .popup .field input {
     color: var(--gray-color);
+    background-color: var(--background-color);
     width: 100%;
     height: max-content;
     border: none;
@@ -2604,7 +2606,7 @@ main.feeds>.discover-topics>.topic-wrapper>.topic-footer>.count{
 /*.notifications*/
 main.feeds>.notifications{
     /*border: var(--border);*/
-    background-color: white;
+    background-color: var(--background-color);
     display: flex;
     flex-flow: column;
     gap: 10px;
@@ -2621,7 +2623,7 @@ main.feeds>.notifications>.action{
     cursor: pointer;
 }
 main.feeds>.notifications>.unread{
-    background-color: rgba(226, 227, 227, 0.64);
+    background-color: var(--unread-color);
 }
 main.feeds>.notifications>.action>.profile-image{
     position: relative;
@@ -2783,7 +2785,7 @@ main.feeds>.notifications>.action>.more-info>.more-options>.options-item>.icli{
 }
 main.feeds>.notifications>.action>.more-info>.more-options>.options-item>.option-details>.detail-title{
     font-size: 1rem;
-    color:  rgb(85, 84, 84);
+    color:  var(--article-title-color);
 }
 main.feeds>.notifications>.action>.more-info>.more-options>.options-item>.option-details>.detail-text{
     font-size: 0.85rem;

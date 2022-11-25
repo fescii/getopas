@@ -1616,7 +1616,6 @@
         margin: 0px;
         padding: 0%;
         margin-bottom: 10px;
-        background-color: transparent;
     }
 
     main.feeds>#post-list {
@@ -1792,7 +1791,7 @@
     main.feeds>.feed-contents>.get-more {
         /* border: 1px solid blue;*/
         margin: 0%;
-        color: var(--hover-link-color);
+        /*color: var(--hover-link-color);*/
         background-color: var(--background-color);
         padding-bottom: 20px;
     }
@@ -2343,8 +2342,7 @@
         z-index: inherit;
         display: none;
         position: absolute;
-        background-color: white;
-        /*background-color: rgb(228, 243, 214);*/
+        background-color: var(--background-color);
         border: var(--border);
         padding: 0%;
         padding-top: 12px;
@@ -2365,7 +2363,7 @@
 
     .profile-dropdown hr {
         margin: 0%;
-        color: #808080;
+        color: var(--gray-color);
         opacity: .4;
     }
 
@@ -2382,7 +2380,7 @@
         padding: 0%;
         font-weight: 500;
         font-size: 1rem;
-        color: #404040;
+        color: var(--article-title-color);
     }
 
     .mobile-footer>.profile-section>.profile-dropdown .linked-list {

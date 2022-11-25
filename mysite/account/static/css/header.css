@@ -92,11 +92,11 @@ header.header #start{
   margin-top: 4px;
 }
 .sign-up{
-  color: #1dbd7b;
+  color: var(--accent-color);
   border:1px solid var(--border-color);
 }
 .login,a.start{
-  background-color: #1dbd7b;
+  background-color: var(--accent-color);;
   color: white;
 }
 
@@ -141,12 +141,12 @@ header.header #start{
   align-items: center;
   justify-content: center;
   /*border: var(--border);*/
-   border: 1px solid #1dbd7a7c;
+   border: var(--border);
  /* background-color: var(--alt-accent-color);*/
   width: 19px;
   height: 19px;
-  background-color: white;
-  color: var(--alt-accent-color);
+  background-color:  var(--background-color);
+  color: var(--accent-color);
   font-weight: bold;
   text-align: center;
   /*padding-top: 5px;*/
@@ -211,7 +211,7 @@ header.header #start{
   height: 8px;
   width: 8px;
   border: var(--border);
-  background-color:#1dbd7b;
+  background-color:var(--accent-color);
   -webkit-border-radius: 50px;
   -moz-border-radius: 50px;
   -ms-border-radius: 50px;
@@ -223,7 +223,7 @@ header.header #start{
   z-index: inherit;
   display:none;
   position: absolute;
-  background-color: white;
+  background-color: var(--background-color);
  /*background-color: rgb(228, 243, 214);*/
   border: var(--border);
   padding: 0%;
@@ -277,7 +277,7 @@ header.header #start{
   margin: 0%;
   padding: 0%;
   font-size: 0.98rem;
-  color: #404040;
+  color: var(--article-title-color);
 }
 .profile-dropdown>.go-to-profile>.name-container .profile-link{
   padding: 0%;
@@ -285,17 +285,17 @@ header.header #start{
   display: flex;
   align-items: center;
   text-decoration: none;
-  color: #808080;
+  color: var(--gray-color);
  /* border: 1px solid  #808080;*/
   font-size: 0.8rem;
   margin-left: 3px;
 }
 .profile-dropdown>.go-to-profile>.name-container .profile-link:hover{
-  color: #08b86e;
+  color: var(--accent-color);
 }
 
 .profile-dropdown>.go-to-profile>.name-container>.profile-link .icbo{
-  color: #08b86e;
+  color: var(--accent-color);
   display: inline-block;
   margin: 0%;
   /*border: 1px solid  #808080;*/
@@ -306,7 +306,7 @@ header.header #start{
 }
 .profile-dropdown hr{
   margin: 0%;
-  color: #808080;
+  color: var(--gray-color);
   opacity: .1;
 }
 .profile-dropdown>.linked-list{
@@ -321,11 +321,11 @@ header.header #start{
 .profile-dropdown>.linked-list .dropdown-link{
   text-decoration: none;
   font-size: 1rem;
-  color: #808080;
+  color: var(--gray-color);
   padding: 0px 5px;
 }
 .profile-dropdown>.linked-list .dropdown-link:hover{
-  color: var(--hover-link-color);
+  color: var(--accent-color);
 }
 .profile-dropdown>.linked-list .log-out{
   color: rgb(219, 55, 55);
@@ -399,6 +399,7 @@ main.search>.search-wrapper{
 .search-wrapper>form>p>input[type="text"]{
   border: var(--border);
   color:var(--gray-color);
+  background-color: var(--background-color);
   margin-left: 0px;
   padding-left: 33px;
   padding-bottom: 0px;
@@ -495,13 +496,13 @@ main.search>.search-header{
 
 .search-header .header-content>.header-links>.header-link:hover,
 .feeds-header .header-content>.header-links>.header-link:hover{
-  color: var(--hover-link-color);
+  color: var(--accent-color);
 }
 .search-header .header-content>.header-links>.active,
 .feeds-header .header-content>.header-links>.active{
   border-bottom:2px solid var(--accent-color);
   margin-bottom: 0px;
-  color: var(--hover-link-color);
+  color: var(--accent-color);
 }
 
 /*
@@ -701,7 +702,7 @@ main.search>.dashboard-sidebar{
 .linked-list>.content-link .data-active>span#select{
   display: inline-block;
   /*border: 1px solid rgb(247, 23, 7);*/
-  background-color:  #22e393de;
+  background-color:  var(--accent-color);
   width: 5px;
   position: absolute;
   left: -12px;
@@ -719,7 +720,7 @@ main.search>.dashboard-sidebar{
    margin: 0%;
    text-align: center;
    text-decoration: none;
-   color: #808080;
+   color: var(--gray-color);
    /*border: 1px solid rgb(18, 223, 223);*/
    min-width: max-content;
 }
@@ -733,12 +734,12 @@ main.search>.dashboard-sidebar{
    -o-border-radius: 5px;
 }*/
 .linked-list>.content-link .active-link{
-   color:   #08b86e;
+   color:   var(--accent-color);
   /* font-weight: bold;*/
 }
 .linked-list>.content-link .data-active{
-   color:   #08b86e;
-   background-color: rgba(57, 56, 56, 0.087);
+   color:   var(--accent-color);
+   background-color: var(--nav-background);
    -webkit-border-radius: 5px;
    -moz-border-radius: 5px;
    -ms-border-radius: 5px;

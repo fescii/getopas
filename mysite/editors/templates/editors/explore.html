@@ -181,12 +181,12 @@ saveButtons.forEach(saveButton =>{
         // toggle button text and data-action
         saveButton.innerHTML = `<span>${data['action']}</span>`;
         if (data['action'] === 'Remove'){
-          saveButton.style.backgroundColor = "rgb(255, 136, 0)";
+          saveButton.style.backgroundColor = "var(--alt-accent-color)";
           saveButton.style.color = "#fff";
         }
         else{
-          saveButton.style.backgroundColor = "rgba(57, 56, 56, 0.087)";
-          saveButton.style.color = "#808080";
+          saveButton.style.backgroundColor = "var(--background-btn)";
+          saveButton.style.color = "var(--gray-color)";
         }
       }
     });
