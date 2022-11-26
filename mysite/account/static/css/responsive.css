@@ -70,6 +70,15 @@
         column-gap: 50px;
         row-gap: 0px;
     }
+    /*Themes*/
+    main.themes {
+        /* border: 1px solid rgb(0, 255, 157);*/
+        margin-top: 0px;
+        display: grid;
+        grid-template-columns: 120px 1fr;
+        column-gap: 30px;
+        row-gap: 0%;
+    }
 }
 
 @media screen and (max-width: 1000px) {
@@ -145,6 +154,15 @@
         display: grid;
         grid-template-columns: 130px 3fr 1.2fr;
         column-gap: 10px;
+        row-gap: 0%;
+    }
+    /*Themes*/
+    main.themes {
+        /* border: 1px solid rgb(0, 255, 157);*/
+        margin-top: 0px;
+        display: grid;
+        grid-template-columns: 120px 1fr;
+        column-gap: 30px;
         row-gap: 0%;
     }
     main.read{
@@ -271,6 +289,24 @@
         width: 80%;
         right: 10px;
     }
+    /*Themes*/
+    main.themes {
+        /* border: 1px solid rgb(0, 255, 157);*/
+        margin-top: 0px;
+        display: grid;
+        grid-template-columns: 120px 1fr;
+        column-gap: 30px;
+        row-gap: 0%;
+    }
+    main.themes>.theme-options{
+        margin-top: 30px;
+        /*border: var(--border);*/
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        column-gap: 30px;
+        row-gap: 20px;
+    }
+
 }
 
 @media screen and (max-width: 930px) {
@@ -915,6 +951,14 @@
         display: flex;
         align-items: center;
     }
+    main.themes>.theme-options{
+        margin-top: 20px !important;
+        /*border: 1px solid red;*/
+        padding: 20px 10px !important;
+        display: flex;
+        flex-flow: column;
+        gap: 20px;
+    }
 
     .profile-section>.profile-image-wrapper {
         margin: 0%;
@@ -1340,6 +1384,7 @@
     }
     main.read{
         display: flex;
+        background-color: var(--background-color);
         
     }
 
@@ -1467,6 +1512,11 @@
         /* position: fixed;
         top: 10px;
         left: 10px;*/
+    }
+    
+    main.themes>.theme-options>.theme-option{
+        border: var(--border);
+        marging: 10px 5px;
     }
 
     .dashboard-sidebar {

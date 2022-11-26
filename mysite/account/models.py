@@ -59,9 +59,29 @@ user_model.add_to_class('following',models.ManyToManyField('self',
 class Theme(models.Model):
     name = models.CharField(max_length=200)
     description = models.TextField()
-    creator = models.OneToOneField(settings.AUTH_USER_MODEL,
-                                on_delete=models.CASCADE, related_name='user_theme')
+    creator = models.ForeignKey(settings.AUTH_USER_MODEL,
+                                on_delete=models.CASCADE, related_name='user_themes')
     preferences = JSONField()
+    theme_users = models.IntegerField(default=0)
 
     def __str__(self):
         return self.name
+
+    #Update users
+    def update_users(self, *args, **kwargs):
+        self.theme_users =self.theme_users+1
+        super(Theme, self).save(*args, kwargs)
+
+class UserTheme(models.Model):
+    theme = models.ForeignKey(Theme,on_delete=models.CASCADE,related_name='current_theme')
+    user = models.OneToOneField(settings.AUTH_USER_MODEL,
+                                on_delete=models.CASCADE, related_name='user_current_theme')
+
+    def __str__(self):
+        return f'{self.creator} uses {self.theme}'
+
+    #Set/Update Theme
+    def update_user_theme(self,theme,user,*args, **kwargs):
+        self.theme = theme
+        self.user = user
+        super(UserTheme, self).save(update_fields=['theme','user'],*args, **kwargs)

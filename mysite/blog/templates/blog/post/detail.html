@@ -100,14 +100,8 @@
                 {% endwith %}
             </div>
             <div class="comments-filter">
-                <a class="active" title="Save" href="">
-                    <span>All</span>
-                </a>
-                <a title="Share" href="">
-                    <span>Relevant</span>
-                </a>
-                <a title="Share" href="">
-                    <span>Recent</span>
+                <a title="Save" href="">
+                    <span>Filter</span>
                 </a>
             </div>
         </div>
@@ -257,7 +251,7 @@
                         span.textContent = data['action'];
                         icon.classList.remove('icli')
                         icon.classList.add('icbo')
-                        saveButton.style.color = "rgb(255, 136, 0)";
+                        saveButton.style.color = "var(--alt-accent-color)";
                         /*saveButton.style.backgroundColor = "rgb(255, 136, 0)";
                         saveButton.style.color = "#fff";*/
                     }
@@ -266,8 +260,8 @@
                         icon.classList.remove('icbo')
                         icon.classList.add('icli')
                         /*saveButton.innerHTML = `<span>${data['action']}</span><i class="iconly-Bookmark icli"></i>`;
-                        saveButton.style.backgroundColor = "rgba(57, 56, 56, 0.087)";*/
-                        saveButton.style.color = "#808080";
+                        saveButton.style.backgroundColor = "var(--background-btn)";*/
+                        saveButton.style.color = "var(--gray-color)";
                     }
                 }
             });
@@ -328,7 +322,7 @@
                         // toggle button text
                         likeButton.textContent = data['action'];
                         if (data['action'] === 'Unlike'){
-                            likeButton.style.backgroundColor = "rgb(255, 136, 0)";
+                            likeButton.style.backgroundColor = "var(--alt-accent-color)";
                             likeButton.style.color = "#fff";
                             count.textContent = totalLikes + 1;
                         }
@@ -337,8 +331,8 @@
                             userComment.remove()
                         }
                         else{
-                        likeButton.style.backgroundColor = "rgba(57, 56, 56, 0.087)";
-                        likeButton.style.color = "#808080";
+                        likeButton.style.backgroundColor = "var(--background-btn)";
+                        likeButton.style.color = "var(--gray-color)";
                         count.textContent = totalLikes - 1;
                         }
                     }

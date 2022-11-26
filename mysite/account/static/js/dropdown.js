@@ -5,11 +5,11 @@ if (hamburgerMenu != null) {
     //Creating an arrow function for changing the class to active.
     const menuIsActive = () => {
         //Selecting the hamburger menu and adding and removing the class of active on click.
-        try{
+        try {
             footerBtn.style.setProperty('color', '#808080');
             footerModal.style.setProperty('display', 'none');
         }
-        finally{
+        finally {
             hamburgerMenu.classList.toggle('active');
             if (menu.style.display == 'block') {
                 menu.style.setProperty('display', 'none');
@@ -50,13 +50,13 @@ if (footerBtn != null && footerModal != null) {
             footerTxt.style.setProperty('color', '#808080')
         }
         else {
-            try{
+            try {
                 if (menu.style.display == 'block') {
                     hamburgerMenu.classList.toggle('active');
                     menu.style.setProperty('display', 'none');
                 }
             }
-            finally{
+            finally {
                 footerModal.style.setProperty('display', 'block')
                 e.target.style.setProperty('color', 'rgb(255, 136, 0)')
                 footerTxt.style.setProperty('color', 'rgb(255, 136, 0)')
@@ -122,25 +122,21 @@ if (closeButtons != null) {
     }
 }*/
 
-//Set-Theme
-function setTheme(data) {
-    let root = document.documentElement;
 
-    root.style.setProperty('--accent-color', data['accent']);
-    root.style.setProperty('--alt-accent-color', data['alt']);
-    root.style.setProperty('--article-title-color', data['article']);
-    root.style.setProperty('--section-title-color', data['section']);
-
-    root.style.setProperty('--link-color', data['link']);
-    root.style.setProperty('--gray-color', data['gray']);
-    root.style.setProperty('--sidebar-link-color', data['sidebar']);
-    root.style.setProperty('--hover-link-color', data['hover']);
-    root.style.setProperty('--summery-color', data['summery']);
-    root.style.setProperty('--unread-color', data['unread']);
-
-    root.style.setProperty('--background-color', data['background']);
-    root.style.setProperty('--body-background-color', data['body']);
-    root.style.setProperty('--box-shadow', data['shadow']);
-    root.style.setProperty('--nav-background', data['nav']);
-    root.style.setProperty('--border', data['border']);
+let data = {
+    "alt": "#08b86f",
+    "nav": "rgba(218, 215, 215, 0.087)",
+    "body": "#000",
+    "gray": "#a6a6a6",
+    "link": "#007bff",
+    "hover": "#1dbd7b",
+    "accent": "#08b86f",
+    "border": "1px solid #a2a3a342",
+    "shadow": "0 12px 48px rgba(109, 117, 141, 0.2)",
+    "unread": "rgba(90, 91, 91, 0.64)",
+    "article": "#f2f2f2",
+    "section": "#f2f2f2",
+    "sidebar": "#a6a6a6",
+    "summery": "#e5e5e5",
+    "background": "#1a1a1a"
 }

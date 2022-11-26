@@ -23,6 +23,34 @@
     <link href="{% static "css/responsive.css" %}" rel="stylesheet">
     <link href="{% static "css/style.css" %}" rel="stylesheet">
     <link href="https://fonts.cdnfonts.com/css/product-sans" rel="stylesheet">
+    <script type="text/javascript">
+        //Set-Theme
+        function setTheme(data) {
+            let root = document.documentElement;
+
+            root.style.setProperty('--accent-color', data['accent']);
+            root.style.setProperty('--alt-accent-color', data['alt']);
+            root.style.setProperty('--article-title-color', data['article']);
+            root.style.setProperty('--section-title-color', data['section']);
+
+            root.style.setProperty('--link-color', data['link']);
+            root.style.setProperty('--gray-color', data['gray']);
+            root.style.setProperty('--sidebar-link-color', data['sidebar']);
+            root.style.setProperty('--hover-link-color', data['hover']);
+            root.style.setProperty('--summery-color', data['summery']);
+            root.style.setProperty('--unread-color', data['unread']);
+            
+            root.style.setProperty('--background-btn', data['btn']);
+            root.style.setProperty('--background-color', data['background']);
+            root.style.setProperty('--body-background-color', data['body']);
+            root.style.setProperty('--box-shadow', data['shadow']);
+            root.style.setProperty('--nav-background', data['nav']);
+            root.style.setProperty('--border', data['border']);
+        }
+        {% with request.user.user_current_theme.theme.preferences as preferences %}
+            setTheme({{preferences|safe}})
+        {% endwith %}
+    </script>
     <script src="//cdn.jsdelivr.net/npm/js-cookie@3.0.1/dist/js.cookie.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v3.0.6/css/line.css">

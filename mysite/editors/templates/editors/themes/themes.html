@@ -9,14 +9,16 @@
     {% for theme in themes %}
         <div class="theme-option">
             <div class="theme-letters">
-                <div class="theme-as">Aa</div>
+                {% with theme.preferences as colors %}
+                    <div class="theme-as"><span style="color:{{colors.accent}}">A</span><span style="color:{{colors.alt}}">a</span></div>
+                {% endwith %}
             </div>
             <div class="theme-content">
                 <div class="theme-content-title">{{theme.name}}</div>
                 <div class="theme-content-description">{{theme.description}}</div>
             </div>
             <div class="theme-footer">
-                <a href="" class="author">
+                <a href="{{theme.creator.get_absolute_url}}" class="author">
                     <div class="author-image">
                         {% if theme.creator.profile.photo %}
                             <img src="{% thumbnail theme.creator.profile.photo 80x0 %}"/>
@@ -70,10 +72,10 @@
                     }
                     else{
                         setTheme(data)
-                        useBtn.texContent = 'Current'
+                        useBtn.textContent = 'Current'
                     }
                 })
-            },{'once':true})
+            })
         })
     }
 {% endblock %}

@@ -13,7 +13,7 @@ from account.views import is_admin, is_editor, is_author
 from django.contrib.auth.decorators import login_required,user_passes_test
 from django.http import HttpResponseRedirect, HttpResponse
 from django.urls import reverse
-from account.models import Profile,Theme
+from account.models import Profile,Theme,UserTheme
 from blog.models import Post,Bookmark,Like,BlogComment
 from django.contrib.auth.models import User
 from django.contrib import messages
@@ -982,7 +982,15 @@ def use_theme(request):
     theme = Theme.objects.get(id=theme_id)
     user = User.objects.get(id=user_id)
     if user and theme:
-        return JsonResponse(theme.preferences)
+        try:
+            user_theme = UserTheme.objects.get(user=user)
+            UserTheme.update_user_theme(user_theme,theme=theme,user=user)
+            Theme.update_users(theme)
+            return JsonResponse(theme.preferences)
+        except UserTheme.DoesNotExist:
+            UserTheme.objects.create(theme=theme,user=user)
+            Theme.update_users(theme)
+            return JsonResponse(theme.preferences)
     return JsonResponse({'status': 'error'})
 
 
