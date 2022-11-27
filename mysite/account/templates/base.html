@@ -39,7 +39,7 @@
             root.style.setProperty('--hover-link-color', data['hover']);
             root.style.setProperty('--summery-color', data['summery']);
             root.style.setProperty('--unread-color', data['unread']);
-            
+
             root.style.setProperty('--background-btn', data['btn']);
             root.style.setProperty('--background-color', data['background']);
             root.style.setProperty('--body-background-color', data['body']);
@@ -47,9 +47,11 @@
             root.style.setProperty('--nav-background', data['nav']);
             root.style.setProperty('--border', data['border']);
         }
-        {% with request.user.user_current_theme.theme.preferences as preferences %}
-            setTheme({{preferences|safe}})
-        {% endwith %}
+        {% if request.user.user_current_theme %}
+            {% with request.user.user_current_theme.theme.preferences as preferences %}
+                setTheme({{preferences|safe}})
+            {% endwith %}
+        {% endif %}
     </script>
     <script src="//cdn.jsdelivr.net/npm/js-cookie@3.0.1/dist/js.cookie.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
