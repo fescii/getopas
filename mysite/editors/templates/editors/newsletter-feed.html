@@ -31,6 +31,7 @@ if(likeButtons != null){
     likeButtons.forEach(likeBtn =>{
         likeBtn.addEventListener('click', function(e){
             e.preventDefault();
+            likeBtn.style.pointerEvents = "none";
 
             // add request body
             let formData = new FormData();
@@ -71,6 +72,7 @@ if(likeButtons != null){
                     }
                 }
             });
+            likeBtn.style.pointerEvents = "auto";
         });
     });
 }
@@ -104,6 +106,7 @@ window.addEventListener('scroll', function(e) {
                         likeButtonsInner.forEach(likeBtn =>{
                             likeBtn.addEventListener('click', function(e){
                                 e.preventDefault();
+                                likeBtn.style.pointerEvents = "none";
 
                                 // add request body
                                 let formData = new FormData();
@@ -144,6 +147,7 @@ window.addEventListener('scroll', function(e) {
                                         }
                                     }
                                 });
+                                likeBtn.style.pointerEvents = "auto";
                             });
                         });
                     }

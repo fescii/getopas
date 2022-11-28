@@ -162,6 +162,7 @@ if(likeButtons != null){
     likeButtons.forEach(likeBtn =>{
         likeBtn.addEventListener('click', function(e){
             e.preventDefault();
+            likeBtn.style.pointerEvents = "none";
 
             // add request body
             let formData = new FormData();
@@ -202,6 +203,7 @@ if(likeButtons != null){
                     }
                 }
             });
+            likeBtn.style.pointerEvents = "auto";
         });
     });
 }

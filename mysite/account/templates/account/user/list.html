@@ -72,6 +72,15 @@
                 parent = followButton.parentElement
                 count = parent.querySelector('#num')
                 followersText = parent.querySelector('.followers-text')
+
+                if(followButton.dataset.action === "Follow"){
+                    followButton.textContent = "Following...";
+                }
+                else{
+                    followButton.textContent = "Unfollowing...";
+                }
+                followButton.style.pointerEvents = "none";
+
                 // add request body
                 let formData = new FormData();
                 formData.append('id', followButton.dataset.id);
@@ -98,7 +107,7 @@
                                 followersText.textContent = 'Followers';
                             }
                         }
-                        else if( action === 'Unfollow'){
+                        else if(action === 'Unfollow'){
                             followButton.dataset.action = 'Follow';
                             followButton.textContent = 'Follow';
                             followButton.style.backgroundColor = "var(--accent-color)";
@@ -112,6 +121,7 @@
                         }
                     }
                 })
+                followButton.style.pointerEvents = "auto";
             });
         })
     }
@@ -146,6 +156,14 @@
                             followButtonsInner.forEach(followButton =>{
                                 followButton.addEventListener('click', function(e){
                                     e.preventDefault();
+
+                                    if(followButton.dataset.action === "Follow"){
+                                        followButton.textContent = "Following...";
+                                    }
+                                    else{
+                                        followButton.textContent = "Unfollowing...";
+                                    }
+                                    followButton.style.pointerEvents = "none";
 
                                     parent = followButton.parentElement
                                     count = parent.querySelector('#num')
@@ -190,6 +208,7 @@
                                             }
                                         }
                                     })
+                                    followButton.style.pointerEvents = "auto";
                                 });
                             })
                         }
