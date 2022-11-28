@@ -85,6 +85,7 @@
             actionBtn.addEventListener('click', (e) => {
                 e.preventDefault();
                 notification = document.querySelector(`#action-${actionBtn.dataset.id}`)
+                actionBtn.style.pointerEvents = "none";
 
                 // add request body
                 let formData = new FormData();
@@ -110,8 +111,10 @@
         followBtns.forEach((followBtn,index)=>{
             followBtn.addEventListener('click', (e) => {
                 e.preventDefault();
+                followBtn.style.pointerEvents = "none";
                 follow = followBtn.querySelector('.detail-title')
                 follow_text = followBtn.querySelector('.detail-text')
+                follow.textContent = "Loading..."
 
                 // add request body
                 let formData = new FormData();
@@ -135,6 +138,7 @@
                         follow_text.textContent = `Stop seeing ${data['user']}'s updates`
                     }
                 })
+                followBtn.style.pointerEvents = "auto";
             })
         })
     }
@@ -144,6 +148,7 @@
         markBtns.forEach((markBtn,index)=>{
             markBtn.addEventListener('click', (e) => {
                 e.preventDefault();
+                markBtn.style.pointerEvents = "none";
                 notification = document.querySelector(`#action-${markBtn.dataset.id}`)
                 mark_text = markBtn.querySelector('.detail-text')
 
@@ -169,6 +174,7 @@
                         mark_text.textContent = 'Mark as read'
                     }
                 })
+                markBtn.style.pointerEvents = "auto";
             })
         })
     }
@@ -233,6 +239,7 @@ window.addEventListener('scroll', function(e) {
                         deleteBtnsInner.forEach((actionBtn,index)=>{
                             actionBtn.addEventListener('click', (e) => {
                                 e.preventDefault();
+                                actionBtn.style.pointerEvents = "none";
                                 notification = document.querySelector(`#action-${actionBtn.dataset.id}`)
 
                                 // add request body
@@ -259,8 +266,10 @@ window.addEventListener('scroll', function(e) {
                         followBtnsInner.forEach((followBtn,index)=>{
                             followBtn.addEventListener('click', (e) => {
                                 e.preventDefault();
+                                followBtn.style.pointerEvents = "none";
                                 follow = followBtn.querySelector('.detail-title')
                                 follow_text = followBtn.querySelector('.detail-text')
+                                follow.textContent = "Loading..."
 
                                 // add request body
                                 let formData = new FormData();
@@ -284,6 +293,7 @@ window.addEventListener('scroll', function(e) {
                                         follow_text.textContent = `Stop seeing ${data['user']}'s updates`
                                     }
                                 })
+                                followBtn.style.pointerEvents = "auto";
                             })
                         })
                     }
@@ -293,6 +303,7 @@ window.addEventListener('scroll', function(e) {
                         markBtnsInner.forEach((markBtn,index)=>{
                             markBtn.addEventListener('click', (e) => {
                                 e.preventDefault();
+                                markBtn.style.pointerEvents = "none";
                                 notification = document.querySelector(`#action-${markBtn.dataset.id}`)
                                 mark_text = markBtn.querySelector('.detail-text')
 
@@ -318,6 +329,7 @@ window.addEventListener('scroll', function(e) {
                                         mark_text.textContent = 'Mark as read'
                                     }
                                 })
+                                markBtn.style.pointerEvents = "auto";
                             })
                         })
                     }

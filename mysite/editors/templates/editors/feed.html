@@ -88,6 +88,13 @@ if(viewBtns != null && popup != null){
   saveButtons.forEach(saveButton =>{
       saveButton.addEventListener('click', function(e){
           e.preventDefault();
+            if(saveButton.dataset.action === 'Save'){
+              saveButton.textContent = 'Saving...'
+          }
+          else{
+              saveButton.textContent = 'Removing...'
+          }
+          saveButton.style.pointerEvents = "none";
 
           // add request body
           let formData = new FormData();
@@ -99,6 +106,7 @@ if(viewBtns != null && popup != null){
           fetch(url, options).then(response => response.json()).then(data => {
               if (data['status'] === 'ok'){
                   // toggle button text
+                  saveButton.dataset.action = data['action']
                   saveButton.innerHTML = `<span>${data['action']}</span>`;
                   if (data['action'] === 'Remove'){
                     saveButton.style.backgroundColor = "var(--alt-accent-color)";
@@ -110,6 +118,7 @@ if(viewBtns != null && popup != null){
                   }
               }
           });
+          saveButton.style.pointerEvents = "auto";
       });
   });
 let page = 1;
@@ -175,6 +184,13 @@ window.addEventListener('scroll', function(e) {
                     Buttons.forEach(Button =>{
                             Button.addEventListener('click', function(e){
                             e.preventDefault();
+                            if(Button.dataset.action === 'Save'){
+                                Button.textContent = 'Saving...'
+                            }
+                            else{
+                                Button.textContent = 'Removing...'
+                            }
+                            Button.style.pointerEvents = "none";
 
                             // add request body
                             let formData = new FormData();
@@ -186,6 +202,7 @@ window.addEventListener('scroll', function(e) {
                             fetch(url, options).then(response => response.json()).then(data => {
                                 if (data['status'] === 'ok'){
                                     // toggle button text and data-action
+                                    Button.dataset.action = data['action']
                                     Button.innerHTML = `<span>${data['action']}</span>`;
                                     if (data['action'] === 'Remove'){
                                       Button.style.backgroundColor = "var(--alt-accent-color)";
@@ -197,6 +214,7 @@ window.addEventListener('scroll', function(e) {
                                     }
                                 }
                             });
+                            Button.style.pointerEvents = "auto";
                         });
                     });
                 }
