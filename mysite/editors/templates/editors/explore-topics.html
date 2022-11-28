@@ -167,7 +167,7 @@ saveButtons = document.querySelectorAll('a.save')
 saveButtons.forEach(saveButton =>{
     saveButton.addEventListener('click', function(e){
         e.preventDefault();
-        if(saveButton.dataset.action == 'Save'){
+        if(saveButton.dataset.action === 'Save'){
             saveButton.textContent = 'Saving...'
         }
         else{
