@@ -29,7 +29,7 @@
                     <span class="author-name">@{{theme.creator.username}}</span>
                 </a>
                 <a href="" data-id="{{theme.id}}" class="theme-use" data-user="{{request.user.id}}">
-                    <span class="use-text">Use</span>
+                    <span class="use-text">Apply</span>
                 </a>
             </div>
         </div>
@@ -56,7 +56,8 @@
         useBtns.forEach((useBtn,index)=>{
             useBtn.addEventListener('click', (e) => {
                 e.preventDefault();
-
+                useBtn.style.pointerEvents = "none";
+                useBtn.textContent = 'Applying...'
                 // add request body
                 let formData = new FormData();
                 formData.append('id', useBtn.dataset.id);
@@ -72,9 +73,10 @@
                     }
                     else{
                         setTheme(data)
-                        useBtn.textContent = 'Current'
+                        useBtn.textContent = 'Apply'
                     }
                 })
+                useBtn.style.pointerEvents = "auto";
             })
         })
     }

@@ -413,6 +413,13 @@ saveButtons = document.querySelectorAll('a.save')
 saveButtons.forEach(saveButton =>{
     saveButton.addEventListener('click', function(e){
         e.preventDefault();
+        if(saveButton.dataset.action == 'Save'){
+            saveButton.textContent = 'Saving...'
+        }
+        else{
+            saveButton.textContent = 'Removing...'
+        }
+        saveButton.style.pointerEvents = "none";
 
         // add request body
         let formData = new FormData();
@@ -424,6 +431,7 @@ saveButtons.forEach(saveButton =>{
         fetch(url, options).then(response => response.json()).then(data => {
             if (data['status'] === 'ok'){
                 // toggle button text
+                saveButton.dataset.action = data['action']
                 saveButton.innerHTML = `<span>${data['action']}</span>`;
                 if (data['action'] === 'Remove'){
                     saveButton.style.backgroundColor = "var(--alt-accent-color)";
@@ -435,6 +443,7 @@ saveButtons.forEach(saveButton =>{
                 }
             }
         });
+        saveButton.style.pointerEvents = "auto";
     });
 });
 {% endblock %}
