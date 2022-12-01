@@ -146,7 +146,7 @@ header.header #start{
   width: 19px;
   height: 19px;
   background-color:  var(--background-color);
-  color: var(--accent-color);
+  color: var(--alt-accent-color);
   font-weight: bold;
   text-align: center;
   /*padding-top: 5px;*/
