@@ -140,20 +140,15 @@ header.header #start{
   display: flex;
   align-items: center;
   justify-content: center;
-  /*border: var(--border);*/
-   border: var(--border);
- /* background-color: var(--alt-accent-color);*/
-  width: 19px;
-  height: 19px;
-  background-color:  var(--background-color);
-  color: var(--alt-accent-color);
+  box-shadow: var(--box-shadow);
+  width: 10px;
+  height: 10px;
+  background-color:  var(--warn-color);
   font-weight: bold;
   text-align: center;
-  /*padding-top: 5px;*/
   position: absolute;
-  font-size: 0.7rem;
   top: 2px;
-  right: -1px;
+  right: 1px;
   -webkit-border-radius: 50px;
   -moz-border-radius: 50px;
   -ms-border-radius: 50px;

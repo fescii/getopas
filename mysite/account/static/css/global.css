@@ -45,6 +45,7 @@ body {
         --footer-link-color: #666;
         --site-name-color: rgba(102,247,113,1);
         --link-hover-color: teal;
+        --warn-color: #e72c10;
 
         --content-gradient: linear-gradient(350deg, #0f0f1a 1%, #0f0f1a 100%);
         --side-content:#0a0a0f;
@@ -73,6 +74,7 @@ body {
     --hover-link-color: #1dbd7b;
     --summery-color: #404040;
     --unread-color: rgba(226, 227, 227, 0.64);
+    --warn-color: #e72c10;
 
     --background-color: white;
     --body-background-color: #ffffff;
