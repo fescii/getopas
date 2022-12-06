@@ -15,7 +15,7 @@
             </div>
 
             <div class="user-info">
-                <span class="name"> {{auser.get_full_name}} </span>
+                <span class="name"> {{auser.first_name|lower|capfirst}} {{auser.last_name|lower|capfirst}} </span>
                 <span class="dot">&#183;</span>
                 <a href="{% url 'profile' username=auser%}" class="username">@{{auser.username}}</a>
             </div>
@@ -38,6 +38,6 @@
         </div>
     </div>
 {% empty %}
-<div class="person" style="color:#08b86f;border:none">No users found!</div>
+<div class="person" style="color:inherit;border:none">No users found!</div>
 {% endfor %}
 {% endwith %}
