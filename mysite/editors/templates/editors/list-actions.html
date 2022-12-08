@@ -35,7 +35,7 @@
                             {% endif %}
                         </div>
                         <div class="info">
-                            <a href="{{ auser.get_absolute_url }}" class="name"> {{ auser.get_full_name|lower|capfirst }} </a>
+                            <a href="{{ auser.get_absolute_url }}" class="name"> {{ auser.first_name|lower|capfirst }}  {{ auser.last_name|lower|capfirst }}</a>
                             {{ action.verb }}
                             <a href="{{ target.get_absolute_url }}" class="info-to">{{ target }}</a>
                         </div>
