@@ -2072,7 +2072,9 @@ main.read>.article-wrapper>.content>.article-content * {
     overflow-x: hidden !important;
     width: 100% !important;
     color: var(--article-title-color) !important;
-    font-size: 1.17rem !important;
+    font-size: 1rem !important;
+    line-height: 1.76;
+    margin: 0%;
 }
 main.read>.article-wrapper>.content>.article-content h1,
 main.read>.article-wrapper>.content>.article-content h2,
@@ -2081,6 +2083,15 @@ main.read>.article-wrapper>.content>.article-content h4,
 main.read>.article-wrapper>.content>.article-content h5,
 main.read>.article-wrapper>.content>.article-content h6{
     font-size: 1.5rem !important;
+    font-weight: 500 !important;
+    padding: 0% !important;
+    margin: 2px 0px !important;
+    margin-top: 10px !important;
+}
+main.read>.article-wrapper>.content>.article-content ul,
+main.read>.article-wrapper>.content>.article-content ol{
+    color: var(--article-title-color) !important;
+    list-style-type: auto;
 }
 
 main.read>.article-wrapper>.content>.article-content a {
@@ -2094,10 +2105,10 @@ main.read>.article-wrapper>.content>.article-title>a {
 }
 
 main.read>.article-wrapper>.content>#cover-image {
-    align-self: flex-start;
+    align-self: center;
     margin: 20px 0px;
     width: 80%;
-    height: 280px;
+    height: auto;
 }
 
 main.read>.article-wrapper>.content>#cover-image>img {
@@ -2271,7 +2282,7 @@ main.read>.comments-wrapper>.add-comment {
     width: max-content;
     padding: 8px 15px;
     font-size: 1.0rem;
-    margin-right: 10px;
+    margin-right: 10px;b
     cursor: pointer;
     border: none;
     color: white;
@@ -2386,7 +2397,7 @@ main.read>.comments-wrapper>.comments>.user-comment>.content>.content-head {
 main.read>.comments-wrapper>.comments>.user-comment>.content>.content-head>.author {
     text-decoration: none;
     color: var(--article-title-color);
-    font-size: 1.17rem !important;
+    font-size: 1rem !important;
     display: flex;
     flex-wrap: nowrap;
     align-items: center;
@@ -2394,17 +2405,17 @@ main.read>.comments-wrapper>.comments>.user-comment>.content>.content-head>.auth
 
 main.read>.comments-wrapper>.comments>.user-comment>.content>.content-head>.author>span {
     color: var(--accent-color);
-    font-size: 1rem;
+    font-size: 0.9rem;
     align-self: flex-end;
     margin-left: 2px;
-    margin-bottom: 0px;
+    margin-bottom: 1px;
 }
 
 main.read>.comments-wrapper>.comments>.user-comment>.content>.content-head>.author>.icbo {
     display: inline-block;
     margin-left: 10px;
     align-self: flex-end;
-    margin-bottom: 3px;
+    margin-bottom: 2px;
 }
 
 main.read>.comments-wrapper>.comments>.user-comment>.content>.content-head>.author:hover {
@@ -2450,7 +2461,7 @@ main.read>.comments-wrapper>.comments>.user-comment>.content>.content-text * {
     margin: 0%;
     color: var(--article-title-color) !important;
     padding: 0px;
-    font-size: 1.14rem !important;
+    font-size: 1rem !important;
 }
 
 main.read>.comments-wrapper>.comments>.user-comment>.content>.content-text img {
@@ -2478,6 +2489,7 @@ main.read>.comments-wrapper>.comments>.user-comment>.content>.likes .delete-arti
     right: unset;
     left: 0px;
     bottom: 0px;
+    z-index: 5;
 }
 
 main.read>.comments-wrapper>.comments>.user-comment>.content>.likes>.delete,
@@ -2498,6 +2510,7 @@ main.read>.comments-wrapper>.comments>.user-comment>.content>.likes>.like {
     -o-border-radius: 50px;
     -webkit-border-radius: 50px;
     border-radius: 50px;
+    margin-left: -10px;
 }
 
 /*

@@ -2,7 +2,7 @@
 {% load blog_tags %}
 <div class="profile-section">
     <a href="{% url 'editors:actions' %}">
-      <span class="iconly-Notification icbo">
+      <span class="iconly-Notification icli">
         {%  total_unread user_id=request.user.id  as unread %}
         {% if unread > 0 %}
         <span id="text-count"></span>

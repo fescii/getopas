@@ -208,7 +208,7 @@ main.feeds>.my-article-list{
     padding: 3px 15px;
     margin: 10px 10px;
     font-size: 1rem;
-    background-color: rgba(57, 56, 56, 0.087);
+    background-color:  var(--background-btn);
     color: var(--gray-color);
     border-radius: 50px;
 }
