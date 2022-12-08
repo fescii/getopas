@@ -3198,7 +3198,7 @@ main.feeds>.people>.person>.more-user-info>.follow {
     font-size: 1.0rem;
     color: white;
     padding: 5px 15px;
-    background-color: var(--accent-color);
+    background-color: var(--follow-color);
     -webkit-border-radius: 50px;
     -moz-border-radius: 50px;
     -ms-border-radius: 50px;

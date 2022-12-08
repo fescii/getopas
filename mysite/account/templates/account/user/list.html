@@ -110,7 +110,7 @@
                         else if(action === 'Unfollow'){
                             followButton.dataset.action = 'Follow';
                             followButton.textContent = 'Follow';
-                            followButton.style.backgroundColor = "var(--accent-color)";
+                            followButton.style.backgroundColor = "var(--follow-color)";
                             count.textContent = totalFollowers - 1;
                             if( totalFollowers === 2){
                                 followersText.textContent = 'Follower';
@@ -197,7 +197,7 @@
                                             else if( action === 'Unfollow'){
                                                 followButton.dataset.action = 'Follow';
                                                 followButton.textContent = 'Follow';
-                                                followButton.style.backgroundColor = "var(--accent-color)";
+                                                followButton.style.backgroundColor = "var(--follow-color)";
                                                 count.textContent = totalFollowers - 1;
                                                 if( totalFollowers === 2){
                                                     followersText.textContent = 'Follower';

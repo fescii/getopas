@@ -34,6 +34,7 @@
             root.style.setProperty('--section-title-color', data['section']);
 
             root.style.setProperty('--link-color', data['link']);
+            root.style.setProperty('--follow-color', data['follow']);
             root.style.setProperty('--gray-color', data['gray']);
             root.style.setProperty('--sidebar-link-color', data['sidebar']);
             root.style.setProperty('--hover-link-color', data['hover']);
@@ -53,6 +54,8 @@
                 setTheme({{preferences|safe}})
             {% endwith %}
         {% endif %}
+
+
     </script>
     <script src="//cdn.jsdelivr.net/npm/js-cookie@3.0.1/dist/js.cookie.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
@@ -280,6 +283,7 @@
 
             {% block domready %}
             {% endblock %}
+           
         });
     </script>
     {% block footer %}
