@@ -1515,7 +1515,7 @@
     
     main.themes>.theme-options>.theme-option{
         border: var(--border);
-        marging: 10px 5px;
+        margin: 10px 5px;
     }
 
     .dashboard-sidebar {
