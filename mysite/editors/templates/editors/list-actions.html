@@ -61,7 +61,7 @@
                                         {% endif %}
                                     </div>
                                 </a>
-                                {%  check_follow auser.id request.user as follow %}
+                                {%  check_user_follow auser.id request.user as follow %}
                                 <a href="" class="follow-{{page.number}} options-item" data-user="{{ auser.id }}" data-id="{{ action.id }}" data-action="{{follow|capfirst}}">
                                     <span class="iconly-Close-Square icli"></span>
                                     <div class="option-details">

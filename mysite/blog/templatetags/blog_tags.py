@@ -108,7 +108,7 @@ def check_liked(id,user):
 
 #Check-if-user-is-followed
 @register.simple_tag
-def check_follow(user_id,user):
+def check_user_follow(user_id,user):
     a_user = User.objects.get(id=user_id)
     if Contact.objects.filter(user_from=user,user_to=a_user):
         return 'unfollow'

@@ -2,6 +2,13 @@
 {% load static %}
 {% load blog_tags %}
 {% load thumbnail %}
+{% block title %}
+    {% if title != "notifications" %}
+        Notifications | {{title|capfirst}}
+    {% else %}
+        {{title|capfirst}}
+    {% endif %}
+{% endblock %}
 {% block content %}
 {% include "editors/action-header.html" %}
 <div id="notifications-list" class="notifications feed-contents">
