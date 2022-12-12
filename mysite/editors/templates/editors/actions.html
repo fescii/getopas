@@ -120,6 +120,7 @@
                 e.preventDefault();
                 followBtn.style.pointerEvents = "none";
                 follow = followBtn.querySelector('.detail-title')
+                modal = document.querySelector(`#modal-${followBtn.dataset.id}`)
                 follow_text = followBtn.querySelector('.detail-text')
                 follow.textContent = "Loading..."
 
@@ -146,6 +147,7 @@
                     }
                 })
                 followBtn.style.pointerEvents = "auto";
+                modal.style.display = "none";
             })
         })
     }
@@ -158,6 +160,7 @@
                 markBtn.style.pointerEvents = "none";
                 notification = document.querySelector(`#action-${markBtn.dataset.id}`)
                 mark_text = markBtn.querySelector('.detail-text')
+                modal = notification.querySelector(`#modal-${markBtn.dataset.id}`)
 
                 // add request body
                 let formData = new FormData();
@@ -182,6 +185,7 @@
                     }
                 })
                 markBtn.style.pointerEvents = "auto";
+                modal.style.display = "none";
             })
         })
     }
@@ -275,6 +279,7 @@ window.addEventListener('scroll', function(e) {
                                 e.preventDefault();
                                 followBtn.style.pointerEvents = "none";
                                 follow = followBtn.querySelector('.detail-title')
+                                modal = document.querySelector(`#modal-${followBtn.dataset.id}`)
                                 follow_text = followBtn.querySelector('.detail-text')
                                 follow.textContent = "Loading..."
 
@@ -301,6 +306,7 @@ window.addEventListener('scroll', function(e) {
                                     }
                                 })
                                 followBtn.style.pointerEvents = "auto";
+                                modal.style.display = "none";
                             })
                         })
                     }
@@ -312,6 +318,7 @@ window.addEventListener('scroll', function(e) {
                                 e.preventDefault();
                                 markBtn.style.pointerEvents = "none";
                                 notification = document.querySelector(`#action-${markBtn.dataset.id}`)
+                                modal = notification.querySelector(`#modal-${markBtn.dataset.id}`)
                                 mark_text = markBtn.querySelector('.detail-text')
 
                                 // add request body
@@ -337,6 +344,7 @@ window.addEventListener('scroll', function(e) {
                                     }
                                 })
                                 markBtn.style.pointerEvents = "auto";
+                                modal.style.display = "none";
                             })
                         })
                     }
