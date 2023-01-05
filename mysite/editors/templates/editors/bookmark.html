@@ -93,7 +93,9 @@
     </div>
   </div>
   {% empty %}
-    <p>You have not s192.168.70.202aved any articles yet.</p>
+    <div class="article-wrapper" style="color: var(--gray-color);padding-left:5px;border:none;">
+      You have not saved any articles yet.
+    </div>
     {% endfor %}
   {% include "pagination.html" with page=saved_posts %}
 </div>
