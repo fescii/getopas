@@ -2505,6 +2505,41 @@
         cursor: default;
         font-size: 0.9rem;
     }
+
+    /*Editor*/
+    main.editing {
+        position: relative;
+        /* border: 1px solid rgb(0, 255, 157); */
+        margin-top: 0px;
+        display: flex;
+        flex-flow: column;
+        margin: 60px 5px;
+    }
+    main.editing > .feeds-header {
+        position: fixed;
+        top: 0px;
+        height: 70px;
+        z-index: 3;
+        /* border: 1px solid rgb(0, 255, 157); */
+        background-color: var(--background-color);
+        backdrop-filter: blur(100px);
+        width: max-content;
+        right: 30px;
+    }
+    main.editing >.main-content{
+        display: flex;
+        flex-flow: column;
+    }
+    main.editing >.main-content>form{
+        /* border: 1px solid rgb(0, 255, 157); */
+        display: flex;
+        width: 100%;
+        flex-flow: column;
+        gap: 20px;
+        /* align-items: center;
+        justify-content: center; */
+    }
+
     /*Notification*/
     a,
     .pagination > .step-links > a,
