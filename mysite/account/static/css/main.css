@@ -1727,7 +1727,7 @@ main.newsletters>.newsletters-feeds>.newsletter-wrapper:nth-of-type(7) {
 .newsletter-wrapper>.footer>.footer-info>a>span {
     display: inline-block;
     font-size: 25px;
-    margin-top: 5px;
+    /* margin-top: 5px; */
     color: var(--alt-accent-color);
     -webkit-transition: transform 3s ease;
     -moz-transition: transform 3s ease;
@@ -3538,3 +3538,11 @@ main.themes>.theme-options>.theme-option>.theme-footer>.theme-use{
     -o-border-radius: 50px;
     border-radius: 50px;
 }
+
+/* Summernote
+.note-editor .note-toolbar{
+    background: none !important;
+}
+.note-editor .card-header{
+    border: none !important;
+} */

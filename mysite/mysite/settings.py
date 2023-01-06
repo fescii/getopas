@@ -173,8 +173,9 @@ TINYMCE_JS_URL = os.path.join(STATIC_URL, 'tinymce/tinymce.min.js')
 ABSOLUTE_URL_OVERRIDES = {'auth.user': lambda u: reverse_lazy('profile',args=[u.username])}
 
 #Summernote
-SUMMERNOTE_THEME = 'bs4'
+SUMMERNOTE_THEME = 'bs5'
 SUMMERNOTE_CONFIG = {
+    'iframe':False,
     # You can put custom Summernote settings
     'summernote': {
         # As an example, using Summernote Air-mode
@@ -182,7 +183,7 @@ SUMMERNOTE_CONFIG = {
 
         # Change editor size
         'width': '100%',
-        'height': '250',
+        # 'height': '100%',
 
         # Use proper language setting automatically (default)
         'lang': None,
