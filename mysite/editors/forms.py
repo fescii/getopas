@@ -13,7 +13,8 @@ class CreateBlogPostForm(forms.ModelForm):
         fields = ('title','body','tags','status')
         widgets = {
             'body': SummernoteWidget(),
-            # 'title': {'placeholder': 'Search Opas','is_required':'required'},
+            'title': forms.TextInput(attrs={'placeholder': 'Click to add title'}),
+            'tags': forms.TextInput(attrs={'placeholder': 'A comma-separated list of tags'}),
         }
 class BlogEditForm(forms.ModelForm):
     class Meta:

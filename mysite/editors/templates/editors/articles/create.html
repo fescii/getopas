@@ -7,13 +7,14 @@
     {{post_form.media }}
     {% for field in post_form %}
       <div class="field {{ field.name }}">
-        {{ field.label_tag }}
+        {% comment %} {{ field.label_tag }} {% endcomment %}
+        <span class="name">{{ field.name|capfirst }}</span>
         {{ field }}
-        {{ field.help_text }}
+        {% comment %} {{ field.help_text }} {% endcomment %}
       </div>
       {% endfor %}
   {% csrf_token %}
-  <button type="submit">Save</button>
+  <button type="submit">Publish</button>
   </form>
 </div>
 {% endblock %}

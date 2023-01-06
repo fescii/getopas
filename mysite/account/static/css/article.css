@@ -222,3 +222,98 @@ main.feeds>.my-article-list{
 .article-list>.post-summery>.action-links>.delete-article-options>.delete-text>span{
     color: var(--accent-color);
 }
+
+/*Editor*/
+main.editing {
+    position: relative;
+    /* border: 1px solid rgb(0, 255, 157); */
+    margin-top: 0px;
+    display: flex;
+    flex-flow: column;
+    margin: 60px 5%;
+  }
+main.editing > .feeds-header {
+    grid-column: 2/4;
+    grid-row: 1/2;
+    position: fixed;
+    top: 0px;
+    height: 70px;
+    z-index: 3;
+    /* border: 1px solid rgb(0, 255, 157); */
+    background-color: var(--background-color);
+    backdrop-filter: blur(100px);
+    width: max-content;
+    right: 30px;
+}
+main.editing >.main-content{
+    display: flex;
+    flex-flow: column;
+}
+main.editing >.main-content>form{
+    /* border: 1px solid rgb(0, 255, 157); */
+    display: flex;
+    flex-flow: column;
+    gap: 20px;
+    /* align-items: center;
+    justify-content: center; */
+}
+main.editing >.main-content>form>.field{
+    display: flex;
+    flex-flow: column;
+    gap: 5px;
+}
+main.editing >.main-content>form>.field>input[type="text"]{
+    outline: none;
+    padding: 5px;
+    border: var(--border);
+}
+main.editing >.main-content>form>.field>.name{
+    display: inline-block;
+    color: var(--article-title-color);
+    font-size: 1.05rem;
+    /* margin-left: 3px; */
+    font-weight: bold;
+    width: 100%;
+}
+main.editing >.main-content>form>.tags>input[type="text"]{
+    padding: 0%;
+    font-size: 1rem;
+    color: var(--article-title-color);
+    border: none;
+    /* margin-left: 3px; */
+}
+main.editing >.main-content>form>.title>input[type="text"]{
+    font-size: 1.5rem;
+    padding: 0%;
+    color: var(--article-title-color);
+    border: none;
+}
+main.editing >.main-content>form>.body>.name,
+main.editing >.main-content>form>.title>.name{
+    display: none;
+}
+main.editing >.main-content>form>.status>select{
+    padding: 4px 5px;
+    background-color: transparent;
+    width: max-content;
+    cursor: pointer;
+    outline: none;
+    font-size: 1rem;
+    color: var(--article-title-color);
+    border: var(--border);
+    border-radius: 15px;
+    -webkit-border-radius: 15px;
+    -moz-border-radius: 15px;
+    -ms-border-radius: 15px;
+    -o-border-radius: 15px;
+}
+main.editing >.main-content>form>button[type="submit"]{
+    width: max-content;
+    background-color: var(--accent-color);
+    color: white;
+    font-size: 1rem;
+    padding: 5px 15px;
+    border-radius: 50px;
+    border: none;
+    cursor: pointer;
+}
