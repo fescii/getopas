@@ -12,8 +12,8 @@ class CreateBlogPostForm(forms.ModelForm):
         model = Post
         fields = ('title','body','tags','status')
         widgets = {
-            'body': SummernoteWidget()
-            #'bar': SummernoteInplaceWidget(),
+            'body': SummernoteWidget(),
+            # 'title': {'placeholder': 'Search Opas','is_required':'required'},
         }
 class BlogEditForm(forms.ModelForm):
     class Meta:
