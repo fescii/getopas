@@ -5,27 +5,19 @@
   <div class="main-content">
     <form method="POST" enctype="multipart/form-data">
     {{ edit_form.media }}
-    {{ edit_form.as_p }}
+    {% for field in edit_form %}
+      <div class="field {{ field.name }}">
+        {% comment %} {{ field.label_tag }} {% endcomment %}
+        <span class="name">{{ field.name|capfirst }}</span>
+        {{ field }}
+        {% comment %} {{ field.help_text }} {% endcomment %}
+      </div>
+    {% endfor %}
     {% csrf_token %}
-    <input type="submit" value="Save">
+    <button type="submit">Update</button>
     </form>
   </div>
   {% endblock %}
 {% block footer %}
-<script src="{% static 'tinymce/tinymce.min.js'  %}"></script>
 <script src=" {% static 'js/base.js' %}"></script>
-<script>
-    tinymce.init({
-        selector: '#id_body',
-        height: 550,
-        menubar: 'edit insert view format table',
-        plugins: [
-          'advlist autolink lists link image charmap print preview anchor',
-          'searchreplace visualblocks code fullscreen',
-          'insertdatetime media table paste imagetools wordcount'
-        ],
-        toolbar: 'insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image',
-        content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }'
-      });
-  </script>
 {% endblock footer %}

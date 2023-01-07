@@ -20,7 +20,9 @@ class BlogEditForm(forms.ModelForm):
     class Meta:
         model = Post
         fields = ('title', 'body','status')
-        #fields = '__all__'
+        widgets = {
+            'body': SummernoteWidget(),
+        }
 
 class BlogEditTagsForm(forms.ModelForm):
     class Meta:

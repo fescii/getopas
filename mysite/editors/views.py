@@ -849,7 +849,7 @@ def edit_blog_post(request, pk):
             Post.update_post(post,title=title,body=body, status=status)
             #edit_form.save()
             messages.success(request, 'Post updated')
-            return HttpResponseRedirect(reverse('user_post_list'))
+            return HttpResponseRedirect(reverse('editors:user_post_list'))
 
         else:
             messages.error(request, 'Error! updating')
