@@ -1380,14 +1380,14 @@ main.profile>.profile-info>.general-info>.profile-title {
 
 }
 
-.avatar-upload {
+.general-info>.profile-image .avatar-upload {
     /*border: 1px solid var(--border-color);*/
     position: relative;
     max-width: 205px;
     justify-self: end;
 }
 
-.avatar-upload .avatar-edit {
+.general-info>.profile-image .avatar-upload .avatar-edit {
     position: absolute;
     left: 20px;
     top: 35%;
@@ -1404,11 +1404,11 @@ main.profile>.profile-info>.general-info>.profile-title {
   }
 */
 
-.avatar-upload .avatar-edit>input {
+.general-info>.profile-image .avatar-upload .avatar-edit>input {
     display: none;
 }
 
-.avatar-upload .avatar-edit>input+label {
+.general-info>.profile-image .avatar-upload .avatar-edit>input+label {
     display: inline-block;
     width: max-content;
     height: 30px;
@@ -1425,7 +1425,7 @@ main.profile>.profile-info>.general-info>.profile-title {
     transition: all 0.2s ease-in-out;
 }
 
-.avatar-upload .avatar-edit>label {
+.general-info>.profile-image .avatar-upload .avatar-edit>label {
     background-color: #ffffffcf;
     border-color: var(--border-shadow);
     box-shadow: var(--box-shadow);
@@ -1439,7 +1439,7 @@ main.profile>.profile-info>.general-info>.profile-title {
     border-radius: 50px;
 }
 
-.avatar-upload .avatar-edit>label:hover {
+.general-info>.profile-image .avatar-upload .avatar-edit>label:hover {
     background-color: #ffffff;
     border-color: var(--border-shadow);
     box-shadow: var(--box-shadow);
@@ -1456,7 +1456,7 @@ main.profile>.profile-info>.general-info>.profile-title {
     text-align: center;
     margin: auto;
   }*/
-.avatar-upload .avatar-preview {
+  .general-info>.profile-image .avatar-upload .avatar-preview {
     width: 120px;
     height: 120px;
     position: relative;
@@ -1466,7 +1466,7 @@ main.profile>.profile-info>.general-info>.profile-title {
     z-index: -1;
 }
 
-.avatar-upload .avatar-preview>div {
+.general-info>.profile-image .avatar-upload .avatar-preview>div {
     background-image: url('');
     width: 100%;
     height: 100%;
@@ -1476,7 +1476,7 @@ main.profile>.profile-info>.general-info>.profile-title {
     background-position: center;
 }
 
-.profile-image>input[type="submit"] {
+.general-info>.profile-image>input[type="submit"] {
     color: white;
     width: 80%;
     font-size: 15px;
@@ -2105,16 +2105,18 @@ main.read>.article-wrapper>.content>.article-title>a {
 }
 
 main.read>.article-wrapper>.content>#cover-image {
-    align-self: center;
+    align-self: flex-start;
     margin: 20px 0px;
     width: 100%;
     height: auto;
 }
 
 main.read>.article-wrapper>.content>#cover-image>img {
+    /* width: 100%;
+    height: 100%; */
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: contain;
 }
 
 main.read>.article-wrapper>.content>.article-footer {
@@ -2284,7 +2286,6 @@ main.read>.comments-wrapper>.add-comment {
     font-size: 1.0rem;
     margin-right: 10px;
     cursor: pointer;
-    border: none;
     color: white;
     background: #ad5389;
     background: linear-gradient(0deg, rgba(20, 167, 62, 1) 0%, rgba(102, 247, 113, 1) 100%);

@@ -323,6 +323,7 @@ def explore_topics(request):
                    'tag_four_posts': posts_in_tag_four,
                    'common_tags': most_common_tags})
 
+
 #Feeds Interests.
 @login_required
 def interest(request):
@@ -905,43 +906,21 @@ def edit_blog_post_tags(request, pk):
                          'profile':profile,
                          'section': 'article-list'})
 
+
 #Edit Article Cover Photo
 @login_required
-def edit_blog_post_cover(request, pk):
+def edit_article_cover(request, pk):
     #post = get_object_or_404(Post, id=pk)
-    user = request.user
-    profile = user.profile
     post = Post.objects.get(id=pk)
     if request.method == 'POST':
-        edit_form = BlogEditCoverForm(request.POST or None, instance=post,files=request.FILES)
-        if edit_form.is_valid():
-            cd = edit_form.cleaned_data
-            cover = cd['cover']
-            #edit_form.save()
-            Post.update_cover(post,cover)
-            messages.success(request, 'Cover updated')
-            return HttpResponseRedirect(reverse('editors:user_post_list'))
+        cover = request.FILES.get("photo")
+        Post.update_cover(post,cover)
+        messages.success(request, 'Cover updated')
+        return HttpResponseRedirect(reverse('editors:user_post_list'))
 
-        else:
-            messages.error(request, 'Error updating!')
-            edit_form = BlogEditCoverForm(request.POST or None, instance=post, files=request.FILES)
-
-        return render(request,
-                        'editors/articles/edit-post-cover.html',
-                        {'edit_form': edit_form,
-                         'user':user,
-                         'post': post,
-                         'profile':profile,
-                         'section': 'article-list'})
     else:
-        edit_form = BlogEditCoverForm(request.POST or None, instance=post)
-        return render(request,
-                        'editors/articles/edit-post-cover.html',
-                        {'edit_form': edit_form,
-                         'post': post,
-                         'user':user,
-                         'profile':profile,
-                         'section': 'article-list'})
+        messages.error(request, 'Error updating!')
+
 
 # process delete post
 @login_required

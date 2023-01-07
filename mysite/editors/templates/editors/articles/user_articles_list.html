@@ -16,15 +16,35 @@
                     <h2>
                         <a href="{{ post.get_absolute_url }}"> {{ post.title }} </a>
                     </h2>
-                    <div class="image-wrapper">
+                    {% comment %} <div class="image-wrapper">
                         {% if post.cover %}
                             <img id="" src="{% thumbnail post.cover 300x0 %}" alt="Post-Image">
                         {% else %}
-                            <img src="https://eu.ui-avatars.com/api/?background=ff8800&name={{post.title}}&size=250&color=fff" alt="Profile">
+                            <img src="https://eu.ui-avatars.com/api/?background=23a6d5&name={{post.title}}&size=250&color=fff" alt="article image">
                         {% endif %}
-                    </div>
+                    </div> {% endcomment %}
+                    <form class="image-wrapper" action="{% url 'editors:edit_article_cover' pk=post.id %}" method="post" enctype="multipart/form-data">
+                        <div data-id="{{post.id}}" class="avatar-upload">
+                            <div class="avatar-edit">
+                                <label for="wrapper-{{post.id}}">Select Photo</label>
+                                <input type="file" name="photo" accept="image/*" id="wrapper-{{post.id}}">
+                            </div>
+                            <div class="avatar-preview">
+                                <div id="clock" class="clock-{{post.id}}"
+                                    {% if post.cover %}
+                                    style="background-image: url('..{% thumbnail post.cover 300x0 %}');">
+                                    {% else %}
+                                        style="background-image: url('https://eu.ui-avatars.com/api/?background=08b86f&name={{post.title}}&size=250&color=fff');">
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                        {% csrf_token %}
+                        <input type="submit" value="Update">
+                    </form>
                     <div class="date">
-                        Created on: <span class="published-date">{{ post.publish.date }} {{ post.publish.time }}</span>
+                        {% comment %} {{ post.publish|time_lapse }} {% endcomment %}
+                        {{ post.publish }}
                     </div>
                     <div class='article-summery'>
                         {{ post.body|striptags|safe|truncatechars:160 }}
@@ -40,7 +60,6 @@
                     </div>
                     <div class="action-links">
                         <a href="/edit-article/{{post.id}}">Edit</a>
-                        <a href="/edit-article/cover/{{post.id}}">Cover</a>
                         <a href="/edit-article/tags/{{post.id}}">Tags</a>
                         <a class="delete-article" href="">Delete</a>
                         <div class="delete-article-options">
@@ -60,6 +79,32 @@
     </div>
     {% include "editors/create-container.html" %}
 {% endblock content %}
+{% block footer %}
+<script>
+    let changePics = document.querySelectorAll('form.image-wrapper>.avatar-upload')
+    if(changePics != null){
+        changePics.forEach((item,index)=>{
+            let postId = item.dataset.id;
+            let avatarEdit = item.querySelector(`.clock-${postId}`);
+            let labelItem = item.querySelector(`#wrapper-${postId}`);
+
+            labelItem.addEventListener('change',(e)=>{
+                e.preventDefault()
+
+                let file = e.target.files[0];
+                let reader = new FileReader();
+                reader.onloadend = function () {
+                    avatarEdit.style.backgroundImage = "url(" + reader.result + ")";
+                }
+                if (file) {
+                    reader.readAsDataURL(file);
+                } else {
+                }
+            });
+        })
+    }
+</script>
+{% endblock footer%}
 {% block domready %}
         // Delete-modals
         deleteBtns = document.querySelectorAll('a.delete-article')

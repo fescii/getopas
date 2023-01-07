@@ -46,6 +46,7 @@ main.feeds>.my-article-list{
 }
 .article-list>.post-summery>h2{
     font-size: 1.25rem;
+    font-weight: 500;
     margin: 0%;
     padding: 0%;
     grid-column: 2/3;
@@ -53,6 +54,7 @@ main.feeds>.my-article-list{
 }
 .article-list>.post-summery>h2>a{
     text-decoration: none;
+    font-size: 1.3rem;
     color: var(--article-title-color);
 }
 
@@ -67,16 +69,120 @@ main.feeds>.my-article-list{
 }
 
 .article-list>.post-summery>.image-wrapper {
-    height: 130px;
     grid-column: 1/2;
     grid-row: 1/5;
-    margin: 12px 20px 0px 10px;
+    margin: 5px 20px 0px 10px;
+    padding: 0px;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    justify-content: stretch;
+    gap: 20px;
+    height: max-content;
 }
 
-.article-list>.post-summery>.image-wrapper>img {
+.article-list>.post-summery>.image-wrapper .avatar-upload {
+    /* border: 3px solid var(--border-color); */
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 0;
+    justify-self: end;
+}
+
+.article-list>.post-summery>.image-wrapper .avatar-upload .avatar-edit {
+    background: transparent;
+    position: absolute;
+    top: 20px;
+    z-index: 2;
+}
+
+.article-list>.post-summery>.image-wrapper .avatar-upload .avatar-edit>input {
+    display: none;
+}
+
+.article-list>.post-summery>.image-wrapper .avatar-upload .avatar-edit>input+label {
+    display: inline-block;
+    width: max-content;
+    height: 30px;
+    margin-bottom: 0;
+    border-radius: 100%;
+    background-color: #ffffff45;
+    border: 1px solid transparent;
+    box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.12);
+    cursor: pointer;
+    font-weight: normal;
+    transition: all 0.2s ease-in-out;
+}
+
+.article-list>.post-summery>.image-wrapper .avatar-upload .avatar-edit>label {
+    background-color: #ffffffcf;
+    cursor: pointer;
+    border-color: var(--border-shadow);
+    box-shadow: var(--box-shadow);
+    color: var(--accent-color);
+    font-weight: bold;
+    padding: 5px 18px;
+    -webkit-border-radius: 50px;
+    -moz-border-radius: 50px;
+    -ms-border-radius: 50px;
+    -o-border-radius: 50px;
+    border-radius: 50px;
+}
+
+.article-list>.post-summery>.image-wrapper .avatar-upload .avatar-edit>label:hover {
+    background-color: #ffffff;
+    border-color: var(--border-shadow);
+    box-shadow: var(--box-shadow);
+}
+
+.article-list>.post-summery>.image-wrapper .avatar-upload .avatar-preview {
+    width: 210px;
+    height: 170px;
+    border-radius: 10px;
+    box-shadow: var(--box-shadow);
+    z-index: 1;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
+}
+
+.article-list>.post-summery>.image-wrapper .avatar-upload .avatar-preview>div {
+    background-image: url('');
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    border-radius: 10px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
+}
+
+.article-list>.post-summery>.image-wrapper>input[type="submit"] {
+    display: inline-block;
+    color: white;
+    width: max-content;
+    z-index: 2;
+    font-size: 15px;
+    margin-top: -70px;
+    color: white;
+    background: #ad5389;
+    background: linear-gradient(0deg, rgba(20, 167, 62, 1) 0%, rgba(102, 247, 113, 1) 100%);
+    border: none;
+    box-shadow: 0 12px 48px #14a73e22;
+    cursor: pointer;
+    padding: 5px 15px;
+    text-align: center;
+    -webkit-border-radius: 50px;
+    -moz-border-radius: 50px;
+    -ms-border-radius: 50px;
+    -o-border-radius: 50px;
+    border-radius: 50px;
 }
 
 .article-list>.post-summery>.article-summery {
@@ -111,17 +217,19 @@ main.feeds>.my-article-list{
     grid-column: 2/3;
    /* border: 1px solid #838584e0;*/
 }
-
+.issue-list>.issue-summery>h2{
+    font-weight: 500;
+}
 .issue-list>.issue-summery>h2>a {
     text-decoration: none;
     color: var(--article-title-color);
     font-weight: 400;
 }
 
-.article-list>.post-summery>.date>.published-date {
+.article-list>.post-summery>.date{
     color: var(--gray-color);
     font-weight: lighter;
-    font-size: 0.9rem;
+    /* font-size: 0.9rem; */
 }
 
 .article-list>.post-summery>.article-stats>.views,
@@ -140,7 +248,7 @@ main.feeds>.my-article-list{
 .article-list>.post-summery>.article-stats>.comments>.icli {
     font-size: 18px;
     font-weight: bold;
-    color: var(--alt-accent-color);
+    color: var(--accent-color);
     /*border: 1px solid rgb(48, 48, 45);*/
     display: inline-block;
     margin-right: 5px;
@@ -166,18 +274,19 @@ main.feeds>.my-article-list{
     padding: 3px 15px;
     font-size: 1rem;
     border: var(--gray-color);
-    background-color: rgba(57, 56, 56, 0.087);
+    background-color: var(--background-btn);
     color: var(--gray-color);
     border-radius: 50px;
 }
 
 .article-list>.post-summery>.action-links>a:last-of-type {
     color: #fff;
-    background-color: var(--alt-accent-color);
+    background-color: var(--warn-color);
 }
 .delete-article-options,
 .article-list>.post-summery>.action-links>.delete-article-options{
     position: absolute;
+    z-index: 3;
     right: 10px;
     background-color: var(--background-color);
     box-shadow: var(--box-shadow);
@@ -216,7 +325,7 @@ main.feeds>.my-article-list{
 .article-list>.post-summery>.action-links>.delete-article-options>a:last-of-type{
     justify-self: end;
     color: #fff;
-    background-color: #e72c10;
+    background-color: var(--warn-color);
 }
 .delete-article-options>.delete-text>span,
 .article-list>.post-summery>.action-links>.delete-article-options>.delete-text>span{
