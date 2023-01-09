@@ -60,7 +60,7 @@
                     </div>
                     <div class="action-links">
                         <a href="/edit-article/{{post.id}}">Edit</a>
-                        <a href="/edit-article/tags/{{post.id}}">Tags</a>
+                        <a data-id="{{post.id}}" class="edit-article-tags" href="">Tags</a>
                         <a class="delete-article" href="">Delete</a>
                         <div class="delete-article-options">
                             <div class="delete-text">
@@ -69,6 +69,17 @@
                             <a class="delete-article-cancel" href="">Cancel</a>
                             <a href="/delete-article/{{post.id}}">Confirm</a>
                         </div>
+                        <form id="update-tags-{{post.id}}" class="update-article-tags" action="{% url 'editors:edit_article_tags' pk=post.id %}" method="post">
+                            <div class="header">
+                                <label for="tags-{{post.id}}">Edit tags</label>
+                                <input type="text" name="tags" id="tags-{{post.id}}" value="{% for tag in post.tags.names %}{{tag|split:''}},{% endfor %}">
+                            </div>
+                            <div class="footer">
+                                <a class="update-tags-cancel" href="">Cancel</a>
+                                {% csrf_token %}
+                                <input type="submit" value="Update">
+                            </div>
+                        </form>
                     </div>
                 </div>
             {% empty %}
@@ -118,7 +129,6 @@
                     modal = deleteModals[index]
                     if (modal.style.display === 'grid') {
                         modal.style.setProperty('display', 'none')
-                        actionBtn.style.backgroundColor = 'transparent'
                     }
                     else {
                         try{
@@ -138,6 +148,40 @@
                 cancelBtn.addEventListener('click',(e)=>{
                     e.preventDefault()
                     modal = deleteModals[index]
+                    modal.style.setProperty('display', 'none')
+                })
+            })
+        }
+
+
+        //Update-tags-modals
+        tagBtns = document.querySelectorAll('a.edit-article-tags')
+        tagModals = document.querySelectorAll('.update-article-tags')
+
+
+        if (tagBtns != null && tagModals != null) {
+            tagBtns.forEach(tagBtn=>{
+               const modal = document.querySelector(`form#update-tags-${tagBtn.dataset.id}`)
+               const cancelBtn = modal.querySelector('a.update-tags-cancel')
+                tagBtn.addEventListener('click', (e) => {
+                    e.preventDefault()
+                    if (modal.style.display === 'flex') {
+                        modal.style.display = 'none'
+                    }
+                    else {
+                        modal.style.setProperty('display', 'flex')
+                        {% comment %} try{
+                            tagModals.forEach((tagModal)=>{
+                                tagModal.style.display = 'none'
+                            })
+                        }
+                        finally{
+                            modal.style.setProperty('display', 'flex')
+                        } {% endcomment %}
+                    }
+                })
+                cancelBtn.addEventListener('click',(e)=>{
+                    e.preventDefault()
                     modal.style.setProperty('display', 'none')
                 })
             })

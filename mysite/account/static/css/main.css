@@ -1713,6 +1713,7 @@ main.newsletters>.newsletters-feeds>.newsletter-wrapper:nth-of-type(7) {
     flex-flow: row;
     flex-wrap: nowrap;
     align-items: center;
+    justify-content: center;
     gap: 2px;
 }
 
@@ -1727,7 +1728,7 @@ main.newsletters>.newsletters-feeds>.newsletter-wrapper:nth-of-type(7) {
 .newsletter-wrapper>.footer>.footer-info>a>span {
     display: inline-block;
     font-size: 25px;
-    /* margin-top: 5px; */
+    margin-top: 4px;
     color: var(--alt-accent-color);
     -webkit-transition: transform 3s ease;
     -moz-transition: transform 3s ease;

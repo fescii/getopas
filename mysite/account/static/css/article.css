@@ -283,10 +283,80 @@ main.feeds>.my-article-list{
     color: #fff;
     background-color: var(--warn-color);
 }
+
+.article-list>.post-summery>.action-links>.update-article-tags{
+    position: absolute;
+    z-index: 2;
+    right: 10px;
+    background-color: var(--background-color);
+    box-shadow: var(--box-shadow);
+    bottom: 50px;
+    width: 50%;
+    border-radius: 10px;
+    border-top-right-radius: 0%;
+    border: var(--border);
+    padding: 10px;
+    display: none;
+    flex-flow: column;
+    gap: 25px;
+}
+.article-list>.post-summery>.action-links>.update-article-tags>.header{
+    display: flex;
+    flex-flow: column;
+    gap: 5px;
+}
+.article-list>.post-summery>.action-links>.update-article-tags>.header>label{
+    color: var(--article-title-color);
+    align-self: center;
+    font-size: 1.2rem;
+}
+.article-list>.post-summery>.action-links>.update-article-tags>.header>input[type="text"]{
+    outline: none;
+    background-color: transparent;
+    color: var(--article-title-color);
+    border: var(--border);
+    font-size: 1rem;
+    padding: 5px 10px;
+    border-radius: 50px;
+    -webkit-border-radius: 50px;
+    -moz-border-radius: 50px;
+    -ms-border-radius: 50px;
+    -o-border-radius: 50px;
+}
+.article-list>.post-summery>.action-links>.update-article-tags>.footer{
+    display: flex;
+    flex-flow: row;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 5px;
+}
+.article-list>.post-summery>.action-links>.update-article-tags>.footer>input[type="submit"],
+.article-list>.post-summery>.action-links>.update-article-tags>.footer>a{
+    text-decoration: none;
+    /*box-shadow: 0rem 0.5rem 1.5rem #6366630e;*/
+    display: inline-block;
+    width: max-content;
+    padding: 3px 15px;
+    cursor: pointer;
+    /* margin: 10px 10px; */
+    font-size: 1rem;
+    background-color:  var(--background-btn);
+    color: var(--gray-color);
+    border: none;
+    border-radius: 50px;
+}
+.article-list>.post-summery>.action-links>.update-article-tags>.footer>input[type="submit"]{
+    padding: 5px 15px;
+    color: #fff;
+    background-color: var(--accent-color);
+}
+
+
 .delete-article-options,
 .article-list>.post-summery>.action-links>.delete-article-options{
     position: absolute;
-    z-index: 3;
+    z-index: 2;
     right: 10px;
     background-color: var(--background-color);
     box-shadow: var(--box-shadow);

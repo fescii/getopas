@@ -1,5 +1,6 @@
 from django.shortcuts import render,get_object_or_404
 from django.contrib.auth import authenticate, login
+import json
 
 from magazine.models import Issue, Issue_likes
 from .forms import  CreateBlogPostForm,\
@@ -748,6 +749,7 @@ def create_options(request):
                     'total_issues':total_issues,
                     'followers':followers,
                     'title':'create',
+                    'tab_c':'create',
                     'name':'publications',
                     'section':'create'})
 
@@ -764,7 +766,14 @@ def create_post(request):
             post = post_form.save(commit=False)
             post.author = request.user
             post.save()
-            post_form.save_m2m()
+            tags = post_form.cleaned_data["tags"]
+            text_tags = ",".join([str(tag).lower() for tag in tags])
+            text_tags = text_tags.replace(" ","")
+            text_tags = text_tags.replace("[","")
+            text_tags = text_tags.replace("]","")
+
+            post.tags.set(text_tags.split(","),clear=True)
+            # post_form.save_m2m()
             create_action(request.user, 'added article','create', post)
             messages.success(request, 'Article was created')
             return HttpResponseRedirect(reverse('editors:user_post_list'))
@@ -805,6 +814,7 @@ def user_post_list(request):
     return render(request, 'editors/articles/user_articles_list.html',
                   {'page': page,
                    'posts': posts,
+                   'tab_c':'create',
                    'title': 'published',
                    'name':'publications',
                    'section': 'my-articles'})
@@ -829,6 +839,7 @@ def user_drafted_list(request):
                   {'page': page,
                    'posts': posts,
                    'title': 'drafted',
+                   'tab_c':'create',
                    'name':'publications',
                    'section': 'my-articles'})
 
@@ -872,39 +883,18 @@ def edit_blog_post(request, pk):
 
 #Edit Articles Tags
 @login_required
-def edit_blog_post_tags(request, pk):
+def edit_article_tags(request, pk):
     #post = get_object_or_404(Post, id=pk)
-    user = request.user
-    profile = user.profile
     post = Post.objects.get(id=pk)
     if request.method == 'POST':
-        edit_form = BlogEditTagsForm(request.POST or None, instance=post)
-        if edit_form.is_valid():
-            tags = edit_form.save(commit=False)
-            edit_form.save_m2m()
-            tags.save()
-            messages.success(request, 'Tags updated')
-            return HttpResponseRedirect(reverse('editors:user_post_list'))
-
-        else:
-            messages.error(request, 'Error! updating')
-            edit_form = BlogEditTagsForm(request.POST or None, instance=post)
-
-        return render(request,
-                        'editors/articles/edit-post-tags.html',
-                        {'edit_form': edit_form,
-                         'user':user,
-                         'profile':profile,
-                         'section': 'article-list'})
+        tags = request.POST.get("tags")
+        tags.replace(" ","")
+        text_tags = tags.lower()
+        post.tags.set(text_tags.split(","),clear=True)
+        messages.success(request, 'Tags updated')
+        return HttpResponseRedirect(reverse('editors:user_post_list'))
     else:
-        edit_form = BlogEditTagsForm(request.POST or None, instance=post)
-        return render(request,
-                        'editors/articles/edit-post-tags.html',
-                        {'edit_form': edit_form,
-                         'post': post,
-                         'user':user,
-                         'profile':profile,
-                         'section': 'article-list'})
+        messages.error(request, 'Error updating!')
 
 
 #Edit Article Cover Photo
@@ -965,10 +955,12 @@ def use_theme(request):
             user_theme = UserTheme.objects.get(user=user)
             UserTheme.update_user_theme(user_theme,theme=theme,user=user)
             Theme.update_users(theme)
+            # request.session['preferences'] = theme.preferences
             return JsonResponse(theme.preferences)
         except UserTheme.DoesNotExist:
             UserTheme.objects.create(theme=theme,user=user)
             Theme.update_users(theme)
+            # request.session['preferences'] = theme.preferences
             return JsonResponse(theme.preferences)
     return JsonResponse({'status': 'error'})
 
