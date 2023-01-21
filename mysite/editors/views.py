@@ -34,9 +34,9 @@ def main_home(request):
 
     # Display all posts by default
     posts = Post.published.all()
-    paginator = Paginator(posts, 5)
+    paginator = Paginator(posts, 3)
     page = request.GET.get('page')
-    post_only = request.GET.get('post_only')
+    post_only = request.GET.get('story_only')
     try:
         posts = paginator.page(page)
     except PageNotAnInteger:
@@ -52,8 +52,7 @@ def main_home(request):
     if post_only:
         return render(request,
                       'main/list-stories.html',
-                      {'section': 'articles','posts': posts})
-
+                      {'section': 'stories','stories': posts})
 
     return render(request,
                  'main/main.html',

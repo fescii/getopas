@@ -121,8 +121,8 @@
                 <div class="name">Stories</div>
             </div>
             {% include "main/list-stories.html" %}
-            <a href="" id="load-more-stories" class="load-more">Load more</a>
         </div>
+        <a href="" id="load-more-stories" class="load-more">Load more</a>
     </main>
 {% endblock main %}
 {% block domready %}
@@ -130,21 +130,27 @@
     let emptyPage = false;
     let blockRequest = false;
     let loadMoreControl = document.querySelector("#load-more-stories")
-    loadMoreControl.addEventListener('click', (e)=> {
+    loadMoreControl.addEventListener('click', (e)=>{
         e.preventDefault()
-        blockRequest = true;
-        page += 1;
-        fetch('?post_only=1&page=' + page)
-        .then(response => response.text())
-        .then(html => {
-            if (html === '') {
-                emptyPage = true;
-            }
-            else {
-                let postList = document.querySelector('#stories-list');
-                postList.insertAdjacentHTML('beforeEnd', html);
-                blockRequest = false;
-            }
-        })
+        if(!emptyPage && !blockRequest) {
+            e.target.textContent = 'Loding...'
+            blockRequest = true;
+            page += 1;
+            fetch('?story_only=1&page=' + page)
+            .then(response => response.text())
+            .then(html => {
+                if (html === '') {
+                    emptyPage = true;
+                    e.target.textContent = 'Load more'
+                }
+                else {
+                    console.log(html)
+                    let storiesList = document.querySelector('#stories-list');
+                    storiesList.insertAdjacentHTML('beforeEnd', html);
+                    blockRequest = false;
+                    e.target.textContent = 'Load more'
+                }
+            })
+        }
     })
 {% endblock %}
