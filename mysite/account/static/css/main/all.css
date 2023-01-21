@@ -10,6 +10,7 @@
     box-sizing: border-box !important;
     --font-one: 'Sen', sans-serif;
     --font-two: 'Product Sans', sans-serif;
+    /* font-family: 'Sen', sans-serif; */
 }
 html{
     margin: 0%;

@@ -42,51 +42,52 @@
     </div>
   </div>
 {% endblock content%}
+
 {% block domready %}
 //Share-Modal
 const viewBtns = document.querySelectorAll("a#view-modal"),
-    popup = document.querySelectorAll("#popup");
+popup = document.querySelectorAll("#popup");
 
-    if(viewBtns != null && popup != null){
-      viewBtns.forEach((viewBtn,index)=>{
-        const close = popup[index].querySelector("#close"),
-        field = popup[index].querySelector(".field"),
-        input = field.querySelector("input"),
-        copy = field.querySelector("button");
+if(viewBtns != null && popup != null){
+  viewBtns.forEach((viewBtn,index)=>{
+    const close = popup[index].querySelector("#close"),
+    field = popup[index].querySelector(".field"),
+    input = field.querySelector("input"),
+    copy = field.querySelector("button");
 
-        viewBtn.addEventListener("click",(e)=>{
-            e.preventDefault();
-            popup[index].style.setProperty('display', 'block')
-        })
+    viewBtn.addEventListener("click",(e)=>{
+      e.preventDefault();
+      popup[index].style.setProperty('display', 'block')
+    })
 
-        close.addEventListener("click",()=>{
-            popup[index].style.setProperty('display', 'none')
-        })
+    close.addEventListener("click",()=>{
+      popup[index].style.setProperty('display', 'none')
+    })
 
-        copy.onclick = () => {
-          input.select(); //select input value
-          if (document.execCommand("copy")) { //if the selected text copy
-            field.classList.add("active");
-            copy.innerText = "Copied";
-            setTimeout(() => {
-              window.getSelection().removeAllRanges(); //remove selection from document
-              field.classList.remove("active");
-              copy.innerText = "Copy";
-            }, 3000);
-          }
+    copy.onclick = () => {
+      input.select(); //select input value
+        if (document.execCommand("copy")) { //if the selected text copy
+          field.classList.add("active");
+          copy.innerText = "Copied";
+          setTimeout(() => {
+            window.getSelection().removeAllRanges(); //remove selection from document
+            field.classList.remove("active");
+            copy.innerText = "Copy";
+          }, 3000);
         }
-      })
-    }
+      }
+    })
+}
 
-    const url = '{% url "editors:save" %}';
-    let options = {
-      method: 'POST',
-      headers: {'X-CSRFToken': csrftoken},
-      mode: 'same-origin'
-    }
+const url = '{% url "editors:save" %}';
+let options = {
+  method: 'POST',
+  headers: {'X-CSRFToken': csrftoken},
+  mode: 'same-origin'
+}
 
-    saveButtons = document.querySelectorAll('a.save')
-    saveButtons.forEach(saveButton =>{
+  saveButtons = document.querySelectorAll('a#save-1')
+  saveButtons.forEach(saveButton =>{
       saveButton.addEventListener('click', function(e){
         e.preventDefault();
         if(saveButton.dataset.action === 'Save'){
