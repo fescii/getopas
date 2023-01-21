@@ -130,7 +130,7 @@
                         {% endif %}
                     </div>
                     <div class="content">
-                        <a href="" class="header">
+                        <a href="{% url 'profile' username=story.author%}" class="header">
                             <div class="name">{{story.author.get_full_name}}</div>
                             <span class="username">@{{story.author.username}}</span>
                         </a>
@@ -155,7 +155,7 @@
                                 <div class="no">{{story.blog_views}}</div>
                             </div>
                             <i class="dot"></i>
-                            <span class="text">6th Aug 2022</span>
+                            <span class="text">{{ story.publish|get_date_en }}</span>
                             {% for tag in story.tags.all|first_tag %}
                                 <a href="{% url 'editors:explore_newsletter_topic' topic=tag.slug %}" class="topic">{{tag|split:" "}}</a>
                             {% endfor %}

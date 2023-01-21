@@ -1,0 +1,47 @@
+{% load static %}
+{% load blog_tags %}
+{% load contact_tags %}
+{% load thumbnail %}
+{% for story in stories %}
+    <div class="story">
+        <div class="profile">
+            {% if story.author.profile.photo %}
+                <img src="{% thumbnail story.author.profile.photo 300x0 %}" alt="Profile">
+            {% else %}
+                <img src="https://eu.ui-avatars.com/api/?background=08b86f&name={{story.author.first_name}}+{{story.author.last_name}}&size=250&color=fff" alt="Profile">
+            {% endif %}
+        </div>
+        <div class="content">
+            <a href="{% url 'profile' username=story.author%}" class="header">
+                <div class="name">{{story.author.get_full_name}}</div>
+                <span class="username">@{{story.author.username}}</span>
+            </a>
+            <div class="summery-wrapper">
+                <a href="{{story.get_absolute_url}}" class="title">{{story.title}}</a>
+                <div class="summery">
+                    <div class="story-cover">
+                        {% if story.cover %}
+                            <img id="" src="{% thumbnail story.cover 300x0 %}" alt="Story image">
+                        {% else %}
+                            <img src="https://eu.ui-avatars.com/api/?background=ff8800&name={{story.title}}&size=250&color=fff" alt="Profile">
+                        {% endif %}
+                    </div>
+                    <div class="text">
+                        {{story.body|striptags|safe|truncatechars:300 }}
+                    </div>
+                </div>
+            </div>
+            <div class="footer">
+                <div class="views">
+                    <span class="iconlyBulk-Show"><span class="path1"></span><span class="path2"></span></span>
+                    <div class="no">{{story.blog_views}}</div>
+                </div>
+                <i class="dot"></i>
+                <span class="text">{{ story.publish|get_date_en }}</span>
+                {% for tag in story.tags.all|first_tag %}
+                    <a href="{% url 'editors:explore_newsletter_topic' topic=tag.slug %}" class="topic">{{tag|split:" "}}</a>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endfor %}

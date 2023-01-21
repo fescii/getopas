@@ -259,3 +259,26 @@ def time_lapse(posted_time):
         else:
             return f'{years} year ago'
 register.filter('time_lapse',time_lapse)
+
+#Return tine-since-the-article-was-posted
+def get_date_en(posted_time):
+    posted_time = posted_time
+    th = ''
+    day = int(posted_time.strftime('%d'))
+    if (day == 11):
+        th = 'th'
+    elif (day == 12):
+        th = 'th'
+    elif (day == 13):
+        th = 'th'
+    else:
+        if ((day % 10) == 1):
+            th = 'st'
+        elif ((day % 10) == 2):
+            th = 'nd'
+        elif ((day % 10) == 3):
+            th = 'rd'
+        else:
+            th = 'th'
+    return f"{day}{th} {posted_time.strftime('%b')} {posted_time.strftime('%Y')}"
+register.filter('get_date_en',get_date_en)
