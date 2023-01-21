@@ -32,8 +32,28 @@ from django.core.exceptions import ObjectDoesNotExist
 #Home
 def main_home(request):
 
-    # Display all actions by default
-    posts = Post.published.all()[:10]
+    # Display all posts by default
+    posts = Post.published.all()
+    paginator = Paginator(posts, 5)
+    page = request.GET.get('page')
+    post_only = request.GET.get('post_only')
+    try:
+        posts = paginator.page(page)
+    except PageNotAnInteger:
+        # If page is not an integer deliver the first page
+        posts = paginator.page(1)
+    except EmptyPage:
+        if post_only:
+            # If AJAX request and page out of range
+            # return an empty page
+            return HttpResponse('')
+        # If page out of range return last page of results
+        posts = paginator.page(paginator.num_pages)
+    if post_only:
+        return render(request,
+                      'main/list-stories.html',
+                      {'section': 'articles','posts': posts})
+
 
     return render(request,
                  'main/main.html',
