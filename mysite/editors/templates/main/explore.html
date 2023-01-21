@@ -1,0 +1,186 @@
+{% extends "main.html" %}
+{% load static %}
+{% load blog_tags %}
+{% load contact_tags %}
+{% load thumbnail %}
+
+{% block metatitle %}Experience the world of information, anytime, anywhere.{% endblock %}
+{% block description %}
+    Unleash the power of words and share your stories,newsletters and information with the world in a seamless and interactive way.
+{% endblock %}
+
+{% comment %} {% block image %}{% static 'favicon.ico' %}{% endblock %} {% endcomment %}
+{% block url %}https://www.getopas.com{% endblock %}
+
+{% block main %}
+    <main class="explore">
+        <div class="most-read">
+            <div class="section-title">
+                <div class="name">
+                    <h2 class="name">Most Read</h2>
+                    <span class="text">What recently captured people's interest</span>
+                </div>
+                {% comment %} <a href="" class="link">view more</a> {% endcomment %}
+            </div>
+            <div class="most-read-stories">
+                {% for story in top_posts %}
+                    <div class="story">
+                        <div class="image-wrapper">
+                            {% if story.cover %}
+                                <img id="" src="{% thumbnail story.cover 500x0 %}" alt="Story image">
+                            {% else %}
+                                <img src="https://eu.ui-avatars.com/api/?background=ff8800&name={{story.title}}&size=500&color=fff" alt="Profile">
+                            {% endif %}
+                        </div>
+                        <div class="story-info">
+                            <h2 class="story-title">
+                                <a href="{{story.get_absolute_url}}" class="link">{{story.title}}</a>
+                            </h2>
+                            <div class="user-info">
+                                <a href="{{story.author.get_absolute_url}}" class="name">{{story.author.get_full_name}}</a>
+                            </div>
+                        </div>
+                        <div class="story-summery">
+                            {{story.body|striptags|safe|truncatechars:200 }}
+                        </div>
+                        <div class="story-footer">
+                            <a href="" class="save">
+                                <i class="iconly-Bookmark icli"></i>
+                                <span class="text">Save</span>
+                            </a>
+                            {% for tag in story.tags.all|first_tag %}
+                                <a href="{% url 'editors:explore' topic=tag.slug %}" class="topic">{{tag|split:" "}}</a>
+                            {% endfor %}
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+            <div class="best-topic">
+                <div class="section-title">
+                    <div class="name">
+                        <div class="name">{{tag_one|split:" "}}</div>
+                        <span class="text">What’s happening in {{tag_one|split:" "}}</span>
+                    </div>
+                    <a href="{% url 'editors:explore' topic=tag_one.slug %}" class="link">view more</a>
+                </div>
+                <div class="best-topic-stories">
+                    {% for story in tag_one_posts %}
+                        <div class="story">
+                            <div class="image-wrapper">
+                                {% if story.cover %}
+                                    <img id="" src="{% thumbnail story.cover 500x0 %}" alt="Story image">
+                                {% else %}
+                                    <img src="https://eu.ui-avatars.com/api/?background=ff8800&name={{story.title}}&size=500&color=fff" alt="Profile">
+                                {% endif %}
+                            </div>
+                            <div class="story-info">
+                                <h2 class="story-title">
+                                    <a href="{{story.get_absolute_url}}" class="link">{{story.title}}</a>
+                                </h2>
+                                <div class="user-info">
+                                    <a href="{{story.author.get_absolute_url}}" class="name">{{story.author.get_full_name}}</a>
+                                </div>
+                            </div>
+                            <div class="story-summery">
+                                {{story.body|striptags|safe|truncatechars:200 }}
+                            </div>
+                            <div class="story-footer">
+                                <a href="" class="save">
+                                    <i class="iconly-Bookmark icli"></i>
+                                    <span class="text">Save</span>
+                                </a>
+                                {% for tag in story.tags.all|first_tag %}
+                                    <a href="{% url 'editors:explore' topic=tag.slug %}" class="topic">{{tag|split:" "}}</a>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="editors-pick">
+                <div class="section-title">
+                    <div class="name">
+                        <div class="name">{{tag_two|split:" "}}</div>
+                        <span class="text">What’s happening in {{tag_two|split:" "}}</span>
+                    </div>
+                    <a href="{% url 'editors:explore' topic=tag_two.slug %}" class="link">view more</a>
+                </div>
+                <div class="editors-pick-stories">
+                    {% for story in tag_two_posts %}
+                        <div class="story">
+                            <div class="image-wrapper">
+                                {% if story.cover %}
+                                    <img id="" src="{% thumbnail story.cover 500x0 %}" alt="Story image">
+                                {% else %}
+                                    <img src="https://eu.ui-avatars.com/api/?background=ff8800&name={{story.title}}&size=500&color=fff" alt="Profile">
+                                {% endif %}
+                            </div>
+                            <div class="story-info">
+                                <h2 class="story-title">
+                                    <a href="{{story.get_absolute_url}}" class="link">{{story.title}}</a>
+                                </h2>
+                                <div class="user-info">
+                                    <a href="{{story.author.get_absolute_url}}" class="name">{{story.author.get_full_name}}</a>
+                                </div>
+                            </div>
+                            <div class="story-summery">
+                                {{story.body|striptags|safe|truncatechars:200 }}
+                            </div>
+                            <div class="story-footer">
+                                <a href="" class="save">
+                                    <i class="iconly-Bookmark icli"></i>
+                                    <span class="text">Save</span>
+                                </a>
+                                {% for tag in story.tags.all|first_tag %}
+                                    <a href="{% url 'editors:explore' topic=tag.slug %}" class="topic">{{tag|split:" "}}</a>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        <div class="second-topic">
+            <div class="section-title">
+                <div class="name">
+                    <div class="name">Recently</div>
+                    <span class="text">Most recent stories</span>
+                </div>
+                {% comment %} <a href="" class="link">view more</a> {% endcomment %}
+            </div>
+            <div class="second-topic-stories">
+                {% for story in recently_added %}
+                    <div class="story">
+                        <div class="image-wrapper">
+                            {% if story.cover %}
+                                <img id="" src="{% thumbnail story.cover 500x0 %}" alt="Story image">
+                            {% else %}
+                                <img src="https://eu.ui-avatars.com/api/?background=ff8800&name={{story.title}}&size=500&color=fff" alt="Profile">
+                            {% endif %}
+                        </div>
+                        <div class="story-info">
+                            <h2 class="story-title">
+                                <a href="{{story.get_absolute_url}}" class="link">{{story.title}}</a>
+                            </h2>
+                            <div class="user-info">
+                                <a href="{{story.author.get_absolute_url}}" class="name">{{story.author.get_full_name}}</a>
+                            </div>
+                        </div>
+                        <div class="story-summery">
+                            {{story.body|striptags|safe|truncatechars:200 }}
+                        </div>
+                        <div class="story-footer">
+                            <a href="" class="save">
+                                <i class="iconly-Bookmark icli"></i>
+                                <span class="text">Save</span>
+                            </a>
+                            {% for tag in story.tags.all|first_tag %}
+                                <a href="{% url 'editors:explore' topic=tag.slug %}" class="topic">{{tag|split:" "}}</a>
+                            {% endfor %}
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </main>
+{% endblock main %}

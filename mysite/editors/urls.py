@@ -13,6 +13,7 @@ urlpatterns = [
 
     #Explores
     path('', views.main_home, name='main_home'),
+    path('discover', views.explore_out, name='explore_out'),
 
     #Articles
     path('explore/<str:topic>', views.explore, name='explore'),

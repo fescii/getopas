@@ -59,6 +59,35 @@ def main_home(request):
                     'title':'home',
                     'section':'opas'})
 
+#Explore-logged-out.
+def explore_out(request):
+    #Getting Total articles
+    object_list = Post.published.all()
+
+    top_posts = Post.most_viewed(Post,6)
+    recently_added = Post.recently_added(Post, 3)
+    # Most common tags
+    most_common_tags = Post.tags.most_common()[:2]
+    common_tags = [int(tag.id) for tag in most_common_tags]
+
+    tag_one = most_common_tags[0]
+    tag_two = most_common_tags[1]
+
+    #Posts-in-most-common-tags
+    posts_in_tag_one = object_list.filter(tags__in=common_tags[0:1])[:3]
+    posts_in_tag_two = object_list.filter(tags__in=common_tags[1:2])[:3]
+
+
+    return render(request,
+                  'main/explore.html',
+                  {'tag_one_posts': posts_in_tag_one,
+                   'tag_two_posts': posts_in_tag_two,
+                   'tag_one': tag_one,
+                   'tag_two': tag_two,
+                   'top_posts': top_posts,
+                   'common_tags': most_common_tags,
+                   'recently_added': recently_added})
+
 
 
 #Dashboard
