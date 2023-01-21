@@ -962,11 +962,12 @@ main.read-out>.story-content>#cover-image{
     margin-top: 15px;
     align-self: center;
     width: 70%;
+    max-height: 300px;
 }
 main.read-out>.story-content>#cover-image>img{
     width: 100%;
     height: 100%;
-    object-fit: contain;
+    object-fit: cover;
 }
 main.read-out>.story-content>.article-content *{
     color: #404040 !important;

@@ -260,7 +260,7 @@ def time_lapse(posted_time):
             return f'{years} year ago'
 register.filter('time_lapse',time_lapse)
 
-#Return tine-since-the-article-was-posted
+#Return date-en-short
 def get_date_en(posted_time):
     posted_time = posted_time
     th = ''
@@ -282,3 +282,9 @@ def get_date_en(posted_time):
             th = 'th'
     return f"{day}{th} {posted_time.strftime('%b')} {posted_time.strftime('%Y')}"
 register.filter('get_date_en',get_date_en)
+
+#Return date-en-long
+def get_date_long(posted_time):
+    posted_time = posted_time
+    return f" {posted_time.strftime('%A')}, {posted_time.strftime('%B')} {posted_time.strftime('%d')}, {posted_time.strftime('%Y')}"
+register.filter('get_date_long',get_date_long)

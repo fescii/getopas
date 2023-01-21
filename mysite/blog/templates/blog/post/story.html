@@ -1,0 +1,93 @@
+{% extends "main.html" %}
+{% load static %}
+{% load blog_tags %}
+{% load contact_tags %}
+{% load thumbnail %}
+{% block title %}{{ post.title }}{% endblock %}
+{% block description %}{{post.body|striptags|safe|truncatechars:300 }}{% endblock %}
+{% block metatitle %}{{post.title }}{% endblock %}
+{% block image %}https://www.getopas.com{% thumbnail post.cover 300x0 %}{% endblock %}
+{% block url %}https://www.getopas.com{{post.get_absolute_url}}{% endblock %}
+
+{% block main %}
+<main class="read-out">
+    <div class="side-content">
+        <div class="section-title">
+            <div class="name">Discover Topics</div>
+            <!-- <span class="iconly-Arrow-Right-2 icli"></span> -->
+        </div>
+        <ul class="topic-list">
+            {% show_most_common_tags %}
+        </ul>
+        <div class="more">
+            <a href="#" class="more">Discover More</a>
+        </div>
+
+    </div>
+    <div class="story-title">
+        <div class="section-title">
+            <div class="name">{{post.title}}</div>
+        </div>
+        <div class="header">
+            <div class="header-item date">
+                <span class="text">{{ post.publish|get_date_long }}</span>
+            </div>
+            <span class="dot"></span>
+            <div class="header-item views">
+                <span class="text">{{post.blog_views}} views</span>
+            </div>
+        </div>
+    </div>
+    <div class="story-content">
+        <div id="cover-image">
+            {% if post.cover %}
+                <img id="" src="{% thumbnail post.cover 700x0 %}" title="article cover" alt="">
+            {% else %}
+                <img src="https://eu.ui-avatars.com/api/?background=08b86f&name={{post.title}}&size=250&color=fff"/>
+            {% endif %}
+        </div>
+        <div class="article-content">
+            {{post.body|safe}}
+        </div>
+        <div class="article-footer">
+            <div class="article-tags">
+                {% for tag in post.tags.names|truncate_tags %}
+                    <a href="{% url 'editors:explore' topic=tag|slug_tag %}" class="tag">{{tag|split:" "}}</a>
+                {% endfor %}
+            </div>
+            <div class="author-info">
+                <h2>About author</h2>
+                <div class="image-wrapper">
+                    {% if post.author.profile.photo %}
+                        <img src="{% thumbnail post.author.profile.photo 100x0 %}"/>
+                    {% else %}
+                        <img src="https://eu.ui-avatars.com/api/?background=08b86f&name={{post.author.first_name}}+{{post.author.last_name}}&size=250&color=fff"/>
+                    {% endif %}
+                </div>
+                <div class="name">
+                    <span class="name">{{post.author.get_full_name}}</span>
+                    <a href="{{post.author.get_absolute_url}}" class="username">
+                        <span class="text">View page</span>
+                        <i class="iconly-Arrow-Right icli"></i>
+                    </a>
+                </div>
+                <div class="bio">
+                    <h3>About</h3>
+                    {{post.author.profile.about|striptags|safe}}
+                </div>
+                <div class="get-tips">
+                    <h3>Get updates</h3>
+                    <p> You can always get {{post.author.first_name|add_apostrophe}} stories via email when subscribe to their page.</p>
+                    <a href="" id="service-oops" class="start-link">
+                        <span class="plus">
+                            <i class="top"></i>
+                            <i class="hor"></i>
+                        </span>
+                       <span class="text">Subscribe</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock main %}
