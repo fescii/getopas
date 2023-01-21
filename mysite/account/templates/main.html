@@ -1,0 +1,338 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{% endblock %}</title>
+
+    <meta name="description" content="{% block description %}{% endblock %}">
+    <meta property="og:title" content="{% block metatitle %}{% endblock %}">
+    <meta property="og:image" content="{% block image %}{% endblock %}">
+    <meta property="og:url" content="{% block url %}{% endblock %}">
+
+    <link href="{% static 'img/favicon.ico' %}" rel="shortcut icon">
+    <link href="{% static 'css/main/all.css' %}" rel="stylesheet">
+    <link href="{% static 'css/main/res.css' %}" rel="stylesheet">
+    <link href="{% static 'css/style.css' %}" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Sen:wght@400;700;800&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <header class="top">
+        <div class="logo-container">
+            <div class="logo-wrapper">
+                <img src="{% static 'img/favi.png' %}" alt="" srcset="">
+            </div>
+            <div class="logo-name">Opas</div>
+        </div>
+        <div class="left">
+            <ul class="header-links">
+                <li class="item"><a href="" class="item-link">Home</a></li>
+                <li class="item"><a href="" class="item-link">Explore</a></li>
+                <li class="item"><a href="" class="item-link">About Us</a></li>
+                <li class="item"><a href="" class="item-link">Support</a></li>
+            </ul>
+            <a href="" class="getting-started">
+                <span class="iconly-Logout icli"></span>
+                <span class="text">Get started</span>
+            </a>
+        </div>
+    </header>
+    {% block welcome %}
+    {% endblock welcome %}
+    {% block main %}
+    {% endblock main %}
+     <footer class="footer">
+        <section class="item-one">
+            <div class="title">Resources</div>
+            <ul class="footer-list">
+                <li class="item">
+                    <a href="" class="item-link">Blog</a>
+                </li>
+                <li class="item">
+                    <a href="" class="item-link">Docs</a>
+                </li>
+                <li class="item">
+                    <a href="" class="item-link">What’s New</a>
+                    <span class="dot"></span>
+                </li>
+                <li class="item">
+                    <a href="" class="item-link">Give a feedback </a>
+                </li>
+                <li class="item">
+                    <a href="" class="item-link">Request a feature</a>
+                </li>
+            </ul>
+        </section>
+        <section class="item-two">
+            <div class="title">About</div>
+            <ul class="footer-list">
+                <li class="item">
+                    <a href="" class="item-link">Team</a>
+                </li>
+                <li class="item">
+                    <a href="" class="item-link">FAQs</a>
+                    <span class="dot"></span>
+                </li>
+                <li class="item">
+                    <a href="" class="item-link">Support</a>
+                </li>
+                <li class="item">
+                    <a href="" class="item-link">Security</a>
+                </li>
+                <li class="item">
+                    <a href="" class="item-link">Terms of Use</a>
+                </li>
+            </ul>
+        </section>
+        <section class="item-three">
+            <div class="title">Contribute</div>
+            <ul class="footer-list">
+                <li class="item">
+                    <a href="" class="item-link">Team</a>
+                </li>
+                <li class="item">
+                    <a href="" class="item-link">Archive</a>
+                </li>
+                <li class="item">
+                    <a href="" class="item-link">Insights</a>
+                    <span class="dot"></span>
+                </li>
+                <li class="item">
+                    <a href="" class="item-link">Code of Conduct</a>
+                </li>
+                <li class="item">
+                    <a href="" class="item-link">Become a member</a>
+                </li>
+            </ul>
+        </section>
+        <section class="newsletter">
+            <div class="title">Join Our Newsletter</div>
+            <div class="text">
+                Stay up to date with our news, blog posts, and announcements by subscribing to our Newsletter.
+            </div>
+            <form action="" method="post">
+                <input type="email" name="email" id="" placeholder="Enter your email">
+                <input id="service-oops" type="submit" value="Subscribe">
+            </form>
+            <div class="footer-social-box">
+                <a title="Facebook" rel="noopener" aria-label="Femarin Facebook" href="#" target="_blank"
+                    class="footer-social-url in-footer-light w-inline-block">
+                    <div class="svg w-embed">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <path
+                                d="M15.6 12H12.9C12.9 16.5 12.9 22 12.9 22H8.9C8.9 22 8.9 16.5 8.9 12H7V8.5H8.9V6.2C8.9 4.6 9.7 2 13 2L16 2V5.4C16 5.4 14.1 5.4 13.8 5.4 13.4 5.4 12.9 5.6 12.9 6.4V8.5H16L15.6 12Z"
+                                fill="currentColor" />
+                        </svg>
+                    </div>
+                    <div class="fs-url-tooltip">
+                        <div class="fs-tooltip-dark">
+                            <div>Facebook</div>
+                        </div>
+                    </div>
+                </a>
+                <a title="Twitter" rel="noopener" aria-label="Femarin Twitter" href="#" target="_blank"
+                    class="footer-social-url in-footer-light w-inline-block">
+                    <div class="svg w-embed">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <path
+                                d="M19.2 7.7L19.2 8.2C19.2 13.2 15.5 19 8.7 19 6.6 19 4.6 18.4 3 17.3 3.3 17.3 3.6 17.4 3.9 17.4 5.6 17.4 7.2 16.7 8.5 15.7 6.9 15.7 5.5 14.6 5 13.1 5.2 13.1 5.5 13.2 5.7 13.2 6.1 13.2 6.4 13.1 6.7 13 5 12.7 3.7 11.2 3.7 9.3V9.3C4.2 9.6 4.8 9.7 5.4 9.7 4.4 9.1 3.8 7.9 3.8 6.6 3.8 5.9 3.9 5.3 4.3 4.7 6.1 7 8.8 8.5 11.9 8.7 11.8 8.4 11.8 8.1 11.8 7.8 11.8 5.7 13.4 4 15.5 4 16.5 4 17.5 4.5 18.2 5.2 19 5 19.8 4.7 20.5 4.3 20.2 5.2 19.6 5.9 18.9 6.4 19.6 6.3 20.3 6.1 21 5.8 20.5 6.5 19.9 7.2 19.2 7.7Z"
+                                fill="currentColor" />
+                        </svg>
+                    </div>
+                    <div class="fs-url-tooltip">
+                        <div class="fs-tooltip-dark">
+                            <div>Twitter</div>
+                        </div>
+                    </div>
+                </a>
+                <a title="Linkedin" rel="noopener" aria-label="Femarin Linkedin" href="#" target="_blank"
+                    class="footer-social-url in-footer-light w-inline-block">
+                    <div class="svg w-embed">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <path
+                                d="M19.2 3H4.8C3.8 3 3 3.8 3 4.8V19.2C3 20.2 3.8 21 4.8 21H19.2C20.2 21 21 20.2 21 19.2V4.8C21 3.8 20.2 3 19.2 3ZM8.4 18.3H5.7V10.2H8.4V18.3ZM7.1 8.7C6.2 8.7 5.4 8 5.4 7.1 5.4 6.2 6.2 5.4 7.1 5.4 8 5.4 8.7 6.2 8.7 7.1 8.7 8 8 8.7 7.1 8.7ZM18.3 18.3H15.6V13.5C15.6 12.8 15 12.2 14.3 12.2 13.5 12.2 12.9 12.8 12.9 13.5V18.3H10.2V10.2H12.9V11.3C13.4 10.6 14.3 10 15.2 10 16.9 10 18.3 11.5 18.3 13.2V18.3Z"
+                                fill="currentColor" />
+                        </svg>
+                    </div>
+                    <div class="fs-url-tooltip">
+                        <div class="fs-tooltip-dark">
+                            <div>Linkedin</div>
+                        </div>
+                    </div>
+                </a>
+                <a title="Instagram" rel="noopener" aria-label="Femarin Instagram" href="#" target="_blank"
+                    class="footer-social-url in-footer-light w-inline-block">
+                    <div class="svg w-embed">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <style>
+                                .a {
+                                    fill: currentColor;
+                                }
+                            </style>
+                            <path
+                                d="M3 8.3C3.1 7.3 3.2 6.7 3.4 6.1 3.7 5.5 4 5 4.5 4.5 4.9 4.1 5.5 3.7 6.1 3.5 6.6 3.3 7.3 3.1 8.3 3.1 9.2 3 9.5 3 12 3 14.4 3 14.7 3 15.7 3.1 16.6 3.1 17.3 3.2 17.9 3.5 18.5 3.7 19 4.1 19.5 4.5 19.9 5 20.3 5.5 20.5 6.1 20.7 6.7 20.9 7.3 20.9 8.3 21 9.3 21 9.6 21 12 21 14.4 21 14.8 20.9 15.7 20.9 16.7 20.7 17.3 20.5 17.9 20.3 18.5 19.9 19 19.5 19.5 19 19.9 18.5 20.3 17.9 20.5 17.3 20.8 16.6 20.9 15.7 20.9 14.7 21 14.4 21 12 21 9.5 21 9.2 21 8.3 20.9 7.3 20.9 6.6 20.8 6.1 20.5 4.9 20.1 3.9 19.1 3.4 17.9 3.2 17.3 3.1 16.7 3 15.7 3 14.8 3 14.4 3 12 3 9.6 3 9.3 3 8.3ZM4.6 15.6C4.7 16.5 4.8 17 4.9 17.3 5.3 18.1 5.9 18.7 6.7 19 7 19.1 7.5 19.3 8.3 19.3 9.3 19.4 9.6 19.4 12 19.4 14.4 19.4 14.7 19.4 15.6 19.3 16.5 19.3 17 19.1 17.3 19 17.7 18.9 18 18.6 18.3 18.3 18.6 18.1 18.8 17.7 19 17.3 19.1 17 19.2 16.5 19.3 15.6 19.3 14.7 19.3 14.4 19.3 12 19.3 9.6 19.3 9.3 19.3 8.4 19.2 7.5 19.1 7 19 6.7 18.8 6.3 18.6 6 18.3 5.7 18 5.4 17.7 5.1 17.3 5 16.9 4.9 16.5 4.7 15.6 4.7 14.6 4.6 14.4 4.6 12 4.6 9.6 4.6 9.3 4.6 8.3 4.7 7.4 4.7 7 4.9 6.7 5 6.3 5.1 5.9 5.4 5.6 5.7 5.3 6 5.1 6.3 4.9 6.7 4.8 7 4.7 7.5 4.6 8.4 4.6 9.3 4.6 9.6 4.6 12 4.6 14.4 4.6 14.7 4.6 15.6Z"
+                                class="a" />
+                            <path
+                                d="M12 7.4C14.5 7.4 16.6 9.4 16.6 12 16.6 14.6 14.5 16.6 12 16.6 9.4 16.6 7.3 14.6 7.3 12 7.3 9.4 9.4 7.4 12 7.4ZM12 15C13.6 15 15 13.7 15 12 15 10.3 13.6 9 12 9 10.3 9 9 10.3 9 12 9 13.7 10.3 15 12 15V15Z"
+                                class="a" />
+                            <path
+                                d="M6.1 7.2C6.1 7.8 6.6 8.3 7.2 8.3 7.8 8.3 8.2 7.8 8.2 7.2 8.2 6.6 7.8 6.1 7.2 6.1 6.6 6.1 6.1 6.6 6.1 7.2V7.2Z"
+                                class="a" />
+                        </svg>
+                    </div>
+                    <div class="fs-url-tooltip">
+                        <div class="fs-tooltip-dark">
+                            <div>Instagram</div>
+                        </div>
+                    </div>
+                </a>
+                <a title="Youtube" rel="noopener" aria-label="Femarin YouTube" href="#" target="_blank"
+                    class="footer-social-url in-footer-light w-inline-block">
+                    <div class="svg w-embed">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <path
+                                d="M21.6 7.2C21.4 6.3 20.7 5.7 19.8 5.4 18.3 5 12 5 12 5 12 5 5.7 5 4.2 5.4 3.3 5.6 2.6 6.3 2.4 7.2 2 8.8 2 12 2 12 2 12 2 15.3 2.4 16.8 2.6 17.7 3.3 18.3 4.2 18.6 5.8 19 12 19 12 19 12 19 18.3 19 19.8 18.6 20.7 18.4 21.4 17.7 21.6 16.8 22 15.3 22 12 22 12 22 12 22 8.8 21.6 7.2V7.2ZM10 15V9L15.2 12 10 15Z"
+                                fill="currentColor" />
+                        </svg>
+                    </div>
+                    <div class="fs-url-tooltip">
+                        <div class="fs-tooltip-dark">
+                            <div>Youtube</div>
+                        </div>
+                    </div>
+                </a>
+                <a title="TikTok" rel="noopener" aria-label="Femarin TikTok" href="#" target="_blank"
+                    class="footer-social-url in-footer-light w-inline-block">
+                    <div class="svg w-embed">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M19.9919 7.50695C19.0161 7.50695 18.1157 7.16612 17.3926 6.59113C16.5634 5.93198 15.9676 4.9651 15.7572 3.85069C15.7051 3.57534 15.677 3.29119 15.6743 3H12.8867V11.0308L12.8833 15.4297C12.8833 16.6057 12.1569 17.6029 11.15 17.9536C10.8578 18.0553 10.5422 18.1036 10.2136 18.0846C9.79409 18.0603 9.401 17.9268 9.05935 17.7113C8.33229 17.2529 7.83935 16.4212 7.82599 15.4698C7.80495 13.9829 8.94513 12.7706 10.3545 12.7706C10.6327 12.7706 10.8999 12.8185 11.15 12.9054V10.7104V9.92134C10.8862 9.88015 10.6177 9.85867 10.3461 9.85867C8.80353 9.85867 7.36076 10.5347 6.32946 11.7526C5.54996 12.6731 5.0824 13.8473 5.01026 15.0786C4.91575 16.6962 5.47716 18.2339 6.56591 19.3683C6.72588 19.5349 6.89387 19.6895 7.06954 19.8321C8.00299 20.5894 9.14418 21 10.3461 21C10.6177 21 10.8862 20.9789 11.15 20.9377C12.2728 20.7623 13.3088 20.2204 14.1264 19.3683C15.131 18.3215 15.686 16.9318 15.692 15.4526L15.6777 8.88369C16.1569 9.27347 16.6809 9.596 17.2433 9.84635C18.118 10.2354 19.0455 10.4326 20 10.4322V8.29814V7.50625C20.0006 7.50695 19.9926 7.50695 19.9919 7.50695V7.50695Z"
+                                fill="currentColor" />
+                        </svg>
+                    </div>
+                    <div class="fs-url-tooltip">
+                        <div class="fs-tooltip-dark">
+                            <div>TikTok</div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </section>
+        <div class="copy">
+            <div class="copyright">
+                <!-- <div class="company">Opas</div> -->
+                <i class="copy">&copy</i>
+                <a href="#" id="copyright">2022</a>
+            </div>
+            <div class="legal">
+                <a href="#" class="legal-link">Privacy Policy</a>
+                <a href="#" class="legal-link">Cookies</a>
+                <a href="#" class="legal-link">Legal</a>
+            </div>
+        </div>
+    </footer>
+    <div id="service-oops-modal" class="oops-display-modal">
+        <div id="cancel" class="cancel">
+            <span class="right"></span>
+            <span class="left"></span>
+        </div>
+        <div class="modal-content">
+            <span class="iconlyBulk-Danger"><span class="path1"></span><span class="path2"></span></span>
+            <h2 class="text">Oops! that service is not set up yet.</h2>
+            <i class="other-text">This is only a demo version,  we'll release it soon</i>
+        </div>
+    </div>
+    <script>
+        let socialIcons = document.querySelectorAll("div.w-embed")
+        if( socialIcons !=null ){
+            socialIcons.forEach(socialIcon=>{
+                let parent = socialIcon.parentElement
+                let toolTip = parent.querySelector(".fs-url-tooltip")
+                socialIcon.addEventListener("mouseenter",(e)=>{
+                    e.preventDefault()
+                    toolTip.style.display = "flex"
+                })
+                socialIcon.addEventListener("mouseleave",(e)=>{
+                    e.preventDefault()
+                    toolTip.style.display = "none"
+                })
+            })
+        }
+        let copy = document.querySelector("a#copyright")
+        if( copy !=null ){
+            let date = `${new Date().getFullYear()} aduki, Inc. All rights reserved`
+            copy.textContent = date
+        }
+        //Controls
+        let leftControl = document.querySelector("main.main>.services>.content>.control>span#left-control"),
+            rightControl = document.querySelector("main.main>.services>.content>.control>span#right-control"),
+            contentContainer = document.querySelector("main.main>.services>.content>#infos");
+        if( leftControl !=null && rightControl !=null && contentContainer !=null ){
+            let total = contentContainer.scrollWidth - contentContainer.clientWidth,
+                leftS = 310,
+                start = contentContainer.clientWidth;
+            console.log(total)
+            leftControl.addEventListener("click",(e)=>{
+                e.preventDefault()
+                if(leftS >= total){
+                    leftS = total-310
+                }
+                contentContainer.scrollTo({
+                    top: 0,
+                    left: leftS,
+                    behavior: "smooth"
+                })
+                if(leftS < 0){
+                    leftS = 0
+                }
+                else{
+                    leftS -= 320
+                }
+
+            })
+            rightControl.addEventListener("click",(e)=>{
+                e.preventDefault()
+                console.log(total)
+                if(leftS < 310){
+                    leftS = 310
+                }
+                contentContainer.scrollTo({
+                    top: 0,
+                    left: leftS,
+                    behavior: "smooth"
+                })
+                if(leftS > total){
+                    leftS = total
+                }
+                else{
+                    leftS += 320
+                }
+
+            })
+        }
+
+        let serviceOops = document.querySelectorAll("#service-oops"),
+        serviceOopsModal = document.querySelector("#service-oops-modal");
+        if(serviceOops !=null && serviceOopsModal !=null){
+            serviceOops.forEach(element=>{
+                element.addEventListener("click",(e)=>{
+                    e.preventDefault()
+                    serviceOopsModal.style.display = "flex"
+                })
+            })
+            let cancel = serviceOopsModal.querySelector("#cancel");
+            cancel.addEventListener("click",(e)=>{
+                e.preventDefault()
+                serviceOopsModal.style.display = "none"
+            })
+        }
+    </script>
+</body>
+
+</html>

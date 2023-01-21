@@ -1,0 +1,169 @@
+{% extends "main.html" %}
+{% load static %}
+{% load blog_tags %}
+{% load contact_tags %}
+{% load thumbnail %}
+{% block title %}Opas{% endblock %}
+
+{% block metatitle %}Experience the world of information, anytime, anywhere.{% endblock %}
+{% block description %}
+    Unleash the power of words and share your stories,newsletters and information with the world in a seamless and interactive way.
+{% endblock %}
+
+{% comment %} {% block image %}{% static 'favicon.ico' %}{% endblock %} {% endcomment %}
+{% block url %}https://www.getopas.com{% endblock %}
+
+{% block welcome %}
+    <div class="welcome-wrapper">
+        <div class="text-content">
+            <h2 class="tag">
+                Experience the world of information, anytime, anywhere.
+            </h2>
+            <div class="sub-text">
+                Unleash the power of words and share your stories,newsletters and information with the world in a
+                seamless and interactive way.
+            </div>
+            <div class="start-using">
+                <a href="" class="start-link">Join Today</a>
+                <a href="" id="service-oops" class="start-link">Read Docs</a>
+            </div>
+        </div>
+        <div class="image">
+            <img src="{% static 'img/illustration/8486.jpg' %}" alt="Logo" srcset="">
+        </div>
+    </div>
+{% endblock welcome %}
+
+{% block main %}
+    <main class="main">
+        <div class="services">
+            <div class="section-title">
+                <div class="name">Features and tools</div>
+                <!-- <span class="iconly-Arrow-Right-2 icli"></span> -->
+            </div>
+            <div class="content">
+                <div class="left control">
+                    <span id="left-control" class="iconlyBulk-Arrow-Left-Circle"><span class="path1"></span><span class="path2"></span></span>
+                </div>
+                <div id="infos" class="infos">
+                    <div class="info">
+                        <h2 class="name">Content Creation Tools</h2>
+                        <p class="text">
+                            Our content creation tools are designed to make the process of creating and publishing articles/blog-posts as easy and efficient as possible.
+                            <!-- These tools allow users to create engaging and high quality content that will attract and retain readers, and also improve visibility of their articles in search engines. -->
+                        </p>
+                    </div>
+                    <div class="info">
+                        <h2 class="name">Newsletters</h2>
+                        <p class="text">
+                            Stay informed and up-to-date with engaging newsletters.
+                            Create and share your newsletter with us.
+                        </p>
+                    </div>
+                    <div class="info">
+                        <h2 class="name">SEO Optimization</h2>
+                        <p class="text">
+                            Opas is optimize for search engines,making it easy for users to improve the visibility and ranking of their articles search results.
+                        </p>
+                    </div>
+                    <div class="info">
+                        <h2 class="name">User-friendly Interface</h2>
+                        <p class="text">
+                            Opas is designed with a user friendly interface that is easy to navigate and understand.
+                            This makes it easy for users to create,edit,and publish their articles.
+                        </p>
+                    </div>
+                    <div class="info">
+                        <h2 class="name">Commenting System</h2>
+                        <p class="text">
+                            The software includes a commenting system that allow users to interact with their readers and respond to their feedback.
+                        </p>
+                    </div>
+                    <div class="info">
+                        <h2 class="name">Media Integration</h2>
+                        <p class="text">
+                            This allow users to easily add images and other medias to their articles,making them more engaging and interactive.
+                        </p>
+                    </div>
+                    <div class="info">
+                        <h2 class="name">Social Media Sharing</h2>
+                        <p class="text">
+                            The software enables users to share their articles,blog posts on various social media platforms with just a click,increasing the reach and visibility of their articles.
+                        </p>
+                    </div>
+                    <div class="info">
+                        <h2 class="name">Mobile Optimization</h2>
+                        <p class="text">
+                            Opas is designed to be mobile-friendly,ensuring that users can access their pages on the go.
+                        </p>
+                    </div>
+                </div>
+                <div class="right control">
+                    <span id="right-control" class="iconlyBulk-Arrow-Right-Circle"><span class="path1"></span><span class="path2"></span></span>
+                </div>
+            </div>
+        </div>
+        <div class="side-content">
+            <div class="section-title">
+                <div class="name">Discover Topics</div>
+                <!-- <span class="iconly-Arrow-Right-2 icli"></span> -->
+            </div>
+            <ul class="topic-list">
+                {% show_most_common_tags %}
+            </ul>
+            <div class="more">
+                <a href="" class="more">Discover More</a>
+            </div>
+
+        </div>
+        <div class="stories-infinite">
+            <div class="section-title">
+                <div class="name">Stories</div>
+            </div>
+            {% for story in stories %}
+                <div class="story">
+                    <div class="profile">
+                        {% if story.author.profile.photo %}
+                            <img src="{% thumbnail story.author.profile.photo 300x0 %}" alt="Profile">
+                        {% else %}
+                            <img src="https://eu.ui-avatars.com/api/?background=08b86f&name={{story.author.first_name}}+{{story.author.last_name}}&size=250&color=fff" alt="Profile">
+                        {% endif %}
+                    </div>
+                    <div class="content">
+                        <a href="" class="header">
+                            <div class="name">{{story.author.get_full_name}}</div>
+                            <span class="username">@{{story.author.username}}</span>
+                        </a>
+                        <div class="summery-wrapper">
+                            <a href="{{story.get_absolute_url}}" class="title">{{story.title}}</a>
+                            <div class="summery">
+                                <div class="story-cover">
+                                    {% if story.cover %}
+                                        <img id="" src="{% thumbnail story.cover 300x0 %}" alt="Story image">
+                                    {% else %}
+                                        <img src="https://eu.ui-avatars.com/api/?background=ff8800&name={{story.title}}&size=250&color=fff" alt="Profile">
+                                    {% endif %}
+                                </div>
+                                <div class="text">
+                                    {{story.body|striptags|safe|truncatechars:300 }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="footer">
+                            <div class="views">
+                                <span class="iconlyBulk-Show"><span class="path1"></span><span class="path2"></span></span>
+                                <div class="no">{{story.blog_views}}</div>
+                            </div>
+                            <i class="dot"></i>
+                            <span class="text">6th Aug 2022</span>
+                            {% for tag in story.tags.all|first_tag %}
+                                <a href="{% url 'editors:explore_newsletter_topic' topic=tag.slug %}" class="topic">{{tag|split:" "}}</a>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+            <a href="" class="load-more">Load more</a>
+        </div>
+    </main>
+{% endblock main %}

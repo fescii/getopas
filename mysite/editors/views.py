@@ -29,6 +29,19 @@ from django.core.exceptions import ObjectDoesNotExist
 
 
 # Create your views here.
+#Home
+def main_home(request):
+
+    # Display all actions by default
+    posts = Post.published.all()[:10]
+
+    return render(request,
+                 'main/main.html',
+                    {'stories':posts,
+                    'title':'home',
+                    'section':'opas'})
+
+
 
 #Dashboard
 @login_required

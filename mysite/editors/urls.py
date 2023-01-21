@@ -11,6 +11,9 @@ urlpatterns = [
     path('newsletters', views.newsletters, name='newsletters'),
     path('create', views.create_options, name='create_options'),
 
+    #Explores
+    path('', views.main_home, name='main_home'),
+
     #Articles
     path('explore/<str:topic>', views.explore, name='explore'),
     path('explore', views.explore_topics, name='explore_topics'),
