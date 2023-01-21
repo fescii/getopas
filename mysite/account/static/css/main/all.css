@@ -611,9 +611,11 @@ main.main>.stories-infinite>.story>.content>.footer>a.topic{
     background-color: #08b86f;
     color: #ffffff;
 } */
-main.main>.stories-infinite>.load-more{
+.load-more{
     text-decoration: none;
     align-self: center;
+    justify-self:center;
+    width: 120px;
     /* border: 1px solid #c3c3c39b; */
     background-color: #08b86f;
     padding: 8px 15px;
