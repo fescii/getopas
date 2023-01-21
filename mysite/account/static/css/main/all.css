@@ -1225,6 +1225,7 @@ main.main>.side-user{
     /* border: 1px solid #c3c3c39b; */
     display: flex;
     flex-flow: column;
+    align-items: flex-start;
     gap: 30px;
 }
 main.main>.side-content>.bio{

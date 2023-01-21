@@ -39,7 +39,7 @@
                 <i class="dot"></i>
                 <span class="text">{{ story.publish|get_date_en }}</span>
                 {% for tag in story.tags.all|first_tag %}
-                    <a href="{% url 'editors:explore_newsletter_topic' topic=tag.slug %}" class="topic">{{tag|split:" "}}</a>
+                    <a href="{% url 'editors:explore' topic=tag.slug %}" class="topic">{{tag|split:" "}}</a>
                 {% endfor %}
             </div>
         </div>

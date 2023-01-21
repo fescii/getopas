@@ -184,38 +184,63 @@ def edit(request,username):
                        'section': 'profile'})
 
 #User Profile Page
-@login_required
+# @login_required
 def user_profile(request, username):
     r_user = get_object_or_404(User,username=username,is_active=True)
+    posts = Post.published.filter(author=r_user)
     profile = r_user.profile
-    if request.method == 'POST':
-        profile_photo_form = ProfilePhotoEditForm(data=request.POST,
-                                       files=request.FILES)
-        if profile_photo_form.is_valid():
-            cd = profile_photo_form.cleaned_data
-            photo = cd['photo']
-            Profile.update_profile_picture(profile,  photo=photo)
-            messages.success(request, 'Profile photo updated')
-            return HttpResponseRedirect(reverse('profile',kwargs={'username': r_user.username}))
+    if request.user.is_authenticated:
+        if request.method == 'POST':
+            profile_photo_form = ProfilePhotoEditForm(data=request.POST,
+                                        files=request.FILES)
+            if profile_photo_form.is_valid():
+                cd = profile_photo_form.cleaned_data
+                photo = cd['photo']
+                Profile.update_profile_picture(profile,  photo=photo)
+                messages.success(request, 'Profile photo updated')
+                return HttpResponseRedirect(reverse('profile',kwargs={'username': r_user.username}))
 
+            else:
+                messages.error(request, 'Error updating your profile')
+                profile_photo_form = ProfilePhotoEditForm()
+                return render(request,
+                        'account/profile/user-profile.html',
+                        {'profile_photo_form': profile_photo_form,
+                        'r_user': r_user,
+                        'profile': profile,'tab': 'profile',
+                        'section': 'profile'})
         else:
-            messages.error(request, 'Error updating your profile')
             profile_photo_form = ProfilePhotoEditForm()
             return render(request,
-                      'account/profile/user-profile.html',
-                      {'profile_photo_form': profile_photo_form,
-                       'r_user': r_user,
-                       'profile': profile,'tab': 'profile',
-                       'section': 'profile'})
-
+                        'account/profile/user-profile.html',
+                        {'r_user': r_user,
+                        'profile': profile,'tab': 'profile',
+                        'section': 'profile',
+                        'profile_photo_form': profile_photo_form})
     else:
-        profile_photo_form = ProfilePhotoEditForm()
+        paginator = Paginator(posts, 2)
+    page = request.GET.get('page')
+    post_only = request.GET.get('story_only')
+    try:
+        posts = paginator.page(page)
+    except PageNotAnInteger:
+        # If page is not an integer deliver the first page
+        posts = paginator.page(1)
+    except EmptyPage:
+        if post_only:
+            # If AJAX request and page out of range
+            # return an empty page
+            return HttpResponse('')
+        # If page out of range return last page of results
+        posts = paginator.page(paginator.num_pages)
+    if post_only:
         return render(request,
-                    'account/profile/user-profile.html',
-                    {'r_user': r_user,
-                    'profile': profile,'tab': 'profile',
-                    'section': 'profile',
-                    'profile_photo_form': profile_photo_form})
+                          'main/list-stories.html',
+                            {'stories': posts})
+
+    return render(request,
+                 'account/profile/user-profile.html',
+                    {'r_user': r_user,'stories': posts})
 
 @login_required
 def user_list(request):

@@ -1,0 +1,206 @@
+{% extends "main.html" %}
+{% load static %}
+{% load blog_tags %}
+{% load contact_tags %}
+{% load thumbnail %}
+{% block title %}{{r_user.first_name|capfirst}}'s Profile{% endblock %}
+
+{% block description %}{{r_user.profile.about|striptags|safe|truncatechars:300 }}{% endblock %}
+{% block metatitle %}{{r_user.get_absolute_url }}{% endblock %}
+{% block image %}
+{% if r_user.profile.photo %}
+    https://www.getopas.com{% thumbnail r_user.profile.photo 100x0 %}
+    {% else %}
+        https://eu.ui-avatars.com/api/?background=08b86f&name={{r_user.first_name}}+{{r_user.last_name}}&size=250&color=fff"
+    {% endif %}
+{% endblock %}
+{% block url %}https://www.getopas.com{{r_user.get_absolute_url}}{% endblock %}
+
+{% block welcome %}
+    <div class="author-info-page">
+        <h2>{{r_user.first_name|add_apostrophe}} Page</h2>
+        <div class="image-wrapper">
+            {% if r_user.profile.photo %}
+                <img src="{% thumbnail r_user.profile.photo 100x0 %}"/>
+            {% else %}
+                <img src="https://eu.ui-avatars.com/api/?background=08b86f&name={{r_user.first_name}}+{{r_user.last_name}}&size=250&color=fff"/>
+            {% endif %}
+        </div>
+        <div class="name info">
+            <h3>Name</h3>
+            <span class="text">{{r_user.get_full_name}}</span>
+        </div>
+        <div class="occupation info">
+            <h3>Occupation</h3>
+            <span class="text">{{r_user.profile.occupation}}</span>
+        </div>
+        <div class="social info">
+            <h3>Social</h3>
+            <span class="text">
+                You can follow {{r_user.get_full_name}} on the following social platforms.
+                Note that; some of these social links may be broken.
+            </span>
+            <div class="footer-social-box">
+                <a title="Facebook" rel="noopener" aria-label="Femarin Facebook" href="#" target="_blank"
+                    class="footer-social-url in-footer-light w-inline-block">
+                    <div class="svg w-embed">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <path
+                                d="M15.6 12H12.9C12.9 16.5 12.9 22 12.9 22H8.9C8.9 22 8.9 16.5 8.9 12H7V8.5H8.9V6.2C8.9 4.6 9.7 2 13 2L16 2V5.4C16 5.4 14.1 5.4 13.8 5.4 13.4 5.4 12.9 5.6 12.9 6.4V8.5H16L15.6 12Z"
+                                fill="currentColor" />
+                        </svg>
+                    </div>
+                    <div class="fs-url-tooltip">
+                        <div class="fs-tooltip-dark">
+                            <div>Facebook</div>
+                        </div>
+                    </div>
+                </a>
+                <a title="Twitter" rel="noopener" aria-label="Femarin Twitter" href="#" target="_blank"
+                    class="footer-social-url in-footer-light w-inline-block">
+                    <div class="svg w-embed">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <path
+                                d="M19.2 7.7L19.2 8.2C19.2 13.2 15.5 19 8.7 19 6.6 19 4.6 18.4 3 17.3 3.3 17.3 3.6 17.4 3.9 17.4 5.6 17.4 7.2 16.7 8.5 15.7 6.9 15.7 5.5 14.6 5 13.1 5.2 13.1 5.5 13.2 5.7 13.2 6.1 13.2 6.4 13.1 6.7 13 5 12.7 3.7 11.2 3.7 9.3V9.3C4.2 9.6 4.8 9.7 5.4 9.7 4.4 9.1 3.8 7.9 3.8 6.6 3.8 5.9 3.9 5.3 4.3 4.7 6.1 7 8.8 8.5 11.9 8.7 11.8 8.4 11.8 8.1 11.8 7.8 11.8 5.7 13.4 4 15.5 4 16.5 4 17.5 4.5 18.2 5.2 19 5 19.8 4.7 20.5 4.3 20.2 5.2 19.6 5.9 18.9 6.4 19.6 6.3 20.3 6.1 21 5.8 20.5 6.5 19.9 7.2 19.2 7.7Z"
+                                fill="currentColor" />
+                        </svg>
+                    </div>
+                    <div class="fs-url-tooltip">
+                        <div class="fs-tooltip-dark">
+                            <div>Twitter</div>
+                        </div>
+                    </div>
+                </a>
+                <a title="Linkedin" rel="noopener" aria-label="Femarin Linkedin" href="#" target="_blank"
+                    class="footer-social-url in-footer-light w-inline-block">
+                    <div class="svg w-embed">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <path
+                                d="M19.2 3H4.8C3.8 3 3 3.8 3 4.8V19.2C3 20.2 3.8 21 4.8 21H19.2C20.2 21 21 20.2 21 19.2V4.8C21 3.8 20.2 3 19.2 3ZM8.4 18.3H5.7V10.2H8.4V18.3ZM7.1 8.7C6.2 8.7 5.4 8 5.4 7.1 5.4 6.2 6.2 5.4 7.1 5.4 8 5.4 8.7 6.2 8.7 7.1 8.7 8 8 8.7 7.1 8.7ZM18.3 18.3H15.6V13.5C15.6 12.8 15 12.2 14.3 12.2 13.5 12.2 12.9 12.8 12.9 13.5V18.3H10.2V10.2H12.9V11.3C13.4 10.6 14.3 10 15.2 10 16.9 10 18.3 11.5 18.3 13.2V18.3Z"
+                                fill="currentColor" />
+                        </svg>
+                    </div>
+                    <div class="fs-url-tooltip">
+                        <div class="fs-tooltip-dark">
+                            <div>Linkedin</div>
+                        </div>
+                    </div>
+                </a>
+                <a title="Instagram" rel="noopener" aria-label="Femarin Instagram" href="#" target="_blank"
+                    class="footer-social-url in-footer-light w-inline-block">
+                    <div class="svg w-embed">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <style>
+                                .a {
+                                    fill: currentColor;
+                                }
+                            </style>
+                            <path
+                                d="M3 8.3C3.1 7.3 3.2 6.7 3.4 6.1 3.7 5.5 4 5 4.5 4.5 4.9 4.1 5.5 3.7 6.1 3.5 6.6 3.3 7.3 3.1 8.3 3.1 9.2 3 9.5 3 12 3 14.4 3 14.7 3 15.7 3.1 16.6 3.1 17.3 3.2 17.9 3.5 18.5 3.7 19 4.1 19.5 4.5 19.9 5 20.3 5.5 20.5 6.1 20.7 6.7 20.9 7.3 20.9 8.3 21 9.3 21 9.6 21 12 21 14.4 21 14.8 20.9 15.7 20.9 16.7 20.7 17.3 20.5 17.9 20.3 18.5 19.9 19 19.5 19.5 19 19.9 18.5 20.3 17.9 20.5 17.3 20.8 16.6 20.9 15.7 20.9 14.7 21 14.4 21 12 21 9.5 21 9.2 21 8.3 20.9 7.3 20.9 6.6 20.8 6.1 20.5 4.9 20.1 3.9 19.1 3.4 17.9 3.2 17.3 3.1 16.7 3 15.7 3 14.8 3 14.4 3 12 3 9.6 3 9.3 3 8.3ZM4.6 15.6C4.7 16.5 4.8 17 4.9 17.3 5.3 18.1 5.9 18.7 6.7 19 7 19.1 7.5 19.3 8.3 19.3 9.3 19.4 9.6 19.4 12 19.4 14.4 19.4 14.7 19.4 15.6 19.3 16.5 19.3 17 19.1 17.3 19 17.7 18.9 18 18.6 18.3 18.3 18.6 18.1 18.8 17.7 19 17.3 19.1 17 19.2 16.5 19.3 15.6 19.3 14.7 19.3 14.4 19.3 12 19.3 9.6 19.3 9.3 19.3 8.4 19.2 7.5 19.1 7 19 6.7 18.8 6.3 18.6 6 18.3 5.7 18 5.4 17.7 5.1 17.3 5 16.9 4.9 16.5 4.7 15.6 4.7 14.6 4.6 14.4 4.6 12 4.6 9.6 4.6 9.3 4.6 8.3 4.7 7.4 4.7 7 4.9 6.7 5 6.3 5.1 5.9 5.4 5.6 5.7 5.3 6 5.1 6.3 4.9 6.7 4.8 7 4.7 7.5 4.6 8.4 4.6 9.3 4.6 9.6 4.6 12 4.6 14.4 4.6 14.7 4.6 15.6Z"
+                                class="a" />
+                            <path
+                                d="M12 7.4C14.5 7.4 16.6 9.4 16.6 12 16.6 14.6 14.5 16.6 12 16.6 9.4 16.6 7.3 14.6 7.3 12 7.3 9.4 9.4 7.4 12 7.4ZM12 15C13.6 15 15 13.7 15 12 15 10.3 13.6 9 12 9 10.3 9 9 10.3 9 12 9 13.7 10.3 15 12 15V15Z"
+                                class="a" />
+                            <path
+                                d="M6.1 7.2C6.1 7.8 6.6 8.3 7.2 8.3 7.8 8.3 8.2 7.8 8.2 7.2 8.2 6.6 7.8 6.1 7.2 6.1 6.6 6.1 6.1 6.6 6.1 7.2V7.2Z"
+                                class="a" />
+                        </svg>
+                    </div>
+                    <div class="fs-url-tooltip">
+                        <div class="fs-tooltip-dark">
+                            <div>Instagram</div>
+                        </div>
+                    </div>
+                </a>
+                <a title="Youtube" rel="noopener" aria-label="Femarin YouTube" href="#" target="_blank"
+                    class="footer-social-url in-footer-light w-inline-block">
+                    <div class="svg w-embed">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <path
+                                d="M21.6 7.2C21.4 6.3 20.7 5.7 19.8 5.4 18.3 5 12 5 12 5 12 5 5.7 5 4.2 5.4 3.3 5.6 2.6 6.3 2.4 7.2 2 8.8 2 12 2 12 2 12 2 15.3 2.4 16.8 2.6 17.7 3.3 18.3 4.2 18.6 5.8 19 12 19 12 19 12 19 18.3 19 19.8 18.6 20.7 18.4 21.4 17.7 21.6 16.8 22 15.3 22 12 22 12 22 12 22 8.8 21.6 7.2V7.2ZM10 15V9L15.2 12 10 15Z"
+                                fill="currentColor" />
+                        </svg>
+                    </div>
+                    <div class="fs-url-tooltip">
+                        <div class="fs-tooltip-dark">
+                            <div>Youtube</div>
+                        </div>
+                    </div>
+                </a>
+                <a title="TikTok" rel="noopener" aria-label="Femarin TikTok" href="#" target="_blank"
+                    class="footer-social-url in-footer-light w-inline-block">
+                    <div class="svg w-embed">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M19.9919 7.50695C19.0161 7.50695 18.1157 7.16612 17.3926 6.59113C16.5634 5.93198 15.9676 4.9651 15.7572 3.85069C15.7051 3.57534 15.677 3.29119 15.6743 3H12.8867V11.0308L12.8833 15.4297C12.8833 16.6057 12.1569 17.6029 11.15 17.9536C10.8578 18.0553 10.5422 18.1036 10.2136 18.0846C9.79409 18.0603 9.401 17.9268 9.05935 17.7113C8.33229 17.2529 7.83935 16.4212 7.82599 15.4698C7.80495 13.9829 8.94513 12.7706 10.3545 12.7706C10.6327 12.7706 10.8999 12.8185 11.15 12.9054V10.7104V9.92134C10.8862 9.88015 10.6177 9.85867 10.3461 9.85867C8.80353 9.85867 7.36076 10.5347 6.32946 11.7526C5.54996 12.6731 5.0824 13.8473 5.01026 15.0786C4.91575 16.6962 5.47716 18.2339 6.56591 19.3683C6.72588 19.5349 6.89387 19.6895 7.06954 19.8321C8.00299 20.5894 9.14418 21 10.3461 21C10.6177 21 10.8862 20.9789 11.15 20.9377C12.2728 20.7623 13.3088 20.2204 14.1264 19.3683C15.131 18.3215 15.686 16.9318 15.692 15.4526L15.6777 8.88369C16.1569 9.27347 16.6809 9.596 17.2433 9.84635C18.118 10.2354 19.0455 10.4326 20 10.4322V8.29814V7.50625C20.0006 7.50695 19.9926 7.50695 19.9919 7.50695V7.50695Z"
+                                fill="currentColor" />
+                        </svg>
+                    </div>
+                    <div class="fs-url-tooltip">
+                        <div class="fs-tooltip-dark">
+                            <div>TikTok</div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+</div>
+{% endblock welcome %}
+
+{% block main %}
+    <main class="main">
+        <div class="side-content side-user">
+            <div class="bio">
+                <h3>About</h3>
+                {{r_user.profile.about|striptags|safe}}
+            </div>
+            <div class="get-tips">
+                <h3>Get updates</h3>
+                <p> You can always get {{r_user.first_name|add_apostrophe}} stories via email when subscribe to their page.</p>
+                <a href="" id="service-oops" class="start-link">
+                    <span class="plus">
+                        <i class="top"></i>
+                        <i class="hor"></i>
+                    </span>
+                   <span class="text">Subscribe</span>
+                </a>
+            </div>
+        </div>
+        <div id="stories-list" class="stories-infinite">
+            <div class="section-title">
+                <div class="name">{{r_user.first_name|add_apostrophe}} Stories</div>
+            </div>
+            {% include "main/list-stories.html" %}
+        </div>
+        <a href="" id="load-more-stories" class="load-more">Load more</a>
+    </main>
+{% endblock main %}
+{% block domready %}
+    let page = 1;
+    let emptyPage = false;
+    let blockRequest = false;
+    let loadMoreControl = document.querySelector("#load-more-stories")
+    loadMoreControl.addEventListener('click', (e)=>{
+        e.preventDefault()
+        if(!emptyPage && !blockRequest) {
+            e.target.textContent = 'Loding...'
+            blockRequest = true;
+            page += 1;
+            fetch('?story_only=1&page=' + page)
+            .then(response => response.text())
+            .then(html => {
+                if (html === '') {
+                    emptyPage = true;
+                    e.target.textContent = 'Load more'
+                }
+                else {
+                    //console.log(html)
+                    let storiesList = document.querySelector('#stories-list');
+                    storiesList.insertAdjacentHTML('beforeEnd', html);
+                    blockRequest = false;
+                    e.target.textContent = 'Load more'
+                }
+            })
+        }
+    })
+{% endblock %}
