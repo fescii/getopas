@@ -1,0 +1,94 @@
+{% extends "main.html" %}
+{% load static %}
+{% load blog_tags %}
+{% load contact_tags %}
+{% load thumbnail %}
+{% block title %}{{topic|split:"-"}}{% endblock %}
+
+{% block metatitle %}Experience the world of information, anytime, anywhere.{% endblock %}
+{% block description %}
+    Unleash the power of words and share your stories,newsletters and information with the world in a seamless and interactive way.
+{% endblock %}
+
+{% comment %} {% block image %}{% static 'favicon.ico' %}{% endblock %} {% endcomment %}
+{% block url %}https://www.getopas.com{% endblock %}
+
+{% block welcome %}
+    <div class="welcome-wrapper">
+        <div class="text-content">
+            <h2 class="tag">
+                {{topic|split:"-"}}
+            </h2>
+            <div class="sub-text">
+                Discover, read, and interact with the contributing authors in  the stories about {{topic|split:"-"}}.
+                You can also get the stories periodically via email by subscribing to this topic.
+            </div>
+            <div class="start-using">
+                <a href="" id="service-oops" class="start-link">
+                    <span class="plus">
+                        <i class="top"></i>
+                        <i class="hor"></i>
+                    </span>
+                   <span class="text">Subscribe</span>
+                </a>
+                <a href="" id="service-oops" class="start-link">Start writing</a>
+            </div>
+        </div>
+        <div class="image">
+            <img src="{% static 'img/illustration/8486.jpg' %}" alt="" srcset="">
+        </div>
+    </div>
+{% endblock welcome %}
+
+{% block main %}
+    <main class="main">
+        <div class="side-content">
+            <div class="section-title">
+                <div class="name">Discover Topics</div>
+            </div>
+            <ul class="topic-list">
+                {% show_most_common_tags %}
+            </ul>
+            <div class="more">
+                <a href="" class="more">Discover More</a>
+            </div>
+
+        </div>
+        <div id="stories-list" class="stories-infinite">
+            <div class="section-title">
+                <div class="name">Stories</div>
+            </div>
+            {% include "main/list-stories.html" %}
+        </div>
+        <a href="" id="load-more-stories" class="load-more">Load more</a>
+    </main>
+{% endblock main %}
+{% block domready %}
+    let page = 1;
+    let emptyPage = false;
+    let blockRequest = false;
+    let loadMoreControl = document.querySelector("#load-more-stories")
+    loadMoreControl.addEventListener('click', (e)=>{
+        e.preventDefault()
+        if(!emptyPage && !blockRequest) {
+            e.target.textContent = 'Loding...'
+            blockRequest = true;
+            page += 1;
+            fetch('?story_only=1&page=' + page)
+            .then(response => response.text())
+            .then(html => {
+                if (html === '') {
+                    emptyPage = true;
+                    e.target.textContent = 'Load more'
+                }
+                else {
+                    console.log(html)
+                    let storiesList = document.querySelector('#stories-list');
+                    storiesList.insertAdjacentHTML('beforeEnd', html);
+                    blockRequest = false;
+                    e.target.textContent = 'Load more'
+                }
+            })
+        }
+    })
+{% endblock %}

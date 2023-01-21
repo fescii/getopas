@@ -612,6 +612,7 @@ main.main>.stories-infinite>.story>.content>.footer>a.topic{
     color: #ffffff;
 } */
 .load-more{
+    grid-row: 4;
     text-decoration: none;
     align-self: center;
     justify-self:center;

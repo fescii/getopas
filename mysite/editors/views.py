@@ -31,7 +31,6 @@ from django.core.exceptions import ObjectDoesNotExist
 # Create your views here.
 #Home
 def main_home(request):
-
     # Display all posts by default
     posts = Post.published.all()
     paginator = Paginator(posts, 3)
@@ -266,11 +265,8 @@ def recent_newsletters(request):
 
 
 #Explore
-@login_required
+# @login_required
 def explore(request,topic=None):
-    user = request.user
-    profile = user.profile
-
     #Getting Total articles views and comments of the current user
     object_list = Post.published.all()
     tag = None
@@ -278,25 +274,38 @@ def explore(request,topic=None):
         tag = get_object_or_404(Tag, slug=topic)
         topic_posts = object_list.filter(tags__in=[tag])
 
-    paginator = Paginator(topic_posts, 8) # 5 posts in each page
+    posts = topic_posts
+    paginator = Paginator(posts, 2)
     page = request.GET.get('page')
+    post_only = request.GET.get('story_only')
     try:
         posts = paginator.page(page)
     except PageNotAnInteger:
-    # If page is not an integer deliver the first page
+        # If page is not an integer deliver the first page
         posts = paginator.page(1)
     except EmptyPage:
-    # If page is out of range deliver last page of results
+        if post_only:
+            # If AJAX request and page out of range
+            # return an empty page
+            return HttpResponse('')
+        # If page out of range return last page of results
         posts = paginator.page(paginator.num_pages)
+    if post_only:
+        if request.user.is_authenticated:
+            return render(request,
+                      'main/list-login.html',
+                      {'stories': posts})
+        else:
+            return render(request,
+                          'main/list-stories.html',
+                            {'stories': posts})
 
     return render(request,
                  'editors/explore.html',
-                    {'user': user,
-                    'profile': profile,
-                    'topic': topic,
+                    {'topic': topic,
                     'section': 'explore',
                     'title': 'explore','tab': 'opas',
-                    'topic_posts': posts})
+                    'stories': posts})
 
 #Feeds Infinite Scroll.
 @login_required

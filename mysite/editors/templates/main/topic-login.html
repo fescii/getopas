@@ -1,0 +1,230 @@
+{% extends "base.html" %}
+{% load static %}
+{% load blog_tags %}
+{% load thumbnail %}
+
+{% block title %}{{topic|split:"-"}}{% endblock %}
+{% block content %}
+{% include "editors/feeds-header.html" %}
+  <div id="stories-list" class="article-feeds feed-contents">
+    <div class="feed-title">
+      <div class="section-title">{{topic|split:"-"}}</div>
+      <i class="iconly-Arrow-Right-Circle icli"></i>
+      <hr size="1" />
+    </div>
+    {% include "main/list-login.html" %}
+  </div>
+  {% include "editors/create-container.html" %}
+  <div class="sidebar-content">
+    <div class="stats">
+      <h3 class="stats-title">My Stats</h3>
+      <div class="stats-today">
+        <h4 class="today">Impressions</h4>
+        <p class="today-stats">
+          <span class="iconly-Show icbo"></span>{{ request.user|get_views }} View{{ request.user|get_views| pluralize }}
+        </p>
+      </div>
+      <div class="stats-month">
+        <h4 class="month">Engagements</h4>
+        <p class="month-stats">
+          <span class="iconly-User2 icbo"></span>{{ request.user|get_comments }} Comment{{ request.user|get_comments | pluralize }}
+        </p>
+      </div>
+      <a href=" {% url 'editors:user_post_list' %}" class="go-to-articles">See your articles performance
+        <span class="iconly-Arrow-Right icli"></span>
+      </a>
+    </div>
+    <div class="topics">
+      <h2 class="sidebar-title">Discover Topics</h2>
+      <ul class="topic-list">
+        {% show_most_common_tags %}
+      </ul>
+    </div>
+  </div>
+{% endblock content%}
+{% block domready %}
+//Share-Modal
+const viewBtns = document.querySelectorAll("a#view-modal"),
+    popup = document.querySelectorAll("#popup");
+
+    if(viewBtns != null && popup != null){
+      viewBtns.forEach((viewBtn,index)=>{
+        const close = popup[index].querySelector("#close"),
+        field = popup[index].querySelector(".field"),
+        input = field.querySelector("input"),
+        copy = field.querySelector("button");
+
+        viewBtn.addEventListener("click",(e)=>{
+            e.preventDefault();
+            popup[index].style.setProperty('display', 'block')
+        })
+
+        close.addEventListener("click",()=>{
+            popup[index].style.setProperty('display', 'none')
+        })
+
+        copy.onclick = () => {
+          input.select(); //select input value
+          if (document.execCommand("copy")) { //if the selected text copy
+            field.classList.add("active");
+            copy.innerText = "Copied";
+            setTimeout(() => {
+              window.getSelection().removeAllRanges(); //remove selection from document
+              field.classList.remove("active");
+              copy.innerText = "Copy";
+            }, 3000);
+          }
+        }
+      })
+    }
+
+    const url = '{% url "editors:save" %}';
+    let options = {
+      method: 'POST',
+      headers: {'X-CSRFToken': csrftoken},
+      mode: 'same-origin'
+    }
+
+    saveButtons = document.querySelectorAll('a.save')
+    saveButtons.forEach(saveButton =>{
+      saveButton.addEventListener('click', function(e){
+        e.preventDefault();
+        if(saveButton.dataset.action === 'Save'){
+            saveButton.textContent = 'Saving...'
+        }
+        else{
+            saveButton.textContent = 'Removing...'
+        }
+        saveButton.style.pointerEvents = "none";
+
+        // add request body
+        let formData = new FormData();
+        formData.append('id', saveButton.dataset.id);
+        formData.append('action', saveButton.dataset.action);
+        options['body'] = formData;
+
+        // send HTTP request
+        fetch(url, options).then(response => response.json()).then(data => {
+          if (data['status'] === 'ok'){
+            // toggle button text and data-action
+            saveButton.dataset.action = data['action']
+            saveButton.innerHTML = `<span>${data['action']}</span>`;
+            if (data['action'] === 'Remove'){
+              saveButton.style.backgroundColor = "var(--alt-accent-color)";
+              saveButton.style.color = "#fff";
+            }
+            else{
+              saveButton.style.backgroundColor = "var(--background-btn)";
+              saveButton.style.color = "var(--gray-color)";
+            }
+          }
+        });
+        saveButton.style.pointerEvents = "auto";
+      });
+    });
+
+    let page = 1;
+let emptyPage = false;
+let blockRequest = false;
+window.addEventListener('scroll', function(e) {
+        let margin = document.body.clientHeight - window.innerHeight - 200;
+        if(window.pageYOffset > margin && !emptyPage && !blockRequest) {
+            blockRequest = true;
+            page += 1;
+            fetch('?story_only=1&page=' + page)
+            .then(response => response.text())
+            .then(html => {
+                if (html === '') {
+                    emptyPage = true;
+                }
+                else {
+                    let postList = document.getElementById('stories-list');
+                    postList.insertAdjacentHTML('beforeEnd', html);
+                    blockRequest = false;
+                    const url = '{% url "editors:save" %}';
+                    let options = {
+                        method: 'POST',
+                        headers: {'X-CSRFToken': csrftoken},
+                        mode: 'same-origin'
+                    }
+                    //Share-Modal
+                    const showBtns = document.querySelectorAll(`a#view-modal-${page}`),
+                      popups = document.querySelectorAll(`#popup-${page}`);
+                    if(showBtns != null && popups != null){
+                      showBtns.forEach((viewBtn,index)=>{
+                        const close = popups[index].querySelector(`#close-${page}`),
+                        field = popups[index].querySelector(".field"),
+                        input = field.querySelector("input"),
+                        copy = field.querySelector("button");
+
+                        viewBtn.addEventListener("click",(e)=>{
+                            e.preventDefault();
+                            popups[index].style.setProperty('display', 'block')
+                        })
+
+                        close.addEventListener("click",()=>{
+                            popups[index].style.setProperty('display', 'none')
+                        })
+
+                          copy.onclick = () => {
+                              input.select(); //select input value
+                              if (document.execCommand("copy")) { //if the selected text copy
+                                  field.classList.add("active");
+                                  copy.innerText = "Copied";
+                                  setTimeout(() => {
+                                      window.getSelection().removeAllRanges(); //remove selection from document
+                                      field.classList.remove("active");
+                                      copy.innerText = "Copy";
+                                  }, 3000);
+                              }
+                          }
+
+                      })
+                    }
+
+                    Buttons= document.querySelectorAll(`a#save-${page}`)
+                    Buttons.forEach(Button =>{
+                            Button.addEventListener('click', function(e){
+                            e.preventDefault();
+                            if(Button.dataset.action === 'Save'){
+                                Button.textContent = 'Saving...'
+                            }
+                            else{
+                                Button.textContent = 'Removing...'
+                            }
+                            Button.style.pointerEvents = "none";
+
+                            // add request body
+                            let formData = new FormData();
+                            formData.append('id', Button.dataset.id);
+                            formData.append('action', Button.dataset.action);
+                            options['body'] = formData;
+
+                            // send HTTP request
+                            fetch(url, options).then(response => response.json()).then(data => {
+                                if (data['status'] === 'ok'){
+                                    // toggle button text and data-action
+                                    Button.dataset.action = data['action']
+                                    Button.innerHTML = `<span>${data['action']}</span>`;
+                                    if (data['action'] === 'Remove'){
+                                      Button.style.backgroundColor = "var(--alt-accent-color)";
+                                      Button.style.color = "#fff";
+                                    }
+                                    else{
+                                      Button.style.backgroundColor = "var(--background-btn)";
+                                      Button.style.color = "var(--gray-color)";
+                                    }
+                                }
+                            });
+                            Button.style.pointerEvents = "auto";
+                        });
+                    });
+                }
+            })
+
+        }
+    });
+    // Launch scroll event
+    const scrollEvent = new Event('scroll');
+    window.dispatchEvent(scrollEvent);
+{% endblock %}

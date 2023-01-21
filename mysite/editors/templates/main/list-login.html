@@ -1,0 +1,82 @@
+{% load static %}
+{% load blog_tags %}
+{% load thumbnail %}
+
+{% for post in stories %}
+    <div class="article-wrapper">
+        <div class="article-info">
+          <div class="profile-wrapper">
+          {% if post.author.profile.photo %}
+            <img src="{% thumbnail post.author.profile.photo 200x0 %}" alt="Profile" />
+          {% else %}
+              <img src="https://eu.ui-avatars.com/api/?background=08b86f&name={{post.author.first_name}}+{{post.author.last_name}}&size=250&color=fff"/>
+          {% endif %}
+          </div>
+          <a href="{% url 'profile' username=post.author%}" class="author">
+            {{post.author.first_name}} {{post.author.last_name}}
+          </a>
+          <span class="read-time posted">
+            <span class="dot">&#183;</span> {{post.body|read_time}}
+          </span>
+          <span class="posted right"><i class="iconly-Time-Circle icli"></i>
+            <span class="date">
+              {{post.created|date:"M"}} {{post.created.day}}, {{ post.created|date:"Y"}}
+            </span>
+          </span>
+        </div>
+        <div class="summery-content">
+          <h2 class="article-title">
+            <a href="{{post.get_absolute_url}}" title="Article Title" class="article-title-link">
+              {{post.title}}
+            </a>
+          </h2>
+          <div class="article-summery">
+            <div id="mobile-image">
+              <img id="" src="{% thumbnail post.cover 300x0 %}" alt="Post-Image" />
+            </div>
+            <p class="summery-text">
+              {{post.body|striptags|safe|truncatechars:400 }}
+            </p>
+          </div>
+          <div class="popup" id="popup">
+            <div class="header">
+              <span>Share this via</span>
+              <div id="close" class="close-element"><i class="uil uil-times"></i></div>
+            </div>
+            <div class="content">
+              <div class="icons">
+                <a href="https://www.facebook.com/sharer.php?u=https://www.getopas.com{{post.get_absolute_url}}?t='{{post.body|striptags|safe|truncatechars:180}}'" rel="noopener" target="_blank" ><i class="fab fa-facebook-f"></i></a>
+                <a href="https://twitter.com/share?url=https://www.getopas.com{{post.get_absolute_url}}&amp;text={{post.body|striptags|safe|truncatechars:180}}" rel="noopener" target="_blank" ><i class="fab fa-twitter"></i></a>
+                <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://www.getopas.com{{post.get_absolute_url}}&title={{post.title}}&summery={{post.body|striptags|safe|truncatechars:180}}" rel="noopener" target="_blank"><i class="fab fa-linkedin"></i></a>
+                <a href="https://api.whatsapp.com/send?text=https://www.getopas.com{{post.get_absolute_url}}" data-action="share/whatsapp/share" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                <a href="https://t.me/share/url?url=https://www.getopas.com{{post.get_absolute_url}}&text={{post.body|striptags|safe|truncatechars:180}}" rel="noopener" target="_blank"><i class="fab fa-telegram-plane"></i></a>
+            </div>
+              <p>Or copy link</p>
+              <div class="field">
+                <i class="url-icon uil uil-link"></i>
+                <input type="text" readonly value="https://www.getopas.com{{post.get_absolute_url}}">
+                <button>Copy</button>
+              </div>
+            </div>
+          </div>
+          <div class="article-footer">
+            <div class="article-tags">
+            {% for tag in post.tags.names|truncate_tags %}
+              <a href="{% url 'editors:explore' topic=tag|slug_tag %}" class="tag">{{tag|split:" "}}</a>
+            {% endfor %}
+            </div>
+            <div class="article-actions">
+              <a class="save {% check_saved post.id request.user%}" href="" data-id="{{ post.id }}" data-action="{% check_saved post.id request.user%}">
+                <span>{% check_saved post.id request.user%}</span>
+              </a>
+              <a class="view-modal"  id="view-modal" title="Share" href="">
+                <span>Share</span>
+              </a>
+              <a title="Report" href="">
+                <span>Report</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+{% endfor %}
