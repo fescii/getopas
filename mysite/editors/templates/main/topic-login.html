@@ -123,7 +123,7 @@ const viewBtns = document.querySelectorAll("a#view-modal"),
       });
     });
 
-    let page = 1;
+let page = 1;
 let emptyPage = false;
 let blockRequest = false;
 window.addEventListener('scroll', function(e) {
@@ -182,7 +182,7 @@ window.addEventListener('scroll', function(e) {
                       })
                     }
 
-                    Buttons= document.querySelectorAll(`a#save-${page}`)
+                    Buttons = document.querySelectorAll(`a#save-${page}`)
                     Buttons.forEach(Button =>{
                             Button.addEventListener('click', function(e){
                             e.preventDefault();
