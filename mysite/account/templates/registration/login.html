@@ -1,28 +1,37 @@
 {% extends "logmain.html" %}
-{% block title %}Opus Login{% endblock %}
+{% load static %}
+{% block title %}Opas Login{% endblock %}
 {% block content %}
-<div class="login-form">
-    <div class="top">
-        <h2>Welcome back!</h2>
-        <i>Glad to see you again</i>
-    </div>
-    <form action="{% url 'login' %}" method="post">
-        {% for field in form %}
-            <div class="field">
-                {{field.label}}
-                {{field}}
+    <div class="container">
+        <div class="top">
+            <div class="image-wrapper">
+                <img src="{% static 'img/favi.png' %}" alt="Logo" srcset="">
             </div>
-        {% endfor %}
-        {% csrf_token %}
-        <input type="hidden" name="next" value="{{ next }}" />
-        <input type="submit" value="Log-in">
-    </form>
-    {% if form.errors %}
-        <ul>
-            <li>Your username and password didn't match. Please try again.</li>
-        </ul>
-    {% endif %}
-    <a href="{% url "password_reset" %}">Forgot your password?</a>
-    <p>If you don't have an account <a href="{% url "register" %}">register here</a></p>
-</div>
+            <h2>Welcome back!</h2>
+            <i>Glad to see you again</i>
+        </div>
+        <form action="{% url 'login' %}" method="post">
+            {% for field in form %}
+                <div class="field">
+                <span class="name">{{field.label}}</span>
+                {% if forloop.first %}
+                    <span class="iconly-Profile icli"></span>
+                {% else %}
+                        <span class="iconly-Lock icli"></span>
+                {% endif %}
+                    {{field}}
+                </div>
+            {% endfor %}
+            {% csrf_token %}
+            {% if form.errors %}
+                <ul class="errors">
+                    <li>Your username and password didn't match.</li>
+                </ul>
+            {% endif %}
+            <input type="hidden" name="next" value="{{ next }}" />
+            <input type="submit" value="Log In">
+        </form>
+        <a class="forgot" href="{% url "password_reset" %}">Forgot your password?</a>
+        <p class="register">If you don't have an account <a href="{% url "register" %}">register here</a></p>
+    </div>
 {% endblock %}

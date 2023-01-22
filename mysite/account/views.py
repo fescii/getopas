@@ -129,19 +129,19 @@ def register(request):
             Profile.objects.create(user=new_user)
             #create_action(new_user, 'has created an account')
             return render(request,
-                          'editors/register_done.html',
+                          'registration/register_done.html',
                           {'new_user': new_user})
         else:
             args = user_form.errors
             user_form = UserRegistrationForm()
         return render(request,
-                      'editors/register.html',
+                      'registration/register.html',
                       {'user_form': user_form,
                        'error': args})
     else:
         user_form = UserRegistrationForm()
         return render(request,
-                      'editors/register.html',
+                      'registration/register.html',
                       {'user_form': user_form})
 
 #Edit User Info

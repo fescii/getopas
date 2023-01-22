@@ -1,0 +1,48 @@
+{% extends "logmain.html" %}
+{% load static %}
+{% block title %}Create an account{% endblock %}
+{% block content %}
+<div class="container container-sign-up">
+    <div class="top">
+        <div class="image-wrapper">
+            <img src="{% static 'img/favi.png' %}" alt="Logo" srcset="">
+        </div>
+        <h2>Create an account</h2>
+        <i>Join team of creative writers</i>
+    </div>
+    <form action="{% url 'register' %}" method="post">
+        {% if error %}
+            <ul class="errors">
+                <p>Check and correct the following errors</p>
+                {% for err in error %}
+                    <i>{{err}},</i>
+                {% endfor %}
+            </ul>
+        {% endif %}
+        {% for field in user_form %}
+            <div class="field">
+               <span class="name">{{field.label}}</span>
+                {{field}}
+            </div>
+        {% endfor %}
+        {% csrf_token %}
+        <input type="submit" value="Register">
+    </form>
+    <p class="register">Already have an account <a href="{% url 'login' %}">Login here</a></p>
+</div>
+{% endblock %}
+
+{% comment %} {% block content %}
+<h1>Create an account</h1>
+<p>Please, sign up using the following form:</p>
+{% if error %}
+<p> Correct the following</p>
+{{error.as_ul}}
+{% endif %} {% endcomment %}
+
+{% comment %} <form method="post">
+{{ user_form.as_p }}
+{% csrf_token %}
+<p><input type="submit" value="Create my account"></p>
+</form>
+{% endblock %} {% endcomment %}

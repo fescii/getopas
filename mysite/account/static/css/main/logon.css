@@ -1,0 +1,267 @@
+*{
+    box-sizing: border-box !important;
+    --font-one: 'Sen', sans-serif;
+    /* --font-two: 'Product Sans', sans-serif; */
+}
+html{
+    margin: 0%;
+    font-size: 16px;
+    /* font-family: 'Sen', sans-serif; */
+}
+body{
+    /* border: 1px solid #808080; */
+    font-family: 'Sen', sans-serif;
+    font-size: inherit;
+    height: 100vh;
+    margin: 0% 0%;
+    padding:  0%;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    justify-content: center;
+    /* background-image: url("../img/logon.jpg"); */
+    background-position: 0%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-blend-mode: color-burn;
+}
+.container{
+    background-color: #ffffffff;
+    padding: 10px 35px 20px 35px;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
+}
+.container-password{
+    padding: 10px 35px 40px 35px;
+}
+.container-reset{
+    max-width: 500px;
+}
+.container>.top{
+    /* border: 1px solid #808080; */
+    border-bottom: 1px solid #80808040;
+    padding: 10px 0px 10px 0px;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    gap: 5px;
+    width: 100%;
+}
+
+.container>.top>.image-wrapper{
+    width: 50px;
+    height: 50px;
+}
+.container>.top>.image-wrapper>img{
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+.container>.top>h2{
+    /* border: 1px solid #808080; */
+    margin: 0%;
+    color: #404040;
+}
+.container>.top>i{
+    color: #808080;
+    text-align: center;
+}
+.container>form{
+    /* border: 1px solid #80808040; */
+    width: 100%;
+    margin: 0px;
+    color: #404040;
+    display: flex;
+    flex-flow: column;
+    gap: 15px;
+}
+.container-sign-up>form{
+    /* border: 1px solid #80808040; */
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+.container>form>.field{
+    width: 100%;
+    display: flex;
+    flex-flow: column;
+    /* align-items: flex-start; */
+    justify-content: flex-start;
+    gap: 3px;
+    color: inherit;
+    position: relative;
+}
+.container-password>form>.field{
+    gap: 5px;
+}
+.container>form>.field>.name{
+    font-size: 1.15rem;
+}
+.container>form>.field>input[type="email"],
+.container>form>.field>input[type="text"],
+.container>form>.field>input[type="password"]{
+    padding: 5px 10px 5px 30px;
+    outline: none;
+    border: 1px solid #80808040;
+    font-size: 1rem;
+    color: #808080;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
+}
+.container-sign-up>form>.field>input[type="email"],
+.container-sign-up>form>.field>input[type="text"],
+.container-sign-up>form>.field>input[type="password"]{
+    padding-left: 10px;
+}
+.container>form>.field>span.icli{
+    color: #808080;
+    position: absolute;
+    left: 5px;
+    top: 30px;
+    font-size: 1.35rem;
+}
+.container>form>input[type="submit"]{
+    padding: 7px 20px;
+    margin: 0%;
+    margin-top: 10px;
+    width: 40%;
+    align-self: center;
+    background-color: #08b86f;
+    color: #ffffff;
+    border: none;
+    font-size: 1rem;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
+}
+.container-sign-up>form>input[type="submit"]{
+    grid-column: 1/3;
+    align-self: center;
+    justify-self: center;
+}
+.container-sign-up>form>.errors{
+    margin: 0%;
+    grid-column: 1/3;
+    justify-self: center;
+    text-align: center;
+}
+.container-sign-up>form>.errors>i{
+    width: max-content;
+}
+.container-sign-up>form>.errors>p{
+    font-size: 1.35rem;
+    margin: 0%;
+    color: #404040;
+}
+.container>a.forgot{
+    align-self: center;
+    display: inline-block;
+    text-decoration: none;
+    color: #08b86f;
+}
+.container>a.forgot:hover{
+    text-decoration: underline;
+}
+.container>p.register{
+    margin: 0%;
+    color: #404040;
+}
+.container>h3.help-text{
+    margin: 15px 0% 20px 0%;
+    color: #404040;
+    text-align: center;
+}
+.container>h3.help-text>a,
+.container>p.register>a{
+    text-decoration: none;
+    color: #08b86f;
+}
+.container>form>ul.errorlist,
+.container>form>ul.errors{
+    margin: 0%;
+    padding: 0% 5px 0% 15px;
+    color: #ee7752;
+}
+.container>form>ul.errorlist>ul{
+    margin: 0%;
+    padding: 0%;
+}
+.container>form>ul.errorlist>li,
+.container>form>ul.errors>li{
+    color: inherit;
+}
+@media screen and ( max-width:640px ){
+    .container-sign-up>form{
+        display: flex;
+        flex-flow: column;
+        gap: 10px;
+    }
+}
+
+@media screen and ( max-width:500px ){
+    body{
+        /* border: 1px solid #808080; */
+        font-size: inherit;
+        height: 100vh;
+        margin: 0% 0%;
+        padding: 20px 20px;
+        /* display: unset; */
+        display: flex;
+        flex-flow: column;
+        align-items: unset;
+        justify-content:flex-start;
+        background-image: unset;
+        background-color: #ffffff;
+    }
+    .container-sign-up,
+    .container{
+        /* border: 1px solid #808080; */
+        background-color: #ffffffff;
+        /* margin-top: 20px; */
+        padding: 10px 10px 10px 10px;
+        align-items: flex-start;
+        /* gap: 30; */
+        border-radius: unset;
+        -webkit-border-radius: unset;
+        -moz-border-radius: unset;
+        -ms-border-radius: unset;
+        -o-border-radius: unset;
+    }
+    .container>form{
+        margin-top: 30px;
+    }
+    .container>form,
+    .container-sign-up>form{
+        /* border: 1px solid #808080; */
+        width: 100%;
+        display: flex;
+        align-items: flex-start;
+        gap: 20px;
+    }
+    .container>form>.field,
+    .container-sign-up>form>.field{
+        /* border: 1px solid #808080; */
+        width: 100%;
+    }
+    .container>form>.field>input[type="email"],
+    .container>form>.field>input[type="text"],
+    .container>form>.field>input[type="password"]{
+        padding-top: 8px ;
+        padding-bottom: 8px;
+    }
+    .container>.top{
+        margin:  0px 0px;
+    }
+}
