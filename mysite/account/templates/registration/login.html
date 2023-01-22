@@ -11,6 +11,11 @@
             <i>Glad to see you again</i>
         </div>
         <form action="{% url 'login' %}" method="post">
+            {% if form.errors %}
+                <ul class="errors">
+                    <li>Your username and password didn't match.</li>
+                </ul>
+            {% endif %}
             {% for field in form %}
                 <div class="field">
                 <span class="name">{{field.label}}</span>
@@ -22,13 +27,8 @@
                     {{field}}
                 </div>
             {% endfor %}
-            {% csrf_token %}
-            {% if form.errors %}
-                <ul class="errors">
-                    <li>Your username and password didn't match.</li>
-                </ul>
-            {% endif %}
             <input type="hidden" name="next" value="{{ next }}" />
+            {% csrf_token %}
             <input type="submit" value="Log In">
         </form>
         <a class="forgot" href="{% url "password_reset" %}">Forgot your password?</a>

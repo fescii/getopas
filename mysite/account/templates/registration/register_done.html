@@ -1,6 +1,15 @@
-{% block title %}Welcome{% endblock %}
+{% extends "logmain.html" %}
+{% load static %}
+{% block title %}Opas Welcome{% endblock %}
 {% block content %}
-<h1>Welcome {{ new_user.first_name }}!</h1>
-<p>Your account has been successfully created. Now you can <a
-href="{% url "login" %}">log in</a>.</p>
+    <div class="container">
+        <div class="top">
+            <div class="image-wrapper">
+                <img src="{% static 'img/favi.png' %}" alt="Logo" srcset="">
+            </div>
+            <h2>Welcome {{ new_user.first_name }}!</h2>
+            <i>Account has been successfully created.</i>
+        </div>
+        <h3 class="help-text">Your account has been successfully created. Now you can <a href="{% url "login" %}">login</a>.</h3>
+    </div>
 {% endblock %}

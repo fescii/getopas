@@ -27,6 +27,7 @@ body{
 }
 .container{
     background-color: #ffffffff;
+    min-width: 500px;
     padding: 10px 35px 20px 35px;
     display: flex;
     flex-flow: column;
@@ -44,6 +45,10 @@ body{
 }
 .container-reset{
     max-width: 500px;
+}
+.container-start{
+    max-width: 550px;
+    padding: 10px 20px 10px 20px;
 }
 .container>.top{
     /* border: 1px solid #808080; */
@@ -65,10 +70,35 @@ body{
     height: 100%;
     object-fit: contain;
 }
+.container-start>.top>h1,
 .container>.top>h2{
     /* border: 1px solid #808080; */
     margin: 0%;
     color: #404040;
+}
+.container-start>.top>h1{
+    background: linear-gradient(-45deg, #ee7752, rgb(255, 136, 0), #08b86f, #23d5ab);
+    background-size: auto;
+    background-clip: border-box;
+    background-clip: text;
+    background-size: 350% 350%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: gradient 10s ease infinite;
+    -webkit-animation: gradient 10s ease infinite;
+}
+@keyframes gradient {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
 }
 .container>.top>i{
     color: #808080;
@@ -83,6 +113,81 @@ body{
     flex-flow: column;
     gap: 15px;
 }
+.container-start>.content{
+     /* border: 1px solid #80808040; */
+     width: 100%;
+     margin: 0px;
+     color: #404040;
+     display: flex;
+     flex-flow: column;
+     gap: 15px;
+}
+.container-start>.content>.field{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    row-gap: 10px;
+    justify-content: center;
+}
+.container-start>.content>.field>p{
+    grid-column: 1/3;
+    margin: 0%;
+}
+.container-start>.content>.field>a{
+    text-decoration: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    margin: 20px 0%;
+    width: max-content;
+    justify-self: center;
+    background-color: #08b86f;
+    color: #ffffff;
+    border: none;
+    font-size: 1.15rem;
+    border-radius: 50px;
+    -webkit-border-radius: 50px;
+    -moz-border-radius: 50px;
+    -ms-border-radius: 50px;
+    -o-border-radius: 50px;
+}
+.container-start>.content>.field>a:last-of-type{
+    background-color: rgb(255, 136, 0);
+}
+.container-start>.content>.field>.info{
+    grid-column: 1/3;
+    text-align: center;
+}
+.container-start>.content>.field>.info>a{
+    /* border: 1px solid #80808040; */
+    text-decoration: none;
+    color: #08b86f;
+}
+.container-start>.content>ul.footer{
+    border-top: 1px solid #80808040;
+    margin: 0% 0px;
+    width: 100%;
+    padding: 5px 0%;
+    /* list-style-type: circle; */
+    color: #808080;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+.container-start>.content>ul.footer>li{
+    /* border: 1px solid #80808040; */
+    /* display: inline-block; */
+    color: #808080;
+}
+.container-start>.content>ul.footer>li>a{
+    text-decoration: none;
+    color: #808080;
+}
+.container-start>.content>ul.footer>li>a:hover{
+    color: #08b86f;
+}
+
+
 .container-sign-up>form{
     /* border: 1px solid #80808040; */
     display: grid;
@@ -110,6 +215,7 @@ body{
     padding: 5px 10px 5px 30px;
     outline: none;
     border: 1px solid #80808040;
+    background-color: transparent;
     font-size: 1rem;
     color: #808080;
     border-radius: 5px;
@@ -131,20 +237,21 @@ body{
     font-size: 1.35rem;
 }
 .container>form>input[type="submit"]{
-    padding: 7px 20px;
+    padding: 10px 20px;
+    cursor: pointer;
     margin: 0%;
     margin-top: 10px;
-    width: 40%;
+    width: max-content;
     align-self: center;
     background-color: #08b86f;
     color: #ffffff;
     border: none;
     font-size: 1rem;
-    border-radius: 5px;
-    -webkit-border-radius: 5px;
-    -moz-border-radius: 5px;
-    -ms-border-radius: 5px;
-    -o-border-radius: 5px;
+    border-radius: 50px;
+    -webkit-border-radius: 50px;
+    -moz-border-radius: 50px;
+    -ms-border-radius: 50px;
+    -o-border-radius: 50px;
 }
 .container-sign-up>form>input[type="submit"]{
     grid-column: 1/3;
@@ -164,6 +271,7 @@ body{
     font-size: 1.35rem;
     margin: 0%;
     color: #404040;
+    text-align: center;
 }
 .container>a.forgot{
     align-self: center;
@@ -229,6 +337,7 @@ body{
     .container{
         /* border: 1px solid #808080; */
         background-color: #ffffffff;
+        min-width: unset;
         /* margin-top: 20px; */
         padding: 10px 10px 10px 10px;
         align-items: flex-start;
@@ -263,5 +372,18 @@ body{
     }
     .container>.top{
         margin:  0px 0px;
+    }
+    .container>p.register{
+        /* border: 1px solid #808080; */
+        width: 100%;
+        margin: 0%;
+        color: #404040;
+    }
+    .container>h3.help-text{
+        /* border: 1px solid #808080; */
+        width: 100%;
+        margin: 15px 0% 20px 0%;
+        color: #404040;
+        text-align: center;
     }
 }

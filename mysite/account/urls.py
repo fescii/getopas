@@ -34,6 +34,7 @@ urlpatterns = [
 
     #Register urls
     path('register/', views.register, name='register'),
+    path('join/', views.get_started, name='get_started'),
 
     #Edit user info path
     path('@<str:username>/edit', views.edit, name='edit'),

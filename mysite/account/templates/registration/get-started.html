@@ -1,0 +1,38 @@
+{% extends "logmain.html" %}
+{% load static %}
+{% block title %}Opas Get Started{% endblock %}
+{% block content %}
+    <div class="container container-start">
+        <div class="top">
+            <div class="image-wrapper">
+                <img src="{% static 'img/favi.png' %}" alt="Logo" srcset="">
+            </div>
+            <h1>{{site_name}}</h1>
+            <i>Experience the world of information, anytime, anywhere.</i>
+        </div>
+        <div class="content">
+            <div class="field">
+                <p>Unleash the power of words and share your stories, newsletters and information with the world in a seamless and interactive way. </p>
+                <a href="{% url 'login' %}">Login</a>
+                <a href="{% url 'register' %}">Register</a>
+                <div class="info">
+                    By continuing you indicate that you agree to Opas’ <a href="">Terms of Service</a> and <a href="">Privacy Policy</a>.
+                </div>
+            </div>
+            <ul class="footer">
+                <li>
+                    <a href="">About</a>
+                </li>
+                <li>
+                    <a href="">Privacy</a>
+                </li>
+                <li>
+                    <a href="">Terms</a>
+                </li>
+                <li>
+                    <a href="">&copy aduki, Inc. 2023</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+{% endblock %}

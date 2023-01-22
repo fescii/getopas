@@ -431,3 +431,11 @@ def header_content(request):
                   'account/user/header.html',
                   {'section': 'people',
                    'user': user})
+
+
+#Registration View
+def get_started(request):
+    args = 'Opas'
+    return render(request,
+                      'registration/get-started.html',
+                      {'site_name': args})
