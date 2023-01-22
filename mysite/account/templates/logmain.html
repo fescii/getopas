@@ -1,0 +1,31 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{% endblock %}</title>
+
+    <meta name="description" content="{% block description %}{% endblock %}">
+    <meta property="og:title" content="{% block metatitle %}{% endblock %}">
+    <meta property="og:image" content="{% block image %}{% endblock %}">
+    <meta property="og:url" content="{% block url %}{% endblock %}">
+
+
+    <link href="{% static 'css/style.css' %}" rel="stylesheet">
+
+
+    <script src="//cdn.jsdelivr.net/npm/js-cookie@3.0.1/dist/js.cookie.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Sen:wght@400;700;800&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    {% block content %}
+    {% endblock content %}
+</body>
+
+</html>
