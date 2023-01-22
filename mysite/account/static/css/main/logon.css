@@ -233,7 +233,7 @@ body{
     color: #808080;
     position: absolute;
     left: 5px;
-    top: 30px;
+    top: 32px;
     font-size: 1.35rem;
 }
 .container>form>input[type="submit"]{
