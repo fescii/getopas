@@ -212,7 +212,7 @@ body{
 .container>form>.field>input[type="email"],
 .container>form>.field>input[type="text"],
 .container>form>.field>input[type="password"]{
-    padding: 5px 10px 5px 30px;
+    padding: 6px 10px 6px 30px;
     outline: none;
     border: 1px solid #80808040;
     background-color: transparent;
@@ -233,7 +233,7 @@ body{
     color: #808080;
     position: absolute;
     left: 5px;
-    top: 32px;
+    top: 34px;
     font-size: 1.35rem;
 }
 .container>form>input[type="submit"]{
