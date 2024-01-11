@@ -42,7 +42,7 @@
                     {% endif %}
             </div>
             <p class="summery-text">
-                {{post.body|striptags|safe|truncatechars:400 }}
+                {{post.body|striptags|safe|truncatechars:250 }}
             </p>
         </div>
         <div class="popup" id="popup-{{page.number}}">

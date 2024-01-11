@@ -1,0 +1,34 @@
+{% extends "logmain.html" %}
+{% load static %}
+{% block title %}Opas Login{% endblock %}
+{% block content %}
+    <div class="container">
+        <div class="top">
+            <div class="image-wrapper">
+                <img src="{% static 'img/favi.png' %}" alt="Logo" srcset="">
+            </div>
+            <h2>Suppot Us</h2>
+            <i>Help us host and manage this platform</i>
+        </div>
+        <form action="{% url 'mpesa' %}" method="post">
+            {% if form.errors %}
+                <ul class="errors">
+                    <li>Please enter correct info.</li>
+                </ul>
+            {% endif %}
+            {% for field in form %}
+                <div class="field">
+                <span class="name">{{field.label}}</span>
+                {% if forloop.first %}
+                    <span class="iconly-Profile icli"></span>
+                {% else %}
+                        <span class="iconly-Lock icli"></span>
+                {% endif %}
+                    {{field}}
+                </div>
+            {% endfor %}
+            {% csrf_token %}
+            <input type="submit" value="Donate">
+        </form>
+    </div>
+{% endblock %}

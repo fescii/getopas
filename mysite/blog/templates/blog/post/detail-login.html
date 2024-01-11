@@ -2,11 +2,13 @@
 {% load static %}
 {% load blog_tags %}
 {% load thumbnail %}
+
 {% block title %}{{ post.title }}{% endblock %}
 {% block description %}{{post.body|striptags|safe|truncatechars:300 }}{% endblock %}
 {% block metatitle %}{{post.title }}{% endblock %}
-{% block image %}https://www.getopas.com{% thumbnail post.cover 300x0 %}{% endblock %}
-{% block url %}https://www.getopas.com{{post.get_absolute_url}}{% endblock %}
+{% block image %}{% site_path %}{% thumbnail post.cover 300x0 %}{% endblock %}
+{% block url %}{% site_path %}{{post.get_absolute_url}}{% endblock %}
+
 {% block content %}
     <div class="article-wrapper">
       <!--  <h2 id="site-title">{{title|split:"-"}}</h2>-->
@@ -39,10 +41,10 @@
                     <span>Share</span>
                     <i class="iconly-Send icli"> </i>
                 </a>
-                <a title="Share" href="">
+               <!-- <a title="Share" href="">
                     <span>Report</span>
                     <i class="iconly-Info-Circle icli"> </i>
-                </a>
+                </a>-->
             </div>
             <div class="popup" id="popup">
                 <div class="header">

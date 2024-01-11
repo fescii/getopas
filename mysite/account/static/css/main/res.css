@@ -240,6 +240,13 @@
         gap: 50px;
         margin-top: 20px;
     }
+    main.read-out>.story-content>.article-content *{
+        font-size: 1.05rem;
+    }
+    main.main>.services>.content>.infos>.info>p.text{
+    /* border: 1px solid #c02727; */
+    font-size: 1.15rem;
+    }
     main>.side-content{
         /* border: 1px solid #c02727; */
         gap: 20px;
@@ -271,5 +278,8 @@
         padding: 10px;
         display: flex;
         flex-flow: column;
+    }
+    a{
+        cursor:default !important;
     }
 }

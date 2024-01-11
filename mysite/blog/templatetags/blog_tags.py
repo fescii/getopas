@@ -17,8 +17,8 @@ register = template.Library()
 
 #Get Total Published Posts
 @register.simple_tag
-def total_posts():
-    return Post.published.count()
+def site_path():
+    return 'https://getopas.pythonanywhere.com'
 
 #Get Total Unread Notification
 @register.simple_tag

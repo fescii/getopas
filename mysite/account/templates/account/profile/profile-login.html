@@ -1,20 +1,21 @@
 {% extends "base.html" %}
 {% load static %}
 {% load contact_tags %}
+{% load blog_tags %}
 {% load thumbnail %}
 {% block title %}{{r_user.first_name|capfirst}}'s Profile{% endblock %}
 
 
 {% block description %}{{r_user.profile.about|striptags|safe|truncatechars:300 }}{% endblock %}
-{% block metatitle %}{{r_user.get_absolute_url }}{% endblock %}
+{% block metatitle %}{{r_user.get_full_name }}{% endblock %}
 {% block image %}
 {% if r_user.profile.photo %}
-    https://www.getopas.com{% thumbnail r_user.profile.photo 100x0 %}
+    {% site_path %}{% thumbnail r_user.profile.photo 100x0 %}
     {% else %}
         https://eu.ui-avatars.com/api/?background=08b86f&name={{r_user.first_name}}+{{r_user.last_name}}&size=250&color=fff"
     {% endif %}
 {% endblock %}
-{% block url %}https://www.getopas.com{{r_user.get_absolute_url}}{% endblock %}
+{% block url %}{% site_path %}{{r_user.get_absolute_url}}{% endblock %}
 
 {% block content %}
 
@@ -109,18 +110,6 @@
                 <div class="section-title">Contact Info</div>
             </div>
             <div class="info-container">
-                <div class="info">
-                    <div class="info-title">Website</div>
-                    <div class="info-content">{{profile.website}}</div>
-                </div>
-                <div class="info">
-                    <div class="info-title">Twitter</div>
-                    <div class="info-content">@{{profile.twitter}}</div>
-                </div>
-                <div class="info">
-                    <div class="info-title">Linkedin</div>
-                    <div class="info-content">{{profile.linkedin}}</div>
-                </div>
                 <div class="info">
                     <div class="info-title">Location</div>
                     <div class="info-content">{{profile.location}}</div>

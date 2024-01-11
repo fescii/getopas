@@ -27,8 +27,8 @@
                     {{field}}
                 </div>
             {% endfor %}
-            <input type="hidden" name="next" value="{{ next }}" />
             {% csrf_token %}
+            <input type="hidden" name="next" value="{{ next }}" />
             <input type="submit" value="Log In">
         </form>
         <a class="forgot" href="{% url "password_reset" %}">Forgot your password?</a>

@@ -53,16 +53,16 @@
               </div>
               <div class="content">
                   <div class="icons">
-                      <a href="https://www.facebook.com/sharer.php?u=https://www.getopas.com{{post.get_absolute_url}}?t='{{post.body|striptags|safe|truncatechars:180}}'" rel="noopener" target="_blank" ><i class="fab fa-facebook-f"></i></a>
-                      <a href="https://twitter.com/share?url=https://www.getopas.com{{post.get_absolute_url}}&amp;text={{post.body|striptags|safe|truncatechars:180}}" rel="noopener" target="_blank" ><i class="fab fa-twitter"></i></a>
-                      <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://www.getopas.com{{post.get_absolute_url}}&title={{post.title}}&summery={{post.body|striptags|safe|truncatechars:180}}" rel="noopener" target="_blank"><i class="fab fa-linkedin"></i></a>
-                      <a href="https://api.whatsapp.com/send?text=https://www.getopas.com{{post.get_absolute_url}}" data-action="share/whatsapp/share" target="_blank"><i class="fab fa-whatsapp"></i></a>
-                      <a href="https://t.me/share/url?url=https://www.getopas.com{{post.get_absolute_url}}&text={{post.body|striptags|safe|truncatechars:180}}" rel="noopener" target="_blank"><i class="fab fa-telegram-plane"></i></a>
+                      <a href="https://www.facebook.com/sharer.php?u={% site_path %}{{post.get_absolute_url}}?t='{{post.body|striptags|safe|truncatechars:180}}'" rel="noopener" target="_blank" ><i class="fab fa-facebook-f"></i></a>
+                      <a href="https://twitter.com/intent/tweet?url={% site_path %}{{post.get_absolute_url}}&amp;text={{post.body|striptags|safe|truncatechars:180}}" rel="noopener" target="_blank" ><i class="fab fa-twitter"></i></a>
+                      <a href="https://www.linkedin.com/shareArticle?mini=true&url={% site_path %}{{post.get_absolute_url}}&title={{post.title}}&summery={{post.body|striptags|safe|truncatechars:180}}" rel="noopener" target="_blank"><i class="fab fa-linkedin"></i></a>
+                      <a href="https://api.whatsapp.com/send?text={% site_path %}{{post.get_absolute_url}}" data-action="share/whatsapp/share" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                      <a href="https://t.me/share/url?url={% site_path %}{{post.get_absolute_url}}&text={{post.body|striptags|safe|truncatechars:180}}" rel="noopener" target="_blank"><i class="fab fa-telegram-plane"></i></a>
                   </div>
                 <p>Or copy link</p>
                 <div class="field">
                   <i class="url-icon uil uil-link"></i>
-                  <input type="text" readonly value="https://www.getopas.com{{post.get_absolute_url}}">
+                  <input type="text" readonly value="{% site_path %}{{post.get_absolute_url}}">
                   <button>Copy</button>
                 </div>
               </div>

@@ -972,12 +972,16 @@ main.read-out>.story-content>#cover-image>img{
 main.read-out>.story-content>.article-content *{
     color: #404040 !important;
     line-height: 1.5 !important;
-    font-size: 1.15rem !important;
+    font-size: 1.15rem;
+    font-family: 'Sen', sans-serif !important;
     max-width: 100%;
 }
 main.read-out>.story-content>.article-content a{
     color: #1A73E8 !important;
     text-decoration: none;
+}
+main.read-out>.story-content>.article-content a:hover{
+    text-decoration: underline;
 }
 main.read-out>.story-content>.article-content h1,
 main.read-out>.story-content>.article-content h2,
@@ -988,6 +992,9 @@ main.read-out>.story-content>.article-content h6{
     padding: 0% !important;
     font-size: 1.3rem !important;
     /* border: 1px solid #808080; */
+}
+main.read-out>.story-content>.article-content img{
+    max-height:400px;
 }
 
 main.read-out>.story-content>.article-footer{

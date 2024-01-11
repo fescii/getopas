@@ -1,4 +1,3 @@
-from re import template
 from django.urls import path, include
 from . import views
 from django.contrib.auth import views as auth_views
@@ -35,6 +34,9 @@ urlpatterns = [
     #Register urls
     path('register/', views.register, name='register'),
     path('join/', views.get_started, name='get_started'),
+
+    #Payments urls
+    path('donate/mpesa', views.pay_mpesa, name='mpesa'),
 
     #Edit user info path
     path('@<str:username>/edit', views.edit, name='edit'),

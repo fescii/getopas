@@ -2,8 +2,9 @@ from django.shortcuts import render
 from django.contrib.auth.models import User
 from blog.models import Post
 from magazine.models import Issue
+
 from .forms import SearchForm
-from django.contrib.postgres.search import SearchVector, SearchQuery, SearchRank
+# from django.contrib.postgres.search import SearchVector, SearchQuery, SearchRank
 
 # Create your views here.
 #Search View
@@ -15,24 +16,19 @@ def query_search(request,option = 'one'):
     if 'search' in request.GET:
         form = SearchForm(request.GET)
         if form.is_valid():
-            search = form.cleaned_data['search']
-            search_vector = SearchVector('title',weight='A') + \
-                    SearchVector('body', weight='B')
-            search_query = SearchQuery(search)
-            results = Post.published.annotate(
-                    search = search_vector,
-                            rank=SearchRank(search_vector, search_query)
-                            ).filter(rank__gte=0.05).order_by('-rank')
+            search = str(form.cleaned_data['search'])
+            # search_e = PostDocument.search().filter("contains", name=search)
+            # results =  search_e.to_queryset()
+            results =  Post.objects.filter(title__icontains=search ) | Post.objects.filter(body__icontains=search )
+
             #Newsletters
-            search_vector_issue = SearchVector('title',weight='A') + SearchVector('description', weight='B')
-            issues = Issue.published.annotate(search = search_vector_issue,
-                                              rank=SearchRank(search_vector_issue, search_query))\
-                                                  .filter(rank__gte=0.05).order_by('-rank')
+            # search_vector_issue = IssueDocument.search().filter("contains", name=search)
+            # issues = search_vector_issue.to_queryset()
+            issues =  Issue.objects.filter(title__icontains=search) | Issue.objects.filter(description__icontains=search)
+
             #People
-            search_vector_people = SearchVector('first_name',weight='A') + SearchVector('last_name', weight='B')
-            people =  User.objects.annotate(search = search_vector_people,
-                                              rank=SearchRank(search_vector_people, search_query))\
-                                                  .filter(rank__gte=0.05).order_by('-rank')
+            # search_vector_people = UserDocument.search().filter("contains", name=search)
+            people =  User.objects.filter(first_name__icontains=search) | User.objects.filter(last_name__icontains=search)
 
             return render(request,'search/search/search.html',
                                     {'form': form,'query':search,
@@ -52,13 +48,6 @@ def query_search(request,option = 'one'):
     form = SearchForm()
     search = str(search)
     results = []
-    search_vector = SearchVector('title',weight='A') + \
-        SearchVector('description', weight='B')
-    search_query = SearchQuery(search)
-    results = Issue.published.annotate(
-        search = search_vector,
-        rank=SearchRank(search_vector, search_query)
-        ).filter(rank__gte=0.3).order_by('-rank')
     return render(request,'search/search/search.html',
                                   {'form': form,'query':search,
                                    'section': 'search',

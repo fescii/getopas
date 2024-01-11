@@ -6,15 +6,15 @@
 {% block title %}{{r_user.first_name|capfirst}}'s Profile{% endblock %}
 
 {% block description %}{{r_user.profile.about|striptags|safe|truncatechars:300 }}{% endblock %}
-{% block metatitle %}{{r_user.get_absolute_url }}{% endblock %}
+{% block metatitle %}{{r_user.get_full_name }}{% endblock %}
 {% block image %}
 {% if r_user.profile.photo %}
-    https://www.getopas.com{% thumbnail r_user.profile.photo 100x0 %}
+    {% site_path %}{% thumbnail r_user.profile.photo 100x0 %}
     {% else %}
         https://eu.ui-avatars.com/api/?background=08b86f&name={{r_user.first_name}}+{{r_user.last_name}}&size=250&color=fff"
     {% endif %}
 {% endblock %}
-{% block url %}https://www.getopas.com{{r_user.get_absolute_url}}{% endblock %}
+{% block url %}{% site_path %}{{r_user.get_absolute_url}}{% endblock %}
 
 {% block welcome %}
     <div class="author-info-page">

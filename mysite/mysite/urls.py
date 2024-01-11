@@ -37,10 +37,10 @@ urlpatterns = [
     #path('dashboard/', include(("editors.urls", 'editors'), namespace="editors")),
     path('', include('account.urls')),
     path('search/', include('search.urls')),
+    path('', include('pwa.urls')),
     path('sitemap.xml', sitemap, {'sitemaps' : sitemaps},
          name = 'django.contrib.sitemaps.views.sitemap'),
-]
+]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
-
-if settings.DEBUG:
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+# if settings.DEBUG:
+    # urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -1,11 +1,11 @@
-from django.shortcuts import render
 from django.contrib.auth.decorators import login_required,user_passes_test
 from django.http import HttpResponseRedirect, HttpResponse
 from django.urls import reverse
 from django.core.paginator import Paginator, EmptyPage,\
     PageNotAnInteger
 from .forms import UserRegistrationForm,\
-    UserEditForm, ProfileEditForm,ModerateUserForm, ProfilePhotoEditForm
+    UserEditForm, ProfileEditForm,ModerateUserForm, ProfilePhotoEditForm,\
+    PaymntForm
 from django.http import JsonResponse
 from django.views.decorators.http import require_POST
 from .models import Contact
@@ -15,6 +15,15 @@ from django.contrib.auth.models import User
 from .models import Profile
 from actions.utils import create_action
 from blog.models import Post
+# import payment
+from python_daraja import payment
+
+
+SHORT_CODE = "5381359"
+PASSKEY = "YOUR PASSKEY"
+CONSUMER_SECRET = "wCcnsLP3P7lBoZGQ"
+CONSUMER_KEY = "yuHl5x9E3S5BqmXgnlU0gmkkUWu2040t"
+ACCOUNT_TYPE = "TILL"  # Set to PAYBILL to use Pay Bill instead of BuyGoods
 
 
 # Create your views here.
@@ -143,6 +152,8 @@ def register(request):
         return render(request,
                       'registration/register.html',
                       {'user_form': user_form})
+
+
 
 #Edit User Info
 @login_required
@@ -282,7 +293,7 @@ def top_users(request):
     users = User.objects.filter(is_active=True).exclude(username=request.user.username)
     users = users.filter(id__in=top_ids)
     users = users.exclude(id__in=following_ids)
-    
+
     paginator = Paginator(users, 8)
     page = request.GET.get('page')
     try:
@@ -439,3 +450,34 @@ def get_started(request):
     return render(request,
                       'registration/get-started.html',
                       {'site_name': args})
+
+
+#Payment Form Info
+def pay_mpesa(request):
+    if request.method == 'POST':
+        payment_form = PaymntForm()
+        if payment_form.is_valid():
+            cd = payment_form.cleaned_data
+
+            no = str(cd['no'])
+            pesa = str(cd['pesa'])
+
+            payment.trigger_stk_push(phone_number=no, amount=pesa, callback_url='https://your-domain/callback/',
+                                   description='Payment for services rendered',
+                                   account_ref='Python Good PHP Bad and Co.')
+
+            messages.success(request, 'Payment initiated')
+            #return HttpResponseRedirect(reverse('profile',kwargs={'username': user.username}))
+
+        else:
+            messages.error(request, 'Error initiating payment')
+            payment_form = PaymntForm()
+            return render(request,
+                      'payment/mpesa.html',
+                      {'form': payment_form,})
+    else:
+        payment_form = PaymntForm()
+        return render(request,
+                      'payment/mpesa.html',
+                      {'form': payment_form,})
+

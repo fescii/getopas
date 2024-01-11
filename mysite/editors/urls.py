@@ -7,12 +7,12 @@ urlpatterns = [
     #path('', include('django.contrib.auth.urls')),
 
     #Dashboard path
-    path('home', views.dashboard, name='home'),
+    path('', views.dashboard, name='home'),
     path('newsletters', views.newsletters, name='newsletters'),
     path('create', views.create_options, name='create_options'),
 
     #Explores
-    path('', views.main_home, name='main_home'),
+    # path('', views.main_home, name='main_home'),
     path('discover', views.explore_out, name='explore_out'),
 
     #Articles

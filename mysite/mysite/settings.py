@@ -25,11 +25,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-ww8d*)@2(pxgtxwt)jd+1ii-=-we2ot9nm4nn*0kaap0%(fd2@'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ['192.168.209.202','localhost','192.168.6.200']
+ALLOWED_HOSTS = ['*']
 
-SITE_ID = 1
+SITE_ID = 2
 # Application definition
 
 INSTALLED_APPS = [
@@ -55,6 +55,8 @@ INSTALLED_APPS = [
     'django.contrib.sitemaps',
     'django.contrib.postgres',
     'easy_thumbnails',
+    'django_elasticsearch_dsl',
+    'pwa',
 ]
 
 MIDDLEWARE = [
@@ -99,11 +101,12 @@ DATABASES = {
 }"""
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'opus',
-        'USER': 'femar',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'getopas$default',
+        'USER': 'getopas',
         'PASSWORD': 'Fescii##$$3',
-}
+        'HOST': 'getopas.mysql.pythonanywhere-services.com',
+    }
 }
 
 
@@ -146,7 +149,8 @@ USE_TZ = False
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
 PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
-STATIC_URL = 'static/'
+# STATIC_URL = 'static/'
+STATIC_URL = "/static/"
 STATIC_ROOT = os.path.join(PROJECT_ROOT, 'static')
 
 # Default primary key field type
@@ -155,7 +159,15 @@ STATIC_ROOT = os.path.join(PROJECT_ROOT, 'static')
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Email config
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'opasplatform@gmail.com'
+EMAIL_HOST_PASSWORD = 'gzvxirzimcauguik'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_USE_SSL = False
+
 
 #Login Redirects
 LOGIN_REDIRECT_URL = 'editors:home'
@@ -172,8 +184,54 @@ TINYMCE_JS_URL = os.path.join(STATIC_URL, 'tinymce/tinymce.min.js')
 
 ABSOLUTE_URL_OVERRIDES = {'auth.user': lambda u: reverse_lazy('profile',args=[u.username])}
 
+
+ELASTICSEARCH_DSL={
+    'default': {
+        'hosts': 'localhost:9200'
+    },
+}
+
+
+#PWA
+# PWA_SERVICE_WORKER_PATH = os.path.join(MEDIA_URL, 'js/', 'serviceworker.js')
+# PWA_SERVICE_WORKER_PATH = '/home/getopas/getopas/mysite/account/static/js/serviceworker.js'
+
+
+
+PWA_APP_NAME = 'Opas'
+PWA_APP_DESCRIPTION = "Experience the world of information, anytime, anywhere."
+PWA_APP_THEME_COLOR = '#000000'
+PWA_APP_BACKGROUND_COLOR = '#ffffff'
+PWA_APP_DISPLAY = 'standalone'
+PWA_APP_SCOPE = '/'
+PWA_APP_ORIENTATION = 'any'
+PWA_APP_START_URL = '/'
+PWA_APP_STATUS_BAR_COLOR = 'default'
+PWA_APP_ICONS = [
+	{
+		'src': os.path.join(MEDIA_URL, 'img/', 'favi.png'),
+		'sizes': '160x160'
+	}
+]
+PWA_APP_ICONS_APPLE = [
+	{
+		'src': os.path.join(MEDIA_URL, 'img/', 'favi.png'),
+		'sizes': '160x160'
+	}
+]
+PWA_APP_SPLASH_SCREEN = [
+	{
+		'src': os.path.join(MEDIA_URL, 'img/', 'favi.png'),
+		'media': '(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2)'
+	}
+]
+PWA_APP_DIR = 'ltr'
+PWA_APP_LANG = 'en-US'
+
+
+
 #Summernote
-SUMMERNOTE_THEME = 'bs5'
+SUMMERNOTE_THEME = 'bs4'
 SUMMERNOTE_CONFIG = {
     'iframe':False,
     # You can put custom Summernote settings
@@ -191,6 +249,7 @@ SUMMERNOTE_CONFIG = {
         # Toolbar customization
         # https://summernote.org/deep-dive/#custom-toolbar-popover
         'toolbar': [
+            ['style', ['style','h2','h3']],
             ['font', ['bold', 'underline', 'clear']],
             ['para', ['ul', 'ol', 'paragraph']],
             ['insert', ['link', 'picture',]],

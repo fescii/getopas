@@ -4,6 +4,16 @@
 {% load thumbnail %}
 
 {% block title %}{{topic|split:"-"}}{% endblock %}
+
+{% block metatitle %}Experience the world of information, anytime, anywhere.{% endblock %}
+{% block description %}
+    Unleash the power of words and share your stories,newsletters and information with the world in a seamless and interactive way.
+{% endblock %}
+{% block image %}
+    {% site_path %}{% static 'img/favi.png' %}
+{% endblock %}
+{% block url %}{% site_path %}{% endblock %}
+
 {% block content %}
 {% include "editors/feeds-header.html" %}
   <div id="stories-list" class="article-feeds feed-contents">

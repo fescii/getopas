@@ -72,7 +72,7 @@
                         <form id="update-tags-{{post.id}}" class="update-article-tags" action="{% url 'editors:edit_article_tags' pk=post.id %}" method="post">
                             <div class="header">
                                 <label for="tags-{{post.id}}">Edit tags</label>
-                                <input type="text" name="tags" id="tags-{{post.id}}" value="{% for tag in post.tags.names %}{{tag|split:''}},{% endfor %}">
+                                <input type="text" name="tags" id="tags-{{post.id}}" value="{% for tag in post.tags.names %}{{tag|split:' '}},{% endfor %}">
                             </div>
                             <div class="footer">
                                 <a class="update-tags-cancel" href="">Cancel</a>

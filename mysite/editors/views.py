@@ -32,32 +32,36 @@ from django.core.exceptions import ObjectDoesNotExist
 #Home
 def main_home(request):
     # Display all posts by default
-    posts = Post.published.all()
-    paginator = Paginator(posts, 3)
-    page = request.GET.get('page')
-    post_only = request.GET.get('story_only')
-    try:
-        posts = paginator.page(page)
-    except PageNotAnInteger:
-        # If page is not an integer deliver the first page
-        posts = paginator.page(1)
-    except EmptyPage:
+    if request.user.is_authenticated:
+            # return redirect('members:members-home')
+            return HttpResponseRedirect(reverse('editors:home'))
+    else:
+        posts = Post.published.all()
+        paginator = Paginator(posts, 10)
+        page = request.GET.get('page')
+        post_only = request.GET.get('story_only')
+        try:
+            posts = paginator.page(page)
+        except PageNotAnInteger:
+            # If page is not an integer deliver the first page
+            posts = paginator.page(1)
+        except EmptyPage:
+            if post_only:
+                # If AJAX request and page out of range
+                # return an empty page
+                return HttpResponse('')
+            # If page out of range return last page of results
+            posts = paginator.page(paginator.num_pages)
         if post_only:
-            # If AJAX request and page out of range
-            # return an empty page
-            return HttpResponse('')
-        # If page out of range return last page of results
-        posts = paginator.page(paginator.num_pages)
-    if post_only:
-        return render(request,
-                      'main/list-stories.html',
-                      {'section': 'stories','stories': posts})
+            return render(request,
+                          'main/list-stories.html',
+                          {'section': 'stories','stories': posts})
 
-    return render(request,
-                 'main/main.html',
-                    {'stories':posts,
-                    'title':'home',
-                    'section':'opas'})
+        return render(request,
+                     'main/main.html',
+                        {'stories':posts,
+                        'title':'home',
+                        'section':'opas'})
 
 #Explore-logged-out.
 def explore_out(request):
@@ -91,33 +95,62 @@ def explore_out(request):
 
 
 #Dashboard
-@login_required
+# @login_required
 def dashboard(request):
-    user = request.user
-    profile = user.profile
+    if request.user.is_authenticated:
+        user = request.user
+        profile = user.profile
 
-    # Display all actions by default
-    posts_interest = Post.published.exclude(author=request.user)
-    following_ids = request.user.following.values_list('id',flat=True)
-    if following_ids:
-        # If user is following others, retrieve only their actions
-        posts_interest = posts_interest.filter(author__in=following_ids)
-        posts_interest = posts_interest.select_related('author', 'author__profile')[:5]
-    #Top Posts
-    top_posts = Post.most_viewed(Post)
+        # Display all actions by default
+        posts_interest = Post.published.exclude(author=request.user)
+        following_ids = request.user.following.values_list('id',flat=True)
+        if following_ids:
+            # If user is following others, retrieve only their actions
+            posts_interest = posts_interest.filter(author__in=following_ids)
+            posts_interest = posts_interest.select_related('author', 'author__profile')[:5]
+        #Top Posts
+        top_posts = Post.most_viewed(Post)
 
-    #Recent Added-Posts
-    recently_added = Post.recently_added(Post, 5)
+        #Recent Added-Posts
+        recently_added = Post.recently_added(Post, 5)
 
-    return render(request,
-                 'editors/dashboard.html',
-                    {'user': user,
-                    'profile': profile,
-                    'most_viewed':top_posts,
-                    'posts_interest':posts_interest,
-                    'recently_added': recently_added,
-                    'title':'home','tab': 'opas',
-                    'section':'opas'})
+        return render(request,
+                     'editors/home.html',
+                        {'user': user,
+                        'profile': profile,
+                        'most_viewed':top_posts,
+                        'posts_interest':posts_interest,
+                        'recently_added': recently_added,
+                        'title':'home','tab': 'opas',
+                        'section':'opas'})
+    else:
+        posts = Post.published.all()
+        paginator = Paginator(posts, 10)
+        page = request.GET.get('page')
+        post_only = request.GET.get('story_only')
+        try:
+            posts = paginator.page(page)
+        except PageNotAnInteger:
+            # If page is not an integer deliver the first page
+            posts = paginator.page(1)
+        except EmptyPage:
+            if post_only:
+                # If AJAX request and page out of range
+                # return an empty page
+                return HttpResponse('')
+            # If page out of range return last page of results
+            posts = paginator.page(paginator.num_pages)
+        if post_only:
+            return render(request,
+                          'main/list-stories.html',
+                          {'section': 'stories','stories': posts})
+
+        return render(request,
+                     'editors/home.html',
+                        {'stories':posts,
+                        'title':'home',
+                        'section':'opas'})
+
 
 #Dashboard-Newsletters
 @login_required
@@ -304,7 +337,7 @@ def explore(request,topic=None):
         topic_posts = object_list.filter(tags__in=[tag])
 
     posts = topic_posts
-    paginator = Paginator(posts, 2)
+    paginator = Paginator(posts, 10)
     page = request.GET.get('page')
     post_only = request.GET.get('story_only')
     try:
@@ -340,7 +373,7 @@ def explore(request,topic=None):
 @login_required
 def feeds(request):
     posts = Post.published.all()
-    paginator = Paginator(posts, 5)
+    paginator = Paginator(posts, 10)
     page = request.GET.get('page')
     post_only = request.GET.get('post_only')
     try:
@@ -436,7 +469,7 @@ def interest(request):
 @login_required
 def trending(request):
     posts = Post.published.all().order_by('-blog_views')
-    paginator = Paginator(posts, 5)
+    paginator = Paginator(posts, 10)
     page = request.GET.get('page')
     post_only = request.GET.get('post_only')
     try:
@@ -467,7 +500,7 @@ def trending(request):
 @login_required
 def recent(request):
     posts = Post.published.all().order_by('-publish')
-    paginator = Paginator(posts, 5)
+    paginator = Paginator(posts, 10)
     page = request.GET.get('page')
     post_only = request.GET.get('post_only')
     try:
@@ -837,12 +870,22 @@ def create_post(request):
             post.author = request.user
             post.save()
             tags = post_form.cleaned_data["tags"]
-            text_tags = ",".join([str(tag).lower() for tag in tags])
-            text_tags = text_tags.replace(" ","")
-            text_tags = text_tags.replace("[","")
-            text_tags = text_tags.replace("]","")
 
-            post.tags.set(text_tags.split(","),clear=True)
+            n_tags = ",".join(map(str,tags))
+            text_tags = n_tags.lower()
+            if text_tags[-1] == ",":
+                text_tags = text_tags[0:-1]
+
+            text_tags_list = []
+            text_tags_splitted = text_tags.split(",")
+            for tag in text_tags_splitted:
+                if tag[0] == " ":
+                    tag = tag[1:]
+                    text_tags_list.append(tag)
+                else:
+                    text_tags_list.append(tag)
+
+            post.tags.set(text_tags_list,clear=True)
             # post_form.save_m2m()
             create_action(request.user, 'added article','create', post)
             messages.success(request, 'Article was created')
@@ -958,13 +1001,33 @@ def edit_article_tags(request, pk):
     post = Post.objects.get(id=pk)
     if request.method == 'POST':
         tags = request.POST.get("tags")
-        tags.replace(" ","")
-        text_tags = tags.lower()
-        post.tags.set(text_tags.split(","),clear=True)
-        messages.success(request, 'Tags updated')
-        return HttpResponseRedirect(reverse('editors:user_post_list'))
+        if tags == " " or tags == "":
+            messages.error(request, 'No tags found')
+            return HttpResponseRedirect(reverse('editors:user_post_list'))
+        else:
+            # tags.replace(" ","")
+            text_tags = tags.lower()
+            if text_tags[-1] == ",":
+                text_tags = text_tags[0:-1]
+
+            text_tags_list = []
+            text_tags_splitted = text_tags.split(",")
+            for tag in text_tags_splitted:
+                if tag[0] == " ":
+                    tag = tag[1:]
+                    text_tags_list.append(tag)
+                else:
+                    text_tags_list.append(tag)
+
+            # text_tags_list = text_tags_list.replace("[","")
+            # text_tags_list = text_tags_list.replace("]","")
+
+            post.tags.set(text_tags_list,clear=True)
+            messages.success(request, 'Tags updated')
+            return HttpResponseRedirect(reverse('editors:user_post_list'))
     else:
         messages.error(request, 'Error updating!')
+        return HttpResponseRedirect(reverse('editors:user_post_list'))
 
 
 #Edit Article Cover Photo

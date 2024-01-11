@@ -43,7 +43,7 @@ class ProfileEditForm(forms.ModelForm):
     date_of_birth = forms.DateField(widget=forms.DateInput)
     class Meta:
         model = Profile
-        fields = ('date_of_birth','occupation','website','twitter','linkedin','location','about')
+        fields = ('date_of_birth','occupation','location','about')
         widgets = {
             'about': SummernoteWidget(attrs={'placeholder': 'Add about'})
             #'bar': SummernoteInplaceWidget(),
@@ -65,3 +65,7 @@ class ModerateUserForm(forms.Form):
          ('3', 'author'),
     )
     role = forms.ChoiceField(choices=CHOICES)
+
+class PaymntForm(forms.Form):
+    number = forms.CharField(required=True)
+    amount = forms.CharField(required=True)

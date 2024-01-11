@@ -1,0 +1,5 @@
+{% if user.is_authenticated %}
+  {% include "editors/dashboard.html" %}
+{% else %}
+  {% include "main/main.html" %}
+{% endif %}
