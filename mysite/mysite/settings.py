@@ -102,10 +102,10 @@ DATABASES = {
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'getopas$default',
+        'NAME': 'Your database name',
         'USER': 'getopas',
-        'PASSWORD': 'Fescii##$$3',
-        'HOST': 'getopas.mysql.pythonanywhere-services.com',
+        'PASSWORD': 'Your database password',
+        'HOST': 'your database',
     }
 }
 
